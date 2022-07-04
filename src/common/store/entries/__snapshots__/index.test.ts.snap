@@ -1,0 +1,631 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`1- default state 1`] = `
+Object {
+  "__manual__": Object {
+    "entries": Array [],
+    "error": null,
+    "hasMore": false,
+    "loading": false,
+    "sid": "",
+  },
+  "__promoted__": Object {
+    "entries": Array [],
+    "error": null,
+    "hasMore": false,
+    "loading": false,
+    "sid": "",
+  },
+}
+`;
+
+exports[`2- location change. should create a group with default filter. 1`] = `
+Object {
+  "__manual__": Object {
+    "entries": Array [],
+    "error": null,
+    "hasMore": false,
+    "loading": false,
+    "sid": "",
+  },
+  "__promoted__": Object {
+    "entries": Array [],
+    "error": null,
+    "hasMore": false,
+    "loading": false,
+    "sid": "",
+  },
+  "hot": Object {
+    "entries": Array [],
+    "error": null,
+    "hasMore": false,
+    "loading": true,
+    "sid": "",
+  },
+}
+`;
+
+exports[`3- location change. should create a group with the filter and tag given. 1`] = `
+Object {
+  "__manual__": Object {
+    "entries": Array [],
+    "error": null,
+    "hasMore": false,
+    "loading": false,
+    "sid": "",
+  },
+  "__promoted__": Object {
+    "entries": Array [],
+    "error": null,
+    "hasMore": false,
+    "loading": false,
+    "sid": "",
+  },
+  "hot": Object {
+    "entries": Array [],
+    "error": null,
+    "hasMore": false,
+    "loading": true,
+    "sid": "",
+  },
+  "trending-bitcoin": Object {
+    "entries": Array [],
+    "error": null,
+    "hasMore": false,
+    "loading": true,
+    "sid": "",
+  },
+}
+`;
+
+exports[`4- location change with invalid filter. state should state same. 1`] = `
+Object {
+  "__manual__": Object {
+    "entries": Array [],
+    "error": null,
+    "hasMore": false,
+    "loading": false,
+    "sid": "",
+  },
+  "__promoted__": Object {
+    "entries": Array [],
+    "error": null,
+    "hasMore": false,
+    "loading": false,
+    "sid": "",
+  },
+  "hot": Object {
+    "entries": Array [],
+    "error": null,
+    "hasMore": false,
+    "loading": true,
+    "sid": "",
+  },
+  "trending-bitcoin": Object {
+    "entries": Array [],
+    "error": null,
+    "hasMore": false,
+    "loading": true,
+    "sid": "",
+  },
+}
+`;
+
+exports[`5- start fetching. should toggle "loading" 1`] = `
+Object {
+  "__manual__": Object {
+    "entries": Array [],
+    "error": null,
+    "hasMore": false,
+    "loading": false,
+    "sid": "",
+  },
+  "__promoted__": Object {
+    "entries": Array [],
+    "error": null,
+    "hasMore": false,
+    "loading": false,
+    "sid": "",
+  },
+  "hot": Object {
+    "entries": Array [],
+    "error": null,
+    "hasMore": false,
+    "loading": true,
+    "sid": "",
+  },
+  "trending-bitcoin": Object {
+    "entries": Array [],
+    "error": null,
+    "hasMore": false,
+    "loading": true,
+    "sid": "",
+  },
+}
+`;
+
+exports[`6- fetch error. should toggle "loading" and add error object to the group. 1`] = `
+Object {
+  "__manual__": Object {
+    "entries": Array [],
+    "error": null,
+    "hasMore": false,
+    "loading": false,
+    "sid": "",
+  },
+  "__promoted__": Object {
+    "entries": Array [],
+    "error": null,
+    "hasMore": false,
+    "loading": false,
+    "sid": "",
+  },
+  "hot": Object {
+    "entries": Array [],
+    "error": "fetch error",
+    "hasMore": false,
+    "loading": false,
+    "sid": "",
+  },
+  "trending-bitcoin": Object {
+    "entries": Array [],
+    "error": null,
+    "hasMore": false,
+    "loading": true,
+    "sid": "",
+  },
+}
+`;
+
+exports[`7- start fetching. 1`] = `
+Object {
+  "__manual__": Object {
+    "entries": Array [],
+    "error": null,
+    "hasMore": false,
+    "loading": false,
+    "sid": "",
+  },
+  "__promoted__": Object {
+    "entries": Array [],
+    "error": null,
+    "hasMore": false,
+    "loading": false,
+    "sid": "",
+  },
+  "hot": Object {
+    "entries": Array [],
+    "error": "fetch error",
+    "hasMore": false,
+    "loading": false,
+    "sid": "",
+  },
+  "trending-bitcoin": Object {
+    "entries": Array [],
+    "error": null,
+    "hasMore": false,
+    "loading": true,
+    "sid": "",
+  },
+}
+`;
+
+exports[`8- fetched. 1`] = `
+Object {
+  "__manual__": Object {
+    "entries": Array [],
+    "error": null,
+    "hasMore": false,
+    "loading": false,
+    "sid": "",
+  },
+  "__promoted__": Object {
+    "entries": Array [],
+    "error": null,
+    "hasMore": false,
+    "loading": false,
+    "sid": "",
+  },
+  "hot": Object {
+    "entries": Array [],
+    "error": "fetch error",
+    "hasMore": false,
+    "loading": false,
+    "sid": "",
+  },
+  "trending-bitcoin": Object {
+    "entries": Array [
+      Object {
+        "author": "lorem",
+        "payout": 1,
+        "permlink": "lorem-ipsum-dolor-sit-amet",
+      },
+      Object {
+        "author": "consectetur",
+        "payout": 1,
+        "permlink": "consectetur-adipiscing elit-in-vel-enim-libero",
+      },
+      Object {
+        "author": "nam",
+        "payout": 1,
+        "permlink": "tempor-nibh-eget-enim-vulputate",
+      },
+      Object {
+        "author": "vivamus",
+        "payout": 1,
+        "permlink": "vivamus-ornare-at-tortor-eu-vestibulum",
+      },
+    ],
+    "error": null,
+    "hasMore": undefined,
+    "loading": false,
+    "sid": true,
+  },
+}
+`;
+
+exports[`9- start fetching again (simulates user scrolling down) 1`] = `
+Object {
+  "__manual__": Object {
+    "entries": Array [],
+    "error": null,
+    "hasMore": false,
+    "loading": false,
+    "sid": "",
+  },
+  "__promoted__": Object {
+    "entries": Array [],
+    "error": null,
+    "hasMore": false,
+    "loading": false,
+    "sid": "",
+  },
+  "hot": Object {
+    "entries": Array [],
+    "error": "fetch error",
+    "hasMore": false,
+    "loading": false,
+    "sid": "",
+  },
+  "trending-bitcoin": Object {
+    "entries": Array [
+      Object {
+        "author": "lorem",
+        "payout": 1,
+        "permlink": "lorem-ipsum-dolor-sit-amet",
+      },
+      Object {
+        "author": "consectetur",
+        "payout": 1,
+        "permlink": "consectetur-adipiscing elit-in-vel-enim-libero",
+      },
+      Object {
+        "author": "nam",
+        "payout": 1,
+        "permlink": "tempor-nibh-eget-enim-vulputate",
+      },
+      Object {
+        "author": "vivamus",
+        "payout": 1,
+        "permlink": "vivamus-ornare-at-tortor-eu-vestibulum",
+      },
+    ],
+    "error": null,
+    "hasMore": undefined,
+    "loading": true,
+    "sid": true,
+  },
+}
+`;
+
+exports[`10- fetched. should ignore posts already in store. 1`] = `
+Object {
+  "__manual__": Object {
+    "entries": Array [],
+    "error": null,
+    "hasMore": false,
+    "loading": false,
+    "sid": "",
+  },
+  "__promoted__": Object {
+    "entries": Array [],
+    "error": null,
+    "hasMore": false,
+    "loading": false,
+    "sid": "",
+  },
+  "hot": Object {
+    "entries": Array [],
+    "error": "fetch error",
+    "hasMore": false,
+    "loading": false,
+    "sid": "",
+  },
+  "trending-bitcoin": Object {
+    "entries": Array [
+      Object {
+        "author": "lorem",
+        "payout": 1,
+        "permlink": "lorem-ipsum-dolor-sit-amet",
+      },
+      Object {
+        "author": "consectetur",
+        "payout": 1,
+        "permlink": "consectetur-adipiscing elit-in-vel-enim-libero",
+      },
+      Object {
+        "author": "nam",
+        "payout": 1,
+        "permlink": "tempor-nibh-eget-enim-vulputate",
+      },
+      Object {
+        "author": "vivamus",
+        "payout": 1,
+        "permlink": "vivamus-ornare-at-tortor-eu-vestibulum",
+      },
+      Object {
+        "author": "donec",
+        "payout": 1,
+        "permlink": "donec-bibendum-tortor-ultricies",
+      },
+    ],
+    "error": null,
+    "hasMore": undefined,
+    "loading": false,
+    "sid": false,
+  },
+}
+`;
+
+exports[`11- location change for an extra group 1`] = `
+Object {
+  "__manual__": Object {
+    "entries": Array [],
+    "error": null,
+    "hasMore": false,
+    "loading": false,
+    "sid": "",
+  },
+  "__promoted__": Object {
+    "entries": Array [],
+    "error": null,
+    "hasMore": false,
+    "loading": false,
+    "sid": "",
+  },
+  "created-bitcoin": Object {
+    "entries": Array [],
+    "error": null,
+    "hasMore": false,
+    "loading": true,
+    "sid": "",
+  },
+  "hot": Object {
+    "entries": Array [],
+    "error": "fetch error",
+    "hasMore": false,
+    "loading": false,
+    "sid": "",
+  },
+  "trending-bitcoin": Object {
+    "entries": Array [
+      Object {
+        "author": "lorem",
+        "payout": 1,
+        "permlink": "lorem-ipsum-dolor-sit-amet",
+      },
+      Object {
+        "author": "consectetur",
+        "payout": 1,
+        "permlink": "consectetur-adipiscing elit-in-vel-enim-libero",
+      },
+      Object {
+        "author": "nam",
+        "payout": 1,
+        "permlink": "tempor-nibh-eget-enim-vulputate",
+      },
+      Object {
+        "author": "vivamus",
+        "payout": 1,
+        "permlink": "vivamus-ornare-at-tortor-eu-vestibulum",
+      },
+      Object {
+        "author": "donec",
+        "payout": 1,
+        "permlink": "donec-bibendum-tortor-ultricies",
+      },
+    ],
+    "error": null,
+    "hasMore": undefined,
+    "loading": false,
+    "sid": false,
+  },
+}
+`;
+
+exports[`12- fetched another group. 1`] = `
+Object {
+  "__manual__": Object {
+    "entries": Array [],
+    "error": null,
+    "hasMore": false,
+    "loading": false,
+    "sid": "",
+  },
+  "__promoted__": Object {
+    "entries": Array [],
+    "error": null,
+    "hasMore": false,
+    "loading": false,
+    "sid": "",
+  },
+  "created-bitcoin": Object {
+    "entries": Array [
+      Object {
+        "author": "nam",
+        "payout": 1,
+        "permlink": "tempor-nibh-eget-enim-vulputate",
+      },
+    ],
+    "error": null,
+    "hasMore": undefined,
+    "loading": false,
+    "sid": false,
+  },
+  "hot": Object {
+    "entries": Array [],
+    "error": "fetch error",
+    "hasMore": false,
+    "loading": false,
+    "sid": "",
+  },
+  "trending-bitcoin": Object {
+    "entries": Array [
+      Object {
+        "author": "lorem",
+        "payout": 1,
+        "permlink": "lorem-ipsum-dolor-sit-amet",
+      },
+      Object {
+        "author": "consectetur",
+        "payout": 1,
+        "permlink": "consectetur-adipiscing elit-in-vel-enim-libero",
+      },
+      Object {
+        "author": "nam",
+        "payout": 1,
+        "permlink": "tempor-nibh-eget-enim-vulputate",
+      },
+      Object {
+        "author": "vivamus",
+        "payout": 1,
+        "permlink": "vivamus-ornare-at-tortor-eu-vestibulum",
+      },
+      Object {
+        "author": "donec",
+        "payout": 1,
+        "permlink": "donec-bibendum-tortor-ultricies",
+      },
+    ],
+    "error": null,
+    "hasMore": undefined,
+    "loading": false,
+    "sid": false,
+  },
+}
+`;
+
+exports[`13- update a particular entry. 1`] = `
+Object {
+  "__manual__": Object {
+    "entries": Array [],
+    "error": null,
+    "hasMore": false,
+    "loading": false,
+    "sid": "",
+  },
+  "__promoted__": Object {
+    "entries": Array [],
+    "error": null,
+    "hasMore": false,
+    "loading": false,
+    "sid": "",
+  },
+  "created-bitcoin": Object {
+    "entries": Array [
+      Object {
+        "author": "nam",
+        "payout": 1.2,
+        "permlink": "tempor-nibh-eget-enim-vulputate",
+      },
+    ],
+    "error": null,
+    "loading": false,
+    "sid": false,
+  },
+  "hot": Object {
+    "entries": Array [],
+    "error": "fetch error",
+    "hasMore": false,
+    "loading": false,
+    "sid": "",
+  },
+  "trending-bitcoin": Object {
+    "entries": Array [
+      Object {
+        "author": "lorem",
+        "payout": 1,
+        "permlink": "lorem-ipsum-dolor-sit-amet",
+      },
+      Object {
+        "author": "consectetur",
+        "payout": 1,
+        "permlink": "consectetur-adipiscing elit-in-vel-enim-libero",
+      },
+      Object {
+        "author": "nam",
+        "payout": 1.2,
+        "permlink": "tempor-nibh-eget-enim-vulputate",
+      },
+      Object {
+        "author": "vivamus",
+        "payout": 1,
+        "permlink": "vivamus-ornare-at-tortor-eu-vestibulum",
+      },
+      Object {
+        "author": "donec",
+        "payout": 1,
+        "permlink": "donec-bibendum-tortor-ultricies",
+      },
+    ],
+    "error": null,
+    "loading": false,
+    "sid": false,
+  },
+}
+`;
+
+exports[`14- invalidate. should reset the group. 1`] = `
+Object {
+  "__manual__": Object {
+    "entries": Array [],
+    "error": null,
+    "hasMore": false,
+    "loading": false,
+    "sid": "",
+  },
+  "__promoted__": Object {
+    "entries": Array [],
+    "error": null,
+    "hasMore": false,
+    "loading": false,
+    "sid": "",
+  },
+  "created-bitcoin": Object {
+    "entries": Array [
+      Object {
+        "author": "nam",
+        "payout": 1.2,
+        "permlink": "tempor-nibh-eget-enim-vulputate",
+      },
+    ],
+    "error": null,
+    "loading": false,
+    "sid": false,
+  },
+  "hot": Object {
+    "entries": Array [],
+    "error": "fetch error",
+    "hasMore": false,
+    "loading": false,
+    "sid": "",
+  },
+  "trending-bitcoin": Object {
+    "entries": Array [],
+    "error": null,
+    "hasMore": false,
+    "loading": false,
+    "sid": false,
+  },
+}
+`;

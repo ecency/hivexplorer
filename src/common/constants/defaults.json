@@ -1,0 +1,17 @@
+{
+    "filter": "hot",
+    "theme": "day",
+    "listStyle": "row",
+    "currency": {
+      "currency": "hbd",
+      "rate": 1,
+      "symbol": "$"
+    },
+    "locale": "en-US",
+    "base": "https://hivexplorer.com",
+    "imageServer": "https://images.ecency.com",
+    "name": "Hivexplorer",
+    "title": "Explorer for Hive blockchain",
+    "description": "Explorer blockchain data and get detailed overview of each block and transactions happening on Hive"
+  }
+  
