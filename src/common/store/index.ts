@@ -1,103 +1,68 @@
-import {combineReducers} from "redux";
-import {connectRouter} from "connected-react-router";
-import {createBrowserHistory, createMemoryHistory, History} from "history";
+import { combineReducers } from 'redux';
+import { connectRouter } from 'connected-react-router';
+import { createBrowserHistory, createMemoryHistory, History } from 'history';
 
-
-import isEqual from "react-fast-compare";
-
-import global from "./global";
-import dynamicProps from "./dynamic-props";
-import trendingTags from "./trending-tags";
-import entries from "./entries";
-import accounts from "./accounts";
-import communities from "./communities";
-import transactions from "./transactions";
-import discussion from "./discussion";
-import subscriptions from "./subscriptions";
+import global from './global';
 import persistentPageScroll from './persistent-page-scroll';
-
-import filterTagExtract from "../util/filter-tag-extract";
-
-let reducers = {
-    global,
-    dynamicProps,
-    trendingTags,
-    entries,
-    accounts,
-    communities,
-    transactions,
-    discussion,
-    subscriptions,
-    persistentPageScroll
-};
 
 export let history: History | undefined;
 
 // create browser history on client side
-if (typeof window !== "undefined") {
-    if (window.location.href.startsWith('file://')) {
-        // electron
-        history = createMemoryHistory();
-    } else {
-        // web
-        history = createBrowserHistory();
+if (typeof window !== 'undefined') {
+  if (window.location.href.startsWith('file://')) {
+    // electron
+    history = createMemoryHistory();
+  } else {
+    // web
+    history = createBrowserHistory();
+  }
+
+  // We need a customised history object since history pushes new state for same path.
+  // See: https://github.com/ReactTraining/history/issues/470
+  // We don't want LOCATION_CHANGE triggered for same path because of structure of out "entries" reducer.
+
+  // get ref of current push function
+  const _push = history.push;
+
+  let prevPath: string = history.location.pathname;
+  // update previous path once history change
+  history.listen(location => {
+    prevPath = location.pathname;
+  });
+
+  // create a new push function that compares new path and previous path.
+  history.push = (pathname: History.Path, state: History.LocationState = {}) => {
+    // simple path compare
+    if (pathname === prevPath) {
+      return;
     }
+    _push(pathname.includes('//') ? '/' : pathname, state);
+  }
 
-    // We need a customised history object since history pushes new state for same path.
-    // See: https://github.com/ReactTraining/history/issues/470
-    // We don't want LOCATION_CHANGE triggered for same path because of structure of out "entries" reducer.
+  // scroll to top on every push action
+  history.listen((location, action) => {
+    if (action === 'PUSH') {
+      // Don't scroll to top with anchor links
+      if (history!.location.hash !== '') {
+        return;
+      }
 
-    // get ref of current push function
-    const _push = history.push;
-
-    let prevPath: string = history.location.pathname;
-    // update previous path once history change
-    history.listen(location => {
-        prevPath = location.pathname;
-    });
-
-    // create a new push function that compares new path and previous path.
-    history.push = (pathname: History.Path, state: History.LocationState = {}) => {
-
-        // compare filter & tag resolution of paths
-        // this control required because "/" == "/hot" and "/@username" == "/@username/posts"
-        const ftCur = filterTagExtract(pathname);
-        const ftPrev = filterTagExtract(prevPath);
-
-        if (ftCur && ftPrev) {
-            if (isEqual(ftCur, ftPrev)) {
-                return;
-            }
-        }
-
-        // simple path compare
-        if (pathname === prevPath) {
-            return;
-        }
-        _push(pathname.includes("//")?"/":pathname, state);
+      setTimeout(() => {
+        window.scrollTo({
+          top: 0
+        });
+      }, 100);
     }
+  });
 
-    // scroll to top on every push action
-    history.listen((location, action) => {
-        if (action === "PUSH") {
-            // Don't scroll to top with anchor links
-            if (history!.location.hash !== "") {
-                return;
-            }
-
-            setTimeout(() => {
-                window.scrollTo({
-                    top: 0
-                });
-            }, 100);
-        }
-    });
-
-    // @ts-ignore
-    reducers = {router: connectRouter(history), ...reducers};
+  // @ts-ignore
+  reducers = { router: connectRouter(history), ...reducers };
 }
 
-const rootReducer = combineReducers(reducers);
+const rootReducer = combineReducers({
+  global,
+  persistentPageScroll,
+});
 
 export default rootReducer;
 
