@@ -5,7 +5,7 @@ import defaults from '../constants/defaults.json';
 export function getMetaProps<T extends Record<string, any>>({ global, activeUser }: T) {
   const { filter, tag } = global;
 
-  const fC = capitalize(filter);
+  const fC = filter ? capitalize(filter) : "";
   let title = _t('entry-index.title', { f: fC });
   let description = _t('entry-index.description', { f: fC });
   let url = `/${filter}`;

@@ -1,1 +1,14 @@
-{}
+{
+  "home": {
+    
+  },
+  "entry-index": {
+    "title": "{{f}} topics",
+    "description": "{{f}} topics on a social network owned and operated by its users.",
+    "description-tag": "{{f}} #{{t}} topics",
+    "description-user-feed": "{{u}}'s feed",
+    "faq": "FAQ",
+    "tos": "Terms of service",
+    "pp": "Privacy Policy"
+  }
+}
