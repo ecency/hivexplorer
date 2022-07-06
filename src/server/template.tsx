@@ -16,29 +16,6 @@ import { AppState } from '../common/store';
 import configureStore from '../common/store/configure';
 import path from 'path';
 import { ChunkExtractor, ChunkExtractorManager } from '@loadable/server';
-// Import the StyledComponents SSR util
-import { ServerStyleSheet } from "styled-components";
-
-let assets: any;
-
-const syncLoadAssets = () => {
-  assets = require(process.env.RAZZLE_ASSETS_MANIFEST!);
-};
-syncLoadAssets();
-
-const cssLinksFromAssets = (assets, entrypoint) => {
-    return assets[entrypoint] ? assets[entrypoint].css ?
-    assets[entrypoint].css.map(asset=>
-      `<link rel="stylesheet" href="${asset}">`
-    ).join('') : '' : '';
-};
-  
-const jsScriptTagsFromAssets = (assets, entrypoint, extra = '') => {
-    return assets[entrypoint] ? assets[entrypoint].js ?
-    assets[entrypoint].js.map(asset=>
-      `<script src="${asset}"${extra}></script>`
-    ).join('') : '' : '';
-};
 
 export const render = (req: express.Request, state: AppState) => {
   const store = configureStore(state);
@@ -87,6 +64,21 @@ export const render = (req: express.Request, state: AppState) => {
                   window.__PRELOADED_STATE__ = ${serialize(finalState)}
                 </script>
                 ${scriptTags}
+                <script type="application/ld+json">
+                  {
+                    "@context": "https://schema.org",
+                    "@type": "WebSite",
+                    "url": "https://ecency.com/",
+                    "potentialAction": [{
+                      "@type": "SearchAction",
+                      "target": {
+                        "@type": "EntryPoint",
+                        "urlTemplate": "https://ecency.com/search/?q={search_term_string}"
+                      },
+                      "query-input": "required name=search_term_string"
+                    }]
+                  }
+                </script>
                 <style>
                   body {
                     display: block !important;

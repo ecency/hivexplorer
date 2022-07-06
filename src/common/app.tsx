@@ -1,18 +1,36 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
+import NotFound from './components/404';
+// import Tracker from './tracker';
+import routes from './routes';
+import * as ls from './util/local-storage';
+import i18n from 'i18next';
 import { pageMapDispatchToProps, pageMapStateToProps } from './pages/common';
 import { connect } from 'react-redux';
+import loadable from '@loadable/component';
 
-import EntryIndexContainer from './pages/index';
+const EntryPage = loadable(() => import('./pages/index'));
 
-import routes from './routes';
+const App = ({ setLang }: any) => {
+  useEffect(() => {
+    let pathname = window.location.pathname;
+    if (pathname !== '/faq') {
+      const currentLang = ls.get('current-language');
+      if (currentLang) {
+        setLang(currentLang);
+        i18n.changeLanguage(currentLang)
+      }
+    }
+  }, []);
 
-const App = () => {
   return (
-    <Switch>
-      <Route exact={true} path={routes.HOME} component={EntryIndexContainer}/>
-      <Route exact={true} strict={true} path={routes.FILTER} component={EntryIndexContainer}/>
-    </Switch>
+    <>
+      {/*<Tracker/>*/}
+      <Switch>
+        <Route exact={true} path={routes.HOME} component={EntryPage}/>
+        <Route component={NotFound}/>
+      </Switch>
+    </>
   );
 };
 
