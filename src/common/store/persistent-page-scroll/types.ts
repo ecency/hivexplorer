@@ -10,7 +10,7 @@ export enum ActionTypes {
 
 export interface SavePageScrollAction {
   type: ActionTypes.SAVE_PAGE_SCROLL;
-  data: SavePageScrollData;
+  data?: SavePageScrollData;
 }
 
 export interface SavePageScrollData {

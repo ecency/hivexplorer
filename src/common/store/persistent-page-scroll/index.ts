@@ -8,7 +8,9 @@ export default (state: PersistentPageScrollState = initialState, action: Actions
     case ActionTypes.SAVE_PAGE_SCROLL:
       const { data } = action;
 
-      state[data.pageName] = { scroll: data.scrollValue };
+      if (data) {
+        state[data.pageName] = { scroll: data.scrollValue };
+      }
       return state;
     default:
       return state;
