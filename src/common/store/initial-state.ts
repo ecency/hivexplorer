@@ -1,12 +1,10 @@
 import { AppState } from './index';
-import { Theme } from './global/types';
+import {initialState as globalInitialState} from "./global";
+import {initialState as persistentPageScrollInitialState} from "./persistent-page-scroll";
 
 const initialState: AppState = {
-  global: {
-    theme: Theme.day,
-    isMobile: false,
-  },
-  persistentPageScroll: {},
+  global: globalInitialState,
+  persistentPageScroll: persistentPageScrollInitialState,
 };
 
 export default initialState;

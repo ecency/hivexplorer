@@ -1,4 +1,4 @@
-const PREFIX = 'ecency';
+const PREFIX = 'hex';
 
 
 export const get = (k: string, def: any = null): any => {

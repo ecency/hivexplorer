@@ -1,7 +1,6 @@
 import axios, { AxiosRequestConfig, AxiosResponse, Method } from 'axios';
 
 import { Response } from 'express';
-import config from '../config';
 
 export const pipe = (promise: Promise<AxiosResponse>, res: Response) => {
   promise.then(r => {
@@ -47,13 +46,5 @@ export const stripLastSlash = (req: any, res: any, next: any) => {
     res.redirect(301, req.path.slice(0, -1) + query);
   } else {
     next();
-  }
-}
-
-export const authCheck = (req: any, res: any, next: any) => {
-  if (config.hsClientSecret && config.usePrivate !== '1') {
-    next();
-  } else {
-    res.json({ error: 'Define HIVESIGNER_SECRET ENV variable or set USE_PRIVATE=1' });
   }
 }

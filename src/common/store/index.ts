@@ -1,21 +1,21 @@
 import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
-import { createBrowserHistory, createMemoryHistory, History } from 'history';
+import { createBrowserHistory, History } from 'history';
 
 import global from './global';
 import persistentPageScroll from './persistent-page-scroll';
 
 export let history: History | undefined;
 
+let reducers = {
+  global,
+  persistentPageScroll,
+};
+
 // create browser history on client side
 if (typeof window !== 'undefined') {
-  if (window.location.href.startsWith('file://')) {
-    // electron
-    history = createMemoryHistory();
-  } else {
-    // web
-    history = createBrowserHistory();
-  }
+  // web
+  history = createBrowserHistory();
 
   // We need a customised history object since history pushes new state for same path.
   // See: https://github.com/ReactTraining/history/issues/470
@@ -59,10 +59,7 @@ if (typeof window !== 'undefined') {
   reducers = { router: connectRouter(history), ...reducers };
 }
 
-const rootReducer = combineReducers({
-  global,
-  persistentPageScroll,
-});
+const rootReducer = combineReducers(reducers);
 
 export default rootReducer;
 

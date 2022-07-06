@@ -13,11 +13,7 @@ export function getMetaProps<T extends Record<string, any>>({ global, activeUser
   let rss = '';
 
   if (tag) {
-    if (activeUser && tag === 'my') {
-      title = `@${activeUser.username}'s community feed on decentralized web`;
-      description = _t('entry-index.description-user-feed', { u: tag });
-      canonical = `${defaults.base}/@${tag}/${filter}`;
-    } else if (tag.startsWith('@')) {
+    if (tag.startsWith('@')) {
       title = `${tag}'s ${filter} on decentralized web`;
       description = _t('entry-index.description-user-feed', { u: tag });
       canonical = `${defaults.base}/@${tag}/${filter}`;

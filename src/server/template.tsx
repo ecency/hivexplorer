@@ -64,21 +64,6 @@ export const render = (req: express.Request, state: AppState) => {
                   window.__PRELOADED_STATE__ = ${serialize(finalState)}
                 </script>
                 ${scriptTags}
-                <script type="application/ld+json">
-                  {
-                    "@context": "https://schema.org",
-                    "@type": "WebSite",
-                    "url": "https://ecency.com/",
-                    "potentialAction": [{
-                      "@type": "SearchAction",
-                      "target": {
-                        "@type": "EntryPoint",
-                        "urlTemplate": "https://ecency.com/search/?q={search_term_string}"
-                      },
-                      "query-input": "required name=search_term_string"
-                    }]
-                  }
-                </script>
                 <style>
                   body {
                     display: block !important;

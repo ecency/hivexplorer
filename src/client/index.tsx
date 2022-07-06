@@ -3,7 +3,6 @@ import { hydrate } from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 import configureStore from '../common/store/configure';
-import { hasKeyChainAct } from '../common/store/global';
 import { history } from '../common/store';
 import App from '../common/app';
 import { AppWindow } from './window';
@@ -17,22 +16,11 @@ declare var window: AppWindow;
 const store = configureStore(window['__PRELOADED_STATE__']);
 
 if (process.env.NODE_ENV === 'production') {
-  console.log(`@@@@@@@(((((@@@@@@@@@@@@@
-@@@(((((((((((((@@@@@@@@@
-@((((@@@@@@@@@((((@@@@@@@
-@(((@@@(((((@@@((((%@@@@@
-((((@@@(((@@@@#((((((((%@
-((((@@@((((((((((@@@@((((
-((((@@@@@@&&&@@@@@@@@@(((
-((((@@@@@@@@@@@@@@@@@((((
-(((((%@@@@@@@@@%%(((((((@
-@@(((((((((((((((((((@@@@`
-  );
-  console.log('%c%s', 'font-size: 16px;', 'We are hiring!');
+  console.log('%c%s', 'font-size: 16px;', 'Do not paste any sensitive information here!');
   console.log(
     '%c%s',
     'font-size: 12px;',
-    'Are you developer, looking ways to contribute? \nhttps://github.com/ecency/ecency-vision \n\n'
+    'Are you developer, looking ways to contribute? \nhttps://github.com/ecency/hivexplorer \n\n'
   );
 }
 
@@ -45,17 +33,7 @@ loadableReady().then(() => {
     </Provider>,
     document.getElementById('root')
   );
-  
-  // Check & activate keychain support
-  window.addEventListener('load', () => {
-    setTimeout(() => {
-      if (window.hive_keychain) {
-        window.hive_keychain.requestHandshake(() => {
-          store.dispatch(hasKeyChainAct());
-        });
-      }
-    }, 50);
-  });
+
 });
 
 if (module.hot) {

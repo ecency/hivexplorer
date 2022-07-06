@@ -6,7 +6,6 @@ import {
   Actions,
   ActionTypes,
   Global,
-  HasKeyChainAction,
   LangSetAction,
   Theme,
   ThemeChangeAction,
@@ -16,7 +15,6 @@ import * as ls from '../../util/local-storage';
 export const initialState: Global = {
   theme: Theme[defaults.theme],
   isMobile: false,
-  hasKeyChain: false,
   lang: 'en_US',
 };
 
@@ -25,9 +23,6 @@ export default (state: Global = initialState, action: Actions): Global => {
     case ActionTypes.THEME_CHANGE: {
       const { theme } = action;
       return { ...state, theme };
-    }
-    case ActionTypes.HAS_KEYCHAIN: {
-      return { ...state, hasKeyChain: true };
     }
     case ActionTypes.LANG_SET: {
       const { lang } = action;
@@ -70,12 +65,6 @@ export const themeChangeAct = (theme: Theme): ThemeChangeAction => {
   return {
     type: ActionTypes.THEME_CHANGE,
     theme,
-  };
-};
-
-export const hasKeyChainAct = (): HasKeyChainAction => {
-  return {
-    type: ActionTypes.HAS_KEYCHAIN,
   };
 };
 

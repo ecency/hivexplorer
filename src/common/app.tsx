@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import NotFound from './components/404';
-// import Tracker from './tracker';
 import routes from './routes';
 import * as ls from './util/local-storage';
 import i18n from 'i18next';
@@ -13,13 +12,10 @@ const EntryPage = loadable(() => import('./pages/index'));
 
 const App = ({ setLang }: any) => {
   useEffect(() => {
-    let pathname = window.location.pathname;
-    if (pathname !== '/faq') {
-      const currentLang = ls.get('current-language');
-      if (currentLang) {
-        setLang(currentLang);
-        i18n.changeLanguage(currentLang)
-      }
+    const currentLang = ls.get('current-language');
+    if (currentLang) {
+      setLang(currentLang);
+      i18n.changeLanguage(currentLang)
     }
   }, []);
 

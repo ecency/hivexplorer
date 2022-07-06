@@ -8,18 +8,12 @@ export enum Theme {
 export interface Global {
   theme: Theme;
   isMobile: boolean;
-  hasKeyChain: boolean;
   lang: string;
 }
 
 export enum ActionTypes {
   THEME_CHANGE = '@global/THEME_CHANGE',
-  HAS_KEYCHAIN = '@global/HAS_KEYCHAIN',
   LANG_SET = '@global/LANG_SET',
-}
-
-export interface HasKeyChainAction {
-  type: ActionTypes.HAS_KEYCHAIN;
 }
 
 export interface LangSetAction {
@@ -32,4 +26,4 @@ export interface ThemeChangeAction {
   theme: Theme;
 }
 
-export type Actions = LocationChangeAction | ThemeChangeAction | HasKeyChainAction | LangSetAction;
+export type Actions = LocationChangeAction | ThemeChangeAction | LangSetAction;
