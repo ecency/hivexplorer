@@ -57,16 +57,13 @@ export class NotFound extends Component<Props, State> {
         <Meta {...metaProps} />
         <div className="not-found-404">
           {/*<img src={isElectron() ? './img/logo-circle.svg' : logoCircle} className="logo" alt="Ecency"/>*/}
-          <h1>This page doesn't exist.</h1>
+          <h1>404: This page doesn't exist.</h1>
           <p className="links">
             {canGoBack && <a href="#" onClick={(e) => {
               e.preventDefault();
               this.goBack();
             }}>Back</a>}
             <Link to="/">Home</Link>
-            <Link to="/created">New posts</Link>
-            <Link to="/hot">Hot posts</Link>
-            <Link to="/trending">Trending posts</Link>
           </p>
         </div>
       </>
