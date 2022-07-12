@@ -7,8 +7,6 @@ import { Link } from 'react-router-dom';
 import Meta from '../meta';
 import { Global } from '../../store/global/types';
 
-// const logoCircle = require('../../img/logo-circle.svg');
-
 interface Props {
   history: History;
   global: Global;
@@ -43,7 +41,7 @@ export class NotFound extends Component<Props, State> {
       title: '404',
     };
 
-    const { history, global } = this.props;
+    const { history } = this.props;
 
     // @ts-ignore make ide happy. code compiles without error.
     const entries = history.entries || {}
@@ -56,7 +54,6 @@ export class NotFound extends Component<Props, State> {
       <>
         <Meta {...metaProps} />
         <div className="not-found-404">
-          {/*<img src={isElectron() ? './img/logo-circle.svg' : logoCircle} className="logo" alt="Ecency"/>*/}
           <h1>404: This page doesn't exist.</h1>
           <p className="links">
             {canGoBack && <a href="#" onClick={(e) => {
