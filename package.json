@@ -14,7 +14,10 @@
     "@loadable/component": "^5.15.2",
     "@loadable/server": "^5.15.2",
     "@types/numeral": "^0.0.28",
-    "axios": "^0.21.2",
+    "@types/react-router-bootstrap": "^0.24.5",
+    "@types/styled-components": "^5.1.25",
+    "axios": "^0.27.2",
+    "bootstrap": "^5.2.0",
     "connected-react-router": "^6.8.0",
     "cookie-parser": "^1.4.6",
     "currency-symbol-map": "^4.0.4",
@@ -23,6 +26,7 @@
     "history": "^4.7.2",
     "i18next": "^19.4.4",
     "i18next-browser-languagedetector": "^4.2.0",
+    "i18next-http-backend": "^1.4.1",
     "js-cookie": "^3.0.1",
     "loadable-ts-transformer": "^1.0.0-alpha.3",
     "lodash": "^4.17.21",
@@ -32,13 +36,18 @@
     "numeral": "^2.0.6",
     "path-to-regexp": "^6.1.0",
     "react": "^16.8.6",
+    "react-bootstrap": "^2.4.0",
     "react-dom": "^16.8.6",
     "react-helmet": "^6.0.0",
+    "react-i18next": "^11.18.1",
     "react-redux": "^7.2.0",
-    "react-router-dom": "^5.0.1",
+    "react-router-bootstrap": "^0.25.0",
+    "react-router-dom": "5.1.2",
     "redux": "4.0.5",
+    "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "serialize-javascript": "^3.1.0",
+    "styled-components": "^5.3.5",
     "xss": "^1.0.8"
   },
   "devDependencies": {
@@ -65,6 +74,7 @@
     "@types/serialize-javascript": "^1.5.0",
     "@types/webpack-env": "^1.14.0",
     "babel-preset-razzle": "^4.0.5",
+    "flag-icon-css": "^4.1.7",
     "html-webpack-plugin": "4.5.2",
     "jest": "^26.0.0",
     "mini-css-extract-plugin": "0.9.0",
@@ -106,5 +116,16 @@
     "collectCoverageFrom": [
       "src/**/*.{js,jsx,ts,tsx}"
     ]
-  }
+  },
+  "description": "## How to use",
+  "main": "healthCheck.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ecency/hivexplorer.git"
+  },
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/ecency/hivexplorer/issues"
+  },
+  "homepage": "https://github.com/ecency/hivexplorer#readme"
 }

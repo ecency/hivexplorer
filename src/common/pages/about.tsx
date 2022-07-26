@@ -5,19 +5,23 @@ import Theme from '../components/theme';
 import { getMetaProps } from '../util/get-meta-props';
 import { connect } from 'react-redux';
 import { withPersistentScroll } from '../components/with-persistent-scroll';
+import { useTranslation } from 'react-i18next';
 
-const Index = (props: PageProps) => {
+
+const About = (props: PageProps) => {
+  const {t}=useTranslation()
   const [metaProps, setMetaProps] = useState({});
 
   useEffect(() => {
+    console.log(getMetaProps(props))
     setMetaProps(getMetaProps(props));
   }, []);
 
   return <>
     <Meta {...metaProps} />
     <Theme global={props.global}/>
-    <div>Test page</div>
+    <div className='card-row'>{t("about.page_title")}</div>
   </>;
 };
 
-export default connect(pageMapStateToProps, pageMapDispatchToProps)(withPersistentScroll(Index));
+export default connect(pageMapStateToProps, pageMapDispatchToProps)(withPersistentScroll(About));

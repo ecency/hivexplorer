@@ -37,7 +37,7 @@ export default async (req: express.Request, res: express.Response) => {
       // console.log(mapping[0].api, method, params);
       let result = cache.get(`${method}-${params}`);
       if (result === undefined) {
-        result = await client.call(mapping[0].api, method, params);
+        result = await client.call(mapping[0].api, method, query);
       }
 
       // rpc response

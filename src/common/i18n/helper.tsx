@@ -2,7 +2,7 @@ import React from 'react';
 
 import xss from 'xss';
 
-import { _t } from './index';
+
 
 export const HTML_WHITELIST = {
   'a': [
@@ -45,8 +45,10 @@ export class Tsx extends React.Component<Props> {
 
     const { children } = this.props;
 
-    const html = safeHtml(_t(k, args));
+    // const html = safeHtml(_t(k, args));
 
-    return React.cloneElement(children, { dangerouslySetInnerHTML: { __html: html } });
+    return React.cloneElement(children, { 
+      // dangerouslySetInnerHTML: { __html: html } 
+    });
   }
 }

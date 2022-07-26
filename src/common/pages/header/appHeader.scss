@@ -1,0 +1,33 @@
+.appNav{
+    .container{
+        position: relative;
+    }
+    .navItems{
+        margin-left: auto;
+    }
+    .logo-icon{
+        height: 1em;
+        margin-right: 8px;
+        vertical-align: -5%
+    }
+    .flag-img{
+        width: 24px;
+        padding-right: 5px;
+    }
+    .day-night-btn{
+        background: transparent;
+        border: 0;
+        .day-night-img{
+            height: 24px;
+        }
+        &:focus{
+            outline: 0;
+            box-shadow: none !important;
+        }
+        @media (max-width:992px) {
+            position: absolute;
+            top: 3px;
+            right: 65px;
+        }
+    }
+}
