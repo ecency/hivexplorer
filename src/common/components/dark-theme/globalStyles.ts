@@ -19,6 +19,11 @@ export const GlobalStyles = createGlobalStyle`
     color: ${({ theme }) => theme.text};
   }
   .bi-globe{
-    fill: ${({ theme }) => theme.text}
+    fill: ${({ theme }) => theme.text};
+  }
+  svg {
+    color: ${({theme})=> theme.icon};
+    width: 18px;
+    height: 18px;
   }
   `

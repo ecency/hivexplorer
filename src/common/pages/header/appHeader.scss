@@ -6,9 +6,11 @@
         margin-left: auto;
     }
     .logo-icon{
-        height: 1em;
-        margin-right: 8px;
-        vertical-align: -5%
+        svg {
+            height: 1em;
+            margin-right: 8px;
+            vertical-align: -5%    
+        }
     }
     .flag-img{
         width: 24px;

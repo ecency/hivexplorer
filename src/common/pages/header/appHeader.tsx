@@ -6,12 +6,7 @@ import { useTranslation } from 'react-i18next';
 import {Navbar, Nav,Container,NavDropdown,Button} from 'react-bootstrap';
 import {LinkContainer} from 'react-router-bootstrap';
 import './appHeader.scss';
-import fr from '../../../../public/assets/countries/fr.svg'
-import gb from '../../../../public/assets/countries/gb.svg'
-import hiveLogo from '../../../../public/assets/logo/logo-hive.png'
-import dayImg from '../../../../public/assets/icons/day.png'
-import nightImg from '../../../../public/assets/icons/night.png'
-
+import {brightnessSvg, gbFlag, frFlag, hiveLogo} from '../../img/svg';
 
 
 
@@ -20,13 +15,13 @@ const languages=[
     code:'fr',
     name:'Français',
     country_code:"fr",
-    flagImg:`${fr}`
+    flagImg: frFlag
   },
   {
     code:'en',
     name:'English',
     country_code:"gb",
-    flagImg:`${gb}`
+    flagImg: gbFlag
   },
 ]
 const AppHeader = (props:any) => {
@@ -41,7 +36,8 @@ const AppHeader = (props:any) => {
             <LinkContainer to="/">
             <Navbar.Brand>
               <span id="logo">
-              <img className='logo-icon' src={hiveLogo} alt="Logo hive" /><span className='navText'>HiveExplorer</span></span>
+                <div className='logo-icon navText'>{hiveLogo} Hivexplorer</div>
+              </span>
               </Navbar.Brand>
             </LinkContainer>
            
@@ -65,9 +61,8 @@ const AppHeader = (props:any) => {
                 >
                     {languages.map(({code,name,country_code,flagImg})=>(
                        <NavDropdown.Item key={country_code} onClick={()=>i18next.changeLanguage(code)} disabled={code === currentLangCode}>
-                        <div className='langFlag' >  
-                            <img style={{ opacity:code === currentLangCode ? 0.5 : 1 }}className="flag-img" src={flagImg}/>
-                            {name}
+                        <div className='langFlag' >
+                          {flagImg} {name}
                         </div>
                        </NavDropdown.Item>
                     ))}
@@ -75,8 +70,8 @@ const AppHeader = (props:any) => {
               </Nav>
             </Navbar.Collapse>
             <Button className="day-night-btn" onClick={props.themeToggler}>
-             <img className='day-night-img' src={currTheme==="day"? dayImg : nightImg } alt="" />
-              </Button>
+                {brightnessSvg}
+            </Button>
          </Container>
       </Navbar>
       </>
