@@ -85,6 +85,11 @@ export const methods = [
     "params": ["block_num"]
   },
   {
+    "api": "block_api",
+    "method": "get_block_range",
+    "params": ["starting_block_num", "count"]
+  },
+  {
     "api": "account_history_api",
     "method": "get_ops_in_block",
     "params": ["block_num", "only_virtual"]

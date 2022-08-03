@@ -1,9 +1,8 @@
 {
   "theme": "day",
   "locale": "en-US",
-  "base": "https://ecency.com",
+  "base": "https://hivexplorer.com",
   "imageServer": "https://images.ecency.com",
-  "nwsServer": "wss://enotify.esteem.app",
   "name": "Hivexplorer",
   "title": "Explorer for Hive blockchain",
   "description": "Find anything you want from blockchain and see details of transactions and operations."

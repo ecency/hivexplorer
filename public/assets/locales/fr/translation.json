@@ -1,0 +1,23 @@
+{  
+    "nav":{
+        "about":"À propos de",
+        "service":"Prestations de service"
+    },
+    "home":{
+        "latest_block":"Derniers Blocs",
+        "latest_transaction":"Derniers Transactions"
+    },
+    "headBlock":{
+        "time":"Temps",
+        "witness":"Les témoins",
+        "reward_fund":"Fonds de récompense",
+        "vesting_fund":"Fonds d'acquisition",
+        "vesting_share":"Actions d'acquisition",
+        "supply":"Fourmir"
+
+
+    },
+    "about":{
+        "page_title":"À propos de french"
+    }
+}
