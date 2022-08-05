@@ -58,4 +58,9 @@ i18n
       useSuspense:false
     }
   });
+
+export const _t = (k: string, args = {}) => {
+  return i18n.t(k, args);
+};
+
   export default i18n;

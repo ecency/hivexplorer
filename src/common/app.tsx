@@ -15,6 +15,10 @@ import {ThemeProvider} from "styled-components";
 import { Button } from 'react-bootstrap';
 import { GlobalStyles } from "./components/dark-theme/globalStyles";
 import { darkTheme, lightTheme } from './components/dark-theme/themes';
+import {Global, Theme} from "./store/global/types";
+import '../style/theme-day.scss';
+import '../style/theme-night.scss';
+
 
 
 const EntryPage = loadable(() => import('./pages/home/HomePage'));
@@ -26,10 +30,15 @@ const App = ({ setLang }: any) => {
   const currTheme = useSelector((state:any) => state.global.theme)
   const {t} = useTranslation()
   const [theme, setTheme] = useState(currTheme);
-  const themeToggler = () => {
-    theme === 'day' ? setTheme('night') : setTheme('day')
-    dispatch(toggleTheme())
-}
+
+  useEffect(() => {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', handleAutoDetectTheme);
+}, []); //
+
+  const handleAutoDetectTheme = (e: any = null) => {        
+    const _default_theme = e && e.matches ? Theme.night : Theme.day
+    toggleTheme(_default_theme);
+  }
   useEffect(() => {
 
     const currentLang = ls.get('current-language');
@@ -43,19 +52,23 @@ const App = ({ setLang }: any) => {
   return (
     <>
       {/*<Tracker/>*/}
-      <ThemeProvider theme={theme === 'day' ? lightTheme : darkTheme}>
       <>
-      <GlobalStyles/>
       {/*<Tracker/>*/}
-      <AppHeader themeToggler={themeToggler}/>
+      {/* <div className="switch-menu">
+        <Button className="switch-theme" onClick={() => dispatch(toggleTheme())}>
+            Click me
+        </Button>
+      </div> */}
+      <AppHeader />
       <Switch>
         <Route exact={true} path={routes.HOME} component={EntryPage}/>
         <Route exact={true} path={routes.ABOUT} component={AboutPage}/>
+        {/* CHECK */}
+        <Route exact={true} path={routes.Service} component={NotFound}/>
         <Route exact={true} path={routes.HeadBlock}  component={HeadBlockDetailPage}/>
         <Route component={NotFound}/>
       </Switch>
       </>
-    </ThemeProvider>
 
     </>
   );
