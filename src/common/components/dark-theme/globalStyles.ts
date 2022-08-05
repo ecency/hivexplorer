@@ -27,4 +27,14 @@ export const GlobalStyles = createGlobalStyle`
     width: 18px;
     height: 18px;
   }
+  .svg-theme {
+    fill: ${({theme})=> theme.text}
+  }
+  .row-border{
+      border-bottom: 1px solid ${({ theme }) => theme.cardBorder};
+  }
+  .btn-theme, .btn-theme:hover, .btn-theme:focus, .btn-theme:active{
+    background:${({ theme }) => theme.btnBg};
+    color: ${({ theme }) => theme.text};
+  }
   `
