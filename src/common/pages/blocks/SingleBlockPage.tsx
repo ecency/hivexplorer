@@ -4,11 +4,9 @@ import { match } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Col, Container, Row, Card,Button} from 'react-bootstrap';
-import './headBlock.scss';
-import { withPersistentScroll } from '../with-persistent-scroll';
 import { pageMapDispatchToProps, pageMapStateToProps, PageProps } from '../../pages/common';
-import { infoIcon,showLessIcon,showMoreIcon } from '../../img/svg';
-import BlockField from '../fields/blockFields/blockField';
+
+import { withPersistentScroll } from '../../components/with-persistent-scroll';
 
 
 var url = 'http://localhost:3000/api/get_dynamic_global_properties';
@@ -61,7 +59,7 @@ export interface LatestBlock {
     max_open_recurrent_transfers:string
 }
 
-const HeadBlockDetail = (props:any) => {
+const SingleBlock = (props:any) => {
     
     const {match} = props
     const { t } = useTranslation()
@@ -80,19 +78,11 @@ const HeadBlockDetail = (props:any) => {
                         Block: {match.params.id}
                     </Card.Header>
                     <Card.Body className='p-0'>
-                    {showMore? result && Object.keys(result).slice(0,).map((key,index)=>{
-                        return(
-                           <BlockField value={result[key]}  item={key} number={index}/>
-                        )
-                    }) :result && Object.keys(result).slice(0,10).map((key,index)=>{
-                        return(
-                           <BlockField value={result[key]}  item={key} number={index}/>
-                        )
-                    })}
+              
                     </Card.Body>
                     <Card.Footer>
                         <Button className='showmore-btn btn-theme' onClick={()=>setShowMore(!showMore)}>
-                            Show {showMore? <span>Less {showLessIcon} </span> : <span>More {showMoreIcon}</span> }
+                            Show
                         </Button>
                     </Card.Footer>
                 </Card>
@@ -100,4 +90,4 @@ const HeadBlockDetail = (props:any) => {
         </div>
     )
 };
-export default connect(pageMapStateToProps, pageMapDispatchToProps)(withPersistentScroll(HeadBlockDetail));
+export default connect(pageMapStateToProps, pageMapDispatchToProps)(withPersistentScroll(SingleBlock));

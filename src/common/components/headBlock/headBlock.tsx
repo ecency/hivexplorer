@@ -12,10 +12,6 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { ConfigItems } from '../../../../config';
 
-
-
-var url = `${ConfigItems.urlLink}/api/get_dynamic_global_properties`;
-
 export interface Block {
     head_block_number: number,
     head_block_id: string,
@@ -28,20 +24,17 @@ export interface Block {
     total_reward_fund_hive: string,
 }
 
-const HeadBlock = () => {
+const HeadBlock = (props:Block) => {
     const { t } = useTranslation()
-    const [result, setResult] = useState<Block>();
-    useEffect(() => {
-        axios.get(url).then(response => {
-            setResult(response.data)
-        })
-    }, []);
+    const result=props
+      console.log(props.current_hbd_supply)
+   
     return (
         <div className='head-block'>
-           {result &&
+           {props &&
             <Card>
                 <Card.Header>
-                <span className='head-block-attr-span'>Block: </span><Link to={`/b/${result.head_block_number}`}>
+                <span className='head-block-attr-span'>Block: </span><Link to={`/latest/b/${result.head_block_number}`}>
                     {result.head_block_number}</Link>
                 </Card.Header>
                 <Card.Body>

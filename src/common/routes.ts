@@ -3,5 +3,6 @@ export default {
     ABOUT:'/about',
     Contact:'/contact',
     Service:'/service',
-    HeadBlock:'/b/:id'
+    HeadBlock:'/latest/b/:id',
+    TargetBlock:'/b/:id'
 };
