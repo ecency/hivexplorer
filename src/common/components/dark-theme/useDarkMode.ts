@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 
 export const useDarkMode = () => {
     const [theme, setTheme] = useState('');
-    const currTheme = useSelector((state) => state.global.theme);
+    const currTheme = useSelector((state:any) => state.global.theme);
 
     const setMode = (mode: string) => {
         window.localStorage.setItem('theme', mode)

@@ -24,6 +24,7 @@ import '../style/theme-night.scss';
 const EntryPage = loadable(() => import('./pages/home/HomePage'));
 const AboutPage = loadable(() => import('./pages/about'));
 const HeadBlockDetailPage = loadable(() => import('./components/headBlock/headBlockDetail'));
+const SingleBlock = loadable(()=>import('./pages/blocks/SingleBlockPage'))
 
 const App = ({ setLang }: any) => {
   const dispatch = useDispatch()
@@ -66,6 +67,7 @@ const App = ({ setLang }: any) => {
         {/* CHECK */}
         <Route exact={true} path={routes.Service} component={NotFound}/>
         <Route exact={true} path={routes.HeadBlock}  component={HeadBlockDetailPage}/>
+        <Route exact={true} path={routes.TargetBlock}  component={SingleBlock}/>
         <Route component={NotFound}/>
       </Switch>
       </>

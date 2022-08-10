@@ -9,4 +9,14 @@
             border-right: 1px solid #bdbdbd;
         }
     }
+    
+}
+.head-block-detail{
+    padding: 2rem 0;
+    .showmore-btn{
+        border:0 
+    }
+    .showmore-btn:focus{
+        box-shadow: none;
+    }
 }
