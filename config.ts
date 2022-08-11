@@ -1,4 +1,4 @@
 export const ConfigItems ={
-    urlLink:"http://localhost:3000",
+    baseUrl:"http://localhost:3000",
 }
    

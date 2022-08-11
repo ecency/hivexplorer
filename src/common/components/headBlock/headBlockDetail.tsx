@@ -12,6 +12,7 @@ import BlockField from '../fields/blockFields/blockField';
 
 
 var url = 'http://localhost:3000/api/get_dynamic_global_properties';
+import { ConfigItems } from '../../../../config';
 
 export interface LatestBlock {
     head_block_number: number,
@@ -67,8 +68,10 @@ const HeadBlockDetail = (props:any) => {
     const { t } = useTranslation()
     const [result, setResult] = useState<LatestBlock>();
     const [showMore, setShowMore] = useState(false);
+
+    let url_global = `${ConfigItems.baseUrl}/api/get_dynamic_global_properties`;
     useEffect(() => {
-        axios.get(url).then(response => {
+        axios.get(url_global).then(response => {
             setResult(response.data)
         })
     }, []);
@@ -82,17 +85,17 @@ const HeadBlockDetail = (props:any) => {
                     <Card.Body className='p-0'>
                     {showMore? result && Object.keys(result).slice(0,).map((key,index)=>{
                         return(
-                           <BlockField value={result[key]}  item={key} number={index}/>
+                           <BlockField key={index} value={result[key]}  item={key} number={index}/>
                         )
                     }) :result && Object.keys(result).slice(0,10).map((key,index)=>{
                         return(
-                           <BlockField value={result[key]}  item={key} number={index}/>
+                           <BlockField  key={index} value={result[key]}  item={key} number={index}/>
                         )
                     })}
                     </Card.Body>
                     <Card.Footer>
                         <Button className='showmore-btn btn-theme' onClick={()=>setShowMore(!showMore)}>
-                            Show {showMore? <span>Less {showLessIcon} </span> : <span>More {showMoreIcon}</span> }
+                            Show {showMore? <span>Less {showLessIcon} </span> : <span>More {showMoreIcon}</span>}
                         </Button>
                     </Card.Footer>
                 </Card>

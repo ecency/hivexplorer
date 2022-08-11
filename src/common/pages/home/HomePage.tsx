@@ -14,11 +14,7 @@ import HeadBlock,{ Block } from '../../components/headBlock/headBlock';
 import HomeBlocks,{HomeBlocksType } from '../../components/home/blocksComponent';
 
 var url1 = 'https://jsonplaceholder.typicode.com/users';
-
-var headBlock = `${ConfigItems.urlLink}/api/get_dynamic_global_properties`;
-
-
-
+var headBlock = `${ConfigItems.baseUrl}/api/get_dynamic_global_properties`;
 interface User{
   id:number,
   name:string,
@@ -97,7 +93,7 @@ const Index = (props: PageProps) => {
           <Col xs={12} md={6}>
             <Card>
               <Card.Header>{t("home.latest_block")}</Card.Header>
-              <Card.Body>
+              <Card.Body className='p-0'>
                {result &&  <HomeBlocks block_number={result?.head_block_number} />}
               </Card.Body>
             </Card>

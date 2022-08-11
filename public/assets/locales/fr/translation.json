@@ -7,7 +7,7 @@
         "latest_block":"Derniers Blocs",
         "latest_transaction":"Derniers Transactions"
     },
-    "head_block":{
+    "block":{
         "head_block_number":"Block Number",
         "head_block_id": "Block ID",
         "time":"Time",

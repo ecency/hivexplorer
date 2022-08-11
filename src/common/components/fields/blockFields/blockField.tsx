@@ -19,7 +19,7 @@ const BlockField = (props:any) => {
     }, []);
     return (
         <Row className='row-border' key={number}>
-            <Col  md={3} xs={12} className="attr-col"><span>{infoIcon} </span><span> {t(`head_block.${item}`)}:</span> </Col>
+            <Col  md={3} xs={12} className="attr-col"><span>{infoIcon} </span><span> {t(`block.${item}`)}:</span> </Col>
             <Col md={9} xs={12}>
                 {value}
             </Col>
