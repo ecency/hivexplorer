@@ -10,6 +10,7 @@ import { ConfigItems } from '../../../../config';
 import BlockField from '../../components/fields/blockFields/blockField';
 import { infoIcon } from '../../img/svg';
 import { transactionList } from '../../components/home/blocksComponent';
+import Theme from '../../components/theme';
 
 export interface LatestBlock {
     previous:string
@@ -40,24 +41,27 @@ const SingleBlock = (props:any) => {
     }, []);
     console.log(result?.block_id)
     return (
-        <div className='head-block-detail'>
-         <Container>
-                <Card>
-                    <Card.Header>
-                        Block: {match.params.id}
-                    </Card.Header>
-                    <Card.Body className='p-0'>
-                        { result && Object.keys(result).map((key,index)=>{
-                            return(
-                                <BlockField key={index} value={ typeof(result[key])==='string'? result[key]:result[key].length}  item={key} number={index}/>
-                           
-                            )})
-                        }
-                    </Card.Body>
+        <>
+            <Theme global={props.global}/>
+            <div className='head-block-detail'>
+            <Container>
+                    <Card>
+                        <Card.Header>
+                            Block: {match.params.id}
+                        </Card.Header>
+                        <Card.Body className='pt-0'>
+                            { result && Object.keys(result).map((key,index)=>{
+                                return(
+                                    <BlockField key={index} value={ typeof(result[key])==='string'? result[key]:result[key].length}  item={key} number={index}/>
+                            
+                                )})
+                            }
+                        </Card.Body>
 
-                </Card>
-         </Container>
-        </div>
+                    </Card>
+            </Container>
+            </div>
+        </>
     )
 };
 export default connect(pageMapStateToProps, pageMapDispatchToProps)(withPersistentScroll(SingleBlock));

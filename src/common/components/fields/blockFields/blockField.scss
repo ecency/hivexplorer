@@ -1,5 +1,15 @@
 .row-border{
+    border-width: 0px 0px 1px 0;
+    border-style: solid;
     margin-left: 0;
     margin-right: 0;
     padding: 0.75rem 0;
+}
+
+.border-color-day {
+    border-color: #e7e7e7;
+}
+
+.border-color-night {
+    border-color: #161d26;
 }

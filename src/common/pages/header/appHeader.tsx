@@ -18,6 +18,8 @@ const AppHeader = (props:any) => {
     const appNav = currTheme === 'day' ? 'appNav appNav-day' : 'appNav appNav-night';
     const appNavText = currTheme === 'day' ? 'logo-icon appNav-text-day' : 'logo-icon appNav-text-night';
     const themeContrastColor = currTheme === 'day' ? 'black' : 'white';
+    const switchThemeBtn = currTheme === 'day' ? 'switch-theme-btn-day' : 'switch-theme-btn-night';
+    const menuVariant = currTheme === 'day' ? 'light' : 'dark';
 
     return (
       <>
@@ -43,7 +45,7 @@ const AppHeader = (props:any) => {
                   <Nav.Link className={appNavText}>{t("nav.service")}</Nav.Link>
                 </LinkContainer>
 
-                <NavDropdown id="nav-dropdown-dark-example" title={globeImg}>
+                <NavDropdown menuVariant={menuVariant} id="nav-dropdown-dark-example" title={globeImg(themeContrastColor)}>
                     {languages.map(({code,name,country_code,flagImg})=>(
                        <NavDropdown.Item key={country_code} onClick={()=>i18next.changeLanguage(code)} disabled={code === currentLangCode}>
                         <div className='langFlag' >
@@ -54,11 +56,9 @@ const AppHeader = (props:any) => {
                 </NavDropdown>
               </Nav>
             </Navbar.Collapse>
-            <div className="switch-menu">
-              <Button className="day-night-btn switch-theme btn-sm" onClick={() => dispatch(toggleTheme())}>
-                {brightnessSvg}
+              <Button className={switchThemeBtn} onClick={() => dispatch(toggleTheme())}>
+                {brightnessSvg(themeContrastColor)}
               </Button>
-            </div>
          </Container>
       </Navbar>
       </>

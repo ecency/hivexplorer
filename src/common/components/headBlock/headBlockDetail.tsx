@@ -9,7 +9,8 @@ import { withPersistentScroll } from '../with-persistent-scroll';
 import { pageMapDispatchToProps, pageMapStateToProps, PageProps } from '../../pages/common';
 import { infoIcon,showLessIcon,showMoreIcon } from '../../img/svg';
 import BlockField from '../fields/blockFields/blockField';
-
+import Theme from '../theme';
+import { useSelector } from 'react-redux';
 
 var url = 'http://localhost:3000/api/get_dynamic_global_properties';
 import { ConfigItems } from '../../../../config';
@@ -68,6 +69,9 @@ const HeadBlockDetail = (props:any) => {
     const { t } = useTranslation()
     const [result, setResult] = useState<LatestBlock>();
     const [showMore, setShowMore] = useState(false);
+    const currTheme = useSelector((state:any) => state.global.theme)
+    const themeContrastColor = currTheme === 'day' ? 'black' : 'white';
+    const themeBtn = currTheme === 'day' ? 'showmore-btn btn-light' : 'showmore-btn btn-dark';
 
     let url_global = `${ConfigItems.baseUrl}/api/get_dynamic_global_properties`;
     useEffect(() => {
@@ -76,31 +80,34 @@ const HeadBlockDetail = (props:any) => {
         })
     }, []);
     return (
-        <div className='head-block-detail'>
-         <Container>
-                <Card>
-                    <Card.Header>
-                        Block: {match.params.id}
-                    </Card.Header>
-                    <Card.Body className='p-0'>
-                    {showMore? result && Object.keys(result).slice(0,).map((key,index)=>{
-                        return(
-                           <BlockField key={index} value={result[key]}  item={key} number={index}/>
-                        )
-                    }) :result && Object.keys(result).slice(0,10).map((key,index)=>{
-                        return(
-                           <BlockField  key={index} value={result[key]}  item={key} number={index}/>
-                        )
-                    })}
-                    </Card.Body>
-                    <Card.Footer>
-                        <Button className='showmore-btn btn-theme' onClick={()=>setShowMore(!showMore)}>
-                            Show {showMore? <span>Less {showLessIcon} </span> : <span>More {showMoreIcon}</span>}
-                        </Button>
-                    </Card.Footer>
-                </Card>
-         </Container>
-        </div>
+        <>
+            <Theme global={props.global}/>
+            <div className='head-block-detail'>
+            <Container>
+                    <Card>
+                        <Card.Header>
+                            Block: {match.params.id}
+                        </Card.Header>
+                        <Card.Body className='pt-0'>
+                        {showMore? result && Object.keys(result).slice(0,).map((key,index)=>{
+                            return(
+                            <BlockField key={index} value={result[key]}  item={key} number={index}/>
+                            )
+                        }) :result && Object.keys(result).slice(0,10).map((key,index)=>{
+                            return(
+                            <BlockField  key={index} value={result[key]}  item={key} number={index}/>
+                            )
+                        })}
+                        </Card.Body>
+                        <Card.Footer>
+                            <Button className={themeBtn} onClick={()=>setShowMore(!showMore)}>
+                                Show {showMore? <span>Less {showLessIcon(themeContrastColor)} </span> : <span>More {showMoreIcon(themeContrastColor)}</span>}
+                            </Button>
+                        </Card.Footer>
+                    </Card>
+            </Container>
+            </div>
+        </>
     )
 };
 export default connect(pageMapStateToProps, pageMapDispatchToProps)(withPersistentScroll(HeadBlockDetail));

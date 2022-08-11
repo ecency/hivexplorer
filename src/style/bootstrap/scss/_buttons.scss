@@ -117,6 +117,14 @@ fieldset:disabled a.btn {
   @include button-size($btn-padding-y-sm, $btn-padding-x-sm, $btn-font-size-sm, $btn-line-height-sm, $btn-border-radius-sm);
 }
 
+.btn-light {
+  background-color: #bbbb;
+}
+
+.btn-dark {
+  background-color: #374852;
+}
+
 
 //
 // Block button
