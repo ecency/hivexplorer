@@ -38,6 +38,7 @@
     "path-to-regexp": "^6.1.0",
     "react": "^16.8.6",
     "react-bootstrap": "^2.4.0",
+    "react-data-table-component": "^7.5.2",
     "react-dom": "^16.8.6",
     "react-helmet": "^6.0.0",
     "react-i18next": "^11.18.1",

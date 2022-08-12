@@ -29,7 +29,7 @@ export interface HomeBlocksType {
 interface HomeBlockList extends Array<HomeBlocksType>{}
 const HomeBlocks = (props:any) => {
     const { t } = useTranslation()
-    const [homeBlocks, setHomeBlocks] = useState<HomeBlockList>([]);
+    const [homeBlocks, setHomeBlocks] = useState<HomeBlockList>();
     var home_blocks_url=`${ConfigItems.baseUrl}/api/get_block_range?starting_block_num=${props.block_number}&count=15`;
       useEffect(()=>{
         axios.get(home_blocks_url).then(res => {
@@ -59,13 +59,13 @@ const HomeBlocks = (props:any) => {
                         <Col md={12} >Time: {block.timestamp.replace('T',' & ')}</Col>
                     </Row>
                  </Col>
-                 <Col md={4} xs={12}>
+                 <Col md={5} xs={12}>
                     <Row>
                         <Col md={12}>Witness: <Link to={''}>{block.witness}</Link></Col>
                         <Col md={12}>Txns: {block.transactions.length}</Col>
                     </Row>
                  </Col>
-                 <Col md={3} xs={12}>
+                 <Col md={2} xs={12}>
                     <Row>
                         
                         <Col md={12} >Ops: {operationsCount}</Col>

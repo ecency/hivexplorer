@@ -6,12 +6,15 @@ import Theme from '../../components/theme';
 import { getMetaProps } from '../../util/get-meta-props';
 import { connect } from 'react-redux';
 import { withPersistentScroll } from '../../components/with-persistent-scroll';
-import { Col, Container,Row,Card } from 'react-bootstrap';
+import { Col, Container,Row,Card, Button } from 'react-bootstrap';
 import './HomePage.scss';
 import { useTranslation } from 'react-i18next';
 import { ConfigItems } from '../../../../config';
 import HeadBlock,{ Block } from '../../components/headBlock/headBlock';
-import HomeBlocks,{HomeBlocksType } from '../../components/home/blocksComponent';
+import HomeBlocks,{HomeBlocksType } from '../../components/home/BlocksComponent';
+import HomeTransactions from '../../components/home/TransactionsComponent';
+import { Link } from 'react-router-dom';
+
 
 var url1 = 'https://jsonplaceholder.typicode.com/users';
 var headBlock = `${ConfigItems.baseUrl}/api/get_dynamic_global_properties`;
@@ -86,27 +89,36 @@ const Index = (props: PageProps) => {
   return <>
     <Meta {...metaProps} />
     <Theme global={props.global}/>
-    <div className='home pt-5'>
+    <div className='home py-4'>
       <Container>
-        {result && <HeadBlock {...result} />}
-        <Row>
-          <Col xs={12} md={6}>
-            <Card>
-              <Card.Header>{t("home.latest_block")}</Card.Header>
-              <Card.Body className='p-0'>
-               {result &&  <HomeBlocks block_number={result?.head_block_number} />}
-              </Card.Body>
-            </Card>
-          </Col>
-          <Col xs={12} md={6} >
-          <Card>
-              <Card.Header>{t("home.latest_transaction")}</Card.Header>
-              <Card.Body className='p-0'>
-              Null
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
+        {result && 
+        <>
+          <HeadBlock {...result} /><Row>
+              <Col xs={12} md={6}>
+                <Card>
+                  <Card.Header>{t("home.latest_block")}</Card.Header>
+                  <Card.Body className='block-transaction-body p-0'>
+                    <HomeBlocks block_number={result.head_block_number} />
+                  </Card.Body>
+                  <Card.Footer>
+                    <Button>See More Blocks</Button>
+                  </Card.Footer>
+                </Card>
+              </Col>
+              <Col xs={12} md={6}>
+                <Card>
+                  <Card.Header>{t("home.latest_transaction")}</Card.Header>
+                  <Card.Body className='block-transaction-body p-0'>
+                    <HomeTransactions block_number={result.head_block_number} />
+                  </Card.Body>
+                  <Card.Footer>
+                    <Link to={`/transactions`}><Button>See More Transaction</Button></Link>
+                  </Card.Footer>
+                </Card>
+              </Col>
+            </Row>
+          </>
+        }
       </Container>
     </div>
    

@@ -1,6 +1,6 @@
 import React from "react";
 
-export const brightnessSvg = (color) => (
+export const brightnessSvg = (color:string) => (
   <svg viewBox="0 0 24 24">
     <path
       fill={color}

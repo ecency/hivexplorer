@@ -4,5 +4,6 @@ export default {
     Contact:'/contact',
     Service:'/service',
     HeadBlock:'/latest/b/:id',
-    TargetBlock:'/b/:id'
+    TargetBlock:'/b/:id',
+    Transactions:'/transactions'
 };

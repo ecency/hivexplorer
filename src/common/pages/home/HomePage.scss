@@ -6,4 +6,11 @@
     .block-row{
         padding: 1rem 0;
     }
+    .block-transaction-body{
+        height: 453px;
+        overflow-y: scroll;
+        &::-webkit-scrollbar-track{
+         box-shadow: none;   
+        }
+    }
 }

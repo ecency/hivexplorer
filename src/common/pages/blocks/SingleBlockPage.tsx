@@ -9,7 +9,7 @@ import { withPersistentScroll } from '../../components/with-persistent-scroll';
 import { ConfigItems } from '../../../../config';
 import BlockField from '../../components/fields/blockFields/blockField';
 import { infoIcon } from '../../img/svg';
-import { transactionList } from '../../components/home/blocksComponent';
+import { transactionList } from '../../components/home/BlocksComponent';
 import Theme from '../../components/theme';
 
 export interface LatestBlock {
@@ -30,8 +30,6 @@ const SingleBlock = (props:any) => {
     const { t } = useTranslation()
     const [result, setResult] = useState<LatestBlock>();
     const [showMore, setShowMore] = useState(false);
-    console.log('id',match.params.id)
-    console.log('id',match.params.id)
     var url_single_block = `${ConfigItems.baseUrl}/api/get_block?block_num=${match.params.id}`;
     useEffect(() => {
         axios.get(url_single_block).then(response => {
@@ -39,7 +37,6 @@ const SingleBlock = (props:any) => {
         })
        
     }, []);
-    console.log(result?.block_id)
     return (
         <>
             <Theme global={props.global}/>
