@@ -30,7 +30,7 @@ interface HomeBlockList extends Array<HomeBlocksType>{}
 const HomeBlocks = (props:any) => {
     const { t } = useTranslation()
     const [homeBlocks, setHomeBlocks] = useState<HomeBlockList>();
-    var home_blocks_url=`${ConfigItems.baseUrl}/api/get_block_range?starting_block_num=${props.block_number}&count=15`;
+    var home_blocks_url=`${ConfigItems.baseUrl}/api/get_block_range?starting_block_num=${props.block_number-15}&count=15`;
       useEffect(()=>{
         axios.get(home_blocks_url).then(res => {
             setHomeBlocks(res.data.blocks)

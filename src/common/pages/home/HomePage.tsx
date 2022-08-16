@@ -101,7 +101,7 @@ const Index = (props: PageProps) => {
                     <HomeBlocks block_number={result.head_block_number} />
                   </Card.Body>
                   <Card.Footer>
-                    <Button>See More Blocks</Button>
+                    <Link  to={'/blocks'}><Button>See More Blocks</Button></Link>
                   </Card.Footer>
                 </Card>
               </Col>

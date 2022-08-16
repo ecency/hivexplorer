@@ -30,9 +30,10 @@ interface HomeTransactionList extends Array<HomeTransactionType>{}
 const HomeTransactions = (props:any) => {
     const { t } = useTranslation()
     const [homeTransactions, setHomeTransactions] = useState<HomeTransactionList>([]);
-    var home_blocks_url=`${ConfigItems.baseUrl}/api/get_ops_in_block?block_num=66952823`;
+    var home_transactions_url=`${ConfigItems.baseUrl}/api/get_ops_in_block?block_num=${props.block_number-15}`;
+    console.log('bid',props.block_number-10)
       useEffect(()=>{
-        axios.get(home_blocks_url).then(res => {
+        axios.get(home_transactions_url).then(res => {
             setHomeTransactions(res.data.ops)
             console.log('ops',res.data.ops)
           })

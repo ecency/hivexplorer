@@ -3,12 +3,12 @@ import React, { useEffect, useState } from 'react';import axios from 'axios';
 import { match } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { Col, Container, Row, Card,Button,Table} from 'react-bootstrap';
 import { pageMapDispatchToProps, pageMapStateToProps, PageProps } from '../../pages/common';
 import { withPersistentScroll } from '../../components/with-persistent-scroll';
 import { ConfigItems } from '../../../../config';
 import { HomeTransactionType } from '../../components/home/TransactionsComponent';
-import DataTables from '../../components/data-tables/DataTables';
+import DataTables from '../../components/transactions/DataTables';
+import Theme from '../../components/theme';
 
 
 interface TransactionList extends Array<HomeTransactionType>{}
@@ -26,6 +26,7 @@ const AllTransactions = (props:any) => {
       },[])
     return (
         <>
+             <Theme global={props.global}/>
            {transactions &&  <DataTables data={transactions}/>}
         </>
     )

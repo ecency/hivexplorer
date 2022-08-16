@@ -49,7 +49,7 @@ const SingleBlock = (props:any) => {
                         <Card.Body className='pt-0'>
                             { result && Object.keys(result).map((key,index)=>{
                                 return(
-                                    <BlockField key={index} value={ typeof(result[key])==='string'? result[key]:result[key].length}  item={key} number={index}/>
+                                    <BlockField key={index} value={typeof(result[key])==='string'? result[key]:result[key].length}  item={key} number={index}/>
                             
                                 )})
                             }

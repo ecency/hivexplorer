@@ -34,7 +34,7 @@ const HeadBlock = (props:Block) => {
            {props &&
             <Card>
                 <Card.Header>
-                <span className='head-block-attr-span'>Block: </span><Link to={`/latest/b/${result.head_block_number}`}>
+                <span className='head-block-attr-span'>Block: </span><Link to={`/head/b/${result.head_block_number}`}>
                     {result.head_block_number}</Link>
                 </Card.Header>
                 <Card.Body>

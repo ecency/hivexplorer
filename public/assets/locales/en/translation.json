@@ -6,10 +6,16 @@
         "latest_block":"Latest Blocks",
         "latest_transaction":"Latest Transaction"
     },
+    "common":{
+        "type":"Type",
+        "value":"Value",
+        "block":"Block",
+        "date":"Date",
+        "time":"Time"
+    },
     "block":{
         "head_block_number":"Block Number",
         "head_block_id": "Block ID",
-        "time":"Time",
         "witness":"Witnesses",
         "current_witness":"Current Witness",
         "total_pow":"Total POW",
@@ -54,7 +60,21 @@
         "min_recurrent_transfers_recurrence":"Min Recurrent Rransfers Recurrence",
         "max_open_recurrent_transfers":"Max Open Recurrent Transfers"
     },
+    "transaction":{
+
+    },
     "about":{
         "page_title":"About"
+    },
+    "table_column":{
+        "id":"ID",
+        "type":"Type",
+        "value":"Value",
+        "block":"Block",
+        "date":"Date",
+        "time":"Time",
+        "witness":"Witness",
+        "transaction":"Transactions",
+        "operations":"Operations"
     }
 }

@@ -35,11 +35,11 @@ const FilterComponent = ({ filterText, onFilter, onClear }:{filterText:string,on
     <Input
       id="search"
       type="text"
-      placeholder="Filter table data..."
+      placeholder="Search Transaction..."
       value={filterText}
       onChange={onFilter}
     />
-    <ClearButton onClick={onClear}>X</ClearButton>
+    <ClearButton onClick={onClear}>x</ClearButton>
   </>
 );
 
