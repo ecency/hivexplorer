@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react';import axios from 'axios';
 import { match } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { useTranslation } from 'react-i18next';
 import { Col, Container, Row, Card,Button} from 'react-bootstrap';
 import './headBlock.scss';
 import { withPersistentScroll } from '../with-persistent-scroll';
@@ -12,8 +11,9 @@ import BlockField from '../fields/blockFields/blockField';
 import Theme from '../theme';
 import { useSelector } from 'react-redux';
 
-var url = 'http://localhost:3000/api/get_dynamic_global_properties';
+const url = `${ConfigItems.baseUrl}/api/get_dynamic_global_properties`;
 import { ConfigItems } from '../../../../config';
+import { _t } from '../../i18n';
 
 export interface LatestBlock {
     head_block_number: number,
@@ -66,7 +66,6 @@ export interface LatestBlock {
 const HeadBlockDetail = (props:any) => {
     
     const {match} = props
-    const { t } = useTranslation()
     const [result, setResult] = useState<LatestBlock>();
     const [showMore, setShowMore] = useState(false);
     const currTheme = useSelector((state:any) => state.global.theme)
@@ -86,7 +85,7 @@ const HeadBlockDetail = (props:any) => {
             <Container>
                     <Card>
                         <Card.Header>
-                            Block: {match.params.id}
+                            {_t('common.block')}: {match.params.id}
                         </Card.Header>
                         <Card.Body className='pt-0'>
                         {showMore? result && Object.keys(result).slice(0,).map((key,index)=>{
@@ -101,7 +100,7 @@ const HeadBlockDetail = (props:any) => {
                         </Card.Body>
                         <Card.Footer>
                             <Button className={themeBtn} onClick={()=>setShowMore(!showMore)}>
-                                Show {showMore? <span>Less {showLessIcon(themeContrastColor)} </span> : <span>More {showMoreIcon(themeContrastColor)}</span>}
+                                {_t('common.show')} {showMore? <span>{_t('common.less')} {showLessIcon(themeContrastColor)} </span> : <span>{_t('common.more')} {showMoreIcon(themeContrastColor)}</span>}
                             </Button>
                         </Card.Footer>
                     </Card>

@@ -41,13 +41,13 @@ export default async (req: express.Request, res: express.Response) => {
       }
 
       // rpc response
-      cache.set(`${method}-${params}`, result, 60);
+      cache.set(`${method}-${params}`, result, 3);
 
-      res.set('Cache-Control','public, max-age=60'); // 60s
+      res.set('Cache-Control','public, max-age=3'); // 60s
       res.json(result);
     } catch (error) {
       // other script errors
-      res.set('Cache-Control', 'public, max-age=10'); // 10s
+      res.set('Cache-Control', 'public, max-age=1'); // 10s
       res.json(error);
     }
   } else {

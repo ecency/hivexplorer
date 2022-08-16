@@ -1,0 +1,53 @@
+.data-table-hive{
+    .rdt_Table{
+        border: 1px solid #c5c5c5;
+    }
+    .avatar-img{
+        height: 40px;
+        width: 40px;
+        border-radius: 100%;
+        margin-right: 10px;
+    }
+    .MuiOutlinedInput-notchedOutline{
+        border: none !important;
+    }
+    .MuiInputBase-input{
+        border: 1px solid #e0e0e0;
+    }
+    .MuiInput-underline:after,.MuiInput-underline:before {
+        border:none !important;
+    }
+    .MuiTablePagination-toolbar{
+        p{
+            margin-bottom: 0.25rem !important;
+        }   
+       
+    }
+    .search-field{
+        width: 500px;
+        input{
+            padding: 10px !important;
+        }
+        @media (max-width:768px){
+            width: 100%;
+        }
+    }
+    .paper-night {
+        background-color: transparent;
+        .MuiTableCell-root{
+            color: #ffffffde !important;
+        }
+        .MuiTablePagination-toolbar{
+            p{
+                color: #ffffffde !important;
+            }  
+        }
+        .MuiInputBase-input{
+            background: #ebebeb;
+        }
+    }
+    .paper-day {
+        background-color: transparent;
+    }
+  
+}

@@ -8,16 +8,14 @@ import { connect } from 'react-redux';
 import { withPersistentScroll } from '../../components/with-persistent-scroll';
 import { Col, Container,Row,Card, Button } from 'react-bootstrap';
 import './HomePage.scss';
-import { useTranslation } from 'react-i18next';
 import { ConfigItems } from '../../../../config';
 import HeadBlock,{ Block } from '../../components/headBlock/headBlock';
 import HomeBlocks,{HomeBlocksType } from '../../components/home/BlocksComponent';
 import HomeTransactions from '../../components/home/TransactionsComponent';
 import { Link } from 'react-router-dom';
+import { _t } from '../../i18n';
 
-
-var url1 = 'https://jsonplaceholder.typicode.com/users';
-var headBlock = `${ConfigItems.baseUrl}/api/get_dynamic_global_properties`;
+const headBlock = `${ConfigItems.baseUrl}/api/get_dynamic_global_properties`;
 interface User{
   id:number,
   name:string,
@@ -29,7 +27,6 @@ interface User{
 interface UserList extends Array<User>{}
 
 const Index = (props: PageProps) => {
-  const {t}=useTranslation()
   const [metaProps, setMetaProps] = useState({});
   // const [users, setUsers]  = useState<UserList>([])
   // useEffect(() => {
@@ -96,18 +93,18 @@ const Index = (props: PageProps) => {
           <HeadBlock {...result} /><Row>
               <Col xs={12} md={6}>
                 <Card>
-                  <Card.Header>{t("home.latest_block")}</Card.Header>
+                  <Card.Header>{_t("home.latest_block")}</Card.Header>
                   <Card.Body className='block-transaction-body p-0'>
                     <HomeBlocks block_number={result.head_block_number} />
                   </Card.Body>
                   <Card.Footer>
-                    <Button>See More Blocks</Button>
+                    <Link  to={'/blocks'}><Button>See More Blocks</Button></Link>
                   </Card.Footer>
                 </Card>
               </Col>
               <Col xs={12} md={6}>
                 <Card>
-                  <Card.Header>{t("home.latest_transaction")}</Card.Header>
+                  <Card.Header>{_t("home.latest_transaction")}</Card.Header>
                   <Card.Body className='block-transaction-body p-0'>
                     <HomeTransactions block_number={result.head_block_number} />
                   </Card.Body>
