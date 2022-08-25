@@ -137,7 +137,7 @@ export const methods = [
     "params": ["keys"]
   },
   {
-    "api": "condenser_api",
+    "api": "database_api",
     "method": "get_accounts",
     "params": ["names"]
   },
