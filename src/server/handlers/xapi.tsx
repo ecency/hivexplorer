@@ -33,11 +33,11 @@ export default async (req: express.Request, res: express.Response) => {
     } else {
       params = []
     }
+    let result = cache.get(`${method}-${params}`);
     try {
       // console.log(mapping[0].api, method, params);
-      let result = cache.get(`${method}-${params}`);
       if (result === undefined) {
-        result = await client.call(mapping[0].api, method, params);
+        result = await client.call(mapping[0].api, method, method=='condenser_api'?params:query);
       }
 
       // rpc response
