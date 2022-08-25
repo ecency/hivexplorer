@@ -1,14 +1,101 @@
-{
-  "home": {
-    
-  },
-  "entry-index": {
-    "title": "{{f}} topics",
-    "description": "{{f}} topics on a social network owned and operated by its users.",
-    "description-tag": "{{f}} #{{t}} topics",
-    "description-user-feed": "{{u}}'s feed",
-    "faq": "FAQ",
-    "tos": "Terms of service",
-    "pp": "Privacy Policy"
-  }
+{   "nav":{
+  "about":"About",
+  "service":"Services"
+},
+"home":{
+  "latest_block":"Latest Blocks",
+  "latest_transaction":"Latest Transaction"
+},
+"common":{
+  "id":"ID",
+  "type":"Type",
+  "value":"Value",
+  "block":"Block",
+  "date":"Date",
+  "time":"Time",
+  "show":"Show",
+  "less":"Less",
+  "more":"More",
+  "witness":"Witness",
+  "txns":"Txns",
+  "ops":"Ops"
+},
+"block":{
+  "reward_fund":"Reward Fund",
+  "vesting_fund":"Vesting Fund",
+  "vesting_shares":"Vesting Shares",
+  "supply":"Supply",
+  "previous":"Previous",
+  "timestamp":"timestamp",
+  "extensions":"Extensions",
+  "block_id":"Block ID",
+  "signing_key":"Signing Key",
+  "transaction_ids":"Transaction IDs",
+  "transaction_merkle_root":"Transaction Merkle Root",
+  "witness_signature":"Witness Signature",
+  "head_block_number":"Block Number",
+  "head_block_id": "Block ID",
+  "witness":"Witnesses",
+  "current_witness":"Current Witness",
+  "total_pow":"Total POW",
+  "num_pow_witnesses":"Num POW Witnesses",
+  "virtual_supply":"Virtual Supply",
+  "current_supply":"Current Supply",
+  "init_hbd_supply":"Init HBD Supply",
+  "current_hbd_supply":"Current HBD Supply",
+  "total_vesting_fund_hive":"Total Reward Fund Hive",
+  "total_vesting_shares":"Total Reward Shares",
+  "total_reward_fund_hive":"Total Vesting Fund Hive",
+  "total_reward_shares2":"Total Vesting Shares",
+  "pending_rewarded_vesting_shares":"Pending Rewarded Vesting Shares",
+  "pending_rewarded_vesting_hive":"Pending Rewarded Vesting Hive",
+  "hbd_interest_rate":"HBD Interest Rate",
+  "hbd_print_rate":"HBD Print Rate",
+  "maximum_block_size":"Maximum block Size",
+  "required_actions_partition_percent":"Required Actions Partition Percent",
+  "current_aslot":"Current Aslot",
+  "recent_slots_filled":"Recent Slots Filled",
+  "participation_count":"Participation Count",
+  "last_irreversible_block_num":"Last Irreversible Block Num",
+  "vote_power_reserve_rate":"Vote Power Reserve Rate",
+  "delegation_return_period":"Delegation Return Period",
+  "reverse_auction_seconds":"reverse_auction_seconds",
+  "available_account_subsidies":"Available Account subsidies",
+  "hbd_stop_percent":"HBD Stop Percent",
+  "hbd_start_percent":"HBD Start Percent",
+  "next_maintenance_time":"Next Maintenance Time",
+  "last_budget_time":"Last Budget Time",
+  "next_daily_maintenance_time":"Next Daily Maintenance Time",
+  "content_reward_percent":"Content Reward Percent",
+  "vesting_reward_percent":"Vesting Reward Percent",
+  "sps_fund_percent":"SPS Fund Percent",
+  "sps_interval_ledger":"SPS Interval Ledger",
+  "downvote_pool_percent":"Downvote Pool Percent",
+  "current_remove_threshold":"Current Remove Threshold",
+  "early_voting_seconds":"Early Voting Seconds",
+  "mid_voting_seconds":"Mid Voting Seconds",
+  "max_consecutive_recurrent_transfer_failures":"Max Consecutive Recurrent Transfer Failures",
+  "max_recurrent_transfer_end_date":"Max Recurrent Transfer End Date",
+  "min_recurrent_transfers_recurrence":"Min Recurrent Rransfers Recurrence",
+  "max_open_recurrent_transfers":"Max Open Recurrent Transfers"
+},
+"heading_label":{
+  "latest_transaction":"Latest Transactions",
+  "search_transaction":"Search Transactions",
+  "latest_block":"Latest Blocks",
+  "search_block":"Search Blocks"
+},
+"about":{
+  "page_title":"About"
+},
+"table_column":{
+  "type":"Type",
+  "value":"Value",
+  "block":"Block",
+  "date":"Date",
+  "time":"Time",
+  "witness":"Witness",
+  "transactions":"Transactions",
+  "operations":"Operations"
+}
 }

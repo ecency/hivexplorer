@@ -8,7 +8,7 @@
     .logo-icon{
         svg {
             height: 1em;
-            margin-right: 8px;
+            margin-right: 0px;
             vertical-align: -5%    
         }
     }
@@ -16,6 +16,17 @@
         width: 24px;
         padding-right: 5px;
     }
+    
+    .switch-theme-btn-day {
+        border: none !important;
+        background-color: white !important;
+    }
+    
+    .switch-theme-btn-night {
+        border: none !important;
+        background-color: #161d26 !important;
+    }
+
     .day-night-btn{
         background: transparent;
         border: 0;
@@ -31,5 +42,34 @@
             top: 3px;
             right: 65px;
         }
+    }
+   
+}
+
+.appNav-night {
+    background: #161d26;
+}
+
+.appNav-day {
+    background: #fcfcfc;
+}
+
+.appNav-text-day {
+    color: #030303;
+}
+
+.appNav-text-night {
+    color: #ffffff;
+}
+@media (max-width:992px){
+    .navbar-toggler{
+        position: absolute;
+        top: 0;
+        right: 10px;
+    }
+    .dark-light-btn{
+        position: absolute;
+        top: 5px;
+        right: 70px;
     }
 }

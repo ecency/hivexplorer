@@ -1,11 +1,12 @@
 import {createStore, applyMiddleware, compose, Middleware, Store} from 'redux';
 import thunk from 'redux-thunk';
+import logger from "redux-logger";
 import {routerMiddleware} from 'connected-react-router';
 
 import rootReducer, {AppState, history} from './index';
 
 const enhancers = [];
-let middleware: Middleware[] = [thunk];
+let middleware: Middleware[] = [thunk, logger];
 
 // history is active only client side
 if (history) {

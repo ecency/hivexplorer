@@ -33,21 +33,21 @@ export default async (req: express.Request, res: express.Response) => {
     } else {
       params = []
     }
+    let result = cache.get(`${method}-${params}`);
     try {
       // console.log(mapping[0].api, method, params);
-      let result = cache.get(`${method}-${params}`);
       if (result === undefined) {
-        result = await client.call(mapping[0].api, method, query);
+        result = await client.call(mapping[0].api, method, method=='condenser_api'?params:query);
       }
 
       // rpc response
-      cache.set(`${method}-${params}`, result, 60);
+      cache.set(`${method}-${params}`, result, 3);
 
-      res.set('Cache-Control','public, max-age=60'); // 60s
+      res.set('Cache-Control','public, max-age=3'); // 60s
       res.json(result);
     } catch (error) {
       // other script errors
-      res.set('Cache-Control', 'public, max-age=10'); // 10s
+      res.set('Cache-Control', 'public, max-age=1'); // 10s
       res.json(error);
     }
   } else {
