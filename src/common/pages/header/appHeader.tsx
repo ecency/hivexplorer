@@ -11,7 +11,7 @@ import { toggleTheme } from "../../store/global/index";
 import { _t } from '../../i18n';
 
 const RESOURCES_MENU = [_t("nav.resources-about")];
-const BLOCKCHAIN_MENU = [_t("nav.blockchain-vt"), _t("nav.blockchain-vb")];
+const BLOCKCHAIN_MENU = [_t("nav.blockchain-vt"), _t("nav.blockchain-vb"), _t("nav.blockchain-gov"), _t("nav.blockchain-witnesses"), _t("nav.blockchain-proposals")];
 const TOKENS_MENU = [_t("nav.tokens-hive"), _t("nav.tokens-he"), _t("nav.tokens-speak")];
 
 const AppHeader = (props:any) => {
@@ -41,22 +41,28 @@ const AppHeader = (props:any) => {
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="ml-auto">
                 <NavDropdown id="nav-dropdown-blockchain" title={_t("nav.blockchain")}>
-                    {BLOCKCHAIN_MENU.map((x,ind)=>(
-                       <NavDropdown.Item key={ind}>
-                          <span>{x}</span>
-                       </NavDropdown.Item>
-                    ))}
+                  { BLOCKCHAIN_MENU.map((x,ind)=> {
+                    return (
+                      <div key={`${x}${ind}`}>
+                        {x.includes('Governance') && <NavDropdown.Divider key={`${x}${ind}top`} />}
+                        <NavDropdown.Item key={`${x}${ind}main`} disabled={x.includes('Governance')}>
+                            <span>{x}</span>
+                        </NavDropdown.Item>
+                        {x.includes('Governance') && <NavDropdown.Divider key={`${x}${ind}bottom`}/>}
+                      </div>
+                    )})
+                  }
                 </NavDropdown>
                 <NavDropdown id="nav-dropdown-tokens" title={_t("nav.tokens")}>
                     {TOKENS_MENU.map((x,ind)=>(
-                       <NavDropdown.Item key={ind}>
+                       <NavDropdown.Item key={`${x}${ind}`}>
                           <span>{x}</span>
                        </NavDropdown.Item>
                     ))}
                 </NavDropdown>
                 <NavDropdown id="nav-dropdown-resources" title={_t("nav.resources")}>
                     {RESOURCES_MENU.map((x,ind)=>(
-                       <NavDropdown.Item key={ind}>
+                       <NavDropdown.Item key={`${x}${ind}`}>
                           <span>{x}</span>
                        </NavDropdown.Item>
                     ))}

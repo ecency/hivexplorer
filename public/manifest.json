@@ -1,0 +1,11 @@
+{
+    "short_name": "Hivexplorer",
+    "name": "Hivexplorer",
+    "start_url": "/",
+    "scope": ".",
+    "display": "standalone",
+    "theme_color": "#000000",
+    "background_color": "#ffffff",
+    "prefer_related_applications": true
+  }
+  
