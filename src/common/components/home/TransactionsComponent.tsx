@@ -7,6 +7,7 @@ import { ConfigItems } from '../../../../config';
 import { pageMapDispatchToProps, pageMapStateToProps, PageProps } from '../../pages/common';
 import moment from 'moment';
 import { _t } from '../../i18n';
+import { Link } from 'react-router-dom';
 
 
 export interface op_type {
@@ -23,7 +24,7 @@ export interface HomeTransactionType {
     op:op_type
     
 }
-interface HomeTransactionList extends Array<HomeTransactionType>{}
+export interface HomeTransactionList extends Array<HomeTransactionType>{}
 const HomeTransactions = (props:any) => {
     const [homeTransactions, setHomeTransactions] = useState<HomeTransactionList>([]);
     const blockNum=67065450
@@ -45,7 +46,7 @@ const HomeTransactions = (props:any) => {
                <Row className='m-0 block-row row-border' key={index}>
                  <Col md={6} xs={12}>
                     <Row>
-                        <Col md={12}>{_t('common.id')}: {trans.trx_id}  </Col>
+                        <Col md={12}>{_t('common.id')}: <Link to={`/trx/${trans.trx_id}`}>{trans.trx_id}</Link> </Col>
                         <Col md={12}>{_t('common.type')}: {trans.op.type}</Col>
                        
                     </Row>
