@@ -10,6 +10,10 @@ import { languages } from '../../languages';
 import { toggleTheme } from "../../store/global/index";
 import { _t } from '../../i18n';
 
+const RESOURCES_MENU = [_t("nav.resources-about")];
+const BLOCKCHAIN_MENU = [_t("nav.blockchain-vt"), _t("nav.blockchain-vb")];
+const TOKENS_MENU = [_t("nav.tokens-hive"), _t("nav.tokens-he"), _t("nav.tokens-speak")];
+
 const AppHeader = (props:any) => {
     const currentLangCode=cookies.get('i18next') || 'en'
     const currTheme = useSelector((state:any) => state.global.theme)
@@ -36,13 +40,27 @@ const AppHeader = (props:any) => {
           
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="ml-auto">
-             
-                <LinkContainer  activeStyle={{ color: themeContrastColor }} to="/about">
-                  <Nav.Link active={false} className={appNavText}>{_t("nav.about")}</Nav.Link>
-                </LinkContainer>
-                <LinkContainer  activeStyle={{ color: themeContrastColor }}  to="/service">
-                  <Nav.Link className={appNavText}>{_t("nav.service")}</Nav.Link>
-                </LinkContainer>
+                <NavDropdown id="nav-dropdown-blockchain" title={_t("nav.blockchain")}>
+                    {BLOCKCHAIN_MENU.map((x,ind)=>(
+                       <NavDropdown.Item key={ind}>
+                          <span>{x}</span>
+                       </NavDropdown.Item>
+                    ))}
+                </NavDropdown>
+                <NavDropdown id="nav-dropdown-tokens" title={_t("nav.tokens")}>
+                    {TOKENS_MENU.map((x,ind)=>(
+                       <NavDropdown.Item key={ind}>
+                          <span>{x}</span>
+                       </NavDropdown.Item>
+                    ))}
+                </NavDropdown>
+                <NavDropdown id="nav-dropdown-resources" title={_t("nav.resources")}>
+                    {RESOURCES_MENU.map((x,ind)=>(
+                       <NavDropdown.Item key={ind}>
+                          <span>{x}</span>
+                       </NavDropdown.Item>
+                    ))}
+                </NavDropdown>
 
                 <NavDropdown menuVariant={menuVariant} id="nav-dropdown-dark-example" title={globeImg(themeContrastColor)}>
                     {languages.map(({code,name,country_code,flagImg})=>(
