@@ -10,10 +10,7 @@ import '../style/theme-day.scss';
 import '../style/theme-night.scss';
 import './base-handlers';
 import { loadableReady } from '@loadable/component';
-import LanguageDetector from 'i18next-browser-languagedetector';
-import i18n from "i18next";
-import { useTranslation, initReactI18next } from "react-i18next";
-import HttpApi from 'i18next-http-backend';
+import { SSRProvider } from 'react-bootstrap';
 
 declare var window: AppWindow;
 
@@ -27,28 +24,6 @@ if (process.env.NODE_ENV === 'production') {
     'Are you developer, looking ways to contribute? \nhttps://github.com/ecency/hivexplorer \n\n'
   );
 }
-i18n
-  .use(initReactI18next) // passes i18n down to react-i18next
-  .use(LanguageDetector)
-  .use(HttpApi)
-  .init({
-    supportedLngs:['en','fr'],
-    // the translations
-    // (tip move them in a JSON file and import them,
-    // or even better, manage them via a UI: https://react.i18next.com/guides/multiple-translation-files#manage-your-translations-with-a-management-gui)
-    //lng: document.querySelector('html').lang , // if you're using a language detector, do not define the lng option
-    fallbackLng: "en",
-    detection:{
-      order: [ 'cookie', 'localStorage',  'htmlTag', 'path', 'subdomain'],
-      caches:['cookie']
-    },
-    backend:{
-      loadPath: 'assets/locales/{{lng}}/translation.json',
-    },
-    react:{
-      useSuspense:false
-    }
-  });
 // function App() {
 //   const { t } = useTranslation();
 
@@ -56,11 +31,16 @@ i18n
 // }
 loadableReady().then(() => {
   hydrate(
-    <Provider store={store}>
+    <SSRProvider>
+      <Provider store={store}>
       <ConnectedRouter history={history!}>
+     
         <App/>
+
       </ConnectedRouter>
-    </Provider>,
+    </Provider>
+    </SSRProvider>
+    ,
     document.getElementById('root')
   );
 
@@ -69,11 +49,14 @@ loadableReady().then(() => {
 if (module.hot) {
   module.hot.accept('../common/app', () => {
     hydrate(
+      <SSRProvider>
       <Provider store={store}>
         <ConnectedRouter history={history!}>
-          <App/>
+            <App/>
         </ConnectedRouter>
-      </Provider>,
+      </Provider>
+      </SSRProvider>
+     ,
       document.getElementById('root')
     );
   });

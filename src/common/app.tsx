@@ -9,7 +9,6 @@ import { pageMapDispatchToProps, pageMapStateToProps } from './pages/common';
 import { connect,useDispatch,useSelector } from 'react-redux';
 import loadable from '@loadable/component';
 import AppHeader from './pages/header/appHeader';
-import { useTranslation } from 'react-i18next';
 import { toggleTheme } from "./store/global/index"
 import {Global, Theme} from "./store/global/types";
 import '../style/theme-day.scss';
@@ -25,7 +24,6 @@ const MultipleBlocks = loadable(()=>import('./pages/blocks/AllBlocks'))
 const App = ({ setLang }: any) => {
   const dispatch = useDispatch()
   const currTheme = useSelector((state:any) => state.global.theme)
-  const {t} = useTranslation()
   const [theme, setTheme] = useState(currTheme);
 
   useEffect(() => {

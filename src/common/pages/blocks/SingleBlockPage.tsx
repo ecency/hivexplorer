@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react';import axios from 'axios';
 import { match } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { useTranslation } from 'react-i18next';
 import { Col, Container, Row, Card,Button} from 'react-bootstrap';
 import { pageMapDispatchToProps, pageMapStateToProps, PageProps } from '../../pages/common';
 import { withPersistentScroll } from '../../components/with-persistent-scroll';
@@ -11,6 +10,7 @@ import BlockField from '../../components/fields/blockFields/blockField';
 import { infoIcon } from '../../img/svg';
 import { transactionList } from '../../components/home/BlocksComponent';
 import Theme from '../../components/theme';
+import { _t } from '../../i18n';
 
 export interface LatestBlock {
     previous:string
@@ -22,15 +22,15 @@ export interface LatestBlock {
     signing_key: string
     transaction:Object
     extensions:Object
+    transaction_ids:Object
 }
 
 const SingleBlock = (props:any) => {
     
     const {match} = props
-    const { t } = useTranslation()
     const [result, setResult] = useState<LatestBlock>();
     const [showMore, setShowMore] = useState(false);
-    var url_single_block = `${ConfigItems.baseUrl}/api/get_block?block_num=${match.params.id}`;
+    const url_single_block = `${ConfigItems.baseUrl}/api/get_block?block_num=${match.params.id}`;
     useEffect(() => {
         axios.get(url_single_block).then(response => {
             setResult(response.data.block)
@@ -44,7 +44,7 @@ const SingleBlock = (props:any) => {
             <Container>
                     <Card>
                         <Card.Header>
-                            Block: {match.params.id}
+                            {_t('common.block')}: {match.params.id}
                         </Card.Header>
                         <Card.Body className='pt-0'>
                             { result && Object.keys(result).map((key,index)=>{

@@ -8,7 +8,7 @@
     .logo-icon{
         svg {
             height: 1em;
-            margin-right: 8px;
+            margin-right: 0px;
             vertical-align: -5%    
         }
     }
@@ -43,6 +43,7 @@
             right: 65px;
         }
     }
+   
 }
 
 .appNav-night {
@@ -59,4 +60,16 @@
 
 .appNav-text-night {
     color: #ffffff;
+}
+@media (max-width:992px){
+    .navbar-toggler{
+        position: absolute;
+        top: 0;
+        right: 10px;
+    }
+    .dark-light-btn{
+        position: absolute;
+        top: 5px;
+        right: 70px;
+    }
 }

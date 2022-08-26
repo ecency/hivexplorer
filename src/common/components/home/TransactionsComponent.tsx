@@ -1,15 +1,12 @@
-import { pageMapDispatchToProps, pageMapStateToProps, PageProps } from '../../pages/common';
 import React, { useEffect, useState } from 'react';
-import axios, { responseEncoding } from 'axios';
-import Meta from '../meta';
-import Theme from '../theme';
-import { getMetaProps } from '../../util/get-meta-props';
+import axios from 'axios';
 import { connect } from 'react-redux';
 import { withPersistentScroll } from '../with-persistent-scroll';
-import { Col, Container, Row, Card } from 'react-bootstrap';
-import { useTranslation } from 'react-i18next'
+import { Col, Row } from 'react-bootstrap';
 import { ConfigItems } from '../../../../config';
-import { Link } from 'react-router-dom';
+import { pageMapDispatchToProps, pageMapStateToProps, PageProps } from '../../pages/common';
+import moment from 'moment';
+import { _t } from '../../i18n';
 
 
 export interface op_type {
@@ -28,16 +25,17 @@ export interface HomeTransactionType {
 }
 interface HomeTransactionList extends Array<HomeTransactionType>{}
 const HomeTransactions = (props:any) => {
-    const { t } = useTranslation()
     const [homeTransactions, setHomeTransactions] = useState<HomeTransactionList>([]);
-    var home_transactions_url=`${ConfigItems.baseUrl}/api/get_ops_in_block?block_num=${props.block_number-15}`;
-    console.log('bid',props.block_number-10)
+    const blockNum=67065450
+    const home_transactions_url=`${ConfigItems.baseUrl}/api/get_ops_in_block?block_num=${blockNum-10}`;
       useEffect(()=>{
         axios.get(home_transactions_url).then(res => {
             setHomeTransactions(res.data.ops)
-            console.log('ops',res.data.ops)
           })
       },[])
+      const Date_time=(timeSet:string,timeFormat:string)=>{
+        return moment(timeSet).utc().format(timeFormat)
+      }
 
     return (
        <>
@@ -47,14 +45,15 @@ const HomeTransactions = (props:any) => {
                <Row className='m-0 block-row row-border' key={index}>
                  <Col md={6} xs={12}>
                     <Row>
-                        <Col md={12}>ID: {trans.trx_id}  </Col>
-                        <Col md={12} >Time: {trans.timestamp.replace('T',' & ')}</Col>
+                        <Col md={12}>{_t('common.id')}: {trans.trx_id}  </Col>
+                        <Col md={12}>{_t('common.type')}: {trans.op.type}</Col>
+                       
                     </Row>
                  </Col>
                  <Col md={4} xs={12}>
                     <Row>
-                        <Col md={12}>Type: {trans.op.type}</Col>
-                        
+                        <Col md={12}>{_t('common.date')}: {Date_time(trans.timestamp,'YYYY-MM-DD')}</Col>
+                        <Col md={12} >{_t('common.time')}: {Date_time(trans.timestamp,'hh:mm:ss')}</Col>
                     </Row>
                  </Col>
                  <Col md={2} xs={12}>

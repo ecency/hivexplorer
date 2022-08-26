@@ -137,7 +137,7 @@ export const methods = [
     "params": ["keys"]
   },
   {
-    "api": "condenser_api",
+    "api": "database_api",
     "method": "get_accounts",
     "params": ["names"]
   },
@@ -154,6 +154,7 @@ export const methods = [
   {
     "api": "condenser_api",
     "method": "lookup_accounts",
+    "param_type": "params",
     "params": ["lower_bound_name", "limit"]
   },
   {
@@ -217,6 +218,7 @@ export const methods = [
   },
   {
     "api": "condenser_api",
+    "param_type": "params",
     "method": "get_transaction",
     "params": ["trx_id"]
   },

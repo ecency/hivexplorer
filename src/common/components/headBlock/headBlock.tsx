@@ -8,9 +8,9 @@ import { connect } from 'react-redux';
 import { withPersistentScroll } from '../with-persistent-scroll';
 import { Col, Container, Row, Card } from 'react-bootstrap';
 import './headBlock.scss';
-import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { ConfigItems } from '../../../../config';
+import { _t } from '../../i18n';
 
 export interface Block {
     head_block_number: number,
@@ -25,36 +25,33 @@ export interface Block {
 }
 
 const HeadBlock = (props:Block) => {
-    const { t } = useTranslation()
     const result=props
-      console.log(props.current_hbd_supply)
-   
     return (
         <div className='head-block'>
            {props &&
             <Card>
                 <Card.Header>
-                <span className='head-block-attr-span'>Block: </span><Link to={`/head/b/${result.head_block_number}`}>
+                <span className='head-block-attr-span'>{_t("common.block")}: </span><Link to={`/head/b/${result.head_block_number}`}>
                     {result.head_block_number}</Link>
                 </Card.Header>
                 <Card.Body>
                     <Row>
                         <Col md={4} xs={12}>
                             <div>
-                                <div className='pt-2'><span className='head-block-attr-span'>Time: </span>{result.time}</div>
-                                <div className='pt-2'><span className='head-block-attr-span'>Witnesses: </span>{result.num_pow_witnesses}</div>
+                                <div className='pt-2'><span className='head-block-attr-span'>{_t("common.time")}: </span>{result.time}</div>
+                                <div className='pt-2'><span className='head-block-attr-span'>{_t('block.witness')}: </span>{result.num_pow_witnesses}</div>
                             </div>
                         </Col>
                         <Col md={4} xs={12} className="head-block-middle">
                             <div >
-                                <div className='pt-2'><span className='head-block-attr-span'>Reward Fund: </span>{result.total_reward_fund_hive}</div>
-                                <div className='pt-2'><span className='head-block-attr-span'>Vesting Fund: </span>{result.total_vesting_fund_hive}</div>
+                                <div className='pt-2'><span className='head-block-attr-span'>{_t('block.reward_fund')}: </span>{result.total_reward_fund_hive}</div>
+                                <div className='pt-2'><span className='head-block-attr-span'>{_t('block.vesting_fund')}: </span>{result.total_vesting_fund_hive}</div>
                             </div>
                         </Col>
                         <Col md={4} xs={12}>
                             <div>
-                                <div className='pt-2'><span className='head-block-attr-span'>Vesting Shares: </span>{result.total_vesting_shares}</div>
-                                <div className='pt-2'><span className='head-block-attr-span'>Supply: </span>{result.init_hbd_supply}</div>
+                                <div className='pt-2'><span className='head-block-attr-span'>{_t('block.vesting_shares')}: </span>{result.total_vesting_shares}</div>
+                                <div className='pt-2'><span className='head-block-attr-span'>{_t("block.supply")}: </span>{result.init_hbd_supply}</div>
                             </div>
                         </Col>
                     </Row>
