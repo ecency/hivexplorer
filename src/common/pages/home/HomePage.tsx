@@ -11,7 +11,11 @@ import './HomePage.scss';
 import { ConfigItems } from '../../../../config';
 import HeadBlock,{ Block } from '../../components/headBlock/headBlock';
 import HomeBlocks,{HomeBlocksType } from '../../components/home/BlocksComponent';
-import HomeTransactions, { HomeTransactionList } from '../../components/home/TransactionsComponent';
+import HomeTransactions, { HomeTransactionType } from '../../components/home/TransactionsComponent';
+import ApiFetchedBlocksTable from '../blocks/ApiFetchedBlocksTable';
+import ApiFetchedLookupAccounts from '../accounts/ApiFetchedLookupAccounts';
+import ApiFetchedTransationsTable from '../transaction/ApiFetchedTransationsTable';
+import { SingleTransaction } from '../transaction/SingleTransactionPage';
 import { Link } from 'react-router-dom';
 import { _t } from '../../i18n';
 
@@ -26,7 +30,7 @@ interface User{
     zipcode: string,
   }
 }
-interface UserList extends Array<User>{}
+export interface UserList extends Array<User>{}
 
 const Index = (props: PageProps) => {
   const [metaProps, setMetaProps] = useState({});
@@ -61,9 +65,9 @@ const Index = (props: PageProps) => {
     }, []);
 
 
-  const [blocksApiResult, setBlocksApiResult] = useState<HomeTransactionList>()
-  const [accountsApiResult, setAccountsApiResult] = useState()
-  const [transationsApiResult, setTransationsApiResult] = useState()
+  const [blocksApiResult, setBlocksApiResult] = useState<HomeTransactionType>()
+  const [accountsApiResult, setAccountsApiResult] = useState<User>()
+  const [transationsApiResult, setTransationsApiResult] = useState<SingleTransaction>()
     
   const searchHandler = (e:any) => {
     e.preventDefault();
@@ -138,63 +142,11 @@ const Index = (props: PageProps) => {
             </Button>
           </Form.Group>
         </Form>
-          {blocksApiResult &&  
-            <Table>
-              <thead>
-                <tr>
-                  <th>Block Id</th>
-                  <th>Expiration</th>
-                  <th>Transaction Number</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><Link to={`/b/${blocksApiResult[0].block}`}> {blocksApiResult[0].block} </Link></td>
-                  <td>{blocksApiResult[0].trx_id}</td>
-                  <td>{blocksApiResult[0].timestamp}</td>
-                </tr>
-              </tbody>
-            </Table>
-          }
+          { blocksApiResult &&  <ApiFetchedBlocksTable {...blocksApiResult} /> }
 
-          {accountsApiResult &&  
-            <Table >
-              <thead>
-                <tr>
-                  <th>User Names</th>
-                </tr>
-              </thead>
-              {/* <tbody>
-                  { accountsApiResult.map((data) => {
-                    return (<tr> 
-                      <td>{data}</td> 
-                    </tr>)
-                  })}
-              </tbody> */}
-            </Table>
-          }
+          { accountsApiResult &&  <ApiFetchedLookupAccounts {...accountsApiResult} /> }
 
-          {transationsApiResult &&  
-            <Table>
-              <thead>
-                <tr>
-                  <th>Block Id</th>
-                  <th>Trx Id</th>
-                  <th>Transation Number</th>
-                  <th>Expiration</th>
-                </tr>
-              </thead>
-              {/* <tbody>
-                <tr>
-                  <td><Link to={`/b/${transationsApiResult.block_num}`}> {transationsApiResult.block_num} </Link></td>
-                  <td>{transationsApiResult.transaction_id}</td>
-                  <td>{transationsApiResult.transaction_num}</td>
-                  <td>{transationsApiResult.expiration}</td>
-                </tr>
-              </tbody> */}
-            </Table>
-          }
-
+          { transationsApiResult &&  <ApiFetchedTransationsTable {...transationsApiResult} /> }
           
           {/* { searchedResult && searchedResult[0].block && <Link to={`/b/${searchedResult[0].block}`}> {searchedResult[0].block} </Link> } */}
           <HeadBlock {...result} /><Row>
