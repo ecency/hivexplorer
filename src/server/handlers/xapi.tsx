@@ -22,9 +22,10 @@ export default async (req: express.Request, res: express.Response) => {
   const method = req.params.method;
   const mapping = filter(methods, { method: method });
   let params: any[] | null = null;
-
+  
   if (mapping[0]) {
     if (mapping[0].params && isArray(mapping[0].params)) {
+      console.log('yes');
       params = [];
       mapping[0].params.forEach((param) => {
         const queryParam = query[param];
@@ -35,9 +36,11 @@ export default async (req: express.Request, res: express.Response) => {
     }
     let result = cache.get(`${method}-${params}`);
     try {
+      console.log("params", params);
       // console.log(mapping[0].api, method, params);
       if (result === undefined) {
-        result = await client.call(mapping[0].api, method, method=='condenser_api'?params:query);
+        const method_type:any = (mapping[0].param_type && mapping[0].param_type === 'params') ? params : query; 
+        result = await client.call(mapping[0].api, method, method_type);
       }
 
       // rpc response
@@ -56,4 +59,3 @@ export default async (req: express.Request, res: express.Response) => {
     res.json({});
   }
 };
-

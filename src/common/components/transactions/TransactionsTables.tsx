@@ -118,7 +118,7 @@ const Date_time=(timeSet:string,timeFormat:string)=>{
                 return (
                   <TableRow hover={true} role="checkbox" tabIndex={-1} key={i}>
                     <TableCell><Link to={`/b/${transaction.block}`}>{transaction.block}</Link></TableCell>
-                    <TableCell>{transaction.trx_id}</TableCell>
+                    <TableCell><Link to={`/trx/${transaction.trx_id}`}>{transaction.trx_id}</Link></TableCell>
                     <TableCell>{transaction.op.type}</TableCell>
                     <TableCell>{transaction.op.type}</TableCell>
                   </TableRow>
