@@ -169,7 +169,7 @@ const Index = (props: PageProps) => {
                 Error <Button className="clearBtn" onClick={clearSearchResultHandler}>Clear</Button>
               </Card.Header>
               <Card.Body className='p-0'>
-                <p className="m-3">No record found against searched input.</p>
+                <p className="m-3">{_t("common.no_search_result")}</p>
               </Card.Body>
             </Card> 
           }

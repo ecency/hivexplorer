@@ -2,6 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import { Table } from 'react-bootstrap';
 import { HomeTransactionType } from '../../components/home/TransactionsComponent';
+import { _t } from '../../i18n';
+
 
 export default function ApiFetchedBlocksTable(props: any) {
     const blocksApiResult:HomeTransactionType=props;
@@ -9,9 +11,9 @@ export default function ApiFetchedBlocksTable(props: any) {
         <Table className='mb-4'>
             <thead>
             <tr>
-                <th>Block Id</th>
-                <th>Expiration</th>
-                <th>Transaction Number</th>
+                <th>{_t("block.block_id")}</th>
+                <th>{_t("block.expiration")}</th>
+                <th>{_t("block.transaction_number")}</th>
             </tr>
             </thead>
             <tbody>
