@@ -6,7 +6,7 @@ import { SingleTransaction } from './SingleTransactionPage';
 export default function ApiFetchedTransationsTable(props: any) {
     const blocksApiResult:SingleTransaction=props;
     return (
-        <Table>
+        <Table className='mb-4' >
             <thead>
             <tr>
                 <th>Block Id</th>

@@ -359,13 +359,15 @@ $table-cell-padding-sm:       .3rem !default;
 
 $table-color:                 $body-color !default;
 $table-bg:                    null !default;
+$table-head-theme-bg:         null !default;
 $table-accent-bg:             rgba($black, .05) !default;
 $table-hover-color:           $table-color !default;
 $table-hover-bg:              rgba($black, .075) !default;
 $table-active-bg:             $table-hover-bg !default;
 
 $table-border-width:          $border-width !default;
-$table-border-color:          $border-color !default;
+$table-border-radius:         $border-radius !default;
+$table-border-color:          rgba($black, .125) !default;
 
 $table-head-bg:               $gray-200 !default;
 $table-head-color:            $gray-700 !default;

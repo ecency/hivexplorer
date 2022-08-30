@@ -6,7 +6,7 @@ import { HomeTransactionType } from '../../components/home/TransactionsComponent
 export default function ApiFetchedBlocksTable(props: any) {
     const blocksApiResult:HomeTransactionType=props;
     return (
-        <Table>
+        <Table className='mb-4'>
             <thead>
             <tr>
                 <th>Block Id</th>

@@ -5,7 +5,7 @@ import { UserList } from '../home/HomePage';
 export default function ApiFetchedLookupAccounts(props: any) {
     const blocksApiResult:UserList=props;
     return (
-        <Table >
+        <Table className='mb-4' >
               <thead>
                 <tr>
                   <th>User Names</th>
