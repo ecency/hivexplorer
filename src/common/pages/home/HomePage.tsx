@@ -11,7 +11,11 @@ import './HomePage.scss';
 import { ConfigItems } from '../../../../config';
 import HeadBlock,{ Block } from '../../components/headBlock/headBlock';
 import HomeBlocks,{HomeBlocksType } from '../../components/home/BlocksComponent';
-import HomeTransactions, { HomeTransactionList } from '../../components/home/TransactionsComponent';
+import HomeTransactions, { HomeTransactionType } from '../../components/home/TransactionsComponent';
+import ApiFetchedBlocksTable from '../blocks/ApiFetchedBlocksTable';
+import ApiFetchedLookupAccounts from '../accounts/ApiFetchedLookupAccounts';
+import ApiFetchedTransationsTable from '../transaction/ApiFetchedTransationsTable';
+import { SingleTransaction } from '../transaction/SingleTransactionPage';
 import { Link } from 'react-router-dom';
 import { _t } from '../../i18n';
 
@@ -26,7 +30,7 @@ interface User{
     zipcode: string,
   }
 }
-interface UserList extends Array<User>{}
+export interface UserList extends Array<User>{}
 
 const Index = (props: PageProps) => {
   const [metaProps, setMetaProps] = useState({});
@@ -61,10 +65,22 @@ const Index = (props: PageProps) => {
     }, []);
 
 
-  const [blocksApiResult, setBlocksApiResult] = useState<HomeTransactionList>()
-  const [accountsApiResult, setAccountsApiResult] = useState()
-  const [transationsApiResult, setTransationsApiResult] = useState()
-    
+  const [blocksApiResult, setBlocksApiResult] = useState<HomeTransactionType>()
+  const [accountsApiResult, setAccountsApiResult] = useState<User>()
+  const [transationsApiResult, setTransationsApiResult] = useState<SingleTransaction>()
+  const [noSearchResult, setNoSearchResult] = useState<Boolean>(false)
+  
+  const setSearchResultStateHandler = (blockSearch: HomeTransactionType | undefined, AccountSearch: User | undefined, TransactionSearch: SingleTransaction | undefined, noSearch: Boolean) => {
+    setBlocksApiResult(blockSearch);
+    setAccountsApiResult(AccountSearch);
+    setTransationsApiResult(TransactionSearch);
+    setNoSearchResult(noSearch);
+  }
+
+  const clearSearchResultHandler = () => {
+    setSearchResultStateHandler(undefined, undefined, undefined, false);
+  }
+  
   const searchHandler = (e:any) => {
     e.preventDefault();
     const numeric = /^\d+$/;
@@ -72,27 +88,29 @@ const Index = (props: PageProps) => {
     
     const searchedInput = e.target[0].value;
 
-    if (numeric.test(searchedInput)) {
-      const blocks=`${ConfigItems.baseUrl}/api/get_ops_in_block?block_num=67096310`;
-      axios.get(blocks).then(res => {
-        console.log(res.data);
-        console.log("Blocks API", res.data.ops);
-        setBlocksApiResult(res.data.ops);
-      });
-    } else if (searchedInput.length < 16 && AllInputPattern.test(searchedInput)) {
-      const accounts=`${ConfigItems.baseUrl}/api/lookup_accounts?lower_bound_name=u&limit=10`;
-      axios.get(accounts).then(res => {
-          console.log("Accounts API", res.data);
-          setAccountsApiResult(res.data);
+    if (searchedInput) {
+      if (numeric.test(searchedInput)) {
+        const blocks=`${ConfigItems.baseUrl}/api/get_ops_in_block?block_num=67096310`;
+        axios.get(blocks).then(res => {
+          console.log(res.data);
+          setSearchResultStateHandler(res.data.ops, undefined, undefined, false);
+        });
+      } else if (searchedInput.length < 16 && AllInputPattern.test(searchedInput)) {
+        const accounts=`${ConfigItems.baseUrl}/api/lookup_accounts?lower_bound_name=u&limit=10`;
+        axios.get(accounts).then(res => {
+          setSearchResultStateHandler(undefined, res.data, undefined, false);
         })
-    } else if (searchedInput.length > 16) {
-      const accounts=`${ConfigItems.baseUrl}/api/get_transaction?trx_id=43a56a99f5ba0066819e5923ea9f6ba62fcb30a3`;
-      axios.get(accounts).then(res => {
-          console.log("Transactions API", res.data);
-          setTransationsApiResult(res.data);
-      })
+      } else if (searchedInput.length > 16) {
+        const accounts=`${ConfigItems.baseUrl}/api/get_transaction?trx_id=43a56a99f5ba0066819e5923ea9f6ba62fcb30a3`;
+        axios.get(accounts).then(res => {
+          setSearchResultStateHandler(undefined, undefined, res.data, false);
+
+        })
+      } else {
+        setSearchResultStateHandler(undefined, undefined, undefined, true);
+      }
     } else {
-      alert('Invalid input!')
+      setSearchResultStateHandler(undefined, undefined, undefined, true);
     }
   }
    
@@ -130,71 +148,31 @@ const Index = (props: PageProps) => {
       <Container>
         {result && 
         <>
-        <Form onSubmit={(e: any) => searchHandler(e)}>
+        <Form onSubmit={(e: any) => searchHandler(e)} className="mb-4">
           <Form.Group className='d-flex col-3 col-md-4'>
-            <Form.Control type="text" placeholder="Search" className="mr-2" />
+            <Form.Control type="text" placeholder="Block, Account, Transaction" className="mr-2" />
             <Button variant="primary" type="submit">
-              Submit
+              Search
             </Button>
           </Form.Group>
-        </Form>
-          {blocksApiResult &&  
-            <Table>
-              <thead>
-                <tr>
-                  <th>Block Id</th>
-                  <th>Expiration</th>
-                  <th>Transaction Number</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><Link to={`/b/${blocksApiResult[0].block}`}> {blocksApiResult[0].block} </Link></td>
-                  <td>{blocksApiResult[0].trx_id}</td>
-                  <td>{blocksApiResult[0].timestamp}</td>
-                </tr>
-              </tbody>
-            </Table>
-          }
+        </Form>          
+          { (blocksApiResult || accountsApiResult || transationsApiResult) && <Button className="mb-2 clearBtn" onClick={clearSearchResultHandler}>Clear</Button> }
 
-          {accountsApiResult &&  
-            <Table >
-              <thead>
-                <tr>
-                  <th>User Names</th>
-                </tr>
-              </thead>
-              {/* <tbody>
-                  { accountsApiResult.map((data) => {
-                    return (<tr> 
-                      <td>{data}</td> 
-                    </tr>)
-                  })}
-              </tbody> */}
-            </Table>
-          }
+          { blocksApiResult &&  <ApiFetchedBlocksTable {...blocksApiResult} /> }
 
-          {transationsApiResult &&  
-            <Table>
-              <thead>
-                <tr>
-                  <th>Block Id</th>
-                  <th>Trx Id</th>
-                  <th>Transation Number</th>
-                  <th>Expiration</th>
-                </tr>
-              </thead>
-              {/* <tbody>
-                <tr>
-                  <td><Link to={`/b/${transationsApiResult.block_num}`}> {transationsApiResult.block_num} </Link></td>
-                  <td>{transationsApiResult.transaction_id}</td>
-                  <td>{transationsApiResult.transaction_num}</td>
-                  <td>{transationsApiResult.expiration}</td>
-                </tr>
-              </tbody> */}
-            </Table>
-          }
+          { accountsApiResult &&  <ApiFetchedLookupAccounts {...accountsApiResult} /> }
 
+          { transationsApiResult &&  <ApiFetchedTransationsTable {...transationsApiResult} /> }
+
+          { noSearchResult &&  <Card className="cardCollapsible">
+              <Card.Header>
+                Error <Button className="clearBtn" onClick={clearSearchResultHandler}>Clear</Button>
+              </Card.Header>
+              <Card.Body className='p-0'>
+                <p className="m-3">{_t("common.no_search_result")}</p>
+              </Card.Body>
+            </Card> 
+          }
           
           {/* { searchedResult && searchedResult[0].block && <Link to={`/b/${searchedResult[0].block}`}> {searchedResult[0].block} </Link> } */}
           <HeadBlock {...result} /><Row>

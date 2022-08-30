@@ -29,7 +29,9 @@
     "more":"More",
     "witness":"Witness",
     "txns":"Txns",
-    "ops":"Ops"
+    "ops":"Ops",
+    "user_names": "User Names",
+    "no_search_result": "No record found against searched input."
   },
   "block":{
     "reward_fund":"Reward Fund",
@@ -47,6 +49,9 @@
     "head_block_number":"Block Number",
     "head_block_id": "Block ID",
     "witness":"Witnesses",
+    "expiration":"Expiration",
+    "transaction_number":"Transation Number",
+    "trx_id": "Trx Id",
     "current_witness":"Current Witness",
     "total_pow":"Total POW",
     "num_pow_witnesses":"Num POW Witnesses",
