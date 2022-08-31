@@ -7,13 +7,13 @@ import './headBlock.scss';
 import { withPersistentScroll } from '../with-persistent-scroll';
 import { pageMapDispatchToProps, pageMapStateToProps, PageProps } from '../../pages/common';
 import { infoIcon,showLessIcon,showMoreIcon } from '../../img/svg';
-import BlockField from '../fields/blockFields/blockField';
 import Theme from '../theme';
 import { useSelector } from 'react-redux';
 
 const url = `${ConfigItems.baseUrl}/api/get_dynamic_global_properties`;
 import { ConfigItems } from '../../../../config';
 import { _t } from '../../i18n';
+import StringField from '../fields/blockFields/StringField';
 
 export interface LatestBlock {
     head_block_number: number,
@@ -71,6 +71,7 @@ const HeadBlockDetail = (props:any) => {
     const currTheme = useSelector((state:any) => state.global.theme)
     const themeContrastColor = currTheme === 'day' ? 'black' : 'white';
     const themeBtn = currTheme === 'day' ? 'showmore-btn btn-light' : 'showmore-btn btn-dark';
+    const label='block'
 
     let url_global = `${ConfigItems.baseUrl}/api/get_dynamic_global_properties`;
     useEffect(() => {
@@ -90,11 +91,11 @@ const HeadBlockDetail = (props:any) => {
                         <Card.Body className='pt-0'>
                         {showMore? result && Object.keys(result).slice(0,).map((key,index)=>{
                             return(
-                            <BlockField key={index} value={result[key]}  item={key} number={index}/>
+                            <StringField key={index} value={result[key]}  item={key} number={index} label_for='block'/>
                             )
                         }) :result && Object.keys(result).slice(0,10).map((key,index)=>{
                             return(
-                            <BlockField  key={index} value={result[key]}  item={key} number={index}/>
+                            <StringField  key={index} value={result[key]}  item={key} number={index} label_for='block'/>
                             )
                         })}
                         </Card.Body>

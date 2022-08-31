@@ -6,19 +6,19 @@ import { Col, Container, Row, Card,Button} from 'react-bootstrap';
 import { pageMapDispatchToProps, pageMapStateToProps, PageProps } from '../../pages/common';
 import { withPersistentScroll } from '../../components/with-persistent-scroll';
 import { ConfigItems } from '../../../../config';
-import BlockField from '../../components/fields/blockFields/blockField';
+import StringField from '../../components/fields/blockFields/StringField';
 import { infoIcon } from '../../img/svg';
 import { transactionList } from '../../components/home/BlocksComponent';
 import Theme from '../../components/theme';
 import { _t } from '../../i18n';
 
 export interface LatestBlock {
+    block_id: string
     previous:string
     timestamp: string
     witness: string
     transaction_merkle_root: string
     witness_signature:string
-    block_id: string
     signing_key: string
     transaction:Object
     extensions:Object
@@ -49,7 +49,7 @@ const SingleBlock = (props:any) => {
                         <Card.Body className='pt-0'>
                             { result && Object.keys(result).map((key,index)=>{
                                 return(
-                                    <BlockField key={index} value={typeof(result[key])==='string'? result[key]:result[key].length}  item={key} number={index}/>
+                                    <StringField key={index} value={typeof(result[key])==='string'? result[key]:result[key].length}  item={key} number={index} label_for='block'/>
                             
                                 )})
                             }
