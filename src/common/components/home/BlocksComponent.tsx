@@ -54,7 +54,7 @@ const HomeBlocks = (props:any) => {
                  <Col md={5} xs={12}>
                     <Row>
                         <Col md={12}>{_t('common.block')}: <Link to={`/b/${blockNum}`}>{blockNum--}</Link> </Col>
-                        <Col md={12}>{_t('common.witness')}: <Link to={''}>{block.witness}</Link></Col>
+                        <Col md={12}>{_t('common.witness')}: <Link to={`/@${block.witness}`}>{block.witness}</Link></Col>
                         
                     </Row>
                  </Col>
