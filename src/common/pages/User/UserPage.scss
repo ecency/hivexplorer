@@ -1,5 +1,19 @@
 .user-container{
+    padding: 2rem 0;
+   
     .MuiTabs-indicator{
         background-color: #706f70 !important;
+    }
+    .paper-night{
+        background: transparent !important;
+        .MuiTableCell-head{
+            color: white !important;
+        }
+        .transaction-table-data-row{
+            background: transparent !important;
+            .transaction-table-data-cell{
+              color: #fff !important;
+            }
+        }
     }
 }

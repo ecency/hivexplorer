@@ -17,3 +17,13 @@
 .border-color-night {
     border-color: #161d26;
 }
+.time-date-table {
+    & th, td{
+        border: 1px solid #706f70;
+    border-collapse: collapse;
+    }
+    td{
+        padding: 10px;
+    }
+    
+  }

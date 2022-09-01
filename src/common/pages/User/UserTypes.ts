@@ -76,3 +76,21 @@ export interface UserTypeList {
     tags_usage: object
     guest_bloggers: object
 }
+export interface UserTransactionType {
+    
+    trx_id:string
+    block:number,
+    trx_in_block:number,
+    op_in_trx:number,
+    virtual_op:number,
+    timestamp:string,
+    op:{
+        type:string,
+        vesting_shares:{
+            amount:string,
+            precision:number,
+            nai:string
+        }
+    }
+    operation_id:number
+}
