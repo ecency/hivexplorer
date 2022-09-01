@@ -1,5 +1,6 @@
 
-import React, { useEffect, useState } from 'react';import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { match } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { pageMapDispatchToProps, pageMapStateToProps, PageProps } from '../../pages/common';
@@ -14,7 +15,9 @@ import Paper from '@material-ui/core/Paper';
 import PropTypes from 'prop-types';
 import { Tab, Tabs } from '@material-ui/core';
 import { UserTypeList } from './UserTypes';
+import './UserPage.scss'
 import StringField from '../../components/fields/blockFields/StringField';
+import UserTransactionsTable from './userTransactionTable';
 
 interface UserList extends Array<UserTypeList>{}
 
@@ -48,24 +51,19 @@ const UserPage = (props:any) => {
    const [userAccount,setUserAccount]=useState<UserList>()
    const [value, setValue] = useState(0);
 
+
+
   const handleChange = (event:any, newValue:number) => {
     setValue(newValue);
   };
     const account_url=`${ConfigItems.baseUrl}/api/get_accounts?name[]=${match.params.user_id}`;
+  
       useEffect(()=>{
-        console.log(account_url)
         axios.get(account_url).then(res => {
             setUserAccount(res.data)
-           
           })
       },[])
-      userAccount?.map((k:any,i)=>{
-       console.log(typeof(i[k]))
-
-    })
-    userAccount && Object.keys(userAccount).map((key,index)=>{
-        console.log(typeof(key))
-    })
+   
     function a11yProps(index:number) {
         return {
           id: `simple-tab-${index}`,
@@ -77,21 +75,21 @@ const UserPage = (props:any) => {
             <Theme global={props.global}/>
             <Container className='user-container'>
                {userAccount && userAccount.map((user,i)=>{
+                const Json_Meta=JSON.parse(user.json_metadata)
                 return(
                   <div key={i}>
-                    <UserHeader  id={user.id} name={user.name} {...JSON.parse(user.json_metadata)} />
+                    <UserHeader  id={user.id} name={user.name} metaData={Json_Meta} />
                     <Card className='user-card'>
                         <Card.Header className='p-0'>
                         <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-                            <Tab label="Item One" {...a11yProps(0)} />
-                            <Tab label="Item Two" {...a11yProps(1)} />
+                            <Tab label="Info" {...a11yProps(0)} />
+                            <Tab label="Transaction" {...a11yProps(1)} />
                         </Tabs>
 
                         </Card.Header>
                         <Card.Body className='py-0'>
                         <TabPanel value={value} index={0}>
                             {Object.keys(user).map((k,index)=>{
-                                console.log(typeof(user[k]))
                               return(
                                typeof(user[k])!=='object' && typeof(user[k])!=='boolean'? 
                                 <StringField key={index} item={k} number={index} value={user[k]} label_for='user-info' />
@@ -103,7 +101,9 @@ const UserPage = (props:any) => {
                               )})}
                             </TabPanel>
                             <TabPanel value={value} index={1}>
-                               <h1>Transaction</h1>
+                               {
+                                <UserTransactionsTable user={`${match.params.user_id}`}/>
+                                }
                             </TabPanel>
                         </Card.Body>
                     </Card>
