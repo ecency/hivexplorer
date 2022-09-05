@@ -30,6 +30,10 @@
     "witness":"Witness",
     "txns":"Txns",
     "ops":"Ops",
+    "trx_in_block":"Trx In Block",
+    "req_auth":"Req. Auth",
+    "req_post_auth":"Req. Posting Auth",
+    "transaction":"Transaction",
     "transaction_num":"Transaction No",
     "user_names": "User Names",
     "no_search_result": "No record found against searched input."
@@ -148,12 +152,14 @@
     "post_count": "Post Count",
     "can_vote": "Can Vote",
     "voting_manabar": {
-    "current_mana": "Current Mana",
-    "last_update_time": "Last Update Time"
+      "object_name":"Voting Manabar",
+      "current_mana": "Current Mana",
+      "last_update_time": "Last Update Time"
     },
     "downvote_manabar": {
-    "current_mana": "Current Mana",
-    "last_update_time": "Last Update Time"
+      "object_name":"Downvote Manabar",
+      "current_mana": "Current Mana",
+      "last_update_time": "Last Update Time"
     },
     "voting_power": "Voting Power",
     "balance": "Balance",

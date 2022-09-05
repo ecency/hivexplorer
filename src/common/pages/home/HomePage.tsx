@@ -90,7 +90,7 @@ const Index = (props: PageProps) => {
 
     if (searchedInput) {
       if (numeric.test(searchedInput)) {
-        const blocks=`${ConfigItems.baseUrl}/api/get_ops_in_block?block_num=67096310`;
+        const blocks=`${ConfigItems.baseUrl}/api/get_ops_in_block?block_num=${(searchedInput)}`;
         axios.get(blocks).then(res => {
           console.log(res.data);
           setSearchResultStateHandler(res.data.ops, undefined, undefined, false);
@@ -101,7 +101,7 @@ const Index = (props: PageProps) => {
           setSearchResultStateHandler(undefined, res.data, undefined, false);
         })
       } else if (searchedInput.length > 16) {
-        const accounts=`${ConfigItems.baseUrl}/api/get_transaction?trx_id=43a56a99f5ba0066819e5923ea9f6ba62fcb30a3`;
+        const accounts=`${ConfigItems.baseUrl}/api/get_transaction?trx_id=${searchedInput}`;
         axios.get(accounts).then(res => {
           setSearchResultStateHandler(undefined, undefined, res.data, false);
 
@@ -156,22 +156,22 @@ const Index = (props: PageProps) => {
             </Button>
           </Form.Group>
         </Form>          
-          { (blocksApiResult || accountsApiResult || transationsApiResult) && <Button className="mb-2 clearBtn" onClick={clearSearchResultHandler}>Clear</Button> }
+          {(blocksApiResult || accountsApiResult || transationsApiResult) && <Button className="mb-2 clearBtn" onClick={clearSearchResultHandler}>Clear</Button>}
 
-          { blocksApiResult &&  <ApiFetchedBlocksTable {...blocksApiResult} /> }
+          {blocksApiResult &&  <ApiFetchedBlocksTable {...blocksApiResult} />}
 
-          { accountsApiResult &&  <ApiFetchedLookupAccounts {...accountsApiResult} /> }
+          {accountsApiResult &&  <ApiFetchedLookupAccounts {...accountsApiResult} />}
 
-          { transationsApiResult &&  <ApiFetchedTransationsTable {...transationsApiResult} /> }
+          {transationsApiResult &&  <ApiFetchedTransationsTable {...transationsApiResult} />}
 
-          { noSearchResult &&  <Card className="cardCollapsible">
+          {noSearchResult &&  <Card className="cardCollapsible">
               <Card.Header>
                 Error <Button className="clearBtn" onClick={clearSearchResultHandler}>Clear</Button>
               </Card.Header>
               <Card.Body className='p-0'>
                 <p className="m-3">{_t("common.no_search_result")}</p>
               </Card.Body>
-            </Card> 
+            </Card>
           }
           
           {/* { searchedResult && searchedResult[0].block && <Link to={`/b/${searchedResult[0].block}`}> {searchedResult[0].block} </Link> } */}

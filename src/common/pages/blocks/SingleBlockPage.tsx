@@ -11,6 +11,7 @@ import { infoIcon } from '../../img/svg';
 import { transactionList } from '../../components/home/BlocksComponent';
 import Theme from '../../components/theme';
 import { _t } from '../../i18n';
+import ObjectField from '../../components/fields/blockFields/ObjectField';
 
 export interface LatestBlock {
     block_id: string
@@ -49,10 +50,13 @@ const SingleBlock = (props:any) => {
                         <Card.Body className='pt-0'>
                             { result && Object.keys(result).map((key,index)=>{
                                 return(
-                                    <StringField key={index} value={typeof(result[key])==='string'? result[key]:result[key].length}  item={key} number={index} label_for='block'/>
-                            
-                                )})
+                                    typeof(result[key])==='string' || typeof(result[key])==='number'?
+                                    <StringField key={index} value={result[key]}  item={key} number={index} label_for='block'/>
+                                    :
+                                    <ObjectField key={index} value={result[key]}  item={key} number={index} label_for='block'/>
+                                )
                             }
+                        )}
                         </Card.Body>
 
                     </Card>
