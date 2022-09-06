@@ -26,7 +26,13 @@
         border: none !important;
         background-color: #161d26 !important;
     }
-
+    .nav-text-dark{
+        a#nav-dropdown-blockchain,
+        a#nav-dropdown-tokens,
+        a#nav-dropdown-resources{
+            color: #fcfcfc !important;
+        }
+    }
     .day-night-btn{
         background: transparent;
         border: 0;

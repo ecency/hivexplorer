@@ -43,7 +43,6 @@ const StringField = (props:any) => {
     const Date_time=(timeDate:string)=>{
         return(
             <>
-         
                 <table className='time-date-table'>
                     <tr>
                         <td>Date</td>
@@ -54,7 +53,6 @@ const StringField = (props:any) => {
                         <td>{DateTimeMoment(`${timeDate}`,`hh:mm:ss`)}</td>
                     </tr>
                 </table>
-           
             </>
         )
     }
@@ -63,8 +61,12 @@ const StringField = (props:any) => {
         <Row className={rowBorder}  key={number}>
             <Col  md={3} xs={12} className="attr-col"><span>{infoIcon(themeContrastColor)} </span><span className='pl-1'>  {_t(`${label_for}.${item}`)}:</span> </Col>
             <Col md={9} xs={12}>
-                {item==='witness'?
+                {   item==='witness' || item==='current_witness'?
                     <Link to={`/@${value}`}>{value}</Link>
+                    :
+                    item==='block_num'?
+                    <Link to={`/b/${value}`}>{value}</Link>
+    
                     :item==="transaction_ids"? <Button >{value}</Button>
                     :timestampKeys.includes(item)?
                        Date_time(value)

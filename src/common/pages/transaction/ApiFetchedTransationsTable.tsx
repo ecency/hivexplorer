@@ -5,7 +5,7 @@ import { SingleTransaction } from './SingleTransactionPage';
 import { _t } from '../../i18n';
 
 export default function ApiFetchedTransationsTable(props: any) {
-    const blocksApiResult:SingleTransaction=props;
+    const transactionsApiResult:SingleTransaction=props;
     return (
         <Table className='mb-4' >
             <thead>
@@ -17,14 +17,14 @@ export default function ApiFetchedTransationsTable(props: any) {
 
             </tr>
             </thead>
-            {/* <tbody>
+            <tbody>
             <tr>
-                <td><Link to={`/b/${transationsApiResult.block_num}`}> {transationsApiResult.block_num} </Link></td>
-                <td>{transationsApiResult.transaction_id}</td>
-                <td>{transationsApiResult.transaction_num}</td>
-                <td>{transationsApiResult.expiration}</td>
+                <td><Link to={`/b/${transactionsApiResult.block_num}`}> {transactionsApiResult.block_num} </Link></td>
+                <td>{transactionsApiResult.transaction_id}</td>
+                <td>{transactionsApiResult.transaction_num}</td>
+                <td>{transactionsApiResult.expiration}</td>
             </tr>
-            </tbody> */}
+            </tbody>
         </Table>
     )
 }

@@ -40,13 +40,12 @@ const SingleTransaction = (props:any) => {
             <Container>
                     <Card>
                         <Card.Header>
-                            {_t('common.block')}: {match.params.id}
+                            {_t('common.transaction')}: {match.params.id}
                         </Card.Header>
                         <Card.Body className='py-0'>
                             { result && Object.keys(result).map((key,index)=>{
                                 return(
                                     <StringField key={index} value={typeof(result[key])==='string' || typeof(result[key])==='number' ? result[key]:result[key].length}  item={key} number={index} label_for='transaction'/>
-                            
                                 )})
                             }
                         </Card.Body>

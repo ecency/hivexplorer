@@ -82,10 +82,10 @@ const Date_time=(timeSet:string,timeFormat:string)=>{
                   <TableRow className="transaction-table-data-row" hover={true} role="checkbox" tabIndex={-1} key={i}>
                         <TableCell  className="transaction-table-data-cell py-2"><Link to={`/b/${trans[1].block}`}>{trans[1].block}</Link></TableCell>
                         <TableCell  className="transaction-table-data-cell py-2"><Link to={`/trx/${trans[1].trx_id}`}>{trans[1].trx_id}</Link></TableCell>
-                        <TableCell className="transaction-table-data-cell py-2">{trans[0]}</TableCell>
+                        <TableCell className="transaction-table-data-cell py-2 text-center">{trans[0]}</TableCell>
                         <TableCell className="transaction-table-data-cell py-2">{trans[1].op.type}</TableCell>
-                        <TableCell className="transaction-table-data-cell py-2">{trans[1].op_in_trx}</TableCell>
-                        <TableCell className="transaction-table-data-cell py-2">{trans[1].virtual_op}</TableCell>
+                        <TableCell className="transaction-table-data-cell py-2 text-center">{trans[1].op_in_trx}</TableCell>
+                        <TableCell className="transaction-table-data-cell py-2 text-center">{trans[1].virtual_op}</TableCell>
                   </TableRow>
                 //   :<></>
                 );

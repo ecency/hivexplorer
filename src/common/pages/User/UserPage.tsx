@@ -18,6 +18,7 @@ import { UserTypeList } from './UserTypes';
 import './UserPage.scss'
 import StringField from '../../components/fields/blockFields/StringField';
 import UserTransactionsTable from './userTransactionTable';
+import ObjectField from '../../components/fields/blockFields/ObjectField';
 
 interface UserList extends Array<UserTypeList>{}
 
@@ -48,28 +49,23 @@ function TabPanel(props:any) {
 const UserPage = (props:any) => {
     
     const {match} = props
-   const [userAccount,setUserAccount]=useState<UserList>()
-   const [value, setValue] = useState(0);
-
-
-
-  const handleChange = (event:any, newValue:number) => {
-    setValue(newValue);
-  };
-    const account_url=`${ConfigItems.baseUrl}/api/get_accounts?name[]=${match.params.user_id}`;
-  
-      useEffect(()=>{
-        axios.get(account_url).then(res => {
-            setUserAccount(res.data)
-          })
-      },[])
-   
+    const [userAccount,setUserAccount]=useState<UserList>()
+    const [value, setValue] = useState(0);
+    const handleChange = (event:any, newValue:number) => {
+        setValue(newValue);
+    };
+    useEffect(()=>{
+    let account_url=`${ConfigItems.baseUrl}/api/get_accounts?name[]=${match.params.user_id}`;
+    axios.get(account_url).then(res => {
+        setUserAccount(res.data)
+        })
+    },[])
     function a11yProps(index:number) {
         return {
           id: `simple-tab-${index}`,
           'aria-controls': `simple-tabpanel-${index}`,
         };
-      }
+    }
     return (
         <>
             <Theme global={props.global}/>
@@ -85,7 +81,6 @@ const UserPage = (props:any) => {
                             <Tab label="Info" {...a11yProps(0)} />
                             <Tab label="Transaction" {...a11yProps(1)} />
                         </Tabs>
-
                         </Card.Header>
                         <Card.Body className='py-0'>
                         <TabPanel value={value} index={0}>
@@ -96,6 +91,9 @@ const UserPage = (props:any) => {
                                 :
                                 typeof(user[k])==='boolean'? 
                                 <StringField key={index} item={k} number={index} value={JSON.stringify(user[k])} label_for='user-info' />
+                                :
+                                typeof(user[k])==='object'?
+                                <ObjectField key={index} item={k} number={index} value={user[k]} label_for='user-info'/>
                                 :
                                 <></>
                               )})}
