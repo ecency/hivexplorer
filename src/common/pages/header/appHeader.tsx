@@ -39,7 +39,7 @@ const AppHeader = (props:any) => {
 
     return (
       <>
-      <Navbar className={appNav} expand="lg">
+      <Navbar className={appNav} expand="lg"  variant={currTheme === 'day' ? 'light' : 'dark'}>
          <Container>
             <LinkContainer to="/">
             <Navbar.Brand>

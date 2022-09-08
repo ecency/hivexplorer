@@ -1,7 +1,7 @@
 
 import React,{useEffect, useState} from 'react';
 import { Button, Col, ListGroup, Row } from 'react-bootstrap';
-import { infoIcon, trxIcon } from '../../../img/svg';
+import { infoIcon, showLessIcon, showMoreIcon, trxIcon } from '../../../img/svg';
 import './ObjectField.scss'
 import { useSelector } from 'react-redux';
 import { _t } from '../../../i18n';
@@ -31,16 +31,20 @@ const timestampKeys=[
     "last_budget_time",
     "next_daily_maintenance_time"
 ]
-
+interface opValType {
+    id:string
+    voter:string
+    json:string
+}
 const ObjectField = (props:any) => {
     const {number,item,value,label_for}=props;
     console.log('object',item,value)
     console.log('object-type',typeof(item))
-    const [witnessBtn,setWitnessBtn]=useState(false)
-    console.log('witness',witnessBtn)
+    const [expandBtn,setExpandBtn]=useState(false)
     const currTheme = useSelector((state:any) => state.global.theme)
     const themeContrastColor = currTheme === 'day' ? 'black' : 'white';
     const rowBorder = currTheme === 'day' ? 'row-border border-color-day' : 'row-border border-color-night';
+    const themeBtn = currTheme === 'day' ? 'showmore-btn btn-light' : 'showmore-btn btn-dark';
     console.log('label',label_for)
 
     const DateTimeMoment=(timeSet:string,timeFormat:string)=>{
@@ -62,7 +66,42 @@ const ObjectField = (props:any) => {
             </>
         )
     }
-    const witness_view=(value:any,item:string)=>{
+    const expand_operation=(value:any,item:string)=>{
+        return(
+            value.map((val:any,i:number)=>{
+                const type:string=val[0]
+                const opVal:opValType=val[1]
+               return(
+                <Row className={`${rowBorder} mt-1`} key={i}>
+                    <Col md={3}>
+                        <></>
+                    </Col>
+                    <Col md={9}>
+                    <table className='time-date-table'>
+                       <tbody>
+                        <tr>
+                            <td>Type</td><td>{type}</td>
+                        </tr>
+                       {opVal.voter && <tr>
+                            <td colSpan={2}>voter</td><td>{opVal.voter}</td>
+                        </tr>}
+                        {opVal.id &&  <tr>
+                            <td>id</td><td>{opVal.id}</td>
+                        </tr>}
+                        {opVal.json && <tr>
+                            <td>json</td><td>{opVal.json}</td>
+                        </tr>}
+                       
+                       </tbody>
+                       
+                    </table>
+                    </Col>
+                </Row>
+               )
+            })
+        )
+    }
+    const expand_view=(value:any,item:string)=>{
        return(
         <Row className={`${rowBorder} mt-1`}>
             <Col>
@@ -112,7 +151,10 @@ const ObjectField = (props:any) => {
         <>
         <Row className={rowBorder}  key={number}>
             <Col  md={3} xs={12} className="attr-col"><span>{infoIcon(themeContrastColor)} </span><span className='pl-1'>
-                {item==='voting_manabar' || item==='downvote_manabar' ?<span>{_t(`${label_for}.${item.object_name}`)}</span>:_t(`${label_for}.${item}`)}:</span> 
+                {item==='voting_manabar' || item==='downvote_manabar' ?
+                <span>{_t(`${label_for}.${item.object_name}`)}</span>
+                :
+                _t(`${label_for}.${item}`)}:</span> 
             </Col>
             <Col md={9} xs={12}>
                 {item==='voting_manabar' || item ==='downvote_manabar'?
@@ -127,21 +169,22 @@ const ObjectField = (props:any) => {
                     </tr>
                 </table>
                 :
-                item==='witness_votes'?
+                item==='witness_votes' || item==='transaction_ids' || item==='operations'?
                 <>
-                <Button onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>setWitnessBtn(!witnessBtn)}>{value.length}</Button>
+                    <Button className={themeBtn} 
+                            onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>setExpandBtn(!expandBtn)}>
+                                {value.length} {expandBtn? <span>{showLessIcon(themeContrastColor)} </span> : <span>{showMoreIcon(themeContrastColor)}</span>}
+                    </Button>
                 </>
                 :
-                  item==='transaction_ids'?
-                  <>
-                  <Button onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>setWitnessBtn(!witnessBtn)}>{value.length}</Button>
-                  </>
-                :value.length}
+                value.length}
                 
             </Col> 
         </Row>
-        { item==='witness_votes' && witnessBtn ?witness_view(value,item):<></>}
-        { item==='transaction_ids' && witnessBtn ?witness_view(value,item):<></>}
+        {item==='witness_votes' && expandBtn ?expand_view(value,item):<></>}
+        {item==='transaction_ids' && expandBtn ?expand_view(value,item):<></>}
+        {item==='operations' && expandBtn ?expand_operation(value,item):<></>}
+       
         </>
         
     )

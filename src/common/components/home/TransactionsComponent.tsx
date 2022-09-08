@@ -19,6 +19,7 @@ export interface op_type {
 }
 
 export interface HomeTransactionType {
+    map(arg0: (suggestion: any, index: number) => JSX.Element): string | number | boolean | {} | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactNodeArray | React.ReactPortal | null | undefined;
     trx_id: string
     block: number
     trx_in_block: number
@@ -80,7 +81,7 @@ const HomeTransactions = (props:any) => {
                         <Col md={6}>{_t('common.req_auth')}: 
                             {req_auths.map((user:string,i:number)=>{
                               return(
-                                <img className='avatar-img' src={`https://images.ecency.com/u/${user}/avatar`} alt="" />
+                                <img className='avatar-img' src={`https://images.ecency.com/u/${user}/avatar`} key={i} alt="" />
                               )
                             })}
                         </Col>
@@ -89,7 +90,7 @@ const HomeTransactions = (props:any) => {
                          <Col md={6}>{_t('common.req_post_auth')}:
                           {posting_auths.map((user:string,i:number)=>{
                               return(
-                                <img className='avatar-img' src={`https://images.ecency.com/u/${user}/avatar`} alt="" />
+                                <img className='avatar-img' src={`https://images.ecency.com/u/${user}/avatar`} key={i} alt="" />
                               )
                             })}
                         </Col>}

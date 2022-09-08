@@ -73,7 +73,8 @@ const UserHeader = (props:any) => {
                             </li>}
                         </ul>
                     </div>
-                    <div> 
+                    <div>
+                        Progress Bars
                     </div>
                 </Row>
             </div>

@@ -4,6 +4,35 @@
     .MuiTabs-indicator{
         background-color: #706f70 !important;
     }
+    .table-paper{
+        overflow-x: scroll;
+        .search-field{
+            padding: 10px 0 20px;
+            width: 400px;
+            .MuiInput-underline:before{
+                border: none !important;
+            }
+            .MuiInputBase-input {
+                padding: 0.5rem;
+                background-color:#f5f5f5
+            }
+        }
+    }
+    .trans-table {
+        margin: auto;
+        & th, td{
+            border: 1px solid #706f70;
+        border-collapse: collapse;
+        }
+        tr td:first-child{
+            min-width: 100px;
+        }
+        td{
+            padding: 10px;
+            word-break: break-all;
+        }
+        
+      }
     .paper-night{
         background: transparent !important;
         .MuiTableCell-head{
@@ -14,6 +43,17 @@
             .transaction-table-data-cell{
               color: #fff !important;
             }
+        }
+    }
+   
+}
+.transaction-table-night{
+    .MuiTablePagination-root{
+        p{
+            color: #fff;
+        }
+        .MuiTablePagination-select {
+            background-color:#f5f5f5
         }
     }
 }

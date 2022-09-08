@@ -11,6 +11,7 @@ import { transactionList } from '../../components/home/BlocksComponent';
 import Theme from '../../components/theme';
 import { _t } from '../../i18n';
 import StringField from '../../components/fields/blockFields/StringField';
+import ObjectField from '../../components/fields/blockFields/ObjectField';
 
 export interface SingleTransaction {
     block_num: number
@@ -20,7 +21,7 @@ export interface SingleTransaction {
     transaction_id:string,
     extensions:object,
     signature:object,
-    transaction_num: number
+    transaction_num: number,
     operations: object
 }
 
@@ -45,7 +46,14 @@ const SingleTransaction = (props:any) => {
                         <Card.Body className='py-0'>
                             { result && Object.keys(result).map((key,index)=>{
                                 return(
-                                    <StringField key={index} value={typeof(result[key])==='string' || typeof(result[key])==='number' ? result[key]:result[key].length}  item={key} number={index} label_for='transaction'/>
+                                   <>
+                                   { typeof(result[key])==='object'?
+                                    <ObjectField key={index} value={result[key]}  item={key} number={index} label_for='transaction'/>
+                                     :
+                                     <StringField key={index} value={result[key]}  item={key} number={index} label_for='transaction'/>
+                                   }
+                                   </>
+                                   
                                 )})
                             }
                         </Card.Body>

@@ -12,9 +12,6 @@ import { ConfigItems } from '../../../../config';
 import HeadBlock,{ Block } from '../../components/headBlock/headBlock';
 import HomeBlocks,{HomeBlocksType } from '../../components/home/BlocksComponent';
 import HomeTransactions, { HomeTransactionType } from '../../components/home/TransactionsComponent';
-import ApiFetchedBlocksTable from '../blocks/ApiFetchedBlocksTable';
-import ApiFetchedLookupAccounts from '../accounts/ApiFetchedLookupAccounts';
-import ApiFetchedTransationsTable from '../transaction/ApiFetchedTransationsTable';
 import { SingleTransaction } from '../transaction/SingleTransactionPage';
 import { Link } from 'react-router-dom';
 import { _t } from '../../i18n';
@@ -23,6 +20,7 @@ const headBlock = `${ConfigItems.baseUrl}/api/get_dynamic_global_properties`;
 
 
 interface User{
+  map(arg0: (suggestion: any, index: number) => JSX.Element): string | number | boolean | {} | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactNodeArray | React.ReactPortal | null | undefined;
   id:number,
   name:string,
   email:string,
@@ -69,6 +67,7 @@ const Index = (props: PageProps) => {
   const [accountsApiResult, setAccountsApiResult] = useState<User>()
   const [transationsApiResult, setTransationsApiResult] = useState<SingleTransaction>()
   const [noSearchResult, setNoSearchResult] = useState<Boolean>(false)
+  const [clear, setClear] = useState(true)
   
   const setSearchResultStateHandler = (blockSearch: HomeTransactionType | undefined, AccountSearch: User | undefined, TransactionSearch: SingleTransaction | undefined, noSearch: Boolean) => {
     setBlocksApiResult(blockSearch);
@@ -78,32 +77,40 @@ const Index = (props: PageProps) => {
   }
 
   const clearSearchResultHandler = () => {
-    setSearchResultStateHandler(undefined, undefined, undefined, false);
+    setClear(true)
   }
-  
-  const searchHandler = (e:any) => {
-    e.preventDefault();
+
+
+
+
+  const searchHandler = (searchedInput: any) => {
+
     const numeric = /^\d+$/;
     const AllInputPattern = /^[a-zA-Z0-9.-]*$/;
-    
-    const searchedInput = e.target[0].value;
-
-    if (searchedInput) {
-      if (numeric.test(searchedInput)) {
-        const blocks=`${ConfigItems.baseUrl}/api/get_ops_in_block?block_num=${(searchedInput)}`;
+    const value = searchedInput.target.value
+    if (value) {
+      if (numeric.test(value)) {
+        const blocks=`${ConfigItems.baseUrl}/api/get_ops_in_block?block_num=${(value)}`;
         axios.get(blocks).then(res => {
-          console.log(res.data);
-          setSearchResultStateHandler(res.data.ops, undefined, undefined, false);
+          res.data.ops.length > 0 ? setSearchResultStateHandler(res.data.ops, undefined, undefined, false) : setSearchResultStateHandler(undefined, undefined, undefined, true) 
         });
-      } else if (searchedInput.length < 16 && AllInputPattern.test(searchedInput)) {
-        const accounts=`${ConfigItems.baseUrl}/api/lookup_accounts?lower_bound_name=u&limit=10`;
+      } else if (value.length < 16 && AllInputPattern.test(value)) {
+        const accounts=`${ConfigItems.baseUrl}/api/lookup_accounts?lower_bound_name=u&limit=100`;
         axios.get(accounts).then(res => {
-          setSearchResultStateHandler(undefined, res.data, undefined, false);
+          const responseData = res.data
+          let matches = []
+          if (value.length > 0 ) {
+            matches = responseData.filter((usr:any) => {
+              const regex = new RegExp(`${value}`, "gi");
+              return usr.match(regex)
+            })
+          }
+          matches.length > 0 ? setSearchResultStateHandler(undefined, matches, undefined, false) : setSearchResultStateHandler(undefined, undefined, undefined, true);
         })
-      } else if (searchedInput.length > 16) {
-        const accounts=`${ConfigItems.baseUrl}/api/get_transaction?trx_id=${searchedInput}`;
+      } else if (value.length > 16) {
+        const accounts=`${ConfigItems.baseUrl}/api/get_transaction?trx_id=${value}`;
         axios.get(accounts).then(res => {
-          setSearchResultStateHandler(undefined, undefined, res.data, false);
+          res.data.name === 'RPCError' ? setSearchResultStateHandler(undefined, undefined, undefined, true) : setSearchResultStateHandler(undefined, undefined, res.data, false);
 
         })
       } else {
@@ -140,40 +147,58 @@ const Index = (props: PageProps) => {
   //     })
   // }
 
-  console.log(accountsApiResult, "account");
+  useEffect(() => {
+    if (!blocksApiResult &&  !accountsApiResult && !transationsApiResult) {
+      setClear(false)
+      setNoSearchResult(true)
+    }
+  }, [blocksApiResult, accountsApiResult, transationsApiResult])
+
+
   return <>
     <Meta {...metaProps} />
     <Theme global={props.global}/>
     <div className='home py-4'>
-      <Container>
+    <Container>
         {result && 
         <>
-        <Form onSubmit={(e: any) => searchHandler(e)} className="mb-4">
-          <Form.Group className='d-flex col-3 col-md-4'>
-            <Form.Control type="text" placeholder="Block, Account, Transaction" className="mr-2" />
-            <Button variant="primary" type="submit">
-              Search
-            </Button>
-          </Form.Group>
-        </Form>          
-          {(blocksApiResult || accountsApiResult || transationsApiResult) && <Button className="mb-2 clearBtn" onClick={clearSearchResultHandler}>Clear</Button>}
+        <div style={{ verticalAlign: 'center'}}>
+          <Form  className="mb-0">
+            <Form.Group className=' col-12'>
+              <Form.Control className="rounded" onChange={searchHandler} type="text" placeholder="Block, Account, Transaction"/>
+            </Form.Group>
+          </Form> 
+          {noSearchResult ? 
+            <div className=" col-md-12 mt-2 mb-2">
+              { !clear && <>
+                <p className="d-inline-block">No search results found</p>
+                <Button className="d-inline-block ml-2 btn-sm" onClick={clearSearchResultHandler}>X</Button>
+              </>}
+          </div>  : <div className="d-block m-0 col-md-12" style={{border: 3}}>
 
-          {blocksApiResult &&  <ApiFetchedBlocksTable {...blocksApiResult} />}
+            { blocksApiResult &&
+              <div className=" col-md-12 mt-2 mb-2">
+                <Link to={`/b/${blocksApiResult[0].block}`}> 
+                    {blocksApiResult[0].block} 
+                </Link>
+                <hr />
+              </div>
+            }
+            { accountsApiResult && accountsApiResult.map((suggestion, index) => {
+              return (<><div key={index} className=" col-md-12 mt-2 mb-2">
+                <Link to={`/@${suggestion}`}> 
+                    {suggestion} 
+                </Link>
+                
+              </div><hr /></>)
+            })}
+            { transationsApiResult && <div className=" col-md-12 mt-2 mb-2">
+                <Link to={`/trx/${transationsApiResult.transaction_id}`}> {transationsApiResult.transaction_id} </Link>
+            </div> }
+            </div>}
 
-          {accountsApiResult &&  <ApiFetchedLookupAccounts {...accountsApiResult} />}
+        </div>
 
-          {transationsApiResult &&  <ApiFetchedTransationsTable {...transationsApiResult} />}
-
-          {noSearchResult &&  <Card className="cardCollapsible">
-              <Card.Header>
-                Error <Button className="clearBtn" onClick={clearSearchResultHandler}>Clear</Button>
-              </Card.Header>
-              <Card.Body className='p-0'>
-                <p className="m-3">{_t("common.no_search_result")}</p>
-              </Card.Body>
-            </Card>
-          }
-          
           {/* { searchedResult && searchedResult[0].block && <Link to={`/b/${searchedResult[0].block}`}> {searchedResult[0].block} </Link> } */}
           <HeadBlock {...result} /><Row>
               <Col xs={12} md={6}>
