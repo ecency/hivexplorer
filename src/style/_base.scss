@@ -10,7 +10,9 @@ html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
 }
-
+body{
+  padding-top: 60px !important;
+}
 #root {
   min-width: 280px;
 

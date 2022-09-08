@@ -76,6 +76,12 @@ export interface UserTypeList {
     tags_usage: object
     guest_bloggers: object
 }
+
+interface AmountPrecisionNai {
+        amount: string
+        precision: number
+        Nai: string
+}
 export interface UserTransactionType {
     
     trx_id:string
@@ -85,12 +91,53 @@ export interface UserTransactionType {
     virtual_op:number,
     timestamp:string,
     op:{
+        
         type:string,
-        vesting_shares:{
-            amount:string,
-            precision:number,
-            nai:string
+        value:{
+            producer:string,
+            curator:string,
+            publisher:string,
+            voter: string
+            author: string
+            benefactor: string
+            permlink: string
+            weight: string
+            rshares: string
+            total_vote_weight: string
+            owner:string
+            required_auths:string[]
+            required_posting_auths: string[]
+            id: string
+            json: string
+            props:object
+            extensions:string[]
+            creator: string,
+            account: string,
+            memo: string
+            from: string
+            to: string
+            author_rewards: number
+            reward_hive: AmountPrecisionNai
+            reward_hbd: AmountPrecisionNai
+            reward_vests: AmountPrecisionNai
+            fee: AmountPrecisionNai
+            reward:AmountPrecisionNai
+            vesting_shares:AmountPrecisionNai
+            pending_payout:AmountPrecisionNai
+            hbd_payout:AmountPrecisionNai
+            vesting_payout:AmountPrecisionNai
+            amount: AmountPrecisionNai
+            payout: AmountPrecisionNai
+            total_payout_value:AmountPrecisionNai
+            curator_payout_value: AmountPrecisionNai
+            beneficiary_payout_value: AmountPrecisionNai
+            curators_vesting_payout:AmountPrecisionNai
+            exchange_rate: {
+                base: AmountPrecisionNai,
+                quote: AmountPrecisionNai
+            }
         }
+     
     }
     operation_id:number
 }

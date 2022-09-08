@@ -58,6 +58,7 @@ const UserPage = (props:any) => {
     let account_url=`${ConfigItems.baseUrl}/api/get_accounts?name[]=${match.params.user_id}`;
     axios.get(account_url).then(res => {
         setUserAccount(res.data)
+
         })
     },[])
     function a11yProps(index:number) {
@@ -66,15 +67,23 @@ const UserPage = (props:any) => {
           'aria-controls': `simple-tabpanel-${index}`,
         };
     }
+    {userAccount && userAccount.map((user,i)=>{
+    console.log('parse',JSON.parse(user.posting_json_metadata))
+    })}
     return (
         <>
             <Theme global={props.global}/>
             <Container className='user-container'>
                {userAccount && userAccount.map((user,i)=>{
-                const Json_Meta=JSON.parse(user.json_metadata)
+                let Json_Meta
+                user.json_metadata===""?
+                Json_Meta=JSON.parse(user.posting_json_metadata) : Json_Meta=JSON.parse(user.json_metadata)
                 return(
                   <div key={i}>
-                    <UserHeader  id={user.id} name={user.name} metaData={Json_Meta} />
+                     <UserHeader  
+                              id={user.id} 
+                              name={user.name} 
+                              metaData={Json_Meta} />
                     <Card className='user-card'>
                         <Card.Header className='p-0'>
                         <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
