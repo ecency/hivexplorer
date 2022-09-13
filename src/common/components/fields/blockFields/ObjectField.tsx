@@ -38,28 +38,25 @@ interface opValType {
 }
 const ObjectField = (props:any) => {
     const {number,item,value,label_for}=props;
-    console.log('object',item,value)
-    console.log('object-type',typeof(item))
     const [expandBtn,setExpandBtn]=useState(false)
     const currTheme = useSelector((state:any) => state.global.theme)
     const themeContrastColor = currTheme === 'day' ? 'black' : 'white';
     const rowBorder = currTheme === 'day' ? 'row-border border-color-day' : 'row-border border-color-night';
-    const themeBtn = currTheme === 'day' ? 'showmore-btn btn-light' : 'showmore-btn btn-dark';
-    console.log('label',label_for)
+    const themeBtn = currTheme === 'day' ? 'showmore-btn btn-light' : 'showmore-btn btn-dark'
 
     const DateTimeMoment=(timeSet:string,timeFormat:string)=>{
-        return moment(timeSet).utc().format(timeFormat)
+        return moment(timeSet).format(timeFormat)
       }
     const Date_time=(timeDate:string)=>{
         return(
             <>
                 <table className='time-date-table'>
                     <tr>
-                        <td>Date</td>
+                        <td>{_t('common.date')}</td>
                         <td>{DateTimeMoment(`${timeDate}`,"YYYY-MM-DD")}</td>
                     </tr>
                     <tr>
-                        <td>Time</td>
+                        <td>{_t('common.time')}</td>
                         <td>{DateTimeMoment(`${timeDate}`,`hh:mm:ss`)}</td>
                     </tr>
                 </table>
@@ -80,16 +77,16 @@ const ObjectField = (props:any) => {
                     <table className='time-date-table'>
                        <tbody>
                         <tr>
-                            <td>Type</td><td>{type}</td>
+                            <td>{_t('common.type')}</td><td>{type}</td>
                         </tr>
                        {opVal.voter && <tr>
-                            <td colSpan={2}>voter</td><td>{opVal.voter}</td>
+                            <td >{_t('common.voter')}</td><td>{opVal.voter}</td>
                         </tr>}
                         {opVal.id &&  <tr>
-                            <td>id</td><td>{opVal.id}</td>
+                            <td>{_t('common.id')}</td><td>{opVal.id}</td>
                         </tr>}
                         {opVal.json && <tr>
-                            <td>json</td><td>{opVal.json}</td>
+                            <td>{_t('common.json')}</td><td>{opVal.json}</td>
                         </tr>}
                        
                        </tbody>
@@ -115,7 +112,7 @@ const ObjectField = (props:any) => {
                                     <span>{val}</span>
                                 </a>
                                 :
-                                <Link to={`/trx/${val}`}>
+                                <Link to={`/tx/${val}`}>
                                     <span>{trxIcon(themeContrastColor)}</span><span> {val}</span>
                                 </Link>
                                 }
@@ -135,7 +132,7 @@ const ObjectField = (props:any) => {
                                     <span>{val}</span>
                                 </a>
                                 :
-                                <Link to={`/trx/${val}`}>
+                                <Link to={`/tx/${val}`}>
                                     <span>{trxIcon(themeContrastColor)}</span><span> {val}</span>
                                 </Link>
                                 }

@@ -28,11 +28,13 @@
     "less":"Less",
     "more":"More",
     "witness":"Witness",
+    "block_id":"Block ID",
     "txns":"Txns",
     "ops":"Ops",
     "trx_in_block":"Trx In Block",
     "req_auth":"Req. Auth",
     "req_post_auth":"Req. Posting Auth",
+    "info":"Info",
     "transaction":"Transaction",
     "transaction_num":"Transaction No",
     "user_names": "User Names",
@@ -129,6 +131,12 @@
     "witness":"Witness",
     "transactions":"Transactions",
     "operations":"Operations"
+  },
+  "button-label":{
+    "see_more_blocks":"See More Blocks",
+    "see_more_transactions":"See More Transactions",
+    "show_more":"Show More",
+    "show_less":"Show Less"
   },
   "user-info": {
     "id":"Id",

@@ -39,7 +39,8 @@ export default async (req: express.Request, res: express.Response) => {
       console.log("params", params);
       // console.log(mapping[0].api, method, params);
       if (result === undefined) {
-        const method_type:any = (mapping[0].param_type && mapping[0].param_type === 'params') ? params : query; 
+        // const method_type:any = (mapping[0].param_type && mapping[0].param_type === 'params') ? params : query;
+        const method_type:any = mapping[0].isArray ? params : query;
         result = await client.call(mapping[0].api, method, method_type);
       }
 

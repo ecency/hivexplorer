@@ -53,8 +53,6 @@ const TransactionsTables = (props:any) => {
   const currTheme = useSelector((state:any) => state.global.theme)
   const [filterText, setFilterText] = useState("");
   const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
-  console.log('data',props.data)
-  let block_number_page=67096310
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
   };
@@ -83,7 +81,7 @@ const TransactionsTables = (props:any) => {
     }
 })
 const Date_time=(timeSet:string,timeFormat:string)=>{
-  return moment(timeSet).utc().format(timeFormat)
+  return moment(timeSet).format(timeFormat)
 }
   return (
     <>
@@ -118,7 +116,7 @@ const Date_time=(timeSet:string,timeFormat:string)=>{
                 return (
                   <TableRow hover={true} role="checkbox" tabIndex={-1} key={i}>
                     <TableCell><Link to={`/b/${transaction.block}`}>{transaction.block}</Link></TableCell>
-                    <TableCell><Link to={`/trx/${transaction.trx_id}`}>{transaction.trx_id}</Link></TableCell>
+                    <TableCell><Link to={`/tx/${transaction.trx_id}`}>{transaction.trx_id}</Link></TableCell>
                     <TableCell>{transaction.op.type}</TableCell>
                     <TableCell>{transaction.op.type}</TableCell>
                   </TableRow>

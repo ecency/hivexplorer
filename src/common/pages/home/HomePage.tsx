@@ -55,9 +55,7 @@ const Index = (props: PageProps) => {
   // }, []);
   const [result, setResult] = useState<Block>();
     useEffect(() => {
-        axios.get(headBlock).then(response => {
-          console.log("here", headBlock);  
-          console.log("here", response.data);  
+        axios.get(headBlock).then(response => { 
           setResult(response.data)
         })
     }, []);
@@ -95,7 +93,7 @@ const Index = (props: PageProps) => {
           res.data.ops.length > 0 ? setSearchResultStateHandler(res.data.ops, undefined, undefined, false) : setSearchResultStateHandler(undefined, undefined, undefined, true) 
         });
       } else if (value.length < 16 && AllInputPattern.test(value)) {
-        const accounts=`${ConfigItems.baseUrl}/api/lookup_accounts?lower_bound_name=u&limit=100`;
+        const accounts=`${ConfigItems.baseUrl}/api/lookup_accounts?lower_bound_name=${value}&limit=100`;
         axios.get(accounts).then(res => {
           const responseData = res.data
           let matches = []
@@ -163,18 +161,19 @@ const Index = (props: PageProps) => {
         {result && 
         <>
         <div style={{ verticalAlign: 'center'}}>
-          <Form  className="mb-0">
-            <Form.Group className=' col-12'>
+          <Form  className="m-0 search-form">
+            <Form.Group className=' col-12 p-0'>
               <Form.Control className="rounded" onChange={searchHandler} type="text" placeholder="Block, Account, Transaction"/>
             </Form.Group>
           </Form> 
-          {noSearchResult ? 
-            <div className=" col-md-12 mt-2 mb-2">
-              { !clear && <>
-                <p className="d-inline-block">No search results found</p>
-                <Button className="d-inline-block ml-2 btn-sm" onClick={clearSearchResultHandler}>X</Button>
-              </>}
-          </div>  : <div className="d-block m-0 col-md-12" style={{border: 3}}>
+          {!noSearchResult &&  
+          //   <div className=" col-md-12 mt-2 mb-2">
+          //     { !clear && <>
+          //       <p className="d-inline-block">No search results found</p>
+          //       <Button className="d-inline-block ml-2 btn-sm" onClick={clearSearchResultHandler}>X</Button>
+          //     </>}
+          // </div>  : 
+          <div className="d-block m-0 col-md-12 search-dropdown">
 
             { blocksApiResult &&
               <div className=" col-md-12 mt-2 mb-2">
@@ -186,14 +185,15 @@ const Index = (props: PageProps) => {
             }
             { accountsApiResult && accountsApiResult.map((suggestion, index) => {
               return (<><div key={index} className=" col-md-12 mt-2 mb-2">
-                <Link to={`/@${suggestion}`}> 
+                <Link to={`/@${suggestion}`}>
+                  <img className="search-user" src={`https://images.ecency.com/u/${suggestion}/avatar`} alt={`suggestion`} />
                     {suggestion} 
                 </Link>
                 
               </div><hr /></>)
             })}
             { transationsApiResult && <div className=" col-md-12 mt-2 mb-2">
-                <Link to={`/trx/${transationsApiResult.transaction_id}`}> {transationsApiResult.transaction_id} </Link>
+                <Link to={`/tx/${transationsApiResult.transaction_id}`}> {transationsApiResult.transaction_id} </Link>
             </div> }
             </div>}
 
@@ -208,7 +208,7 @@ const Index = (props: PageProps) => {
                     <HomeBlocks block_number={result.head_block_number} />
                   </Card.Body>
                   <Card.Footer>
-                    <Link  to={'/blocks'}><Button>See More Blocks</Button></Link>
+                    <Link  to={'/blocks'}><Button>{_t('button-label.see_more_blocks')}</Button></Link>
                   </Card.Footer>
                 </Card>
               </Col>
@@ -219,7 +219,7 @@ const Index = (props: PageProps) => {
                     <HomeTransactions block_number={result.head_block_number} />
                   </Card.Body>
                   <Card.Footer>
-                    <Link to={`/transactions`}><Button>See More Transaction</Button></Link>
+                    <Link to={`/transactions`}><Button>{_t('button-label.see_more_transactions')}</Button></Link>
                   </Card.Footer>
                 </Card>
               </Col>

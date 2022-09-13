@@ -61,7 +61,6 @@ const TransactionOperationTable= (props:any) => {
     const currTheme = useSelector((state:any) => state.global.theme)
     const OpValArray=new Array()
     OpValArray.push(opRewardHive,opVestShare)
-    console.log('opValArray',OpValArray)
 
     function OpObjectValue(field:any,name:string){
         return(

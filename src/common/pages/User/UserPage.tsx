@@ -19,6 +19,8 @@ import './UserPage.scss'
 import StringField from '../../components/fields/blockFields/StringField';
 import UserTransactionsTable from './userTransactionTable';
 import ObjectField from '../../components/fields/blockFields/ObjectField';
+import { _t } from '../../i18n';
+import { DecodeJson } from '../../../server/util';
 
 interface UserList extends Array<UserTypeList>{}
 
@@ -56,6 +58,7 @@ const UserPage = (props:any) => {
     };
     useEffect(()=>{
     let account_url=`${ConfigItems.baseUrl}/api/get_accounts?name[]=${match.params.user_id}`;
+    console.log(account_url)
     axios.get(account_url).then(res => {
         setUserAccount(res.data)
 
@@ -67,32 +70,31 @@ const UserPage = (props:any) => {
           'aria-controls': `simple-tabpanel-${index}`,
         };
     }
-    {userAccount && userAccount.map((user,i)=>{
-    console.log('parse',JSON.parse(user.posting_json_metadata))
-    })}
     return (
         <>
             <Theme global={props.global}/>
             <Container className='user-container'>
                {userAccount && userAccount.map((user,i)=>{
-                let Json_Meta
+                let Json_Meta 
                 user.json_metadata===""?
-                Json_Meta=JSON.parse(user.posting_json_metadata) : Json_Meta=JSON.parse(user.json_metadata)
+                Json_Meta=DecodeJson(user.json_metadata) : Json_Meta=DecodeJson(user.posting_json_metadata)
+                // Json_Meta=JSON.parse(user.posting_json_metadata) : Json_Meta=JSON.parse(user.json_metadata)
+                
                 return(
                   <div key={i}>
                      <UserHeader  
-                              id={user.id} 
-                              name={user.name} 
-                              metaData={Json_Meta} />
+                        id={user.id} 
+                        name={user.name} 
+                        metaData={Json_Meta} />
                     <Card className='user-card'>
                         <Card.Header className='p-0'>
                         <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-                            <Tab label="Info" {...a11yProps(0)} />
-                            <Tab label="Transaction" {...a11yProps(1)} />
+                            <Tab label={_t('common.info')} {...a11yProps(0)} />
+                            <Tab label={_t('common.transaction')} {...a11yProps(1)} />
                         </Tabs>
                         </Card.Header>
                         <Card.Body className='py-0'>
-                        <TabPanel value={value} index={0}>
+                            <TabPanel value={value} index={0}>
                             {Object.keys(user).map((k,index)=>{
                               return(
                                typeof(user[k])!=='object' && typeof(user[k])!=='boolean'? 

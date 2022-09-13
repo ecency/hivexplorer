@@ -35,21 +35,20 @@ const StringField = (props:any) => {
     const currTheme = useSelector((state:any) => state.global.theme)
     const themeContrastColor = currTheme === 'day' ? 'black' : 'white';
     const rowBorder = currTheme === 'day' ? 'row-border border-color-day' : 'row-border border-color-night';
-    console.log('label',label_for)
 
     const DateTimeMoment=(timeSet:string,timeFormat:string)=>{
-        return moment(timeSet).utc().format(timeFormat)
+        return moment(timeSet).format(timeFormat)
       }
     const Date_time=(timeDate:string)=>{
         return(
             <>
                 <table className='time-date-table'>
                     <tr>
-                        <td>Date</td>
+                        <td>{_t('common.date')}</td>
                         <td>{DateTimeMoment(`${timeDate}`,"YYYY-MM-DD")}</td>
                     </tr>
                     <tr>
-                        <td>Time</td>
+                        <td>{_t('common.time')}</td>
                         <td>{DateTimeMoment(`${timeDate}`,`hh:mm:ss`)}</td>
                     </tr>
                 </table>

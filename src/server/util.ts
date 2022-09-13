@@ -48,3 +48,12 @@ export const stripLastSlash = (req: any, res: any, next: any) => {
     next();
   }
 }
+
+export const DecodeJson=(meta:string)=>{
+  try{
+    return JSON.parse(meta)
+  }
+  catch{
+    return {}
+  }
+}
