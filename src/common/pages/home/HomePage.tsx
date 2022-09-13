@@ -193,7 +193,7 @@ const Index = (props: PageProps) => {
               </div><hr /></>)
             })}
             { transationsApiResult && <div className=" col-md-12 mt-2 mb-2">
-                <Link to={`/trx/${transationsApiResult.transaction_id}`}> {transationsApiResult.transaction_id} </Link>
+                <Link to={`/tx/${transationsApiResult.transaction_id}`}> {transationsApiResult.transaction_id} </Link>
             </div> }
             </div>}
 

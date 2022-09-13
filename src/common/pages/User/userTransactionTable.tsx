@@ -85,7 +85,7 @@ const UserTransactionsTable = (props:any) => {
     })
 
     const Date_time=(timeSet:string,timeFormat:string)=>{
-      return moment(timeSet).utc().format(timeFormat)
+      return moment(timeSet).format(timeFormat)
     }
     const handleChangePage = (event: unknown, newPage: number) => {
       setPage(newPage);
@@ -104,7 +104,7 @@ const UserTransactionsTable = (props:any) => {
     <>
       <TableRow className="transaction-table-data-row" hover={true} role="checkbox" tabIndex={-1} >
         <TableCell  className="transaction-table-data-cell py-2">
-          <Link to={`/trx/${trans[1].trx_id}`}>{trans[1].trx_id}</Link>
+          <Link to={`/tx/${trans[1].trx_id}`}>{trans[1].trx_id}</Link>
         </TableCell>
         <TableCell  className="transaction-table-data-cell py-2">
           <Link to={`/b/${trans[1].block}`}>{trans[1].block}</Link>

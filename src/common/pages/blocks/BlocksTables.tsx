@@ -79,7 +79,7 @@ const BlocksTables = (props:any) => {
     }
 })
 const Date_time=(timeSet:string,timeFormat:string)=>{
-  return moment(timeSet).utc().format(timeFormat)
+  return moment(timeSet).format(timeFormat)
 }
   return (
     <>

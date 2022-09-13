@@ -48,7 +48,7 @@ const ObjectField = (props:any) => {
     console.log('label',label_for)
 
     const DateTimeMoment=(timeSet:string,timeFormat:string)=>{
-        return moment(timeSet).utc().format(timeFormat)
+        return moment(timeSet).format(timeFormat)
       }
     const Date_time=(timeDate:string)=>{
         return(
@@ -115,7 +115,7 @@ const ObjectField = (props:any) => {
                                     <span>{val}</span>
                                 </a>
                                 :
-                                <Link to={`/trx/${val}`}>
+                                <Link to={`/tx/${val}`}>
                                     <span>{trxIcon(themeContrastColor)}</span><span> {val}</span>
                                 </Link>
                                 }
@@ -135,7 +135,7 @@ const ObjectField = (props:any) => {
                                     <span>{val}</span>
                                 </a>
                                 :
-                                <Link to={`/trx/${val}`}>
+                                <Link to={`/tx/${val}`}>
                                     <span>{trxIcon(themeContrastColor)}</span><span> {val}</span>
                                 </Link>
                                 }

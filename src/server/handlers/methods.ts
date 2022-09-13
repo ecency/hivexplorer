@@ -275,6 +275,7 @@ export const methods = [
   {
     "api": "condenser_api",
     "method": "get_witnesses",
+    "param_type":"params",
     "params": ["witnessIds"]
   },
   {
@@ -285,7 +286,8 @@ export const methods = [
   {
     "api": "condenser_api",
     "method": "get_witnesses_by_vote",
-    "params": ["from", "limit"]
+    "param_type":"params",
+    "params": ["account", "limit"]
   },
   {
     "api": "condenser_api",

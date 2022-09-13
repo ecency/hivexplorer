@@ -45,7 +45,7 @@ const HomeTransactions = (props:any) => {
          
       },[])
       const Date_time=(timeSet:string,timeFormat:string)=>{
-        return moment(timeSet).utc().format(timeFormat)
+        return moment(timeSet).format(timeFormat)
       }
       
 
@@ -60,7 +60,7 @@ const HomeTransactions = (props:any) => {
                <Row className='m-0 block-row row-border' key={index}>
                  <Col md={12} xs={12}>
                     <Row>
-                        <Col md={12}>{_t('common.id')}: <Link to={`/trx/${trans.trx_id}`}>{trans.trx_id}</Link> </Col>
+                        <Col md={12}>{_t('common.id')}: <Link to={`/tx/${trans.trx_id}`}>{trans.trx_id}</Link> </Col>
                     </Row>
                  </Col>
                  <Col md={12} xs={12}>

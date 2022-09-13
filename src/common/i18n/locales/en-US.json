@@ -28,6 +28,7 @@
     "less":"Less",
     "more":"More",
     "witness":"Witness",
+    "block_id":"Block ID",
     "txns":"Txns",
     "ops":"Ops",
     "trx_in_block":"Trx In Block",

@@ -101,8 +101,8 @@ export interface UserTransactionType {
             author: string
             benefactor: string
             permlink: string
-            weight: string
-            rshares: string
+            weight: string | number
+            rshares: string | number
             total_vote_weight: string
             owner:string
             required_auths:string[]

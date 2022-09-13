@@ -9,8 +9,6 @@ import { pageMapDispatchToProps, pageMapStateToProps, PageProps } from '../../pa
 import { infoIcon,showLessIcon,showMoreIcon } from '../../img/svg';
 import Theme from '../theme';
 import { useSelector } from 'react-redux';
-
-const url = `${ConfigItems.baseUrl}/api/get_dynamic_global_properties`;
 import { ConfigItems } from '../../../../config';
 import { _t } from '../../i18n';
 import StringField from '../fields/blockFields/StringField';
