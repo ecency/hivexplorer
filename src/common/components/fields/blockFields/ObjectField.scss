@@ -37,3 +37,13 @@
     }
     
   }
+  .list-group{
+    border: 1px solid #706f70;
+    .list-group-item{
+        background-color: transparent;
+        border-bottom: 1px solid #706f70;
+        &:last-child{
+            border: 0
+        }
+    }
+}

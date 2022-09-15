@@ -14,6 +14,7 @@ import HomeBlocks,{HomeBlocksType } from '../../components/home/BlocksComponent'
 import HomeTransactions, { HomeTransactionType } from '../../components/home/TransactionsComponent';
 import { SingleTransaction } from '../transaction/SingleTransactionPage';
 import { Link } from 'react-router-dom';
+import { useSelector } from "react-redux";
 import { _t } from '../../i18n';
 
 const headBlock = `${ConfigItems.baseUrl}/api/get_dynamic_global_properties`;
@@ -60,12 +61,13 @@ const Index = (props: PageProps) => {
         })
     }, []);
 
-
+  const currTheme = useSelector((state:any) => state.global.theme)
   const [blocksApiResult, setBlocksApiResult] = useState<HomeTransactionType>()
   const [accountsApiResult, setAccountsApiResult] = useState<User>()
   const [transationsApiResult, setTransationsApiResult] = useState<SingleTransaction>()
   const [noSearchResult, setNoSearchResult] = useState<Boolean>(false)
   const [clear, setClear] = useState(true)
+  const [enteredValue, setEnteredValue] = useState('')
   
   const setSearchResultStateHandler = (blockSearch: HomeTransactionType | undefined, AccountSearch: User | undefined, TransactionSearch: SingleTransaction | undefined, noSearch: Boolean) => {
     setBlocksApiResult(blockSearch);
@@ -81,11 +83,10 @@ const Index = (props: PageProps) => {
 
 
 
-  const searchHandler = (searchedInput: any) => {
+  const searchHandler = (value: any) => {
 
     const numeric = /^\d+$/;
     const AllInputPattern = /^[a-zA-Z0-9.-]*$/;
-    const value = searchedInput.target.value
     if (value) {
       if (numeric.test(value)) {
         const blocks=`${ConfigItems.baseUrl}/api/get_ops_in_block?block_num=${(value)}`;
@@ -152,6 +153,14 @@ const Index = (props: PageProps) => {
     }
   }, [blocksApiResult, accountsApiResult, transationsApiResult])
 
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      searchHandler(enteredValue)
+    }, 1000)
+
+    return () => clearTimeout(delayDebounceFn)
+  }, [enteredValue])
+
 
   return <>
     <Meta {...metaProps} />
@@ -163,7 +172,7 @@ const Index = (props: PageProps) => {
         <div style={{ verticalAlign: 'center'}}>
           <Form  className="m-0 search-form">
             <Form.Group className=' col-12 p-0'>
-              <Form.Control className="rounded" onChange={searchHandler} type="text" placeholder="Block, Account, Transaction"/>
+              <Form.Control className="rounded" onChange={(e) => setEnteredValue(e.target.value)} type="text" placeholder="Block, Account, Transaction"/>
             </Form.Group>
           </Form> 
           {!noSearchResult &&  
@@ -173,7 +182,7 @@ const Index = (props: PageProps) => {
           //       <Button className="d-inline-block ml-2 btn-sm" onClick={clearSearchResultHandler}>X</Button>
           //     </>}
           // </div>  : 
-          <div className="d-block m-0 col-md-12 search-dropdown">
+          <div className={currTheme==='day'? "day-background d-block m-0 col-md-12 search-dropdown":"night-background d-block m-0 col-md-12 search-dropdown"}>
 
             { blocksApiResult &&
               <div className=" col-md-12 mt-2 mb-2">
