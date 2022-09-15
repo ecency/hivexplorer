@@ -154,6 +154,8 @@ export const methods = [
   {
     "api": "condenser_api",
     "method": "lookup_accounts",
+    // "param_type": "params",
+    "isArray":true,
     "params": ["lower_bound_name", "limit"]
   },
   {
@@ -217,6 +219,8 @@ export const methods = [
   },
   {
     "api": "condenser_api",
+    // "param_type": "params",
+    "isArray":true,
     "method": "get_transaction",
     "params": ["trx_id"]
   },
@@ -273,6 +277,8 @@ export const methods = [
   {
     "api": "condenser_api",
     "method": "get_witnesses",
+    // "param_type":"params",
+    "isArray":true,
     "params": ["witnessIds"]
   },
   {
@@ -283,7 +289,9 @@ export const methods = [
   {
     "api": "condenser_api",
     "method": "get_witnesses_by_vote",
-    "params": ["from", "limit"]
+    // "param_type":"params",
+    "isArray":true,
+    "params": ["account", "limit"]
   },
   {
     "api": "condenser_api",

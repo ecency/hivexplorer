@@ -34,6 +34,7 @@
     "node-sass": "^6.0.1",
     "numeral": "^2.0.6",
     "path-to-regexp": "^6.1.0",
+    "prop-types": "^15.8.1",
     "react": "^16.8.6",
     "react-bootstrap": "^2.4.0",
     "react-dom": "^16.8.6",

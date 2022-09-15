@@ -1,0 +1,49 @@
+.row-border{
+    border-width: 0px 0px 1px 0;
+    border-style: solid;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0.75rem 0;
+}
+.attr-col{
+    display: flex;
+    word-break: break-word;
+    align-items: center;
+}
+.border-color-day {
+    border-color: #e7e7e7;
+}
+
+.border-color-night {
+    border-color: #161d26;
+}
+.avatar-img{
+    height: 40px;
+    width: 40px;
+    border-radius: 100%;
+    margin-right: 10px;
+}
+.time-date-table {
+    & th, td{
+        border: 1px solid #706f70;
+    border-collapse: collapse;
+    }
+    tr td:first-child{
+        min-width: 100px;
+    }
+    td{
+        padding: 10px;
+        word-break: break-word;
+    }
+    
+  }
+  .list-group{
+    border: 1px solid #706f70;
+    .list-group-item{
+        background-color: transparent;
+        border-bottom: 1px solid #706f70;
+        &:last-child{
+            border: 0
+        }
+    }
+}

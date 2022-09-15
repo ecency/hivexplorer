@@ -9,9 +9,22 @@ import {brightnessSvg, gbFlag, frFlag, hiveLogo, globeImg} from '../../img/svg';
 import { languages } from '../../languages';
 import { toggleTheme } from "../../store/global/index";
 import { _t } from '../../i18n';
+import { Link } from 'react-router-dom';
 
 const RESOURCES_MENU = [_t("nav.resources-about")];
-const BLOCKCHAIN_MENU = [_t("nav.blockchain-vt"), _t("nav.blockchain-vb"), _t("nav.blockchain-gov"), _t("nav.blockchain-witnesses"), _t("nav.blockchain-proposals")];
+const BLOCKCHAIN_MENU = [
+  {
+    name:_t("nav.blockchain-vt"),
+    link:`/transactions`
+  }, 
+  {name:_t("nav.blockchain-vb"),
+  link:`/blocks`
+  }, 
+  {name:_t("nav.blockchain-gov")}, 
+  {name:_t("nav.blockchain-witnesses")}, 
+  {
+    name:_t("nav.blockchain-proposals")
+  }];
 const TOKENS_MENU = [_t("nav.tokens-hive"), _t("nav.tokens-he"), _t("nav.tokens-speak")];
 
 const AppHeader = (props:any) => {
@@ -26,7 +39,7 @@ const AppHeader = (props:any) => {
 
     return (
       <>
-      <Navbar className={appNav} expand="lg">
+      <Navbar className={appNav} expand="lg"  variant={currTheme === 'day' ? 'light' : 'dark'}>
          <Container>
             <LinkContainer to="/">
             <Navbar.Brand>
@@ -40,34 +53,33 @@ const AppHeader = (props:any) => {
           
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="ml-auto">
-                <NavDropdown id="nav-dropdown-blockchain" title={_t("nav.blockchain")}>
+                <NavDropdown className={currTheme==='day'? 'nav-text-white':'nav-text-dark'} id="nav-dropdown-blockchain" title={_t("nav.blockchain")}>
                   { BLOCKCHAIN_MENU.map((x,ind)=> {
                     return (
-                      <div key={`${x}${ind}`}>
-                        {x.includes('Governance') && <NavDropdown.Divider key={`${x}${ind}top`} />}
-                        <NavDropdown.Item key={`${x}${ind}main`} disabled={x.includes('Governance')}>
-                            <span>{x}</span>
+                      <div key={`${x.name}${ind}`}>
+                        {x.name.includes('Governance') && <NavDropdown.Divider key={`${x.name}${ind}top`} />}
+                        <NavDropdown.Item key={`${x.name}${ind}main`} disabled={x.name.includes('Governance')}>
+                           <span>{x.link?<Link to={x.link}>{x.name}</Link>:x.name}</span>
                         </NavDropdown.Item>
-                        {x.includes('Governance') && <NavDropdown.Divider key={`${x}${ind}bottom`}/>}
+                        {x.name.includes('Governance') && <NavDropdown.Divider key={`${x.name}${ind}bottom`}/>}
                       </div>
                     )})
                   }
                 </NavDropdown>
-                <NavDropdown id="nav-dropdown-tokens" title={_t("nav.tokens")}>
+                <NavDropdown className={currTheme==='day'? 'nav-text-white':'nav-text-dark'} id="nav-dropdown-tokens" title={_t("nav.tokens")}>
                     {TOKENS_MENU.map((x,ind)=>(
                        <NavDropdown.Item key={`${x}${ind}`}>
                           <span>{x}</span>
                        </NavDropdown.Item>
                     ))}
                 </NavDropdown>
-                <NavDropdown id="nav-dropdown-resources" title={_t("nav.resources")}>
+                <NavDropdown className={currTheme==='day'? 'nav-text-white':'nav-text-dark'} id="nav-dropdown-resources" title={_t("nav.resources")}>
                     {RESOURCES_MENU.map((x,ind)=>(
                        <NavDropdown.Item key={`${x}${ind}`}>
                           <span>{x}</span>
                        </NavDropdown.Item>
                     ))}
                 </NavDropdown>
-
                 <NavDropdown menuVariant={menuVariant} id="nav-dropdown-dark-example" title={globeImg(themeContrastColor)}>
                     {languages.map(({code,name,country_code,flagImg})=>(
                        <NavDropdown.Item key={country_code} onClick={()=>i18next.changeLanguage(code)} disabled={code === currentLangCode}>

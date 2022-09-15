@@ -22,6 +22,7 @@ export interface Block {
     total_vesting_fund_hive: string,
     total_vesting_shares: string,
     total_reward_fund_hive: string,
+    current_witness:string
 }
 
 const HeadBlock = (props:Block) => {
@@ -39,7 +40,7 @@ const HeadBlock = (props:Block) => {
                         <Col md={4} xs={12}>
                             <div>
                                 <div className='pt-2'><span className='head-block-attr-span'>{_t("common.time")}: </span>{result.time}</div>
-                                <div className='pt-2'><span className='head-block-attr-span'>{_t('block.witness')}: </span>{result.num_pow_witnesses}</div>
+                                <div className='pt-2'><span className='head-block-attr-span'>{_t('block.current_witness')}: </span>{result.current_witness}</div>
                             </div>
                         </Col>
                         <Col md={4} xs={12} className="head-block-middle">

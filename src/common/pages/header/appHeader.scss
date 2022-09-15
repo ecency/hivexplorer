@@ -1,4 +1,8 @@
 .appNav{
+    position: fixed;
+    width: 100%;
+    z-index: 99999;
+    top: 0;
     .container{
         position: relative;
     }
@@ -26,7 +30,13 @@
         border: none !important;
         background-color: #161d26 !important;
     }
-
+    .nav-text-dark{
+        a#nav-dropdown-blockchain,
+        a#nav-dropdown-tokens,
+        a#nav-dropdown-resources{
+            color: #fcfcfc !important;
+        }
+    }
     .day-night-btn{
         background: transparent;
         border: 0;

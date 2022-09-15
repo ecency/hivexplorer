@@ -6,5 +6,7 @@ export default {
     HeadBlock:'/head/b/:id',
     TargetBlock:'/b/:id',
     Transactions:'/transactions',
+    TargetTransaction:'/tx/:id',
+    User:'/@:user_id',
     Blocks:'/blocks'
 };

@@ -33,11 +33,12 @@ $modal-header-border-color: null default;
 $modal-content-border-color: $dark-two;
 
 $table-accent-bg: $dark-six;
+$table-head-theme-bg:  $dark-two;
 
 $close-color: $silver;
 
 $table-color: $silver;
-$table-border-color: lighten($dark-six, 10);
+$table-border-color: $dark-two;
 
 $pagination-bg: lighten($dark-six, 10);
 $pagination-border-color: $dark-six;
@@ -83,6 +84,7 @@ $tooltip-max-width: 380px;
 
   background: $dark-seven;
   color: $white-two;
+  padding-top: 60px !important;
 }
 
 @import "bootstrap";

@@ -79,7 +79,7 @@ const BlocksTables = (props:any) => {
     }
 })
 const Date_time=(timeSet:string,timeFormat:string)=>{
-  return moment(timeSet).utc().format(timeFormat)
+  return moment(timeSet).format(timeFormat)
 }
   return (
     <>
@@ -122,7 +122,12 @@ const Date_time=(timeSet:string,timeFormat:string)=>{
                     <TableCell><Link to={`/b/${block_number_page}`}>{block_number_page--}</Link></TableCell>
                     <TableCell>{Date_time(`${block.timestamp}`,"YYYY-MM-DD")} </TableCell>
                     <TableCell>{Date_time(`${block.timestamp}`,"hh:mm:ss")}</TableCell>
-                    <TableCell><span><img className="avatar-img" src={`https://images.ecency.com/u/${block.witness}/avatar`} alt={block.witness} /></span>{block.witness}</TableCell>
+                    <TableCell>
+                      <span>
+                        <img className="avatar-img" src={`https://images.ecency.com/u/${block.witness}/avatar`} alt={block.witness} />
+                      </span>
+                      <Link to={`/@${block.witness}`}>{block.witness}</Link>
+                      </TableCell>
                     <TableCell className="text-center">{block.transactions.length}</TableCell>
                     <TableCell className="text-center">{operationsTableCount}</TableCell>
                   </TableRow>
