@@ -1,5 +1,6 @@
 .cover-profile-tabs-container{
-    height: 450px;
+    min-height: 450px;
+   
     .cover-profile-container{
         height: 250px;
         background-color: #8b8b8bc2;
@@ -43,8 +44,7 @@
     }
     .user-profile-feature-row{
         .user-link-list-ul{
-            position: relative;
-            top: 50px;
+            padding-top: 35px;
             list-style: none;
             li{
                 padding-bottom: 5px;
@@ -55,7 +55,18 @@
         }
     }
     .user-links-container{
-        width: 300px;
+     
     }
-
+    .user-progress-container{
+        padding: 20px 20px 0;
+        p{
+            margin-bottom: 0.5rem;
+        }
+    }
+    @media (max-width:992px) {
+        min-height: 500px;
+    }
+    @media (max-width:768px) {
+        min-height: 600px
+    }
 }

@@ -1,0 +1,17 @@
+.data-table-hive{
+    .trans-table {
+        margin: auto;
+        & th, td{
+            border: 1px solid #706f70;
+        border-collapse: collapse;
+        }
+        tr td:first-child{
+            min-width: 100px;
+        }
+        td{
+            padding: 10px;
+            word-break: break-all;
+        }
+        
+      }
+}

@@ -1,18 +1,50 @@
 
+import { RCAccount } from '@hiveio/dhive/lib/chain/rc';
 import { Tab, Tabs } from '@material-ui/core';
-import React,{useEffect} from 'react';
-import { Button, Card, Col, Row } from 'react-bootstrap';
+import axios from 'axios';
+import moment from 'moment';
+import React,{useEffect, useState} from 'react';
+import { Button, Card, Col, ProgressBar, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { ConfigItems } from '../../../../config';
+import { _t } from '../../i18n';
 import { facebookIcon, instagramIcon, twitterIcon,gitHubIcon, websiteIcon, youtubeIcon } from '../../img/svg';
 import './UserHeader.scss'
 
-
+interface RCState {
+    rcAccount: null | RCAccount
+   }
 const UserHeader = (props:any) => {
-    const {name,metaData,id}=props
+    const {
+        id,
+        name,
+        created,
+        postCount,
+        metaData,
+        votingPower,
+        downVotingPower,
+        resourceCredits
+    }=props
+    const [rcAccount,setRCAccount]=useState<RCState>()
+    const rc_account_url=`${ConfigItems.baseUrl}/api/find_rc_accounts?accounts[]=good-karma`;
+    
+    // useEffect(()=>{
+  
+    //     console.log(rc_account_url)
+    //     axios.get(rc_account_url).then(res => {
+    //         setRCAccount(res.data.rc_accounts)
+    
+    //         })
+    //     },[rcAccount])
+    //     console.log('rc',rcAccount)
     const metaProfile=metaData.profile
     const currTheme = useSelector((state:any) => state.global.theme)
     const themeContrastColor = currTheme === 'day' ? '#535e65' : 'white';
+
+    // Created Date
+    const createdDate = moment.utc(created).format("LL");
+    console.log('rc1111',resourceCredits)
    
     return (
        <Card className='cover-profile-tabs-container'>
@@ -33,49 +65,92 @@ const UserHeader = (props:any) => {
          
                 </Row>
                 <Row className='user-profile-feature-row'>
-                    <div className='user-links-container'>
-                        <ul className='user-link-list-ul'>
-                            {metaProfile.facebook && 
-                            <li className='user-link-list'>
-                                <a href={`https://www.facebook.com/${metaProfile.facebook}`} target={'_blank'}>
-                                    <span className={currTheme === 'day' ? 'icon-bg-white' : 'icon-bg-dark'}>{facebookIcon(themeContrastColor)}</span><span className='link-text'>FaceBook</span>
-                                </a>
-                            </li>}
-                            {metaProfile.twitter && 
-                            <li className='user-link-list'>
-                                <a href={`https://www.twitter.com/${metaProfile.twitter}`} target={'_blank'}>
-                                    <span className={currTheme === 'day' ? 'icon-bg-white' : 'icon-bg-dark'}>{twitterIcon(themeContrastColor)}</span><span className='link-text'>Twitter</span>
-                                </a>
-                            </li>}
-                            {metaProfile.instagram && 
-                            <li className='user-link-list'>
-                                <a href={`https://www.instagram.com/${metaProfile.instagram}`} target={'_blank'}>
-                                    <span className={currTheme === 'day' ? 'icon-bg-white' : 'icon-bg-dark'}>{instagramIcon(themeContrastColor)}</span><span className='link-text'>Instagram</span>
-                                </a>
-                            </li>}
-                            {metaProfile.youtube && 
-                            <li className='user-link-list'>
-                                <a href={`https://www.facebook.com/${metaProfile.youtube}`} target={'_blank'}>
-                                    <span className={currTheme === 'day' ? 'icon-bg-white' : 'icon-bg-dark'}>{youtubeIcon(themeContrastColor)}</span><span className='link-text'>Youtube</span>
-                                </a>
-                            </li>}
-                            {metaProfile.github && 
-                            <li className='user-link-list'>
-                                <a href={`https://github.com/${metaProfile.github}`} target={'_blank'}>
-                                <span className={currTheme === 'day' ? 'icon-bg-white' : 'icon-bg-dark'}>{gitHubIcon(themeContrastColor)}</span><span className='link-text'>Github</span>
-                                </a>
-                            </li>}
-                            {metaProfile.website && 
-                            <li className='user-link-list'>
-                                <a href={`${metaProfile.website}`} target={'_blank'}>
-                                <span className={currTheme === 'day' ? 'icon-bg-white' : 'icon-bg-dark'}>{websiteIcon(themeContrastColor)}</span><span className='link-text'>Website</span>
-                                </a>
-                            </li>}
-                        </ul>
-                    </div>
-                    <div>
-                       <></>
-                    </div>
+                   <Col lg={2} md={3}>
+                        <div className='user-links-container'>
+                            <ul className='user-link-list-ul'>
+                                {metaProfile.facebook && 
+                                <li className='user-link-list'>
+                                    <a href={`https://www.facebook.com/${metaProfile.facebook}`} target={'_blank'}>
+                                        <span className={currTheme === 'day' ? 'icon-bg-white' : 'icon-bg-dark'}>{facebookIcon(themeContrastColor)}</span><span className='link-text'>FaceBook</span>
+                                    </a>
+                                </li>}
+                                {metaProfile.twitter && 
+                                <li className='user-link-list'>
+                                    <a href={`https://www.twitter.com/${metaProfile.twitter}`} target={'_blank'}>
+                                        <span className={currTheme === 'day' ? 'icon-bg-white' : 'icon-bg-dark'}>{twitterIcon(themeContrastColor)}</span><span className='link-text'>Twitter</span>
+                                    </a>
+                                </li>}
+                                {metaProfile.instagram && 
+                                <li className='user-link-list'>
+                                    <a href={`https://www.instagram.com/${metaProfile.instagram}`} target={'_blank'}>
+                                        <span className={currTheme === 'day' ? 'icon-bg-white' : 'icon-bg-dark'}>{instagramIcon(themeContrastColor)}</span><span className='link-text'>Instagram</span>
+                                    </a>
+                                </li>}
+                                {metaProfile.youtube && 
+                                <li className='user-link-list'>
+                                    <a href={`https://www.facebook.com/${metaProfile.youtube}`} target={'_blank'}>
+                                        <span className={currTheme === 'day' ? 'icon-bg-white' : 'icon-bg-dark'}>{youtubeIcon(themeContrastColor)}</span><span className='link-text'>Youtube</span>
+                                    </a>
+                                </li>}
+                                {metaProfile.github && 
+                                <li className='user-link-list'>
+                                    <a href={`https://github.com/${metaProfile.github}`} target={'_blank'}>
+                                    <span className={currTheme === 'day' ? 'icon-bg-white' : 'icon-bg-dark'}>{gitHubIcon(themeContrastColor)}</span><span className='link-text'>Github</span>
+                                    </a>
+                                </li>}
+                                {metaProfile.website && 
+                                <li className='user-link-list'>
+                                    <a href={`${metaProfile.website}`} target={'_blank'}>
+                                    <span className={currTheme === 'day' ? 'icon-bg-white' : 'icon-bg-dark'}>{websiteIcon(themeContrastColor)}</span><span className='link-text'>Website</span>
+                                    </a>
+                                </li>}
+                            </ul>
+                        </div>
+                   </Col>
+                    <Col lg={10} md={9}>
+                        <div className='user-progress-container'>
+                            <Row>
+                                <Col sm={3} xs={5}>
+                                    <p>{_t('user-info.created')}:</p>
+                                </Col>
+                                <Col sm={9} xs={7}>
+                                    <p>{createdDate}</p>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col sm={3} xs={5} >
+                                    <p>{_t('user-info.post_count')}:</p>
+                                </Col>
+                                <Col sm={9} xs={7}>
+                                    <p>{postCount}</p>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col md={3}>
+                                    <p>{_t('user-info.vote_power')}</p>
+                                </Col>
+                                <Col md={9}>
+                                    <ProgressBar striped  now={votingPower} label={`${votingPower}%`} />
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col md={3}>
+                                    <p>{_t('user-info.down_vote_power')}</p>
+                                </Col>
+                                <Col md={9}>
+                                    <ProgressBar striped variant="warning" now={downVotingPower} label={`${downVotingPower}%`} />
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col md={3}>
+                                    <p>{_t('user-info.resource_credits')}</p>
+                                </Col>
+                                <Col md={9}>
+                                    <ProgressBar striped variant="success" now={resourceCredits} label={`${resourceCredits}%`} />
+                                </Col>
+                            </Row>
+                        </div>
+                    </Col>
                 </Row>
             </div>
        </Card>

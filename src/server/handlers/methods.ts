@@ -427,6 +427,11 @@ export const methods = [
     "params": ["proposal_ids"]
   },
   {
+    "api": "rc_api",
+    "method": "find_rc_accounts",
+    "params": ["accounts"]
+  },
+  {
     "api": "database_api",
     "method": "list_proposals",
     "params": ["start", "limit", "order", "order_direction", "status"]

@@ -43,6 +43,34 @@
         }
         
       }
+      .authority-table {
+        width: 100%;
+
+        tbody{
+            tr.row-border:last-child{
+                border-bottom: 0 !important;
+            }
+            .row-border-dotted{
+                border-bottom: 1px dotted #b1b1b1;
+                &:last-child{
+                    border-bottom: 0 !important;
+                }
+            }
+        }
+        .auth-col{
+            display: flex;
+            justify-content: space-between;
+            word-break: break-all;
+            padding-bottom: 5px;
+            .number-span{
+                margin-right: 10%;
+                margin-left: 15px;
+            }
+        }
+        @media (max-width:992px) {
+            width: 990px;
+        }
+      }
     .paper-night{
         background: transparent !important;
         .MuiTableCell-head{
@@ -54,6 +82,11 @@
               color: #fff !important;
             }
         }
+    }
+    #user-tabpanel-2{
+        margin-left: -20px !important;
+        margin-right: -20px !important;
+        overflow-x: auto;
     }
    
 }

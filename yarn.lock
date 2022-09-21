@@ -1382,10 +1382,10 @@
   resolved "https://registry.yarnpkg.com/@emotion/unitless/-/unitless-0.7.5.tgz#77211291c1900a700b8a78cfafda3160d76949ed"
   integrity sha512-OWORNpfjMsSSUBVrRBVGECkhWcULOAJz9ZW8uK9qgxD+87M7jHRcvh/A96XXNhXTLmKcoYSQtBEX7lHMO7YRwg==
 
-"@hiveio/dhive@^1.2.1":
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/@hiveio/dhive/-/dhive-1.2.1.tgz#bcae9b809c15150e5cb0e64aa571c84b6851bf73"
-  integrity sha512-ZOyYQBXvsqTMGXTf/8mI7rtGvsNjiRM30H8nUWamy0iYjEzYNO/4KL0sSJFGA9dxIQbEMp4h7KfASAJJGFYXyA==
+"@hiveio/dhive@^1.2.3":
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/@hiveio/dhive/-/dhive-1.2.3.tgz#6f8a7c2e2edb848daa4c94e8bf00a65bb5162e30"
+  integrity sha512-5ghwVD+167o9+2H9lpvdU5WUTdUYaecqzmVuCnmCA1An22U8D093bgvJCnNefowh2RFMQgz8EmXicvTaixnv1Q==
   dependencies:
     bs58 "^4.0.1"
     bytebuffer "^5.0.1"

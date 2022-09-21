@@ -9,6 +9,9 @@ import { Link } from 'react-router-dom';
 import moment from 'moment';
 import configureStore from '../../../store/configure';
 import { ConfigItems } from '../../../../../config';
+import { push } from 'connected-react-router';
+import { divide, values } from 'lodash';
+import JsonField from './JsonField';
 
 const timestampKeys=[
     "time",
@@ -36,13 +39,24 @@ interface opValType {
     voter:string
     json:string
 }
+interface transactionType {
+    ref_block_num:number
+    ref_block_prefix:number
+    expiration:string,
+    operations:object,
+    extension:object
+    signatures:object
+}
+interface transactionTypeList extends Array<transactionType>{}
 const ObjectField = (props:any) => {
-    const {number,item,value,label_for}=props;
+    const {number,item,value,label_for,transactionOperations}=props;
     const [expandBtn,setExpandBtn]=useState(false)
     const currTheme = useSelector((state:any) => state.global.theme)
     const themeContrastColor = currTheme === 'day' ? 'black' : 'white';
     const rowBorder = currTheme === 'day' ? 'row-border border-color-day' : 'row-border border-color-night';
     const themeBtn = currTheme === 'day' ? 'showmore-btn btn-light' : 'showmore-btn btn-dark'
+    console.log('ops',transactionOperations)
+    let transactionValue:transactionTypeList=[]
 
     const DateTimeMoment=(timeSet:string,timeFormat:string)=>{
         return moment(timeSet).format(timeFormat)
@@ -51,7 +65,8 @@ const ObjectField = (props:any) => {
         return(
             <>
                 <table className='time-date-table'>
-                    <tr>
+                   <tbody>
+                   <tr>
                         <td>{_t('common.date')}</td>
                         <td>{DateTimeMoment(`${timeDate}`,"YYYY-MM-DD")}</td>
                     </tr>
@@ -59,6 +74,7 @@ const ObjectField = (props:any) => {
                         <td>{_t('common.time')}</td>
                         <td>{DateTimeMoment(`${timeDate}`,`hh:mm:ss`)}</td>
                     </tr>
+                   </tbody>
                 </table>
             </>
         )
@@ -99,9 +115,12 @@ const ObjectField = (props:any) => {
         )
     }
     const expand_view=(value:any,item:string)=>{
+        console.log('value',value)
+        console.log('trans value',transactionValue)
+
        return(
         <Row className={`${rowBorder} mt-1`}>
-            <Col>
+            <Col md={6} xs={12}>
                 <ListGroup>
                     {value.slice(0,Math.ceil(value.length/2)).map((val:string,i:number)=>{
                         return(
@@ -112,18 +131,25 @@ const ObjectField = (props:any) => {
                                     <span>{val}</span>
                                 </a>
                                 :
-                                <Link to={`/tx/${val}`}>
-                                    <span>{trxIcon(themeContrastColor)}</span><span> {val}</span>
-                                </Link>
+                                <>
+                                    <Link to={`/tx/${val}`}>
+                                        <span>{trxIcon(themeContrastColor)}</span><span> {val} {i}</span>
+                                        
+                                    </Link>
+                                    <JsonField transactionOperations={transactionOperations[i]}/>
+                                   
+                                
+                                </>
                                 }
                             </ListGroup.Item>
                         )
                     })}
                 </ListGroup>
             </Col>
-            <Col>
+            <Col md={6} xs={12}>
                 <ListGroup>
                     {value.slice(Math.ceil(value.length/2),value.length).map((val:string,i:number)=>{
+                        const j=i+Math.ceil(value.length/2)
                         return(
                             <ListGroup.Item key={i}>
                                {item==='witness_votes'?
@@ -132,9 +158,12 @@ const ObjectField = (props:any) => {
                                     <span>{val}</span>
                                 </a>
                                 :
+                               <>
                                 <Link to={`/tx/${val}`}>
-                                    <span>{trxIcon(themeContrastColor)}</span><span> {val}</span>
+                                    <span>{trxIcon(themeContrastColor)}</span><span> {val} {j}</span>
                                 </Link>
+                               <JsonField transactionOperations={transactionOperations[j]}/>
+                               </>
                                 }
                             </ListGroup.Item>
                         )
@@ -146,12 +175,16 @@ const ObjectField = (props:any) => {
     }
     return (
         <>
+         {item!=='posting' && item !=='owner' && item !=="active" &&
         <Row className={rowBorder}  key={number}>
-            <Col  md={3} xs={12} className="attr-col"><span>{infoIcon(themeContrastColor)} </span><span className='pl-1'>
+
+            <Col  md={3} xs={12} className="attr-col"><span>{infoIcon(themeContrastColor)} </span>
+            <span className='pl-1'>
                 {item==='voting_manabar' || item==='downvote_manabar' ?
                 <span>{_t(`${label_for}.${item.object_name}`)}</span>
                 :
-                _t(`${label_for}.${item}`)}:</span> 
+                _t(`${label_for}.${item}`)}:
+                </span> 
             </Col>
             <Col md={9} xs={12}>
                 {item==='voting_manabar' || item ==='downvote_manabar'?
@@ -165,23 +198,33 @@ const ObjectField = (props:any) => {
                         <td>{value.last_update_time}</td>
                     </tr>
                 </table>
-                :
+                :  item==='transactions'? 
+                <>
+                  {transactionValue.push(...value)}
+                  {console.log('pushed data',transactionValue)}
+                  </>
+                 :
                 item==='witness_votes' || item==='transaction_ids' || item==='operations'?
                 <>
                     <Button className={themeBtn} 
-                            onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>setExpandBtn(!expandBtn)}>
+                            onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>setExpandBtn(!expandBtn)}
+                            disabled={value.length===0?true:false}>
                                 {value.length} {expandBtn? <span>{showLessIcon(themeContrastColor)} </span> : <span>{showMoreIcon(themeContrastColor)}</span>}
                     </Button>
                 </>
                 :
-                value.length}
+                <> 
+                    {value.length}
+                </>
+                }
                 
             </Col> 
         </Row>
+        }
         {item==='witness_votes' && expandBtn ?expand_view(value,item):<></>}
         {item==='transaction_ids' && expandBtn ?expand_view(value,item):<></>}
         {item==='operations' && expandBtn ?expand_operation(value,item):<></>}
-       
+         
         </>
         
     )

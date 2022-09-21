@@ -1,3 +1,8 @@
+export interface ManabarType {
+    current_mana: string | number
+    last_update_time: number
+}
+
 export interface UserTypeList {
     id:number,
     name:string,
@@ -19,14 +24,8 @@ export interface UserTypeList {
     lifetime_vote_count: number
     post_count: number
     can_vote: boolean
-    voting_manabar: {
-    current_mana: string
-    last_update_time: number
-    }
-    downvote_manabar: {
-    current_mana: string
-    last_update_time: number
-        }
+    voting_manabar: ManabarType
+    downvote_manabar: ManabarType
     voting_power: number
     balance: string
     savings_balance:string
