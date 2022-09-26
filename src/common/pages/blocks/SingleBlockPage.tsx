@@ -33,6 +33,7 @@ const SingleBlock = (props:any) => {
     const [showMore, setShowMore] = useState(false);
     const url_single_block = `${ConfigItems.baseUrl}/api/get_block?block_num=${match.params.id}`;
     useEffect(() => {
+        console.log('block-url',url_single_block)
         axios.get(url_single_block).then(response => {
             setResult(response.data.block)
         })
@@ -53,7 +54,7 @@ const SingleBlock = (props:any) => {
                                     typeof(result[key])==='string' || typeof(result[key])==='number'?
                                     <StringField key={index} value={result[key]}  item={key} number={index} label_for='block'/>
                                     :
-                                    <ObjectField key={index} value={result[key]}  item={key} number={index} label_for='block'/>
+                                    <ObjectField transactionOperations={result['transactions']} key={index} value={result[key]}  item={key} number={index} label_for='block'/>
                                 )
                             }
                         )}

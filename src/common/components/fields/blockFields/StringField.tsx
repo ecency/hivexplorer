@@ -43,7 +43,8 @@ const StringField = (props:any) => {
         return(
             <>
                 <table className='time-date-table'>
-                    <tr>
+                   <tbody>
+                   <tr>
                         <td>{_t('common.date')}</td>
                         <td>{DateTimeMoment(`${timeDate}`,"YYYY-MM-DD")}</td>
                     </tr>
@@ -51,6 +52,7 @@ const StringField = (props:any) => {
                         <td>{_t('common.time')}</td>
                         <td>{DateTimeMoment(`${timeDate}`,`hh:mm:ss`)}</td>
                     </tr>
+                   </tbody>
                 </table>
             </>
         )

@@ -7,7 +7,7 @@ import { withPersistentScroll } from '../../components/with-persistent-scroll';
 import { ConfigItems } from '../../../../config';
 import { HomeTransactionType } from '../../components/home/TransactionsComponent';
 import Theme from '../../components/theme';
-import TransactionsTables from '../../components/transactions/TransactionsTables';
+import TransactionsTables from './TransactionsTables';
 
 
 interface TransactionList extends Array<HomeTransactionType>{}
@@ -18,6 +18,7 @@ const AllTransactions = (props:any) => {
     const transactions_url=`${ConfigItems.baseUrl}/api/get_ops_in_block?block_num=66952823`;
       useEffect(()=>{
         axios.get(transactions_url).then(res => {
+          console.log(transactions_url)
             setTransactions(res.data.ops)
           })
       },[])
