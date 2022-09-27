@@ -22,6 +22,7 @@ const AllTransactions = loadable(()=>import('./pages/transaction/AllTransactions
 const SingleTransaction = loadable(()=>import('./pages/transaction/SingleTransactionPage'))
 const MultipleBlocks = loadable(()=>import('./pages/blocks/AllBlocks'))
 const UserPage = loadable(()=>import('./pages/User/UserPage'))
+const WitnessesPage = loadable(()=>import('./pages/witnesses/WitnessesPage'))
 
 const App = ({ setLang }: any) => {
   const dispatch = useDispatch()
@@ -68,6 +69,7 @@ const App = ({ setLang }: any) => {
         <Route exact={true} path={routes.TargetTransaction}  component={SingleTransaction}/>
         <Route exact={true} path={routes.Blocks}  component={MultipleBlocks}/>
         <Route exact={true} path={routes.User}  component={UserPage}/>
+        <Route exact={true} path={routes.Witnesses}  component={WitnessesPage}/>
         <Route component={NotFound}/>
       </Switch>
       </>

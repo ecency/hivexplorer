@@ -1,0 +1,44 @@
+.witnesses-container{
+    .witness-header{
+        text-align: center;
+        padding: 1rem 3rem;
+    }
+    .witnesses-table{
+        .owner-col-th{
+            padding-right: 110px !important;
+
+        }
+        .witness-external-link{
+            &::after{
+                display: none;
+            }
+        }
+        .inner{
+            border-radius: 25px;
+            color: #fff;
+            font-weight: 500;
+            padding: 2px 10px;
+
+            &-green{
+                background: #a1c982;
+            }
+            &-blue{
+                background: #357ce6;
+            }
+        }
+        .witness-dropdown-table{
+            margin: auto;
+            & th, td{
+                border: 1px solid #706f70;
+            border-collapse: collapse;
+            }
+            tr td:first-child{
+                min-width: 100px;
+            }
+            td{
+                padding: 10px;
+                word-break: break-all;
+            }
+        }
+    }
+}
