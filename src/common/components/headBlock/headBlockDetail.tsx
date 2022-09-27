@@ -73,6 +73,7 @@ const HeadBlockDetail = (props:any) => {
 
     let url_global = `${ConfigItems.baseUrl}/api/get_dynamic_global_properties`;
     useEffect(() => {
+        console.log(url_global)
         axios.get(url_global).then(response => {
             setResult(response.data)
         })

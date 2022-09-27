@@ -130,7 +130,7 @@ const UserHeader = (props:any) => {
                                     <p>{_t('user-info.vote_power')}</p>
                                 </Col>
                                 <Col md={9}>
-                                    <ProgressBar striped  now={votingPower} label={`${votingPower}%`} />
+                                    <ProgressBar striped={true}  now={votingPower} label={`${votingPower}%`} />
                                 </Col>
                             </Row>
                             <Row>
@@ -138,7 +138,7 @@ const UserHeader = (props:any) => {
                                     <p>{_t('user-info.down_vote_power')}</p>
                                 </Col>
                                 <Col md={9}>
-                                    <ProgressBar striped variant="warning" now={downVotingPower} label={`${downVotingPower}%`} />
+                                    <ProgressBar striped={true}  variant="warning" now={downVotingPower} label={`${downVotingPower}%`} />
                                 </Col>
                             </Row>
                             <Row>
@@ -146,7 +146,7 @@ const UserHeader = (props:any) => {
                                     <p>{_t('user-info.resource_credits')}</p>
                                 </Col>
                                 <Col md={9}>
-                                    <ProgressBar striped variant="success" now={resourceCredits} label={`${resourceCredits}%`} />
+                                    <ProgressBar striped={true} variant="success" now={resourceCredits} label={`${resourceCredits}%`} />
                                 </Col>
                             </Row>
                         </div>

@@ -272,5 +272,30 @@
     "curator_payout_value":"Curator Payout Value",
     "beneficiary_payout_value":" Beneficiary Payout Value",
     "curators_vesting_payout":"Curators Vesting Payout"
+  },
+  "witnesses":{
+    "id":"ID",
+    "owner":"Owner",
+    "created":"Created",
+    "url":"URL",
+    "total_missed":"Missed",
+    "account_creation_fee":"Fee",
+    "account_creation_feed":"Feed",
+    "version":"Version",
+    "more":"More",
+    "votes":"Votes",
+   "virtual_last_update":"Virtual Last Update",
+   "virtual_position":"Virtual Position",
+   "virtual_scheduled_time":"Virtual Scheduled Time",
+   "last_aslot":"Last Aslot",
+   "last_confirmed_block_num":"Last Confirmed Block Number",
+   "pow_worker":"POW Worker",
+   "signing_key":"Signing Key",
+   "last_hbd_exchange_update":"last HBD Exchange update",
+    "last_work":"Last Work",
+    "running_version":"Running Version",
+    "hardfork_version_vote":"Hardfork Version Vote",
+    "hardfork_time_vote":"Hardfork Time Vote",
+    "available_witness_account_subsidies":"Available Witness Account Subsidies"
   }
 }

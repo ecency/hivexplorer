@@ -130,7 +130,7 @@ const TransRow=(props:any)=>{
               <TableRow >
                 {columns.map((column,index) => (
                     <TableCell className="card-header" key={index}>
-                      {column.label}
+                      {column.label} 
                     </TableCell>
                   ))}
               </TableRow>

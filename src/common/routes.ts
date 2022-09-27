@@ -8,5 +8,6 @@ export default {
     Transactions:'/transactions',
     TargetTransaction:'/tx/:id',
     User:'/@:user_id',
-    Blocks:'/blocks'
+    Blocks:'/blocks',
+    Witnesses:'/witnesses'
 };
