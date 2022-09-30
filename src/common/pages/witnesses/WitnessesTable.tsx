@@ -39,7 +39,7 @@ interface Column {
   const mainColumns:Column[] = [
     { label: `${_t("witnesses.id")}`,align: 'right',},
     { label: `${_t("witnesses.owner")}`,align: 'right',},
-    { label: `${_t("witnesses.created")}`,align: 'right',},
+    { label: `${_t("witnesses.votes")}`,align: 'right',},
     { label: `${_t("witnesses.url")}`,align: 'right',},
     { label: `${_t("witnesses.total_missed")}`,align: 'right',},
     { label: `${_t("witnesses.account_creation_fee")}`,align: 'right',},
@@ -48,7 +48,7 @@ interface Column {
     { label: `${_t("witnesses.more")}`,align: 'right',},
   ];
   const innerColumns= [
-    "votes",
+    "created",
    "virtual_last_update",
    "virtual_position",
    "virtual_scheduled_time",
@@ -123,7 +123,7 @@ const WitnessRow=(props:any)=>{
                 </span>
             <Link to={`/@${witness.owner}`}>{witness.owner}</Link>
             </TableCell>
-            <TableCell>{moment.utc(witness.created).format("LL")}</TableCell>
+            <TableCell>{`${witness.votes.substring(0,6)}m`}</TableCell>
             <TableCell><a className="witness-external-link" href={witness.url} target="_blank">{ExternalLink(themeContrastColor)}</a></TableCell>
             <TableCell>{witness.total_missed}</TableCell>
             <TableCell>{witness.props.account_creation_fee}</TableCell>
@@ -131,7 +131,7 @@ const WitnessRow=(props:any)=>{
                 <span className="inner inner-green">${witness.hbd_exchange_rate.base.replace(' HBD','')} | {dateToRelative(witness.last_hbd_exchange_update)}</span>
             </TableCell>
             <TableCell><span className="inner inner-blue">{witness.running_version}</span></TableCell>
-            <TableCell>
+            <TableCell className="text-center">
                 <IconButton style={{color: currTheme==='day'? '#535e65':'#fcfcfc'}} aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
                     {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                 </IconButton>
@@ -164,7 +164,7 @@ const WitnessRow=(props:any)=>{
                                 return(
                                     <tr key={i}>
                                         <td>{_t(`witnesses.${key}`)}</td>
-                                        <td>{witness[key]}</td>
+                                        <td>{key==="created"?  moment.utc(witness[key]).format("LL") : witness[key]}</td>
                                     </tr>
                                 )
                                }
@@ -195,7 +195,7 @@ const WitnessRow=(props:any)=>{
         className="search-field"
         onChange={inputHandler}
         fullWidth={false}
-        placeholder={`${_t('heading_label.search_transaction')}`}
+        placeholder={`${_t('heading_label.search_witnesses')}`}
         
       />
      

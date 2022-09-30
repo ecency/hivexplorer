@@ -12,6 +12,7 @@ import { useSelector } from 'react-redux';
 import { ConfigItems } from '../../../../config';
 import { _t } from '../../i18n';
 import StringField from '../fields/blockFields/StringField';
+import BackToTopButton from '../Buttons/BackToTop';
 
 export interface LatestBlock {
     head_block_number: number,
@@ -106,6 +107,7 @@ const HeadBlockDetail = (props:any) => {
                     </Card>
             </Container>
             </div>
+            <BackToTopButton />
         </>
     )
 };

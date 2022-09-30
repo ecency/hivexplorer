@@ -13,6 +13,7 @@ import { toggleTheme } from "./store/global/index"
 import {Global, Theme} from "./store/global/types";
 import '../style/theme-day.scss';
 import '../style/theme-night.scss';
+import BackToTopButton from './components/Buttons/BackToTop';
 
 const EntryPage = loadable(() => import('./pages/home/HomePage'));
 const AboutPage = loadable(() => import('./pages/about'));
@@ -23,6 +24,8 @@ const SingleTransaction = loadable(()=>import('./pages/transaction/SingleTransac
 const MultipleBlocks = loadable(()=>import('./pages/blocks/AllBlocks'))
 const UserPage = loadable(()=>import('./pages/User/UserPage'))
 const WitnessesPage = loadable(()=>import('./pages/witnesses/WitnessesPage'))
+const ProposalsPage = loadable(()=>import('./pages/proposals/ProposalsPage'))
+const SingleProposalPage = loadable(()=>import('./pages/proposals/SingleProposalPage'))
 
 const App = ({ setLang }: any) => {
   const dispatch = useDispatch()
@@ -70,6 +73,8 @@ const App = ({ setLang }: any) => {
         <Route exact={true} path={routes.Blocks}  component={MultipleBlocks}/>
         <Route exact={true} path={routes.User}  component={UserPage}/>
         <Route exact={true} path={routes.Witnesses}  component={WitnessesPage}/>
+        <Route exact={true} path={routes.Proposals}  component={ProposalsPage}/>
+        <Route exact={true} path={routes.SingleProposal}  component={SingleProposalPage}/>
         <Route component={NotFound}/>
       </Switch>
       </>

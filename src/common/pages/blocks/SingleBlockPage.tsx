@@ -12,6 +12,7 @@ import { transactionList } from '../../components/home/BlocksComponent';
 import Theme from '../../components/theme';
 import { _t } from '../../i18n';
 import ObjectField from '../../components/fields/blockFields/ObjectField';
+import BackToTopButton from '../../components/Buttons/BackToTop';
 
 export interface LatestBlock {
     block_id: string
@@ -62,7 +63,9 @@ const SingleBlock = (props:any) => {
 
                     </Card>
             </Container>
+           
             </div>
+            <BackToTopButton />
         </>
     )
 };
