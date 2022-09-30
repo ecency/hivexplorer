@@ -9,5 +9,7 @@ export default {
     TargetTransaction:'/tx/:id',
     User:'/@:user_id',
     Blocks:'/blocks',
-    Witnesses:'/witnesses'
+    Witnesses:'/witnesses',
+    Proposals:"/proposals",
+    SingleProposal:"/proposals/:id"
 };

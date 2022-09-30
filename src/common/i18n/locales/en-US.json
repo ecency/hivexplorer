@@ -19,6 +19,8 @@
   },
   "common":{
     "id":"ID",
+    "by":"By",
+    "for":"For",
     "type":"Type",
     "value":"Value",
     "block":"Block",
@@ -27,6 +29,7 @@
     "show":"Show",
     "less":"Less",
     "more":"More",
+    "json":"Json",
     "witness":"Witness",
     "block_id":"Block ID",
     "txns":"Txns",
@@ -118,7 +121,9 @@
     "latest_transaction":"Latest Transactions",
     "search_transaction":"Search Transactions",
     "latest_block":"Latest Blocks",
-    "search_block":"Search Blocks"
+    "search_block":"Search Blocks",
+    "search_proposals":"Search Proposals",
+    "search_witnesses":"Search Witnesses"
   },
   "about":{
     "page_title":"About"
@@ -297,5 +302,14 @@
     "hardfork_version_vote":"Hardfork Version Vote",
     "hardfork_time_vote":"Hardfork Time Vote",
     "available_witness_account_subsidies":"Available Witness Account Subsidies"
+  },
+  "proposals":{
+    "status":"Status",
+    "all":"All",
+    "active":"Active",
+    "inactive":"Inactive",
+    "upcoming":"Upcoming",
+    "expired":"Expired",
+    "see_all":"See All Proposals"
   }
 }

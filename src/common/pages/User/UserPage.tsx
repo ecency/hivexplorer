@@ -24,6 +24,8 @@ import { DecodeJson } from '../../../server/util';
 import { downVotingPower, findRcAccounts, rcPower, votingPower } from '../../api/hive';
 import { RCAccount } from '@hiveio/dhive/lib/chain/rc';
 import UserAuthorities from './UserAuthorities';
+import { getAccount, getRCAccount } from '../../api/urls';
+import BackToTopButton from '../../components/Buttons/BackToTop';
 
 
 interface UserList extends Array<UserTypeList>{}
@@ -65,8 +67,9 @@ const UserPage = (props:any) => {
     const handleChange = (event:any, newValue:number) => {
         setValue(newValue);
     };
-    const account_url=`${ConfigItems.baseUrl}/api/get_accounts?name[]=${match.params.user_id}`;
-    const rc_account_url=`${ConfigItems.baseUrl}/api/find_rc_accounts?accounts[]=${match.params.user_id}`;
+    const userId=match.params.user_id
+    const account_url=getAccount(userId);
+    const rc_account_url=getRCAccount(userId);
     useEffect(()=>{
 
     axios.get(account_url).then(res => {
@@ -89,31 +92,20 @@ const UserPage = (props:any) => {
           'aria-controls': `user-tabpanel-${index}`,
         };
     }
-    //    const votingPower = (userAccount:UserList): number => {
-    //     // @ts-ignore "Account" is compatible with dhive's "ExtendedAccount"
-    //     const calc = userAccount && client.rc.calculateVPMana(userAccount);
-    //     const {percentage} = calc;
-    
-    //     return percentage / 100;
-    // };
-    // console.log('voting',votingPower)
     return (
         <>
             <Theme global={props.global}/>
             <Container className='user-container'>
                {userAccount && rcAccount && userAccount.map((user,i)=>{
                 console.log('rc1',rcAccount,rcPower(rcAccount))
-              const VPower=votingPower(user)
-              const DVPower=downVotingPower(user)
-              const RCAPower=rcPower(rcAccount)
-              // const RCPower=rcPower(user)
-              // console.log('vp',VPower,DVPower,rcName,rcAccount)
+                const VPower=votingPower(user)
+                const DVPower=downVotingPower(user)
+                const RCAPower=rcPower(rcAccount)
+             
                 let Json_Meta 
-                // user.json_metadata===""?
-                // Json_Meta=DecodeJson(user.json_metadata) : Json_Meta=DecodeJson(user.posting_json_metadata)
-                // Json_Meta=JSON.parse(user.posting_json_metadata) : Json_Meta=JSON.parse(user.json_metadata)
-                 user.posting_json_metadata===""?
-                 user.json_metadata===""?
+  
+                user.posting_json_metadata===""?
+                user.json_metadata===""?
                 Json_Meta=JSON.parse('{"profile":{"name":"","about":"","website":"","cover_image":"","profile_image":"","dtube_pub":"","witness_description":""}}') :
                 Json_Meta=DecodeJson(user.json_metadata) : Json_Meta=DecodeJson(user.posting_json_metadata) 
                 
@@ -159,7 +151,7 @@ const UserPage = (props:any) => {
                             </TabPanel>
                             <TabPanel value={value} index={1}>
                                {
-                                <UserTransactionsTable user={`${match.params.user_id}`}/>
+                                <UserTransactionsTable user={`${userId}`}/>
                                 }
                             </TabPanel>
                             <TabPanel value={value} index={2}>
@@ -174,6 +166,7 @@ const UserPage = (props:any) => {
                 )
                })}               
             </Container>
+            <BackToTopButton />
         </>
     )
 };

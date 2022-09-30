@@ -21,9 +21,12 @@ const BLOCKCHAIN_MENU = [
   link:`/blocks`
   }, 
   {name:_t("nav.blockchain-gov")}, 
-  {name:_t("nav.blockchain-witnesses")}, 
+  {name:_t("nav.blockchain-witnesses"),
+  link:`/witnesses`
+  }, 
   {
-    name:_t("nav.blockchain-proposals")
+    name:_t("nav.blockchain-proposals"),
+    link:`/proposals`
   }];
 const TOKENS_MENU = [_t("nav.tokens-hive"), _t("nav.tokens-he"), _t("nav.tokens-speak")];
 
