@@ -15,7 +15,7 @@ import '../style/theme-day.scss';
 import '../style/theme-night.scss';
 import BackToTopButton from './components/Buttons/BackToTop';
 
-const EntryPage = loadable(() => import('./pages/home/HomePage'));
+const HomePage = loadable(() => import('./pages/home/HomePage'));
 const AboutPage = loadable(() => import('./pages/about'));
 const HeadBlockDetailPage = loadable(() => import('./components/headBlock/headBlockDetail'));
 const SingleBlock = loadable(()=>import('./pages/blocks/SingleBlockPage'))
@@ -26,6 +26,7 @@ const UserPage = loadable(()=>import('./pages/User/UserPage'))
 const WitnessesPage = loadable(()=>import('./pages/witnesses/WitnessesPage'))
 const ProposalsPage = loadable(()=>import('./pages/proposals/ProposalsPage'))
 const SingleProposalPage = loadable(()=>import('./pages/proposals/SingleProposalPage'))
+const EntryPage = loadable(() => import('./pages/entry/EntryPage'));
 
 const App = ({ setLang }: any) => {
   const dispatch = useDispatch()
@@ -62,7 +63,7 @@ const App = ({ setLang }: any) => {
       </div> */}
       <AppHeader />
       <Switch>
-        <Route exact={true} path={routes.HOME} component={EntryPage}/>
+        <Route exact={true} path={routes.HOME} component={HomePage}/>
         <Route exact={true} path={routes.ABOUT} component={AboutPage}/>
         {/* CHECK */}
         <Route exact={true} path={routes.Service} component={NotFound}/>
@@ -75,6 +76,7 @@ const App = ({ setLang }: any) => {
         <Route exact={true} path={routes.Witnesses}  component={WitnessesPage}/>
         <Route exact={true} path={routes.Proposals}  component={ProposalsPage}/>
         <Route exact={true} path={routes.SingleProposal}  component={SingleProposalPage}/>
+        <Route exact={true} path={routes.Entry}  component={EntryPage}/>
         <Route component={NotFound}/>
       </Switch>
       </>

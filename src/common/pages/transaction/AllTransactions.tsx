@@ -21,7 +21,7 @@ const AllTransactions = (props:any) => {
           console.log(transactions_url)
             setTransactions(res.data.ops)
           })
-      },[])
+      },[transactions])
     return (
         <>
              <Theme global={props.global}/>

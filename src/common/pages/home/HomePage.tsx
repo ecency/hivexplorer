@@ -56,6 +56,7 @@ const Index = (props: PageProps) => {
   // }, []);
   const [result, setResult] = useState<Block>();
     useEffect(() => {
+      console.log(headBlock)
         axios.get(headBlock).then(response => { 
           setResult(response.data)
         })

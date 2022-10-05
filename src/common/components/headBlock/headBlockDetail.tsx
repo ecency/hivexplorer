@@ -13,6 +13,13 @@ import { ConfigItems } from '../../../../config';
 import { _t } from '../../i18n';
 import StringField from '../fields/blockFields/StringField';
 import BackToTopButton from '../Buttons/BackToTop';
+import ObjectField from '../fields/blockFields/ObjectField';
+
+export interface objAmountPrecisionNai {
+    amount: string
+precision: number
+nai: string
+}
 
 export interface LatestBlock {
     head_block_number: number,
@@ -21,16 +28,16 @@ export interface LatestBlock {
     current_witness:string,
     total_pow:string,
     num_pow_witnesses:string,
-    virtual_supply:string,
-    current_supply:string,
-    init_hbd_supply:string,
-    current_hbd_supply:string,
-    total_vesting_fund_hive:string,
-    total_vesting_shares:string,
-    total_reward_fund_hive:string,
-    total_reward_shares2:string,
-    pending_rewarded_vesting_shares:string,
-    pending_rewarded_vesting_hive:string,
+    virtual_supply:string | objAmountPrecisionNai 
+    current_supply:string | objAmountPrecisionNai 
+    init_hbd_supply:string | objAmountPrecisionNai 
+    current_hbd_supply:string | objAmountPrecisionNai,
+    total_vesting_fund_hive:string | objAmountPrecisionNai,
+    total_vesting_shares:string | objAmountPrecisionNai,
+    total_reward_fund_hive:string | objAmountPrecisionNai,
+    total_reward_shares2:string | objAmountPrecisionNai,
+    pending_rewarded_vesting_shares:string | objAmountPrecisionNai,
+    pending_rewarded_vesting_hive:string | objAmountPrecisionNai, 
     hbd_interest_rate:string,
     hbd_print_rate:string,
     maximum_block_size:string,
@@ -53,6 +60,8 @@ export interface LatestBlock {
     sps_fund_percent:string,
     sps_interval_ledger:string,
     downvote_pool_percent:string,
+    proposal_fund_percent: number,
+    dhf_interval_ledger: string | objAmountPrecisionNai,
     current_remove_threshold:string,
     early_voting_seconds:string,
     mid_voting_seconds:string,
@@ -91,13 +100,22 @@ const HeadBlockDetail = (props:any) => {
                         <Card.Body className='pt-0'>
                         {showMore? result && Object.keys(result).slice(0,).map((key,index)=>{
                             return(
+                            // <StringField key={index} value={result[key]}  item={key} number={index} label_for='block'/>
+                            <>
+                            {typeof(result[key])!=="object"?
                             <StringField key={index} value={result[key]}  item={key} number={index} label_for='block'/>
+                            :
+                            <ObjectField key={index} value={result[key]}  item={key} number={index} label_for='block'/>
+                            }
+                            </>
                             )
                         }) :result && Object.keys(result).slice(0,10).map((key,index)=>{
                             return(
-                            <StringField  key={index} value={result[key]}  item={key} number={index} label_for='block'/>
+                            // <StringField  key={index} value={result[key]}  item={key} number={index} label_for='block'/>
+                          <>  {typeof(result[key])!=="object"?<StringField key={index} value={result[key]}  item={key} number={index} label_for='block'/>:<p key={index}>Object</p>}</>
                             )
                         })}
+
                         </Card.Body>
                         <Card.Footer>
                             <Button className={themeBtn} onClick={()=>setShowMore(!showMore)}>

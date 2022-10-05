@@ -97,13 +97,25 @@ const UserAuthorities = (props:any) => {
             <table className="authority-table">
                 <tbody>
                 {Object.keys(props).map((authority,i:number)=>{
+                    console.log(authority)
                     return(
-                    <tr key={i} className="row-border" >
-                        <td className="pt-2 pl-4 pr-2 pb-2">{authority}</td>
-                        <td  className="pt-2 px-2 pb-2">
-                            {AuthorityObject(props[authority])}
+                      <>
+                        {authority==="memo_key"? 
+                        <tr key={i} className="row-border" >
+                        <td className="pt-2 pl-4 pr-2 pb-2">{_t(`user-info.${authority}`)}</td>
+                        <td  className="pt-2 px-4 pb-2">
+                            {props[authority]}
                         </td>
-                    </tr>
+                    </tr> 
+                      :  <tr key={i} className="row-border" >
+                      <td className="pt-2 pl-4 pr-2 pb-2">{_t(`user-info.${authority}`)}</td>
+                      <td  className="pt-2 px-2 pb-2">
+                          {AuthorityObject(props[authority])}
+                      </td>
+                  </tr>
+                    }
+                      </>
+                
                     )})}
                 </tbody>
             </table>  

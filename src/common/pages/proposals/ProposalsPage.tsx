@@ -61,9 +61,20 @@ const ProposalsPage = (props:any) => {
         console.log(proposals_url)
         axios.get(proposals_url).then(res=>{
             proposals=res.data.proposals
+
+            // filtering Expired Proposals
             expiredProposals = proposals.filter((x:proposalsType) => x.status === "expired");
+            // Sorting Expired Proposals
+            expiredProposals = expiredProposals.sort((a, b) => parseFloat(b.total_votes.toLocaleString()) - parseFloat(a.total_votes.toLocaleString()));
+            // filtering active Proposals
             activeProposals = proposals.filter((x:proposalsType) => x.status === "active");
+            // sorting active proposals
+            activeProposals = activeProposals.sort((a, b) => parseFloat(b.total_votes.toLocaleString()) - parseFloat(a.total_votes.toLocaleString()));
+            // InActive Proposals
             inactiveProposals = proposals.filter((x:proposalsType) => x.status === "inactive");
+            // Sorting In Active
+            inactiveProposals = inactiveProposals.sort((a, b) => parseFloat(b.total_votes.toLocaleString()) - parseFloat(a.total_votes.toLocaleString()));
+            // All Proposals 
             proposals=[...activeProposals,...inactiveProposals,...expiredProposals]
             const entireProposals=proposals
             setAllProposals(entireProposals)
@@ -90,6 +101,7 @@ const ProposalsPage = (props:any) => {
         const fund = getAccount("hive.fund");
         eligible = allProposals?.filter((x:proposalsType) => x.status !== 'expired');
         inactiveProposals=allProposals?.filter((x:proposalsType) => x.status === 'expired');
+        console.log('fund calculate',fund)
         axios.get(fund).then(resp=>{
             const totalBudgetCount = parseAsset(resp.data[0].hbd_balance).amount;
             setTotalBudget(totalBudgetCount)

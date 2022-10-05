@@ -1,0 +1,47 @@
+.entry-content-container{
+    padding: 5rem 0;
+    .entry-header{
+        padding: 10px 0;
+        display: flex;
+        .avatar-img{
+            height: 50px;
+            width: 50px;
+            border-radius: 100%;
+        }
+    }
+    .accordion{
+        .accordion-body{
+            word-break: break-all;
+        }
+        .accordion-button{
+            display: flex;
+            justify-content: space-between;
+            &:focus{
+                box-shadow: none !important;
+            }
+            &::after{
+                display: none;
+            }
+        }   
+        &.accordion_night{
+            background-color: transparent;
+            .accordion-item{
+                background-color: transparent;
+                color: #fff;
+                .accordion-button{
+                    background: #161d26;
+                    color: #fff;
+                    &::after{
+                        display: none;
+                    }
+                }   
+                .card-header,.MuiTableCell-body{
+                    color: #fff;
+                }
+            }
+
+            
+        }
+        
+    }
+}

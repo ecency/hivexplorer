@@ -11,5 +11,6 @@ export default {
     Blocks:'/blocks',
     Witnesses:'/witnesses',
     Proposals:"/proposals",
-    SingleProposal:"/proposals/:id"
+    SingleProposal:"/proposals/:id",
+    Entry:"/@:user_id/:permlink"
 };

@@ -51,13 +51,13 @@ const UserTransactionsTable = (props:any) => {
     const [page, setPage] = useState(0);
    
     const [rowsPerPage, setRowsPerPage] = useState(25);
-    const [transactionFrom,setTransactionForm]=useState(0)
+    const [transactionFrom,setTransactionForm]=useState(100)
     const [transactionLimit,setTransactionLimit]=useState(100)
     const currTheme = useSelector((state:any) => state.global.theme)
     const [userTransaction,setUserTransaction]=useState<UserTransactionTypeList>()
     const [open,setOpen]=useState(false)
 
-    const user_transaction_url=`${ConfigItems.baseUrl}/api/get_account_history?account=${user}&from=${transactionFrom}&limit=${transactionLimit}`
+    const user_transaction_url=`${ConfigItems.baseUrl}/api/get_account_history?account=${user}&start=${transactionFrom}&limit=${transactionLimit}`
 
     useEffect(()=>{
           axios.get(user_transaction_url).then(resp=>{

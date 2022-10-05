@@ -21,6 +21,9 @@ const timestampKeys=[
     "savings_hbd_last_interest_payment",
     "next_vesting_withdrawal",
     "last_post",
+    "last_update",
+    "last_payout",
+    "cashout_time",
     "last_root_post",
     "last_vote_time",
     "governance_vote_expiration_ts",
@@ -33,7 +36,7 @@ const timestampKeys=[
 const StringField = (props:any) => {
     const {number,item,value,label_for}=props;
     const currTheme = useSelector((state:any) => state.global.theme)
-    const themeContrastColor = currTheme === 'day' ? 'black' : 'white';
+    const themeContrastColor = currTheme === 'day' ? '#535e65' : 'white';
     const rowBorder = currTheme === 'day' ? 'row-border border-color-day' : 'row-border border-color-night';
 
     const DateTimeMoment=(timeSet:string,timeFormat:string)=>{
@@ -60,7 +63,7 @@ const StringField = (props:any) => {
 
     return (
         <Row className={rowBorder}  key={number}>
-            <Col  md={3} xs={12} className="attr-col"><span>{infoIcon(themeContrastColor)} </span><span className='pl-1'>  {_t(`${label_for}.${item}`)}:</span> </Col>
+            <Col  md={3} xs={12} className="attr-col"><span>{infoIcon(themeContrastColor)} </span><span className='pl-2'>  {_t(`${label_for}.${item}`)}:</span> </Col>
             <Col md={9} xs={12}>
                 {   item==='witness' || item==='current_witness'?
                     <Link to={`/@${value}`}>{value}</Link>

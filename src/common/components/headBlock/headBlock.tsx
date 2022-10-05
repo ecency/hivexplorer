@@ -17,11 +17,11 @@ export interface Block {
     head_block_id: string,
     time: string,
     num_pow_witnesses: number,
-    init_hbd_supply:string,
-    current_hbd_supply: string,
-    total_vesting_fund_hive: string,
-    total_vesting_shares: string,
-    total_reward_fund_hive: string,
+    init_hbd_supply:string | object,
+    current_hbd_supply: string | object,
+    total_vesting_fund_hive: string | object,
+    total_vesting_shares: string | object,
+    total_reward_fund_hive: string | object,
     current_witness:string
 }
 
