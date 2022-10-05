@@ -11,22 +11,36 @@ import { Container } from 'react-bootstrap';
 import { Paper } from '@material-ui/core';
 import ProposalCard from './ProposalCard';
 import './proposalsPage.scss'
-import { getSingleProposal } from '../../api/urls';
+import { getPermLink, getSingleProposal } from '../../api/urls';
 import { _t } from '../../i18n';
 import { proposalsType } from './ProposalsPage';
+import { EntryType } from '../entry/EntryTypes';
+import {renderPostBody, setProxyBase, catchPostImage} from "@ecency/render-helper";
 
 
 const SingleProposalPage = (props:any) => {
     const {match} = props
-   
+    const proposalId=match.params.id
     const [singleProposal,setSingleProposal]=useState<proposalsType>()
+    let find_proposal=getSingleProposal(proposalId)
+    const [entry,setEntry]=useState<EntryType>()
     useEffect(()=>{
-        const proposalId=match.params.id
-        let find_proposal=getSingleProposal(proposalId)
+      
+      console.log(find_proposal) 
        axios.get(find_proposal).then(res=>{
         setSingleProposal(res.data.proposals)
+   
        })
     },[singleProposal])
+    useEffect(()=>{
+       if(singleProposal){
+        const permlink_url=getPermLink(singleProposal[0].creator,singleProposal[0].permlink)
+        console.log(permlink_url)
+        axios.get(permlink_url).then(resp=>{
+            setEntry(resp.data)
+        })
+       }
+    },[singleProposal,entry])
     return (
         <>
              <Theme global={props.global}/>
@@ -38,6 +52,9 @@ const SingleProposalPage = (props:any) => {
              <div>
                {singleProposal && <ProposalCard  proposalData={singleProposal[0]} />}
              </div>
+            {entry &&  <div className="the-entry">
+                <div className="entry-body markdown-view user-selectable" dangerouslySetInnerHTML={{__html: renderPostBody(entry.body, false)}}/>
+            </div>}
              </Container>
         </>
     )

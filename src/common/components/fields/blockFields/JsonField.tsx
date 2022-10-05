@@ -31,7 +31,7 @@ const JsonField = (props:any) => {
         const opVal=op.value
         console.log('required auths',opVal.required_posting_auths)
         return(
-            <table className='json-table' key={index}>
+            <table className={currTheme==="day"?'json-table json-table-day':'json-table json-table-night'} key={index}>
             <tbody>
             <tr>
                  <td>Type</td>

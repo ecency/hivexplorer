@@ -27,17 +27,7 @@ const UserHeader = (props:any) => {
         resourceCredits
     }=props
     const [rcAccount,setRCAccount]=useState<RCState>()
-    const rc_account_url=`${ConfigItems.baseUrl}/api/find_rc_accounts?accounts[]=good-karma`;
-    
-    // useEffect(()=>{
-  
-    //     console.log(rc_account_url)
-    //     axios.get(rc_account_url).then(res => {
-    //         setRCAccount(res.data.rc_accounts)
-    
-    //         })
-    //     },[rcAccount])
-    //     console.log('rc',rcAccount)
+
     const metaProfile=metaData.profile
     const currTheme = useSelector((state:any) => state.global.theme)
     const themeContrastColor = currTheme === 'day' ? '#535e65' : 'white';

@@ -18,7 +18,7 @@ const MultipleBlocks = (props:any) => {
     const {match} = props
     const [blocks, setBlocks] = useState<BlockList>([]);
     const block_num=67090459
-    const blocks_url=`${ConfigItems.baseUrl}/api/get_block_range?starting_block_num=${block_num-50}&count=50`;
+    const blocks_url=`${ConfigItems.baseUrl}/api/get_block_range?starting_block_num=${block_num-49}&count=50`;
       useEffect(()=>{
         console.log(blocks_url)
         axios.get(blocks_url).then(res => {

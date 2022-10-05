@@ -52,7 +52,7 @@ const ObjectField = (props:any) => {
     const {number,item,value,label_for,transactionOperations}=props;
     const [expandBtn,setExpandBtn]=useState(false)
     const currTheme = useSelector((state:any) => state.global.theme)
-    const themeContrastColor = currTheme === 'day' ? 'black' : 'white';
+    const themeContrastColor = currTheme === 'day' ? '#535e65' : 'white';
     const rowBorder = currTheme === 'day' ? 'row-border border-color-day' : 'row-border border-color-night';
     const themeBtn = currTheme === 'day' ? 'showmore-btn btn-light' : 'showmore-btn btn-dark'
     console.log('ops',transactionOperations)
@@ -179,9 +179,9 @@ const ObjectField = (props:any) => {
         <Row className={rowBorder}  key={number}>
 
             <Col  md={3} xs={12} className="attr-col"><span>{infoIcon(themeContrastColor)} </span>
-            <span className='pl-1'>
+            <span className='pl-2'>
                 {item==='voting_manabar' || item==='downvote_manabar' ?
-                <span>{_t(`${label_for}.${item.object_name}`)}</span>
+                <span>{_t(`${label_for}.${item}`)}</span>
                 :
                 _t(`${label_for}.${item}`)}:
                 </span> 
@@ -212,9 +212,13 @@ const ObjectField = (props:any) => {
                                 {value.length} {expandBtn? <span>{showLessIcon(themeContrastColor)} </span> : <span>{showMoreIcon(themeContrastColor)}</span>}
                     </Button>
                 </>
-                :
+                : item==='init_hbd_supply' || item==='current_hbd_supply' || item==='virtual_supply'?
                 <> 
-                    {value.length}
+                    {value.amount}
+                </>
+                :
+                <>
+                 {value.length}
                 </>
                 }
                 

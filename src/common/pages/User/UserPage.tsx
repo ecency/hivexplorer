@@ -71,7 +71,7 @@ const UserPage = (props:any) => {
     const account_url=getAccount(userId);
     const rc_account_url=getRCAccount(userId);
     useEffect(()=>{
-
+      console.log('account url',account_url)
     axios.get(account_url).then(res => {
         setUserAccount(res.data)
 
@@ -156,7 +156,7 @@ const UserPage = (props:any) => {
                             </TabPanel>
                             <TabPanel value={value} index={2}>
                                {
-                                  <UserAuthorities owner={user.owner} posting={user.posting} active={user.active} />
+                                  <UserAuthorities memo_key={user.memo_key} owner={user.owner} posting={user.posting} active={user.active} />
                                 }
                             </TabPanel>
                         </Card.Body>

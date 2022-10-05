@@ -61,9 +61,20 @@ const ProposalsPage = (props:any) => {
         console.log(proposals_url)
         axios.get(proposals_url).then(res=>{
             proposals=res.data.proposals
+
+            // filtering Expired Proposals
             expiredProposals = proposals.filter((x:proposalsType) => x.status === "expired");
+            // Sorting Expired Proposals
+            expiredProposals = expiredProposals.sort((a, b) => parseFloat(b.total_votes.toLocaleString()) - parseFloat(a.total_votes.toLocaleString()));
+            // filtering active Proposals
             activeProposals = proposals.filter((x:proposalsType) => x.status === "active");
+            // sorting active proposals
+            activeProposals = activeProposals.sort((a, b) => parseFloat(b.total_votes.toLocaleString()) - parseFloat(a.total_votes.toLocaleString()));
+            // InActive Proposals
             inactiveProposals = proposals.filter((x:proposalsType) => x.status === "inactive");
+            // Sorting In Active
+            inactiveProposals = inactiveProposals.sort((a, b) => parseFloat(b.total_votes.toLocaleString()) - parseFloat(a.total_votes.toLocaleString()));
+            // All Proposals 
             proposals=[...activeProposals,...inactiveProposals,...expiredProposals]
             const entireProposals=proposals
             setAllProposals(entireProposals)
@@ -90,6 +101,7 @@ const ProposalsPage = (props:any) => {
         const fund = getAccount("hive.fund");
         eligible = allProposals?.filter((x:proposalsType) => x.status !== 'expired');
         inactiveProposals=allProposals?.filter((x:proposalsType) => x.status === 'expired');
+        console.log('fund calculate',fund)
         axios.get(fund).then(resp=>{
             const totalBudgetCount = parseAsset(resp.data[0].hbd_balance).amount;
             setTotalBudget(totalBudgetCount)
@@ -138,8 +150,8 @@ const ProposalsPage = (props:any) => {
              <Theme global={props.global}/>
              <Container className='proposal-container py-5'>
              <div className='proposal-header text-center'>
-                <h1>Proposals</h1>
-                <p>The Decentralized Hive Fund (DHF) is an on-chain funding mechanism that allows anyone to submit a proposal and get funding once community votes pass certain threshold. </p> 
+                <h1>{_t('proposals.page_title')}</h1>
+                <p>{_t('proposals.page_intro')}</p> 
                 <div className="funding-numbers">
                             <div className="funding-number">
                                 <div className="value">
@@ -172,8 +184,8 @@ const ProposalsPage = (props:any) => {
                         </div>
 
                 <div className="filter-menu">
-                        {Object.values(Filter).map(x => {
-                            return <button className='btn' onClick={()=>setProposalStatus(x)} disabled={proposalStatus===x?true:false}>{_t(`proposals.${x}`)}</button>
+                        {Object.values(Filter).map((x,i) => {
+                            return <button key={i} className='btn' onClick={()=>setProposalStatus(x)} disabled={proposalStatus===x?true:false}>{_t(`proposals.${x}`)}</button>
                         })}
                 </div>
              </div>

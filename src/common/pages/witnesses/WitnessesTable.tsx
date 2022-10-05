@@ -48,6 +48,8 @@ interface Column {
     { label: `${_t("witnesses.more")}`,align: 'right',},
   ];
   const innerColumns= [
+    "props",
+    "hbd_exchange_rate",
     "created",
    "virtual_last_update",
    "virtual_position",
@@ -62,15 +64,15 @@ interface Column {
     "hardfork_version_vote",
     "hardfork_time_vote",
     "available_witness_account_subsidies"
+    
   ];
 
 interface BlockList extends Array<HomeBlocksType>{}
 const WitnessesTables = (props:any) => {
 
- const WitnessesData=props.data
- WitnessesData.map((wit:witnessesType)=>{
-    console.log('id',wit.owner)
- })
+  const WitnessesData=props.data
+  console.log(WitnessesData);
+  
   const [page, setPage] = useState(0);
   const [searched, setSearched] = useState("");
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -111,6 +113,7 @@ const Date_time=(timeSet:string,timeFormat:string)=>{
 }
 const WitnessRow=(props:any)=>{
     const {witness}=props
+    console.log(witness)
     const [open, setOpen] = useState(allOpen);
 
     return(
@@ -159,16 +162,42 @@ const WitnessRow=(props:any)=>{
                     </Table> */}
                     <table className="witness-dropdown-table">
                         <tbody>
-                            {innerColumns.map((key,i)=>{
+                         <>
+                         {innerColumns.map((key,i)=>{
                                if(witness.hasOwnProperty(key)){
                                 return(
+                                    <>
+                                    {typeof(witness[key])==="object"? 
+                                           
+                                            <tr>
+                                             <td>{_t(`witnesses.${key}`)}</td>
+                                            <td>
+                                              <table>
+                                                <tbody>
+                                                  {Object.keys(witness[key]).map((val:any,i:number)=>{
+                                                    return(
+                                                      <tr key={i}>
+                                                        <td>{_t(`witnesses.${val}`)}</td>
+                                                        <td>{witness[key][val]}</td>
+                                                      </tr>
+                                                    )
+                                                  })}
+                                                </tbody>
+                                              </table>
+                                            </td>
+                                        </tr>
+                                    :
                                     <tr key={i}>
                                         <td>{_t(`witnesses.${key}`)}</td>
                                         <td>{key==="created"?  moment.utc(witness[key]).format("LL") : witness[key]}</td>
                                     </tr>
+                                    }
+                                    </>
                                 )
                                }
                             })}
+                        
+                         </>
                         </tbody>
                     </table>
                 </Box>
@@ -182,8 +211,8 @@ const WitnessRow=(props:any)=>{
     <>
     <Container className="data-table-hive witnesses-container py-5">
         <div className="witness-header">
-            <h1>Witnesses</h1>
-            <p>Role of witnesses or block producers in Hive blockchain is to act as the network's governance body. Community elects them to represent their voice and each user can elect up to 30 witnesses. Top 20 witnesses are producing blocks every minute while rest remain as backup witness and gets randomized chance every minute. This role is integral part of consensus mechanism blockchain runs on and recommend user engagement to vote on trusted witnesses.</p>
+            <h1>{_t('witnesses.page_title')}</h1>
+            <p>{_t('witnesses.page_intro')}</p>
         </div>
      
     <Paper 
