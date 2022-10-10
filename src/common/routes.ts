@@ -8,5 +8,9 @@ export default {
     Transactions:'/transactions',
     TargetTransaction:'/tx/:id',
     User:'/@:user_id',
-    Blocks:'/blocks'
+    Blocks:'/blocks',
+    Witnesses:'/witnesses',
+    Proposals:"/proposals",
+    SingleProposal:"/proposals/:id",
+    Entry:"/@:user_id/:permlink"
 };

@@ -8,6 +8,7 @@ import { pageMapDispatchToProps, pageMapStateToProps, PageProps } from '../../pa
 import moment from 'moment';
 import { _t } from '../../i18n';
 import { Link } from 'react-router-dom';
+import { getTransactions } from '../../api/urls';
 
 
 export interface op_type {
@@ -35,7 +36,7 @@ export interface HomeTransactionList extends Array<HomeTransactionType>{}
 const HomeTransactions = (props:any) => {
     const [homeTransactions, setHomeTransactions] = useState<HomeTransactionList>([]);
     const blockNum=67065450
-    const home_transactions_url=`${ConfigItems.baseUrl}/api/get_ops_in_block?block_num=${blockNum-10}`;
+    const home_transactions_url=getTransactions(blockNum-10);
       useEffect(()=>{
         axios.get(home_transactions_url).then(res => {
             setHomeTransactions(res.data.ops)

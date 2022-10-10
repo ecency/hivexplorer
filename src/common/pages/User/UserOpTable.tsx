@@ -7,7 +7,7 @@ import { withPersistentScroll } from '../../components/with-persistent-scroll';
 import { ConfigItems } from '../../../../config';
 import { HomeTransactionType } from '../../components/home/TransactionsComponent';
 import Theme from '../../components/theme';
-import TransactionsTables from '../../components/transactions/TransactionsTables';
+import TransactionsTables from '../transaction/TransactionsTables';
 import { _t } from '../../i18n';
 
 

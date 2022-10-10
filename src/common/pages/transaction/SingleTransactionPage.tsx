@@ -46,14 +46,11 @@ const SingleTransaction = (props:any) => {
                         <Card.Body className='py-0'>
                             { result && Object.keys(result).map((key,index)=>{
                                 return(
-                                   <>
-                                   { typeof(result[key])==='object'?
+                                   typeof(result[key])==='object'?
                                     <ObjectField key={index} value={result[key]}  item={key} number={index} label_for='transaction'/>
                                      :
                                      <StringField key={index} value={result[key]}  item={key} number={index} label_for='transaction'/>
-                                   }
-                                   </>
-                                   
+
                                 )})
                             }
                         </Card.Body>

@@ -51,12 +51,13 @@ const UserTransactionsTable = (props:any) => {
     const [page, setPage] = useState(0);
    
     const [rowsPerPage, setRowsPerPage] = useState(25);
-    const [transactionFrom,setTransactionForm]=useState(0)
-    const [transactionLimit,setTransactionLimit]=useState(20)
+    const [transactionFrom,setTransactionForm]=useState(100)
+    const [transactionLimit,setTransactionLimit]=useState(100)
     const currTheme = useSelector((state:any) => state.global.theme)
     const [userTransaction,setUserTransaction]=useState<UserTransactionTypeList>()
+    const [open,setOpen]=useState(false)
 
-    const user_transaction_url=`${ConfigItems.baseUrl}/api/get_account_history?account=${user}&from=${transactionFrom}&limit=${transactionLimit}`
+    const user_transaction_url=`${ConfigItems.baseUrl}/api/get_account_history?account=${user}&start=${transactionFrom}&limit=${transactionLimit}`
 
     useEffect(()=>{
           axios.get(user_transaction_url).then(resp=>{
@@ -96,7 +97,7 @@ const UserTransactionsTable = (props:any) => {
     const TransRow=(props:any)=>{
       const {trans}=props
       const opTrans=trans[1].op
-      const [open,setOpen]=useState(false)
+      const [openRow,setOpenRow]=useState(false)
 
   return(
     <>
@@ -110,14 +111,14 @@ const UserTransactionsTable = (props:any) => {
         <TableCell className="transaction-table-data-cell py-2 text-center">{trans[0]}</TableCell>
         <TableCell className="transaction-table-data-cell py-2">{trans[1].op.type}</TableCell>
         <TableCell>
-          <IconButton style={{color: currTheme==='day'? '#535e65':'#fcfcfc'}} aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
-            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+          <IconButton style={{color: currTheme==='day'? '#535e65':'#fcfcfc'}} aria-label="expand row" size="small" onClick={() => setOpenRow(!openRow)}>
+            {openRow ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-          <Collapse in={open} timeout="auto" unmountOnExit={true}>
+          <Collapse in={openRow} timeout="auto" unmountOnExit={true}>
             <Box margin={1}>
               <TransactionOperationTable opTrans={...opTrans} />
             </Box>

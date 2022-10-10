@@ -4,6 +4,9 @@ import React, {useState } from "react";
 import '../../../style/dataTable/DataTables.scss'
 import { Link } from "react-router-dom";
 import {
+  Box,
+  Collapse,
+  IconButton,
   Paper,
   Table,
   TableBody,
@@ -14,20 +17,14 @@ import {
   TableRow,
   TextField,
  } from '@material-ui/core';
-// import Paper from '@mui/material/Paper';
-// import Table from '@mui/material/Table';
-// import TableBody from '@mui/material/TableBody';
-// import TableCell from '@mui/material/TableCell';
-// import TableContainer from '@mui/material/TableContainer';
-// import TableHead from '@mui/material/TableHead';
-// import TablePagination from '@mui/material/TablePagination';
-// import TableRow from '@mui/material/TableRow';
-// import TextField from "@mui/material/TextField";
 import { Container } from 'react-bootstrap';
-import { HomeBlocksType } from "../home/BlocksComponent";
+import { HomeBlocksType } from "../../components/home/BlocksComponent";
 import moment from "moment";
 import { useSelector } from "react-redux";
 import { _t } from "../../i18n";
+import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import TransactionOpTable from "./TransactionOpTable";
 
 
 interface Column {
@@ -36,10 +33,11 @@ interface Column {
 }
 
 const columns:Column[] = [
-  { label: `${_t("common.block")}`,align: 'right',},
   { label: `${_t("common.id")}`,align: 'right',},
+  { label: `${_t("common.date")}`,align: 'right',},
+  { label: `${_t("common.time")}`,align: 'right',},
   { label: `${_t("common.type")}`,align: 'right',},
-  { label: `${_t("common.value")}`,align: 'right',},
+  { label: `${_t("common.ops")}`,align: 'right',},
 ];
 
 interface BlockList extends Array<HomeBlocksType>{}
@@ -49,7 +47,7 @@ const TransactionsTables = (props:any) => {
   const [page, setPage] = useState(0);
   const [searched, setSearched] = useState("");
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [open, setOpen] = useState(false);
+ 
   const currTheme = useSelector((state:any) => state.global.theme)
   const [filterText, setFilterText] = useState("");
   const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
@@ -83,6 +81,34 @@ const TransactionsTables = (props:any) => {
 const Date_time=(timeSet:string,timeFormat:string)=>{
   return moment(timeSet).format(timeFormat)
 }
+const TransRow=(props:any)=>{
+  const {transaction}=props
+  const [open, setOpen] = useState(false);
+  return(
+    <>
+        <TableRow hover={true} role="checkbox" tabIndex={-1}>
+        <TableCell><Link to={`/tx/${transaction.trx_id}`}>{transaction.trx_id}</Link></TableCell>
+        <TableCell>{Date_time(`${transaction.timestamp}`,"YYYY-MM-DD")}</TableCell>
+        <TableCell>{Date_time(`${transaction.timestamp}`,"hh:mm:ss")}</TableCell>
+        <TableCell>{transaction.op.type}</TableCell>
+        <TableCell>
+          <IconButton style={{color: currTheme==='day'? '#535e65':'#fcfcfc'}} aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
+            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+          </IconButton>
+        </TableCell>
+      </TableRow>
+            <TableRow>
+            <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+              <Collapse in={open} timeout="auto" unmountOnExit={true}>
+                <Box margin={1}>
+                  <TransactionOpTable opTrans={transaction.op} />
+                </Box>
+              </Collapse>
+            </TableCell>
+          </TableRow>
+    </>
+  )
+}
   return (
     <>
     <Container className="data-table-hive py-5">
@@ -104,7 +130,7 @@ const Date_time=(timeSet:string,timeFormat:string)=>{
               <TableRow >
                 {columns.map((column,index) => (
                     <TableCell className="card-header" key={index}>
-                      {column.label}
+                      {column.label} 
                     </TableCell>
                   ))}
               </TableRow>
@@ -114,12 +140,7 @@ const Date_time=(timeSet:string,timeFormat:string)=>{
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((transaction:any,i:number) => {
                 return (
-                  <TableRow hover={true} role="checkbox" tabIndex={-1} key={i}>
-                    <TableCell><Link to={`/b/${transaction.block}`}>{transaction.block}</Link></TableCell>
-                    <TableCell><Link to={`/tx/${transaction.trx_id}`}>{transaction.trx_id}</Link></TableCell>
-                    <TableCell>{transaction.op.type}</TableCell>
-                    <TableCell>{transaction.op.type}</TableCell>
-                  </TableRow>
+                  <TransRow key={i} transaction={transaction} />
                 );
               })}
           </TableBody>

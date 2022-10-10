@@ -10,7 +10,7 @@
     "start:prod": "NODE_ENV=production node build/server.js"
   },
   "dependencies": {
-    "@hiveio/dhive": "^1.2.1",
+    "@hiveio/dhive": "^1.2.3",
     "@loadable/component": "^5.15.2",
     "@loadable/server": "^5.15.2",
     "@material-ui/core": "^4.12.4",
