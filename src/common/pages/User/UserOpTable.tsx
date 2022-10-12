@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react';import axios from 'axios';
-import { match } from 'react-router-dom';
+import { Link, match } from 'react-router-dom';
 import { connect, useSelector } from 'react-redux';
 import { pageMapDispatchToProps, pageMapStateToProps, PageProps } from '../../pages/common';
 import { withPersistentScroll } from '../../components/with-persistent-scroll';
@@ -108,7 +108,7 @@ const TransactionOperationTable= (props:any) => {
                             {opVoter && <tr><td>{_t(`trans_table.voter`)}</td> <td>{opVoter}</td></tr>}
                             {opAuth && <tr><td>{_t(`trans_table.author`)}</td><td>{opAuth}</td></tr>}
                             {opBenefactor && <tr><td>{_t(`trans_table.benefactor`)}</td><td>{opBenefactor}</td></tr>}
-                            {opPermlink && <tr><td>{_t(`trans_table.permlink`)}</td><td>{opPermlink}</td></tr>}
+                            {opPermlink && <tr><td>{_t(`trans_table.permlink`)}</td><td><Link to={`/@${opAuth}/${opPermlink}`}>{opPermlink}</Link></td></tr>}
                             {opWeight && <tr><td>{_t(`trans_table.weight`)}</td><td>{opWeight}</td></tr>}
                             {opRshares && <tr><td>{_t(`trans_table.rshares`)}</td><td>{opRshares}</td></tr>}
                             {opTVweight && <tr><td>{_t(`trans_table.total_vote_weight`)}</td><td>{opTVweight}</td></tr>}

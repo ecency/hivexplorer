@@ -1,16 +1,11 @@
 
-import React, { useEffect, useMemo, useState } from 'react';
-import axios from 'axios';
-import { match } from 'react-router-dom';
+import React from 'react';
 import { connect } from 'react-redux';
-import { pageMapDispatchToProps, pageMapStateToProps, PageProps } from '../../pages/common';
+import { pageMapDispatchToProps, pageMapStateToProps } from '../../pages/common';
 import { withPersistentScroll } from '../../components/with-persistent-scroll';
-import Theme from '../../components/theme';
-import {renderPostBody, setProxyBase, catchPostImage} from "@ecency/render-helper";
+import {renderPostBody} from "@ecency/render-helper";
 
 import { _t } from '../../i18n';
-import { getPermLink } from '../../api/urls';
-import { Container } from 'react-bootstrap';
 
 interface EntryType {
     author:string,

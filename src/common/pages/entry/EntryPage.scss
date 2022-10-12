@@ -9,6 +9,12 @@
             border-radius: 100%;
         }
     }
+    .entry-parent{
+        padding: 10px 0 20px;
+        .card{
+            width: 100%;
+        }
+    }
     .accordion{
         .accordion-body{
             word-break: break-all;
@@ -42,6 +48,14 @@
 
             
         }
+        .accordion-item:first-of-type,.accordion-item:last-of-type{
+            border-radius: 0;
+        }
         
+    }
+    .permlink-discussion-content{
+        padding: 15px;
+        border: 1px solid #dee2e6;
+        border-top: 0;
     }
 }

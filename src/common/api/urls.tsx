@@ -49,6 +49,9 @@ export const getWitnesses=(limit:number)=>{
     return `${ConfigItems.baseUrl}/api/get_witnesses_by_vote?limit=${limit}`
 }
 
-export const getPermLink=(user:string,permlink:string)=>{
+export const getDiscussion=(user:string,permlink:string)=>{
+    return `${ConfigItems.baseUrl}/api/get_discussion?author=${user}&permlink=${permlink}`
+}
+export const getContent=(user:string,permlink:string)=>{
     return `${ConfigItems.baseUrl}/api/get_content?author=${user}&permlink=${permlink}`
 }

@@ -27,6 +27,7 @@ const WitnessesPage = loadable(()=>import('./pages/witnesses/WitnessesPage'))
 const ProposalsPage = loadable(()=>import('./pages/proposals/ProposalsPage'))
 const SingleProposalPage = loadable(()=>import('./pages/proposals/SingleProposalPage'))
 const EntryPage = loadable(() => import('./pages/entry/EntryPage'));
+const EntryComment= loadable(() => import('./pages/entry/EntryComment'));
 
 const App = ({ setLang }: any) => {
   const dispatch = useDispatch()
@@ -77,6 +78,7 @@ const App = ({ setLang }: any) => {
         <Route exact={true} path={routes.Proposals}  component={ProposalsPage}/>
         <Route exact={true} path={routes.SingleProposal}  component={SingleProposalPage}/>
         <Route exact={true} path={routes.Entry}  component={EntryPage}/>
+        <Route exact={true} path={routes.EntryComment}  component={EntryComment}/>
         <Route component={NotFound}/>
       </Switch>
       </>
