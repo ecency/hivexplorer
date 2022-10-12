@@ -68,9 +68,9 @@ const UserAuthorities = (props:any) => {
                        {typeof(field[key])!=="object"?
                         field[key]
                         :
-                        field[key].map((inner:any,i:number)=>{
+                        field[key].map((inner:any,j:number)=>{
                             return(
-                                <Row key={i}>
+                                <Row key={j}>
                                     <Col className="auth-col">{key==='account_auths'?
                                         <a href={`/@${inner[0]}`}>{inner[0]}</a>: <span>{inner[0]} </span> } 
                                         <span className="number-span">{`  `} {inner[1]}</span>

@@ -12,6 +12,7 @@ import { ConfigItems } from '../../../../../config';
 import { push } from 'connected-react-router';
 import { divide, values } from 'lodash';
 import JsonField from './JsonField';
+import JsonMetadata from '../../EntryContent/JsonMetadata';
 
 const timestampKeys=[
     "time",
@@ -55,7 +56,6 @@ const ObjectField = (props:any) => {
     const themeContrastColor = currTheme === 'day' ? '#535e65' : 'white';
     const rowBorder = currTheme === 'day' ? 'row-border border-color-day' : 'row-border border-color-night';
     const themeBtn = currTheme === 'day' ? 'showmore-btn btn-light' : 'showmore-btn btn-dark'
-    console.log('ops',transactionOperations)
     let transactionValue:transactionTypeList=[]
 
     const DateTimeMoment=(timeSet:string,timeFormat:string)=>{
@@ -115,9 +115,6 @@ const ObjectField = (props:any) => {
         )
     }
     const expand_view=(value:any,item:string)=>{
-        console.log('value',value)
-        console.log('trans value',transactionValue)
-
        return(
         <Row className={`${rowBorder} mt-1`}>
             <Col md={6} xs={12}>
@@ -189,15 +186,17 @@ const ObjectField = (props:any) => {
             <Col md={9} xs={12}>
                 {item==='voting_manabar' || item ==='downvote_manabar'?
                     <table className='time-date-table'>
-                    <tr>
-                        <td>current_mana</td>
-                        <td>{value.current_mana}</td>
-                    </tr>
-                    <tr>
-                        <td>Time</td>
-                        <td>{value.last_update_time}</td>
-                    </tr>
-                </table>
+                        <tbody>
+                            <tr>
+                                <td>current_mana</td>
+                                <td>{value.current_mana}</td>
+                            </tr>
+                            <tr>
+                                <td>Time</td>
+                                <td>{value.last_update_time}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 :  item==='transactions'? 
                 <>
                   {transactionValue.push(...value)}
@@ -215,6 +214,11 @@ const ObjectField = (props:any) => {
                 : item==='init_hbd_supply' || item==='current_hbd_supply' || item==='virtual_supply'?
                 <> 
                     {value.amount}
+                </>
+                :
+                item==='json_metadata' && label_for==="entry" ?
+                <>
+                    <JsonMetadata data={value} />
                 </>
                 :
                 <>

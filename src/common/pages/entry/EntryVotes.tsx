@@ -1,31 +1,22 @@
 
-import React, { useEffect, useMemo, useState } from 'react';
-import axios from 'axios';
-import { Link, match } from 'react-router-dom';
+import React from 'react';
 import { connect } from 'react-redux';
 import { pageMapDispatchToProps, pageMapStateToProps, PageProps } from '../../pages/common';
 import { withPersistentScroll } from '../../components/with-persistent-scroll';
-import Theme from '../../components/theme';
-import {renderPostBody, setProxyBase, catchPostImage} from "@ecency/render-helper";
-
 import { _t } from '../../i18n';
-import { getPermLink } from '../../api/urls';
-import { Container } from 'react-bootstrap';
 import { activeVotes } from './EntryTypes';
+import { Link } from 'react-router-dom';
 import {
-    Box,
-    Collapse,
-    IconButton,
-    Paper,
+
     Table,
     TableBody,
     TableCell,
     TableContainer,
     TableHead,
-    TablePagination,
     TableRow,
     TextField,
    } from '@material-ui/core'
+
 
 
 interface Column {

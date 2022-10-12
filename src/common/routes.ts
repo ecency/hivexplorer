@@ -12,5 +12,6 @@ export default {
     Witnesses:'/witnesses',
     Proposals:"/proposals",
     SingleProposal:"/proposals/:id",
-    Entry:"/@:user_id/:permlink"
+    Entry:"/@:user_id/:permlink",
+    EntryComment:"/:category/@:user_id/:permlink"
 };
