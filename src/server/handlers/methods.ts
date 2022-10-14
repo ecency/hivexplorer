@@ -432,6 +432,16 @@ export const methods = [
     "params": ["accounts"]
   },
   {
+    "api": "rc_api",
+    "method": "list_rc_direct_delegations",
+    "params": ["start", "limit"]
+  },
+  {
+    "api": "rc_api",
+    "method": "list_rc_accounts",
+    "params": ["start", "limit"]
+  },
+  {
     "api": "database_api",
     "method": "list_proposals",
     "params": ["start", "limit", "order", "order_direction", "status"]
