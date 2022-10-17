@@ -16,12 +16,16 @@ import { _t } from '../../i18n';
 import { proposalsType } from './ProposalsPage';
 import { EntryType } from '../entry/EntryTypes';
 import { renderPostBody, setProxyBase, catchPostImage } from "@ecency/render-helper";
+import { LoaderSpinner } from '../../img/svg';
+import { TrainRounded } from '@material-ui/icons';
+import SpinnerEffect from '../../components/loader/spinner';
 
 
 const SingleProposalPage = (props: any) => {
     const { match } = props
     const proposalId = match.params.id
     const [singleProposal, setSingleProposal] = useState<proposalsType>()
+    const [loading, setLoading] = useState(true);
     let find_proposal = getSingleProposal(proposalId)
     const [entry, setEntry] = useState<EntryType>()
     useEffect(() => {
@@ -33,12 +37,24 @@ const SingleProposalPage = (props: any) => {
         })
     }, [])
     useEffect(() => {
+
         if (singleProposal) {
             const permlink_url = getContent(singleProposal[0].creator, singleProposal[0].permlink)
-            console.log(permlink_url)
-            axios.get(permlink_url).then(resp => {
-                setEntry(resp.data)
-            })
+            // console.log(permlink_url)
+            // axios.get(permlink_url).then(resp => {
+            //     setEntry(resp.data)
+            // })
+            const fetchData = async () =>{
+                setLoading(true);
+                try {
+                  const {data: response} = await axios.get(permlink_url);
+                  setEntry(response);
+                } catch (error:any) {
+                  console.error(error.message);
+                }
+                setLoading(false);
+              }
+              fetchData();
         }
     }, [singleProposal])
     return (
@@ -52,7 +68,8 @@ const SingleProposalPage = (props: any) => {
                 <div>
                     {singleProposal && <ProposalCard proposalData={singleProposal[0]} />}
                 </div>
-                {entry && <div className="the-entry">
+                {loading && <SpinnerEffect />}
+                {!loading && entry && <div className="the-entry">
                     <div className="entry-body markdown-view user-selectable" dangerouslySetInnerHTML={{ __html: renderPostBody(entry.body, false) }} />
                 </div>}
             </Container>

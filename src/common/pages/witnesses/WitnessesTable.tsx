@@ -209,11 +209,7 @@ const WitnessRow=(props:any)=>{
   }
   return (
     <>
-    <Container className="data-table-hive witnesses-container py-5">
-        <div className="witness-header">
-            <h1>{_t('witnesses.page_title')}</h1>
-            <p>{_t('witnesses.page_intro')}</p>
-        </div>
+   
      
     <Paper 
         id="witnesses-paper"
@@ -272,8 +268,7 @@ const WitnessRow=(props:any)=>{
       }
      
     </Paper>
-    </Container>
-  
+
     </>
   );
 };

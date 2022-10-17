@@ -9,19 +9,14 @@ import {
   Table,
   TableBody,
   TableCell,
-  TableContainer,
   IconButton,
-  TableFooter,
   TableHead,
   TablePagination,
   TableRow,
   TextField,
   Collapse,
   Box,
-  Typography,
  } from '@material-ui/core';
-import { Card, Container } from 'react-bootstrap';
-import moment from "moment";
 import { useSelector } from "react-redux";
 import { _t } from "../../i18n";
 import { ConfigItems } from "../../../../config";
@@ -30,6 +25,7 @@ import { UserTransactionType } from "./UserTypes";
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import TransactionOperationTable from "./UserOpTable";
+import SpinnerEffect from "../../components/loader/spinner";
 
 
 interface Column {
@@ -49,7 +45,7 @@ interface UserTransactionTypeList extends Array<UserTransactionType>{}
 const UserTransactionsTable = (props:any) => {
     const {user}=props
     const [page, setPage] = useState(0);
-   
+    const [loading, setLoading] = useState(true);
     const [rowsPerPage, setRowsPerPage] = useState(25);
     const [transactionFrom,setTransactionForm]=useState(100)
     const [transactionLimit,setTransactionLimit]=useState(100)
@@ -60,9 +56,20 @@ const UserTransactionsTable = (props:any) => {
     const user_transaction_url=`${ConfigItems.baseUrl}/api/get_account_history?account=${user}&start=${transactionFrom}&limit=${transactionLimit}`
 
     useEffect(()=>{
-          axios.get(user_transaction_url).then(resp=>{
-            setUserTransaction(resp.data.history)
-          })
+          // axios.get(user_transaction_url).then(resp=>{
+          //   setUserTransaction(resp.data.history)
+          // })
+          const fetchData = async () =>{
+            setLoading(true);
+          try {
+            const {data: response} = await axios.get(user_transaction_url);
+            setUserTransaction(response.history);
+          } catch (error:any) {
+            console.error(error.message);
+          }
+          setLoading(false);
+        }
+        fetchData();
       },[])
       const [inputText, setInputText] = useState("");
       let inputHandler = (e:any) => {
@@ -82,10 +89,6 @@ const UserTransactionsTable = (props:any) => {
           }
         }
     })
-
-    const Date_time=(timeSet:string,timeFormat:string)=>{
-      return moment(timeSet).format(timeFormat)
-    }
     const handleChangePage = (event: unknown, newPage: number) => {
       setPage(newPage);
     };
@@ -130,7 +133,8 @@ const UserTransactionsTable = (props:any) => {
 }
   return (
     <>
-    <div className={currTheme==='day'? "transaction-table-day px-2 pt-4":"transaction-table-night px-2 pt-4"}>
+     {loading && <SpinnerEffect />}
+     {!loading && <div className={currTheme==='day'? "transaction-table-day px-2 pt-4":"transaction-table-night px-2 pt-4"}>
     <Paper className={currTheme==='day'? "paper-day text-dark table-paper":'paper-night text-white table-paper'}>
     <TextField
         id="outlined-basic"
@@ -171,7 +175,8 @@ const UserTransactionsTable = (props:any) => {
        onRowsPerPageChange={handleChangeRowsPerPage}
      />
       }
-    </div>
+    </div>}
+    
    
     </>
   );

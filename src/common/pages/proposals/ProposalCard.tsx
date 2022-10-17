@@ -1,20 +1,13 @@
 
-import React, { useEffect, useState } from 'react';import axios from 'axios';
-import { match,Link } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import { connect, useSelector } from 'react-redux';
-import { pageMapDispatchToProps, pageMapStateToProps, PageProps } from '../common';
+import { pageMapDispatchToProps, pageMapStateToProps } from '../common';
 import { withPersistentScroll } from '../../components/with-persistent-scroll';
-import { ConfigItems } from '../../../../config';
-import { HomeTransactionType } from '../../components/home/TransactionsComponent';
-import Theme from '../../components/theme';
-import { Card, Container } from 'react-bootstrap';
-import {  Paper } from '@material-ui/core';
+import { Card } from 'react-bootstrap';
 import { _t } from '../../i18n';
-import { spawn } from 'child_process';
-import moment from 'moment';
-import { getAccount } from '../../api/urls';
-import parseAsset from '../../helper/parse-asset';
 import { ClippedLink } from '../../img/svg';
+import { CreatedDate } from '../../api/dateTime';
 
 export interface proposalsType {
     id: Number
@@ -49,9 +42,7 @@ const ProposalCard = (props:any) => {
         total_votes
     }:proposalsType=proposalData
     const currTheme = useSelector((state:any) => state.global.theme)
-    const readDate=(date:string)=>{
-        return  moment.utc(date).format("LL");
-    }
+
     return (
         <>
         {proposalData &&  
@@ -83,7 +74,7 @@ const ProposalCard = (props:any) => {
                     </span>
                 }
                 <span className='pl-2'>
-                    {start_date && <>{readDate(start_date)}{` - `}{readDate(end_date)}</>}
+                    {start_date && <>{CreatedDate(start_date)}{` - `}{CreatedDate(end_date)}</>}
                 </span>
                </p>
                <p>

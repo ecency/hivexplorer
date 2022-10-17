@@ -17,6 +17,7 @@ import { response } from 'express';
 import numeral from 'numeral';
 import { _t } from '../../i18n';
 import BackToTopButton from '../../components/Buttons/BackToTop';
+import SpinnerEffect from '../../components/loader/spinner';
 
 enum Filter {
     ALL = "all",
@@ -50,6 +51,7 @@ const ProposalsPage = (props:any) => {
     const [totalBudget,setTotalBudget]=useState<number>()
     const [dailyBudget,setDailyBudget]=useState<number>()
     const [dailyFunded,setDailyFunded]=useState<number>()
+    const [loading, setLoading] = useState(true);
     const [isReturnProposalId,setReturnProposalId]=useState<number | null>(null)
     let proposals:proposalsTypeList
     let expiredProposals
@@ -59,41 +61,82 @@ const ProposalsPage = (props:any) => {
     useEffect(()=>{
         let proposals_url=getProposals("all")
         console.log(proposals_url)
-        axios.get(proposals_url).then(res=>{
-            proposals=res.data.proposals
+        // axios.get(proposals_url).then(res=>{
+        //     proposals=res.data.proposals
 
-            // filtering Expired Proposals
-            expiredProposals = proposals.filter((x:proposalsType) => x.status === "expired");
-            // Sorting Expired Proposals
-            expiredProposals = expiredProposals.sort((a, b) => parseFloat(b.total_votes.toLocaleString()) - parseFloat(a.total_votes.toLocaleString()));
-            // filtering active Proposals
-            activeProposals = proposals.filter((x:proposalsType) => x.status === "active");
-            // sorting active proposals
-            activeProposals = activeProposals.sort((a, b) => parseFloat(b.total_votes.toLocaleString()) - parseFloat(a.total_votes.toLocaleString()));
-            // InActive Proposals
-            inactiveProposals = proposals.filter((x:proposalsType) => x.status === "inactive");
-            // Sorting In Active
-            inactiveProposals = inactiveProposals.sort((a, b) => parseFloat(b.total_votes.toLocaleString()) - parseFloat(a.total_votes.toLocaleString()));
-            // All Proposals 
-            proposals=[...activeProposals,...inactiveProposals,...expiredProposals]
-            const entireProposals=proposals
-            setAllProposals(entireProposals)
-            setFilteredProposals(entireProposals)
+        //     // filtering Expired Proposals
+        //     expiredProposals = proposals.filter((x:proposalsType) => x.status === "expired");
+        //     // Sorting Expired Proposals
+        //     expiredProposals = expiredProposals.sort((a, b) => parseFloat(b.total_votes.toLocaleString()) - parseFloat(a.total_votes.toLocaleString()));
+        //     // filtering active Proposals
+        //     activeProposals = proposals.filter((x:proposalsType) => x.status === "active");
+        //     // sorting active proposals
+        //     activeProposals = activeProposals.sort((a, b) => parseFloat(b.total_votes.toLocaleString()) - parseFloat(a.total_votes.toLocaleString()));
+        //     // InActive Proposals
+        //     inactiveProposals = proposals.filter((x:proposalsType) => x.status === "inactive");
+        //     // Sorting In Active
+        //     inactiveProposals = inactiveProposals.sort((a, b) => parseFloat(b.total_votes.toLocaleString()) - parseFloat(a.total_votes.toLocaleString()));
+        //     // All Proposals 
+        //     proposals=[...activeProposals,...inactiveProposals,...expiredProposals]
+        //     const entireProposals=proposals
+        //     setAllProposals(entireProposals)
+        //     setFilteredProposals(entireProposals)
      
-            if(proposalStatus==="all"){
-                setFilteredProposals(entireProposals)
+        //     if(proposalStatus==="all"){
+        //         setFilteredProposals(entireProposals)
+        //     }
+        //     if(proposalStatus==="active"){
+        //         setFilteredProposals([...activeProposals])
+        //     }
+        //     if(proposalStatus==="inactive"){
+        //         setFilteredProposals([...inactiveProposals])
+        //     }
+        //       if(proposalStatus==="expired"){
+        //         console.log('proposal',proposalStatus)
+        //         setFilteredProposals([...expiredProposals])
+        //     }    
+        // })
+        const fetchData = async () =>{
+            setLoading(true);
+            try {
+              const {data: response} = await axios.get(proposals_url);
+              proposals=response.proposals  
+              expiredProposals = proposals.filter((x:proposalsType) => x.status === "expired");
+              // Sorting Expired Proposals
+              expiredProposals = expiredProposals.sort((a, b) => parseFloat(b.total_votes.toLocaleString()) - parseFloat(a.total_votes.toLocaleString()));
+              // filtering active Proposals
+              activeProposals = proposals.filter((x:proposalsType) => x.status === "active");
+              // sorting active proposals
+              activeProposals = activeProposals.sort((a, b) => parseFloat(b.total_votes.toLocaleString()) - parseFloat(a.total_votes.toLocaleString()));
+              // InActive Proposals
+              inactiveProposals = proposals.filter((x:proposalsType) => x.status === "inactive");
+              // Sorting In Active
+              inactiveProposals = inactiveProposals.sort((a, b) => parseFloat(b.total_votes.toLocaleString()) - parseFloat(a.total_votes.toLocaleString()));
+              // All Proposals 
+              proposals=[...activeProposals,...inactiveProposals,...expiredProposals]
+              const entireProposals=proposals
+              setAllProposals(entireProposals)
+              setFilteredProposals(entireProposals)
+       
+              if(proposalStatus==="all"){
+                  setFilteredProposals(entireProposals)
+              }
+              if(proposalStatus==="active"){
+                  setFilteredProposals([...activeProposals])
+              }
+              if(proposalStatus==="inactive"){
+                  setFilteredProposals([...inactiveProposals])
+              }
+                if(proposalStatus==="expired"){
+                  console.log('proposal',proposalStatus)
+                  setFilteredProposals([...expiredProposals])
+              }    
+            } catch (error:any) {
+              console.error(error.message);
             }
-            if(proposalStatus==="active"){
-                setFilteredProposals([...activeProposals])
-            }
-            if(proposalStatus==="inactive"){
-                setFilteredProposals([...inactiveProposals])
-            }
-              if(proposalStatus==="expired"){
-                console.log('proposal',proposalStatus)
-                setFilteredProposals([...expiredProposals])
-            }    
-        })
+            setLoading(false);
+          }
+          fetchData();
     },[proposalStatus])
    
     let eligible:any
@@ -191,7 +234,8 @@ const ProposalsPage = (props:any) => {
              </div>
              
              <div>
-               {filteredWitnessesData && Object.keys(filteredWitnessesData).map((key,i)=>{
+             {loading && <SpinnerEffect />}
+               {!loading && filteredWitnessesData && Object.keys(filteredWitnessesData).map((key,i)=>{
                     return (
                         <ProposalCard key={i} proposalData={filteredWitnessesData[key]} />
                     )

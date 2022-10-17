@@ -1,12 +1,12 @@
 
-import React,{useEffect} from 'react';
+import React from 'react';
 import { Button, Col, Row } from 'react-bootstrap';
 import { infoIcon } from '../../../img/svg';
 import './stringField.scss'
 import { useSelector } from 'react-redux';
 import { _t } from '../../../i18n';
 import { Link } from 'react-router-dom';
-import moment from 'moment';
+import { Date_time_table } from '../../../api/dateTime';
 
 const timestampKeys=[
     "time",
@@ -38,10 +38,6 @@ const StringField = (props:any) => {
     const currTheme = useSelector((state:any) => state.global.theme)
     const themeContrastColor = currTheme === 'day' ? '#535e65' : 'white';
     const rowBorder = currTheme === 'day' ? 'row-border border-color-day' : 'row-border border-color-night';
-
-    const DateTimeMoment=(timeSet:string,timeFormat:string)=>{
-        return moment(timeSet).format(timeFormat)
-      }
     const Date_time=(timeDate:string)=>{
         return(
             <>
@@ -49,11 +45,11 @@ const StringField = (props:any) => {
                    <tbody>
                    <tr>
                         <td>{_t('common.date')}</td>
-                        <td>{DateTimeMoment(`${timeDate}`,"YYYY-MM-DD")}</td>
+                        <td>{Date_time_table(`${timeDate}`,"YYYY-MM-DD")}</td>
                     </tr>
                     <tr>
                         <td>{_t('common.time')}</td>
-                        <td>{DateTimeMoment(`${timeDate}`,`hh:mm:ss`)}</td>
+                        <td>{Date_time_table(`${timeDate}`,`hh:mm:ss`)}</td>
                     </tr>
                    </tbody>
                 </table>

@@ -1,23 +1,14 @@
 
-import React,{useEffect} from 'react';
-import { Button, Col, Row } from 'react-bootstrap';
-import { infoIcon } from '../../../img/svg';
+import React from 'react';
 import './stringField.scss'
 import { useSelector } from 'react-redux';
 import { _t } from '../../../i18n';
 import { Link } from 'react-router-dom';
-import moment from 'moment';
 
 
 const JsonField = (props:any) => {
     const {transactionOperations}=props;
     const currTheme = useSelector((state:any) => state.global.theme)
-    const themeContrastColor = currTheme === 'day' ? 'black' : 'white';
-    const rowBorder = currTheme === 'day' ? 'row-border border-color-day' : 'row-border border-color-night';
-   
-    const DateTimeMoment=(timeSet:string,timeFormat:string)=>{
-        return moment(timeSet).format(timeFormat)
-      }
       const userType=[
         "voter",
         "author",

@@ -1,18 +1,15 @@
 
-import React,{useEffect, useState} from 'react';
+import React,{useState} from 'react';
 import { Button, Col, ListGroup, Row } from 'react-bootstrap';
 import { infoIcon, showLessIcon, showMoreIcon, trxIcon } from '../../../img/svg';
 import './ObjectField.scss'
 import { useSelector } from 'react-redux';
 import { _t } from '../../../i18n';
 import { Link } from 'react-router-dom';
-import moment from 'moment';
-import configureStore from '../../../store/configure';
 import { ConfigItems } from '../../../../../config';
-import { push } from 'connected-react-router';
-import { divide, values } from 'lodash';
 import JsonField from './JsonField';
 import JsonMetadata from '../../EntryContent/JsonMetadata';
+import { Date_time_table } from '../../../api/dateTime';
 
 const timestampKeys=[
     "time",
@@ -58,9 +55,7 @@ const ObjectField = (props:any) => {
     const themeBtn = currTheme === 'day' ? 'showmore-btn btn-light' : 'showmore-btn btn-dark'
     let transactionValue:transactionTypeList=[]
 
-    const DateTimeMoment=(timeSet:string,timeFormat:string)=>{
-        return moment(timeSet).format(timeFormat)
-      }
+  
     const Date_time=(timeDate:string)=>{
         return(
             <>
@@ -68,11 +63,11 @@ const ObjectField = (props:any) => {
                    <tbody>
                    <tr>
                         <td>{_t('common.date')}</td>
-                        <td>{DateTimeMoment(`${timeDate}`,"YYYY-MM-DD")}</td>
+                        <td>{Date_time_table(`${timeDate}`,"YYYY-MM-DD")}</td>
                     </tr>
                     <tr>
                         <td>{_t('common.time')}</td>
-                        <td>{DateTimeMoment(`${timeDate}`,`hh:mm:ss`)}</td>
+                        <td>{Date_time_table(`${timeDate}`,`hh:mm:ss`)}</td>
                     </tr>
                    </tbody>
                 </table>
@@ -219,6 +214,11 @@ const ObjectField = (props:any) => {
                 item==='json_metadata' && label_for==="entry" ?
                 <>
                     <JsonMetadata data={value} />
+                </>
+                :
+                item==='signatures'  ?
+                <>
+                    {value[0]}
                 </>
                 :
                 <>

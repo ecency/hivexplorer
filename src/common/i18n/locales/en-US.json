@@ -159,6 +159,7 @@
     "json_metadata": "Json Metadata",
     "posting_json_metadata":"Posting Json Metadata",
     "proxy": "Proxy",
+    "previous_owner_update":"Previous Owner Update",
     "last_owner_update": "Last Owner Update",
     "last_account_update": "Last Account Update",
     "created": "Created",

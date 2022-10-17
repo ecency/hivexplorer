@@ -1,36 +1,10 @@
 
-import React, {useState,useEffect} from "react";
-
-import '../../../style/dataTable/DataTables.scss'
-import { Link } from "react-router-dom";
-import {
-
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  IconButton,
-  TableFooter,
-  TableHead,
-  TablePagination,
-  TableRow,
-  TextField,
-  Collapse,
-  Box,
-  Typography,
- } from '@material-ui/core';
-import { Card, Col, Container, Row } from 'react-bootstrap';
-import moment from "moment";
-import { useSelector } from "react-redux";
+import React from "react";
+import { Col, Row } from 'react-bootstrap';
 import { _t } from "../../i18n";
-import { ConfigItems } from "../../../../config";
-import axios from "axios";
 import { UserTransactionType } from "./UserTypes";
-import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-import TransactionOperationTable from "./UserOpTable";
-import { type } from "os";
+import '../../../style/dataTable/DataTables.scss'
+
 
 
 interface Column {
