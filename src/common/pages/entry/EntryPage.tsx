@@ -1,24 +1,21 @@
 
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { match, Link } from 'react-router-dom';
+import {  Link } from 'react-router-dom';
 import { connect, useSelector } from 'react-redux';
-import { pageMapDispatchToProps, pageMapStateToProps, PageProps } from '../../pages/common';
+import { pageMapDispatchToProps, pageMapStateToProps } from '../../pages/common';
 import { withPersistentScroll } from '../../components/with-persistent-scroll';
 import Theme from '../../components/theme';
-import { renderPostBody, setProxyBase, catchPostImage } from "@ecency/render-helper";
 import './EntryPage.scss'
 import { _t } from '../../i18n';
 import { getDiscussion } from '../../api/urls';
 import { Accordion, Container } from 'react-bootstrap';
 import EntryBody from './EntryBody';
 import BackToTopButton from '../../components/Buttons/BackToTop';
-import { EntryType } from './EntryTypes';
-import moment from 'moment';
-import parseDate from '../../helper/parse-date';
 import EntryVotes from './EntryVotes';
 import EntryProperties from './EntryProperties';
-import { infoIcon, showLessIcon, showMoreIcon } from '../../img/svg';
+import { showLessIcon, showMoreIcon } from '../../img/svg';
+import SpinnerEffect from '../../components/loader/spinner';
 
 
 
@@ -34,21 +31,33 @@ const EntryPage = (props: any) => {
     const [openBody, setOpenBody] = useState(true)
     const [openProperties, setOpenProperties] = useState(false)
     const [openVotes, setOpenVotes] = useState(false)
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         console.log(permlink_url)
-        axios.get(permlink_url).then(res => {
-            console.log(res.data)
-            setEntry(res.data)
-        })
+        // axios.get(permlink_url).then(res => {
+        //     console.log(res.data)
+        //     setEntry(res.data)
+        // })
+        const fetchData = async () =>{
+            setLoading(true);
+            try {
+              const {data: response} = await axios.get(permlink_url);
+              setEntry(response);
+            } catch (error:any) {
+              console.error(error.message);
+            }
+            setLoading(false);
+          }
+          fetchData();
     }, [])
     return (
 
         <>
             <Theme global={props.global} />
             <Container className='entry-content-container'>
-                <>
-                    {entry && Object.keys(entry).slice(0, 1).map((key, i: number) => {
+                <>  {loading && <SpinnerEffect />}
+                    {!loading && entry && Object.keys(entry).slice(0, 1).map((key, i: number) => {
                         return (
                             <>  
                                 <h2>{entry[key].title}</h2>
@@ -92,11 +101,12 @@ const EntryPage = (props: any) => {
                                                 <EntryVotes votes={entry[key].active_votes} />
                                             </Accordion.Body>
                                         </Accordion.Item>}
-                                        <div className='permlink-discussion-content'>
+                                        
                                             {entry && Object.keys(entry).slice(1,).map((key, i: number) => {
                                                 return (
                                                     <>
                                                         <div key={i} >
+                                                        <div className='permlink-discussion-content'>
                                                             <Accordion className={currTheme === "day" ? "accordion-day" : "accordion_night"} defaultActiveKey={['0']} alwaysOpen={true}>
                                                                 <Accordion.Item eventKey="0" onClick={() => setOpenBody(!openBody)}>
                                                                     <Accordion.Body>
@@ -129,11 +139,12 @@ const EntryPage = (props: any) => {
                                                                 </Accordion.Item>}
                                                             </Accordion>
                                                         </div>
+                                                        </div>
                                                         <br />
                                                     </>
                                                 )
                                             })}
-                                        </div>
+                                        
 
                                     </Accordion>
                                 </div>

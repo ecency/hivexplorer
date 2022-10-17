@@ -19,6 +19,7 @@ import parseDate from '../../helper/parse-date';
 import EntryVotes from './EntryVotes';
 import EntryProperties from './EntryProperties';
 import { infoIcon, showLessIcon, showMoreIcon } from '../../img/svg';
+import SpinnerEffect from '../../components/loader/spinner';
 
 
 
@@ -34,20 +35,29 @@ const EntryCommentPage = (props: any) => {
     const [openBody, setOpenBody] = useState(true)
     const [openProperties, setOpenProperties] = useState(false)
     const [openVotes, setOpenVotes] = useState(false)
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         console.log(permlink_url)
-        axios.get(permlink_url).then(res => {
-            console.log(res.data)
-            setEntry(res.data)
-        })
+        const fetchData = async () =>{
+            setLoading(true);
+            try {
+              const {data: response} = await axios.get(permlink_url);
+              setEntry(response);
+            } catch (error:any) {
+              console.error(error.message);
+            }
+            setLoading(false);
+          }
+          fetchData();
     }, [])
     return (
         
         <>
             <Theme global={props.global}/>
             <Container className='entry-content-container'>
-            {entry &&  
+            {loading && <SpinnerEffect />}
+            {!loading && entry &&  
               
                 <>
                  <h2>{entry.title? entry.title:entry.permlink}</h2>

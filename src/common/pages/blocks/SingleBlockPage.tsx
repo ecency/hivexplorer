@@ -1,18 +1,17 @@
 
-import React, { useEffect, useState } from 'react';import axios from 'axios';
-import { match } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { connect } from 'react-redux';
-import { Col, Container, Row, Card,Button} from 'react-bootstrap';
+import { Container, Card,Button} from 'react-bootstrap';
 import { pageMapDispatchToProps, pageMapStateToProps, PageProps } from '../../pages/common';
 import { withPersistentScroll } from '../../components/with-persistent-scroll';
 import { ConfigItems } from '../../../../config';
 import StringField from '../../components/fields/blockFields/StringField';
-import { infoIcon } from '../../img/svg';
-import { transactionList } from '../../components/home/BlocksComponent';
 import Theme from '../../components/theme';
 import { _t } from '../../i18n';
 import ObjectField from '../../components/fields/blockFields/ObjectField';
 import BackToTopButton from '../../components/Buttons/BackToTop';
+import SpinnerEffect from '../../components/loader/spinner';
 
 export interface LatestBlock {
     block_id: string
@@ -32,18 +31,31 @@ const SingleBlock = (props:any) => {
     const {match} = props
     const [result, setResult] = useState<LatestBlock>();
     const [showMore, setShowMore] = useState(false);
+    const [loading, setLoading] = useState(true);
     const url_single_block = `${ConfigItems.baseUrl}/api/get_block?block_num=${match.params.id}`;
     useEffect(() => {
         console.log('block-url',url_single_block)
-        axios.get(url_single_block).then(response => {
-            setResult(response.data.block)
-        })
+        // axios.get(url_single_block).then(response => {
+        //     setResult(response.data.block)
+        // })
+        const fetchData = async () =>{
+            setLoading(true);
+          try {
+            const {data: response} = await axios.get(url_single_block);
+            setResult(response.block);
+          } catch (error:any) {
+            console.error(error.message);
+          }
+          setLoading(false);
+        }
+        fetchData();
        
     }, []);
     return (
         <>
             <Theme global={props.global}/>
-            <div className='head-block-detail'>
+            {loading && <SpinnerEffect />}
+            {!loading &&   <div className='head-block-detail'>
             <Container>
                     <Card>
                         <Card.Header>
@@ -64,7 +76,7 @@ const SingleBlock = (props:any) => {
                     </Card>
             </Container>
            
-            </div>
+            </div>}
             <BackToTopButton />
         </>
     )

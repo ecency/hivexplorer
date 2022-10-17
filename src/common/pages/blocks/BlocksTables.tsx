@@ -1,7 +1,6 @@
 
 
 import React, {useState } from "react";
-
 import '../../../style/dataTable/DataTables.scss'
 import { Link } from "react-router-dom";
 import {
@@ -15,19 +14,11 @@ import {
         TableRow,
         TextField,
        } from '@material-ui/core';
-// import Table from '@mui/material/Table';
-// import TableBody from '@mui/material/TableBody';
-// import TableCell from '@mui/material/TableCell';
-// import TableContainer from '@mui/material/TableContainer';
-// import TableHead from '@mui/material/TableHead';
-// import TablePagination from '@mui/material/TablePagination';
-// import TableRow from '@mui/material/TableRow';
-// import TextField from "@mui/material/TextField";
 import { Container } from 'react-bootstrap';
 import { HomeBlocksType } from "../../components/home/BlocksComponent";
-import moment from "moment";
 import { useSelector } from "react-redux";
 import { _t } from "../../i18n";
+import { Date_time_table } from "../../api/dateTime";
 
 
 interface Column {
@@ -78,9 +69,6 @@ const BlocksTables = (props:any) => {
       }
     }
 })
-const Date_time=(timeSet:string,timeFormat:string)=>{
-  return moment(timeSet).format(timeFormat)
-}
   return (
     <>
     <Container className="data-table-hive py-5">
@@ -120,8 +108,8 @@ const Date_time=(timeSet:string,timeFormat:string)=>{
                 return (
                   <TableRow hover={true} role="checkbox" tabIndex={-1} key={i}>
                     <TableCell><Link to={`/b/${block_number_page}`}>{block_number_page--}</Link></TableCell>
-                    <TableCell>{Date_time(`${block.timestamp}`,"YYYY-MM-DD")} </TableCell>
-                    <TableCell>{Date_time(`${block.timestamp}`,"hh:mm:ss")}</TableCell>
+                    <TableCell>{Date_time_table(`${block.timestamp}`,"YYYY-MM-DD")} </TableCell>
+                    <TableCell>{Date_time_table(`${block.timestamp}`,"hh:mm:ss")}</TableCell>
                     <TableCell>
                       <span>
                         <img className="avatar-img" src={`https://images.ecency.com/u/${block.witness}/avatar`} alt={block.witness} />

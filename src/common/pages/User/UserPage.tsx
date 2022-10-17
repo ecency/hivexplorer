@@ -1,17 +1,12 @@
 
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { match } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { pageMapDispatchToProps, pageMapStateToProps, PageProps } from '../../pages/common';
 import { withPersistentScroll } from '../../components/with-persistent-scroll';
-import { ConfigItems } from '../../../../config';
-import { Link } from 'react-router-dom';
 import Theme from '../../components/theme';
-import { Col, Container, Row, Card } from 'react-bootstrap';
+import { Container, Card } from 'react-bootstrap';
 import UserHeader from '../../components/user/UserHeader';
-import { kMaxLength } from 'buffer';
-import Paper from '@material-ui/core/Paper';
 import PropTypes from 'prop-types';
 import { Tab, Tabs } from '@material-ui/core';
 import { UserTypeList } from './UserTypes';
@@ -26,6 +21,7 @@ import { RCAccount } from '@hiveio/dhive/lib/chain/rc';
 import UserAuthorities from './UserAuthorities';
 import { getAccount, getRCAccount } from '../../api/urls';
 import BackToTopButton from '../../components/Buttons/BackToTop';
+import SpinnerEffect from '../../components/loader/spinner';
 
 
 interface UserList extends Array<UserTypeList>{}
@@ -60,9 +56,9 @@ function TabPanel(props:any) {
 const UserPage = (props:any) => {
     
     const {match} = props
-    const [rcUserName,setRcUserName]=useState("")
     const [userAccount,setUserAccount]=useState<UserList>()
     const [value, setValue] = useState(0);
+    const [loading, setLoading] = useState(true);
     const [rcAccount,setRCAccount]=useState<RCAccount>()
     const handleChange = (event:any, newValue:number) => {
         setValue(newValue);
@@ -72,10 +68,21 @@ const UserPage = (props:any) => {
     const rc_account_url=getRCAccount(userId);
     useEffect(()=>{
       console.log('account url',account_url)
-    axios.get(account_url).then(res => {
-        setUserAccount(res.data)
+        // axios.get(account_url).then(res => {
+        //   setUserAccount(res.data)
+        // })
+        const fetchData = async () =>{
+          setLoading(true);
+        try {
+          const {data: response} = await axios.get(account_url);
+          setUserAccount(response);
+        } catch (error:any) {
+          console.error(error.message);
+        }
+        setLoading(false);
+      }
+      fetchData();
 
-        })
     },[])
     useEffect(()=>{
   
@@ -96,7 +103,8 @@ const UserPage = (props:any) => {
         <>
             <Theme global={props.global}/>
             <Container className='user-container'>
-               {userAccount && rcAccount && userAccount.map((user,i)=>{
+                {loading && <SpinnerEffect />}
+               {!loading && userAccount && rcAccount && userAccount.map((user,i)=>{
                 console.log('rc1',rcAccount,rcPower(rcAccount))
                 const VPower=votingPower(user)
                 const DVPower=downVotingPower(user)

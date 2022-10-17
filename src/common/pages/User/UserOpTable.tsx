@@ -1,13 +1,7 @@
 
-import React, { useEffect, useState } from 'react';import axios from 'axios';
+import React from 'react';
 import { Link, match } from 'react-router-dom';
-import { connect, useSelector } from 'react-redux';
-import { pageMapDispatchToProps, pageMapStateToProps, PageProps } from '../../pages/common';
-import { withPersistentScroll } from '../../components/with-persistent-scroll';
-import { ConfigItems } from '../../../../config';
-import { HomeTransactionType } from '../../components/home/TransactionsComponent';
-import Theme from '../../components/theme';
-import TransactionsTables from '../transaction/TransactionsTables';
+import { useSelector } from 'react-redux';
 import { _t } from '../../i18n';
 
 
@@ -112,7 +106,7 @@ const TransactionOperationTable= (props:any) => {
                             {opWeight && <tr><td>{_t(`trans_table.weight`)}</td><td>{opWeight}</td></tr>}
                             {opRshares && <tr><td>{_t(`trans_table.rshares`)}</td><td>{opRshares}</td></tr>}
                             {opTVweight && <tr><td>{_t(`trans_table.total_vote_weight`)}</td><td>{opTVweight}</td></tr>}
-                            {opCreator && <tr><td>{_t(`trans_table.creator`)}</td><td>{opCreator}</td></tr>}
+                            {opCreator && <tr><td>{_t(`trans_table.creator`)}</td><td><a href={`@${opCreator}`}>{opCreator}</a></td></tr>}
                             {opAccount && <tr><td>{_t(`trans_table.account`)}</td><td>{opAccount}</td></tr>}
                             {opFrom && <tr><td>{_t(`trans_table.from`)}</td><td>{opFrom}</td></tr>}
                             {opTo && <tr><td>{_t(`trans_table.to`)}</td><td>{opTo}</td></tr>}

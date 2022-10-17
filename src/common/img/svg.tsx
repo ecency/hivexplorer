@@ -118,3 +118,15 @@ export const ClippedLink=()=>(
   <svg viewBox="0 0 24 24" width="24px" height="24px"><path fill="currentColor" d="M3.9,12C3.9,10.29 5.29,8.9 7,8.9H11V7H7A5,5 0 0,0 2,12A5,5 0 0,0 7,17H11V15.1H7C5.29,15.1 3.9,13.71 3.9,12M8,13H16V11H8V13M17,7H13V8.9H17C18.71,8.9 20.1,10.29 20.1,12C20.1,13.71 18.71,15.1 17,15.1H13V17H17A5,5 0 0,0 22,12A5,5 0 0,0 17,7Z" />
   </svg>
 )
+export const LoaderSpinner=()=>(
+  <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 38 38" stroke="#357ce6" >
+    <g fill="none" fill-rule="evenodd">
+        <g transform="translate(1 1)" stroke-width="2">
+            <circle stroke-opacity=".5" cx="18" cy="18" r="18"/>
+            <path d="M36 18c0-9.94-8.06-18-18-18">
+                <animateTransform attributeName="transform" type="rotate" from="0 18 18" to="360 18 18" dur="1s" repeatCount="indefinite"/>
+            </path>
+        </g>
+    </g>
+</svg>
+)

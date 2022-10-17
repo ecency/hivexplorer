@@ -1,5 +1,6 @@
 import React from "react"
-import { connect, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
+
 const TransactionOpTable=(props:any)=>{
   const {opTrans}=props
   const currTheme = useSelector((state:any) => state.global.theme)
