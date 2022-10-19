@@ -1,6 +1,7 @@
 .data-table-hive{
     .trans-table {
         margin: auto;
+        width: 80%;
         & th, td{
             border: 1px solid #706f70;
         border-collapse: collapse;
@@ -13,5 +14,8 @@
             word-break: break-all;
         }
         
+      }
+      .card-header-sort{
+        width: 110px;
       }
 }

@@ -26,6 +26,12 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import TransactionOperationTable from "./UserOpTable";
 import SpinnerEffect from "../../components/loader/spinner";
+import moment from "moment";
+import Button from 'react-bootstrap/Button';
+import Image from 'react-bootstrap/Image';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import { Tooltip } from "react-bootstrap";
+import { DateTimeTable, TimestampField } from "../../components/fields/blockFields/DateTimeTable";
 
 
 interface Column {
@@ -36,9 +42,10 @@ interface Column {
 const columns:Column[] = [
   { label: `${_t("common.transaction")}`,align: 'right',},
   { label: `${_t("common.block")}`,align: 'right',},
+  { label: `${_t("common.timestamp")}`,align: 'right',},
   { label: `${_t("common.transaction_num")}`,align: 'right',},
   { label: `${_t("common.type")}`,align: 'right',},
-  { label: `${_t("common.operation")}`,align: 'right',},
+  { label: `${_t("common.ops")}`,align: 'right',},
 ];
 
 interface UserTransactionTypeList extends Array<UserTransactionType>{}
@@ -47,11 +54,12 @@ const UserTransactionsTable = (props:any) => {
     const [page, setPage] = useState(0);
     const [loading, setLoading] = useState(true);
     const [rowsPerPage, setRowsPerPage] = useState(25);
-    const [transactionFrom,setTransactionForm]=useState(100)
-    const [transactionLimit,setTransactionLimit]=useState(100)
+    const [transactionFrom,setTransactionForm]=useState(1000)
+    const [transactionLimit,setTransactionLimit]=useState(1000)
     const currTheme = useSelector((state:any) => state.global.theme)
     const [userTransaction,setUserTransaction]=useState<UserTransactionTypeList>()
-    const [open,setOpen]=useState(false)
+    const [allOpen, setAllOpen] = useState(false);
+
 
     const user_transaction_url=`${ConfigItems.baseUrl}/api/get_account_history?account=${user}&start=${transactionFrom}&limit=${transactionLimit}`
 
@@ -63,6 +71,7 @@ const UserTransactionsTable = (props:any) => {
             setLoading(true);
           try {
             const {data: response} = await axios.get(user_transaction_url);
+            console.log(user_transaction_url)
             setUserTransaction(response.history);
           } catch (error:any) {
             console.error(error.message);
@@ -100,7 +109,7 @@ const UserTransactionsTable = (props:any) => {
     const TransRow=(props:any)=>{
       const {trans}=props
       const opTrans=trans[1].op
-      const [openRow,setOpenRow]=useState(false)
+      const [openRow,setOpenRow]=useState(allOpen)
 
   return(
     <>
@@ -111,9 +120,12 @@ const UserTransactionsTable = (props:any) => {
         <TableCell  className="transaction-table-data-cell py-2">
           <Link to={`/b/${trans[1].block}`}>{trans[1].block}</Link>
         </TableCell>
-        <TableCell className="transaction-table-data-cell py-2 text-center">{trans[0]}</TableCell>
+        <TableCell className="transaction-table-data-cell  px-0 text-center">
+          <TimestampField timestamp={trans[1].timestamp} />
+        </TableCell>
+        <TableCell className="transaction-table-data-cell py-2 col-w-100 text-center">{trans[0]}</TableCell>
         <TableCell className="transaction-table-data-cell py-2">{trans[1].op.type}</TableCell>
-        <TableCell>
+        <TableCell className="text-center col-w-100">
           <IconButton style={{color: currTheme==='day'? '#535e65':'#fcfcfc'}} aria-label="expand row" size="small" onClick={() => setOpenRow(!openRow)}>
             {openRow ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
@@ -149,6 +161,10 @@ const UserTransactionsTable = (props:any) => {
                 {columns.map((column,index) => (
                     <TableCell key={index} className="card-header py-2">
                       {column.label}
+                      {column.label===`${_t("common.ops")}`? 
+                       <IconButton style={{color: currTheme==='day'? '#535e65':'#fcfcfc'}} aria-label="expand row" size="small" onClick={() => setAllOpen(!allOpen)}>
+                            {allOpen ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                        </IconButton>:<></>}
                     </TableCell>
                   ))}
               </TableRow>
@@ -166,7 +182,7 @@ const UserTransactionsTable = (props:any) => {
     </Paper>
     {filteredTransactionsData && 
        <TablePagination
-       rowsPerPageOptions={[25,50, 100, 500]}
+       rowsPerPageOptions={[25,50, 100, 500,1000]}
        component="div"
        count={filteredTransactionsData.length}
        rowsPerPage={rowsPerPage}

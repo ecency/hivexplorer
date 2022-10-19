@@ -17,7 +17,7 @@ const AllTransactions = (props:any) => {
     const {match} = props
     const [loading, setLoading] = useState(true);
     const [transactions, setTransactions] = useState<TransactionList>([]);
-    const transactions_url=`${ConfigItems.baseUrl}/api/get_ops_in_block?block_num=66952823`;
+    const transactions_url=`${ConfigItems.baseUrl}/api/get_ops_in_block?block_num=68847337`;
       useEffect(()=>{
         axios.get(transactions_url).then(res => {
           console.log(transactions_url)

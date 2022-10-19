@@ -1,3 +1,4 @@
+@import '../../../style/colors';
 .appNav{
     position: fixed;
     width: 100%;
@@ -29,7 +30,7 @@
     
     .switch-theme-btn-night {
         border: none !important;
-        background-color: #161d26 !important;
+        background-color: $dark-grey-blue !important;
     }
     .nav-text-dark{
         a#nav-dropdown-blockchain,
@@ -58,7 +59,7 @@
 }
 
 .appNav-night {
-    background: #161d26;
+    background: $dark-grey-blue;
 }
 
 .appNav-day {

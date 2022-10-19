@@ -1,5 +1,5 @@
 
-import React, {useState } from "react";
+import React, {useEffect, useState } from "react";
 
 import '../../../style/dataTable/DataTables.scss'
 import { Link } from "react-router-dom";
@@ -25,6 +25,9 @@ import { _t } from "../../i18n";
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import TransactionOpTable from "./TransactionOpTable";
+import { showLessIcon, showMoreIcon } from "../../img/svg";
+import { sortBy } from "lodash";
+import TransactionOperationTable from "../User/UserOpTable";
 
 
 interface Column {
@@ -35,7 +38,9 @@ interface Column {
 const columns:Column[] = [
   { label: `${_t("common.id")}`,align: 'right',},
   { label: `${_t("common.date")}`,align: 'right',},
-  { label: `${_t("common.time")}`,align: 'right',},
+
+  { label: `${_t("common.trx_in_block")}`,align: 'right',},
+  { label: `${_t("common.op_in_trx")}`,align: 'right',},
   { label: `${_t("common.type")}`,align: 'right',},
   { label: `${_t("common.ops")}`,align: 'right',},
 ];
@@ -43,7 +48,8 @@ const columns:Column[] = [
 interface BlockList extends Array<HomeBlocksType>{}
 const TransactionsTables = (props:any) => {
 
- const TransactionsData=props.data
+ const [TransactionsData,setTransactionData]=useState(props.data)
+ 
   const [page, setPage] = useState(0);
   const [searched, setSearched] = useState("");
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -81,15 +87,35 @@ const TransactionsTables = (props:any) => {
 const Date_time=(timeSet:string,timeFormat:string)=>{
   return moment(timeSet).format(timeFormat)
 }
+
+const sortTransaction=(colName:string,sortState:boolean)=>{
+    console.log(colName,sortState,`${_t("common.trx_in_block")}`)
+    if(colName ===`${_t("common.trx_in_block")}` && sortState===true){
+      setTransactionData(filteredTransactionsData.sort(( b:any,a:any) => parseFloat(b.trx_in_block.toLocaleString()) - parseFloat(a.trx_in_block.toLocaleString())))
+    }
+    if(colName ===`${_t("common.trx_in_block")}` && sortState===false){
+      setTransactionData(filteredTransactionsData.sort(( b:any,a:any) => parseFloat(a.trx_in_block.toLocaleString()) - parseFloat(b.trx_in_block.toLocaleString())))
+    }
+    if(colName ===`${_t("common.op_in_trx")}` && sortState===true){
+      setTransactionData(filteredTransactionsData.sort(( b:any,a:any) => parseFloat(b.op_in_trx.toLocaleString()) - parseFloat(a.op_in_trx.toLocaleString())))
+    }
+    if(colName ===`${_t("common.op_in_trx")}` && sortState===false){
+      setTransactionData(filteredTransactionsData.sort(( b:any,a:any) => parseFloat(a.op_in_trx.toLocaleString()) - parseFloat(b.op_in_trx.toLocaleString())))
+    }
+  
+}
 const TransRow=(props:any)=>{
   const {transaction}=props
   const [open, setOpen] = useState(false);
   return(
     <>
         <TableRow hover={true} role="checkbox" tabIndex={-1}>
-        <TableCell><Link to={`/tx/${transaction.trx_id}`}>{transaction.trx_id}</Link></TableCell>
-        <TableCell>{Date_time(`${transaction.timestamp}`,"YYYY-MM-DD")}</TableCell>
-        <TableCell>{Date_time(`${transaction.timestamp}`,"hh:mm:ss")}</TableCell>
+        <TableCell><Link to={`/tx/${transaction.trx_id}`} >{transaction.trx_id}</Link></TableCell>
+        {/* <TableCell>{Date_time(`${transaction.timestamp}`,"YYYY-MM-DD")}</TableCell> */}
+        <TableCell>{moment(`${transaction.timestamp}`).fromNow()}</TableCell>
+       
+        <TableCell className="text-center px-2">{transaction.trx_in_block}</TableCell>
+        <TableCell  className="text-center px-2">{transaction.op_in_trx}</TableCell>
         <TableCell>{transaction.op.type}</TableCell>
         <TableCell>
           <IconButton style={{color: currTheme==='day'? '#535e65':'#fcfcfc'}} aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
@@ -101,7 +127,8 @@ const TransRow=(props:any)=>{
             <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
               <Collapse in={open} timeout="auto" unmountOnExit={true}>
                 <Box margin={1}>
-                  <TransactionOpTable opTrans={transaction.op} />
+                  {/* <TransactionOpTable opTrans={transaction.op} /> */}
+                  <TransactionOperationTable opTrans={...transaction.op} />
                 </Box>
               </Collapse>
             </TableCell>
@@ -127,12 +154,26 @@ const TransRow=(props:any)=>{
       <TableContainer className="pt-4">
           <Table  stickyHeader={true}  aria-label="sticky table">
             <TableHead className="card-header">
-              <TableRow >
-                {columns.map((column,index) => (
-                    <TableCell className="card-header" key={index}>
-                      {column.label} 
-                    </TableCell>
-                  ))}
+              <TableRow>
+                {columns.map((column,index) => {
+                   const [sortBtn, setSortBtn] = useState(false);
+                   console.log(index)
+                  return(
+                    <>
+                      {column.label===`${_t("common.trx_in_block")}` || column.label===`${_t("common.op_in_trx")}` ?
+                        <TableCell className="card-header px-2 card-header-sort" key={index+1}>
+                            {<><span 
+                            onClick={(e)=>{setSortBtn(!sortBtn);sortTransaction(e.currentTarget.innerText.substring(-1),sortBtn)}}>
+                            {column.label}{sortBtn? showLessIcon('#000'):showMoreIcon('#000')}</span></>}
+                        </TableCell>
+                        :
+                        <TableCell className="card-header" key={index+2}>
+                          {column.label}
+                        </TableCell>
+                       }
+                    </>
+                  )
+                })}
               </TableRow>
             </TableHead>
           <TableBody>

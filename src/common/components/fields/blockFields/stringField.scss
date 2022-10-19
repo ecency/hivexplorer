@@ -1,3 +1,4 @@
+@import '../../../../style/colors';
 .row-border{
     border-width: 0px 0px 1px 0;
     border-style: solid;
@@ -16,7 +17,7 @@
 }
 
 .border-color-night {
-    border-color: #161d26;
+    border-color: $dark-grey-blue;
 }
 .time-date-table {
     & th, td{
