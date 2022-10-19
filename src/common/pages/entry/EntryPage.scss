@@ -1,3 +1,4 @@
+@import '../../../style/colors';
 .entry-content-container{
     padding: 5rem 0;
     .entry-header{
@@ -35,7 +36,7 @@
                 background-color: transparent;
                 color: #fff;
                 .accordion-button{
-                    background: #161d26;
+                    background: $dark-grey-blue;
                     color: #fff;
                     &::after{
                         display: none;

@@ -8,6 +8,7 @@ import { Card } from 'react-bootstrap';
 import { _t } from '../../i18n';
 import { ClippedLink } from '../../img/svg';
 import { CreatedDate } from '../../api/dateTime';
+import moment from 'moment';
 
 export interface proposalsType {
     id: Number
@@ -74,7 +75,7 @@ const ProposalCard = (props:any) => {
                     </span>
                 }
                 <span className='pl-2'>
-                    {start_date && <>{CreatedDate(start_date)}{` - `}{CreatedDate(end_date)}</>}
+                    {start_date && <>{CreatedDate(start_date)}{` - `}{CreatedDate(end_date)}</>} <span>({moment().diff(end_date,'days').toString().substring(1,)} Days Left)</span>
                 </span>
                </p>
                <p>

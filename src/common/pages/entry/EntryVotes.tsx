@@ -14,6 +14,7 @@ import {
     TableHead,
     TableRow,
    } from '@material-ui/core'
+import moment from 'moment';
 
 
 
@@ -56,11 +57,11 @@ const EntryVotes = (props:any) => {
             return(
                 <TableRow key={i} hover={true} role="checkbox" tabIndex={-1}>
                 <TableCell><Link to={`/@${vote.voter}`}>{vote.voter}</Link></TableCell>
-                <TableCell>{vote.weight}</TableCell>
-                <TableCell>{vote.percent}</TableCell>
-                <TableCell>{vote.rshares}</TableCell>
-                <TableCell>{vote.reputation}</TableCell>
-                <TableCell>{vote.time}</TableCell>
+                <TableCell>{vote.weight? vote.weight:"-N/A"}</TableCell>
+                <TableCell>{vote.percent? vote.percent : "-N/A"}</TableCell>
+                <TableCell>{vote.rshares? vote.rshares : "-N/A"}</TableCell>
+                <TableCell>{vote.reputation? vote.reputation : "-N/A"}</TableCell>
+                <TableCell>{vote.time? moment(`${vote.time}`).fromNow(): "-N/A"}</TableCell>
               </TableRow>
             )
         })}

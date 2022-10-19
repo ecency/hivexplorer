@@ -3,12 +3,12 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { withPersistentScroll } from '../with-persistent-scroll';
 import { Col, Row } from 'react-bootstrap';
-import { ConfigItems } from '../../../../config';
-import { pageMapDispatchToProps, pageMapStateToProps, PageProps } from '../../pages/common';
-import moment from 'moment';
+import { pageMapDispatchToProps, pageMapStateToProps} from '../../pages/common';
 import { _t } from '../../i18n';
 import { Link } from 'react-router-dom';
 import { getTransactions } from '../../api/urls';
+import { Date_time_table } from '../../api/dateTime';
+import SpinnerEffect from '../loader/spinner';
 
 
 export interface op_type {
@@ -34,24 +34,32 @@ export interface HomeTransactionType {
 
 export interface HomeTransactionList extends Array<HomeTransactionType>{}
 const HomeTransactions = (props:any) => {
+  const [loading, setLoading] = useState(true);
     const [homeTransactions, setHomeTransactions] = useState<HomeTransactionList>([]);
     const blockNum=67065450
     const home_transactions_url=getTransactions(blockNum-10);
       useEffect(()=>{
-        axios.get(home_transactions_url).then(res => {
-            setHomeTransactions(res.data.ops)
-            
-          })
-         
+        // axios.get(home_transactions_url).then(res => {
+        //     setHomeTransactions(res.data.ops)
+        //   })
+          const fetchData = async () =>{
+            setLoading(true);
+          try {
+            const {data: response} = await axios.get(home_transactions_url);
+            const blocks_response=response.blocks
+            setHomeTransactions(response.ops)
+          } catch (error:any) {
+            console.error(error.message);
+          }
+          setLoading(false);
+        }
+        fetchData();
       },[])
-      const Date_time=(timeSet:string,timeFormat:string)=>{
-        return moment(timeSet).format(timeFormat)
-      }
-      
-
+    
     return (
        <>
-        {homeTransactions && homeTransactions.slice(0,10).map((trans,index)=>{
+       {loading && <SpinnerEffect />}
+        {!loading && homeTransactions && homeTransactions.slice(0,10).map((trans,index)=>{
           const req_auths:string[]=trans.op.value.required_auths
           const posting_auths:string[]=trans.op.value.required_posting_auths
 
@@ -71,26 +79,33 @@ const HomeTransactions = (props:any) => {
                  </Col>
                  <Col md={12} xs={12}>
                     <Row>
-                        <Col md={6}>{_t('common.date')}: {Date_time(trans.timestamp,'YYYY-MM-DD')}</Col>
-                        <Col md={6} >{_t('common.time')}: {Date_time(trans.timestamp,'hh:mm:ss')}</Col>
+                        <Col md={6}>{_t('common.date')}: {Date_time_table(trans.timestamp,'YYYY-MM-DD')}</Col>
+                        <Col md={6} >{_t('common.time')}: {Date_time_table(trans.timestamp,'hh:mm:ss')}</Col>
                     </Row>
                  </Col>
                  <Col md={12} xs={12}>
                     <Row>
                         {req_auths.length !==0 && 
-                        <Col md={6}>{_t('common.req_auth')}: 
+                        <Col md={12}>{_t('common.req_auth')}: 
                             {req_auths.map((user:string,i:number)=>{
                               return(
-                                <img className='avatar-img' src={`https://images.ecency.com/u/${user}/avatar`} key={i} alt="" />
+                                <>
+                                <img className='avatar-img px-1' src={`https://images.ecency.com/u/${user}/avatar`} key={i} alt="" />
+                                <Link to={`@${user}`}>{user}</Link>
+                                </>
                               )
                             })}
                         </Col>
                         }
                         {posting_auths.length!==0 &&
-                         <Col md={6}>{_t('common.req_post_auth')}:
+                         <Col md={12}>{_t('common.req_post_auth')}:
                           {posting_auths.map((user:string,i:number)=>{
                               return(
-                                <img className='avatar-img' src={`https://images.ecency.com/u/${user}/avatar`} key={i} alt="" />
+                                <>
+                                <img className='avatar-img px-1' src={`https://images.ecency.com/u/${user}/avatar`} key={i} alt="" />
+                                <Link to={`@${user}`}>{user}</Link>
+                                </>
+
                               )
                             })}
                         </Col>}

@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import { _t } from '../../../i18n';
 import { Link } from 'react-router-dom';
 import { Date_time_table } from '../../../api/dateTime';
+import { DateTimeTable } from './DateTimeTable';
 
 const timestampKeys=[
     "time",
@@ -38,24 +39,7 @@ const StringField = (props:any) => {
     const currTheme = useSelector((state:any) => state.global.theme)
     const themeContrastColor = currTheme === 'day' ? '#535e65' : 'white';
     const rowBorder = currTheme === 'day' ? 'row-border border-color-day' : 'row-border border-color-night';
-    const Date_time=(timeDate:string)=>{
-        return(
-            <>
-                <table className='time-date-table'>
-                   <tbody>
-                   <tr>
-                        <td>{_t('common.date')}</td>
-                        <td>{Date_time_table(`${timeDate}`,"YYYY-MM-DD")}</td>
-                    </tr>
-                    <tr>
-                        <td>{_t('common.time')}</td>
-                        <td>{Date_time_table(`${timeDate}`,`hh:mm:ss`)}</td>
-                    </tr>
-                   </tbody>
-                </table>
-            </>
-        )
-    }
+
 
     return (
         <Row className={rowBorder}  key={number}>
@@ -69,7 +53,7 @@ const StringField = (props:any) => {
     
                     :item==="transaction_ids"? <Button >{value}</Button>
                     :timestampKeys.includes(item)?
-                       Date_time(value)
+                    DateTimeTable(value)
                     :value}
             </Col>
         </Row>

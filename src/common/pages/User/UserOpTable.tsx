@@ -3,6 +3,8 @@ import React from 'react';
 import { Link, match } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { _t } from '../../i18n';
+import { AuthorityObject } from './UserAuthorities';
+import { object } from 'prop-types';
 
 
 
@@ -50,9 +52,19 @@ const TransactionOperationTable= (props:any) => {
     const opTotalPayoutVal=opVal.total_payout_value
     const opCuratorPayoutVal=opVal.curator_payout_value
     const opBenefPayoutVal=opVal.beneficiary_payout_value
-
+    const opRequiredAuths=opVal.required_auths
+    const opRequiredPostingAuths=opVal.required_posting_auths
+    const opNewAccountName=opVal.new_account_name
+    const opInitialVestingShares=opVal.initial_vesting_shares
+    const opInitialDelegation=opVal.initial_delegation
+    const opActive=opVal.active
+    const opPosting=opVal.posting
+    const opMemoKey=opVal.memo_key
+    const opJsonMeta=opVal.json_metadata
+  
 
     const currTheme = useSelector((state:any) => state.global.theme)
+    console.log('location',window.location.href.includes("@"))
     const OpValArray=new Array()
     OpValArray.push(opRewardHive,opVestShare)
 
@@ -81,7 +93,18 @@ const TransactionOperationTable= (props:any) => {
             </tr>
         )
     }
-
+    function opNestedObject(field:any,name:string){
+        return(
+            <tr>
+            <td>{_t(`trans_table.${name}`)}</td>
+            <td>
+                {typeof(field)!=="object"? field:
+                    <AuthorityObject {...field} />
+                }
+             </td>
+        </tr>
+        )
+    }
     return (
         <>
              <table className={currTheme==='day'?'text-dark trans-table':'text-white trans-table'} >
@@ -98,7 +121,14 @@ const TransactionOperationTable= (props:any) => {
                             {opProd && <tr><td>{_t(`trans_table.producer`)}</td><td>{opProd}</td></tr>}
                             {opCurator && <tr><td>{_t(`trans_table.curator`)}</td><td>{opCurator}</td></tr>}
                             {opPublish && <tr><td>{_t(`trans_table.publisher`)}</td><td>{opPublish}</td></tr>}
-                            {opOwner && <tr><td>{_t(`trans_table.owner`)}</td><td>{opOwner}</td></tr>}
+                            {opMemoKey && <tr><td>{_t(`trans_table.memo_key`)}</td><td>{opMemoKey}</td></tr>}
+                            {opOwner && opNestedObject(opOwner,'owner')}
+    
+                            {opActive && opNestedObject(opActive,'active')}
+                    
+                            {opPosting &&  opNestedObject(opPosting,'posting')}
+                            
+                            {opJsonMeta && <tr><td>{_t(`trans_table.json_meta`)}</td> <td>{opJsonMeta}</td></tr>}
                             {opVoter && <tr><td>{_t(`trans_table.voter`)}</td> <td>{opVoter}</td></tr>}
                             {opAuth && <tr><td>{_t(`trans_table.author`)}</td><td>{opAuth}</td></tr>}
                             {opBenefactor && <tr><td>{_t(`trans_table.benefactor`)}</td><td>{opBenefactor}</td></tr>}
@@ -112,7 +142,33 @@ const TransactionOperationTable= (props:any) => {
                             {opTo && <tr><td>{_t(`trans_table.to`)}</td><td>{opTo}</td></tr>}
                             {opMemo && <tr><td>{_t(`trans_table.memo`)}</td><td>{opMemo}</td></tr>}
                             {opAuthorRewards && <tr><td>{_t(`trans_table.author_rewards`)}</td><td>{opAuthorRewards}</td></tr>}
+                            {opRequiredAuths && opRequiredAuths.length!==0 && 
+                           <tr>
+                                <td style={{width:'175px'}}>{_t(`trans_table.required_auths`)}</td>
+                                <td>
+                                    {window.location.href.includes("@")?
+                                        <a href={`/@${opRequiredAuths[0]}`}>{opRequiredAuths[0]}</a>
+                                    :
+                                        <Link to={`/@${opRequiredAuths[0]}`}>{opRequiredAuths[0]}</Link>
+                                    }
+                                </td>
+                            </tr>
+                            }
+                            {opRequiredPostingAuths && opRequiredPostingAuths.length!==0 && 
+                            <tr>
+                                <td style={{width:'175px'}}>{_t(`trans_table.required_posting_auths`)}</td>
+                                <td>
+                                    {window.location.href.includes("@")?
+                                        <a href={`/@${opRequiredPostingAuths[0]}`}>{opRequiredPostingAuths[0]}</a>
+                                    :
+                                        <Link to={`/@${opRequiredPostingAuths[0]}`}>{opRequiredPostingAuths[0]}</Link>
+                                    }
+                                </td>
+                            </tr>
+                            }
+
                             {opId && <tr><td>{_t(`trans_table.id`)}</td><td>{opId}</td></tr>}
+
                             {opJson && <tr><td>{_t(`trans_table.json`)}</td><td>{opJson}</td></tr>}
                             {opCommentAuthor && <tr><td>{_t(`trans_table.comment_author`)}</td><td>{opCommentAuthor}</td></tr>}
                             {opCommentLink && <tr><td>{_t(`trans_table.comment_permlink`)}</td><td>{opCommentLink}</td></tr>}
@@ -124,14 +180,48 @@ const TransactionOperationTable= (props:any) => {
                                 <table>
                                     <tbody>
                                         <tr>
-                                        {opProps.map((pro:any)=>{
-                                            return(
-                                               <>
-                                                <tr><td>{pro[0]}</td></tr>
-                                                <tr><td>{pro[1]}</td></tr>
-                                               </>
-                                            )
-                                        })}
+                                            {typeof(opProps)!=="object"?
+                                            <>
+                                               {opProps.map((pro:any,i:number)=>{
+                                                return(
+                                                   <>
+                                                    <td key={1}>
+                                                        <table>
+                                                            <tbody>
+                                                            <tr><td>{pro[0]}</td></tr>
+                                                            <tr><td>{pro[1]}</td></tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                   </>
+                                                )
+                                            })}
+                                            </>:
+                                            <>
+                                             <table>
+                                                    <tbody>
+                                               {Object.keys(opProps).map((pro)=>{
+                                                return(
+                                                   <>
+                                                   {typeof(opProps[pro])!=="object" ?
+                                                        <tr>
+                                                            <td>{pro}</td>
+                                                            <td>{opProps[pro]}</td>
+                                                        </tr>
+                                                        :
+                                                        <>{opProps[pro] && OpObjectValue(opProps[pro],`${pro}`)}</>
+                                                
+                                                   }
+                                                   </>
+                                                )
+                                            })}
+                                            </tbody>
+                                                    </table>
+                                            </>
+                                          
+
+                                            }
+                                       
                                         </tr>
                                     </tbody>
                                 </table>
@@ -159,6 +249,10 @@ const TransactionOperationTable= (props:any) => {
 
                             {/* curators_vesting_payout */}
                             {opCuratorPayoutVal && OpObjectValue(opCuratorPayoutVal,'curators_vesting_payout')}
+
+                            {opInitialVestingShares && OpObjectValue(opInitialVestingShares,'initial_vesting_shares')}
+
+                            {opInitialDelegation && OpObjectValue(opInitialDelegation,'initial_delegation')}
                             
                               {opExchange &&
                                <tr>

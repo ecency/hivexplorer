@@ -1,3 +1,4 @@
+@import "../../../style/colors";
 .home{
     .search-form{
         width: 500px;
@@ -7,7 +8,7 @@
     }
     .card-row{
         padding: 10px;
-        border-bottom: 1px solid #efefef;
+        border-bottom: 1px solid $metallic-blue;
     }
     .block-row{
         padding: 1rem 0;
@@ -20,8 +21,11 @@
         }
         .avatar-img{
             height: 30px;
-            width: 30px;
+            width: 33px;
             border-radius: 100%;
+        }
+        .spinner-loader{
+            height: 100%;
         }
     }
     .search-dropdown{
@@ -55,7 +59,7 @@
 }
 
 .night-background {
-    background-color: #161d26;
-    border: 1px solid #161d26; 
+    background-color: $dark-grey-blue;
+    border: 1px solid $dark-grey-blue; 
 
 }

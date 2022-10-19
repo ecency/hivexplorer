@@ -34,13 +34,15 @@
     "block_id":"Block ID",
     "txns":"Txns",
     "ops":"Ops",
-    "trx_in_block":"Trx In Block",
+    "timestamp":"Timestamp",
+    "trx_in_block":"Trx in Block",
+    "op_in_trx":"Ops in Trx",
     "req_auth":"Req. Auth",
     "req_post_auth":"Req. Posting Auth",
     "info":"Info",
     "transaction":"Transaction",
     "authorities":"Authorities",
-    "transaction_num":"Transaction No",
+    "transaction_num":"Trx No",
     "user_names": "User Names",
     "no_search_result": "No record found against searched input."
   },
@@ -274,7 +276,9 @@
     "total_payout_value":"Total Payout Value",
     "curator_payout_value":"Curator Payout Value",
     "beneficiary_payout_value":" Beneficiary Payout Value",
-    "curators_vesting_payout":"Curators Vesting Payout"
+    "curators_vesting_payout":"Curators Vesting Payout",
+    "initial_vesting_shares":"Initial Vesting Shares",
+    "initial_delegation":"Initial Delegation"
   },
   "witnesses":{
     "id":"ID",
