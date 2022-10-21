@@ -16,6 +16,7 @@ import EntryVotes from './EntryVotes';
 import EntryProperties from './EntryProperties';
 import { showLessIcon, showMoreIcon } from '../../img/svg';
 import SpinnerEffect from '../../components/loader/spinner';
+import ToggleButton from 'react-toggle-button'
 
 
 
@@ -32,13 +33,9 @@ const EntryPage = (props: any) => {
     const [openProperties, setOpenProperties] = useState(false)
     const [openVotes, setOpenVotes] = useState(false)
     const [loading, setLoading] = useState(true);
+    const [state, setState] = useState(false);
 
     useEffect(() => {
-        console.log(permlink_url)
-        // axios.get(permlink_url).then(res => {
-        //     console.log(res.data)
-        //     setEntry(res.data)
-        // })
         const fetchData = async () =>{
             setLoading(true);
             try {
@@ -74,11 +71,30 @@ const EntryPage = (props: any) => {
                                     <Accordion className={currTheme === "day" ? "accordion-day" : "accordion_night"} defaultActiveKey={['0']} alwaysOpen={true}>
                                         <Accordion.Item eventKey="0" onClick={() => setOpenBody(!openBody)}>
                                             <Accordion.Header>
+
                                                 <span>{_t('entry.body')}</span>
                                                 <span>{openBody ? showLessIcon(themeContrastColor) : showMoreIcon(themeContrastColor)}</span>
                                             </Accordion.Header>
                                             <Accordion.Body>
-                                                {entry[key].body && <EntryBody body={entry[key].body} />}
+                                                <div className='toggle-button-container'>
+                                                    <p>View in Json </p>
+                                                     <div>
+                                                     <ToggleButton
+                                                        inactiveLabel={"Off"}
+                                                        activeLabel={"On"}
+                                                        value={state}
+                                                        text="n"
+                                                        onToggle={() => {
+                                                            setState(!state);
+                                                        }}
+                                                    />
+                                                     </div>
+                                                </div>
+                                                {entry[key].body && 
+                                                <>
+                                                {state? <p>{entry[key].body}</p>:<EntryBody body={entry[key].body} />}
+                                                
+                                                </>}
                                             </Accordion.Body>
                                         </Accordion.Item>
                                         <Accordion.Item eventKey="1" onClick={() => setOpenProperties(!openProperties)}>
@@ -153,52 +169,6 @@ const EntryPage = (props: any) => {
                     })}
 
                 </>
-
-                {/* {entry &&  
-              
-                <>
-                <div className='entry-header'>
-                    <div className='mr-2'>
-                        <img className='avatar-img' src={`https://images.ecency.com/u/${entry.author}/avatar`} alt=""/> 
-                    </div>
-                    <div>
-                        <h4><Link to={`/@${entry.author}`}>{entry.author}</Link></h4>
-                        <p>{entry.created}</p>
-                    </div>
-                </div>
-                <Accordion className={currTheme==="day"?"accordion-day":"accordion_night"} defaultActiveKey={['0']} alwaysOpen={true}>
-                    <Accordion.Item eventKey="0" onClick={()=>setOpenBody(!openBody)}>
-                        <Accordion.Header>
-                            <span>{_t('entry.body')}</span>
-                            <span>{openBody?showLessIcon(themeContrastColor):showMoreIcon(themeContrastColor)}</span>
-                        </Accordion.Header>
-                        <Accordion.Body>
-                            {entry.body && <EntryBody body={entry.body} />}
-                        </Accordion.Body>
-                    </Accordion.Item>
-                    <Accordion.Item eventKey="1" onClick={()=>setOpenProperties(!openProperties)}>
-                        <Accordion.Header>
-                            <span>{_t('entry.properties')}</span>
-                            <span>{openProperties?showLessIcon(themeContrastColor):showMoreIcon(themeContrastColor)}</span>
-                        </Accordion.Header>
-                        <Accordion.Body>
-                            {entry && <EntryProperties entry={entry}/>}
-                        </Accordion.Body>
-                    </Accordion.Item>
-                    <Accordion.Item eventKey="2" onClick={()=>setOpenVotes(!openVotes)}>
-                        <Accordion.Header >
-                           <span>
-                                <span className='mr-2'>{_t('entry.votes')}</span>  {entry.active_votes && <span>{` (${entry.active_votes.length}) `}</span>}
-                            </span>
-                           <span>{openVotes?showLessIcon(themeContrastColor):showMoreIcon(themeContrastColor)}</span>
-                        </Accordion.Header>
-                        <Accordion.Body>
-                           {entry.active_votes &&  <EntryVotes votes={entry.active_votes} />}
-                        </Accordion.Body>
-                    </Accordion.Item>
-                </Accordion>
-                </>
-            } */}
 
             </Container>
             <BackToTopButton />

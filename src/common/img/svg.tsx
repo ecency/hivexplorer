@@ -130,3 +130,17 @@ export const LoaderSpinner=()=>(
     </g>
 </svg>
 )
+export const AscendingIcon = (color: string) => (
+  <svg xmlns="http://www.w3.org/2000/svg"  width="16px" height="16px" viewBox="0 0 24 24" version="1.1">
+  <g id="surface1">
+  <path style={{stroke:'none',fillRule:'nonzero',fill:`${color}`,fillOpacity:1}} d="M 6 0 L 6 18 L 0 18 L 7.5 24 L 15 18 L 9 18 L 9 0 Z M 12 0 L 12 3 L 18 3 L 18 0 Z M 12 6 L 12 9 L 21 9 L 21 6 Z M 12 12 L 12 15 L 24 15 L 24 12 Z M 12 12 "/>
+  </g>
+  </svg>
+)
+export const DescendingIcon = (color: string) => (
+  <svg xmlns="http://www.w3.org/2000/svg"  width="16px" height="16px" viewBox="0 0 24 24" version="1.1">
+<g id="surface1">
+<path style={{stroke:'none',fillRule:'nonzero',fill:`${color}`,fillOpacity:1}} d="M 6 0 L 6 18 L 0 18 L 7.5 24 L 15 18 L 9 18 L 9 0 Z M 12 0 L 12 3 L 24 3 L 24 0 Z M 12 6 L 12 9 L 21 9 L 21 6 Z M 12 12 L 12 15 L 18 15 L 18 12 Z M 12 12 "/>
+</g>
+</svg>
+)
