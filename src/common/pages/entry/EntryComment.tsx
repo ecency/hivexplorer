@@ -6,7 +6,6 @@ import { connect, useSelector } from 'react-redux';
 import { pageMapDispatchToProps, pageMapStateToProps, PageProps } from '../../pages/common';
 import { withPersistentScroll } from '../../components/with-persistent-scroll';
 import Theme from '../../components/theme';
-import { renderPostBody, setProxyBase, catchPostImage } from "@ecency/render-helper";
 import './EntryPage.scss'
 import { _t } from '../../i18n';
 import { getContent } from '../../api/urls';

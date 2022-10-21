@@ -2,10 +2,7 @@
 import React, { useEffect } from 'react';
 
 import { Link } from 'react-router-dom';
-import moment from 'moment';
-import { json } from 'express';
-
-
+import { ConfigItems } from '../../../../config';
 const JsonMetadata = (props: any) => {
     const { data } = props
     console.log('json_data', JSON.stringify(data))
@@ -13,9 +10,6 @@ const JsonMetadata = (props: any) => {
         <>
             {data &&
                 <>
-                    {/* <table>
-            {JSON.stringify(data)}
-        </table> */}
                     <table className='time-date-table'>
                         <tbody>
                             {Object.keys(data).map((key, i) => {
@@ -55,7 +49,7 @@ const JsonMetadata = (props: any) => {
                                                                     {data[key].map((val: string, j: number) => {
                                                                         return (
                                                                             <tr key={j}>
-                                                                                <td><Link to={`@${val}`}>{val}</Link></td>
+                                                                                <td><Link to={`/@${val}`}>{val}</Link></td>
                                                                             </tr>
                                                                         )
                                                                     })}

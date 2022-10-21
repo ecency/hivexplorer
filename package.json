@@ -10,6 +10,7 @@
     "start:prod": "NODE_ENV=production node build/server.js"
   },
   "dependencies": {
+    "@ecency/render-helper": "^2.2.21",
     "@hiveio/dhive": "^1.2.3",
     "@loadable/component": "^5.15.2",
     "@loadable/server": "^5.15.2",
@@ -43,6 +44,7 @@
     "react-redux": "^7.2.0",
     "react-router-bootstrap": "^0.25.0",
     "react-router-dom": "5.1.2",
+    "react-toggle-button": "^2.2.0",
     "redux": "4.0.5",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",

@@ -10,6 +10,16 @@
             border-radius: 100%;
         }
     }
+    .toggle-button-container{
+        display: flex;
+        align-items: baseline;
+        p{
+            margin-right: 10px;
+        }
+        div{
+            font-size: 14px !important;
+        }
+    }
     .entry-parent{
         padding: 10px 0 20px;
         .card{
