@@ -12,6 +12,7 @@ import WitnessesTables from './WitnessesTable';
 import { Container } from 'react-bootstrap';
 import { _t } from '../../i18n';
 import SpinnerEffect from '../../components/loader/spinner';
+import { getWitnesses } from '../../api/urls';
 
 export interface witnessesType {
     id: number
@@ -49,8 +50,7 @@ const WitnessesPage = (props:any) => {
 
     const [allWitnesses,setAllWitness]=useState<witnessesType>()
     const [loading, setLoading] = useState(true);
-    const witnesses_url=`${ConfigItems.baseUrl}/api/get_witnesses_by_vote?limit=100`
-    console.log(witnesses_url)
+    const witnesses_url=getWitnesses(100)
     useEffect(()=>{
         const fetchData = async () =>{
             setLoading(true);

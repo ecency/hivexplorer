@@ -9,6 +9,7 @@ import { HomeTransactionType } from '../../components/home/TransactionsComponent
 import Theme from '../../components/theme';
 import TransactionsTables from './TransactionsTables';
 import SpinnerEffect from '../../components/loader/spinner';
+import BackToTopButton from '../../components/Buttons/BackToTop';
 
 
 interface TransactionList extends Array<HomeTransactionType>{}
@@ -40,6 +41,7 @@ const AllTransactions = (props:any) => {
              <Theme global={props.global}/>
              {loading && <SpinnerEffect />}
            {!loading && transactions &&  <TransactionsTables data={transactions}/>}
+           <BackToTopButton />
         </>
     )
 };

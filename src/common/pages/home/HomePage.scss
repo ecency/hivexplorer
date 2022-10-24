@@ -6,6 +6,14 @@
             width: 100%;
         }
     }
+    .chart-col{
+     
+        @media (max-width:565px) {
+            .upper-chart{
+                padding-bottom: 1.75rem;
+            }
+        }
+    }
     .card-row{
         padding: 10px;
         border-bottom: 1px solid $metallic-blue;

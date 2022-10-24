@@ -57,7 +57,7 @@ const TransactionsTables = (props: any) => {
   const [allOpen, setAllOpen] = useState(false);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const currTheme = useSelector((state: any) => state.global.theme)
-  const themeContrastColor = currTheme === 'day' ? '#535e65' : 'white';
+  const themeContrastColor = currTheme === 'day' ? '#535e65' : '#ffffffde ';
   const [filterText, setFilterText] = useState("");
   const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
 
@@ -168,7 +168,7 @@ const TransactionsTables = (props: any) => {
                           <TableCell className="card-header px-2 card-header-sort" key={index + 1}>
                             {<><span
                               onClick={(e) => { setSortBtn(!sortBtn); sortTransaction(e.currentTarget.innerText.substring(-1), sortBtn) }}>
-                              {column.label}{sortBtn ? AscendingIcon(themeContrastColor) : DescendingIcon(themeContrastColor)}</span></>}
+                              {column.label}{sortBtn ? DescendingIcon(themeContrastColor) : AscendingIcon(themeContrastColor)}</span></>}
                           </TableCell>
                           :
                           <TableCell

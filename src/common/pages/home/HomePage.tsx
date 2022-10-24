@@ -15,6 +15,9 @@ import { SingleTransaction } from '../transaction/SingleTransactionPage';
 import { Link } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import { _t } from '../../i18n';
+import { eyeBoldSvg, eyeSvg } from '../../img/svg';
+import moment from 'moment';
+import Market from '../../components/market/market';
 
 const headBlock = `${ConfigItems.baseUrl}/api/get_dynamic_global_properties`;
 
@@ -67,7 +70,11 @@ const Index = (props: PageProps) => {
   const [transationsApiResult, setTransationsApiResult] = useState<SingleTransaction>()
   const [noSearchResult, setNoSearchResult] = useState<Boolean>(false)
   const [clear, setClear] = useState(true)
+  const [visible, setVisible] = useState(false)
   const [enteredValue, setEnteredValue] = useState('')
+  const fromTs = moment().subtract(2, "days").format("X");
+        const toTs = moment().format("X");
+
   
   const setSearchResultStateHandler = (blockSearch: HomeTransactionType | undefined, AccountSearch: User | undefined, TransactionSearch: SingleTransaction | undefined, noSearch: Boolean) => {
     setBlocksApiResult(blockSearch);
@@ -167,9 +174,9 @@ const Index = (props: PageProps) => {
     <Theme global={props.global}/>
     <div className='home py-4'>
     <Container>
-        {result && 
-        <>
-        <div style={{ verticalAlign: 'center'}}>
+        <Row>
+          <Col md={6}>
+          <div style={{ verticalAlign: 'center'}}>
           <Form  className="m-0 search-form">
             <Form.Group className=' col-12 p-0'>
               <Form.Control className="rounded" onChange={(e) => setEnteredValue(e.target.value)} type="text" placeholder="Block, Account, Transaction"/>
@@ -207,6 +214,31 @@ const Index = (props: PageProps) => {
             </div>}
 
         </div>
+          </Col>
+          <Col md={6}>
+          <div className="market-data-header">
+                <span className="title d-flex align-items-center">{_t("market-data.title")}
+                    <div className="pointer ml-2" onClick={() => setVisible(!visible)}>
+                        {visible ? eyeSvg : eyeBoldSvg}
+                    </div>
+                </span>
+            </div>
+          </Col>
+          {visible && 
+          <>
+            <Col md={12} className="chart-col pt-4">
+             <Row>
+              <Col md={6} sm={12} className="upper-chart"><Market label="HIVE" coin="hive" vsCurrency="usd" fromTs={fromTs} toTs={toTs} formatter="0.000$" theme={currTheme}/></Col>
+              <Col md={6} sm={12} ><Market label="HBD" coin="hive_dollar" vsCurrency="usd" fromTs={fromTs} toTs={toTs} formatter="0.000$" theme={currTheme}/></Col>
+             </Row>
+            
+            </Col>
+          </>
+          }
+        </Row>
+        {result && 
+        <>
+        
 
           {/* { searchedResult && searchedResult[0].block && <Link to={`/b/${searchedResult[0].block}`}> {searchedResult[0].block} </Link> } */}
           <HeadBlock {...result} /><Row>

@@ -41,6 +41,7 @@ interface Column {
     { label: `${_t("witnesses.owner")}`,align: 'right',},
     { label: `${_t("witnesses.votes")}`,align: 'right',},
     { label: `${_t("witnesses.url")}`,align: 'right',},
+    { label: `${_t("witnesses.last_confirmed_block_num")}`,align: 'right',},
     { label: `${_t("witnesses.total_missed")}`,align: 'right',},
     { label: `${_t("witnesses.account_creation_fee")}`,align: 'right',},
     { label: `${_t("witnesses.account_creation_feed")}`,align: 'right',},
@@ -55,7 +56,6 @@ interface Column {
    "virtual_position",
    "virtual_scheduled_time",
    "last_aslot",
-   "last_confirmed_block_num",
    "pow_worker",
    "signing_key",
    "last_hbd_exchange_update",
@@ -108,14 +108,10 @@ const WitnessesTables = (props:any) => {
       }
     }
 })
-const Date_time=(timeSet:string,timeFormat:string)=>{
-  return moment(timeSet).format(timeFormat)
-}
+
 const WitnessRow=(props:any)=>{
     const {witness}=props
-    console.log(witness)
     const [open, setOpen] = useState(allOpen);
-
     return(
       <>
         <TableRow hover={true} role="checkbox" tabIndex={-1}>
@@ -128,6 +124,7 @@ const WitnessRow=(props:any)=>{
             </TableCell>
             <TableCell>{`${witness.votes.substring(0,6)}m`}</TableCell>
             <TableCell><a className="witness-external-link" href={witness.url} target="_blank">{ExternalLink(themeContrastColor)}</a></TableCell>
+            <TableCell><Link to={`b/${witness.last_confirmed_block_num}`}>{`${witness.last_confirmed_block_num}`}</Link></TableCell>
             <TableCell>{witness.total_missed}</TableCell>
             <TableCell>{witness.props.account_creation_fee}</TableCell>
             <TableCell>
@@ -144,32 +141,16 @@ const WitnessRow=(props:any)=>{
             <TableCell style={{ paddingBottom: 0, paddingTop: 0,borderTop:0 }} colSpan={12}>
             <Collapse in={open} timeout="auto" unmountOnExit={true}>
                 <Box margin={1}>
-                    {/* <Table  className="witnesses-table" aria-label="sticky table">
-                    <TableHead className="card-header">
-              <TableRow >
-                {innerColumns.map((column,index) => (
-                    <TableCell 
-                    className={column.label===`${_t("witnesses.owner")}` || column.label===`${_t("witnesses.account_creation_feed")}`?
-                    "card-header owner-col-th"
-                    :"card-header"} 
-                    key={index}
-                    >
-                      {column.label}
-                    </TableCell>
-                  ))}
-              </TableRow>
-            </TableHead>
-                    </Table> */}
                     <table className="witness-dropdown-table">
                         <tbody>
                          <>
-                         {innerColumns.map((key,i)=>{
+                         {innerColumns.map((key,ind)=>{
                                if(witness.hasOwnProperty(key)){
                                 return(
                                     <>
                                     {typeof(witness[key])==="object"? 
                                            
-                                            <tr>
+                                            <tr key={ind}>
                                              <td>{_t(`witnesses.${key}`)}</td>
                                             <td>
                                               <table>
@@ -177,8 +158,8 @@ const WitnessRow=(props:any)=>{
                                                   {Object.keys(witness[key]).map((val:any,i:number)=>{
                                                     return(
                                                       <tr key={i}>
-                                                        <td>{_t(`witnesses.${val}`)}</td>
-                                                        <td>{witness[key][val]}</td>
+                                                        <td style={{width:'50%'}}>{_t(`witnesses.${val}`)}</td>
+                                                        <td style={{width:'50%'}}>{witness[key][val]}</td>
                                                       </tr>
                                                     )
                                                   })}
@@ -187,7 +168,7 @@ const WitnessRow=(props:any)=>{
                                             </td>
                                         </tr>
                                     :
-                                    <tr key={i}>
+                                    <tr key={ind}>
                                         <td>{_t(`witnesses.${key}`)}</td>
                                         <td>{key==="created"?  moment.utc(witness[key]).format("LL") : witness[key]}</td>
                                     </tr>
