@@ -12,7 +12,8 @@ const JsonField = (props: any) => {
         "voter",
         "author",
         "delegator",
-        "delegatee"
+        "delegatee",
+       
 
     ]
     return (
@@ -78,6 +79,18 @@ const JsonField = (props: any) => {
                                                 <tr>
                                                     <td>{_t('trans_table.json')}</td>
                                                     <td>{opVal.json}</td>
+                                                </tr>
+                                            }
+                                             {opVal.permlink &&
+                                                <tr>
+                                                    <td>{_t('trans_table.permlink')}</td>
+                                                    <td>{opVal.permlink}</td>
+                                                </tr>
+                                            }
+                                             {opVal.weight &&
+                                                <tr>
+                                                    <td>{_t('trans_table.weight')}</td>
+                                                    <td>{opVal.weight}</td>
                                                 </tr>
                                             }
 

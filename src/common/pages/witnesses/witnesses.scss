@@ -1,7 +1,8 @@
 .witnesses-container{
+   
     .witness-header{
         text-align: center;
-        padding: 1rem 3rem;
+        
     }
     .witnesses-table{
         .owner-col-th{
@@ -42,6 +43,12 @@
             table{
                 width: 100%;
             }
+        }
+    }
+    @media (min-width:992px) {
+        max-width: 80% !important;
+        .witness-header{
+            padding: 1rem 3rem;
         }
     }
 }

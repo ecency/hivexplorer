@@ -57,7 +57,7 @@ const TransactionsTables = (props: any) => {
   const [allOpen, setAllOpen] = useState(false);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const currTheme = useSelector((state: any) => state.global.theme)
-  const themeContrastColor = currTheme === 'day' ? '#535e65' : 'white';
+  const themeContrastColor = currTheme === 'day' ? '#535e65' : '#ffffffde';
   const [filterText, setFilterText] = useState("");
   const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
 

@@ -41,7 +41,10 @@ interface Column {
     { label: `${_t("witnesses.owner")}`,align: 'right',},
     { label: `${_t("witnesses.votes")}`,align: 'right',},
     { label: `${_t("witnesses.url")}`,align: 'right',},
+    { label: `${_t("witnesses.hbd_interest_rate")}`,align: 'right',},
+    { label: `${_t("witnesses.last_confirmed_block_num")}`,align: 'right',},
     { label: `${_t("witnesses.total_missed")}`,align: 'right',},
+    { label: `${_t("witnesses.maximum_block_size")}`,align: 'right',},
     { label: `${_t("witnesses.account_creation_fee")}`,align: 'right',},
     { label: `${_t("witnesses.account_creation_feed")}`,align: 'right',},
     { label: `${_t("witnesses.version")}`,align: 'right',},
@@ -54,10 +57,9 @@ interface Column {
    "virtual_last_update",
    "virtual_position",
    "virtual_scheduled_time",
-   "last_aslot",
-   "last_confirmed_block_num",
    "pow_worker",
    "signing_key",
+   "last_aslot",
    "last_hbd_exchange_update",
     "last_work",
     "running_version",
@@ -128,7 +130,10 @@ const WitnessRow=(props:any)=>{
             </TableCell>
             <TableCell>{`${witness.votes.substring(0,6)}m`}</TableCell>
             <TableCell><a className="witness-external-link" href={witness.url} target="_blank">{ExternalLink(themeContrastColor)}</a></TableCell>
+            <TableCell className="text-center">{witness.props.hbd_interest_rate}</TableCell>
+            <TableCell><Link to={`b/${witness.last_confirmed_block_num}`}>{witness.last_confirmed_block_num}</Link></TableCell>
             <TableCell>{witness.total_missed}</TableCell>
+            <TableCell>{witness.props.maximum_block_size}</TableCell>
             <TableCell>{witness.props.account_creation_fee}</TableCell>
             <TableCell>
                 <span className="inner inner-green">${witness.hbd_exchange_rate.base.replace(' HBD','')} | {dateToRelative(witness.last_hbd_exchange_update)}</span>
@@ -144,22 +149,6 @@ const WitnessRow=(props:any)=>{
             <TableCell style={{ paddingBottom: 0, paddingTop: 0,borderTop:0 }} colSpan={12}>
             <Collapse in={open} timeout="auto" unmountOnExit={true}>
                 <Box margin={1}>
-                    {/* <Table  className="witnesses-table" aria-label="sticky table">
-                    <TableHead className="card-header">
-              <TableRow >
-                {innerColumns.map((column,index) => (
-                    <TableCell 
-                    className={column.label===`${_t("witnesses.owner")}` || column.label===`${_t("witnesses.account_creation_feed")}`?
-                    "card-header owner-col-th"
-                    :"card-header"} 
-                    key={index}
-                    >
-                      {column.label}
-                    </TableCell>
-                  ))}
-              </TableRow>
-            </TableHead>
-                    </Table> */}
                     <table className="witness-dropdown-table">
                         <tbody>
                          <>
@@ -177,8 +166,8 @@ const WitnessRow=(props:any)=>{
                                                   {Object.keys(witness[key]).map((val:any,i:number)=>{
                                                     return(
                                                       <tr key={i}>
-                                                        <td>{_t(`witnesses.${val}`)}</td>
-                                                        <td>{witness[key][val]}</td>
+                                                        <td style={{width:'50%'}}>{_t(`witnesses.${val}`)}</td>
+                                                        <td style={{width:'50%'}}>{witness[key][val]}</td>
                                                       </tr>
                                                     )
                                                   })}

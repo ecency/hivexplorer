@@ -16,6 +16,7 @@ import BackToTopButton from '../Buttons/BackToTop';
 import ObjectField from '../fields/blockFields/ObjectField';
 import { getHeadBlock } from '../../api/urls';
 
+
 export interface objAmountPrecisionNai {
     amount: string
 precision: number
@@ -78,16 +79,21 @@ const HeadBlockDetail = (props:any) => {
     const [result, setResult] = useState<LatestBlock>();
     const [showMore, setShowMore] = useState(false);
     const currTheme = useSelector((state:any) => state.global.theme)
+    const HeadBlock = useSelector((state:any) => state.headBlock)
     const themeContrastColor = currTheme === 'day' ? 'black' : 'white';
     const themeBtn = currTheme === 'day' ? 'showmore-btn btn-light' : 'showmore-btn btn-dark';
     const label='block'
 
+
     let url_global = getHeadBlock();
     useEffect(() => {
         console.log(url_global)
-        axios.get(url_global).then(response => {
-            setResult(response.data)
-        })
+        console.log('---------- HEAD BLOCK DETAIL ----------------')
+        console.log(HeadBlock)
+        console.log('---------------------------------------------')
+        // axios.get(url_global).then(response => {
+            setResult(HeadBlock)
+        // })
     }, []);
     return (
         <>

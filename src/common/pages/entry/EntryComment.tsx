@@ -19,7 +19,7 @@ import EntryVotes from './EntryVotes';
 import EntryProperties from './EntryProperties';
 import { infoIcon, showLessIcon, showMoreIcon } from '../../img/svg';
 import SpinnerEffect from '../../components/loader/spinner';
-
+import ToggleButton from 'react-toggle-button'
 
 
 const EntryCommentPage = (props: any) => {
@@ -35,6 +35,7 @@ const EntryCommentPage = (props: any) => {
     const [openProperties, setOpenProperties] = useState(false)
     const [openVotes, setOpenVotes] = useState(false)
     const [loading, setLoading] = useState(true);
+    const [state, setState] = useState(false);
 
     useEffect(() => {
         console.log(permlink_url)
@@ -68,6 +69,20 @@ const EntryCommentPage = (props: any) => {
                         <h4><Link to={`/@${entry.author}`}>{entry.author}</Link></h4>
                         <p>{entry.created}</p>
                     </div>
+                    <div className='toggle-button-container'>
+                        <p>View Raw Format</p>
+                            <div>
+                            <ToggleButton
+                            inactiveLabel={"Off"}
+                            activeLabel={"On"}
+                            value={state}
+                            text="n"
+                            onToggle={() => {
+                                setState(!state);
+                            }}
+                        />
+                            </div>
+                    </div>
                 </div>
                 <div className='entry-parent'>
                   <Card>
@@ -83,7 +98,12 @@ const EntryCommentPage = (props: any) => {
                             <span>{openBody?showLessIcon(themeContrastColor):showMoreIcon(themeContrastColor)}</span>
                         </Accordion.Header>
                         <Accordion.Body>
-                            {entry.body && <EntryBody body={entry.body} />}
+                        {entry.body && 
+                            <>
+                            {state? <p>{entry.body}</p>:<EntryBody body={entry.body} />}
+                            
+                            </>}
+                            
                         </Accordion.Body>
                     </Accordion.Item>
                     <Accordion.Item eventKey="1" onClick={()=>setOpenProperties(!openProperties)}>

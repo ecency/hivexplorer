@@ -5,5 +5,5 @@ export const CreatedDate=(created:string)=>{
 }
 
 export const Date_time_table=(timeSet:string,timeFormat:string)=>{
-    return moment(timeSet).format(timeFormat)
+    return moment.utc(timeSet).format(timeFormat)
   }

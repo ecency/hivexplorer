@@ -13,8 +13,12 @@ import HomeBlocks from '../../components/home/BlocksComponent';
 import HomeTransactions, { HomeTransactionType } from '../../components/home/TransactionsComponent';
 import { SingleTransaction } from '../transaction/SingleTransactionPage';
 import { Link } from 'react-router-dom';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { _t } from '../../i18n';
+import { eyeBoldSvg, eyeSvg } from '../../img/svg';
+import moment from 'moment';
+import Market from '../../components/market/market';
+import { setHeadBlockData } from '../../store/HeadBlock';
 
 const headBlock = `${ConfigItems.baseUrl}/api/get_dynamic_global_properties`;
 
@@ -31,6 +35,11 @@ interface User{
 export interface UserList extends Array<User>{}
 
 const Index = (props: PageProps) => {
+  const dispatch = useDispatch()
+
+
+
+
   const [metaProps, setMetaProps] = useState({});
   // const [users, setUsers]  = useState<UserList>([])
   // useEffect(() => {
@@ -58,7 +67,10 @@ const Index = (props: PageProps) => {
       console.log(headBlock)
         axios.get(headBlock).then(response => { 
           setResult(response.data)
+          dispatch(setHeadBlockData(response.data))
         })
+
+       
     }, []);
 
   const currTheme = useSelector((state:any) => state.global.theme)
@@ -67,7 +79,11 @@ const Index = (props: PageProps) => {
   const [transationsApiResult, setTransationsApiResult] = useState<SingleTransaction>()
   const [noSearchResult, setNoSearchResult] = useState<Boolean>(false)
   const [clear, setClear] = useState(true)
+  const [visible, setVisible] = useState(false)
   const [enteredValue, setEnteredValue] = useState('')
+  const fromTs = moment().subtract(2, "days").format("X");
+        const toTs = moment().format("X");
+
   
   const setSearchResultStateHandler = (blockSearch: HomeTransactionType | undefined, AccountSearch: User | undefined, TransactionSearch: SingleTransaction | undefined, noSearch: Boolean) => {
     setBlocksApiResult(blockSearch);
@@ -119,32 +135,6 @@ const Index = (props: PageProps) => {
       setSearchResultStateHandler(undefined, undefined, undefined, true);
     }
   }
-   
-  
-  // const displayUsers = () => {
-   
-  //     return users.map((user, index)=>{
-  //       return (
-  //       <div className='card-row' key={user.id}>
-  //         <Row >
-  //         <Col md={1} xs={1}>
-  //             {user.id}
-  //           </Col>
-  //           <Col md={3} xs={3}>
-  //             {user.name}
-  //           </Col>
-  //           <Col md={4} xs={4}>
-  //             {user.email}
-  //           </Col>
-  //           <Col md={4} xs={4}>
-  //             {user.address.zipcode}
-  //           </Col>
-  //         </Row>
-          
-  //       </div>
-  //       )
-  //     })
-  // }
 
   useEffect(() => {
     if (!blocksApiResult &&  !accountsApiResult && !transationsApiResult) {
@@ -167,21 +157,16 @@ const Index = (props: PageProps) => {
     <Theme global={props.global}/>
     <div className='home py-4'>
     <Container>
-        {result && 
-        <>
-        <div style={{ verticalAlign: 'center'}}>
+        <Row>
+          <Col md={6}>
+          <div style={{ verticalAlign: 'center'}}>
           <Form  className="m-0 search-form">
             <Form.Group className=' col-12 p-0'>
               <Form.Control className="rounded" onChange={(e) => setEnteredValue(e.target.value)} type="text" placeholder="Block, Account, Transaction"/>
             </Form.Group>
           </Form> 
           {!noSearchResult &&  
-          //   <div className=" col-md-12 mt-2 mb-2">
-          //     { !clear && <>
-          //       <p className="d-inline-block">No search results found</p>
-          //       <Button className="d-inline-block ml-2 btn-sm" onClick={clearSearchResultHandler}>X</Button>
-          //     </>}
-          // </div>  : 
+
           <div className={currTheme==='day'? "day-background d-block m-0 col-md-12 search-dropdown":"night-background d-block m-0 col-md-12 search-dropdown"}>
 
             { blocksApiResult &&
@@ -207,8 +192,31 @@ const Index = (props: PageProps) => {
             </div>}
 
         </div>
-
-          {/* { searchedResult && searchedResult[0].block && <Link to={`/b/${searchedResult[0].block}`}> {searchedResult[0].block} </Link> } */}
+          </Col>
+          {/* <Col md={6} className="col-market">
+          <div className="market-data-header">
+                <span className="title d-flex align-items-center">{_t("home.title_market")}
+                    <div className="pointer ml-2" onClick={() => setVisible(!visible)}>
+                        {visible ? eyeSvg : eyeBoldSvg}
+                    </div>
+                </span>
+            </div>
+          </Col> */}
+        
+          <>
+            <Col md={12} className="chart-col pt-4">
+             <Row>
+              <Col md={6} sm={12} className="upper-chart"><Market label="HIVE" coin="hive" vsCurrency="usd" fromTs={fromTs} toTs={toTs} formatter="0.000$" theme={currTheme}/></Col>
+              <Col md={6} sm={12} ><Market label="HBD" coin="hive_dollar" vsCurrency="usd" fromTs={fromTs} toTs={toTs} formatter="0.000$" theme={currTheme}/></Col>
+             </Row>
+            
+            </Col>
+          </>
+          
+        </Row>
+        {result && 
+        <>
+        
           <HeadBlock {...result} /><Row>
               <Col xs={12} md={6}>
                 <Card>

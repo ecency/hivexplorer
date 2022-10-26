@@ -10,6 +10,7 @@ import { ConfigItems } from '../../../../../config';
 import JsonField from './JsonField';
 import JsonMetadata from '../../EntryContent/JsonMetadata';
 import { Date_time_table } from '../../../api/dateTime';
+import TransactionOperationTable from '../../../pages/User/UserOpTable';
 
 const timestampKeys=[
     "time",
@@ -36,6 +37,9 @@ interface opValType {
     id:string
     voter:string
     json:string
+    author: string
+    permlink: string
+    weight: number | string
 }
 interface transactionType {
     ref_block_num:number
@@ -74,41 +78,11 @@ const ObjectField = (props:any) => {
             </>
         )
     }
-    const expand_operation=(value:any,item:string)=>{
-        return(
-            value.map((val:any,i:number)=>{
-                const type:string=val[0]
-                const opVal:opValType=val[1]
-               return(
-                <Row className={`${rowBorder} mt-1`} key={i}>
-                    <Col md={3}>
-                        <></>
-                    </Col>
-                    <Col md={9}>
-                    <table className='time-date-table'>
-                       <tbody>
-                        <tr>
-                            <td>{_t('common.type')}</td><td>{type}</td>
-                        </tr>
-                       {opVal.voter && <tr>
-                            <td >{_t('common.voter')}</td><td>{opVal.voter}</td>
-                        </tr>}
-                        {opVal.id &&  <tr>
-                            <td>{_t('common.id')}</td><td>{opVal.id}</td>
-                        </tr>}
-                        {opVal.json && <tr>
-                            <td>{_t('common.json')}</td><td>{opVal.json}</td>
-                        </tr>}
-                       
-                       </tbody>
-                       
-                    </table>
-                    </Col>
-                </Row>
-               )
-            })
-        )
-    }
+    // const expand_operation=(value:any,item:string)=>{
+    //     return(
+          
+    //     )
+    // }
     const expand_view=(value:any,item:string)=>{
        return(
         <Row className={`${rowBorder} mt-1`}>
@@ -125,7 +99,7 @@ const ObjectField = (props:any) => {
                                 :
                                 <>
                                     <Link to={`/tx/${val}`}>
-                                        <span>{trxIcon(themeContrastColor)}</span><span> {val} {i}</span>
+                                        <span>{trxIcon(themeContrastColor)}</span><span> {val} </span>
                                         
                                     </Link>
                                     <JsonField transactionOperations={transactionOperations[i]}/>
@@ -152,7 +126,7 @@ const ObjectField = (props:any) => {
                                 :
                                <>
                                 <Link to={`/tx/${val}`}>
-                                    <span>{trxIcon(themeContrastColor)}</span><span> {val} {j}</span>
+                                    <span>{trxIcon(themeContrastColor)}</span><span> {val} </span>
                                 </Link>
                                <JsonField transactionOperations={transactionOperations[j]}/>
                                </>
@@ -198,13 +172,54 @@ const ObjectField = (props:any) => {
                   {console.log('pushed data',transactionValue)}
                   </>
                  :
-                item==='witness_votes' || item==='transaction_ids' || item==='operations'?
+                item==='witness_votes' || item==='transaction_ids' ?
                 <>
                     <Button className={themeBtn} 
                             onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>setExpandBtn(!expandBtn)}
                             disabled={value.length===0?true:false}>
                                 {value.length} {expandBtn? <span>{showLessIcon(themeContrastColor)} </span> : <span>{showMoreIcon(themeContrastColor)}</span>}
                     </Button>
+                </>
+                : 
+                item==='operations'?
+                <>{  value.map((val:any,i:number)=>{
+                    const type:string=val[0]
+                    const opVal:opValType=val[1]
+                   return(
+                 
+                        <table className='time-date-table'>
+                           <tbody>
+                            <tr>
+                                <td>{_t('trans_table.type')}</td><td>{type}</td>
+                            </tr>
+                        
+                            {opVal.id &&  <tr>
+                                <td>{_t('trans_table.id')}</td><td>{opVal.id}</td>
+                            </tr>}
+                            {opVal.json && <tr>
+                                <td>{_t('trans_table.json')}</td><td>{opVal.json}</td>
+                            </tr>}
+                            {opVal.voter && <tr>
+                                <td >{_t('trans_table.voter')}</td><td>{opVal.voter}</td>
+                            </tr>}
+                            {opVal.author && <tr>
+                                <td >{_t('trans_table.author')}</td><td>{opVal.author}</td>
+                            </tr>}
+                            {opVal.permlink && <tr>
+                                <td >{_t('trans_table.permlink')}</td><td>{opVal.permlink}</td>
+                            </tr>}
+                            {opVal.weight && <tr>
+                                <td >{_t('trans_table.weight')}</td><td>{opVal.weight}</td>
+                            </tr>}
+                      
+                      
+                           
+                           </tbody>
+                           
+                        </table> 
+                 
+                   )
+                })}
                 </>
                 : item==='init_hbd_supply' || item==='current_hbd_supply' || item==='virtual_supply'?
                 <> 
@@ -231,7 +246,7 @@ const ObjectField = (props:any) => {
         }
         {item==='witness_votes' && expandBtn ?expand_view(value,item):<></>}
         {item==='transaction_ids' && expandBtn ?expand_view(value,item):<></>}
-        {item==='operations' && expandBtn ?expand_operation(value,item):<></>}
+        {/* {item==='operations' && expandBtn ?expand_operation(value,item):<></>} */}
          
         </>
         

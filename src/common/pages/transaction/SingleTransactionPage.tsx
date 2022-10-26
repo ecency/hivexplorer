@@ -35,6 +35,7 @@ const SingleTransaction = (props:any) => {
         // axios.get(url_single_transaction).then(response => {
         //     setResult(response.data)
         // })
+        console.log(url_single_transaction)
         const fetchData = async () =>{
             setLoading(true);
           try {

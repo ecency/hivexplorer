@@ -67,17 +67,8 @@ const EntryPage = (props: any) => {
                                             <h4><Link to={`/@${entry[key].author}`}>{entry[key].author}</Link></h4>
                                             <p>{entry[key].created}</p>
                                         </div>
-                                    </div>
-                                    <Accordion className={currTheme === "day" ? "accordion-day" : "accordion_night"} defaultActiveKey={['0']} alwaysOpen={true}>
-                                        <Accordion.Item eventKey="0" onClick={() => setOpenBody(!openBody)}>
-                                            <Accordion.Header>
-
-                                                <span>{_t('entry.body')}</span>
-                                                <span>{openBody ? showLessIcon(themeContrastColor) : showMoreIcon(themeContrastColor)}</span>
-                                            </Accordion.Header>
-                                            <Accordion.Body>
-                                                <div className='toggle-button-container'>
-                                                    <p>View in Json </p>
+                                        <div className='toggle-button-container'>
+                                                    <p>View Raw Format</p>
                                                      <div>
                                                      <ToggleButton
                                                         inactiveLabel={"Off"}
@@ -90,6 +81,16 @@ const EntryPage = (props: any) => {
                                                     />
                                                      </div>
                                                 </div>
+                                    </div>
+                                    <Accordion className={currTheme === "day" ? "accordion-day" : "accordion_night"} defaultActiveKey={['0']} alwaysOpen={true}>
+                                        <Accordion.Item eventKey="0" onClick={() => setOpenBody(!openBody)}>
+                                            <Accordion.Header>
+
+                                                <span>{_t('entry.body')}</span>
+                                                <span>{openBody ? showLessIcon(themeContrastColor) : showMoreIcon(themeContrastColor)}</span>
+                                            </Accordion.Header>
+                                            <Accordion.Body>
+                                           
                                                 {entry[key].body && 
                                                 <>
                                                 {state? <p>{entry[key].body}</p>:<EntryBody body={entry[key].body} />}
@@ -130,7 +131,13 @@ const EntryPage = (props: any) => {
                                                                             <p><img className='avatar-img' src={`https://images.ecency.com/u/${entry[key].author}/avatar`} alt=""/> <Link to={`@${entry[key].author}`}>{entry[key].author}</Link></p>
                                                                             <p> <Link to={`/${entry[key].category}/@${entry[key].author}/${entry[key].permlink}`}>{entry[key].permlink}</Link></p>
                                                                         </div>
-                                                                        {entry[key].body && <EntryBody body={entry[key].body} />}
+                                                                     
+                                                                            {entry[key].body && 
+                                                                            <>
+                                                                            {state? <p>{entry[key].body}</p>:<EntryBody body={entry[key].body} />}
+                                                                            
+                                                                            </>}
+                                                                       
                                                                     </Accordion.Body>
                                                                 </Accordion.Item>
                                                                 <Accordion.Item eventKey="1" onClick={() => setOpenProperties(!openProperties)}>

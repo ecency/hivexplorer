@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom';
 import { ConfigItems } from '../../../../config';
 import { _t } from '../../i18n';
 
+
 export interface Block {
     head_block_number: number,
     head_block_id: string,
@@ -27,6 +28,7 @@ export interface Block {
 
 const HeadBlock = (props:Block) => {
     const result=props
+
     return (
         <div className='head-block'>
            {props &&

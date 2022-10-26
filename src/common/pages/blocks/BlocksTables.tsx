@@ -42,7 +42,7 @@ const BlocksTables = (props:any) => {
   const [searched, setSearched] = useState("");
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const currTheme = useSelector((state:any) => state.global.theme)
-  let block_number_page=67096310
+  let block_number_page=props.blockNo
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
   };

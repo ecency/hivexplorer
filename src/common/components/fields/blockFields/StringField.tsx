@@ -15,6 +15,7 @@ const timestampKeys=[
     "last_owner_update",
     "last_account_update",
     "created",
+    "previous_owner_update",
     "last_account_recovery",
     "hbd_seconds_last_update",
     "hbd_last_interest_payment",
