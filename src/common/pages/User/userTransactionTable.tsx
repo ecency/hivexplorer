@@ -56,7 +56,7 @@ const UserTransactionsTable = (props: any) => {
   const [page, setPage] = useState(0);
   const [loading, setLoading] = useState(true);
   const [rowsPerPage, setRowsPerPage] = useState(25);
-  const [transactionFrom, setTransactionForm] = useState(1000)
+  const [transactionFrom, setTransactionForm] = useState(-1)
   const [transactionLimit, setTransactionLimit] = useState(1000)
   const currTheme = useSelector((state: any) => state.global.theme)
   const [userTransaction, setUserTransaction] = useState<UserTransactionTypeList>()
@@ -76,8 +76,8 @@ const UserTransactionsTable = (props: any) => {
       setLoading(true);
       try {
         const { data: response } = await axios.get(user_transaction_url);
-        console.log(user_transaction_url)
-        setUserTransaction(response.history);
+        console.log('user transaction',user_transaction_url)
+        setUserTransaction(response.history.reverse());
       } catch (error: any) {
         console.error(error.message);
       }

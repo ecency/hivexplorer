@@ -149,7 +149,8 @@
     "see_more_blocks":"See More Blocks",
     "see_more_transactions":"See More Transactions",
     "show_more":"Show More",
-    "show_less":"Show Less"
+    "show_less":"Show Less",
+    "show":"Show"
   },
   "user-info": {
     "id":"Id",
@@ -260,6 +261,9 @@
     "author_rewards":"Author Rewards",
     "precision":"Precision",
     "nai":"Nai",
+    "memo_key":"Memo Key",
+    "active":"Active",
+    "posting":"Posting",
     "reward_hive":"Reward Hive",
     "reward_hbd":"Reward HBD",
     "reward_vests":"Reward Vests",

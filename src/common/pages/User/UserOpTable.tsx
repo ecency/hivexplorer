@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { _t } from '../../i18n';
 import { AuthorityObject } from './UserAuthorities';
 import { object } from 'prop-types';
+import { DecodeJson } from '../../../server/util';
 
 
 
@@ -12,61 +13,76 @@ const TransactionOperationTable = (props: any) => {
     const { opTrans } = props
     const opType = opTrans.type
     const opVal = opTrans.value
-    const opProd = opVal.producer
-    const opCurator = opVal.curator
-    const opPublish = opVal.publisher
-    const opVoter = opVal.voter
+
     const opAuth = opVal.author
     const opPermlink = opVal.permlink
-    const opWeight = opVal.weight
-    const opRshares = opVal.rshares
-    const opTVweight = opVal.total_vote_weight
-    const opCommentAuthor = opVal.comment_author
-    const opCommentLink = opVal.comment_permlink
+
     const opPayoutClaim = opVal.payout_must_be_claimed
-    const opId = opVal.id
     const opJson = opVal.json
     const opOwner = opVal.owner
     const opCreator = opVal.creator
-    const opBenefactor = opVal.benefactor
-    const opAccount = opVal.account
-    const opFrom = opVal.from
-    const opTo = opVal.to
-    const opMemo = opVal.memo
+
     const opProps = opVal.props
-    const opAuthorRewards = opVal.author_rewards
     const opVestShare = opVal.vesting_shares
-    const opReward = opVal.reward
-    const opFee = opVal.fee
-    const opPendingPay = opVal.pending_payout
+
     const opExchange = opVal.exchange_rate
     const opRewardHive = opVal.reward_hive
-    const opAmount = opVal.amount
-    const opRewardHbd = opVal.reward_hbd
-    const opRewardVests = opVal.reward_vests
-    const opHBDpayout = opVal.hbd_payout
-    const opHivePayout = opVal.hive_payout
-    const opVestingPayout = opVal.vesting_payout
-    const opCuratorsVestPayout = opVal.curators_vesting_payout
-    const opPayout = opVal.payout
-    const opTotalPayoutVal = opVal.total_payout_value
-    const opCuratorPayoutVal = opVal.curator_payout_value
-    const opBenefPayoutVal = opVal.beneficiary_payout_value
+
     const opRequiredAuths = opVal.required_auths
     const opRequiredPostingAuths = opVal.required_posting_auths
-    const opNewAccountName = opVal.new_account_name
-    const opInitialVestingShares = opVal.initial_vesting_shares
-    const opInitialDelegation = opVal.initial_delegation
+
     const opActive = opVal.active
     const opPosting = opVal.posting
-    const opMemoKey = opVal.memo_key
-    const opJsonMeta = opVal.json_metadata
 
+    const jsonSplit = DecodeJson(opJson)
+    console.log('json split', jsonSplit)
 
     const currTheme = useSelector((state: any) => state.global.theme)
     console.log('location', window.location.href.includes("@"))
     const OpValArray = new Array()
     OpValArray.push(opRewardHive, opVestShare)
+
+    const StringFieldArray=[
+        "id",
+        "producer",
+        "opCurator",
+        "publisher",
+        "json_meta",
+        "voter",
+        "author",
+        "benefactor",
+        "weight",
+        "rshares",
+        "total_vote_weight",
+        "account",
+        "from",
+        "to",
+        "memo",
+        "author_rewards",
+        "comment_author",
+        "comment_permlink"
+
+    ]
+    
+    const ObjectFieldArray=[
+        "vesting_shares",
+        "reward",
+        "amount",
+        "reward_hive",
+        "hbd_payout",
+        "fee",
+        "pending_payout",
+        "reward_hbd",
+        "reward_vests",
+        "hive_payout",
+        "vesting_payout",
+        "total_payout_value",
+        "curator_payout_value",
+        "beneficiary_payout_value",
+        "curators_vesting_payout",
+        "initial_vesting_shares",
+        "initial_delegation",
+    ]
 
     function OpObjectValue(field: any, name: string) {
         return (
@@ -116,35 +132,35 @@ const TransactionOperationTable = (props: any) => {
                     {opVal && <tr>
                         <td>{_t(`trans_table.value`)}</td>
                         <td>
-                            <table>
+                            <table style={{ width: '100%' }}>
                                 <tbody>
-                                    {opProd && <tr><td>{_t(`trans_table.producer`)}</td><td>{opProd}</td></tr>}
-                                    {opCurator && <tr><td>{_t(`trans_table.curator`)}</td><td>{opCurator}</td></tr>}
-                                    {opPublish && <tr><td>{_t(`trans_table.publisher`)}</td><td>{opPublish}</td></tr>}
-                                    {opMemoKey && <tr><td>{_t(`trans_table.memo_key`)}</td><td>{opMemoKey}</td></tr>}
+                                    {Object.keys(opVal).map((key)=>{
+                                        return(
+                                            <>
+                                            {(typeof(opVal[key])==="string" || typeof(opVal[key])==="number") 
+                                                && StringFieldArray.includes(key)
+                                                && 
+                                                <tr>
+                                                    <td>{_t(`trans_table.${key}`)}</td><td>{opVal[key]}</td>
+                                                </tr>
+                                            }
+                                            </>
+                                        )
+                                    })}
+                               
                                     {opOwner && opNestedObject(opOwner, 'owner')}
 
                                     {opActive && opNestedObject(opActive, 'active')}
 
                                     {opPosting && opNestedObject(opPosting, 'posting')}
 
-                                    {opJsonMeta && <tr><td>{_t(`trans_table.json_meta`)}</td> <td>{opJsonMeta}</td></tr>}
-                                    {opVoter && <tr><td>{_t(`trans_table.voter`)}</td> <td>{opVoter}</td></tr>}
-                                    {opAuth && <tr><td>{_t(`trans_table.author`)}</td><td>{opAuth}</td></tr>}
-                                    {opBenefactor && <tr><td>{_t(`trans_table.benefactor`)}</td><td>{opBenefactor}</td></tr>}
                                     {opPermlink && <tr><td>{_t(`trans_table.permlink`)}</td><td><Link to={`/@${opAuth}/${opPermlink}`}>{opPermlink}</Link></td></tr>}
-                                    {opWeight && <tr><td>{_t(`trans_table.weight`)}</td><td>{opWeight}</td></tr>}
-                                    {opRshares && <tr><td>{_t(`trans_table.rshares`)}</td><td>{opRshares}</td></tr>}
-                                    {opTVweight && <tr><td>{_t(`trans_table.total_vote_weight`)}</td><td>{opTVweight}</td></tr>}
+                               
                                     {opCreator && <tr><td>{_t(`trans_table.creator`)}</td><td><a href={`@${opCreator}`}>{opCreator}</a></td></tr>}
-                                    {opAccount && <tr><td>{_t(`trans_table.account`)}</td><td>{opAccount}</td></tr>}
-                                    {opFrom && <tr><td>{_t(`trans_table.from`)}</td><td>{opFrom}</td></tr>}
-                                    {opTo && <tr><td>{_t(`trans_table.to`)}</td><td>{opTo}</td></tr>}
-                                    {opMemo && <tr><td>{_t(`trans_table.memo`)}</td><td>{opMemo}</td></tr>}
-                                    {opAuthorRewards && <tr><td>{_t(`trans_table.author_rewards`)}</td><td>{opAuthorRewards}</td></tr>}
+                                 
                                     {opRequiredAuths && opRequiredAuths.length !== 0 &&
                                         <tr>
-                                            <td style={{ width: '175px' }}>{_t(`trans_table.required_auths`)}</td>
+                                            <td style={{ width: '125px' }}>{_t(`trans_table.required_auths`)}</td>
                                             <td>
                                                 {window.location.href.includes("@") ?
                                                     <a href={`/@${opRequiredAuths[0]}`}>{opRequiredAuths[0]}</a>
@@ -166,12 +182,63 @@ const TransactionOperationTable = (props: any) => {
                                             </td>
                                         </tr>
                                     }
+                                    {/* {jsonSplit.currency && 
+                                    <tr>
+                                        <td>{_t(`trans_table.json`)}</td>
+                                        <td>
+                                         <table>
+                                            <tr>
+                                                <td>Items</td>
+                                                <td>   {jsonSplit.items.map((item:string,i:number)=>{
+                                            return(
+                                                <tr key={i}>
+                                                <td>{item}</td>
+                                            </tr>
+                                            )
+                                        })}</td>
+                                            </tr>
+                                         </table>
+                                        </td>
+                                    </tr>} */}
+                                    {opJson &&
+                                        <tr>
+                                            <td>{_t(`trans_table.json`)}</td>
+                                            <td>
+                                            {jsonSplit.items &&
+                                               
+                                                    <table>
+                                                        <tr>
+                                                            <td>{_t(`trans_table.items`)}</td>
+                                                            <td>   {jsonSplit.items.map((item: string, i: number) => {
+                                                                return (
+                                                                    <tr key={i}>
+                                                                        <td>{item}</td>
+                                                                    </tr>
+                                                                )
+                                                            })}</td>
+                                                        </tr>
+                                                    </table>
+                                               
+                                                }
 
-                                    {opId && <tr><td>{_t(`trans_table.id`)}</td><td>{opId}</td></tr>}
-
-                                    {opJson && <tr><td>{_t(`trans_table.json`)}</td><td>{opJson}</td></tr>}
-                                    {opCommentAuthor && <tr><td>{_t(`trans_table.comment_author`)}</td><td>{opCommentAuthor}</td></tr>}
-                                    {opCommentLink && <tr><td>{_t(`trans_table.comment_permlink`)}</td><td>{opCommentLink}</td></tr>}
+                                            {jsonSplit && Object.keys(jsonSplit).map((key,j)=>{
+                                          
+                                                return(
+                                                    <>
+                                                    {typeof(jsonSplit[key]) !== "object" ? <table key={j}>
+                                                      <tbody>
+                                                      <tr>
+                                                            <td>{_t(`trans_table.${key}`)}</td>
+                                                            <td>{jsonSplit[key]}</td>
+                                                        </tr>
+                                                      </tbody>
+                                                    </table>:<></>}
+                                                    </>
+                                                )
+                                            })}
+                                            
+                                            </td>
+                                        </tr>}
                                     {opPayoutClaim && <tr><td>{_t(`trans_table.payout_must_be_claimed`)}</td><td>{JSON.stringify(opPayoutClaim)}</td></tr>}
                                     {opProps &&
                                         <tr>
@@ -227,33 +294,15 @@ const TransactionOperationTable = (props: any) => {
                                                 </table>
                                             </td>
                                         </tr>}
-                                    {opVestShare && OpObjectValue(opVestShare, 'vesting_shares')}
-                                    {opReward && OpObjectValue(opReward, 'reward')}
-                                    {opAmount && OpObjectValue(opAmount, 'amount')}
-                                    {opRewardHive && OpObjectValue(opRewardHive, 'reward_hive')}
-                                    {opHBDpayout && OpObjectValue(opHBDpayout, 'hbd_payout')}
-                                    {opFee && OpObjectValue(opFee, 'fee')}
-                                    {opPendingPay && OpObjectValue(opPendingPay, 'pending_payout')}
-                                    {opRewardHbd && OpObjectValue(opRewardHbd, 'reward_hbd')}
-                                    {opRewardVests && OpObjectValue(opRewardVests, 'reward_vests')}
-                                    {opHivePayout && OpObjectValue(opHivePayout, 'hive_payout')}
-                                    {opVestingPayout && OpObjectValue(opVestingPayout, 'vesting_payout')}
-                                    {/* Total Payout Value */}
-                                    {opTotalPayoutVal && OpObjectValue(opTotalPayoutVal, 'total_payout_value')}
-
-                                    {/* Curator Payout Value */}
-                                    {opVestingPayout && OpObjectValue(opVestingPayout, 'curator_payout_value')}
-
-                                    {/* beneficiary_payout_value */}
-                                    {opBenefPayoutVal && OpObjectValue(opBenefPayoutVal, 'beneficiary_payout_value')}
-
-                                    {/* curators_vesting_payout */}
-                                    {opCuratorPayoutVal && OpObjectValue(opCuratorPayoutVal, 'curators_vesting_payout')}
-
-                                    {opInitialVestingShares && OpObjectValue(opInitialVestingShares, 'initial_vesting_shares')}
-
-                                    {opInitialDelegation && OpObjectValue(opInitialDelegation, 'initial_delegation')}
-
+                             
+                                    {Object.keys(opVal).map((key)=>{
+                                        console.log("value",key,opVal[key],ObjectFieldArray.includes(key),typeof(opVal[key]))
+                                        return(
+                                            <>
+                                                {typeof(opVal[key])==="object" && ObjectFieldArray.includes(key) && OpObjectValue(opVal[key], `${key}`)}
+                                            </>
+                                        )
+                                    })}
                                     {opExchange &&
                                         <tr>
                                             <td>{_t('trans_table.exchange_rate')}</td>

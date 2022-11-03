@@ -175,7 +175,8 @@ export const methods = [
   {
     "api": "condenser_api",
     "method": "get_owner_history",
-    "params": ["account"]
+    "params": ["account"],
+    "isArray":true,
   },
   {
     "api": "condenser_api",

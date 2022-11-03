@@ -39,7 +39,7 @@ export const TimestampField=(props:any)=>{
             className="d-inline-flex align-items-center"
           >
        
-            <span className="ms-1">{moment(`${timestamp}`).fromNow()}</span>
+            <span className="ms-1">{moment.utc(`${timestamp}`).fromNow()}</span>
           </Button>
         )}
       </OverlayTrigger>

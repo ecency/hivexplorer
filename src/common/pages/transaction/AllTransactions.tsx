@@ -19,6 +19,8 @@ const AllTransactions = (props:any) => {
     const [loading, setLoading] = useState(true);
     const [transactions, setTransactions] = useState<TransactionList>([]);
     const HeadBlock = useSelector((state:any) => state.headBlock.head_block_number)
+    // const HeadBlock = 69369062
+   
     const transactions_url=`${ConfigItems.baseUrl}/api/get_ops_in_block?block_num=${HeadBlock}`;
       useEffect(()=>{
         axios.get(transactions_url).then(res => {
