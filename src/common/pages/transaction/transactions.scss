@@ -1,6 +1,7 @@
 .data-table-hive{
     .trans-table {
         margin: auto;
+        width: 80%;
         & th, td{
             border: 1px solid #706f70;
         border-collapse: collapse;
@@ -13,5 +14,28 @@
             word-break: break-all;
         }
         
+      }
+      .time-date-table {
+        & th, td{
+            border: 1px solid #706f70;
+        border-collapse: collapse;
+        }
+        tr td:first-child{
+            min-width: 100px;
+        }
+        td{
+            padding: 10px ;
+            word-break: break-word;
+        }
+        
+      }
+      .card-header-sort{
+        width: 110px;
+      }
+      .col-w-240{
+        width: 240px !important;
+      }
+      .col-w-110{
+        width: 110x !important;
       }
 }

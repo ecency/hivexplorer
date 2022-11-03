@@ -1,31 +1,21 @@
 
-import React, { useEffect, useMemo, useState } from 'react';
-import axios from 'axios';
-import { Link, match } from 'react-router-dom';
+import React from 'react';
 import { connect } from 'react-redux';
-import { pageMapDispatchToProps, pageMapStateToProps, PageProps } from '../../pages/common';
+import { pageMapDispatchToProps, pageMapStateToProps } from '../../pages/common';
 import { withPersistentScroll } from '../../components/with-persistent-scroll';
-import Theme from '../../components/theme';
-import {renderPostBody, setProxyBase, catchPostImage} from "@ecency/render-helper";
-
 import { _t } from '../../i18n';
-import { getPermLink } from '../../api/urls';
-import { Container } from 'react-bootstrap';
 import { activeVotes } from './EntryTypes';
+import { Link } from 'react-router-dom';
 import {
-    Box,
-    Collapse,
-    IconButton,
-    Paper,
     Table,
     TableBody,
     TableCell,
     TableContainer,
     TableHead,
-    TablePagination,
     TableRow,
-    TextField,
    } from '@material-ui/core'
+import moment from 'moment';
+
 
 
 interface Column {
@@ -67,11 +57,11 @@ const EntryVotes = (props:any) => {
             return(
                 <TableRow key={i} hover={true} role="checkbox" tabIndex={-1}>
                 <TableCell><Link to={`/@${vote.voter}`}>{vote.voter}</Link></TableCell>
-                <TableCell>{vote.weight}</TableCell>
-                <TableCell>{vote.percent}</TableCell>
-                <TableCell>{vote.rshares}</TableCell>
-                <TableCell>{vote.reputation}</TableCell>
-                <TableCell>{vote.time}</TableCell>
+                <TableCell>{vote.weight? vote.weight:"-N/A"}</TableCell>
+                <TableCell>{vote.percent? vote.percent : "-N/A"}</TableCell>
+                <TableCell>{vote.rshares? vote.rshares : "-N/A"}</TableCell>
+                <TableCell>{vote.reputation? vote.reputation : "-N/A"}</TableCell>
+                <TableCell>{vote.time? moment(`${vote.time}`).fromNow(): "-N/A"}</TableCell>
               </TableRow>
             )
         })}

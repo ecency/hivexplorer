@@ -1,3 +1,4 @@
+@import "../../../style/colors";
 .home{
     .search-form{
         width: 500px;
@@ -5,12 +6,26 @@
             width: 100%;
         }
     }
+    .chart-col{
+     
+        @media (max-width:565px) {
+            .upper-chart{
+                padding-bottom: 1.75rem;
+            }
+        }
+    }
     .card-row{
         padding: 10px;
-        border-bottom: 1px solid #efefef;
+        border-bottom: 1px solid $metallic-blue;
     }
     .block-row{
         padding: 1rem 0;
+        line-height: 27px;
+    }
+    .col-market{
+        display: flex;
+        justify-content: end;
+        align-items: center;
     }
     .block-transaction-body{
         height: 453px;
@@ -19,9 +34,13 @@
          box-shadow: none;   
         }
         .avatar-img{
-            height: 30px;
+            height: 27px;
             width: 30px;
-            border-radius: 100%;
+            margin-right: 10px;
+            margin-left: 10px;
+        }
+        .spinner-loader{
+            height: 100%;
         }
     }
     .search-dropdown{
@@ -55,7 +74,7 @@
 }
 
 .night-background {
-    background-color: #161d26;
-    border: 1px solid #161d26; 
+    background-color: $dark-grey-blue;
+    border: 1px solid $dark-grey-blue; 
 
 }

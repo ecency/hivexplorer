@@ -1,12 +1,31 @@
+@import '../../../style/colors';
 .entry-content-container{
     padding: 5rem 0;
     .entry-header{
         padding: 10px 0;
         display: flex;
+        align-items: center;
         .avatar-img{
             height: 50px;
             width: 50px;
             border-radius: 100%;
+        }
+    }
+    .toggle-button-container{
+        display: flex;
+        align-items: baseline;
+        margin-left: auto;
+        p{
+            margin-right: 10px;
+        }
+        div{
+            font-size: 14px !important;
+        }
+    }
+    .entry-parent{
+        padding: 10px 0 20px;
+        .card{
+            width: 100%;
         }
     }
     .accordion{
@@ -29,7 +48,7 @@
                 background-color: transparent;
                 color: #fff;
                 .accordion-button{
-                    background: #161d26;
+                    background: $dark-grey-blue;
                     color: #fff;
                     &::after{
                         display: none;
@@ -42,6 +61,14 @@
 
             
         }
+        .accordion-item:first-of-type,.accordion-item:last-of-type{
+            border-radius: 0;
+        }
         
+    }
+    .permlink-discussion-content{
+        padding: 15px;
+        border: 1px solid #dee2e6;
+        border-top: 0;
     }
 }

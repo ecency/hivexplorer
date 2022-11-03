@@ -4,12 +4,12 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { withPersistentScroll } from '../with-persistent-scroll';
 import { Col, Row } from 'react-bootstrap';
-import { ConfigItems } from '../../../../config';
 import { Link } from 'react-router-dom';
-import { pageMapDispatchToProps, pageMapStateToProps, PageProps } from '../../pages/common';
-import moment from 'moment';
+import { pageMapDispatchToProps, pageMapStateToProps} from '../../pages/common';
 import { _t } from '../../i18n';
 import { getBlocks } from '../../api/urls';
+import { Date_time_table } from '../../api/dateTime';
+import SpinnerEffect from '../loader/spinner';
 
 interface operationsList {
     type: string
@@ -28,22 +28,34 @@ export interface HomeBlocksType {
 }
 interface HomeBlockList extends Array<HomeBlocksType>{}
 const HomeBlocks = (props:any) => {
+    const [loading, setLoading] = useState(true);
     const [homeBlocks, setHomeBlocks] = useState<HomeBlockList>();
     const home_blocks_url=getBlocks(props.block_number,15)
       useEffect(()=>{
-        axios.get(home_blocks_url).then(res => {
-            const blocks_response=res.data.blocks
+        // axios.get(home_blocks_url).then(res => {
+        //     const blocks_response=res.data.blocks
+        //     setHomeBlocks(blocks_response.reverse())
+        //   })
+          const fetchData = async () =>{
+            setLoading(true);
+          try {
+            const {data: response} = await axios.get(home_blocks_url);
+            const blocks_response=response.blocks
             setHomeBlocks(blocks_response.reverse())
-          })
+          } catch (error:any) {
+            console.error(error.message);
+          }
+          setLoading(false);
+        }
+        fetchData();
       },[])
-      const Date_time=(timeSet:string,timeFormat:string)=>{
-        return moment(timeSet).utc().format(timeFormat)
-      }
+   
    const current = new Date();
    let blockNum:number=props.block_number
     return (
        <>
-        {homeBlocks && homeBlocks.map((block,index)=>{
+        {loading && <SpinnerEffect />}
+        {!loading && homeBlocks && homeBlocks.map((block,index)=>{
             const deviceDate=new Date()
             let operationsCount=0
             block.transactions.map((trans,index)=>{
@@ -56,14 +68,14 @@ const HomeBlocks = (props:any) => {
                  <Col md={5} xs={12}>
                     <Row>
                         <Col md={12}>{_t('common.block')}: <Link to={`/b/${blockNum}`}>{blockNum--}</Link> </Col>
-                        <Col md={12}>{_t('common.witness')}: <Link to={''}>{block.witness}</Link></Col>
+                        <Col md={12}>{_t('common.witness')}: <Link to={`/@${block.witness}`}>{block.witness}</Link></Col>
                         
                     </Row>
                  </Col>
                  <Col md={4} xs={12}>
                     <Row>
-                    <Col md={12} >{_t('common.time')}: {Date_time(block.timestamp,'YYYY-MM-DD')}</Col>
-                        <Col md={12}>{_t('common.date')}: {Date_time(block.timestamp,'hh:mm:ss')}</Col>
+                    <Col md={12} >{_t('common.time')}: {Date_time_table(block.timestamp,'YYYY-MM-DD')}</Col>
+                        <Col md={12}>{_t('common.date')}: {Date_time_table(block.timestamp,'hh:mm:ss')}</Col>
                     </Row>
                  </Col>
                  <Col md={3} xs={12}>

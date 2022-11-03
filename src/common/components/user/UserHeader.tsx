@@ -8,6 +8,7 @@ import { Button, Card, Col, ProgressBar, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { ConfigItems } from '../../../../config';
+import { CreatedDate } from '../../api/dateTime';
 import { _t } from '../../i18n';
 import { facebookIcon, instagramIcon, twitterIcon,gitHubIcon, websiteIcon, youtubeIcon } from '../../img/svg';
 import './UserHeader.scss'
@@ -33,7 +34,8 @@ const UserHeader = (props:any) => {
     const themeContrastColor = currTheme === 'day' ? '#535e65' : 'white';
 
     // Created Date
-    const createdDate = moment.utc(created).format("LL");
+    
+    const createdDate = CreatedDate(created);
     console.log('rc1111',resourceCredits)
    
     return (

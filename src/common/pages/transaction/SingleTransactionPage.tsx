@@ -12,6 +12,7 @@ import Theme from '../../components/theme';
 import { _t } from '../../i18n';
 import StringField from '../../components/fields/blockFields/StringField';
 import ObjectField from '../../components/fields/blockFields/ObjectField';
+import SpinnerEffect from '../../components/loader/spinner';
 
 export interface SingleTransaction {
     block_num: number
@@ -27,17 +28,31 @@ export interface SingleTransaction {
 
 const SingleTransaction = (props:any) => {
     const {match} = props
+    const [loading, setLoading] = useState(true);
     const [result, setResult] = useState<SingleTransaction>();
     const url_single_transaction = `${ConfigItems.baseUrl}/api/get_transaction?trx_id=${match.params.id}`;
     useEffect(() => {
-        axios.get(url_single_transaction).then(response => {
-            setResult(response.data)
-        })
+        // axios.get(url_single_transaction).then(response => {
+        //     setResult(response.data)
+        // })
+        console.log(url_single_transaction)
+        const fetchData = async () =>{
+            setLoading(true);
+          try {
+            const {data: response} = await axios.get(url_single_transaction);
+            setResult(response);
+          } catch (error:any) {
+            console.error(error.message);
+          }
+          setLoading(false);
+        }
+        fetchData();
     }, []);
     return (
         <>
             <Theme global={props.global}/>
-            <div className='head-block-detail'>
+            {loading && <SpinnerEffect />}
+            {!loading && <div className='head-block-detail'>
             <Container>
                     <Card>
                         <Card.Header>
@@ -57,7 +72,7 @@ const SingleTransaction = (props:any) => {
 
                     </Card>
             </Container>
-            </div>
+            </div>}
         </>
     )
 };

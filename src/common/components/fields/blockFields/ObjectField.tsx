@@ -1,17 +1,16 @@
 
-import React,{useEffect, useState} from 'react';
+import React,{useState} from 'react';
 import { Button, Col, ListGroup, Row } from 'react-bootstrap';
 import { infoIcon, showLessIcon, showMoreIcon, trxIcon } from '../../../img/svg';
 import './ObjectField.scss'
 import { useSelector } from 'react-redux';
 import { _t } from '../../../i18n';
 import { Link } from 'react-router-dom';
-import moment from 'moment';
-import configureStore from '../../../store/configure';
 import { ConfigItems } from '../../../../../config';
-import { push } from 'connected-react-router';
-import { divide, values } from 'lodash';
 import JsonField from './JsonField';
+import JsonMetadata from '../../EntryContent/JsonMetadata';
+import { Date_time_table } from '../../../api/dateTime';
+import TransactionOperationTable from '../../../pages/User/UserOpTable';
 
 const timestampKeys=[
     "time",
@@ -38,6 +37,9 @@ interface opValType {
     id:string
     voter:string
     json:string
+    author: string
+    permlink: string
+    weight: number | string
 }
 interface transactionType {
     ref_block_num:number
@@ -55,12 +57,9 @@ const ObjectField = (props:any) => {
     const themeContrastColor = currTheme === 'day' ? '#535e65' : 'white';
     const rowBorder = currTheme === 'day' ? 'row-border border-color-day' : 'row-border border-color-night';
     const themeBtn = currTheme === 'day' ? 'showmore-btn btn-light' : 'showmore-btn btn-dark'
-    console.log('ops',transactionOperations)
     let transactionValue:transactionTypeList=[]
 
-    const DateTimeMoment=(timeSet:string,timeFormat:string)=>{
-        return moment(timeSet).format(timeFormat)
-      }
+  
     const Date_time=(timeDate:string)=>{
         return(
             <>
@@ -68,56 +67,23 @@ const ObjectField = (props:any) => {
                    <tbody>
                    <tr>
                         <td>{_t('common.date')}</td>
-                        <td>{DateTimeMoment(`${timeDate}`,"YYYY-MM-DD")}</td>
+                        <td>{Date_time_table(`${timeDate}`,"YYYY-MM-DD")}</td>
                     </tr>
                     <tr>
                         <td>{_t('common.time')}</td>
-                        <td>{DateTimeMoment(`${timeDate}`,`hh:mm:ss`)}</td>
+                        <td>{Date_time_table(`${timeDate}`,`hh:mm:ss`)}</td>
                     </tr>
                    </tbody>
                 </table>
             </>
         )
     }
-    const expand_operation=(value:any,item:string)=>{
-        return(
-            value.map((val:any,i:number)=>{
-                const type:string=val[0]
-                const opVal:opValType=val[1]
-               return(
-                <Row className={`${rowBorder} mt-1`} key={i}>
-                    <Col md={3}>
-                        <></>
-                    </Col>
-                    <Col md={9}>
-                    <table className='time-date-table'>
-                       <tbody>
-                        <tr>
-                            <td>{_t('common.type')}</td><td>{type}</td>
-                        </tr>
-                       {opVal.voter && <tr>
-                            <td >{_t('common.voter')}</td><td>{opVal.voter}</td>
-                        </tr>}
-                        {opVal.id &&  <tr>
-                            <td>{_t('common.id')}</td><td>{opVal.id}</td>
-                        </tr>}
-                        {opVal.json && <tr>
-                            <td>{_t('common.json')}</td><td>{opVal.json}</td>
-                        </tr>}
-                       
-                       </tbody>
-                       
-                    </table>
-                    </Col>
-                </Row>
-               )
-            })
-        )
-    }
+    // const expand_operation=(value:any,item:string)=>{
+    //     return(
+          
+    //     )
+    // }
     const expand_view=(value:any,item:string)=>{
-        console.log('value',value)
-        console.log('trans value',transactionValue)
-
        return(
         <Row className={`${rowBorder} mt-1`}>
             <Col md={6} xs={12}>
@@ -133,7 +99,7 @@ const ObjectField = (props:any) => {
                                 :
                                 <>
                                     <Link to={`/tx/${val}`}>
-                                        <span>{trxIcon(themeContrastColor)}</span><span> {val} {i}</span>
+                                        <span>{trxIcon(themeContrastColor)}</span><span> {val} </span>
                                         
                                     </Link>
                                     <JsonField transactionOperations={transactionOperations[i]}/>
@@ -160,7 +126,7 @@ const ObjectField = (props:any) => {
                                 :
                                <>
                                 <Link to={`/tx/${val}`}>
-                                    <span>{trxIcon(themeContrastColor)}</span><span> {val} {j}</span>
+                                    <span>{trxIcon(themeContrastColor)}</span><span> {val} </span>
                                 </Link>
                                <JsonField transactionOperations={transactionOperations[j]}/>
                                </>
@@ -189,22 +155,24 @@ const ObjectField = (props:any) => {
             <Col md={9} xs={12}>
                 {item==='voting_manabar' || item ==='downvote_manabar'?
                     <table className='time-date-table'>
-                    <tr>
-                        <td>current_mana</td>
-                        <td>{value.current_mana}</td>
-                    </tr>
-                    <tr>
-                        <td>Time</td>
-                        <td>{value.last_update_time}</td>
-                    </tr>
-                </table>
+                        <tbody>
+                            <tr>
+                                <td>current_mana</td>
+                                <td>{value.current_mana}</td>
+                            </tr>
+                            <tr>
+                                <td>Time</td>
+                                <td>{value.last_update_time}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 :  item==='transactions'? 
                 <>
                   {transactionValue.push(...value)}
                   {console.log('pushed data',transactionValue)}
                   </>
                  :
-                item==='witness_votes' || item==='transaction_ids' || item==='operations'?
+                item==='witness_votes' || item==='transaction_ids' ?
                 <>
                     <Button className={themeBtn} 
                             onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>setExpandBtn(!expandBtn)}
@@ -212,9 +180,60 @@ const ObjectField = (props:any) => {
                                 {value.length} {expandBtn? <span>{showLessIcon(themeContrastColor)} </span> : <span>{showMoreIcon(themeContrastColor)}</span>}
                     </Button>
                 </>
+                : 
+                item==='operations'?
+                <>{  value.map((val:any,i:number)=>{
+                    const type:string=val[0]
+                    const opVal:opValType=val[1]
+                   return(
+                 
+                        <table className='time-date-table'>
+                           <tbody>
+                            <tr>
+                                <td>{_t('trans_table.type')}</td><td>{type}</td>
+                            </tr>
+                        
+                            {opVal.id &&  <tr>
+                                <td>{_t('trans_table.id')}</td><td>{opVal.id}</td>
+                            </tr>}
+                            {opVal.json && <tr>
+                                <td>{_t('trans_table.json')}</td><td>{opVal.json}</td>
+                            </tr>}
+                            {opVal.voter && <tr>
+                                <td >{_t('trans_table.voter')}</td><td>{opVal.voter}</td>
+                            </tr>}
+                            {opVal.author && <tr>
+                                <td >{_t('trans_table.author')}</td><td>{opVal.author}</td>
+                            </tr>}
+                            {opVal.permlink && <tr>
+                                <td >{_t('trans_table.permlink')}</td><td>{opVal.permlink}</td>
+                            </tr>}
+                            {opVal.weight && <tr>
+                                <td >{_t('trans_table.weight')}</td><td>{opVal.weight}</td>
+                            </tr>}
+                      
+                      
+                           
+                           </tbody>
+                           
+                        </table> 
+                 
+                   )
+                })}
+                </>
                 : item==='init_hbd_supply' || item==='current_hbd_supply' || item==='virtual_supply'?
                 <> 
                     {value.amount}
+                </>
+                :
+                item==='json_metadata' && label_for==="entry" ?
+                <>
+                    <JsonMetadata data={value} />
+                </>
+                :
+                item==='signatures'  ?
+                <>
+                    {value[0]}
                 </>
                 :
                 <>
@@ -227,7 +246,7 @@ const ObjectField = (props:any) => {
         }
         {item==='witness_votes' && expandBtn ?expand_view(value,item):<></>}
         {item==='transaction_ids' && expandBtn ?expand_view(value,item):<></>}
-        {item==='operations' && expandBtn ?expand_operation(value,item):<></>}
+        {/* {item==='operations' && expandBtn ?expand_operation(value,item):<></>} */}
          
         </>
         

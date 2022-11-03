@@ -4,12 +4,14 @@ import { createBrowserHistory, History } from 'history';
 
 import global from './global';
 import persistentPageScroll from './persistent-page-scroll';
+import headBlock from './HeadBlock';
 
 export let history: History | undefined;
 
 let reducers = {
   global,
   persistentPageScroll,
+  headBlock
 };
 
 // create browser history on client side

@@ -1,0 +1,21 @@
+.theme-night{
+    .market-graph{
+        background-color: #161d26;
+    }
+    .highcharts-background{
+        fill: #161d26;
+    }
+}
+.theme-day{
+    .market-graph{
+        background-color: #f5f5f5;
+    }
+    .highcharts-background{
+        fill: #f5f5f5;
+    }
+}
+.market-graph{
+    .price{
+        padding: 10px;
+    }
+}

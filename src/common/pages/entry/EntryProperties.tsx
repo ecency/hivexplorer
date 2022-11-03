@@ -1,36 +1,15 @@
 
-import React, { useEffect, useMemo, useState } from 'react';
-import axios from 'axios';
-import { Link, match } from 'react-router-dom';
+import React from 'react';
 import { connect } from 'react-redux';
-import { pageMapDispatchToProps, pageMapStateToProps, PageProps } from '../../pages/common';
+import { pageMapDispatchToProps, pageMapStateToProps} from '../../pages/common';
 import { withPersistentScroll } from '../../components/with-persistent-scroll';
-import Theme from '../../components/theme';
-import {renderPostBody, setProxyBase, catchPostImage} from "@ecency/render-helper";
-
 import { _t } from '../../i18n';
-import { getPermLink } from '../../api/urls';
-import { Container } from 'react-bootstrap';
-import { activeVotes } from './EntryTypes';
-import {
-    Box,
-    Collapse,
-    IconButton,
-    Paper,
-    Table,
-    TableBody,
-    TableCell,
-    TableContainer,
-    TableHead,
-    TablePagination,
-    TableRow,
-    TextField,
-   } from '@material-ui/core'
 import StringField from '../../components/fields/blockFields/StringField';
+import ObjectField from '../../components/fields/blockFields/ObjectField';
 
 const EntryProperties = (props:any) => {
-    const {entry}=props
-    console.log('entry',entry)
+    const {entries}=props
+    console.log('entry',entries)
     // {const renderedBody = ;}
     const EntryType=[
         "author",
@@ -59,13 +38,17 @@ const EntryProperties = (props:any) => {
       ]
     return (
         <>
-        {entry && Object.keys(entry).map((key,index)=>{
+        {entries && Object.keys(entries).map((key,index:number)=>{
            return(
-            <>
-            {typeof(entry[key])!=="object" && EntryType.includes(key) &&
-                 <StringField key={index} value={entry[key]}  item={key} number={index} label_for='entry'/>
+           <div key={index}>
+              {typeof(entries[key])!=="object"?
+               EntryType.includes(key) && 
+                 <StringField key={index} value={entries[key]}  item={key} number={index} label_for='entry'/>
+                 :
+                 EntryType.includes(key) && 
+                 <ObjectField key={index} value={entries[key]}  item={key} number={index} label_for='entry'/>
              }
-            </>
+           </div>
            )
         })}
 

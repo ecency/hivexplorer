@@ -1,3 +1,4 @@
+@import '../../../style/colors';
 .proposal-container{
     .search-field-proposals{
         width: 500px;
@@ -79,7 +80,7 @@
             font-weight: 300;
             }
             &-active{
-                background-color: #69bb85;
+                background-color: $green1;
             }
             &-expired{
                 background-color: #f66;

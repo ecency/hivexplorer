@@ -1,36 +1,10 @@
 
-import React, {useState,useEffect} from "react";
-
-import '../../../style/dataTable/DataTables.scss'
-import { Link } from "react-router-dom";
-import {
-
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  IconButton,
-  TableFooter,
-  TableHead,
-  TablePagination,
-  TableRow,
-  TextField,
-  Collapse,
-  Box,
-  Typography,
- } from '@material-ui/core';
-import { Card, Col, Container, Row } from 'react-bootstrap';
-import moment from "moment";
-import { useSelector } from "react-redux";
+import React from "react";
+import { Col, Row } from 'react-bootstrap';
 import { _t } from "../../i18n";
-import { ConfigItems } from "../../../../config";
-import axios from "axios";
 import { UserTransactionType } from "./UserTypes";
-import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-import TransactionOperationTable from "./UserOpTable";
-import { type } from "os";
+import '../../../style/dataTable/DataTables.scss'
+
 
 
 interface Column {
@@ -50,48 +24,49 @@ interface Authority {
     account_auths:string[],
     key_auths:string[]
 }
+export const AuthorityObject=(field:Authority)=>{
+    return(
+       <>
+       {Object.keys(field).map((key,i:number)=>{
+        return(
+            <>
+              {field[key].length !== 0 && 
+             <Row key={i} className="m-0 py-2 row-border-dotted">
+              
+                <>
+                <Col md={3} xs={3}>{key}
+                </Col>
+                <Col md={9} xs={9}>
+                   {typeof(field[key])!=="object"?
+                    field[key]
+                    :
+                    field[key].map((inner:any,j:number)=>{
+                        return(
+                            <Row key={j}>
+                                <Col className="auth-col">{key==='account_auths'?
+                                    <a href={`/@${inner[0]}`}>{inner[0]}</a>: <span>{inner[0]} </span> } 
+                                    <span className="number-span">{`  `} {inner[1]}</span>
+                                </Col>
+                            </Row>
+                        )
+                    })
+                   }
+                </Col>
+                </>
+              
+            </Row>
+              }
+            </>
+           
+        )
+
+       })}
+       </>
+    )
+}
 interface UserTransactionTypeList extends Array<UserTransactionType>{}
 const UserAuthorities = (props:any) => {
-    const AuthorityObject=(field:Authority)=>{
-        return(
-           <>
-           {Object.keys(field).map((key,i:number)=>{
-            return(
-                <>
-                  {field[key].length !== 0 && 
-                 <Row key={i} className="m-0 py-2 row-border-dotted">
-                  
-                    <>
-                    <Col md={3} xs={3}>{key}
-                    </Col>
-                    <Col md={9} xs={9}>
-                       {typeof(field[key])!=="object"?
-                        field[key]
-                        :
-                        field[key].map((inner:any,i:number)=>{
-                            return(
-                                <Row key={i}>
-                                    <Col className="auth-col">{key==='account_auths'?
-                                        <a href={`/@${inner[0]}`}>{inner[0]}</a>: <span>{inner[0]} </span> } 
-                                        <span className="number-span">{`  `} {inner[1]}</span>
-                                    </Col>
-                                </Row>
-                            )
-                        })
-                       }
-                    </Col>
-                    </>
-                  
-                </Row>
-                  }
-                </>
-               
-            )
-
-           })}
-           </>
-        )
-    }
+  
     return(
         <>
             <table className="authority-table">
