@@ -123,7 +123,7 @@ const EntryCommentPage = (props: any) => {
                            <span>{openVotes?showLessIcon(themeContrastColor):showMoreIcon(themeContrastColor)}</span>
                         </Accordion.Header>
                         <Accordion.Body>
-                           {entry.active_votes &&  <EntryVotes votes={entry.active_votes} />}
+                           <EntryVotes user={entry.author} permlink={entry.permlink} />
                         </Accordion.Body>
                     </Accordion.Item>
                 </Accordion>

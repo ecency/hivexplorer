@@ -115,7 +115,7 @@ const EntryPage = (props: any) => {
                                                 <span>{openVotes ? showLessIcon(themeContrastColor) : showMoreIcon(themeContrastColor)}</span>
                                             </Accordion.Header>
                                             <Accordion.Body>
-                                                <EntryVotes votes={entry[key].active_votes} />
+                                                <EntryVotes votes={entry[key].active_votes} user={entry[key].author} permlink={entry[key].permlink} />
                                             </Accordion.Body>
                                         </Accordion.Item>}
                                         
@@ -157,7 +157,7 @@ const EntryPage = (props: any) => {
                                                                         <span>{openVotes ? showLessIcon(themeContrastColor) : showMoreIcon(themeContrastColor)}</span>
                                                                     </Accordion.Header>
                                                                     <Accordion.Body>
-                                                                        <EntryVotes votes={entry[key].active_votes} />
+                                                                        <EntryVotes votes={entry[key].active_votes} user={entry[key].author} permlink={entry[key].permlink}  />
                                                                     </Accordion.Body>
                                                                 </Accordion.Item>}
                                                             </Accordion>

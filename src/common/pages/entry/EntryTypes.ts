@@ -1,4 +1,4 @@
-export interface activeVotes {
+export interface entryVotesType {
     percent:number
     reputation: number
     rshares: number
@@ -21,5 +21,5 @@ export interface EntryType {
     children:number,
     last_payout:string,
     cashout_time:string,
-    active_votes:activeVotes[]
+    active_votes:entryVotesType[]
 }
