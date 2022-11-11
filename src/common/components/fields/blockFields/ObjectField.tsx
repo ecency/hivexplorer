@@ -187,7 +187,7 @@ const ObjectField = (props:any) => {
                     const opVal:opValType=val[1]
                    return(
                  
-                        <table className='time-date-table'>
+                        <table key={i} className='time-date-table'>
                            <tbody>
                             <tr>
                                 <td>{_t('trans_table.type')}</td><td>{type}</td>

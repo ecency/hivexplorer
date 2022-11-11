@@ -42,6 +42,12 @@ const TransactionOperationTable = (props: any) => {
     const OpValArray = new Array()
     OpValArray.push(opRewardHive, opVestShare)
 
+    const LinkAccount=[
+        "current_owner",
+        "open_owner"
+
+    ]
+
     const StringFieldArray=[
         "id",
         "producer",
@@ -60,7 +66,13 @@ const TransactionOperationTable = (props: any) => {
         "memo",
         "author_rewards",
         "comment_author",
-        "comment_permlink"
+        "comment_permlink",
+        "open_orderid",
+        "current_orderid",
+        "fill_or_kill",
+        "expiration",
+        "orderid"
+
 
     ]
     
@@ -82,6 +94,11 @@ const TransactionOperationTable = (props: any) => {
         "curators_vesting_payout",
         "initial_vesting_shares",
         "initial_delegation",
+        "amount_back",
+        "current_pays",
+        "open_pays",
+        "min_to_receive",
+        "amount_to_sell"
     ]
 
     function OpObjectValue(field: any, name: string) {
@@ -137,9 +154,7 @@ const TransactionOperationTable = (props: any) => {
                                     {Object.keys(opVal).map((key)=>{
                                         return(
                                             <>
-                                            {(typeof(opVal[key])==="string" || typeof(opVal[key])==="number") 
-                                                && StringFieldArray.includes(key)
-                                                && 
+                                            {(typeof(opVal[key])==="string" || typeof(opVal[key])==="number") && StringFieldArray.includes(key) && 
                                                 <tr>
                                                     <td>{_t(`trans_table.${key}`)}</td><td>{opVal[key]}</td>
                                                 </tr>
@@ -182,61 +197,42 @@ const TransactionOperationTable = (props: any) => {
                                             </td>
                                         </tr>
                                     }
-                                    {/* {jsonSplit.currency && 
-                                    <tr>
-                                        <td>{_t(`trans_table.json`)}</td>
-                                        <td>
-                                         <table>
-                                            <tr>
-                                                <td>Items</td>
-                                                <td>   {jsonSplit.items.map((item:string,i:number)=>{
-                                            return(
-                                                <tr key={i}>
-                                                <td>{item}</td>
-                                            </tr>
-                                            )
-                                        })}</td>
-                                            </tr>
-                                         </table>
-                                        </td>
-                                    </tr>} */}
+                
                                     {opJson &&
+                                        
                                         <tr>
                                             <td>{_t(`trans_table.json`)}</td>
                                             <td>
                                             {jsonSplit.items &&
-                                               
-                                                    <table>
-                                                        <tr>
-                                                            <td>{_t(`trans_table.items`)}</td>
-                                                            <td>   {jsonSplit.items.map((item: string, i: number) => {
-                                                                return (
-                                                                    <tr key={i}>
-                                                                        <td>{item}</td>
-                                                                    </tr>
+                                                <table style={{ width: '100%' }}>
+                                                    <tr>
+                                                        <td>{_t(`trans_table.items`)}</td>
+                                                        <td>   {jsonSplit.items.map((item: string, i: number) => {
+                                                            return (
+                                                                <tr key={i}>
+                                                                    <td>{item}</td>
+                                                                </tr>
                                                                 )
-                                                            })}</td>
-                                                        </tr>
-                                                    </table>
-                                               
-                                                }
-
+                                                            })}
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            }
                                             {jsonSplit && Object.keys(jsonSplit).map((key,j)=>{
-                                          
                                                 return(
                                                     <>
-                                                    {typeof(jsonSplit[key]) !== "object" ? <table key={j}>
+                                                    {typeof(jsonSplit[key]) !== "object" ? 
+                                                    <table key={j} style={{ width: '100%' }}>
                                                       <tbody>
-                                                      <tr>
-                                                            <td>{_t(`trans_table.${key}`)}</td>
-                                                            <td>{jsonSplit[key]}</td>
+                                                        <tr>
+                                                            <td style={{ width: '50%' }}>{_t(`trans_table.${key}`)}</td>
+                                                            <td style={{ width: '50%' }}>{jsonSplit[key]}</td>
                                                         </tr>
                                                       </tbody>
-                                                    </table>:<></>}
+                                                    </table>:<>{typeof(jsonSplit[key])} {typeof(opJson)}</>}
                                                     </>
                                                 )
                                             })}
-                                            
                                             </td>
                                         </tr>}
                                     {opPayoutClaim && <tr><td>{_t(`trans_table.payout_must_be_claimed`)}</td><td>{JSON.stringify(opPayoutClaim)}</td></tr>}

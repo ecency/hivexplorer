@@ -52,7 +52,10 @@ const HomeTransactions = (props:any) => {
       "delegatee",
       "from",
       "to",
-      "creator"
+      "creator",
+      "seller",
+      "owner",
+      "curator"
     ]
       useEffect(()=>{
           const fetchData = async () =>{

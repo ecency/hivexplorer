@@ -62,3 +62,6 @@ export const getMarketData = (coin: string, vsCurrency: string, fromTs: string, 
     return axios.get(u).then(r => r.data);
 }
 
+export const getEntryVotes=(user:string,permlink:string)=>{
+    return `${ConfigItems.baseUrl}/api/get_active_votes?author=${user}&permlink=${permlink}`
+}
