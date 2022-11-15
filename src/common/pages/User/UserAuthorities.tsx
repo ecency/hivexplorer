@@ -28,10 +28,11 @@ export const AuthorityObject=(field:Authority)=>{
     return(
        <>
        {Object.keys(field).map((key,i:number)=>{
+        i=i+Math.floor(Math.random() * 1000);
         return(
             <>
               {field[key].length !== 0 && 
-             <Row key={i} className="m-0 py-2 row-border-dotted">
+             <Row id={`${i})}`} key={i} className="m-0 py-2 row-border-dotted">
               
                 <>
                 <Col md={3} xs={3}>{key}
@@ -41,6 +42,7 @@ export const AuthorityObject=(field:Authority)=>{
                     field[key]
                     :
                     field[key].map((inner:any,j:number)=>{
+                        j=j+Math.floor(Math.random() * 1000);
                         return(
                             <Row key={j}>
                                 <Col className="auth-col">{key==='account_auths'?

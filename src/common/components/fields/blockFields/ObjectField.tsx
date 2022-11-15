@@ -51,7 +51,7 @@ interface transactionType {
 }
 interface transactionTypeList extends Array<transactionType>{}
 const ObjectField = (props:any) => {
-    const {number,item,value,label_for,transactionOperations}=props;
+    const {number,item,value,label_for,transactionOperations,changeUser}=props;
     const [expandBtn,setExpandBtn]=useState(false)
     const currTheme = useSelector((state:any) => state.global.theme)
     const themeContrastColor = currTheme === 'day' ? '#535e65' : 'white';
@@ -92,10 +92,10 @@ const ObjectField = (props:any) => {
                         return(
                             <ListGroup.Item key={i}>
                                 {item==='witness_votes'?
-                                <a href={`${ConfigItems.baseUrl}/@${val}`}>
+                                <Link onClick={()=>{changeUser(val)}}  to={`/@${val}`}>
                                     <span><img className='avatar-img' src={`https://images.ecency.com/u/${val}/avatar`} alt="" /></span>
                                     <span>{val}</span>
-                                </a>
+                                </Link>
                                 :
                                 <>
                                     <Link to={`/tx/${val}`}>
@@ -103,8 +103,6 @@ const ObjectField = (props:any) => {
                                         
                                     </Link>
                                     <JsonField transactionOperations={transactionOperations[i]}/>
-                                   
-                                
                                 </>
                                 }
                             </ListGroup.Item>
@@ -119,10 +117,10 @@ const ObjectField = (props:any) => {
                         return(
                             <ListGroup.Item key={i}>
                                {item==='witness_votes'?
-                                <a href={`${ConfigItems.baseUrl}/@${val}`}>
+                              <Link onClick={()=>{changeUser(val)}}  to={`/@${val}`}>
                                     <span><img className='avatar-img' src={`https://images.ecency.com/u/${val}/avatar`} alt="" /></span>
                                     <span>{val}</span>
-                                </a>
+                                </Link>
                                 :
                                <>
                                 <Link to={`/tx/${val}`}>

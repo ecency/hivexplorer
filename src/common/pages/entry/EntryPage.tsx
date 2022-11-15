@@ -9,7 +9,7 @@ import Theme from '../../components/theme';
 import './EntryPage.scss'
 import { _t } from '../../i18n';
 import { getDiscussion } from '../../api/urls';
-import { Accordion, Container } from 'react-bootstrap';
+import { Accordion, Card, Container } from 'react-bootstrap';
 import EntryBody from './EntryBody';
 import BackToTopButton from '../../components/Buttons/BackToTop';
 import EntryVotes from './EntryVotes';
@@ -82,6 +82,13 @@ const EntryPage = (props: any) => {
                                                      </div>
                                                 </div>
                                     </div>
+                                    {entry[key].parent_author && <div className='entry-parent'>
+                                        <Card>
+                                            <Card.Header>
+                                                <p className='m-0'>Viewing a response to: <a href={`/@${entry[key].parent_author}/${entry[key].parent_permlink}`}>{`@${entry[key].parent_author}/${entry[key].parent_permlink}`}</a></p>
+                                            </Card.Header>
+                                        </Card>
+                                    </div>}
                                     <Accordion className={currTheme === "day" ? "accordion-day" : "accordion_night"} defaultActiveKey={['0']} alwaysOpen={true}>
                                         <Accordion.Item eventKey="0" onClick={() => setOpenBody(!openBody)}>
                                             <Accordion.Header>
@@ -93,7 +100,7 @@ const EntryPage = (props: any) => {
                                            
                                                 {entry[key].body && 
                                                 <>
-                                                {state? <p>{entry[key].body}</p>:<EntryBody body={entry[key].body} />}
+                                                {state? <pre className='pre-raw-format'>{entry[key].body}</pre>:<EntryBody body={entry[key].body} />}
                                                 
                                                 </>}
                                             </Accordion.Body>
@@ -118,7 +125,7 @@ const EntryPage = (props: any) => {
                                                 <EntryVotes votes={entry[key].active_votes} user={entry[key].author} permlink={entry[key].permlink} />
                                             </Accordion.Body>
                                         </Accordion.Item>}
-                                        
+                                        <div className='pl-5'>
                                             {entry && Object.keys(entry).slice(1,).map((key, i: number) => {
                                                 return (
                                                     <>
@@ -134,7 +141,7 @@ const EntryPage = (props: any) => {
                                                                      
                                                                             {entry[key].body && 
                                                                             <>
-                                                                            {state? <p>{entry[key].body}</p>:<EntryBody body={entry[key].body} />}
+                                                                            {state? <pre className='pre-raw-format'>{entry[key].body}</pre>:<EntryBody body={entry[key].body} />}
                                                                             
                                                                             </>}
                                                                        
@@ -163,11 +170,10 @@ const EntryPage = (props: any) => {
                                                             </Accordion>
                                                         </div>
                                                         </div>
-                                                        <br />
                                                     </>
                                                 )
                                             })}
-                                        
+                                        </div>
 
                                     </Accordion>
                                 </div>
