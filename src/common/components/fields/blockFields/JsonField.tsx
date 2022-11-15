@@ -93,7 +93,6 @@ const JsonField = (props: any) => {
                                                     <td>{opVal.weight}</td>
                                                 </tr>
                                             }
-
                                         </tbody>
                                     </table>
                                 </td>

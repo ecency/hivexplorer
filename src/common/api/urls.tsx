@@ -65,3 +65,7 @@ export const getMarketData = (coin: string, vsCurrency: string, fromTs: string, 
 export const getEntryVotes=(user:string,permlink:string)=>{
     return `${ConfigItems.baseUrl}/api/get_active_votes?author=${user}&permlink=${permlink}`
 }
+
+export const getOwnerHistory=(user:string)=>{
+    return `${ConfigItems.baseUrl}/api/get_owner_history?account=${user}`
+}

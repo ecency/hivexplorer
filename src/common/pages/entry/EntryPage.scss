@@ -31,6 +31,15 @@
     .accordion{
         .accordion-body{
             word-break: break-all;
+            .pre-raw-format{
+                display: block;
+                white-space: pre-wrap;
+                word-break: break-word;
+                background: white;
+                border: none;
+                margin: 0;
+                padding: 0 0 0.5em;
+            }
         }
         .accordion-button{
             display: flex;

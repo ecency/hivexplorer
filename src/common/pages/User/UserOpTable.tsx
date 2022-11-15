@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, match } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { _t } from '../../i18n';
@@ -41,6 +41,8 @@ const TransactionOperationTable = (props: any) => {
     console.log('location', window.location.href.includes("@"))
     const OpValArray = new Array()
     OpValArray.push(opRewardHive, opVestShare)
+
+
 
     const LinkAccount=[
         "current_owner",
@@ -177,9 +179,7 @@ const TransactionOperationTable = (props: any) => {
                                         <tr>
                                             <td style={{ width: '125px' }}>{_t(`trans_table.required_auths`)}</td>
                                             <td>
-                                                {window.location.href.includes("@") ?
-                                                    <a href={`/@${opRequiredAuths[0]}`}>{opRequiredAuths[0]}</a>
-                                                    :
+                                                {
                                                     <Link to={`/@${opRequiredAuths[0]}`}>{opRequiredAuths[0]}</Link>
                                                 }
                                             </td>
@@ -189,9 +189,7 @@ const TransactionOperationTable = (props: any) => {
                                         <tr>
                                             <td style={{ width: '175px' }}>{_t(`trans_table.required_posting_auths`)}</td>
                                             <td>
-                                                {window.location.href.includes("@") ?
-                                                    <a href={`/@${opRequiredPostingAuths[0]}`}>{opRequiredPostingAuths[0]}</a>
-                                                    :
+                                                {
                                                     <Link to={`/@${opRequiredPostingAuths[0]}`}>{opRequiredPostingAuths[0]}</Link>
                                                 }
                                             </td>
@@ -229,7 +227,20 @@ const TransactionOperationTable = (props: any) => {
                                                             <td style={{ width: '50%' }}>{jsonSplit[key]}</td>
                                                         </tr>
                                                       </tbody>
-                                                    </table>:<>{typeof(jsonSplit[key])} {typeof(opJson)}</>}
+                                                    </table>
+                                                    :
+                                                    <>
+                                                    {/* {Object.keys(jsonSplit[key]).map((item)=>{
+                                                        console.log('item',item)
+                                                        return(
+                                                            <>{typeof(jsonSplit[key][item])!=="object" && !jsonSplit.items ? 
+                                                     jsonSplit[key][item]
+                                                            :
+                                                            <>{typeof(jsonSplit[key][item])}</>}</>
+                                                        )
+                                                    })} */}
+                                                    </>
+                                                    }
                                                     </>
                                                 )
                                             })}
