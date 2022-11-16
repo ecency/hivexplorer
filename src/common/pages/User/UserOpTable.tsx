@@ -6,6 +6,7 @@ import { _t } from '../../i18n';
 import { AuthorityObject } from './UserAuthorities';
 import { object } from 'prop-types';
 import { DecodeJson } from '../../../server/util';
+import { Card } from 'react-bootstrap';
 
 
 
@@ -46,6 +47,7 @@ const TransactionOperationTable = (props: any) => {
 
     const LinkAccount=[
         "current_owner",
+        "voter",
         "open_owner"
 
     ]
@@ -56,7 +58,7 @@ const TransactionOperationTable = (props: any) => {
         "opCurator",
         "publisher",
         "json_meta",
-        "voter",
+      
         "author",
         "benefactor",
         "weight",
@@ -142,6 +144,8 @@ const TransactionOperationTable = (props: any) => {
     }
     return (
         <>
+          <Card>
+            <Card.Body>
             <table className={currTheme === 'day' ? 'text-dark trans-table' : 'text-white trans-table'} >
                 <tbody>
                     {opType && <tr>
@@ -173,7 +177,7 @@ const TransactionOperationTable = (props: any) => {
 
                                     {opPermlink && <tr><td>{_t(`trans_table.permlink`)}</td><td><Link to={`/@${opAuth}/${opPermlink}`}>{opPermlink}</Link></td></tr>}
                                
-                                    {opCreator && <tr><td>{_t(`trans_table.creator`)}</td><td><a href={`@${opCreator}`}>{opCreator}</a></td></tr>}
+                                    {opCreator && <tr><td>{_t(`trans_table.creator`)}</td><td><Link to={`@${opCreator}`}>{opCreator}</Link></td></tr>}
                                  
                                     {opRequiredAuths && opRequiredAuths.length !== 0 &&
                                         <tr>
@@ -217,6 +221,7 @@ const TransactionOperationTable = (props: any) => {
                                                 </table>
                                             }
                                             {jsonSplit && Object.keys(jsonSplit).map((key,j)=>{
+                                                console.log(key,typeof(jsonSplit[key]))
                                                 return(
                                                     <>
                                                     {typeof(jsonSplit[key]) !== "object" ? 
@@ -224,21 +229,12 @@ const TransactionOperationTable = (props: any) => {
                                                       <tbody>
                                                         <tr>
                                                             <td style={{ width: '50%' }}>{_t(`trans_table.${key}`)}</td>
-                                                            <td style={{ width: '50%' }}>{jsonSplit[key]}</td>
+                                                            <td style={{ width: '50%' }}>{typeof(jsonSplit[key])==="boolean" ?jsonSplit[key].stringify():jsonSplit[key]} </td>
                                                         </tr>
                                                       </tbody>
                                                     </table>
                                                     :
-                                                    <>
-                                                    {/* {Object.keys(jsonSplit[key]).map((item)=>{
-                                                        console.log('item',item)
-                                                        return(
-                                                            <>{typeof(jsonSplit[key][item])!=="object" && !jsonSplit.items ? 
-                                                     jsonSplit[key][item]
-                                                            :
-                                                            <>{typeof(jsonSplit[key][item])}</>}</>
-                                                        )
-                                                    })} */}
+                                                    <>                                             
                                                     </>
                                                     }
                                                     </>
@@ -330,6 +326,8 @@ const TransactionOperationTable = (props: any) => {
 
                 </tbody>
             </table>
+            </Card.Body>
+          </Card>
         </>
     )
 };
