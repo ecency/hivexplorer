@@ -22,6 +22,7 @@ import UserAuthorities from './UserAuthorities';
 import { getAccount, getOwnerHistory, getRCAccount } from '../../api/urls';
 import BackToTopButton from '../../components/Buttons/BackToTop';
 import SpinnerEffect from '../../components/loader/spinner';
+import UserHistory from './UserHistory';
 
 
 interface UserList extends Array<UserTypeList>{}
@@ -63,6 +64,7 @@ const UserPage = (props:any) => {
     const handleChange = (event:any, newValue:number) => {
         setValue(newValue);
     };
+    const [ownerHistory,setOwnerHistory]=useState([])
     const [userId,setUserId]=useState(match.params.user_id)
     const account_url=getAccount(userId);
     const rc_account_url=getRCAccount(userId);
@@ -89,6 +91,7 @@ const UserPage = (props:any) => {
       console.log(owner_history_url)
       axios.get(owner_history_url).then(res => {
          console.log("history",res)
+         setOwnerHistory(res.data)
           })
       },[])
       useEffect(()=>{
@@ -119,6 +122,7 @@ const UserPage = (props:any) => {
         };
     }
     const changeUser=(val:string)=>{
+      console.log('clicked',val)
       setUserId(val)
     }
     return (
@@ -138,7 +142,7 @@ const UserPage = (props:any) => {
                 user.json_metadata===""?
                 Json_Meta=JSON.parse('{"profile":{"name":"","about":"","website":"","cover_image":"","profile_image":"","dtube_pub":"","witness_description":""}}') :
                 Json_Meta=DecodeJson(user.json_metadata) : Json_Meta=DecodeJson(user.posting_json_metadata) 
-                
+               
                 return(
                   <div key={i}>
 
@@ -161,6 +165,7 @@ const UserPage = (props:any) => {
                             <Tab label={_t('common.info')} {...a11yProps(0)} />
                             <Tab label={_t('common.transaction')} {...a11yProps(1)} />
                             <Tab label={_t('common.authorities')} {...a11yProps(2)} />
+                            {ownerHistory && ownerHistory.length>0 && <Tab label={_t('common.owner_history')} {...a11yProps(3)} />}
                         </Tabs>
                         </Card.Header>
                         <Card.Body className='py-0'>
@@ -186,7 +191,12 @@ const UserPage = (props:any) => {
                             </TabPanel>
                             <TabPanel value={value} index={2}>
                                {
-                                  <UserAuthorities memo_key={user.memo_key} owner={user.owner} posting={user.posting} active={user.active} />
+                                  <UserAuthorities changeUser={changeUser} memo_key={user.memo_key} owner={user.owner} posting={user.posting} active={user.active} />
+                                }
+                            </TabPanel>
+                            <TabPanel value={value} index={3}>
+                               {
+                                 <UserHistory changeUser={changeUser} ownerHistory={ownerHistory} />
                                 }
                             </TabPanel>
                         </Card.Body>
