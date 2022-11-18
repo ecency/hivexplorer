@@ -144,7 +144,7 @@ const TransactionOperationTable = (props: any) => {
     }
     return (
         <>
-          <Card>
+          <Card  className={currTheme === 'day' ? 'trans-card-light trans-card' : 'trans-card-dark trans-card'}>
             <Card.Body>
             <table className={currTheme === 'day' ? 'text-dark trans-table' : 'text-white trans-table'} >
                 <tbody>
