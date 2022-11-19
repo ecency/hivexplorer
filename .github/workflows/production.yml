@@ -60,7 +60,7 @@ jobs:
         port: ${{ secrets.SSH_PORT }}
         envs:
         script: |
-          cd ~/vision-production
+          cd ~/hivexplorer
           git pull origin main
           docker pull ecency/hivexplorer:latest
           docker stack deploy -c docker-compose.yml -c docker-compose.production.yml hivexplorer
