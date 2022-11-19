@@ -52,7 +52,6 @@ jobs:
     steps:
     - name: SSH and deploy node app
       uses: appleboy/ssh-action@master
-      env:
       with:
         host: ${{ secrets.SSH_HOST_EU }}
         username: ${{ secrets.SSH_USERNAME }}
