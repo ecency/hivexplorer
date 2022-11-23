@@ -43,7 +43,6 @@ const HomeTransactions = (props:any) => {
     const [homeTransactions, setHomeTransactions] = useState<HomeTransactionList>([]);
     const HeadBlock = useSelector((state:any) => state.headBlock.head_block_number)
     console.log("headBlck",HeadBlock)
-    const home_transactions_url=getTransactions(props.block_number);
 
     const userType = [
       "voter",
@@ -61,10 +60,7 @@ const HomeTransactions = (props:any) => {
           const fetchData = async () =>{
             setLoading(true);
           try {
-            console.log("Res",home_transactions_url)
-            const {data: response} = await axios.get(home_transactions_url);
-            const blocks_response=response.blocks
-            console.log("Res",response.ops)
+            const response= await getTransactions(props.block_number)
             setHomeTransactions(response.ops)
           } catch (error:any) {
             console.error(error.message);

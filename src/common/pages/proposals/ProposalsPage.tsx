@@ -1,19 +1,16 @@
 
-import React, { useEffect, useState } from 'react';import axios from 'axios';
-import { match } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { connect } from 'react-redux';
 import { pageMapDispatchToProps, pageMapStateToProps, PageProps } from '../common';
 import { withPersistentScroll } from '../../components/with-persistent-scroll';
-import { ConfigItems } from '../../../../config';
-import { HomeTransactionType } from '../../components/home/TransactionsComponent';
 import Theme from '../../components/theme';
 import { Container } from 'react-bootstrap';
-import { Paper, TextField } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
 import ProposalCard from './ProposalCard';
 import './proposalsPage.scss'
 import { getAccount, getProposals } from '../../api/urls';
 import parseAsset from '../../helper/parse-asset';
-import { response } from 'express';
 import numeral from 'numeral';
 import { _t } from '../../i18n';
 import BackToTopButton from '../../components/Buttons/BackToTop';
@@ -59,47 +56,10 @@ const ProposalsPage = (props:any) => {
     let inactiveProposals
    
     useEffect(()=>{
-        let proposals_url=getProposals("all")
-        console.log(proposals_url)
-        // axios.get(proposals_url).then(res=>{
-        //     proposals=res.data.proposals
-
-        //     // filtering Expired Proposals
-        //     expiredProposals = proposals.filter((x:proposalsType) => x.status === "expired");
-        //     // Sorting Expired Proposals
-        //     expiredProposals = expiredProposals.sort((a, b) => parseFloat(b.total_votes.toLocaleString()) - parseFloat(a.total_votes.toLocaleString()));
-        //     // filtering active Proposals
-        //     activeProposals = proposals.filter((x:proposalsType) => x.status === "active");
-        //     // sorting active proposals
-        //     activeProposals = activeProposals.sort((a, b) => parseFloat(b.total_votes.toLocaleString()) - parseFloat(a.total_votes.toLocaleString()));
-        //     // InActive Proposals
-        //     inactiveProposals = proposals.filter((x:proposalsType) => x.status === "inactive");
-        //     // Sorting In Active
-        //     inactiveProposals = inactiveProposals.sort((a, b) => parseFloat(b.total_votes.toLocaleString()) - parseFloat(a.total_votes.toLocaleString()));
-        //     // All Proposals 
-        //     proposals=[...activeProposals,...inactiveProposals,...expiredProposals]
-        //     const entireProposals=proposals
-        //     setAllProposals(entireProposals)
-        //     setFilteredProposals(entireProposals)
-     
-        //     if(proposalStatus==="all"){
-        //         setFilteredProposals(entireProposals)
-        //     }
-        //     if(proposalStatus==="active"){
-        //         setFilteredProposals([...activeProposals])
-        //     }
-        //     if(proposalStatus==="inactive"){
-        //         setFilteredProposals([...inactiveProposals])
-        //     }
-        //       if(proposalStatus==="expired"){
-        //         console.log('proposal',proposalStatus)
-        //         setFilteredProposals([...expiredProposals])
-        //     }    
-        // })
         const fetchData = async () =>{
             setLoading(true);
             try {
-              const {data: response} = await axios.get(proposals_url);
+              const response =await getProposals("all")
               proposals=response.proposals  
               expiredProposals = proposals.filter((x:proposalsType) => x.status === "expired");
               // Sorting Expired Proposals
@@ -131,9 +91,9 @@ const ProposalsPage = (props:any) => {
                   console.log('proposal',proposalStatus)
                   setFilteredProposals([...expiredProposals])
               }    
-            } catch (error:any) {
-              console.error(error.message);
-            }
+             } catch (error:any) {
+                console.error(error.message);
+              }
             setLoading(false);
           }
           fetchData();

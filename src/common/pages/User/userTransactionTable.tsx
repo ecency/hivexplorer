@@ -1,6 +1,5 @@
 
 import React, { useState, useEffect } from "react";
-
 import '../../../style/dataTable/DataTables.scss'
 import { Link } from "react-router-dom";
 import {
@@ -19,20 +18,14 @@ import {
 } from '@material-ui/core';
 import { useSelector } from "react-redux";
 import { _t } from "../../i18n";
-import { ConfigItems } from "../../../../config";
-import axios from "axios";
 import { UserTransactionType } from "./UserTypes";
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import TransactionOperationTable from "./UserOpTable";
 import SpinnerEffect from "../../components/loader/spinner";
-import moment from "moment";
-import Button from 'react-bootstrap/Button';
-import Image from 'react-bootstrap/Image';
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
-import { Tooltip } from "react-bootstrap";
-import { DateTimeTable, TimestampField } from "../../components/fields/blockFields/DateTimeTable";
+import { TimestampField } from "../../components/fields/blockFields/DateTimeTable";
 import { AscendingIcon, DescendingIcon } from "../../img/svg";
+import { getUserTransaction } from "../../api/urls";
 
 
 interface Column {
@@ -66,17 +59,13 @@ const UserTransactionsTable = (props: any) => {
   const themeContrastColor = currTheme === 'day' ? '#535e65' : '#ffffffde ';
 
 
-  const user_transaction_url = `${ConfigItems.baseUrl}/api/get_account_history?account=${user}&start=${transactionFrom}&limit=${transactionLimit}`
+  
 
   useEffect(() => {
-    // axios.get(user_transaction_url).then(resp=>{
-    //   setUserTransaction(resp.data.history)
-    // })
     const fetchData = async () => {
       setLoading(true);
       try {
-        const { data: response } = await axios.get(user_transaction_url);
-        console.log('user transaction',user_transaction_url)
+        const response = await getUserTransaction(user,transactionFrom,transactionLimit)
         setUserTransaction(response.history.reverse());
       } catch (error: any) {
         console.error(error.message);

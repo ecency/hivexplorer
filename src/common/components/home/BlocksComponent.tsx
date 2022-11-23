@@ -30,16 +30,12 @@ interface HomeBlockList extends Array<HomeBlocksType>{}
 const HomeBlocks = (props:any) => {
     const [loading, setLoading] = useState(true);
     const [homeBlocks, setHomeBlocks] = useState<HomeBlockList>();
-    const home_blocks_url=getBlocks(props.block_number,15)
+   
       useEffect(()=>{
-        // axios.get(home_blocks_url).then(res => {
-        //     const blocks_response=res.data.blocks
-        //     setHomeBlocks(blocks_response.reverse())
-        //   })
           const fetchData = async () =>{
             setLoading(true);
           try {
-            const {data: response} = await axios.get(home_blocks_url);
+            const  response = await getBlocks(props.block_number,15)
             const blocks_response=response.blocks
             setHomeBlocks(blocks_response.reverse())
           } catch (error:any) {

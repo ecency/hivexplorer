@@ -50,12 +50,12 @@ const WitnessesPage = (props:any) => {
 
     const [allWitnesses,setAllWitness]=useState<witnessesType>()
     const [loading, setLoading] = useState(true);
-    const witnesses_url=getWitnesses(100)
+   
     useEffect(()=>{
         const fetchData = async () =>{
             setLoading(true);
             try {
-              const {data: response} = await axios.get(witnesses_url);
+              const response = await getWitnesses(100)
               setAllWitness(response);
             } catch (error:any) {
               console.error(error.message);
@@ -63,9 +63,7 @@ const WitnessesPage = (props:any) => {
             setLoading(false);
           }
           fetchData();
-        // axios.get(witnesses_url).then(res=>{
-        //     setAllWitness(res.data)
-        // })
+    
     },[])
     console.log('witnesses',allWitnesses)
     return (
