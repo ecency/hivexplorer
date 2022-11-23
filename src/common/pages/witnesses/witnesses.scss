@@ -5,8 +5,8 @@
         
     }
     .witnesses-table{
-          tbody > tr > td:last-child,
-            thead  > th:last-child { border-left:1px solid #706f70; position: sticky; position: -webkit-sticky; right:0; z-index:1; }
+          .main-table-body > .main-table-row > td:last-child,
+          .main-table-header > tr  > th:last-child { border-left:1px solid #706f70; position: sticky; position: -webkit-sticky; right:0; z-index:1; }
         .owner-col-th{
             padding-right: 110px !important;
 

@@ -77,7 +77,7 @@ const UserPage = (props:any) => {
         const fetchData = async () =>{
           setLoading(true);
         try {
-          const {data: response} = await axios.get(account_url);
+          const response = await getAccount(userId);
           setUserAccount(response);
         } catch (error:any) {
           console.error(error.message);
@@ -106,7 +106,7 @@ const UserPage = (props:any) => {
         const fetchData = async () =>{
           setLoading(true);
         try {
-          const {data: response} = await axios.get(account_url);
+          const response= await getAccount(userId)
           setUserAccount(response);
         } catch (error:any) {
           console.error(error.message);

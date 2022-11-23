@@ -17,7 +17,7 @@ import {
   TableRow,
   TextField,
  } from '@material-ui/core';
-import { Container } from 'react-bootstrap';
+import { Card, Container } from 'react-bootstrap';
 import { HomeBlocksType } from "../../components/home/BlocksComponent";
 import moment from "moment";
 import { useSelector } from "react-redux";
@@ -120,7 +120,7 @@ const WitnessRow=(props:any)=>{
 
     return(
       <>
-        <TableRow hover={true} role="checkbox" tabIndex={-1}>
+        <TableRow className="main-table-row" hover={true} role="checkbox" tabIndex={-1}>
             <TableCell >{witness.id}</TableCell>
             <TableCell >
                 <span>
@@ -149,6 +149,8 @@ const WitnessRow=(props:any)=>{
             <TableCell style={{ paddingBottom: 0, paddingTop: 0,borderTop:0 }} colSpan={12}>
             <Collapse in={open} timeout="auto" unmountOnExit={true}>
                 <Box margin={1}>
+                <Card  className={currTheme === 'day' ? 'trans-card-light trans-card' : 'trans-card-dark trans-card'}>
+                  <Card.Body>
                     <table className="witness-dropdown-table">
                         <tbody>
                          <>
@@ -184,11 +186,14 @@ const WitnessRow=(props:any)=>{
                                     </>
                                 )
                                }
+                               return (<></>)
                             })}
                         
                          </>
                         </tbody>
                     </table>
+                    </Card.Body>
+                    </Card>
                 </Box>
             </Collapse>
             </TableCell>
@@ -215,7 +220,7 @@ const WitnessRow=(props:any)=>{
      
       <TableContainer className="pt-4">
           <Table  stickyHeader={true} className="witnesses-table" aria-label="sticky table">
-            <TableHead className="card-header">
+            <TableHead className="card-header main-table-header">
               <TableRow >
                 {mainColumns.map((column,index) => (
                     <TableCell 
@@ -233,7 +238,7 @@ const WitnessRow=(props:any)=>{
                   ))}
               </TableRow>
             </TableHead>
-          <TableBody>
+          <TableBody className="main-table-body">
             {filteredWitnessesData && filteredWitnessesData
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((witness:witnessesType,i:number) => {

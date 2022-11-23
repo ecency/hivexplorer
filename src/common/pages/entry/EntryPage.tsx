@@ -25,7 +25,6 @@ const EntryPage = (props: any) => {
     const { match } = props
     const userName = match.params.user_id
     const permLink = match.params.permlink
-    const permlink_url = getDiscussion(userName, permLink)
     const [entry, setEntry] = useState<any>()
     const currTheme = useSelector((state: any) => state.global.theme)
     const themeContrastColor = currTheme === 'day' ? 'black' : 'white';
@@ -39,7 +38,7 @@ const EntryPage = (props: any) => {
         const fetchData = async () =>{
             setLoading(true);
             try {
-              const {data: response} = await axios.get(permlink_url);
+              const response = await getDiscussion(userName, permLink)
               setEntry(response);
             } catch (error:any) {
               console.error(error.message);

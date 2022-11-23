@@ -42,7 +42,7 @@ const EntryVotes = (props:any) => {
       const fetchData = async () =>{
           setLoading(true);
           try {
-            const {data: response} = await axios.get(entry_votes_url);
+            const response = await getEntryVotes(user,permlink)
             console.log(response)
             setVotes(response);
           } catch (error:any) {

@@ -40,7 +40,7 @@ const EntryCommentPage = (props: any) => {
         const fetchData = async () =>{
             setLoading(true);
             try {
-              const {data: response} = await axios.get(permlink_url);
+              const  response  = await getDiscussion(userName, permLink)
               console.log('permlink',permlink_url)
               setEntry(response);
             } catch (error:any) {

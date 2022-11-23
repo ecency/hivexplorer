@@ -146,7 +146,7 @@ const Index = (props: PageProps) => {
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
       searchHandler(enteredValue)
-    }, 1000)
+    }, 100)
 
     return () => clearTimeout(delayDebounceFn)
   }, [enteredValue])
@@ -160,9 +160,9 @@ const Index = (props: PageProps) => {
         <Row>
           <Col md={6}>
           <div style={{ verticalAlign: 'center'}}>
-          <Form  className="m-0 search-form">
+          <Form  className="m-0 search-form" onSubmit={()=>console.log('clicked')}>
             <Form.Group className=' col-12 p-0'>
-              <Form.Control className="rounded" onChange={(e) => setEnteredValue(e.target.value)} type="text" placeholder="Block, Account, Transaction"/>
+              <Form.Control className="rounded"  onChange={(e) => setEnteredValue(e.target.value)} type="text" placeholder="Block, Account, Transaction"/>
             </Form.Group>
           </Form> 
           {!noSearchResult &&  
