@@ -82,12 +82,7 @@ const HeadBlockDetail = (props:any) => {
     const HeadBlock = useSelector((state:any) => state.headBlock)
     const themeContrastColor = currTheme === 'day' ? 'black' : 'white';
     const themeBtn = currTheme === 'day' ? 'showmore-btn btn-light' : 'showmore-btn btn-dark';
-    const label='block'
-
-
-    let url_global = getHeadBlock();
     useEffect(() => {
-        console.log(url_global)
         console.log('---------- HEAD BLOCK DETAIL ----------------')
         console.log(HeadBlock)
         console.log('---------------------------------------------')

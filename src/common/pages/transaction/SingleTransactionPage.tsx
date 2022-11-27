@@ -1,18 +1,15 @@
 
-import React, { useEffect, useState } from 'react';import axios from 'axios';
-import { match } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Col, Container, Row, Card,Button} from 'react-bootstrap';
 import { pageMapDispatchToProps, pageMapStateToProps, PageProps } from '../../pages/common';
 import { withPersistentScroll } from '../../components/with-persistent-scroll';
-import { ConfigItems } from '../../../../config';
-import { infoIcon } from '../../img/svg';
-import { transactionList } from '../../components/home/BlocksComponent';
 import Theme from '../../components/theme';
 import { _t } from '../../i18n';
 import StringField from '../../components/fields/blockFields/StringField';
 import ObjectField from '../../components/fields/blockFields/ObjectField';
 import SpinnerEffect from '../../components/loader/spinner';
+import { getSingleTransaction } from '../../api/urls';
 
 export interface SingleTransaction {
     block_num: number
@@ -30,16 +27,11 @@ const SingleTransaction = (props:any) => {
     const {match} = props
     const [loading, setLoading] = useState(true);
     const [result, setResult] = useState<SingleTransaction>();
-    const url_single_transaction = `${ConfigItems.baseUrl}/api/get_transaction?trx_id=${match.params.id}`;
     useEffect(() => {
-        // axios.get(url_single_transaction).then(response => {
-        //     setResult(response.data)
-        // })
-        console.log(url_single_transaction)
         const fetchData = async () =>{
             setLoading(true);
           try {
-            const {data: response} = await axios.get(url_single_transaction);
+            const response = await getSingleTransaction(match.params.id)
             setResult(response);
           } catch (error:any) {
             console.error(error.message);

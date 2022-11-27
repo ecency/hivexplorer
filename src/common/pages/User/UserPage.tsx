@@ -19,9 +19,10 @@ import { DecodeJson } from '../../../server/util';
 import { downVotingPower, findRcAccounts, rcPower, votingPower } from '../../api/hive';
 import { RCAccount } from '@hiveio/dhive/lib/chain/rc';
 import UserAuthorities from './UserAuthorities';
-import { getAccount, getRCAccount } from '../../api/urls';
+import { getAccount, getOwnerHistory, getRCAccount } from '../../api/urls';
 import BackToTopButton from '../../components/Buttons/BackToTop';
 import SpinnerEffect from '../../components/loader/spinner';
+import UserHistory from './UserHistory';
 
 
 interface UserList extends Array<UserTypeList>{}
@@ -63,9 +64,11 @@ const UserPage = (props:any) => {
     const handleChange = (event:any, newValue:number) => {
         setValue(newValue);
     };
-    const userId=match.params.user_id
+    const [ownerHistory,setOwnerHistory]=useState([])
+    const [userId,setUserId]=useState(match.params.user_id)
     const account_url=getAccount(userId);
     const rc_account_url=getRCAccount(userId);
+    const owner_history_url=getOwnerHistory(userId)
     useEffect(()=>{
       console.log('account url',account_url)
         // axios.get(account_url).then(res => {
@@ -74,7 +77,7 @@ const UserPage = (props:any) => {
         const fetchData = async () =>{
           setLoading(true);
         try {
-          const {data: response} = await axios.get(account_url);
+          const response = await getAccount(userId);
           setUserAccount(response);
         } catch (error:any) {
           console.error(error.message);
@@ -85,19 +88,42 @@ const UserPage = (props:any) => {
 
     },[])
     useEffect(()=>{
-  
-      console.log(rc_account_url)
-      axios.get(rc_account_url).then(res => {
-          setRCAccount(res.data.rc_accounts[0])
-  
+      console.log(owner_history_url)
+      axios.get(owner_history_url).then(res => {
+         console.log("history",res)
+         setOwnerHistory(res.data)
           })
       },[])
-    
+      useEffect(()=>{
+        console.log(rc_account_url)
+        axios.get(rc_account_url).then(res => {
+            setRCAccount(res.data.rc_accounts[0])
+            })
+        },[])
+      useEffect(()=>{
+  
+        console.log("changeUser",userId)
+        const fetchData = async () =>{
+          setLoading(true);
+        try {
+          const response= await getAccount(userId)
+          setUserAccount(response);
+        } catch (error:any) {
+          console.error(error.message);
+        }
+        setLoading(false);
+      }
+      fetchData();
+        },[userId])
     function a11yProps(index:number) {
         return {
           id: `user-tab-${index}`,
           'aria-controls': `user-tabpanel-${index}`,
         };
+    }
+    const changeUser=(val:string)=>{
+      console.log('clicked',val)
+      setUserId(val)
     }
     return (
         <>
@@ -116,7 +142,7 @@ const UserPage = (props:any) => {
                 user.json_metadata===""?
                 Json_Meta=JSON.parse('{"profile":{"name":"","about":"","website":"","cover_image":"","profile_image":"","dtube_pub":"","witness_description":""}}') :
                 Json_Meta=DecodeJson(user.json_metadata) : Json_Meta=DecodeJson(user.posting_json_metadata) 
-                
+               
                 return(
                   <div key={i}>
 
@@ -139,6 +165,7 @@ const UserPage = (props:any) => {
                             <Tab label={_t('common.info')} {...a11yProps(0)} />
                             <Tab label={_t('common.transaction')} {...a11yProps(1)} />
                             <Tab label={_t('common.authorities')} {...a11yProps(2)} />
+                            {ownerHistory && ownerHistory.length>0 && <Tab label={_t('common.owner_history')} {...a11yProps(3)} />}
                         </Tabs>
                         </Card.Header>
                         <Card.Body className='py-0'>
@@ -152,7 +179,7 @@ const UserPage = (props:any) => {
                                 <StringField key={index} item={k} number={index} value={JSON.stringify(user[k])} label_for='user-info' />
                                 :
                                 typeof(user[k])==='object'?
-                                <ObjectField key={index} item={k} number={index} value={user[k]} label_for='user-info'/>
+                                <ObjectField changeUser={changeUser} key={index} item={k} number={index} value={user[k]} label_for='user-info'/>
                                 :
                                 <></>
                               )})}
@@ -164,7 +191,12 @@ const UserPage = (props:any) => {
                             </TabPanel>
                             <TabPanel value={value} index={2}>
                                {
-                                  <UserAuthorities memo_key={user.memo_key} owner={user.owner} posting={user.posting} active={user.active} />
+                                  <UserAuthorities changeUser={changeUser} memo_key={user.memo_key} owner={user.owner} posting={user.posting} active={user.active} />
+                                }
+                            </TabPanel>
+                            <TabPanel value={value} index={3}>
+                               {
+                                 <UserHistory changeUser={changeUser} ownerHistory={ownerHistory} />
                                 }
                             </TabPanel>
                         </Card.Body>

@@ -18,6 +18,7 @@ export interface op_type {
       author:string,
       from:string,
       to:string,
+      creator:string,
       required_auths:string[],
       required_posting_auths:string[]
     }
@@ -42,15 +43,24 @@ const HomeTransactions = (props:any) => {
     const [homeTransactions, setHomeTransactions] = useState<HomeTransactionList>([]);
     const HeadBlock = useSelector((state:any) => state.headBlock.head_block_number)
     console.log("headBlck",HeadBlock)
-    const home_transactions_url=getTransactions(HeadBlock);
+
+    const userType = [
+      "voter",
+      "author",
+      "delegator",
+      "delegatee",
+      "from",
+      "to",
+      "creator",
+      "seller",
+      "owner",
+      "curator"
+    ]
       useEffect(()=>{
           const fetchData = async () =>{
             setLoading(true);
           try {
-            console.log("Res",home_transactions_url)
-            const {data: response} = await axios.get(home_transactions_url);
-            const blocks_response=response.blocks
-            console.log("Res",response.ops)
+            const response= await getTransactions(props.block_number)
             setHomeTransactions(response.ops)
           } catch (error:any) {
             console.error(error.message);
@@ -64,12 +74,9 @@ const HomeTransactions = (props:any) => {
        <>
        {loading && <SpinnerEffect />}
         {!loading && homeTransactions && homeTransactions.slice(0,10).map((trans,index)=>{
+          const transOpVal=trans.op.value
           const req_auths:string[]=trans.op.value.required_auths
           const posting_auths:string[]=trans.op.value.required_posting_auths
-          const voter:string=trans.op.value.voter
-          const author:string=trans.op.value.author
-          const from:string=trans.op.value.from
-          const to:string=trans.op.value.to
             const deviceDate=new Date()
             return(
                <Row className='m-0 block-row row-border' key={index}>
@@ -116,38 +123,19 @@ const HomeTransactions = (props:any) => {
                             })}
                         </Col>
                         }
-                        {voter &&
-                         <Col md={6} sm={12}>{_t('trans_table.voter')}:
+                        {transOpVal && Object.keys(transOpVal).map((key)=>{
+                          return(
+                            <>
+                            {typeof(key)==="string" && userType.includes(key)?
+                            <Col md={6} sm={12}>{_t(`trans_table.${key}`)}:
                                 <>
-                                <img className='avatar-img' src={`https://images.ecency.com/u/${voter}/avatar`} alt="" />
-                                <Link to={`@${voter}`}>{voter}</Link>
+                                <img className='avatar-img' src={`https://images.ecency.com/u/${transOpVal[key]}/avatar`} alt="" />
+                                <Link to={`@${transOpVal[key]}`}>{transOpVal[key]}</Link>
                                 </>
-                        </Col>
-                        }
-                        {author &&
-                         <Col md={6} sm={12}>{_t('trans_table.author')}:
-                                <>
-                                <img className='avatar-img' src={`https://images.ecency.com/u/${author}/avatar`} alt="" />
-                                <Link to={`@${author}`}>{author}</Link>
-                                </>
-                        </Col>
-                        }
-                        {from &&
-                         <Col md={6} sm={12}>{_t('trans_table.from')}:
-                                <>
-                                <img className='avatar-img' src={`https://images.ecency.com/u/${from}/avatar`} alt="" />
-                                <Link to={`@${from}`}>{from}</Link>
-                                </>
-                        </Col>
-                        }
-                        {to &&
-                         <Col md={6} sm={12}>{_t('trans_table.to')}:
-                                <>
-                                <img className='avatar-img' src={`https://images.ecency.com/u/${to}/avatar`} alt="" />
-                                <Link to={`@${to}`}>{to}</Link>
-                                </>
-                        </Col>
-                        }
+                              </Col>:<></>}
+                            </>
+                          )
+                        })}
                     </Row>
                  </Col>
                 
