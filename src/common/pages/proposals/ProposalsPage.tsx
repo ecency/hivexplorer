@@ -105,8 +105,8 @@ const ProposalsPage = (props:any) => {
         eligible = allProposals?.filter((x:proposalsType) => x.status !== 'expired');
         inactiveProposals=allProposals?.filter((x:proposalsType) => x.status === 'expired');
         console.log('fund calculate',fund)
-        axios.get(fund).then(resp=>{
-            const totalBudgetCount = parseAsset(resp.data[0].hbd_balance).amount;
+        fund.then(resp=>{
+            const totalBudgetCount = parseAsset(resp[0].hbd_balance).amount;
             setTotalBudget(totalBudgetCount)
             setDailyBudget(totalBudgetCount/100);
             console.log('budget',totalBudget,dailyBudget)
