@@ -7,7 +7,9 @@ export const getAccount=async (user:string)=>{
     const r = await axios.get(account_url);
     return r.data;
 }
-
+export const getFundAccount=(user:string)=>{
+    return `${ConfigItems.baseUrl}/api/get_accounts?name[]=${user}`
+}
 // Get RC Account
 export const getRCAccount=(user:string)=>{
     return `${ConfigItems.baseUrl}/api/find_rc_accounts?accounts[]=${user}`
@@ -72,7 +74,9 @@ export const getWitnesses=async (limit:number)=>{
 }
 
 export const getDiscussion=async (user:string,permlink:string)=>{
+
     const permlink_url=`${ConfigItems.baseUrl}/api/get_discussion?author=${user}&permlink=${permlink}`
+    console.log(permlink_url)
     const r = await axios.get(permlink_url);
     return r.data;
 }
@@ -87,6 +91,7 @@ export const getMarketData = (coin: string, vsCurrency: string, fromTs: string, 
 
 export const getEntryVotes=async (user:string,permlink:string)=>{
     const entry_votes_url= `${ConfigItems.baseUrl}/api/get_active_votes?author=${user}&permlink=${permlink}`
+    console.log(entry_votes_url)
     const r = await axios.get(entry_votes_url);
     return r.data;
 }

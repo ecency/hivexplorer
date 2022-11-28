@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import { ConfigItems } from '../../../../config';
 const JsonMetadata = (props: any) => {
     const { data } = props
-    console.log('json_data', JSON.stringify(data))
     return (
         <>
             {data &&

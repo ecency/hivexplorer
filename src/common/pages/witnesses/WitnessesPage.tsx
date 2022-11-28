@@ -1,12 +1,8 @@
 
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { match } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { pageMapDispatchToProps, pageMapStateToProps, PageProps } from '../../pages/common';
+import { pageMapDispatchToProps, pageMapStateToProps } from '../../pages/common';
 import { withPersistentScroll } from '../../components/with-persistent-scroll';
-import { ConfigItems } from '../../../../config';
-import { HomeTransactionType } from '../../components/home/TransactionsComponent';
 import Theme from '../../components/theme';
 import WitnessesTables from './WitnessesTable';
 import { Container } from 'react-bootstrap';

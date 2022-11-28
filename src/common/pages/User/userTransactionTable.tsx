@@ -170,7 +170,7 @@ const UserTransactionsTable = (props: any) => {
             <TableHead className="card-header">
               <TableRow className="card-header">
                 {columns.map((column, index) => {
-
+                   index = index + Math.floor(Math.random() * 8000)+7000;
                   return (
                     <>
                       {column.label === `${_t("common.block")}` ?
@@ -199,6 +199,7 @@ const UserTransactionsTable = (props: any) => {
               {filteredTransactionsData && filteredTransactionsData
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((trans: any, i: number) => {
+                  i = i + Math.floor(Math.random() * 10000)+9000;
                   return (
                     <TransRow key={i} trans={trans} />
                   );

@@ -146,7 +146,7 @@ const Index = (props: PageProps) => {
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
       searchHandler(enteredValue)
-    }, 100)
+    }, 500)
 
     return () => clearTimeout(delayDebounceFn)
   }, [enteredValue])
