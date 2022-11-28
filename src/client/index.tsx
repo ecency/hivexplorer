@@ -31,15 +31,16 @@ if (process.env.NODE_ENV === 'production') {
 // }
 loadableReady().then(() => {
   hydrate(
-    <SSRProvider>
+  
       <Provider store={store}>
       <ConnectedRouter history={history!}>
      
         <App/>
-
+      
       </ConnectedRouter>
     </Provider>
-    </SSRProvider>
+ 
+   
     ,
     document.getElementById('root')
   );

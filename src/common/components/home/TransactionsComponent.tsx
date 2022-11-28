@@ -102,10 +102,14 @@ const HomeTransactions = (props:any) => {
                         {req_auths && req_auths.length !==0 &&
                         <Col md={12}>{_t('trans_table.req_auth')}: 
                             {req_auths.map((user:string,i:number)=>{
+                               i = i + Math.floor(Math.random() * 3000)+2000;
+                               console.log("i",i)
                               return(
                                 <>
-                                <img className='avatar-img' src={`https://images.ecency.com/u/${user}/avatar`} key={i} alt="" />
+                                <span className={`${i}`} id={`${i}`} key={i}>
+                                <img className='avatar-img' src={`https://images.ecency.com/u/${user}/avatar`} alt="" />
                                 <Link to={`@${user}`}>{user}</Link>
+                                </span>
                                 </>
                               )
                             })}
@@ -113,21 +117,27 @@ const HomeTransactions = (props:any) => {
                         }
                         {posting_auths && posting_auths.length !==0 &&
                         <Col md={12}>{_t('trans_table.posting_auths')}: 
-                            {posting_auths.map((user:string,i:number)=>{
+                            {posting_auths.map((user:string,j:number)=>{
+                                j = j + Math.floor(Math.random() * 4000)+3000;
+                                console.log("j",j)
                               return(
                                 <>
-                                <img className='avatar-img' src={`https://images.ecency.com/u/${user}/avatar`} key={i} alt="" />
+                                <span className={`${j}`} id={`${j}`} key={j+Math.floor(Math.random() * 4000)}>
+                                <img className='avatar-img' src={`https://images.ecency.com/u/${user}/avatar`} alt="" />
                                 <Link to={`@${user}`}>{user}</Link>
+                                </span>
                                 </>
                               )
                             })}
                         </Col>
                         }
-                        {transOpVal && Object.keys(transOpVal).map((key)=>{
+                        {transOpVal && Object.keys(transOpVal).map((key,k:number)=>{
+                           k = k + Math.floor(Math.random() * 50000)+40000;
+                           console.log("k",k)
                           return(
                             <>
                             {typeof(key)==="string" && userType.includes(key)?
-                            <Col md={6} sm={12}>{_t(`trans_table.${key}`)}:
+                            <Col key={k+Math.floor(Math.random() * 5000)+4000} id={`${k}`} md={6} sm={12}>{_t(`trans_table.${key}`)}:
                                 <>
                                 <img className='avatar-img' src={`https://images.ecency.com/u/${transOpVal[key]}/avatar`} alt="" />
                                 <Link to={`@${transOpVal[key]}`}>{transOpVal[key]}</Link>

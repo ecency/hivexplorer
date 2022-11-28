@@ -9,7 +9,6 @@ import ObjectField from '../../components/fields/blockFields/ObjectField';
 
 const EntryProperties = (props:any) => {
     const {entries}=props
-    console.log('entry',entries)
     // {const renderedBody = ;}
     const EntryType=[
         "author",

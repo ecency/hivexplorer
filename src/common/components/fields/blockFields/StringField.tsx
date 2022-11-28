@@ -47,7 +47,7 @@ const StringField = (props:any) => {
             <Col  md={3} xs={12} className="attr-col"><span>{infoIcon(themeContrastColor)} </span><span className='pl-2'>  {_t(`${label_for}.${item}`)}:</span> </Col>
             <Col md={9} xs={12}>
                 {   item==='witness' || item==='current_witness'?
-                    <Link to={`/@${value}`}>{value}</Link>
+                    <span><img className='avatar-img' src={`https://images.ecency.com/u/${value}/avatar`} alt="" /> <Link to={`/@${value}`}>{value}</Link></span>
                     :
                     item==='block_num'?
                     <Link to={`/b/${value}`}>{value}</Link>

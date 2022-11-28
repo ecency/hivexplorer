@@ -285,6 +285,19 @@
     "limit_price":"Limit Price",
     "app":"App",
     "n":"N",
+    "t":"T",
+    "token":"Token",
+    "meme":"Meme",
+    "qty":"Qty",
+    "new_price":"New Price",
+    "item_type":"Item Type",
+    "guild_id":"Guild ID",
+    "edition":"Edition",
+    "plotID":"Plot ID",
+    "seedID":"Seed ID",
+    "trx_id":"Trx Id",
+    "summoner":"Summoner",
+    "secret":"Secret",
     "items":"Items",
     "version":"Version",
     "medium":"Medium",
@@ -300,7 +313,9 @@
     "beneficiary_payout_value":" Beneficiary Payout Value",
     "curators_vesting_payout":"Curators Vesting Payout",
     "initial_vesting_shares":"Initial Vesting Shares",
-    "initial_delegation":"Initial Delegation"
+    "initial_delegation":"Initial Delegation",
+    "to_player":"To Player",
+    "from_player":"From Player"
   },
   "witnesses":{
     "id":"ID",
@@ -350,6 +365,8 @@
     "page_intro":"The Decentralized Hive Fund (DHF) is an on-chain funding mechanism that allows anyone to submit a proposal and get funding once community votes pass certain threshold."
   },
   "entry":{
+    "view_response":"Viewing a response to:",
+    "rendered_data":"Rendered Data",
     "votes":"Votes",
     "properties":"Properties",
     "author":"Author",

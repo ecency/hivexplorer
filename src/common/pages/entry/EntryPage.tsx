@@ -67,11 +67,11 @@ const EntryPage = (props: any) => {
                                             <p>{entry[key].created}</p>
                                         </div>
                                         <div className='toggle-button-container'>
-                                                    <p>View Raw Format</p>
+                                                    <p>{_t('entry.rendered_data')}</p>
                                                      <div>
                                                      <ToggleButton
-                                                        inactiveLabel={"Off"}
-                                                        activeLabel={"On"}
+                                                        inactiveLabel={""}
+                                                        activeLabel={""}
                                                         value={state}
                                                         text="n"
                                                         onToggle={() => {
@@ -84,7 +84,7 @@ const EntryPage = (props: any) => {
                                     {entry[key].parent_author && <div className='entry-parent'>
                                         <Card>
                                             <Card.Header>
-                                                <p className='m-0'>Viewing a response to: <a href={`/@${entry[key].parent_author}/${entry[key].parent_permlink}`}>{`@${entry[key].parent_author}/${entry[key].parent_permlink}`}</a></p>
+                                                <p className='m-0'>{_t('entry.view_response')} <a href={`/@${entry[key].parent_author}/${entry[key].parent_permlink}`}>{`@${entry[key].parent_author}/${entry[key].parent_permlink}`}</a></p>
                                             </Card.Header>
                                         </Card>
                                     </div>}
@@ -163,7 +163,7 @@ const EntryPage = (props: any) => {
                                                                         <span>{openVotes ? showLessIcon(themeContrastColor) : showMoreIcon(themeContrastColor)}</span>
                                                                     </Accordion.Header>
                                                                     <Accordion.Body>
-                                                                        <EntryVotes votes={entry[key].active_votes} user={entry[key].author} permlink={entry[key].permlink}  />
+                                                                        <EntryVotes user={entry[key].author} permlink={entry[key].permlink}  />
                                                                     </Accordion.Body>
                                                                 </Accordion.Item>}
                                                             </Accordion>
