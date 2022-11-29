@@ -156,3 +156,15 @@ export const eyeBoldSvg = (
     <path d="M9.53074 4.12793C8.18629 4.12793 7.1582 5.15601 7.1582 6.50046C7.1582 7.84491 8.18629 8.87299 9.53074 8.87299C10.8752 8.87299 11.9033 7.84491 11.9033 6.50046C11.9033 5.15601 10.8751 4.12793 9.53074 4.12793ZM10.3216 6.50046C9.84706 6.50046 9.53074 6.18414 9.53074 5.70963C9.53074 5.23512 9.84706 4.9188 10.3216 4.9188C10.7961 4.9188 11.1124 5.23512 11.1124 5.70963C11.1124 6.1841 10.7961 6.50046 10.3216 6.50046Z" fill="#788187"/>
   </svg>
 );
+
+export const DefaultUser=(
+  <svg xmlns="http://www.w3.org/2000/svg"  version="1.1" width="256" height="256" viewBox="0 0 256 256">
+<defs>
+</defs>
+<g style={{stroke: 'none', strokeWidth: '0', strokeDasharray: 'none', strokeLinecap: 'butt', strokeLinejoin: 'miter', strokeMiterlimit: 10, fill: 'none', fillRule:'nonzero' , opacity: 1}} transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)">
+	<circle cx="45" cy="45" r="45" style={{stroke: 'none', strokeWidth: 1, strokeDasharray: 'none', strokeLinecap: 'butt', strokeLinejoin: 'miter', strokeMiterlimit: 10, fill: 'rgb(60,178,43)', fillRule: 'nonzero', opacity: 1}} transform="  matrix(1 0 0 1 0 0) "/>
+	<path d="M 45 54.287 c -8.9 0 -16.14 -7.24 -16.14 -16.14 S 36.1 22.007 45 22.007 c 8.899 0 16.14 7.241 16.14 16.14 S 53.899 54.287 45 54.287 z" style={{stroke: 'none', strokeWidth: 1, strokeDasharray: 'none',  strokeLinecap: 'butt', strokeLinejoin: 'miter', strokeMiterlimit: 10, fill: 'rgb(255,255,255)', fillRule: 'nonzero', opacity: 1}} transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/>
+	<path d="M 72.957 71.22 c -3.177 -5.75 -8.143 -10.477 -14.049 -13.341 c -2.008 -0.974 -4.352 -0.959 -6.436 0.041 c -2.343 1.126 -4.857 1.696 -7.473 1.696 c -2.616 0 -5.13 -0.571 -7.473 -1.696 c -2.081 -0.999 -4.426 -1.015 -6.435 -0.041 c -5.906 2.864 -10.872 7.59 -14.05 13.341 C 23.877 78.957 33.865 83.843 45 83.843 C 56.135 83.843 66.123 78.957 72.957 71.22 z" style={{stroke: 'none', strokeWidth: 1, strokeDasharray: 'none', strokeLinecap: 'butt', strokeLinejoin: 'miter', strokeMiterlimit: 10, fill: 'rgb(255,255,255)', fillRule: 'nonzero', opacity: 1}} transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/>
+</g>
+</svg>
+);

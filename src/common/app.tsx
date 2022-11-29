@@ -17,7 +17,7 @@ import BackToTopButton from './components/Buttons/BackToTop';
 import { SSRProvider } from 'react-bootstrap';
 
 const HomePage = loadable(() => import('./pages/home/HomePage'));
-const AboutPage = loadable(() => import('./pages/about'));
+const AboutPage = loadable(() => import('./pages/about/about'));
 const HeadBlockDetailPage = loadable(() => import('./components/headBlock/headBlockDetail'));
 const SingleBlock = loadable(()=>import('./pages/blocks/SingleBlockPage'))
 const AllTransactions = loadable(()=>import('./pages/transaction/AllTransactions'))

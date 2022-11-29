@@ -4,6 +4,7 @@ import { ConfigItems } from "../../../config";
 // Get witness Account 
 export const getAccount=async (user:string)=>{
     const account_url= `${ConfigItems.baseUrl}/api/get_accounts?name[]=${user}`
+    console.log(account_url)
     const r = await axios.get(account_url);
     return r.data;
 }
@@ -29,8 +30,10 @@ export const getSingleProposal=(proposal_id:number)=>{
 }
 
 // Get All Blocks
-export const getHeadBlock=()=>{
-    return `${ConfigItems.baseUrl}/api/get_dynamic_global_properties`
+export const getHeadBlock=async ()=>{
+    const head_block_url= `${ConfigItems.baseUrl}/api/get_dynamic_global_properties`
+    const r = await axios.get(head_block_url);
+    return r.data;
 }
 
 // Get Blocks
@@ -80,8 +83,12 @@ export const getDiscussion=async (user:string,permlink:string)=>{
     const r = await axios.get(permlink_url);
     return r.data;
 }
-export const getContent=(user:string,permlink:string)=>{
-    return `${ConfigItems.baseUrl}/api/get_content?author=${user}&permlink=${permlink}`
+export const getContent=async (user:string,permlink:string)=>{
+    const single_permlink_url=`${ConfigItems.baseUrl}/api/get_content?author=${user}&permlink=${permlink}`
+    console.log(single_permlink_url)
+    const r = await axios.get(single_permlink_url);
+    return r.data;
+
 }
 
 export const getMarketData = (coin: string, vsCurrency: string, fromTs: string, toTs: string): Promise<{ prices?: [number, number] }> => {

@@ -1,6 +1,5 @@
 
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import {  Link } from 'react-router-dom';
 import { connect, useSelector } from 'react-redux';
 import { pageMapDispatchToProps, pageMapStateToProps } from '../../pages/common';
@@ -17,7 +16,7 @@ import EntryProperties from './EntryProperties';
 import { showLessIcon, showMoreIcon } from '../../img/svg';
 import SpinnerEffect from '../../components/loader/spinner';
 import ToggleButton from 'react-toggle-button'
-
+import DefaultImage from '../../img/default-avatar.png'
 
 
 const EntryPage = (props: any) => {
@@ -60,7 +59,7 @@ const EntryPage = (props: any) => {
                                 <div key={i}>
                                     <div className='entry-header'>
                                         <div className='mr-2'>
-                                            <img className='avatar-img' src={`https://images.ecency.com/u/${entry[key].author}/avatar`} alt="" />
+                                            <img className='avatar-img' onError={(e:any)=>{e.target.src={DefaultImage}}} src={`https://images.ecency.com/u/${entry[key].author}/avatar`} alt="" />
                                         </div>
                                         <div>
                                             <h4><Link to={`/@${entry[key].author}`}>{entry[key].author}</Link></h4>

@@ -1,5 +1,6 @@
 
-import React, { useEffect, useState } from 'react'; import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+ import axios from 'axios';
 import { Link, match } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { pageMapDispatchToProps, pageMapStateToProps, PageProps } from '../common';
@@ -8,7 +9,6 @@ import { ConfigItems } from '../../../../config';
 import { HomeTransactionType } from '../../components/home/TransactionsComponent';
 import Theme from '../../components/theme';
 import { Container } from 'react-bootstrap';
-import { Paper } from '@material-ui/core';
 import ProposalCard from './ProposalCard';
 import './proposalsPage.scss'
 import { getContent,getSingleProposal } from '../../api/urls';
@@ -16,8 +16,6 @@ import { _t } from '../../i18n';
 import { proposalsType } from './ProposalsPage';
 import { EntryType } from '../entry/EntryTypes';
 import { renderPostBody, setProxyBase, catchPostImage } from "@ecency/render-helper";
-import { LoaderSpinner } from '../../img/svg';
-import { TrainRounded } from '@material-ui/icons';
 import SpinnerEffect from '../../components/loader/spinner';
 
 
@@ -37,17 +35,11 @@ const SingleProposalPage = (props: any) => {
         })
     }, [])
     useEffect(() => {
-
         if (singleProposal) {
-            const permlink_url = getContent(singleProposal[0].creator, singleProposal[0].permlink)
-            // console.log(permlink_url)
-            // axios.get(permlink_url).then(resp => {
-            //     setEntry(resp.data)
-            // })
             const fetchData = async () =>{
                 setLoading(true);
                 try {
-                  const {data: response} = await axios.get(permlink_url);
+                  const response= await getContent(singleProposal[0].creator, singleProposal[0].permlink);
                   setEntry(response);
                 } catch (error:any) {
                   console.error(error.message);
