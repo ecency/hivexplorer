@@ -9,6 +9,8 @@ import { Link } from 'react-router-dom';
 import { getTransactions } from '../../api/urls';
 import { Date_time_table } from '../../api/dateTime';
 import SpinnerEffect from '../loader/spinner';
+import { DefaultUser } from '../../img/svg';
+import DefaultImage from '../../img/default-avatar.png'
 
 
 export interface op_type {
@@ -79,7 +81,7 @@ const HomeTransactions = (props:any) => {
           const posting_auths:string[]=trans.op.value.required_posting_auths
             const deviceDate=new Date()
             return(
-               <Row className='m-0 block-row row-border' key={index}>
+               <Row className='m-0 block-row row-border' id={`${index}+${trans.trx_id}`} key={`${index}+${trans.trx_id}`}>
                  <Col md={12} xs={12}>
                     <Row>
                         <Col md={12}>{_t('common.id')}: <Link to={`/tx/${trans.trx_id}`}>{trans.trx_id}</Link> </Col>
@@ -100,12 +102,15 @@ const HomeTransactions = (props:any) => {
                  <Col md={12} xs={12}>
                     <Row>
                         {req_auths && req_auths.length !==0 &&
-                        <Col md={12}>{_t('trans_table.req_auth')}: 
+                        <Col md={12}>{_t('trans_table.req_auths')}: 
                             {req_auths.map((user:string,i:number)=>{
+                               console.log("i",i)
                               return(
                                 <>
-                                <img className='avatar-img' src={`https://images.ecency.com/u/${user}/avatar`} key={i} alt="" />
+                                <span className={`${i}`} id={`${i}-${user}+${trans.trx_id}`} key={`${user}+${trans.trx_id}`}>
+                                <img className='avatar-img' onError={(e:any)=>{e.target.src={DefaultImage}}}  src={`https://images.ecency.com/u/${user}/avatar`} alt="" />
                                 <Link to={`@${user}`}>{user}</Link>
+                                </span>
                                 </>
                               )
                             })}
@@ -113,23 +118,27 @@ const HomeTransactions = (props:any) => {
                         }
                         {posting_auths && posting_auths.length !==0 &&
                         <Col md={12}>{_t('trans_table.posting_auths')}: 
-                            {posting_auths.map((user:string,i:number)=>{
+                            {posting_auths.map((user:string,j:number)=>{
                               return(
                                 <>
-                                <img className='avatar-img' src={`https://images.ecency.com/u/${user}/avatar`} key={i} alt="" />
+                                <span className={`${j}`} id={`${user}+${trans.trx_id}`} key={`${user}-${trans.op.type}+${trans.trx_id}`}>
+                                <img className='avatar-img' onError={(e:any)=>{e.target.src={DefaultImage}}} src={`https://images.ecency.com/u/${user}/avatar`} alt="" />
                                 <Link to={`@${user}`}>{user}</Link>
+                                </span>
                                 </>
                               )
                             })}
                         </Col>
                         }
-                        {transOpVal && Object.keys(transOpVal).map((key)=>{
+                        {transOpVal && Object.keys(transOpVal).map((key,k:number)=>{
+                          
+                           console.log("k",k)
                           return(
                             <>
                             {typeof(key)==="string" && userType.includes(key)?
-                            <Col md={6} sm={12}>{_t(`trans_table.${key}`)}:
+                            <Col key={`${k}-${transOpVal[key]}-${trans.trx_id}`} id={`${k}-${transOpVal[key]}-${trans.op.type}-${trans.trx_id}`} md={6} sm={12}>{_t(`trans_table.${key}`)}:
                                 <>
-                                <img className='avatar-img' src={`https://images.ecency.com/u/${transOpVal[key]}/avatar`} alt="" />
+                                <img className='avatar-img' onError={(e:any)=>{e.target.src={DefaultImage}}} src={`https://images.ecency.com/u/${transOpVal[key]}/avatar`} alt="" />
                                 <Link to={`@${transOpVal[key]}`}>{transOpVal[key]}</Link>
                                 </>
                               </Col>:<></>}

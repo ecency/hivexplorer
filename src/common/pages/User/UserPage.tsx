@@ -173,10 +173,10 @@ const UserPage = (props:any) => {
                             {Object.keys(user).map((k,index)=>{
                               return(
                                typeof(user[k])!=='object' && typeof(user[k])!=='boolean'? 
-                                <StringField key={index} item={k} number={index} value={user[k]} label_for='user-info' />
+                                <StringField changeUser={changeUser} key={index} item={k} number={index} value={user[k]} label_for='user-info' />
                                 :
                                 typeof(user[k])==='boolean'? 
-                                <StringField key={index} item={k} number={index} value={JSON.stringify(user[k])} label_for='user-info' />
+                                <StringField  key={index} item={k} number={index} value={JSON.stringify(user[k])} label_for='user-info' />
                                 :
                                 typeof(user[k])==='object'?
                                 <ObjectField changeUser={changeUser} key={index} item={k} number={index} value={user[k]} label_for='user-info'/>

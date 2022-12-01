@@ -73,7 +73,6 @@ interface BlockList extends Array<HomeBlocksType>{}
 const WitnessesTables = (props:any) => {
 
   const WitnessesData=props.data
-  console.log(WitnessesData);
   
   const [page, setPage] = useState(0);
   const [searched, setSearched] = useState("");
@@ -115,7 +114,6 @@ const Date_time=(timeSet:string,timeFormat:string)=>{
 }
 const WitnessRow=(props:any)=>{
     const {witness}=props
-    console.log(witness)
     const [open, setOpen] = useState(allOpen);
 
     return(
@@ -160,14 +158,14 @@ const WitnessRow=(props:any)=>{
                                     <>
                                     {typeof(witness[key])==="object"? 
                                            
-                                            <tr>
+                                            <tr key={i+key}>
                                              <td>{_t(`witnesses.${key}`)}</td>
                                             <td>
                                               <table>
                                                 <tbody>
                                                   {Object.keys(witness[key]).map((val:any,i:number)=>{
                                                     return(
-                                                      <tr key={i}>
+                                                      <tr key={i+val+witness[key][val]}>
                                                         <td style={{width:'50%'}}>{_t(`witnesses.${val}`)}</td>
                                                         <td style={{width:'50%'}}>{witness[key][val]}</td>
                                                       </tr>
@@ -178,7 +176,7 @@ const WitnessRow=(props:any)=>{
                                             </td>
                                         </tr>
                                     :
-                                    <tr key={i}>
+                                    <tr key={i+key}>
                                         <td>{_t(`witnesses.${key}`)}</td>
                                         <td>{key==="created"?  moment.utc(witness[key]).format("LL") : witness[key]}</td>
                                     </tr>

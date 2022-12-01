@@ -3,6 +3,7 @@ import './stringField.scss'
 import { useSelector } from 'react-redux';
 import { _t } from '../../../i18n';
 import { Link } from 'react-router-dom';
+import { DefaultUser } from '../../../img/svg';
 
 
 const JsonField = (props: any) => {

@@ -32,7 +32,8 @@
     "skipLibCheck": true
   },
   "include": [
-    "src"
+    "src",
+    "DefaultImage"
   ],
   "exclude": [
     "node_modules",

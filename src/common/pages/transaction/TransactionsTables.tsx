@@ -120,7 +120,17 @@ const TransactionsTables = (props: any) => {
 
           <TableCell className="text-center px-2">{transaction.trx_in_block}</TableCell>
           <TableCell className="text-center px-2">{transaction.op_in_trx}</TableCell>
-          <TableCell className="tablecell-type">{transaction.op.type}</TableCell>
+          <TableCell className="tablecell-type">
+            {transaction.op.type==="custom_json_operation"? <span className="badge bg-secondary">{transaction.op.type}</span>:
+            transaction.op.type==="effective_comment_vote_operation"? <span className="badge bg-success">{transaction.op.type}</span>:
+            transaction.op.type==="vote_operation"? <span className="badge bg-info">{transaction.op.type}</span>:
+            transaction.op.type==="producer_reward_operation"? <span className="badge bg-danger">{transaction.op.type}</span>:
+            transaction.op.type==="curation_reward_operation"? <span className="badge bg-primary">{transaction.op.type}</span>:
+            transaction.op.type==="comment_benefactor_reward_operation"? <span className="badge bg-semi-primary">{transaction.op.type}</span>:
+            <span className="badge bg-warning text-dark">{transaction.op.type}</span>
+            }
+            </TableCell>
+        
           <TableCell className="text-center">
             <IconButton style={{ color: currTheme === 'day' ? '#535e65' : '#fcfcfc' }} aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
               {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}

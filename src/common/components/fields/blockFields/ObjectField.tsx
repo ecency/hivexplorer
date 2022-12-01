@@ -11,6 +11,7 @@ import JsonField from './JsonField';
 import JsonMetadata from '../../EntryContent/JsonMetadata';
 import { Date_time_table } from '../../../api/dateTime';
 import TransactionOperationTable from '../../../pages/User/UserOpTable';
+import DefaultImage from '../../../img/default-avatar.png'
 
 const timestampKeys=[
     "time",
@@ -93,7 +94,7 @@ const ObjectField = (props:any) => {
                             <ListGroup.Item key={i}>
                                 {item==='witness_votes'?
                                 <Link onClick={()=>{changeUser(val)}}  to={`/@${val}`}>
-                                    <span><img className='avatar-img' src={`https://images.ecency.com/u/${val}/avatar`} alt="" /></span>
+                                    <span><img className='avatar-img' onError={(e:any)=>{e.target.src={DefaultImage}}} src={`https://images.ecency.com/u/${val}/avatar`} alt="" /></span>
                                     <span>{val}</span>
                                 </Link>
                                 :
@@ -118,7 +119,7 @@ const ObjectField = (props:any) => {
                             <ListGroup.Item key={i}>
                                {item==='witness_votes'?
                               <Link onClick={()=>{changeUser(val)}}  to={`/@${val}`}>
-                                    <span><img className='avatar-img' src={`https://images.ecency.com/u/${val}/avatar`} alt="" /></span>
+                                    <span><img className='avatar-img' onError={(e:any)=>{e.target.src={DefaultImage}}} src={`https://images.ecency.com/u/${val}/avatar`} alt="" /></span>
                                     <span>{val}</span>
                                 </Link>
                                 :

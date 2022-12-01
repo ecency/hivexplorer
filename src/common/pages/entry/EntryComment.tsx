@@ -41,7 +41,6 @@ const EntryCommentPage = (props: any) => {
             setLoading(true);
             try {
               const  response  = await getDiscussion(userName, permLink)
-              console.log('permlink',permlink_url)
               setEntry(response);
             } catch (error:any) {
               console.error(error.message);
@@ -70,11 +69,11 @@ const EntryCommentPage = (props: any) => {
                                             <p>{entry[key].created}</p>
                                         </div>
                                         <div className='toggle-button-container'>
-                                                    <p>View Raw Format</p>
+                                                    <p>{_t('entry.rendered_data')}</p>
                                                      <div>
                                                      <ToggleButton
-                                                        inactiveLabel={"Off"}
-                                                        activeLabel={"On"}
+                                                        inactiveLabel={""}
+                                                        activeLabel={""}
                                                         value={state}
                                                         text="n"
                                                         onToggle={() => {
@@ -87,7 +86,7 @@ const EntryCommentPage = (props: any) => {
                                     <div className='entry-parent'>
                                         <Card>
                                             <Card.Header>
-                                                <p className='m-0'>Viewing a response to: <Link to={`/@${entry[key].parent_author}/${entry[key].parent_permlink}`}>{`@${entry[key].parent_author}/${entry[key].parent_permlink}`}</Link></p>
+                                                <p className='m-0'>{_t('entry.view_response')}  <Link to={`/@${entry[key].parent_author}/${entry[key].parent_permlink}`}>{`@${entry[key].parent_author}/${entry[key].parent_permlink}`}</Link></p>
                                             </Card.Header>
                                         </Card>
                                     </div>

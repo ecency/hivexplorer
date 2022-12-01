@@ -14,9 +14,10 @@ import {Global, Theme} from "./store/global/types";
 import '../style/theme-day.scss';
 import '../style/theme-night.scss';
 import BackToTopButton from './components/Buttons/BackToTop';
+import { SSRProvider } from 'react-bootstrap';
 
 const HomePage = loadable(() => import('./pages/home/HomePage'));
-const AboutPage = loadable(() => import('./pages/about'));
+const AboutPage = loadable(() => import('./pages/about/about'));
 const HeadBlockDetailPage = loadable(() => import('./components/headBlock/headBlockDetail'));
 const SingleBlock = loadable(()=>import('./pages/blocks/SingleBlockPage'))
 const AllTransactions = loadable(()=>import('./pages/transaction/AllTransactions'))
@@ -62,6 +63,7 @@ const App = ({ setLang }: any) => {
             Click me
         </Button>
       </div> */}
+       <SSRProvider>
       <AppHeader />
       <Switch>
         <Route exact={true} path={routes.HOME} component={HomePage}/>
@@ -81,6 +83,7 @@ const App = ({ setLang }: any) => {
         <Route exact={true} path={routes.EntryComment}  component={EntryComment}/>
         <Route component={NotFound}/>
       </Switch>
+      </SSRProvider>
       </>
 
     </>

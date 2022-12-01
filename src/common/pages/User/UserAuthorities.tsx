@@ -28,12 +28,13 @@ interface Authority {
 export const AuthorityObject = (field: Authority, changeUser: any) => {
     return (
         <>
-            {Object.keys(field).map((key, i: number) => {
-                i = i + Math.floor(Math.random() * 1000);
+            {Object.keys(field).map((key, y: number) => {
+                y = y + Math.floor(Math.random() * 10)+1;
+                console.log("y",y)
                 return (
                     <>
                         {field[key].length !== 0 &&
-                            <Row id={`${i})}`} key={i} className="m-0 py-2 row-border-dotted">
+                            <Row id={`${y})}`} key={y} className="m-0 py-2 row-border-dotted">
 
                                 <>
                                     <Col md={3} xs={3}>{key}
@@ -43,7 +44,8 @@ export const AuthorityObject = (field: Authority, changeUser: any) => {
                                             field[key]
                                             :
                                             field[key].map((inner: any, j: number) => {
-                                                j = j + Math.floor(Math.random() * 1000);
+                                                j = j + Math.floor(Math.random() * 30)+10;
+                                                console.log("j",j)
                                                 return (
                                                     <Row key={j}>
                                                         <Col className="auth-col">{key === 'account_auths' ?
@@ -75,6 +77,8 @@ const UserAuthorities = (props: any) => {
             <table className="authority-table">
                 <tbody>
                     {Object.keys(props).map((authority, i: number) => {
+                          i = i + Math.floor(Math.random() * 60)+40;
+                          console.log("i",i)
                         console.log(authority)
                         const field = props[authority]
                         return (
@@ -87,11 +91,12 @@ const UserAuthorities = (props: any) => {
                                         </td>
                                     </tr>
                                     : authority !== "changeUser" ?
-                                        <tr key={i} className="row-border" >
+                                        <tr key={i + Math.floor(Math.random() * 90)+71} className="row-border" >
                                             <td className="pt-2 pl-4 pr-2 pb-2">{_t(`user-info.${authority}`)}</td>
                                             <td className="pt-2 px-2 pb-2">
-                                                {Object.keys(field).map((key, i: number) => {
-                                                    i = i + Math.floor(Math.random() * 1000);
+                                                {Object.keys(field).map((key, l: number) => {
+                                                    l = l + Math.floor(Math.random() * 90)+71;
+                                                    console.log("l",l)
                                                     return (
                                                         <>
                                                             {field[key].length !== 0 &&
@@ -104,10 +109,11 @@ const UserAuthorities = (props: any) => {
                                                                             {typeof (field[key]) !== "object" ?
                                                                                 field[key]
                                                                                 :
-                                                                                field[key].map((inner: any, j: number) => {
-                                                                                    j = j + Math.floor(Math.random() * 1000);
+                                                                                field[key].map((inner: any, k: number) => {
+                                                                                    k = k + Math.floor(Math.random() * 250)+210;
+                                                                                    console.log("k",k)
                                                                                     return (
-                                                                                        <Row key={j}>
+                                                                                        <Row key={k}>
                                                                                             <Col className="auth-col">{key === 'account_auths' ?
                                                                                                 <Link onClick={() => changeUser(inner[0])} to={`/@${inner[0]}`}>{inner[0]}</Link> : <span>{inner[0]} </span>}
                                                                                                 <span className="number-span">{`  `} {inner[1]}</span>

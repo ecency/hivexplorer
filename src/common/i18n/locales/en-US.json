@@ -128,7 +128,8 @@
     "search_witnesses":"Search Witnesses"
   },
   "about":{
-    "page_title":"About"
+    "page_title":"About",
+    "page_description": "Hivexplorer is build with ❤️ by Ecency team. <br/><br/>It is <a href='https://github.com/ecency/hivexplorer' target='_blank'>opensource block explorer</a> for <a href='https://hive.io' target='_blank'>Hive</a> blockchain. It is easy to get started API provider for Hive developers as well. <br/><br/>To support our efforts please go to <b><a href='https://ecency.com/proposals/245' target='_blank'>here</a></b> and consider voting. To reach out, please join our <a href='https://discord.me/ecency' target='_blank'>Discord channel</a>."
   },
   "table_column":{
     "type":"Type",
@@ -285,6 +286,19 @@
     "limit_price":"Limit Price",
     "app":"App",
     "n":"N",
+    "t":"T",
+    "token":"Token",
+    "meme":"Memo",
+    "qty":"Qty",
+    "new_price":"New Price",
+    "item_type":"Item Type",
+    "guild_id":"Guild ID",
+    "edition":"Edition",
+    "plotID":"Plot ID",
+    "seedID":"Seed ID",
+    "trx_id":"Trx Id",
+    "summoner":"Summoner",
+    "secret":"Secret",
     "items":"Items",
     "version":"Version",
     "medium":"Medium",
@@ -300,7 +314,9 @@
     "beneficiary_payout_value":" Beneficiary Payout Value",
     "curators_vesting_payout":"Curators Vesting Payout",
     "initial_vesting_shares":"Initial Vesting Shares",
-    "initial_delegation":"Initial Delegation"
+    "initial_delegation":"Initial Delegation",
+    "to_player":"To Player",
+    "from_player":"From Player"
   },
   "witnesses":{
     "id":"ID",
@@ -350,6 +366,8 @@
     "page_intro":"The Decentralized Hive Fund (DHF) is an on-chain funding mechanism that allows anyone to submit a proposal and get funding once community votes pass certain threshold."
   },
   "entry":{
+    "view_response":"Viewing a response to:",
+    "rendered_data":"Rendered Data",
     "votes":"Votes",
     "properties":"Properties",
     "author":"Author",

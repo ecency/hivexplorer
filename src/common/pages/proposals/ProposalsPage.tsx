@@ -9,7 +9,7 @@ import { Container } from 'react-bootstrap';
 import { TextField } from '@material-ui/core';
 import ProposalCard from './ProposalCard';
 import './proposalsPage.scss'
-import { getAccount, getProposals } from '../../api/urls';
+import { getAccount, getFundAccount, getProposals } from '../../api/urls';
 import parseAsset from '../../helper/parse-asset';
 import numeral from 'numeral';
 import { _t } from '../../i18n';
@@ -101,7 +101,7 @@ const ProposalsPage = (props:any) => {
    
     let eligible:any
     useEffect(()=>{
-        const fund = getAccount("hive.fund");
+        const fund = getFundAccount("hive.fund");
         eligible = allProposals?.filter((x:proposalsType) => x.status !== 'expired');
         inactiveProposals=allProposals?.filter((x:proposalsType) => x.status === 'expired');
         console.log('fund calculate',fund)

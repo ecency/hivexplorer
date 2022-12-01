@@ -6,7 +6,7 @@ import './stringField.scss'
 import { useSelector } from 'react-redux';
 import { _t } from '../../../i18n';
 import { Link } from 'react-router-dom';
-import { Date_time_table } from '../../../api/dateTime';
+import DefaultImage from '../../../img/default-avatar.png'
 import { DateTimeTable } from './DateTimeTable';
 
 const timestampKeys=[
@@ -36,7 +36,7 @@ const timestampKeys=[
 ]
 
 const StringField = (props:any) => {
-    const {number,item,value,label_for}=props;
+    const {number,item,value,label_for,changeUser}=props;
     const currTheme = useSelector((state:any) => state.global.theme)
     const themeContrastColor = currTheme === 'day' ? '#535e65' : 'white';
     const rowBorder = currTheme === 'day' ? 'row-border border-color-day' : 'row-border border-color-night';
@@ -47,7 +47,10 @@ const StringField = (props:any) => {
             <Col  md={3} xs={12} className="attr-col"><span>{infoIcon(themeContrastColor)} </span><span className='pl-2'>  {_t(`${label_for}.${item}`)}:</span> </Col>
             <Col md={9} xs={12}>
                 {   item==='witness' || item==='current_witness'?
-                    <Link to={`/@${value}`}>{value}</Link>
+                    <span><img className='avatar-img' onError={(e:any)=>{e.target.src={DefaultImage}}} src={`https://images.ecency.com/u/${value}/avatar`} alt="" /> <Link to={`/@${value}`}>{value}</Link></span>
+                    :
+                    item==='recovery_account'?
+                    <span><img className='avatar-img' onError={(e:any)=>{e.target.src={DefaultImage}}} src={`https://images.ecency.com/u/${value}/avatar`} alt="" /> <Link  onClick={()=>{changeUser(value)}} to={`/@${value}`}>{value}</Link></span>
                     :
                     item==='block_num'?
                     <Link to={`/b/${value}`}>{value}</Link>

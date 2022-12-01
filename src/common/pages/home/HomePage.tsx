@@ -19,8 +19,8 @@ import { eyeBoldSvg, eyeSvg } from '../../img/svg';
 import moment from 'moment';
 import Market from '../../components/market/market';
 import { setHeadBlockData } from '../../store/HeadBlock';
-
-const headBlock = `${ConfigItems.baseUrl}/api/get_dynamic_global_properties`;
+import { getHeadBlock } from '../../api/urls';
+import SpinnerEffect from '../../components/loader/spinner';
 
 
 interface User{
@@ -63,15 +63,30 @@ const Index = (props: PageProps) => {
   //   });
   // }, []);
   const [result, setResult] = useState<Block>();
-    useEffect(() => {
-      console.log(headBlock)
-        axios.get(headBlock).then(response => { 
-          setResult(response.data)
-          dispatch(setHeadBlockData(response.data))
-        })
+  const [loading, setLoading] = useState(true);
+    // useEffect(() => {
+      
+    //     axios.get(headBlock).then(response => { 
+    //       setResult(response.data)
+    //       dispatch(setHeadBlockData(response.data))
+    //     })
 
        
-    }, []);
+    // }, []);
+    useEffect(()=>{
+      const fetchData = async () =>{
+        setLoading(true);
+      try {
+        const response = await getHeadBlock();
+        setResult(response)
+        dispatch(setHeadBlockData(response))
+      } catch (error:any) {
+        console.error(error.message);
+      }
+      setLoading(false);
+    }
+    fetchData();
+},[])
 
   const currTheme = useSelector((state:any) => state.global.theme)
   const [blocksApiResult, setBlocksApiResult] = useState<HomeTransactionType>()
@@ -132,6 +147,7 @@ const Index = (props: PageProps) => {
         setSearchResultStateHandler(undefined, undefined, undefined, true);
       }
     } else {
+      setBlocksApiResult(undefined)
       setSearchResultStateHandler(undefined, undefined, undefined, true);
     }
   }
@@ -146,7 +162,7 @@ const Index = (props: PageProps) => {
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
       searchHandler(enteredValue)
-    }, 100)
+    },100)
 
     return () => clearTimeout(delayDebounceFn)
   }, [enteredValue])
@@ -214,7 +230,8 @@ const Index = (props: PageProps) => {
           </>
           
         </Row>
-        {result && 
+        {loading && <SpinnerEffect />}
+        {!loading && result && 
         <>
         
           <HeadBlock {...result} /><Row>

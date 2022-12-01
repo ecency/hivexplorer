@@ -11,7 +11,11 @@ import { toggleTheme } from "../../store/global/index";
 import { _t } from '../../i18n';
 import { Link } from 'react-router-dom';
 
-const RESOURCES_MENU = [_t("nav.resources-about")];
+const RESOURCES_MENU = [
+  {
+    name:_t("nav.resources-about"),
+    link:`/about`
+}];
 const BLOCKCHAIN_MENU = [
   {
     name:_t("nav.blockchain-vt"),
@@ -69,18 +73,18 @@ const AppHeader = (props:any) => {
                     )})
                   }
                 </NavDropdown>
-                <NavDropdown className={currTheme==='day'? 'nav-text-white':'nav-text-dark'} id="nav-dropdown-tokens" title={_t("nav.tokens")}>
+                {/* <NavDropdown className={currTheme==='day'? 'nav-text-white':'nav-text-dark'} id="nav-dropdown-tokens" title={_t("nav.tokens")}>
                     {TOKENS_MENU.map((x,ind)=>(
                        <NavDropdown.Item key={`${x}${ind}`}>
                           <span>{x}</span>
                        </NavDropdown.Item>
                     ))}
-                </NavDropdown>
+                </NavDropdown> */}
                 <NavDropdown className={currTheme==='day'? 'nav-text-white':'nav-text-dark'} id="nav-dropdown-resources" title={_t("nav.resources")}>
                     {RESOURCES_MENU.map((x,ind)=>(
-                       <NavDropdown.Item key={`${x}${ind}`}>
-                          <span>{x}</span>
-                       </NavDropdown.Item>
+                        <NavDropdown.Item key={`${x.name}${ind}main`} >
+                        <span>{x.link?<Link to={x.link}>{x.name}</Link>:x.name}</span>
+                     </NavDropdown.Item>
                     ))}
                 </NavDropdown>
                 <NavDropdown menuVariant={menuVariant} id="nav-dropdown-dark-example" title={globeImg(themeContrastColor)}>
