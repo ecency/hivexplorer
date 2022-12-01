@@ -23,7 +23,10 @@ const About = (props: PageProps) => {
              <Container className="data-table-hive about-container py-5">
                 <div className="witness-header">
                     <h1>{_t('about.page_title')}</h1>
-                    <p>{_t('about.about_para1')}</p>
+                    <div
+                      className="body"
+                      dangerouslySetInnerHTML={{ __html: _t('about.page_description')}}
+                    />
                 </div>
                
              </Container>
