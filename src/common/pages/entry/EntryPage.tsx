@@ -56,7 +56,7 @@ const EntryPage = (props: any) => {
                         return (
                             <>  
                                 <h2>{entry[key].title}</h2>
-                                <div key={i}>
+                                <div key={i+entry[key].title}>
                                     <div className='entry-header'>
                                         <div className='mr-2'>
                                             <img className='avatar-img' onError={(e:any)=>{e.target.src={DefaultImage}}} src={`https://images.ecency.com/u/${entry[key].author}/avatar`} alt="" />
@@ -127,7 +127,7 @@ const EntryPage = (props: any) => {
                                             {entry && Object.keys(entry).slice(1,).map((key, i: number) => {
                                                 return (
                                                     <>
-                                                        <div key={i} >
+                                                        <div key={i+entry[key].author+entry[key]+entry[key].permlink} >
                                                         <div className='permlink-discussion-content'>
                                                             <Accordion className={currTheme === "day" ? "accordion-day" : "accordion_night"} defaultActiveKey={['0']} alwaysOpen={true}>
                                                                 <Accordion.Item eventKey="0" onClick={() => setOpenBody(!openBody)}>

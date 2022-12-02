@@ -63,7 +63,7 @@ const EntryVotes = (props:any) => {
               <TableRow >
                 {columns.map((column,index) => {
                     return(
-                    <TableCell className="card-header" key={index}>
+                    <TableCell className="card-header" key={index+column.label}>
                         {column.label} 
                       </TableCell>
                     )
@@ -73,13 +73,13 @@ const EntryVotes = (props:any) => {
           <TableBody>
           { votes.map((vote:entryVotesType,i:number)=>{
             return(
-                <TableRow key={i} hover={true} role="checkbox" tabIndex={-1}>
-                <TableCell><Link to={`/@${vote.voter}`}>{vote.voter}</Link></TableCell>
-                <TableCell>{vote.weight? vote.weight:"-N/A"}</TableCell>
-                <TableCell>{vote.percent? vote.percent : "-N/A"}</TableCell>
-                <TableCell>{vote.rshares? vote.rshares : "-N/A"}</TableCell>
-                <TableCell>{vote.reputation? vote.reputation : "-N/A"}</TableCell>
-                <TableCell>{vote.time? moment(`${vote.time}`).fromNow(): "-N/A"}</TableCell>
+                <TableRow key={i+vote.voter+user+permlink} hover={true} role="checkbox" tabIndex={-1}>
+                  <TableCell><Link to={`/@${vote.voter}`}>{vote.voter}</Link></TableCell>
+                  <TableCell>{vote.weight? vote.weight:"-N/A"}</TableCell>
+                  <TableCell>{vote.percent? vote.percent : "-N/A"}</TableCell>
+                  <TableCell>{vote.rshares? vote.rshares : "-N/A"}</TableCell>
+                  <TableCell>{vote.reputation? vote.reputation : "-N/A"}</TableCell>
+                  <TableCell>{vote.time? moment(`${vote.time}`).fromNow(): "-N/A"}</TableCell>
               </TableRow>
             )
         })}

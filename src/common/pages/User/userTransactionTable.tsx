@@ -79,7 +79,7 @@ const UserTransactionsTable = (props: any) => {
     const lowerCase = e.target.value.toLowerCase();
     setInputText(lowerCase);
   };
-  let filteredTransactionsData: any
+  let filteredTransactionsData: UserTransactionTypeList | undefined
   filteredTransactionsData = userTransaction?.filter((el: any) => {
 
     if (el) {
@@ -103,16 +103,16 @@ const UserTransactionsTable = (props: any) => {
   const sortTransaction = (colName: string, sortState: boolean) => {
     console.log(colName, sortState, `${_t("common.trx_in_block")}`)
     if (colName === `${_t("common.block")}` && sortState === true) {
-      setUserTransaction(filteredTransactionsData.sort((b: any, a: any) => parseFloat(b[1].block.toLocaleString()) - parseFloat(a[1].block.toLocaleString())))
+      setUserTransaction(filteredTransactionsData?.sort((b: any, a: any) => parseFloat(b[1].block.toLocaleString()) - parseFloat(a[1].block.toLocaleString())))
     }
     if (colName === `${_t("common.block")}` && sortState === false) {
-      setUserTransaction(filteredTransactionsData.sort((b: any, a: any) => parseFloat(a[1].block.toLocaleString()) - parseFloat(b[1].block.toLocaleString())))
+      setUserTransaction(filteredTransactionsData?.sort((b: any, a: any) => parseFloat(a[1].block.toLocaleString()) - parseFloat(b[1].block.toLocaleString())))
     }
     if (colName === `${_t("common.transaction_num")}` && sortState === true) {
-      setUserTransaction(filteredTransactionsData.sort((b: any, a: any) => parseFloat(b[0].toLocaleString()) - parseFloat(a[0].toLocaleString())))
+      setUserTransaction(filteredTransactionsData?.sort((b: any, a: any) => parseFloat(b[0].toLocaleString()) - parseFloat(a[0].toLocaleString())))
     }
     if (colName === `${_t("common.transaction_num")}` && sortState === false) {
-      setUserTransaction(filteredTransactionsData.sort((b: any, a: any) => parseFloat(a[0].toLocaleString()) - parseFloat(b[0].toLocaleString())))
+      setUserTransaction(filteredTransactionsData?.sort((b: any, a: any) => parseFloat(a[0].toLocaleString()) - parseFloat(b[0].toLocaleString())))
     }
 
   }
@@ -135,7 +135,7 @@ const UserTransactionsTable = (props: any) => {
             <TimestampField timestamp={trans[1].timestamp} />
           </TableCell>
           <TableCell className="transaction-table-data-cell py-2 col-w-100 text-center">{trans[0]}</TableCell>
-          <TableCell className="transaction-table-data-cell py-2">{trans[1].op.type}</TableCell>
+          <TableCell className="transaction-table-data-cell tablecell-type py-2">{trans[1].op.type}</TableCell>
           <TableCell className="text-center col-w-100">
             <IconButton style={{ color: currTheme === 'day' ? '#535e65' : '#fcfcfc' }} aria-label="expand row" size="small" onClick={() => setOpenRow(!openRow)}>
               {openRow ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
@@ -146,7 +146,7 @@ const UserTransactionsTable = (props: any) => {
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
             <Collapse in={openRow} timeout="auto" unmountOnExit={true}>
               <Box margin={1}>
-                <TransactionOperationTable opTrans={...opTrans} />
+                <TransactionOperationTable opTrxNo={trans[0]} opTransBlock={trans[1].block} opTransID={trans[1].trx_id} opTrans={...opTrans} />
               </Box>
             </Collapse>
           </TableCell>
@@ -170,12 +170,11 @@ const UserTransactionsTable = (props: any) => {
             <TableHead className="card-header">
               <TableRow className="card-header">
                 {columns.map((column, index) => {
-                   index = index + Math.floor(Math.random() * 8000)+7000;
                   return (
                     <>
                       {column.label === `${_t("common.block")}` ?
-                        <TableCell className={`card-header px-2 col-w-${column.width} card-header-sort`} key={index + 1}>
-                          {<>
+                        <TableCell className={`card-header px-2 col-w-${column.width} card-header-sort`} key={index+7}>
+                          {<>{console.log('block',index+7)}
                             <span
                               onClick={(e) => { setSortBlockBtn(!sortBlockBtn); sortTransaction(e.currentTarget.innerText.substring(-1), sortBlockBtn) }}>
                               {column.label}{sortBlockBtn ? DescendingIcon(themeContrastColor) : AscendingIcon(themeContrastColor)}</span>
@@ -183,6 +182,7 @@ const UserTransactionsTable = (props: any) => {
                         </TableCell>
                         :
                         <TableCell key={index} className={`card-header px-2 col-w-${column.width} card-header-sort`}>
+                          {console.log('non-block',index)}
                           {column.label}
                           {column.label === `${_t("common.ops")}` ?
                             <IconButton style={{ color: currTheme === 'day' ? '#535e65' : '#fcfcfc' }} aria-label="expand row" size="small" onClick={() => setAllOpen(!allOpen)}>
@@ -198,10 +198,12 @@ const UserTransactionsTable = (props: any) => {
             <TableBody>
               {filteredTransactionsData && filteredTransactionsData
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((trans: any, i: number) => {
-                  i = i + Math.floor(Math.random() * 10000)+9000;
+                .map((trans:UserTransactionType , i: number) => {
+                  console.log('trans',trans,trans[0])
+                  const keyIndex=i+trans[1].trx_id+trans[1].block + page * rowsPerPage + rowsPerPage
+                  console.log('row index',keyIndex)
                   return (
-                    <TransRow key={i} trans={trans} />
+                    <TransRow key={keyIndex} trans={trans} />
                   );
                 })}
             </TableBody>

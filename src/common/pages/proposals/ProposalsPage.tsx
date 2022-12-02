@@ -188,7 +188,7 @@ const ProposalsPage = (props:any) => {
 
                 <div className="filter-menu">
                         {Object.values(Filter).map((x,i) => {
-                            return <button key={i} className='btn' onClick={()=>setProposalStatus(x)} disabled={proposalStatus===x?true:false}>{_t(`proposals.${x}`)}</button>
+                            return <button key={i+x} className='btn' onClick={()=>setProposalStatus(x)} disabled={proposalStatus===x?true:false}>{_t(`proposals.${x}`)}</button>
                         })}
                 </div>
              </div>

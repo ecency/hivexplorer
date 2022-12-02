@@ -11,7 +11,8 @@ import { Card } from 'react-bootstrap';
 
 
 const TransactionOperationTable = (props: any) => {
-    const { opTrans } = props
+    const { opTrxNo,opTransBlock,opTransID,opTrans } = props
+    console.log('opTrans',opTransBlock,opTransID)
     const opType = opTrans.type
     const opVal = opTrans.value
 
@@ -24,24 +25,16 @@ const TransactionOperationTable = (props: any) => {
     const opJson = opVal.json
     const opOwner = opVal.owner
     const opCreator = opVal.creator
-
     const opProps = opVal.props
     const opVestShare = opVal.vesting_shares
-
     const opExchange = opVal.exchange_rate
     const opRewardHive = opVal.reward_hive
-
     const opRequiredAuths = opVal.required_auths
     const opRequiredPostingAuths = opVal.required_posting_auths
-
     const opActive = opVal.active
     const opPosting = opVal.posting
-
     const jsonSplit = DecodeJson(opJson)
-    console.log('json split', jsonSplit)
-
     const currTheme = useSelector((state: any) => state.global.theme)
-    console.log('location', window.location.href.includes("@"))
     const OpValArray = new Array()
     OpValArray.push(opRewardHive, opVestShare)
 
@@ -50,6 +43,8 @@ const TransactionOperationTable = (props: any) => {
     const LinkAccount=[
         "current_owner",
         "voter",
+        "owner",
+        "author",
         "open_owner",
         "producer",
         "publisher",
@@ -57,14 +52,13 @@ const TransactionOperationTable = (props: any) => {
         "from",
         "to",
         "comment_author",
+        "benefactor",
 
     ]
 
     const StringFieldArray=[
         "id",
         "opCurator",
-        "author",
-        "benefactor",
         "weight",
         "rshares",
         "total_vote_weight",
@@ -107,8 +101,9 @@ const TransactionOperationTable = (props: any) => {
     ]
 
     function OpObjectValue(field: any, name: string) {
+        console.log('props',field,name)
         return (
-            <tr>
+          <>
                 <td>{_t(`trans_table.${name}`)}</td>
                 <td>
                     <table>
@@ -128,7 +123,7 @@ const TransactionOperationTable = (props: any) => {
                         </tbody>
                     </table>
                 </td>
-            </tr>
+          </>
         )
     }
     function opNestedObject(field: any, name: string) {
@@ -136,7 +131,7 @@ const TransactionOperationTable = (props: any) => {
             <tr>
                 <td>{_t(`trans_table.${name}`)}</td>
                 <td>
-                    {typeof (field) !== "object" ? field :
+                    {typeof (field) !== "object" ? LinkAccount.includes(name)?<></> : field :
                         <AuthorityObject {...field} />
                     }
                 </td>
@@ -159,11 +154,11 @@ const TransactionOperationTable = (props: any) => {
                             <table style={{ width: '100%' }}>
                                 <tbody>
                                 {Object.keys(opVal).map((key,k:number)=>{
-                                         k = k + Math.floor(Math.random() * 10000)+9000;
+                                       
                                         return(
                                             <>
                                             {(typeof(opVal[key])==="string" || typeof(opVal[key])==="number") && LinkAccount.includes(key) && 
-                                                <tr key={k}>
+                                                <tr key={k+opVal[key]+opTransBlock+opTransID}>
                                                     <td>{_t(`trans_table.${key}`)}</td><td><span><img className='avatar-img' src={`https://images.ecency.com/u/${opVal[key]}/avatar`} alt="" /> {opVal[key]}</span></td>
                                                 </tr>
                                             }
@@ -171,11 +166,11 @@ const TransactionOperationTable = (props: any) => {
                                         )
                                     })}
                                     {Object.keys(opVal).map((key,i:number)=>{
-                                         i = i + Math.floor(Math.random() * 1000);
+                                         
                                         return(
                                             <>
                                             {(typeof(opVal[key])==="string" || typeof(opVal[key])==="number") && StringFieldArray.includes(key) && 
-                                                <tr key={i}>
+                                                <tr key={i+opVal[key]+opTransBlock+opTransID}>
                                                     <td>{_t(`trans_table.${key}`)}</td><td>{opVal[key]}</td>
                                                 </tr>
                                             }
@@ -183,7 +178,7 @@ const TransactionOperationTable = (props: any) => {
                                         )
                                     })}
                                
-                                    {opOwner && opNestedObject(opOwner, 'owner')}
+                                    {opOwner==="object" && opNestedObject(opOwner, 'owner')}
 
                                     {opActive && opNestedObject(opActive, 'active')}
 
@@ -221,26 +216,27 @@ const TransactionOperationTable = (props: any) => {
                                             <td>
                                             {jsonSplit.items &&
                                                 <table style={{ width: '100%' }}>
+                                                    <tbody>
                                                     <tr>
                                                         <td>{_t(`trans_table.items`)}</td>
                                                         <td>   {jsonSplit.items.map((item: string, i: number) => {
                                                             return (
-                                                                <tr key={i}>
+                                                                <tr key={i+item+opTransBlock+opTransID+opTrxNo}>
                                                                     <td>{item}</td>
                                                                 </tr>
                                                                 )
                                                             })}
                                                         </td>
                                                     </tr>
+                                                    </tbody>
                                                 </table>
                                             }
                                             {jsonSplit && Object.keys(jsonSplit).map((key,j:number)=>{
-                                                 j = j + Math.floor(Math.random() * 6000)+5000;
                                                 console.log(key,typeof(jsonSplit[key]))
                                                 return(
                                                     <>
                                                     {typeof(jsonSplit[key]) !== "object" ? 
-                                                    <table key={j} style={{ width: '100%' }}>
+                                                    <table key={j+key+opTransBlock+opTransID+'-'+opTrxNo} style={{ width: '100%' }}>
                                                       <tbody>
                                                         <tr>
                                                             <td style={{ width: '50%' }}>{_t(`trans_table.${key}`)}</td>
@@ -265,45 +261,47 @@ const TransactionOperationTable = (props: any) => {
                                                 <table>
                                                     <tbody>
                                                         <tr>
-                                                            {typeof (opProps) !== "object" ?
-                                                                <>
+                                                            {typeof (opProps) === "object" ?
+                                                                <td>
                                                                     {opProps.map((pro: any, i: number) => {
-                                                                         i = i + Math.floor(Math.random() * 500)+1;
                                                                         return (
                                                                             <>
-                                                                                <td key={1}>
-                                                                                    <table>
+                                                                              
+                                                                                    <table key={1+opTransBlock+opTransID+opTrxNo}>
                                                                                         <tbody>
-                                                                                            <tr><td>{pro[0]}</td></tr>
-                                                                                            <tr><td>{pro[1]}</td></tr>
+                                                                                            <tr>
+                                                                                                <td style={{minWidth: '150px'}}>{pro[0]}</td>
+                                                                                                <td>{pro[1]}</td>
+                                                                                            </tr>
                                                                                         </tbody>
                                                                                     </table>
-                                                                                </td>
+                                                                             
                                                                             </>
                                                                         )
                                                                     })}
-                                                                </> :
+                                                                </td> :
                                                                 <>
-                                                                    <table>
+                                                                    {/* <table>
                                                                         <tbody>
                                                                             {Object.keys(opProps).map((pro,k:number) => {
-                                                                                 k = k + Math.floor(Math.random() * 3000)+2000;
                                                                                 return (
                                                                                     <>
                                                                                         {typeof (opProps[pro]) !== "object" ?
-                                                                                            <tr>
+                                                                                            <tr key={k+opProps[pro]+opTransBlock+'--'+opTransID}>
                                                                                                 <td>{pro}</td>
                                                                                                 <td>{opProps[pro]}</td>
                                                                                             </tr>
                                                                                             :
-                                                                                            <>{opProps[pro] && OpObjectValue(opProps[pro], `${pro}`)}</>
+                                                                                            <>{opProps[pro] && OpObjectValue([opProps[pro]], `${pro}`)}</>
+                                                                                         
+                                                                                            
 
                                                                                         }
                                                                                     </>
                                                                                 )
                                                                             })}
                                                                         </tbody>
-                                                                    </table>
+                                                                    </table> */}
                                                                 </>
 
 
@@ -316,12 +314,11 @@ const TransactionOperationTable = (props: any) => {
                                         </tr>}
                              
                                     {Object.keys(opVal).map((key,m:number)=>{
-                                         m = m + Math.floor(Math.random() * 7000)+6000;
                                         console.log("value",key,opVal[key],ObjectFieldArray.includes(key),typeof(opVal[key]))
                                         return(
-                                            <>
+                                            <tr key={m+'-'+opVal[key]+opTransBlock+opTransID}>
                                                 {typeof(opVal[key])==="object" && ObjectFieldArray.includes(key) && OpObjectValue(opVal[key], `${key}`)}
-                                            </>
+                                            </tr>
                                         )
                                     })}
                                     {opExchange &&

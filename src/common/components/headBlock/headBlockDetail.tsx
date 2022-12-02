@@ -105,9 +105,9 @@ const HeadBlockDetail = (props:any) => {
                             // <StringField key={index} value={result[key]}  item={key} number={index} label_for='block'/>
                             <>
                             {typeof(result[key])!=="object"?
-                            <StringField key={index+Math.floor(Math.random() * 3000)+2000} value={result[key]}  item={key} number={index} label_for='block'/>
+                            <StringField key={index+key}  item={key} number={index} label_for='block'/>
                             :
-                            <ObjectField key={index+Math.floor(Math.random() * 4000)+3001} value={result[key]}  item={key} number={index} label_for='block'/>
+                            <ObjectField key={index+key}  item={key} number={index} label_for='block'/>
                             }
                             </>
                             )
@@ -115,9 +115,9 @@ const HeadBlockDetail = (props:any) => {
                             return(
                             // <StringField  key={index} value={result[key]}  item={key} number={index} label_for='block'/>
                           <>  {typeof(result[key])!=="object"?
-                                <StringField key={index+Math.floor(Math.random() * 5000)+4001} value={result[key]}  item={key} number={index} label_for='block'/>
+                                <StringField key={index+key} value={result[key]}  item={key} number={index} label_for='block'/>
                                 :
-                                <ObjectField key={index +Math.floor(Math.random() * 6000)+5001} value={result[key]}  item={key} number={index} label_for='block'/>
+                                <ObjectField key={index+key} value={result[key]}  item={key} number={index} label_for='block'/>
                                 }</>
                             )
                         })}

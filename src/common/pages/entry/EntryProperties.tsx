@@ -42,10 +42,10 @@ const EntryProperties = (props:any) => {
            <div key={index}>
               {typeof(entries[key])!=="object"?
                EntryType.includes(key) && 
-                 <StringField key={index} value={entries[key]}  item={key} number={index} label_for='entry'/>
+                 <StringField key={key+'entry-property'+index} value={entries[key]}  item={key} number={index} label_for='entry'/>
                  :
                  EntryType.includes(key) && 
-                 <ObjectField key={index} value={entries[key]}  item={key} number={index} label_for='entry'/>
+                 <ObjectField key={key+'entry-property'+index} value={entries[key]}  item={key} number={index} label_for='entry'/>
              }
            </div>
            )

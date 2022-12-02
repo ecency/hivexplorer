@@ -4,6 +4,19 @@
     .MuiTabs-indicator{
         background-color: #706f70 !important;
     }
+    .tablecell-type{
+        .badge{
+          border-radius: 15px !important;
+          line-height: unset !important;
+          font-size: 13px !important;
+          .bg-semi-primary{
+            background-color: #415686 ;
+          }
+          .bg-witness_set_properties_operation{
+            background-color: #5ee4b3a1  ;
+          }
+        }
+      }
     .table-paper{
         overflow-x: auto;
         .search-field{

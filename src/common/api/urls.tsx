@@ -66,6 +66,7 @@ export const getSingleTransaction=async (transaction_id:number)=>{
 }
 export const getUserTransaction=async (user:string,transactionFrom:number,transactionLimit:number)=>{
     const user_transaction_url = `${ConfigItems.baseUrl}/api/get_account_history?account=${user}&start=${transactionFrom}&limit=${transactionLimit}`
+    console.log(user_transaction_url)
     const r = await axios.get(user_transaction_url);
     return r.data;
 }
