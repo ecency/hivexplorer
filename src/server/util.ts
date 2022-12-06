@@ -25,7 +25,6 @@ export const baseApiRequest = (url: string, method: Method, headers: any = {}, p
 
 
 export const cleanURL = (req: any, res: any, next: any) => {
-  console.log(req.url)
   if (req.url.includes('//')) {
     res.redirect(req.url.replace(new RegExp('/{2,}', 'g'), '/'));
   }
