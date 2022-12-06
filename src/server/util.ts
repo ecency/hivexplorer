@@ -25,6 +25,7 @@ export const baseApiRequest = (url: string, method: Method, headers: any = {}, p
 
 
 export const cleanURL = (req: any, res: any, next: any) => {
+  console.log(req.url)
   if (req.url.includes('//')) {
     res.redirect(req.url.replace(new RegExp('/{2,}', 'g'), '/'));
   }
@@ -33,8 +34,12 @@ export const cleanURL = (req: any, res: any, next: any) => {
   }
   if (req.url.includes('-hs?code')) {
     next();
-  } else if (req.url !== req.url.toLowerCase() && !req.url.includes('api/')) {
-    res.redirect(301, req.url.toLowerCase());
+  } else if (!req.url.includes('/api/')) {
+    if (req.url !== req.url.toLowerCase()) {
+      res.redirect(301, req.url.toLowerCase());
+    } else {
+      next();
+    }
   } else {
     next();
   }
