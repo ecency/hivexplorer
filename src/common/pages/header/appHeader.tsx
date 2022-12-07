@@ -15,7 +15,12 @@ const RESOURCES_MENU = [
   {
     name:_t("nav.resources-about"),
     link:`/about`
-}];
+  },
+  {
+    name:_t("nav.resources-api"),
+    link:`/api_documentation`
+  }
+];
 const BLOCKCHAIN_MENU = [
   {
     name:_t("nav.blockchain-vt"),

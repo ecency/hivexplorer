@@ -83,13 +83,13 @@ const EntryCommentPage = (props: any) => {
                                                      </div>
                                                 </div>
                                     </div>
-                                    <div className='entry-parent'>
+                                    {entry[key].parent_author && <div className='entry-parent'>
                                         <Card>
                                             <Card.Header>
-                                                <p className='m-0'>{_t('entry.view_response')}  <Link to={`/@${entry[key].parent_author}/${entry[key].parent_permlink}`}>{`@${entry[key].parent_author}/${entry[key].parent_permlink}`}</Link></p>
+                                                <p className='m-0'>{_t('entry.view_response')} <a href={`/@${entry[key].parent_author}/${entry[key].parent_permlink}`}>{`@${entry[key].parent_author}/${entry[key].parent_permlink}`}</a></p>
                                             </Card.Header>
                                         </Card>
-                                    </div>
+                                    </div>}
                                     <Accordion className={currTheme === "day" ? "accordion-day" : "accordion_night"} defaultActiveKey={['0']} alwaysOpen={true}>
                                         <Accordion.Item eventKey="0" onClick={() => setOpenBody(!openBody)}>
                                             <Accordion.Header>

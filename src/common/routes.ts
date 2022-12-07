@@ -13,5 +13,6 @@ export default {
     Proposals:"/proposals",
     SingleProposal:"/proposals/:id",
     Entry:"/@:user_id/:permlink",
-    EntryComment:"/:category/@:user_id/:permlink"
+    EntryComment:"/:category/@:user_id/:permlink",
+    APIDocumentation:"/api_documentation"
 };

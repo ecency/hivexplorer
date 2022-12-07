@@ -29,6 +29,7 @@ const ProposalsPage = loadable(()=>import('./pages/proposals/ProposalsPage'))
 const SingleProposalPage = loadable(()=>import('./pages/proposals/SingleProposalPage'))
 const EntryPage = loadable(() => import('./pages/entry/EntryPage'));
 const EntryComment= loadable(() => import('./pages/entry/EntryComment'));
+const APIDoc= loadable(() => import('./pages/apiDocumentation/Api_documentation'));
 
 const App = ({ setLang }: any) => {
   const dispatch = useDispatch()
@@ -81,6 +82,7 @@ const App = ({ setLang }: any) => {
         <Route exact={true} path={routes.SingleProposal}  component={SingleProposalPage}/>
         <Route exact={true} path={routes.Entry}  component={EntryPage}/>
         <Route exact={true} path={routes.EntryComment}  component={EntryComment}/>
+        <Route exact={true} path={routes.APIDocumentation}  component={APIDoc}/>
         <Route component={NotFound}/>
       </Switch>
       </SSRProvider>

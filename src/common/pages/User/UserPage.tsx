@@ -101,20 +101,20 @@ const UserPage = (props:any) => {
             })
         },[])
       useEffect(()=>{
-  
+        setUserId(match.params.user_id)
         console.log("changeUser",userId)
-        const fetchData = async () =>{
+        const fetchDataAgain = async () =>{
           setLoading(true);
         try {
-          const response= await getAccount(userId)
+          const response= await getAccount(match.params.user_id)
           setUserAccount(response);
         } catch (error:any) {
           console.error(error.message);
         }
         setLoading(false);
       }
-      fetchData();
-        },[userId])
+      fetchDataAgain();
+        },[match.params.user_id])
     function a11yProps(index:number) {
         return {
           id: `user-tab-${index}`,

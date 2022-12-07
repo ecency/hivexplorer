@@ -11,7 +11,8 @@
     "tokens-hive": "Hive",
     "tokens-he": "Hive Engine",
     "tokens-speak": "Speak Network",
-    "resources-about": "About"
+    "resources-about": "About",
+    "resources-api":"API Documentation"
   },
   "home":{
     "latest_block":"Latest Blocks",
@@ -415,6 +416,24 @@
     "net_rshares":"Net RShares",
     "abs_rshares":"Abs Rshares",
     "active_votes":"Active Votes"
-
+  },
+  "api_documentation":{
+    "page_title":"Hive APIs",
+    "page_welcome":"<h2><a id='introduction-welcome'>Welcome to Hive</a></h2> <h4 id='welcome-to-the-hive-developer-portal'>Welcome to the Hive Developer Portal!</h4><p>This site is designed to aid those interested in developing applications on the  <strong><a href='https://hive.io' target='_blank'>Hive</a></strong> blockchain.</p><p>If you don’t know about Hive yet, visit <a href='https://hive.io'>hive.io</a>.</p><p>The code for this site is on <a href='https://gitlab.syncad.com/hive/devportal'>gitlab</a>. If you’d like to see a specific improvementyou can either submit a pull request or file an issue. Please follow our<a href='https://gitlab.syncad.com/hive/devportal/-/blob/develop/CONTRIBUTING.md'>contribution guidelines</a></p>",
+    "example_url":"Example URL:",
+    "example_response":"Example Response:",
+    "parameters":"Parameters:"
+  },
+  "api_blocks":{
+    "title":"Blocks",
+    "description":"Used to query values related to the block plugin. These AppBase API methods are still under development and subject to change.",
+    "head_block":"Head Block (Global Dynamic Properties)",
+    "head_block_description":"Returns the current dynamic global properties. "
+  },
+  "api_transactions":{
+    "title":"Transactions",
+    "description":"Returns the details of the ,latest transactions, transaction by Id, by witnesses",
+    "get_transaction":"Get Transaction",
+    "get_transaction_description":"Returns the details of a transaction based on a transaction id. Parameters: trx_id:string"
   }
 }
