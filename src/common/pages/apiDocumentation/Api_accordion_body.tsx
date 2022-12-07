@@ -1,24 +1,19 @@
 
 import React, { useEffect, useState } from 'react';
-import { Link, match } from 'react-router-dom';
 import { connect, useSelector } from 'react-redux';
 import { pageMapDispatchToProps, pageMapStateToProps, PageProps } from '../common';
 import { withPersistentScroll } from '../../components/with-persistent-scroll';
 
 import { _t } from '../../i18n';
-import { Accordion } from 'react-bootstrap';
-import { showLessIcon, showMoreIcon } from '../../img/svg';
-import { ConfigItems } from '../../../../config';
-
 
 const Api_accordion_body = (props: any) => {
-    const {description,parameter,response,url}=props
+    const {description,parameter,response,url,end_point}=props
     return (
         <>
             <div>
                 {description &&  
                 <p
-                className="body"
+                className="body text-p"
                 dangerouslySetInnerHTML={{ __html: `${description}`}}
                 />}
                 {url && 
@@ -27,7 +22,12 @@ const Api_accordion_body = (props: any) => {
                         <p><a href={url} target="_blank"><span>{url}</span></a></p>
                     </>
                 }
-                
+                {end_point && 
+                    <>
+                        <h6>{_t('api_documentation.example_end_point')}</h6>
+                        <p className='text-p'><span>{end_point}</span></p>
+                    </>
+                }
                 {response && 
                     <>
                         <h6>{_t('api_documentation.example_response')}</h6>
@@ -36,14 +36,14 @@ const Api_accordion_body = (props: any) => {
                 }
     
                 <h6>{_t('api_documentation.parameters')}</h6>
-                { parameter ?
+                {parameter ?
                 <>
                    <p
-                className="body"
+                className="body text-p"
                 dangerouslySetInnerHTML={{ __html: `${parameter}`}}
                 />
                 </>: 
-                <p>None</p>}
+                <p className='text-p'>None</p>}
 
                     
         </div>

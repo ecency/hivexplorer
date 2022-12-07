@@ -71,7 +71,7 @@ export const getUserTransaction=async (user:string,transactionFrom:number,transa
 }
 // Get Witness
 export const getWitnesses=async (limit:number)=>{
-    const witnesses_url=`${ConfigItems.baseUrl}/api/get_witnesses_by_vote?limit=${limit}`
+    const witnesses_url=`${ConfigItems.baseUrl}/api/get_witnesses_by_vote?account=null&limit=${limit}`
     const r = await axios.get(witnesses_url);
     return r.data;
 }

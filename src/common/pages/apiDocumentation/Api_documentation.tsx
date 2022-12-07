@@ -8,9 +8,12 @@ import { withPersistentScroll } from '../../components/with-persistent-scroll';
 import { _t } from '../../i18n';
 import { Container } from 'react-bootstrap';
 import SwaggerUI from 'swagger-ui-react';
-import API_Blocks from './API_Blocks';
+import API_Blocks from './APIitems/API_Blocks';
 import './api_documentation.scss'
-import API_transactions from './API_transactions';
+import API_transactions from './APIitems/API_transactions';
+import API_witnesses from './APIitems/API_witnesses';
+import BackToTopButton from '../../components/Buttons/BackToTop';
+import API_Proposals from './APIitems/API_Proposals';
 
 
 
@@ -35,7 +38,12 @@ var jsonPretty = JSON.stringify(JSON.parse(jsonString),null,2);
               <API_Blocks />
               <br />
               <API_transactions />
+              <br />
+              <API_witnesses />
+              <br />
+              <API_Proposals />
              </Container>
+             <BackToTopButton />
   </>;
 };
 

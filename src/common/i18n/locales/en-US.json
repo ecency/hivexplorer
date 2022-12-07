@@ -422,6 +422,7 @@
     "page_welcome":"<h2><a id='introduction-welcome'>Welcome to Hive</a></h2> <h4 id='welcome-to-the-hive-developer-portal'>Welcome to the Hive Developer Portal!</h4><p>This site is designed to aid those interested in developing applications on the  <strong><a href='https://hive.io' target='_blank'>Hive</a></strong> blockchain.</p><p>If you don’t know about Hive yet, visit <a href='https://hive.io'>hive.io</a>.</p><p>The code for this site is on <a href='https://gitlab.syncad.com/hive/devportal'>gitlab</a>. If you’d like to see a specific improvementyou can either submit a pull request or file an issue. Please follow our<a href='https://gitlab.syncad.com/hive/devportal/-/blob/develop/CONTRIBUTING.md'>contribution guidelines</a></p>",
     "example_url":"Example URL:",
     "example_response":"Example Response:",
+    "example_end_point":"Example End Point:",
     "parameters":"Parameters:"
   },
   "api_blocks":{
@@ -435,5 +436,19 @@
     "description":"Returns the details of the ,latest transactions, transaction by Id, by witnesses",
     "get_transaction":"Get Transaction",
     "get_transaction_description":"Returns the details of a transaction based on a transaction id. Parameters: trx_id:string"
+  },
+  "api_witnesses":{
+    "title":"Witnesses",
+    "description":"Returns the details of the witnesses, limit of witnesses etc",
+    "get_witnesses_by_vote":"Get Witnesses By Vote",
+    "get_witnesses_by_vote_description":"Returns accounts, queried by name. "
+  },
+  "api_proposals":{
+    "title":"Proposals",
+    "description":"Returns the details about Proposals, Proposals permlinks",
+    "get_proposals":"List Proposals",
+    "get_proposals_description":"Returns all proposals, starting with the specified creator or start date.",
+    "find_proposals":"Find Proposals (By ID)",
+    "find_proposals_description":"Finds proposals by proposal.id (not proposal.proposal_id)."
   }
 }
