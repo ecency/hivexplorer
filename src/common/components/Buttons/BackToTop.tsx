@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
 
 const ButtonContainer = styled.span`
   position: fixed;
@@ -16,7 +16,6 @@ const ButtonContainer = styled.span`
   background: #3b3b98;
   border-radius: 4px;
   transition: opacity 0.4s, color ease-in-out 0.2s, background ease-in-out 0.2s;
-  
 
   &:hover {
     opacity: 1;
@@ -35,18 +34,22 @@ const BackToTopButton = () => {
       }
     };
 
-    window.addEventListener('scroll', checkScrollHeight);
+    window.addEventListener("scroll", checkScrollHeight);
     return () => {
-      window.removeEventListener('scroll', checkScrollHeight);
+      window.removeEventListener("scroll", checkScrollHeight);
     };
   }, [showButton]);
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
-    <ButtonContainer style={{display:showButton?'flex':'none'}} className='scrollTop'  onClick={scrollToTop}>
+    <ButtonContainer
+      style={{ display: showButton ? "flex" : "none" }}
+      className="scrollTop"
+      onClick={scrollToTop}
+    >
       <svg
         width={24}
         height={24}

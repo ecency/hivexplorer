@@ -1,4 +1,4 @@
-import formattedNumber from '../util/formatted-number';
+import formattedNumber from "../util/formatted-number";
 
 interface Props {
   symbol: string;
@@ -29,8 +29,8 @@ export default class HiveEngineToken {
 
   constructor(props: Props) {
     this.symbol = props.symbol;
-    this.name = props.name || '';
-    this.icon = props.icon || '';
+    this.name = props.name || "";
+    this.icon = props.icon || "";
 
     this.precision = props.precision || 0;
     this.stakingEnabled = props.stakingEnabled || false;
@@ -52,21 +52,21 @@ export default class HiveEngineToken {
 
   delegations = (): string => {
     if (!this.hasDelegations()) {
-      return '';
+      return "";
     }
 
     return `(${formattedNumber(this.stake, {
-      fractionDigits: this.precision,
+      fractionDigits: this.precision
     })} + ${formattedNumber(this.delegationsIn, {
-      fractionDigits: this.precision,
+      fractionDigits: this.precision
     })} - ${formattedNumber(this.delegationsOut, {
-      fractionDigits: this.precision,
+      fractionDigits: this.precision
     })})`;
   };
 
   staked = (): string => {
     if (!this.stakingEnabled) {
-      return '-';
+      return "-";
     }
 
     if (this.stakedBalance < 0.0001) {
@@ -74,7 +74,7 @@ export default class HiveEngineToken {
     }
 
     return formattedNumber(this.stakedBalance, { fractionDigits: this.precision });
-  }
+  };
 
   balanced = (): string => {
     if (this.balance < 0.0001) {
@@ -82,5 +82,5 @@ export default class HiveEngineToken {
     }
 
     return formattedNumber(this.balance, { fractionDigits: this.precision });
-  }
+  };
 }

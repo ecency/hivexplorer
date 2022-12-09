@@ -1,7 +1,7 @@
-import { bindActionCreators, Dispatch } from 'redux';
-import { History, Location } from 'history';
-import { AppState } from '../store';
-import { Global } from '../store/global/types';
+import { bindActionCreators, Dispatch } from "redux";
+import { History, Location } from "history";
+import { AppState } from "../store";
+import { Global } from "../store/global/types";
 
 export interface PageProps {
   history: History;
@@ -13,8 +13,4 @@ export const pageMapStateToProps = (state: AppState) => ({
   ...state
 });
 
-export const pageMapDispatchToProps = (dispatch: Dispatch) =>
-  bindActionCreators(
-    {},
-    dispatch
-  );
+export const pageMapDispatchToProps = (dispatch: Dispatch) => bindActionCreators({}, dispatch);

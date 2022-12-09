@@ -5,29 +5,28 @@
 // }
 
 export interface objAmountPrecisionNai {
-  amount: string
-  precision: number
-  nai: string
+  amount: string;
+  precision: number;
+  nai: string;
 }
 
 export interface HeadblockState {
-
-  head_block_number: string,
-  head_block_id: string,
-  time:string,
-  current_witness:string,
+  head_block_number: string;
+  head_block_id: string;
+  time: string;
+  current_witness: string;
   // total_pow:string,
   // num_pow_witnesses:string,
-  // virtual_supply:string | objAmountPrecisionNai 
-  // current_supply:string | objAmountPrecisionNai 
-  // init_hbd_supply:string | objAmountPrecisionNai 
+  // virtual_supply:string | objAmountPrecisionNai
+  // current_supply:string | objAmountPrecisionNai
+  // init_hbd_supply:string | objAmountPrecisionNai
   // current_hbd_supply:string | objAmountPrecisionNai,
   // total_vesting_fund_hive:string | objAmountPrecisionNai,
   // total_vesting_shares:string | objAmountPrecisionNai,
   // total_reward_fund_hive:string | objAmountPrecisionNai,
   // total_reward_shares2:string | objAmountPrecisionNai,
   // pending_rewarded_vesting_shares:string | objAmountPrecisionNai,
-  // pending_rewarded_vesting_hive:string | objAmountPrecisionNai, 
+  // pending_rewarded_vesting_hive:string | objAmountPrecisionNai,
   // hbd_interest_rate:string,
   // hbd_print_rate:string,
   // maximum_block_size:string,
@@ -60,9 +59,6 @@ export interface HeadblockState {
   // min_recurrent_transfers_recurrence:string,
   // max_open_recurrent_transfers:string
 }
-
-
-
 
 export enum ActionTypes {
   SET_HEAD_BLOCK = "@headBlock/SET_DATA"
