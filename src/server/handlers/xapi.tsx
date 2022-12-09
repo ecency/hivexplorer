@@ -25,7 +25,6 @@ export default async (req: express.Request, res: express.Response) => {
   
   if (mapping[0]) {
     if (mapping[0].params && isArray(mapping[0].params)) {
-      console.log('yes');
       params = [];
       mapping[0].params.forEach((param) => {
         const queryParam = query[param];
@@ -36,8 +35,6 @@ export default async (req: express.Request, res: express.Response) => {
     }
     let result = cache.get(`${method}-${params}`);
     try {
-      console.log("params", params);
-      // console.log(mapping[0].api, method, params);
       if (result === undefined) {
         // const method_type:any = (mapping[0].param_type && mapping[0].param_type === 'params') ? params : query;
         const method_type:any = mapping[0].isArray ? params : query;

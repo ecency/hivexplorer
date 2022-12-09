@@ -101,7 +101,6 @@ const UserTransactionsTable = (props: any) => {
     setPage(0);
   };
   const sortTransaction = (colName: string, sortState: boolean) => {
-    console.log(colName, sortState, `${_t("common.trx_in_block")}`)
     if (colName === `${_t("common.block")}` && sortState === true) {
       setUserTransaction(filteredTransactionsData.sort((b: any, a: any) => parseFloat(b[1].block.toLocaleString()) - parseFloat(a[1].block.toLocaleString())))
     }

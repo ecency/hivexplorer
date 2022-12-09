@@ -70,10 +70,6 @@ const UserPage = (props:any) => {
     const rc_account_url=getRCAccount(userId);
     const owner_history_url=getOwnerHistory(userId)
     useEffect(()=>{
-      console.log('account url',account_url)
-        // axios.get(account_url).then(res => {
-        //   setUserAccount(res.data)
-        // })
         const fetchData = async () =>{
           setLoading(true);
         try {
@@ -88,21 +84,16 @@ const UserPage = (props:any) => {
 
     },[])
     useEffect(()=>{
-      console.log(owner_history_url)
       axios.get(owner_history_url).then(res => {
-         console.log("history",res)
          setOwnerHistory(res.data)
           })
       },[])
       useEffect(()=>{
-        console.log(rc_account_url)
         axios.get(rc_account_url).then(res => {
             setRCAccount(res.data.rc_accounts[0])
             })
         },[])
       useEffect(()=>{
-  
-        console.log("changeUser",userId)
         const fetchData = async () =>{
           setLoading(true);
         try {
@@ -122,7 +113,6 @@ const UserPage = (props:any) => {
         };
     }
     const changeUser=(val:string)=>{
-      console.log('clicked',val)
       setUserId(val)
     }
     return (
@@ -131,7 +121,6 @@ const UserPage = (props:any) => {
             <Container className='user-container'>
                 {loading && <SpinnerEffect />}
                {!loading && userAccount && rcAccount && userAccount.map((user,i)=>{
-                console.log('rc1',rcAccount,rcPower(rcAccount))
                 const VPower=votingPower(user)
                 const DVPower=downVotingPower(user)
                 const RCAPower=rcPower(rcAccount)

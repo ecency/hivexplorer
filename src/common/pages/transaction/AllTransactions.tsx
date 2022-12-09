@@ -30,7 +30,6 @@ const AllTransactions = (props:any) => {
           if(HeadBlock===""){
             const resp = await getHeadBlock();
             dispatch(setHeadBlockData(resp))
-            console.log('res-disptach',resp.head_block_number)
             const response = await getTransactions(resp.head_block_number);
             setTransactions(response.ops);
           }

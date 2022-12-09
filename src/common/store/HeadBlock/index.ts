@@ -13,10 +13,6 @@ export default (state: HeadblockState = initialState, action: Actions): Headbloc
   switch (action.type) {
     case ActionTypes.SET_HEAD_BLOCK:
       const { data } = action;
-      console.log("-------- SET HEAD BLOCK DATA -----------")
-      console.log(data)
-      console.log( '----------------------------------------')
-
       if (data) {
         state = { ...state, ...data };
       }

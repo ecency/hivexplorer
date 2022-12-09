@@ -30,7 +30,6 @@ export const AuthorityObject = (field: Authority, changeUser: any) => {
         <>
             {Object.keys(field).map((key, y: number) => {
                 y = y + Math.floor(Math.random() * 10)+1;
-                console.log("y",y)
                 return (
                     <>
                         {field[key].length !== 0 &&
@@ -45,7 +44,6 @@ export const AuthorityObject = (field: Authority, changeUser: any) => {
                                             :
                                             field[key].map((inner: any, j: number) => {
                                                 j = j + Math.floor(Math.random() * 30)+10;
-                                                console.log("j",j)
                                                 return (
                                                     <Row key={j}>
                                                         <Col className="auth-col">{key === 'account_auths' ?
@@ -78,8 +76,6 @@ const UserAuthorities = (props: any) => {
                 <tbody>
                     {Object.keys(props).map((authority, i: number) => {
                           i = i + Math.floor(Math.random() * 60)+40;
-                          console.log("i",i)
-                        console.log(authority)
                         const field = props[authority]
                         return (
                             <>
@@ -96,7 +92,6 @@ const UserAuthorities = (props: any) => {
                                             <td className="pt-2 px-2 pb-2">
                                                 {Object.keys(field).map((key, l: number) => {
                                                     l = l + Math.floor(Math.random() * 90)+71;
-                                                    console.log("l",l)
                                                     return (
                                                         <>
                                                             {field[key].length !== 0 &&
@@ -111,7 +106,6 @@ const UserAuthorities = (props: any) => {
                                                                                 :
                                                                                 field[key].map((inner: any, k: number) => {
                                                                                     k = k + Math.floor(Math.random() * 250)+210;
-                                                                                    console.log("k",k)
                                                                                     return (
                                                                                         <Row key={k}>
                                                                                             <Col className="auth-col">{key === 'account_auths' ?

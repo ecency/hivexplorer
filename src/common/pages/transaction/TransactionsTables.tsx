@@ -93,7 +93,6 @@ const TransactionsTables = (props: any) => {
   }
 
   const sortTransaction = (colName: string, sortState: boolean) => {
-    console.log(colName, sortState, `${_t("common.trx_in_block")}`)
     if (colName === `${_t("common.trx_in_block")}` && sortState === true) {
       setTransactionData(filteredTransactionsData.sort((b: any, a: any) => parseFloat(b.trx_in_block.toLocaleString()) - parseFloat(a.trx_in_block.toLocaleString())))
     }
@@ -171,7 +170,6 @@ const TransactionsTables = (props: any) => {
                 <TableRow>
                   {columns.map((column, index) => {
                     const [sortBtn, setSortBtn] = useState(false);
-                    console.log(index)
                     return (
                       <>
                         {column.label === `${_t("common.trx_in_block")}` || column.label === `${_t("common.op_in_trx")}` ?

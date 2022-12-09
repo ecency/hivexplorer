@@ -61,7 +61,6 @@ const WitnessesPage = (props:any) => {
           fetchData();
     
     },[])
-    console.log('witnesses',allWitnesses)
     return (
         <>
              <Theme global={props.global}/>

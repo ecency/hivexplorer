@@ -36,7 +36,6 @@ const UserHeader = (props:any) => {
     // Created Date
     
     const createdDate = CreatedDate(created);
-    console.log('rc1111',resourceCredits)
    
     return (
       <>{metaProfile &&  <Card className='cover-profile-tabs-container'>

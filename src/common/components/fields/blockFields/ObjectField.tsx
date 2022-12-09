@@ -168,7 +168,6 @@ const ObjectField = (props:any) => {
                 :  item==='transactions'? 
                 <>
                   {transactionValue.push(...value)}
-                  {console.log('pushed data',transactionValue)}
                   </>
                  :
                 item==='witness_votes' || item==='transaction_ids' ?

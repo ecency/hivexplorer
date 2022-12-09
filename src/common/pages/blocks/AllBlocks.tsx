@@ -39,7 +39,6 @@ const MultipleBlocks = (props:any) => {
         if(HeadBlock===""){
           const resp = await getHeadBlock();
           dispatch(setHeadBlockData(resp))
-          console.log('res-disptach',resp.head_block_number)
           const response = await getBlocks(resp.head_block_number,50) ;
           setBlocks(reverse(response.blocks));
         }

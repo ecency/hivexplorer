@@ -43,7 +43,6 @@ const EntryVotes = (props:any) => {
           setLoading(true);
           try {
             const response = await getEntryVotes(user,permlink)
-            console.log("res",response,typeof(response))
             setVotes(response);
           } catch (error:any) {
             console.error(error.message);
