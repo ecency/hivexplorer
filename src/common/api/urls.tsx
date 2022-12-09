@@ -4,7 +4,6 @@ import { ConfigItems } from "../../../config";
 // Get witness Account 
 export const getAccount=async (user:string)=>{
     const account_url= `${ConfigItems.baseUrl}/api/get_accounts?name[]=${user}`
-    console.log(account_url)
     const r = await axios.get(account_url);
     return r.data;
 }
@@ -77,15 +76,12 @@ export const getWitnesses=async (limit:number)=>{
 }
 
 export const getDiscussion=async (user:string,permlink:string)=>{
-
     const permlink_url=`${ConfigItems.baseUrl}/api/get_discussion?author=${user}&permlink=${permlink}`
-    console.log(permlink_url)
     const r = await axios.get(permlink_url);
     return r.data;
 }
 export const getContent=async (user:string,permlink:string)=>{
     const single_permlink_url=`${ConfigItems.baseUrl}/api/get_content?author=${user}&permlink=${permlink}`
-    console.log(single_permlink_url)
     const r = await axios.get(single_permlink_url);
     return r.data;
 
@@ -98,7 +94,6 @@ export const getMarketData = (coin: string, vsCurrency: string, fromTs: string, 
 
 export const getEntryVotes=async (user:string,permlink:string)=>{
     const entry_votes_url= `${ConfigItems.baseUrl}/api/get_active_votes?author=${user}&permlink=${permlink}`
-    console.log(entry_votes_url)
     const r = await axios.get(entry_votes_url);
     return r.data;
 }

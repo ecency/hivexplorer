@@ -88,7 +88,6 @@ const ProposalsPage = (props:any) => {
                   setFilteredProposals([...inactiveProposals])
               }
                 if(proposalStatus==="expired"){
-                  console.log('proposal',proposalStatus)
                   setFilteredProposals([...expiredProposals])
               }    
              } catch (error:any) {
@@ -104,12 +103,10 @@ const ProposalsPage = (props:any) => {
         const fund = getFundAccount("hive.fund");
         eligible = allProposals?.filter((x:proposalsType) => x.status !== 'expired');
         inactiveProposals=allProposals?.filter((x:proposalsType) => x.status === 'expired');
-        console.log('fund calculate',fund)
         axios.get(fund).then(resp=>{
             const totalBudgetCount = parseAsset(resp.data[0].hbd_balance).amount;
             setTotalBudget(totalBudgetCount)
             setDailyBudget(totalBudgetCount/100);
-            console.log('budget',totalBudget,dailyBudget)
             let _thresholdProposalId: any = null;
             if(dailyBudget){
             const dailyFundedCalc = eligible.reduce((a:any, b:any) => {
@@ -122,7 +119,6 @@ const ProposalsPage = (props:any) => {
                 return _sum_amount <= dailyBudget ? _sum_amount : a;
                
             }, 0);
-            console.log('daily',dailyFundedCalc)
             setDailyFunded(dailyFundedCalc)
             }
         })

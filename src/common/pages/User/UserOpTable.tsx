@@ -38,10 +38,7 @@ const TransactionOperationTable = (props: any) => {
     const opPosting = opVal.posting
 
     const jsonSplit = DecodeJson(opJson)
-    console.log('json split', jsonSplit)
-
     const currTheme = useSelector((state: any) => state.global.theme)
-    console.log('location', window.location.href.includes("@"))
     const OpValArray = new Array()
     OpValArray.push(opRewardHive, opVestShare)
 
@@ -236,7 +233,6 @@ const TransactionOperationTable = (props: any) => {
                                             }
                                             {jsonSplit && Object.keys(jsonSplit).map((key,j:number)=>{
                                                  j = j + Math.floor(Math.random() * 6000)+5000;
-                                                console.log(key,typeof(jsonSplit[key]))
                                                 return(
                                                     <>
                                                     {typeof(jsonSplit[key]) !== "object" ? 
@@ -317,7 +313,6 @@ const TransactionOperationTable = (props: any) => {
                              
                                     {Object.keys(opVal).map((key,m:number)=>{
                                          m = m + Math.floor(Math.random() * 7000)+6000;
-                                        console.log("value",key,opVal[key],ObjectFieldArray.includes(key),typeof(opVal[key]))
                                         return(
                                             <>
                                                 {typeof(opVal[key])==="object" && ObjectFieldArray.includes(key) && OpObjectValue(opVal[key], `${key}`)}

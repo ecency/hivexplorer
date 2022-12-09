@@ -58,7 +58,6 @@ const Index = (props: PageProps) => {
   //         }
   //       })
   //     })
-  //     console.log(user_data)
   //     setUsers(user_data)
   //   });
   // }, []);
@@ -176,7 +175,7 @@ const Index = (props: PageProps) => {
         <Row>
           <Col md={6}>
           <div style={{ verticalAlign: 'center'}}>
-          <Form  className="m-0 search-form" onSubmit={()=>console.log('clicked')}>
+          <Form  className="m-0 search-form">
             <Form.Group className=' col-12 p-0'>
               <Form.Control className="rounded"  onChange={(e) => setEnteredValue(e.target.value)} type="text" placeholder="Block, Account, Transaction"/>
             </Form.Group>

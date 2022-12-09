@@ -21,7 +21,6 @@ const JsonField = (props: any) => {
         <>
             {transactionOperations.operations && transactionOperations.operations.map((op: any, index: number) => {
                 const opVal = op.value
-                console.log('required auths', opVal.required_posting_auths)
                 return (
                     <table className={currTheme === "day" ? 'json-table json-table-day' : 'json-table json-table-night'} key={index}>
                         <tbody>
@@ -43,7 +42,6 @@ const JsonField = (props: any) => {
                                             {Object.keys(opVal).map((item: string) => {
                                                 return (
                                                     <>
-                                                        {console.log(item, typeof (item), userType.includes(item))}
                                                         {typeof (item) === "string" && userType.includes(item) ?
                                                             <tr>
                                                                 <td>{_t(`trans_table.${item}`)}</td>

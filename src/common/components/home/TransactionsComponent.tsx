@@ -44,7 +44,6 @@ const HomeTransactions = (props:any) => {
   const [loading, setLoading] = useState(true);
     const [homeTransactions, setHomeTransactions] = useState<HomeTransactionList>([]);
     const HeadBlock = useSelector((state:any) => state.headBlock.head_block_number)
-    console.log("headBlck",HeadBlock)
 
     const userType = [
       "voter",
@@ -104,7 +103,6 @@ const HomeTransactions = (props:any) => {
                         {req_auths && req_auths.length !==0 &&
                         <Col md={12}>{_t('trans_table.req_auths')}: 
                             {req_auths.map((user:string,i:number)=>{
-                               console.log("i",i)
                               return(
                                 <>
                                 <span className={`${i}`} id={`${i}-${user}+${trans.trx_id}`} key={`${user}+${trans.trx_id}`}>
@@ -131,8 +129,6 @@ const HomeTransactions = (props:any) => {
                         </Col>
                         }
                         {transOpVal && Object.keys(transOpVal).map((key,k:number)=>{
-                          
-                           console.log("k",k)
                           return(
                             <>
                             {typeof(key)==="string" && userType.includes(key)?

@@ -83,9 +83,6 @@ const HeadBlockDetail = (props:any) => {
     const themeContrastColor = currTheme === 'day' ? 'black' : 'white';
     const themeBtn = currTheme === 'day' ? 'showmore-btn btn-light' : 'showmore-btn btn-dark';
     useEffect(() => {
-        console.log('---------- HEAD BLOCK DETAIL ----------------')
-        console.log(HeadBlock)
-        console.log('---------------------------------------------')
         // axios.get(url_global).then(response => {
             setResult(HeadBlock)
         // })

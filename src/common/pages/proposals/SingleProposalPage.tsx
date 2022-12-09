@@ -27,11 +27,8 @@ const SingleProposalPage = (props: any) => {
     let find_proposal = getSingleProposal(proposalId)
     const [entry, setEntry] = useState<EntryType>()
     useEffect(() => {
-
-        console.log(find_proposal)
         axios.get(find_proposal).then(res => {
             setSingleProposal(res.data.proposals)
-
         })
     }, [])
     useEffect(() => {

@@ -74,7 +74,6 @@ const UserHistory = (props:any) => {
             <table className="authority-table">
                 <tbody>
                 {Object.keys(ownerHistory[0]).map((key:any,i:number)=>{
-                    console.log(key,typeof(ownerHistory[0][key]))
                     return(
                       <>
                         {/* {authority!=="memo_key"? 
