@@ -6,7 +6,12 @@ import { routerMiddleware } from "connected-react-router";
 import rootReducer, { AppState, history } from "./index";
 
 const enhancers = [];
-let middleware: Middleware[] = [thunk, logger];
+
+let middleware: Middleware[] = [thunk];
+
+if (process.env.NODE_ENV === "development") {
+  middleware = [...middleware, logger]
+}
 
 // history is active only client side
 if (history) {

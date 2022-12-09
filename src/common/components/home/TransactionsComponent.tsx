@@ -132,8 +132,8 @@ const HomeTransactions = (props: any) => {
                           <>
                             <span
                               className={`${i}`}
-                              id={`${i}-${user}+${trans.trx_id}`}
-                              key={`${user}+${trans.trx_id}`}
+                              id={`${i}-${user}-${trans.trx_id}`}
+                              key={`${user}-${trans.trx_id}-${i}`}
                             >
                               <img
                                 className="avatar-img"
@@ -158,8 +158,8 @@ const HomeTransactions = (props: any) => {
                           <>
                             <span
                               className={`${j}`}
-                              id={`${user}+${trans.trx_id}`}
-                              key={`${user}-${trans.op.type}+${trans.trx_id}`}
+                              id={`${user}-${trans.trx_id}-${j}`}
+                              key={`${user}-${trans.op.type}-${trans.trx_id}-${j}`}
                             >
                               <img
                                 className="avatar-img"
