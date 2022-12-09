@@ -1,6 +1,6 @@
-import capitalize from './capitalize';
+import capitalize from "./capitalize";
 // import { _t } from '../i18n';
-import defaults from '../constants/defaults.json';
+import defaults from "../constants/defaults.json";
 
 export function getMetaProps<T extends Record<string, any>>({ global, activeUser }: T) {
   const { filter, tag } = global;
@@ -10,10 +10,10 @@ export function getMetaProps<T extends Record<string, any>>({ global, activeUser
   // let description = _t('entry-index.description', { f: fC });
   let url = `/${filter}`;
   let canonical = `${defaults.base}/${filter}`;
-  let rss = '';
+  let rss = "";
 
   if (tag) {
-    if (tag.startsWith('@')) {
+    if (tag.startsWith("@")) {
       // title = `${tag}'s ${filter} on decentralized web`;
       // description = _t('entry-index.description-user-feed', { u: tag });
       canonical = `${defaults.base}/@${tag}/${filter}`;

@@ -1,8 +1,8 @@
-import { LocationChangeAction } from '../common';
+import { LocationChangeAction } from "../common";
 
 export enum Theme {
-  day = 'day',
-  night = 'night',
+  day = "day",
+  night = "night"
 }
 
 export interface Global {
@@ -12,8 +12,8 @@ export interface Global {
 }
 
 export enum ActionTypes {
-  THEME_CHANGE = '@global/THEME_CHANGE',
-  LANG_SET = '@global/LANG_SET',
+  THEME_CHANGE = "@global/THEME_CHANGE",
+  LANG_SET = "@global/LANG_SET"
 }
 
 export interface LangSetAction {
