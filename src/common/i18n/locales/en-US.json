@@ -1,4 +1,8 @@
 {
+  "g": {
+    "when": "When",
+    "price": "Price"
+  },
   "nav": {
     "blockchain": "Blockchain",
     "tokens": "Tokens",
