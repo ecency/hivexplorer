@@ -1,10 +1,10 @@
-import { combineReducers } from 'redux';
-import { connectRouter } from 'connected-react-router';
-import { createBrowserHistory, History } from 'history';
+import { combineReducers } from "redux";
+import { connectRouter } from "connected-react-router";
+import { createBrowserHistory, History } from "history";
 
-import global from './global';
-import persistentPageScroll from './persistent-page-scroll';
-import headBlock from './HeadBlock';
+import global from "./global";
+import persistentPageScroll from "./persistent-page-scroll";
+import headBlock from "./HeadBlock";
 
 export let history: History | undefined;
 
@@ -15,7 +15,7 @@ let reducers = {
 };
 
 // create browser history on client side
-if (typeof window !== 'undefined') {
+if (typeof window !== "undefined") {
   // web
   history = createBrowserHistory();
 
@@ -28,7 +28,7 @@ if (typeof window !== 'undefined') {
 
   let prevPath: string = history.location.pathname;
   // update previous path once history change
-  history.listen(location => {
+  history.listen((location) => {
     prevPath = location.pathname;
   });
 
@@ -38,14 +38,14 @@ if (typeof window !== 'undefined') {
     if (pathname === prevPath) {
       return;
     }
-    _push(pathname.includes('//') ? '/' : pathname, state);
-  }
+    _push(pathname.includes("//") ? "/" : pathname, state);
+  };
 
   // scroll to top on every push action
   history.listen((location, action) => {
-    if (action === 'PUSH') {
+    if (action === "PUSH") {
       // Don't scroll to top with anchor links
-      if (history!.location.hash !== '') {
+      if (history!.location.hash !== "") {
         return;
       }
 

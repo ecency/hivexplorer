@@ -1,6 +1,24 @@
 @import '../../../style/colors';
 .api-page-container{
-
+    .search-field{
+        width: 500px;
+        display: flex;
+        margin: auto;
+        margin-bottom: 25px;
+        ::before{
+            display: none ;
+        }
+        input{
+            padding: 10px !important;
+        }
+        .MuiInputBase-input {
+            border: 1px solid #e0e0e0 !important;
+         
+        }
+        @media (max-width:768px){
+            width: 100%;
+        }
+    }
     .accordion{
         .accordion-body{
             word-break: break-all;
@@ -29,9 +47,9 @@
             &:focus{
                 box-shadow: none !important;
             }
-            &::after{
-                display: none;
-            }
+            // &::after{
+            //     display: none;
+            // }
         }
         &.accordion-day{
             .accordion-header{
@@ -58,7 +76,8 @@
                     background: $dark-grey-blue;
                     color: #fff;
                     &::after{
-                        display: none;
+                       
+                       background-image: url('../../img/chevron-down-white.svg') !important;
                     }
                 }   
                 .card-header,.MuiTableCell-body{
@@ -103,4 +122,11 @@
         
     }
 
+}
+.theme-night{
+    .api-page-container{
+        .search-field{
+            background-color: #e0e0e0;
+        }
+    }
 }

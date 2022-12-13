@@ -7,4 +7,4 @@ export const parseUrl = (s: string): URL | null => {
   } catch (e) {
     return null;
   }
-}
+};

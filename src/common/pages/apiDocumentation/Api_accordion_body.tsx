@@ -8,6 +8,8 @@ import { _t } from '../../i18n';
 
 const Api_accordion_body = (props: any) => {
     const {description,parameter,response,url,end_point}=props
+
+
     return (
         <>
             <div>
@@ -31,7 +33,7 @@ const Api_accordion_body = (props: any) => {
                 {response && 
                     <>
                         <h6>{_t('api_documentation.example_response')}</h6>
-                        <pre className='api-response'>{response}</pre>
+                        <pre className='api-response'>{atob(response)}</pre>
                     </>
                 }
     
@@ -40,7 +42,7 @@ const Api_accordion_body = (props: any) => {
                 <>
                    <p
                 className="body text-p"
-                dangerouslySetInnerHTML={{ __html: `${parameter}`}}
+                dangerouslySetInnerHTML={{ __html: `${atob(parameter)}`}}
                 />
                 </>: 
                 <p className='text-p'>None</p>}

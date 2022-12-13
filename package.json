@@ -6,6 +6,9 @@
   "scripts": {
     "start": "razzle start",
     "build": "razzle build --noninteractive",
+    "prepare": "husky install",
+    "format": "prettier --ignore-unknown --write './src/**/**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
+    "precommit": "lint-staged",
     "test": "TZ=UTC razzle test --env=jsdom",
     "start:prod": "NODE_ENV=production node build/server.js"
   },
@@ -16,7 +19,6 @@
     "@loadable/server": "^5.15.2",
     "@material-ui/core": "^4.12.4",
     "@material-ui/icons": "^4.11.3",
-    "@types/swagger-ui-react": "^4.11.0",
     "axios": "^0.27.2",
     "bootstrap": "^5.2.0",
     "connected-react-router": "^6.8.0",
@@ -52,7 +54,6 @@
     "redux-thunk": "^2.3.0",
     "serialize-javascript": "^3.1.0",
     "styled-components": "^5.3.5",
-    "swagger-ui-react": "^4.15.5",
     "xss": "^1.0.8"
   },
   "devDependencies": {
@@ -86,10 +87,13 @@
     "babel-preset-razzle": "^4.0.5",
     "flag-icon-css": "^4.1.7",
     "html-webpack-plugin": "4.5.2",
+    "husky": "^8.0.2",
     "jest": "^26.0.0",
+    "lint-staged": "^13.1.0",
     "mini-css-extract-plugin": "0.9.0",
     "mockdate": "^3.0.2",
     "postcss": "8.2.13",
+    "prettier": "^2.8.1",
     "razzle": "^4.0.5",
     "razzle-dev-utils": "^4.0.5",
     "razzle-plugin-scss": "^4.0.5",
@@ -106,6 +110,11 @@
   "resolutions": {
     "jest": "^26.0.0",
     "@types/react": "^16.8.23"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,css,md,json}": [
+      "yarn format"
+    ]
   },
   "jest": {
     "transform": {

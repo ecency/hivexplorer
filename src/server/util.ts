@@ -1,38 +1,44 @@
-import axios, { AxiosRequestConfig, AxiosResponse, Method } from 'axios';
+import axios, { AxiosRequestConfig, AxiosResponse, Method } from "axios";
 
-import { Response } from 'express';
+import { Response } from "express";
 
 export const pipe = (promise: Promise<AxiosResponse>, res: Response) => {
-  promise.then(r => {
-    res.status(r.status).send(r.data);
-  }).catch(() => {
-    res.status(500).send('Server Error');
-  });
+  promise
+    .then((r) => {
+      res.status(r.status).send(r.data);
+    })
+    .catch(() => {
+      res.status(500).send("Server Error");
+    });
 };
 
-export const baseApiRequest = (url: string, method: Method, headers: any = {}, payload: any = {}): Promise<AxiosResponse> => {
+export const baseApiRequest = (
+  url: string,
+  method: Method,
+  headers: any = {},
+  payload: any = {}
+): Promise<AxiosResponse> => {
   const requestConf: AxiosRequestConfig = {
     url,
     method,
     validateStatus: () => true,
-    responseType: 'json',
+    responseType: "json",
     headers: { ...headers },
     data: { ...payload }
-  }
+  };
 
-  return axios(requestConf)
-}
-
+  return axios(requestConf);
+};
 
 export const cleanURL = (req: any, res: any, next: any) => {
-  if (req.url.includes('//')) {
-    res.redirect(req.url.replace(new RegExp('/{2,}', 'g'), '/'));
+  if (req.url.includes("//")) {
+    res.redirect(req.url.replace(new RegExp("/{2,}", "g"), "/"));
   }
-  if (req.url.includes('@@')) {
-    res.redirect(req.url.replace(new RegExp('@{2,}', 'g'), '@'));
+  if (req.url.includes("@@")) {
+    res.redirect(req.url.replace(new RegExp("@{2,}", "g"), "@"));
   }
   if (req.url !== req.url.toLowerCase()) {
-    if (!req.url.includes('/api/')) {
+    if (!req.url.includes("/api/")) {
       res.redirect(301, req.url.toLowerCase());
     } else {
       next();
@@ -40,22 +46,21 @@ export const cleanURL = (req: any, res: any, next: any) => {
   } else {
     next();
   }
-}
+};
 
 export const stripLastSlash = (req: any, res: any, next: any) => {
-  if (req.path.substr(-1) === '/' && req.path.length > 1) {
+  if (req.path.substr(-1) === "/" && req.path.length > 1) {
     let query = req.url.slice(req.path.length);
     res.redirect(301, req.path.slice(0, -1) + query);
   } else {
     next();
   }
-}
+};
 
-export const DecodeJson=(meta:string)=>{
-  try{
-    return JSON.parse(meta)
+export const DecodeJson = (meta: string) => {
+  try {
+    return JSON.parse(meta);
+  } catch {
+    return {};
   }
-  catch{
-    return {}
-  }
-}
+};

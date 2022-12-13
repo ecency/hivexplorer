@@ -1,21 +1,14 @@
-import Cookies from 'js-cookie';
-import { Dispatch } from 'redux';
-import defaults from '../../constants/defaults.json';
-import { AppState } from '../index';
-import {
-  Actions,
-  ActionTypes,
-  Global,
-  LangSetAction,
-  Theme,
-  ThemeChangeAction,
-} from './types';
-import * as ls from '../../util/local-storage';
+import Cookies from "js-cookie";
+import { Dispatch } from "redux";
+import defaults from "../../constants/defaults.json";
+import { AppState } from "../index";
+import { Actions, ActionTypes, Global, LangSetAction, Theme, ThemeChangeAction } from "./types";
+import * as ls from "../../util/local-storage";
 
 export const initialState: Global = {
   theme: Theme[defaults.theme],
   isMobile: false,
-  lang: 'en_US',
+  lang: "en_US"
 };
 
 export default (state: Global = initialState, action: Actions): Global => {
@@ -34,43 +27,41 @@ export default (state: Global = initialState, action: Actions): Global => {
 };
 
 /* Actions */
-export const toggleTheme = (theme_key?: Theme) => (
-  dispatch: Dispatch,
-  getState: () => AppState
-) => {
-  const { global } = getState();
+export const toggleTheme =
+  (theme_key?: Theme) => (dispatch: Dispatch, getState: () => AppState) => {
+    const { global } = getState();
 
-  const { theme, isMobile } = global;
-  let newTheme: any = theme === Theme.day ? Theme.night : Theme.day;
+    const { theme, isMobile } = global;
+    let newTheme: any = theme === Theme.day ? Theme.night : Theme.day;
 
-  if (!!theme_key) {
-    newTheme = theme_key;
-  }
+    if (!!theme_key) {
+      newTheme = theme_key;
+    }
 
-  ls.set('theme', newTheme);
-  Cookies.set('theme', newTheme);
+    ls.set("theme", newTheme);
+    Cookies.set("theme", newTheme);
 
-  dispatch(themeChangeAct(newTheme));
-  if (isMobile) {
-    let body: any = document.getElementsByTagName('body');
-    if (!body) return;
-    body = body[0];
-    body.classList.remove(`theme-${theme}`);
-    body.classList.add(`theme-${newTheme}`);
-  }
-};
+    dispatch(themeChangeAct(newTheme));
+    if (isMobile) {
+      let body: any = document.getElementsByTagName("body");
+      if (!body) return;
+      body = body[0];
+      body.classList.remove(`theme-${theme}`);
+      body.classList.add(`theme-${newTheme}`);
+    }
+  };
 
 /* Action Creators */
 export const themeChangeAct = (theme: Theme): ThemeChangeAction => {
   return {
     type: ActionTypes.THEME_CHANGE,
-    theme,
+    theme
   };
 };
 
 export const setLangAct = (lang: string): LangSetAction => {
   return {
     type: ActionTypes.LANG_SET,
-    lang,
+    lang
   };
 };
