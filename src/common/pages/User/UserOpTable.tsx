@@ -6,6 +6,7 @@ import { AuthorityObject } from "./UserAuthorities";
 import { object } from "prop-types";
 import { DecodeJson } from "../../../server/util";
 import { Card } from "react-bootstrap";
+import { LinkAccount, ObjectFieldArray, StringFieldArray } from "../fields/common_fields";
 
 const TransactionOperationTable = (props: any) => {
   const { opTrans } = props;
@@ -16,6 +17,8 @@ const TransactionOperationTable = (props: any) => {
   const opPermlink = opVal.permlink;
   const opCommentAuth = opVal.comment_author;
   const opCommentPermlink = opVal.comment_permlink;
+  const opParentAuth = opVal.parent_author;
+  const opParentPermlink = opVal.parent_permlink;
 
   const opPayoutClaim = opVal.payout_must_be_claimed;
   const opJson = opVal.json;
@@ -38,62 +41,6 @@ const TransactionOperationTable = (props: any) => {
   const currTheme = useSelector((state: any) => state.global.theme);
   const OpValArray = new Array();
   OpValArray.push(opRewardHive, opVestShare);
-
-  const LinkAccount = [
-    "current_owner",
-    "voter",
-    "open_owner",
-    "producer",
-    "publisher",
-    "creator",
-    "from",
-    "to",
-    "comment_author"
-  ];
-
-  const StringFieldArray = [
-    "id",
-    "opCurator",
-    "author",
-    "benefactor",
-    "weight",
-    "rshares",
-    "total_vote_weight",
-    "account",
-    "json_meta",
-    "memo",
-    "author_rewards",
-    "open_orderid",
-    "current_orderid",
-    "fill_or_kill",
-    "expiration",
-    "orderid"
-  ];
-
-  const ObjectFieldArray = [
-    "vesting_shares",
-    "reward",
-    "amount",
-    "reward_hive",
-    "hbd_payout",
-    "fee",
-    "pending_payout",
-    "reward_hbd",
-    "reward_vests",
-    "hive_payout",
-    "vesting_payout",
-    "total_payout_value",
-    "curator_payout_value",
-    "beneficiary_payout_value",
-    "curators_vesting_payout",
-    "initial_vesting_shares",
-    "initial_delegation",
-    "amount_back",
-    "current_pays",
-    "open_pays",
-    "min_to_receive",
-    "amount_to_sell"
-  ];
 
   function OpObjectValue(field: any, name: string) {
     return (
@@ -211,6 +158,16 @@ const TransactionOperationTable = (props: any) => {
                             <td>
                               <Link to={`/@${opCommentAuth}/${opCommentPermlink}`}>
                                 {opCommentPermlink}
+                              </Link>
+                            </td>
+                          </tr>
+                        )}
+                        {opParentPermlink && (
+                          <tr>
+                            <td>{_t(`trans_table.parent_permlink`)}</td>
+                            <td>
+                              <Link to={`/@${opParentAuth}/${opParentPermlink}`}>
+                                {opParentPermlink}
                               </Link>
                             </td>
                           </tr>
