@@ -234,7 +234,6 @@ const ObjectField = (props: any) => {
                           <td>{type}</td>
                         </tr>
                         {Object.keys(opVal).map((val:any,i:number)=>{
-                          console.log(val)
                           return(
                           <>
                           {typeof(opVal[val]) !== 'object' && opVal[val]!=="" ?
