@@ -60,7 +60,6 @@ const UserPage = (props: any) => {
   };
   const [ownerHistory, setOwnerHistory] = useState([]);
   const [userId, setUserId] = useState(match.params.user_id);
-  const account_url = getAccount(userId);
   const rc_account_url = getRCAccount(userId);
   const owner_history_url = getOwnerHistory(userId);
   useEffect(() => {

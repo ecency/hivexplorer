@@ -3,13 +3,11 @@ import { ConfigItems } from "../../../config";
 
 // Get witness Account
 export const getAccount = async (user: string) => {
-  const account_url = `${ConfigItems.baseUrl}/api/get_accounts?name[]=${user}`;
+  const account_url = `${ConfigItems.baseUrl}/api/get_accounts?names=["${user}"]`;
   const r = await axios.get(account_url);
   return r.data;
 };
-export const getFundAccount = (user: string) => {
-  return `${ConfigItems.baseUrl}/api/get_accounts?name[]=${user}`;
-};
+
 // Get RC Account
 export const getRCAccount = (user: string) => {
   return `${ConfigItems.baseUrl}/api/find_rc_accounts?accounts[]=${user}`;

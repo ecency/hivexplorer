@@ -8,7 +8,7 @@ import { Container } from "react-bootstrap";
 import { TextField } from "@material-ui/core";
 import ProposalCard from "./ProposalCard";
 import "./proposalsPage.scss";
-import { getAccount, getFundAccount, getProposals } from "../../api/urls";
+import { getAccount, getProposals } from "../../api/urls";
 import parseAsset from "../../helper/parse-asset";
 import numeral from "numeral";
 import { _t } from "../../i18n";
@@ -107,11 +107,11 @@ const ProposalsPage = (props: any) => {
 
   let eligible: any;
   useEffect(() => {
-    const fund = getFundAccount("hive.fund");
+    
     eligible = allProposals?.filter((x: proposalsType) => x.status !== "expired");
     inactiveProposals = allProposals?.filter((x: proposalsType) => x.status === "expired");
-    axios.get(fund).then((resp) => {
-      const totalBudgetCount = parseAsset(resp.data[0].hbd_balance).amount;
+    getAccount("hive.fund").then((resp) => {
+      const totalBudgetCount = parseAsset(resp[0].hbd_balance).amount;
       setTotalBudget(totalBudgetCount);
       setDailyBudget(totalBudgetCount / 100);
       let _thresholdProposalId: any = null;
