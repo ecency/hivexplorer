@@ -3,13 +3,11 @@ import { ConfigItems } from "../../../config";
 
 // Get witness Account
 export const getAccount = async (user: string) => {
-  const account_url = `${ConfigItems.baseUrl}/api/get_accounts?name[]=${user}`;
+  const account_url = `${ConfigItems.baseUrl}/api/get_accounts?names=["${user}"]`;
   const r = await axios.get(account_url);
   return r.data;
 };
-export const getFundAccount = (user: string) => {
-  return `${ConfigItems.baseUrl}/api/get_accounts?name[]=${user}`;
-};
+
 // Get RC Account
 export const getRCAccount = (user: string) => {
   return `${ConfigItems.baseUrl}/api/find_rc_accounts?accounts[]=${user}`;
@@ -60,6 +58,7 @@ export const getTransactions = async (block_num: number) => {
 // Get Single Transaction
 export const getSingleTransaction = async (transaction_id: number) => {
   const url_single_transaction = `${ConfigItems.baseUrl}/api/get_transaction?trx_id=${transaction_id}`;
+  console.log(url_single_transaction)
   const r = await axios.get(url_single_transaction);
   return r.data;
 };

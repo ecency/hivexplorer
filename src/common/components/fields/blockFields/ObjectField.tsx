@@ -11,6 +11,7 @@ import JsonMetadata from "../../EntryContent/JsonMetadata";
 import { Date_time_table } from "../../../api/dateTime";
 import TransactionOperationTable from "../../../pages/User/UserOpTable";
 import DefaultImage from "../../../img/default-avatar.png";
+import { LinkAccount } from "../../../pages/fields/common_fields";
 
 const timestampKeys = [
   "time",
@@ -39,6 +40,10 @@ interface opValType {
   json: string;
   author: string;
   permlink: string;
+  comment_author:string;
+  comment_permlink:string;
+  parent_author:string;
+  parent_permlink:string;
   weight: number | string;
 }
 interface transactionType {
@@ -222,49 +227,92 @@ const ObjectField = (props: any) => {
                   const type: string = val[0];
                   const opVal: opValType = val[1];
                   return (
-                    <table key={i} className="time-date-table">
+                    <table key={i+type} className="time-date-table">
                       <tbody>
                         <tr>
                           <td>{_t("trans_table.type")}</td>
                           <td>{type}</td>
                         </tr>
-
-                        {opVal.id && (
-                          <tr>
-                            <td>{_t("trans_table.id")}</td>
-                            <td>{opVal.id}</td>
+                        {Object.keys(opVal).map((val:any,i:number)=>{
+                          return(
+                          <>
+                          {typeof(opVal[val]) !== 'object' && opVal[val]!=="" ?
+                          <tr key={i+val+type}>
+                            <td>{_t(`trans_table.${val}`)}</td>
+                            <td>
+                              {LinkAccount.includes(val)?
+                                <>
+                                <img
+                                    className="avatar-img"
+                                    src={`https://images.ecency.com/u/${opVal[val]}/avatar`}
+                                    alt=""
+                                  />
+                                  <Link to={`/@${opVal[val]}`}>{opVal[val]}</Link>
+                                </>
+                                : 
+                                val==='permlink' ? <Link to={`/@${opVal.author}/${opVal.permlink}`}>{opVal.permlink}</Link>
+                                :
+                                val==='comment_permlink' ? <Link to={`/@${opVal.comment_author}/${opVal.comment_permlink}`}>{opVal.comment_permlink}</Link>
+                                :
+                                val==='parent_permlink' ? <Link to={`/@${opVal.parent_author}/${opVal.parent_permlink}`}>{opVal.parent_permlink}</Link>
+                                :
+                                opVal[val]
+                              }</td>
                           </tr>
-                        )}
-                        {opVal.json && (
-                          <tr>
-                            <td>{_t("trans_table.json")}</td>
-                            <td>{opVal.json}</td>
+                          :
+                          typeof(opVal[val]) === 'object' && opVal[val].length!==0 ?
+                          val==="required_auths" || val==="required_posting_auths" ?
+                          <tr  key={i+val+type}>
+                            <td>{_t(`trans_table.${val}`)}</td>
+                            <td>
+                              <img
+                                  className="avatar-img"
+                                  src={`https://images.ecency.com/u/${opVal[val][0]}/avatar`}
+                                  alt=""
+                                />
+                              <Link to={`/@${opVal[val][0]}`}> {opVal[val][0]}</Link>
+                            </td>
                           </tr>
-                        )}
-                        {opVal.voter && (
-                          <tr>
-                            <td>{_t("trans_table.voter")}</td>
-                            <td>{opVal.voter}</td>
-                          </tr>
-                        )}
-                        {opVal.author && (
-                          <tr>
-                            <td>{_t("trans_table.author")}</td>
-                            <td>{opVal.author}</td>
-                          </tr>
-                        )}
-                        {opVal.permlink && (
-                          <tr>
-                            <td>{_t("trans_table.permlink")}</td>
-                            <td>{opVal.permlink}</td>
-                          </tr>
-                        )}
-                        {opVal.weight && (
-                          <tr>
-                            <td>{_t("trans_table.weight")}</td>
-                            <td>{opVal.weight}</td>
-                          </tr>
-                        )}
+                          :
+                          val==="props" ? 
+                          <tr key={i+val+type}>
+                          <td>{_t(`trans_table.${val}`)}</td>
+                          <td>
+                              <table>
+                                <tbody>
+                                {Object.keys(opVal[val]).map((item:any,j:number)=>{
+                                  return(
+                                    <tr key={j+item}>
+                                      <td>{_t(`trans_table.${opVal[val][item][0]}`)}</td>
+                                      <td>{opVal[val][item][1]}</td>
+                                    </tr>
+                                    )
+                                  })}
+                                </tbody>
+                              </table>
+                          </td>
+                        </tr>
+                          :
+                          <tr key={i+val+type}>
+                            <td>{_t(`trans_table.${val}`)}</td>
+                            <td>
+                                <table>
+                                  <tbody>
+                                  {Object.keys(opVal[val]).map((item:any,j:number)=>{
+                                    return(
+                                      <tr key={j+item}>
+                                        <td>{_t(`trans_table.${item}`)}</td>
+                                        <td>{opVal[val][item]}</td>
+                                      </tr>
+                                      )
+                                    })}
+                                  </tbody>
+                                </table>
+                            </td>
+                          </tr>:<></>}
+                          </>
+                          )
+                        })}
                       </tbody>
                     </table>
                   );
