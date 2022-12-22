@@ -434,8 +434,8 @@
     "active_votes":"Active Votes"
   },
   "api_documentation":{
-    "page_title":"Hive APIs",
-    "page_welcome":"<h2><a id='introduction-welcome'>Welcome to Hive</a></h2> <h4 id='welcome-to-the-hive-developer-portal'>Welcome to the Hive Developer Portal!</h4><p>This site is designed to aid those interested in developing applications on the  <strong><a href='https://hive.io' target='_blank'>Hive</a></strong> blockchain.</p><p>If you don’t know about Hive yet, visit <a href='https://hive.io'>hive.io</a>.</p><p>The code for this site is on <a href='https://gitlab.syncad.com/hive/devportal'>gitlab</a>. If you’d like to see a specific improvementyou can either submit a pull request or file an issue. Please follow our<a href='https://gitlab.syncad.com/hive/devportal/-/blob/develop/CONTRIBUTING.md'>contribution guidelines</a></p>",
+    "page_title":"Hivexplorer API",
+    "page_welcome":"<p>This site is designed to aid those interested in developing applications on the <strong><a href='https://hive.io' target='_blank'>Hive</a></strong> blockchain. REST API for quickly accessing data on Hive.</p><p>The code for this site is on <a href='https://github.com/ecency/hivexplorer'>github</a>. If you’d like to see a specific improvement, you can either submit a pull request or file an issue.</p>",
     "example_url":"Example URL:",
     "example_response":"Example Response:",
     "example_end_point":"Example End Point:",

@@ -14,7 +14,7 @@ import BridgeAPIpart from './APIitems/bridge_apis';
 import BlockAPIpart from './APIitems/block_apis';
 import RcAPIpart from './APIitems/rc_apis';
 import AccountHistoryAPIpart from './APIitems/account_history_apis';
-import { TextField } from '@material-ui/core';
+import { TextField, LinearProgress } from '@material-ui/core';
 import MarketHistoryAPIpart from './APIitems/market_history_apis';
 import SpinnerEffect from '../../components/loader/spinner';
 import NetworkBroadcastAPIpart from './APIitems/network_broadcast_apis';
@@ -96,13 +96,6 @@ const APIdocumentation = (props: PageProps) => {
 
     <Theme global={props.global} />
     <Container className="data-table-hive api-page-container py-5">
-      <TextField
-        id="outlined-basic"
-        className="search-field"
-        onChange={inputHandler}
-        fullWidth={false}
-        placeholder={`${_t("heading_label.search_apis")}`}
-      />
       <div className="witness-header">
         <h1>{_t('api_documentation.page_title')}</h1>
         <div
@@ -110,8 +103,16 @@ const APIdocumentation = (props: PageProps) => {
           dangerouslySetInnerHTML={{ __html: _t('api_documentation.page_welcome') }}
         />
       </div>
-      {loading && <SpinnerEffect />}
-      {!loading && filterVal &&
+      <TextField
+        id="outlined-basic"
+        className="search-field"
+        onChange={inputHandler}
+        fullWidth={false}
+        type="search"
+        placeholder={`${_t("heading_label.search_apis")}`}
+      />
+      {loading && <LinearProgress />}
+      {filterVal &&
         <>
           <br />
           <BlockAPIpart blockAPIs={...blockAPI} />
