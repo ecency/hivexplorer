@@ -90,6 +90,21 @@
     #user-tabpanel-2{
         margin-left: -20px !important;
         margin-right: -20px !important;
+    }
+    .user-tabs{
+        .MuiTabs-fixed{
+            overflow-x: scroll !important;
+            width: auto !important;
+        }
+        ::-webkit-scrollbar{
+            height: 0px !important;
+            width: 0px !important;
+        }
+        ::-webkit-scrollbar-track{
+            box-shadow:none !important ;
+        }
+    }
+    .user-info-card-body{
         overflow-x: auto;
     }
     .trans-card{

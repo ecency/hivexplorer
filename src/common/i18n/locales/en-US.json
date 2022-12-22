@@ -48,6 +48,7 @@
     "authorities": "Authorities",
     "transaction_num": "Trx No",
     "user_names": "User Names",
+    "owner_history":"Owner History",
     "no_search_result": "No record found against searched input."
   },
   "block": {

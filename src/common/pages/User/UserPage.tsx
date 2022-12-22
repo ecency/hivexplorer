@@ -147,7 +147,7 @@ const UserPage = (props: any) => {
                 {/* Tabs view Section */}
                 <Card className="user-card">
                   <Card.Header className="p-0">
-                    <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
+                    <Tabs className="user-tabs" value={value} onChange={handleChange} aria-label="simple tabs example">
                       <Tab label={_t("common.info")} {...a11yProps(0)} />
                       <Tab label={_t("common.transaction")} {...a11yProps(1)} />
                       <Tab label={_t("common.authorities")} {...a11yProps(2)} />
@@ -156,7 +156,7 @@ const UserPage = (props: any) => {
                       )}
                     </Tabs>
                   </Card.Header>
-                  <Card.Body className="py-0">
+                  <Card.Body className="py-0 user-info-card-body">
                     <TabPanel value={value} index={0}>
                       {Object.keys(user).map((k, index) => {
                         return typeof user[k] !== "object" && typeof user[k] !== "boolean" ? (
