@@ -170,11 +170,7 @@ export const methods = [
     api: "condenser_api",
     method: "get_accounts",
     params: ["names"],
-<<<<<<< HEAD
-    
-=======
     isArray: true
->>>>>>> develop
   },
   {
     api: "condenser_api",
