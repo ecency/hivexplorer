@@ -48,6 +48,7 @@
     "authorities": "Authorities",
     "transaction_num": "Trx No",
     "user_names": "User Names",
+    "owner_history": "Owner History",
     "no_search_result": "No record found against searched input."
   },
   "block": {
@@ -320,7 +321,13 @@
     "initial_vesting_shares": "Initial Vesting Shares",
     "initial_delegation": "Initial Delegation",
     "to_player": "To Player",
-    "from_player": "From Player"
+    "from_player": "From Player",
+    "parent_author": "Parent Author",
+    "parent_permlink": "Parent Permlink",
+    "body": "Body",
+    "json_metadata": "Json Metadata",
+    "hbd_exchange_rate": "HBD Exchange Rate",
+    "key": "Key"
   },
   "witnesses": {
     "id": "ID",
