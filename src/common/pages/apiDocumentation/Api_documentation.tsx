@@ -1,53 +1,32 @@
 import { pageMapDispatchToProps, pageMapStateToProps, PageProps } from '../common';
 import React, { useEffect, useState } from 'react';
 import Theme from '../../components/theme';
-import { connect} from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { withPersistentScroll } from '../../components/with-persistent-scroll';
 import { _t } from '../../i18n';
-import { Container } from 'react-bootstrap';
+import { Accordion, Container } from 'react-bootstrap';
 import './api_documentation.scss'
 import BackToTopButton from '../../components/Buttons/BackToTop';
 import { methods as methodsData } from '../../../server/handlers/methods';
-import CondenserAPIpart from './APIitems/condenser_apis';
-import DatabaseAPIpart from './APIitems/database_apis';
-import BridgeAPIpart from './APIitems/bridge_apis';
-import BlockAPIpart from './APIitems/block_apis';
-import RcAPIpart from './APIitems/rc_apis';
-import AccountHistoryAPIpart from './APIitems/account_history_apis';
 import { TextField, LinearProgress } from '@material-ui/core';
-import MarketHistoryAPIpart from './APIitems/market_history_apis';
-import SpinnerEffect from '../../components/loader/spinner';
-import NetworkBroadcastAPIpart from './APIitems/network_broadcast_apis';
-import TransactionStatusAPIpart from './APIitems/transaction_status_apis';
+import Api_accordion_body from './Api_accordion_body';
 
-
+interface api_item_types {
+  name:string,
+  method:string,
+  description:string,
+  url:string,
+  parameter:string,
+  response:string,
+  end_point:string
+}
 const APIdocumentation = (props: PageProps) => {
   let methods = methodsData
-  const [blockAPI, setBlockAPI] = useState([])
-  const [condenserAPI, setCondenserAPI] = useState([])
-  const [databaseAPI, setDatabaseAPI] = useState([])
-  const [bridgeAPI, setBridgeAPI] = useState([])
-  const [rcAPI, setRcAPI] = useState([])
-  const [accHistoryAPI, setAccHistoryAPI] = useState([])
-  const [marketHistoryAPI, setMarketHistoryAPI] = useState([])
-  const [networkBroadcastAPI, setNetworkBroadcastAPI] = useState([])
-  const [trxStatusAPI, setTrxStatusAPI] = useState([])
+  const currTheme = useSelector((state: any) => state.global.theme)
   const [loading, setLoading] = useState(true);
   const [filterVal, setFilterVal] = useState(true);
-
-
+  const [collection, setCollection] = useState({})
   const [inputText, setInputText] = useState("");
-  let blockRecord: any
-  let condenserRecord: any
-  let DatabaseRecord: any
-  let bridgeRecord: any
-  let RCRecord: any
-  let AccHistoryRecord: any
-  let marketHistoryRecord: any
-  let networkBroadcastRecord: any
-  let TransactionStatusRecord: any
-
-
   let inputHandler = (e: any) => {
     const lowerCase = e.target.value.toLowerCase();
     setInputText(lowerCase);
@@ -66,31 +45,26 @@ const APIdocumentation = (props: PageProps) => {
   });
   useEffect(() => {
     setLoading(true);
+
+
     const timer = setTimeout(() => {
       setLoading(false);
-      blockRecord = filteredWitnessesData.filter((x: any) => x.api === "block_api" )
-      setBlockAPI(blockRecord)
-      condenserRecord = filteredWitnessesData.filter((x: any) => x.api === "condenser_api")
-      setCondenserAPI(condenserRecord)
-      DatabaseRecord = filteredWitnessesData.filter((x: any) => x.api === "database_api")
-      setDatabaseAPI(DatabaseRecord)
-      RCRecord = filteredWitnessesData.filter((x: any) => x.api === "rc_api")
-      setRcAPI(RCRecord)
-      bridgeRecord = filteredWitnessesData.filter((x: any) => x.api === "bridge")
-      setBridgeAPI(bridgeRecord)
-      AccHistoryRecord = filteredWitnessesData.filter((x: any) => x.api === "account_history_api")
-      setAccHistoryAPI(AccHistoryRecord)
-      marketHistoryRecord = filteredWitnessesData.filter((x: any) => x.api === "market_history_api")
-      setMarketHistoryAPI(marketHistoryRecord)
-      networkBroadcastRecord = filteredWitnessesData.filter((x: any) => x.api === "network_broadcast_api")
-      setNetworkBroadcastAPI(networkBroadcastRecord)
-      TransactionStatusRecord = filteredWitnessesData.filter((x: any) => x.api === "transaction_status_api")
-      setTrxStatusAPI(TransactionStatusRecord)
-      let urlCheck=filteredWitnessesData.some((x:any)=>x.hasOwnProperty('url'))
+      let data = ["block_api", "condenser_api", "database_api", "rc_api", "bridge", "account_history_api", "market_history_api", "network_broadcast_api", "transaction_status_api"]
+      let data3 = {}
+      data.map((api) => {
+        data3 = {
+          ...data3,
+          ...{ [api]: filteredWitnessesData.filter((x: any) => x.api === api) }
+        }
+        return
+      })
+      setCollection(data3)
+      let urlCheck = filteredWitnessesData.some((x: any) => x.hasOwnProperty('url'))
       setFilterVal(urlCheck)
     }, 1000);
     return () => clearTimeout(timer);
   }, [inputText])
+
 
   return <>
 
@@ -112,28 +86,44 @@ const APIdocumentation = (props: PageProps) => {
         placeholder={`${_t("heading_label.search_apis")}`}
       />
       {loading && <LinearProgress />}
-      {filterVal &&
-        <>
-          <br />
-          <BlockAPIpart blockAPIs={...blockAPI} />
-          <br />
-          <AccountHistoryAPIpart accHistoryApis={...accHistoryAPI} />
-          <br />
-          <CondenserAPIpart condenserAPIs={...condenserAPI} />
-          <br />
-          <DatabaseAPIpart databaseAPIs={...databaseAPI} />
-          <br />
-          <RcAPIpart RcAPIs={...rcAPI} />
-          <br />
-          <BridgeAPIpart bridgeAPIs={...bridgeAPI} />
-          <br />
-          <MarketHistoryAPIpart marketHistoryApis={...marketHistoryAPI} />
-          <br />
-          <NetworkBroadcastAPIpart networkBroadcastAPIs={...networkBroadcastAPI} />
-          <br />
-          <TransactionStatusAPIpart transactionStatusAPIs={...trxStatusAPI}  />
-        </>}
-        {!loading && !filterVal && <h3 className='py-2 text-center'>No Result</h3>}
+      <>{!loading && filterVal && Object.keys(collection).map((api, i: number) => {
+        const urlCheck = collection[api].some((item: any) => item.hasOwnProperty('url'))
+        return (
+          <>
+            {collection[api].length !== 0 && urlCheck && <div key={i + api} className='py-2 api-blocks'>
+              <div >
+                <h1>{_t(`${api}.title`)}</h1>
+                <p>{_t(`${api}.description`)}</p>
+              </div>
+              <Accordion className={currTheme === "day" ? "accordion-day" : "accordion_night"} alwaysOpen={true}>
+                {collection[api].map((item: api_item_types, i: number) => {
+                  return (
+                    <>
+                      {item.url && <Accordion.Item key={i + item.method} eventKey={`${i}`} >
+                        <Accordion.Header>
+                          <span>{item.method}</span>
+                        </Accordion.Header>
+                        <Accordion.Body>
+                          <Api_accordion_body
+                            description={item.description}
+                            response={item.response}
+                            url={item.url}
+                            end_point={item.end_point}
+                            parameter={item.parameter}
+                          />
+                        </Accordion.Body>
+                      </Accordion.Item>}
+                    </>
+                  )
+                })}
+              </Accordion>
+            </div>
+            }
+          </>
+        )
+      })}
+      </>
+      {!loading && !filterVal && <h3 className='py-2 text-center'>No Result</h3>}
     </Container>
     <BackToTopButton />
   </>;

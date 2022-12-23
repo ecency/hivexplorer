@@ -441,7 +441,7 @@
     "example_end_point":"Example End Point:",
     "parameters":"Parameters:"
   },
-  "api_blocks":{
+  "block_api":{
     "title":"Blocks",
     "description":"Used to query values related to the block plugin. These AppBase API methods are still under development and subject to change.",
     "head_block":"Head Block (Global Dynamic Properties)",
@@ -469,39 +469,47 @@
     "find_proposals":"Find Proposals (By ID)",
     "find_proposals_description":"Finds proposals by proposal.id (not proposal.proposal_id)."
   },
-  "api_condenser":{
-    "title":"condenser API",
+  "condenser_api":{
+    "title":"Condenser API",
     "description":"All calls in condenser_api will return [] as the argument, as the array argument passing is opaque and implemented in the API calls themselves. They follow the current argument formatting. Existing apps should only need to skip using login_api and send all of their calls to condenser_api without any other changes required to use Appbase.",
-    "get_active_votes_description":"Returns all votes for the given post."
+    "get_active_votes_description":"Returns all votes for the given post.",
+    "get_witnesses_by_vote_description":"Returns current witnesses by vote. "
 
   },
-  "api_account_history":{
+  "account_history_api":{
     "title":"Account History API",
     "description":"Used to lookup account history information. These AppBase API methods are still under development and subject to change.",
-    "get_ops_in_block_description":"Returns all operations contained in a block."
+    "get_ops_in_block_description":"Returns all operations contained in a block.",
+    "get_account_history_description":"Returns a history of all operations for a given account. Parameters:"
 
   },
-  "api_database":{
+  "database_api":{
     "title":"Database API",
-    "description":"Used to query information about accounts, transactions, and blockchain data."
+    "description":"Used to query information about accounts, transactions, and blockchain data.",
+    "find_proposals_description":"Finds proposals by proposal.id (not proposal.proposal_id).",
+    "get_proposals_description":"Returns all proposals, starting with the specified creator or start date."
   },
-  "api_rc":{
+  "rc_api":{
     "title":"RC API",
     "description":"Allows querying of various Resource Credit metrics.",
     "find_rc_accounts_description":"Returns the available resource credits of accounts.",
     "get_witnesses_by_vote_description":"Returns accounts, queried by name. "
   },
-  "api_bridge":{
+  "bridge":{
     "title":"Bridge API",
     "description":"Presents data interpreted by the hivemind database as JSON-RPC.",
     "get_discussion_description":"Gives a flattened discussion tree starting at given post."
   },
-  "api_transaction_status":{
+  "transaction_status_api":{
     "title":"Transaction Status API",
     "description":"This API is intended to evaluate a transaction status after calling condenser_api.broadcast_transaction."
   },
-  "api_network_broadcast":{
+  "network_broadcast_api":{
     "title":"Network Broadcast API",
     "description":"Used to broadcast transactions and blocks. These AppBase API methods are still under development and subject to change."
+  },
+  "market_history_api":{
+    "title":"Market History API",
+    "description":"Used to lookup market history information. These AppBase API methods are still under development and subject to change."
   }
 }

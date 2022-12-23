@@ -1,6 +1,6 @@
 
-import React, { useEffect, useState } from 'react';
-import { connect, useSelector } from 'react-redux';
+import React from 'react';
+import { connect } from 'react-redux';
 import { pageMapDispatchToProps, pageMapStateToProps, PageProps } from '../common';
 import { withPersistentScroll } from '../../components/with-persistent-scroll';
 
@@ -8,8 +8,6 @@ import { _t } from '../../i18n';
 
 const Api_accordion_body = (props: any) => {
     const {description,parameter,response,url,end_point}=props
-
-
     return (
         <>
             <div>

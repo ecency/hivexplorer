@@ -86,7 +86,7 @@ export const methods = [
     api: "block_api",
     method: "get_block",
     params: ["block_num"],
-    description:_t("api_blocks.get_blocks_description"),
+    description:_t("block_api.get_blocks_description"),
     url:`${ConfigItems.baseUrl}/api/get_block?block_num=8675309`,
     parameter:`PHA+YmxvY2tfbnVtKGludCk8cD4KPHRhYmxlPgogIDx0aGVhZD4KICAgIDx0cj4KICAgICAgPHRoPjxjb2RlIGNsYXNzPSJsYW5ndWFnZS1wbGFpbnRleHQgaGlnaGxpZ2h0ZXItcm91Z2UiPmJsb2NrX251bTwvY29kZT4gKGludCk8L3RoPgogICAgICA8dGg+Jm5ic3A7PC90aD4KICAgIDwvdHI+CiAgPC90aGVhZD4KICA8dGJvZHk+CiAgICA8dHI+CiAgICAgIDx0ZD48Y29kZSBjbGFzcz0ibGFuZ3VhZ2UtcGxhaW50ZXh0IGhpZ2hsaWdodGVyLXJvdWdlIj4xPC9jb2RlPjwvdGQ+CiAgICAgIDx0ZD5RdWVyaWVzIHRoZSB2ZXJ5IGZpcnN0IGJsb2NrLjwvdGQ+CiAgICA8L3RyPgogICAgPHRyPgogICAgICA8dGQ
     +PGNvZGUgY2xhc3M9Imxhbmd1YWdlLXBsYWludGV4dCBoaWdobGlnaHRlci1yb3VnZSI+ODY3NTMwOTwvY29kZT48L3RkPgogICAgICA8dGQ+UXVlcmllcyBibG9jayBudW1iZXIgOCw2NzUsMzA5LjwvdGQ+CiAgICA8L3RyPgogICAgPHRyPgogICAgICA8dGQ+PGNvZGUgY2xhc3M9Imxhbmd1YWdlLXBsYWludGV4dCBoaWdobGlnaHRlci1yb3VnZSI+NjIzOTY3NDU8L2NvZGU+PC90ZD4KICAgICAgPHRkPlF1ZXJpZXMgYmxvY2sgbnVtYmVyIDYyLDM5Niw3NDUuPC90ZD4KICAgIDwvdHI+CiAgPC90Ym9keT4KPC90YWJsZT4=`,
@@ -98,7 +98,7 @@ export const methods = [
   {
     api: "block_api",
     method: "get_block_range",
-    description:_t("api_blocks.get_block_range_description"),
+    description:_t("block_api.get_block_range_description"),
     params: ["starting_block_num", "count"],
     url:`${ConfigItems.baseUrl}/api/get_block_range?starting_block_num=70548020&count=15`,
     end_point:`${ConfigItems.baseUrl}/api/get_block_range?starting_block_num=<{starting_block_num}>&count=<{count}>`,
@@ -110,7 +110,7 @@ export const methods = [
     api: "account_history_api",
     method: "get_ops_in_block",
     params: ["block_num", "only_virtual"],
-    description:_t("api_account_history.get_ops_in_block_description"),
+    description:_t("account_history_api.get_ops_in_block_description"),
     url:`${ConfigItems.baseUrl}/api/get_ops_in_block?block_num=8675309&only_virtual=false&include_reversible=true`,
     end_point:`${ConfigItems.baseUrl}/api/get_ops_in_block?block_num=<{block_num}>&only_virtual=<{only_virtual}>&include_reversible=<{include_reversible}>`,
     response:`ewogICAgIm9wcyI6IFsKICAgICAgICB7CiAgICAgICAgInRyeF9pZCI6ICIwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwIiwKICAgICAgICAiYmxvY2siOiAwLAogICAgICAgICJ0cnhfaW5fYmxvY2siOiA0Mjk0OTY3Mjk1LAogICAgICAgICJvcF9pbl90cngiOiAwLAogICAgICAgICJ2aXJ0dWFsX29wIjogMCwKICAgICAgICAidGltZXN0YW1wIjogIjIwMTktMTAtMDZUMDk6MDU6MTUiLAogICAgICAgICJvcCI6IHt9CiAgICAgICAgfQogICAgXQp9`,
@@ -128,7 +128,7 @@ export const methods = [
   {
     api: "database_api",
     method: "get_dynamic_global_properties",
-    description:_t("api_blocks.head_block_description"),
+    description:_t("block_api.head_block_description"),
     url:`${ConfigItems.baseUrl}/api/get_dynamic_global_properties`,
     end_point:``,
     response:'ewogICAgaGVhZF9ibG9ja19udW1iZXI6IDcwMzE1NDU5CiAgICBoZWFkX2Jsb2NrX2lkOiAiMDQzMGVkYzM1YThhNjdiYjYwNWU2NWJiNTRiNjNlYTVlZWY1MTk0NCIKICAgIHRpbWU6ICIyMDIyLTEyLTA3VDExOjQ3OjI3IgogICAgY3VycmVudF93aXRuZXNzOiAicm9lbGFuZHAiCiAgICB0b3RhbF9wb3c6IDUxNDQxNQogICAgbnVtX3Bvd193aXRuZXNzZXM6IDE3MgogICAgdmlydHVhbF9zdXBwbHk6ICI0NzEyNzQ0NDMuMjc0IEhJVkUiCiAgICBjdXJyZW50X3N1cHBseTogIjM5MzQ1ODYxOS43MDQgSElWRSIKICAgIGluaXRfaGJkX3N1cHBseTogIjAuMDAwIEhCRCIKICAgIGN1cnJlbnRfaGJkX3N1cHBseTogIjI4MDkxNTEyLjMwOSBIQkQiCiAgICB0b3RhbF92ZXN0aW5nX2Z1bmRfaGl2ZTogIjE2NDg3MDQ3MC4xODcgSElWRSIKICAgIHRvdGFsX3Zlc3Rpbmdfc2hhcmVzOiAiMjk2ODY3Mjg1MDE1LjA1NTI0NyBWRVNUUyIKICAgIHRvdGFsX3Jld2FyZF9mdW5kX2hpdmU6ICIwLjAwMCBISVZFIgogICAgdG90YWxfcmV3YXJkX3NoYXJlczI6ICIwIgogICAgcGVuZGluZ19yZXdhcmRlZF92ZXN0aW5nX3NoYXJlczogIjgxODE0OTY3OS4wOTg4ODIgVkVTVFMiCiAgICBwZW5kaW5nX3Jld2FyZGVkX3Zlc3RpbmdfaGl2ZTogIjQyNTkxNi4zNjAgSElWRSIKICAgIGhiZF9pbnRlcmVzdF9yYXRlOiAyMDAwCiAgICBoYmRfcHJpbnRfcmF0ZTogMTAwMDAKICAgIG1heGltdW1fYmxvY2tfc2l6ZTogNjU1MzYKICAgIHJlcXVpcmVkX2FjdGlvbnNfcGFydGl0aW9uX3BlcmNlbnQ6IDAKICAgIGN1cnJlbnRfYXNsb3Q6IDcwNTI2MjIwCiAgICByZWNlbnRfc2xvdHNfZmlsbGVkOiAiMzQwMjgyMzY2OTIwOTM4NDYzNDYzMzc0NjA3NDMxNzY4MjExNDU1IgogICAgcGFydGljaXBhdGlvbl9jb3VudDogMTI4CiAgICBsYXN0X2lycmV2ZXJzaWJsZV9ibG9ja19udW06IDcwMzE1NTMwCiAgICB2b3RlX3Bvd2VyX3Jlc2VydmVfcmF0ZTogMTAKICAgIGRlbGVnYXRpb25fcmV0dXJuX3BlcmlvZDogNDMyMDAwCiAgICByZXZlcnNlX2F1Y3Rpb25fc2Vjb25kczogMAogICAgYXZhaWxhYmxlX2FjY291bnRfc3Vic2lkaWVzOiAxMjI0NDIyNQogICAgaGJkX3N0b3BfcGVyY2VudDogMjAwMAogICAgaGJkX3N0YXJ0X3BlcmNlbnQ6IDIwMDAKICAgIG5leHRfbWFpbnRlbmFuY2VfdGltZTogIjIwMjItMTItMDdUMTI6MzU6MjQiCiAgICBsYXN0X2J1ZGdldF90aW1lOiAiMjAyMi0xMi0wN1QxMTozNToyNCIKICAgIG5leHRfZGFpbHlfbWFpbnRlbmFuY2VfdGltZTogIjIwMjItMTItMDdUMTk6MzE6MzAiCiAgICBjb250ZW50X3Jld2FyZF9wZXJjZW50OiA2NTAwCiAgICB2ZXN0aW5nX3Jld2FyZF9wZXJjZW50OiAxNTAwCiAgICBwcm9wb3NhbF9mdW5kX3BlcmNlbnQ6IDEwMDAKICAgIGRoZl9pbnRlcnZhbF9sZWRnZXI6ICIzNC45NDQgSEJEIgogICAgZG93bnZvdGVfcG9vbF9wZXJjZW50OiAyNTAwCiAgICBjdXJyZW50X3JlbW92ZV90aHJlc2hvbGQ6IDIwMAogICAgZWFybHlfdm90aW5nX3NlY29uZHM6IDg2NDAwCiAgICBtaWRfdm90aW5nX3NlY29uZHM6IDE3MjgwMAogICAgbWF4X2NvbnNlY3V0aXZlX3JlY3VycmVudF90cmFuc2Zlcl9mYWlsdXJlczogMTAKICAgIG1heF9yZWN1cnJlbnRfdHJhbnNmZXJfZW5kX2RhdGU6IDczMAogICAgbWluX3JlY3VycmVudF90cmFuc2ZlcnNfcmVjdXJyZW5jZTogMjQKICAgIG1heF9vcGVuX3JlY3VycmVudF90cmFuc2ZlcnM6IDI1NQp9YAogICAgfSwKICAgIHsKICAgIG5hbWU6IF90KCJhcGlfYmxvY2tzLmdldF9ibG9ja3MiKSwKICAgIG1ldGhvZDpgYCwKICAgIGRlc2NyaXB0aW9uOl90KCJhcGlfYmxvY2tzLmdldF9ibG9ja3NfZGVzY3JpcHRpb24iKSwKICAgIHVybDpgJHtDb25maWdJdGVtcy5iYXNlVXJsfS9hcGkvZ2V0X2Jsb2NrP2Jsb2NrX251bT04Njc1MzA5YCwKICAgIHBhcmFtZXRlcjonYmxvY2tfbnVtKGludCknLAogICAgZW5kX3BvaW50OmAke0NvbmZpZ0l0ZW1zLmJhc2VVcmx9L2FwaS9nZXRfYmxvY2s/YmxvY2tfbnVtPTx7YmxvY2tfbnVtfT5gLAogICAgcmVzcG9uc2U6YAp7CiAgICAicHJldmlvdXMiOiAiMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMCIsCiAgICAidGltZXN0YW1wIjogIjIwMTYtMDMtMjRUMTY6MDU6MDAiLAogICAgIndpdG5lc3MiOiAiaW5pdG1pbmVyIiwKICAgICJ0cmFuc2FjdGlvbl9tZXJrbGVfcm9vdCI6ICIwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwIiwKICAgICJleHRlbnNpb25zIjogW10sCiAgICAid2l0bmVzc19zaWduYXR1cmUiOiAiMjA0ZjhhZDU2YThmNWNmNzIyYTAyYjAzNWE2MWI1MDBhYTU5Yjk1MTliMmMzM2M3N2E4MGMwYTcxNDY4MGE1YTVhN2EzNDBkOTA5ZDE5OTk2NjEzYzVlNGFlOTIxNDZiOWFkZDhhN2E2NjNlZWYzN2Q4MzdlZjg4MTQ3NzMxMzA0MyIsCiAgICAidHJhbnNhY3Rpb25zIjogW10sCiAgICAiYmxvY2tfaWQiOiAiMDAwMDAwMDEwOTgzM2NlNTI4ZDViYmZiM2Y2MjI1YjM5ZWUxMDA4NiIsCiAgICAic2lnbmluZ19rZXkiOiAiU1RNOEdDMTN1Q1piUDQ0SHpNTFY2elBaR3dWUThOdDRLamk4UGFwc1BpTnExQksxNTNYVFgiLAogICAgInRyYW5zYWN0aW9uX2lkcyI6IFtdCn0='
@@ -200,7 +200,7 @@ export const methods = [
   },
   {
     api: "account_history_api",
-    description:_t("api_account_history.account_history_api_description"),
+    description:_t("account_history_api.get_account_history_description"),
     method: "get_account_history",
     url:`${ConfigItems.baseUrl}/api/get_account_history?account=ocd-witness&start=-1&limit=3`,
     end_point:`${ConfigItems.baseUrl}/api/get_account_history?account=<{account}>&start=<{from}>&limit=<{limit}>`,
@@ -294,7 +294,7 @@ export const methods = [
   {
     api: "condenser_api",
     method: "get_active_votes",
-    description:_t("api_condenser.get_active_votes_description"),
+    description:_t("condenser_api.get_active_votes_description"),
     params: ["author", "permlink"],
     url:`${ConfigItems.baseUrl}/api/get_active_votes?author=deathwing&permlink=re-enforcer48-recsvv`,
     end_point:`${ConfigItems.baseUrl}/api/get_active_votes?author=<{author}>&permlink=<{permlink}>`,
@@ -341,7 +341,7 @@ export const methods = [
   },
   {
     api: "condenser_api",
-    description:_t("api_condenser.get_witnesses_by_vote_description"),
+    description:_t("condenser_api.get_witnesses_by_vote_description"),
     method: "get_witnesses_by_vote",
     // "param_type":"params",
     isArray: true,
@@ -482,7 +482,7 @@ export const methods = [
   {
     api: "database_api",
     method: "find_proposals",
-    description:_t("api_database.find_proposals_description"),
+    description:_t("database_api.find_proposals_description"),
     params: ["proposal_ids"],
     url:`${ConfigItems.baseUrl}/api/find_proposals?proposal_ids=[0]`,
     parameter:'PHA+aWQgKGludCk8cD4=',
@@ -493,7 +493,7 @@ export const methods = [
     api: "rc_api",
     method: "find_rc_accounts",
     params: ["accounts"],
-    description:_t("api_rc.find_rc_accounts_description"),
+    description:_t("rc_api.find_rc_accounts_description"),
     url:`${ConfigItems.baseUrl}/api/find_rc_accounts?accounts[]=good-karma`,
     end_point:`${ConfigItems.baseUrl}/api/find_rc_accounts?accounts[]=<{accounts}>`,
     parameter:'PHA+PGNvZGUgY2xhc3M9Imxhbmd1YWdlLXBsYWludGV4dCBoaWdobGlnaHRlci1yb3VnZSI+YWNjb3VudHM6c3RyaW5nIGFycmF5PC9jb2RlPjwvcD4KPHRhYmxlPgogIDx0aGVhZD4KICAgIDx0cj4KICAgICAgPHRoPjxjb2RlIGNsYXNzPSJsYW5ndWFnZS1wbGFpbnRleHQgaGlnaGxpZ2h0ZXItcm91Z2UiPmFjY291bnRzPC9jb2RlPiAoc3RyaW5nKTwvdGg+CiAgICAgIDx0aD4mbmJzcDs8L3RoPgogICAgPC90cj4KICA8L3RoZWFkPgogIDx0Ym9keT4KICAgIDx0cj4KICAgICAgPHRkPjxjb2RlIGNsYXNzPSJsYW5ndWFnZS1wbGFpbnRleHQgaGlnaGxpZ2h0ZXItcm91Z2UiPiJoaXZlaW8iPC9jb2RlPjwvdGQ+CiAgICAgIDx0ZD5RdWVyeSB0aGUgYXZhaWxhYmxlIHJlc291cmNlIGNyZWRpdHMgZm9yIHRoZSBhY2NvdW50IG5hbWVkIOKAnGhpdmVpb+KAnS48L3RkPgogICAgPC90cj4KICAgIDx0cj4KICAgICAgPHRkPjxjb2RlIGNsYXNzPSJsYW5ndWFnZS1wbGFpbnRleHQgaGlnaGxpZ2h0ZXItcm91Z2UiPiJhbGljZSI8L2NvZGU+PC90ZD4KICAgICAgPHRkPlF1ZXJ5IHRoZSBhdmFpbGFibGUgcmVzb3VyY2UgY3JlZGl0cyBmb3IgdGhlIGFjY291bnRzIG5hbWVkIOKAnGFsaWNl4oCdIGFuZCDigJxib2LigJ0uPC90ZD4KICAgIDwvdHI+CiAgPC90Ym9keT4KPC90YWJsZT4=',
@@ -513,7 +513,7 @@ export const methods = [
   {
     api: "database_api",
     method: "list_proposals",
-    description:_t("api_proposals.get_proposals_description"),
+    description:_t("database_api.get_proposals_description"),
     url:`${ConfigItems.baseUrl}/api/list_proposals?order="by_total_votes"&order_direction="ascending"&status="all"&limit=5&start=["0"]`,
     params: ["start", "limit", "order", "order_direction", "status"],
     end_point:`${ConfigItems.baseUrl}/api/list_proposals?order="<{order}>"&order_direction="<{order_direction}>"&status="<{status}>"&limit=<{limit}>&start=["<{start}>"]`,
@@ -544,7 +544,7 @@ export const methods = [
   {
     api: "bridge",
     method: "get_discussion",
-    description:_t("api_bridge.get_discussion_description"),
+    description:_t("bridge.get_discussion_description"),
     params: ["author", "permlink"],
     url:`${ConfigItems.baseUrl}/api/get_discussion?author=hiveio&permlink=around-the-hive-reflections`,
     end_point:`${ConfigItems.baseUrl}/api/get_discussion?author=<{author}>&permlink=<{permlink}>`,
