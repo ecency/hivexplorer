@@ -9,7 +9,8 @@ import { _t } from "../../i18n";
 import { getBlocks } from "../../api/urls";
 import { Date_time_table } from "../../api/dateTime";
 import SpinnerEffect from "../loader/spinner";
-
+import DefaultImage from "../../img/default-avatar.png";
+import UserAvatar from "../user-avatar";
 interface operationsList {
   type: string;
 }
@@ -68,19 +69,15 @@ const HomeBlocks = (props: any) => {
                     {_t("common.block")}: <Link to={`/b/${blockNum}`}>{blockNum--}</Link>{" "}
                   </Col>
                   <Col md={12}>
-                    {_t("common.witness")}: <Link to={`/@${block.witness}`}>{block.witness}</Link>
+                    {_t("common.witness")}: {UserAvatar({
+                            username: block.witness,
+                            size: "small"
+                          })}
                   </Col>
                 </Row>
               </Col>
               <Col md={4} xs={12}>
-                <Row>
-                  <Col md={12}>
-                    {_t("common.time")}: {Date_time_table(block.timestamp, "YYYY-MM-DD")}
-                  </Col>
-                  <Col md={12}>
-                    {_t("common.date")}: {Date_time_table(block.timestamp, "hh:mm:ss")}
-                  </Col>
-                </Row>
+                {Date_time_table(block.timestamp, "YYYY-MM-DD hh:mm:ss")}
               </Col>
               <Col md={3} xs={12}>
                 <Row>

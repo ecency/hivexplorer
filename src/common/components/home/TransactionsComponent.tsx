@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { connect, useSelector } from "react-redux";
 import { withPersistentScroll } from "../with-persistent-scroll";
 import { Col, Row } from "react-bootstrap";
@@ -9,8 +8,8 @@ import { Link } from "react-router-dom";
 import { getTransactions } from "../../api/urls";
 import { Date_time_table } from "../../api/dateTime";
 import SpinnerEffect from "../loader/spinner";
-import { DefaultUser } from "../../img/svg";
 import DefaultImage from "../../img/default-avatar.png";
+import UserAvatar from "../user-avatar";
 
 export interface op_type {
   type: string;
@@ -93,7 +92,7 @@ const HomeTransactions = (props: any) => {
             <Row
               className="m-0 block-row row-border"
               id={`${index}+${trans.trx_id}`}
-              key={`${index}+${trans.trx_id}`}
+              key={`${index}-${trans.trx_id}`}
             >
               <Col md={12} xs={12}>
                 <Row>
@@ -113,14 +112,7 @@ const HomeTransactions = (props: any) => {
                 </Row>
               </Col>
               <Col md={12} xs={12}>
-                <Row>
-                  <Col md={7}>
-                    {_t("common.date")}: {Date_time_table(trans.timestamp, "YYYY-MM-DD")}
-                  </Col>
-                  <Col md={5}>
-                    {_t("common.time")}: {Date_time_table(trans.timestamp, "hh:mm:ss")}
-                  </Col>
-                </Row>
+                {_t("common.date")}: {Date_time_table(trans.timestamp, "YYYY-MM-DD hh:mm:ss")}
               </Col>
               <Col md={12} xs={12}>
                 <Row>
@@ -129,23 +121,10 @@ const HomeTransactions = (props: any) => {
                       {_t("trans_table.req_auths")}:
                       {req_auths.map((user: string, i: number) => {
                         return (
-                          <>
-                            <span
-                              className={`${i}`}
-                              id={`${i}-${user}-${trans.trx_id}`}
-                              key={`${user}-${trans.trx_id}-${i}`}
-                            >
-                              <img
-                                className="avatar-img"
-                                onError={(e: any) => {
-                                  e.target.src = { DefaultImage };
-                                }}
-                                src={`https://images.ecency.com/u/${user}/avatar`}
-                                alt=""
-                              />
-                              <Link to={`@${user}`}>{user}</Link>
-                            </span>
-                          </>
+                          UserAvatar({
+                            username: user,
+                            size: "small"
+                          })
                         );
                       })}
                     </Col>
