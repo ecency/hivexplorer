@@ -1,6 +1,7 @@
 import React from "react";
 import { Table } from "react-bootstrap";
-import { UserList } from "../home/HomePage";
+
+import { UserList } from "../home";
 import { _t } from "../../i18n";
 
 export default function ApiFetchedLookupAccounts(props: any) {

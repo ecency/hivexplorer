@@ -1,12 +1,13 @@
-import React, { useEffect } from "react";
-import { Link, match } from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { Card } from "react-bootstrap";
+
 import { _t } from "../../i18n";
 import { AuthorityObject } from "./UserAuthorities";
-import { object } from "prop-types";
 import { DecodeJson } from "../../../server/util";
-import { Card } from "react-bootstrap";
 import { LinkAccount, ObjectFieldArray, StringFieldArray } from "../fields/common_fields";
+import { UserAvatar } from "../../components/user-avatar";
 
 const TransactionOperationTable = (props: any) => {
   const { opTrans } = props;
@@ -108,14 +109,7 @@ const TransactionOperationTable = (props: any) => {
                                   <tr key={k}>
                                     <td>{_t(`trans_table.${key}`)}</td>
                                     <td>
-                                      <span>
-                                        <img
-                                          className="avatar-img"
-                                          src={`https://images.ecency.com/u/${opVal[key]}/avatar`}
-                                          alt=""
-                                        />{" "}
-                                        {opVal[key]}
-                                      </span>
+                                      <UserAvatar username={opVal[key]} size="small"/>
                                     </td>
                                   </tr>
                                 )}

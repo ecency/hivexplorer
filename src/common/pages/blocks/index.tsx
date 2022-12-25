@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { connect, useDispatch, useSelector } from "react-redux";
+import { reverse } from "lodash";
+
 import { pageMapDispatchToProps, pageMapStateToProps } from "../../pages/common";
 import { withPersistentScroll } from "../../components/with-persistent-scroll";
 import BlockTables from "./BlocksTables";
 import Theme from "../../components/theme";
 import { HomeBlocksType } from "../../components/home/BlocksComponent";
 import SpinnerEffect from "../../components/loader/spinner";
-import { reverse } from "lodash";
 import { getBlocks, getHeadBlock } from "../../api/urls";
 import { setHeadBlockData } from "../../store/HeadBlock";
 

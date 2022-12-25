@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { connect } from "react-redux";
-import { pageMapDispatchToProps, pageMapStateToProps, PageProps } from "../common";
-import { withPersistentScroll } from "../../components/with-persistent-scroll";
-import Theme from "../../components/theme";
 import { Container } from "react-bootstrap";
 import { TextField } from "@material-ui/core";
+import numeral from "numeral";
+
+import { pageMapDispatchToProps, pageMapStateToProps } from "../common";
+import { withPersistentScroll } from "../../components/with-persistent-scroll";
+import Theme from "../../components/theme";
 import ProposalCard from "./ProposalCard";
-import "./proposalsPage.scss";
 import { getAccount, getProposals } from "../../api/urls";
 import parseAsset from "../../helper/parse-asset";
-import numeral from "numeral";
 import { _t } from "../../i18n";
 import BackToTopButton from "../../components/Buttons/BackToTop";
 import SpinnerEffect from "../../components/loader/spinner";

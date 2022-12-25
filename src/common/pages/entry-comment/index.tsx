@@ -1,23 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { connect, useSelector } from "react-redux";
-import { pageMapDispatchToProps, pageMapStateToProps } from "../../pages/common";
+import { Accordion, Card, Container } from "react-bootstrap";
+import ToggleButton from "react-toggle-button";
+
+import { pageMapDispatchToProps, pageMapStateToProps } from "../common";
 import { withPersistentScroll } from "../../components/with-persistent-scroll";
 import Theme from "../../components/theme";
-import "./EntryPage.scss";
 import { _t } from "../../i18n";
 import { getDiscussion } from "../../api/urls";
-import { Accordion, Card, Container } from "react-bootstrap";
-import EntryBody from "./EntryBody";
+import EntryBody from "../entry/EntryBody";
 import BackToTopButton from "../../components/Buttons/BackToTop";
-import EntryVotes from "./EntryVotes";
-import EntryProperties from "./EntryProperties";
+import EntryVotes from "../entry/EntryVotes";
+import EntryProperties from "../entry/EntryProperties";
 import { showLessIcon, showMoreIcon } from "../../img/svg";
 import SpinnerEffect from "../../components/loader/spinner";
-import ToggleButton from "react-toggle-button";
-import DefaultImage from "../../img/default-avatar.png";
+import UserAvatar from "../../components/user-avatar";
 
-const EntryPage = (props: any) => {
+const EntryCommentPage = (props: any) => {
   const { match } = props;
   const userName = match.params.user_id;
   const permLink = match.params.permlink;
@@ -56,16 +56,13 @@ const EntryPage = (props: any) => {
               .slice(0, 1)
               .map((key, i: number) => {
                 return (
-                  <>
+                  <span key={`${entry[key].author}-${entry[key].permLink}-${i}`}>
                     <h2>{entry[key].title}</h2>
-                    <div key={i}>
+                    <div>
                       <div className="entry-header">
                         <div className="mr-2">
                           <img
                             className="avatar-img"
-                            onError={(e: any) => {
-                              e.target.src = { DefaultImage };
-                            }}
                             src={`https://images.ecency.com/u/${entry[key].author}/avatar`}
                             alt=""
                           />
@@ -123,7 +120,7 @@ const EntryPage = (props: any) => {
                             {entry[key].body && (
                               <>
                                 {state ? (
-                                  <pre className="pre-raw-format">{entry[key].body}</pre>
+                                  <p>{entry[key].body}</p>
                                 ) : (
                                   <EntryBody body={entry[key].body} />
                                 )}
@@ -200,14 +197,7 @@ const EntryPage = (props: any) => {
                                             <Accordion.Body>
                                               <div>
                                                 <p>
-                                                  <img
-                                                    className="avatar-img"
-                                                    src={`https://images.ecency.com/u/${entry[key].author}/avatar`}
-                                                    alt=""
-                                                  />{" "}
-                                                  <Link to={`@${entry[key].author}`}>
-                                                    {entry[key].author}
-                                                  </Link>
+                                                  <UserAvatar username={entry[key].author} size="small"/>
                                                 </p>
                                                 <p>
                                                   {" "}
@@ -222,9 +212,7 @@ const EntryPage = (props: any) => {
                                               {entry[key].body && (
                                                 <>
                                                   {state ? (
-                                                    <pre className="pre-raw-format">
-                                                      {entry[key].body}
-                                                    </pre>
+                                                    <p>{entry[key].body}</p>
                                                   ) : (
                                                     <EntryBody body={entry[key].body} />
                                                   )}
@@ -270,6 +258,7 @@ const EntryPage = (props: any) => {
                                               </Accordion.Header>
                                               <Accordion.Body>
                                                 <EntryVotes
+                                                  votes={entry[key].active_votes}
                                                   user={entry[key].author}
                                                   permlink={entry[key].permlink}
                                                 />
@@ -279,13 +268,14 @@ const EntryPage = (props: any) => {
                                         </Accordion>
                                       </div>
                                     </div>
+                                    <br />
                                   </>
                                 );
                               })}
                         </div>
                       </Accordion>
                     </div>
-                  </>
+                  </span>
                 );
               })}
         </>
@@ -297,4 +287,4 @@ const EntryPage = (props: any) => {
 export default connect(
   pageMapStateToProps,
   pageMapDispatchToProps
-)(withPersistentScroll(EntryPage));
+)(withPersistentScroll(EntryCommentPage));

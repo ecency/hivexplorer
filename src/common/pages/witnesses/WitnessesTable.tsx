@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-
-import "../../../style/dataTable/DataTables.scss";
 import { Link } from "react-router-dom";
 import {
   Box,
@@ -17,16 +15,17 @@ import {
   TextField
 } from "@material-ui/core";
 import { Card, Container } from "react-bootstrap";
-import { HomeBlocksType } from "../../components/home/BlocksComponent";
 import moment from "moment";
 import { useSelector } from "react-redux";
-import { _t } from "../../i18n";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
-import { witnessesType } from "./WitnessesPage";
+
+import { HomeBlocksType } from "../../components/home/BlocksComponent";
+import { _t } from "../../i18n";
+import { witnessesType } from ".";
 import { ExternalLink } from "../../img/svg";
-import "./witnesses.scss";
 import { dateToRelative } from "../../helper/parse-date";
+import { UserAvatar } from "../../components/user-avatar";
 
 interface Column {
   label: string;
@@ -115,14 +114,7 @@ const WitnessesTables = (props: any) => {
         <TableRow className="main-table-row" hover={true} role="checkbox" tabIndex={-1}>
           <TableCell>{witness.id}</TableCell>
           <TableCell>
-            <span>
-              <img
-                className="avatar-img"
-                src={`https://images.ecency.com/u/${witness.owner}/avatar`}
-                alt={witness.owner}
-              />
-            </span>
-            <Link to={`/@${witness.owner}`}>{witness.owner}</Link>
+            <UserAvatar username={witness.owner} size="small"/>
           </TableCell>
           <TableCell>{`${witness.votes.substring(0, 6)}m`}</TableCell>
           <TableCell>

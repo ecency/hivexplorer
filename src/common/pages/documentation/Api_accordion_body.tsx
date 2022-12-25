@@ -7,7 +7,7 @@ import { withPersistentScroll } from '../../components/with-persistent-scroll';
 import { _t } from '../../i18n';
 
 const Api_accordion_body = (props: any) => {
-    const {description,parameter,response,url,end_point}=props
+    const {description,parameter,response,url}=props
     return (
         <>
             <div>
@@ -22,16 +22,10 @@ const Api_accordion_body = (props: any) => {
                         <p><a href={url} target="_blank"><span>{url}</span></a></p>
                     </>
                 }
-                {end_point && 
-                    <>
-                        <h6>{_t('api_documentation.example_end_point')}</h6>
-                        <p className='text-p'><span>{end_point}</span></p>
-                    </>
-                }
                 {response && 
                     <>
                         <h6>{_t('api_documentation.example_response')}</h6>
-                        <pre className='api-response'>{atob(response)}</pre>
+                        <pre className='api-response'>{response}</pre>
                     </>
                 }
     
@@ -40,7 +34,7 @@ const Api_accordion_body = (props: any) => {
                 <>
                    <p
                 className="body text-p"
-                dangerouslySetInnerHTML={{ __html: `${atob(parameter)}`}}
+                dangerouslySetInnerHTML={{ __html: `${parameter}`}}
                 />
                 </>: 
                 <p className='text-p'>None</p>}

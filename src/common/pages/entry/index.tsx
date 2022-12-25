@@ -1,30 +1,27 @@
-import React, { useEffect, useMemo, useState } from "react";
-import axios from "axios";
-import { match, Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { connect, useSelector } from "react-redux";
-import { pageMapDispatchToProps, pageMapStateToProps, PageProps } from "../../pages/common";
-import { withPersistentScroll } from "../../components/with-persistent-scroll";
-import Theme from "../../components/theme";
-import "./EntryPage.scss";
-import { _t } from "../../i18n";
-import { getContent, getDiscussion } from "../../api/urls";
 import { Accordion, Card, Container } from "react-bootstrap";
-import EntryBody from "./EntryBody";
-import BackToTopButton from "../../components/Buttons/BackToTop";
-import { EntryType } from "./EntryTypes";
-import moment from "moment";
-import parseDate from "../../helper/parse-date";
-import EntryVotes from "./EntryVotes";
-import EntryProperties from "./EntryProperties";
-import { infoIcon, showLessIcon, showMoreIcon } from "../../img/svg";
-import SpinnerEffect from "../../components/loader/spinner";
 import ToggleButton from "react-toggle-button";
 
-const EntryCommentPage = (props: any) => {
+import { pageMapDispatchToProps, pageMapStateToProps } from "../common";
+import { withPersistentScroll } from "../../components/with-persistent-scroll";
+import Theme from "../../components/theme";
+import { _t } from "../../i18n";
+import { getDiscussion } from "../../api/urls";
+import EntryBody from "./EntryBody";
+import BackToTopButton from "../../components/Buttons/BackToTop";
+import EntryVotes from "./EntryVotes";
+import EntryProperties from "./EntryProperties";
+import { showLessIcon, showMoreIcon } from "../../img/svg";
+import SpinnerEffect from "../../components/loader/spinner";
+import DefaultImage from "../../img/default-avatar.png";
+import UserAvatar from "../../components/user-avatar";
+
+const EntryPage = (props: any) => {
   const { match } = props;
   const userName = match.params.user_id;
   const permLink = match.params.permlink;
-  const permlink_url = getDiscussion(userName, permLink);
   const [entry, setEntry] = useState<any>();
   const currTheme = useSelector((state: any) => state.global.theme);
   const themeContrastColor = currTheme === "day" ? "black" : "white";
@@ -67,6 +64,9 @@ const EntryCommentPage = (props: any) => {
                         <div className="mr-2">
                           <img
                             className="avatar-img"
+                            onError={(e: any) => {
+                              e.target.src = { DefaultImage };
+                            }}
                             src={`https://images.ecency.com/u/${entry[key].author}/avatar`}
                             alt=""
                           />
@@ -124,7 +124,7 @@ const EntryCommentPage = (props: any) => {
                             {entry[key].body && (
                               <>
                                 {state ? (
-                                  <p>{entry[key].body}</p>
+                                  <pre className="pre-raw-format">{entry[key].body}</pre>
                                 ) : (
                                   <EntryBody body={entry[key].body} />
                                 )}
@@ -201,14 +201,7 @@ const EntryCommentPage = (props: any) => {
                                             <Accordion.Body>
                                               <div>
                                                 <p>
-                                                  <img
-                                                    className="avatar-img"
-                                                    src={`https://images.ecency.com/u/${entry[key].author}/avatar`}
-                                                    alt=""
-                                                  />{" "}
-                                                  <Link to={`@${entry[key].author}`}>
-                                                    {entry[key].author}
-                                                  </Link>
+                                                  <UserAvatar username={entry[key].author} size="small"/>
                                                 </p>
                                                 <p>
                                                   {" "}
@@ -223,7 +216,9 @@ const EntryCommentPage = (props: any) => {
                                               {entry[key].body && (
                                                 <>
                                                   {state ? (
-                                                    <p>{entry[key].body}</p>
+                                                    <pre className="pre-raw-format">
+                                                      {entry[key].body}
+                                                    </pre>
                                                   ) : (
                                                     <EntryBody body={entry[key].body} />
                                                   )}
@@ -269,7 +264,6 @@ const EntryCommentPage = (props: any) => {
                                               </Accordion.Header>
                                               <Accordion.Body>
                                                 <EntryVotes
-                                                  votes={entry[key].active_votes}
                                                   user={entry[key].author}
                                                   permlink={entry[key].permlink}
                                                 />
@@ -279,7 +273,6 @@ const EntryCommentPage = (props: any) => {
                                         </Accordion>
                                       </div>
                                     </div>
-                                    <br />
                                   </>
                                 );
                               })}
@@ -298,4 +291,4 @@ const EntryCommentPage = (props: any) => {
 export default connect(
   pageMapStateToProps,
   pageMapDispatchToProps
-)(withPersistentScroll(EntryCommentPage));
+)(withPersistentScroll(EntryPage));

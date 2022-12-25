@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { connect, useDispatch, useSelector } from "react-redux";
-import { pageMapDispatchToProps, pageMapStateToProps, PageProps } from "../../pages/common";
+
+import { pageMapDispatchToProps, pageMapStateToProps, PageProps } from "../common";
 import { withPersistentScroll } from "../../components/with-persistent-scroll";
 import { HomeTransactionType } from "../../components/home/TransactionsComponent";
 import Theme from "../../components/theme";

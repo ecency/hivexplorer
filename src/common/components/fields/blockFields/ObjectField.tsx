@@ -9,9 +9,10 @@ import { ConfigItems } from "../../../../../config";
 import JsonField from "./JsonField";
 import JsonMetadata from "../../EntryContent/JsonMetadata";
 import { Date_time_table } from "../../../api/dateTime";
-import TransactionOperationTable from "../../../pages/User/UserOpTable";
+import TransactionOperationTable from "../../../pages/user/UserOpTable";
 import DefaultImage from "../../../img/default-avatar.png";
 import { LinkAccount } from "../../../pages/fields/common_fields";
+import { UserAvatar } from "../../user-avatar";
 
 const timestampKeys = [
   "time",
@@ -97,24 +98,7 @@ const ObjectField = (props: any) => {
               return (
                 <ListGroup.Item key={i}>
                   {item === "witness_votes" ? (
-                    <Link
-                      onClick={() => {
-                        changeUser(val);
-                      }}
-                      to={`/@${val}`}
-                    >
-                      <span>
-                        <img
-                          className="avatar-img"
-                          onError={(e: any) => {
-                            e.target.src = { DefaultImage };
-                          }}
-                          src={`https://images.ecency.com/u/${val}/avatar`}
-                          alt=""
-                        />
-                      </span>
-                      <span>{val}</span>
-                    </Link>
+                    <UserAvatar username={val} size="small"/>
                   ) : (
                     <>
                       <Link to={`/tx/${val}`}>
@@ -138,24 +122,7 @@ const ObjectField = (props: any) => {
                 return (
                   <ListGroup.Item key={i}>
                     {item === "witness_votes" ? (
-                      <Link
-                        onClick={() => {
-                          changeUser(val);
-                        }}
-                        to={`/@${val}`}
-                      >
-                        <span>
-                          <img
-                            className="avatar-img"
-                            onError={(e: any) => {
-                              e.target.src = { DefaultImage };
-                            }}
-                            src={`https://images.ecency.com/u/${val}/avatar`}
-                            alt=""
-                          />
-                        </span>
-                        <span>{val}</span>
-                      </Link>
+                      <UserAvatar username={val} size="small"/>
                     ) : (
                       <>
                         <Link to={`/tx/${val}`}>
@@ -241,14 +208,7 @@ const ObjectField = (props: any) => {
                             <td>{_t(`trans_table.${val}`)}</td>
                             <td>
                               {LinkAccount.includes(val)?
-                                <>
-                                <img
-                                    className="avatar-img"
-                                    src={`https://images.ecency.com/u/${opVal[val]}/avatar`}
-                                    alt=""
-                                  />
-                                  <Link to={`/@${opVal[val]}`}>{opVal[val]}</Link>
-                                </>
+                                <UserAvatar username={opVal[val]} size="small"/>
                                 : 
                                 val==='permlink' ? <Link to={`/@${opVal.author}/${opVal.permlink}`}>{opVal.permlink}</Link>
                                 :
@@ -265,12 +225,7 @@ const ObjectField = (props: any) => {
                           <tr  key={i+val+type}>
                             <td>{_t(`trans_table.${val}`)}</td>
                             <td>
-                              <img
-                                  className="avatar-img"
-                                  src={`https://images.ecency.com/u/${opVal[val][0]}/avatar`}
-                                  alt=""
-                                />
-                              <Link to={`/@${opVal[val][0]}`}> {opVal[val][0]}</Link>
+                              <UserAvatar username={opVal[val][0]} size="small"/>
                             </td>
                           </tr>
                           :

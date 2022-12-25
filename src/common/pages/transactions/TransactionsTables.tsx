@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-
-import "../../../style/dataTable/DataTables.scss";
 import { Link } from "react-router-dom";
 import {
   Box,
@@ -17,16 +15,15 @@ import {
   TextField
 } from "@material-ui/core";
 import { Container } from "react-bootstrap";
-import { HomeBlocksType } from "../../components/home/BlocksComponent";
 import moment from "moment";
 import { useSelector } from "react-redux";
-import { _t } from "../../i18n";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
-import TransactionOpTable from "./TransactionOpTable";
-import { AscendingIcon, DescendingIcon, showLessIcon, showMoreIcon } from "../../img/svg";
-import { sortBy } from "lodash";
-import TransactionOperationTable from "../User/UserOpTable";
+
+import { HomeBlocksType } from "../../components/home/BlocksComponent";
+import { _t } from "../../i18n";
+import { AscendingIcon, DescendingIcon } from "../../img/svg";
+import TransactionOperationTable from "../user/UserOpTable";
 import { TimestampField } from "../../components/fields/blockFields/DateTimeTable";
 
 interface Column {

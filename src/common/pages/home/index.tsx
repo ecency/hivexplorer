@@ -1,26 +1,26 @@
-import { pageMapDispatchToProps, pageMapStateToProps, PageProps } from "../common";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import moment from "moment";
+
+import { pageMapDispatchToProps, pageMapStateToProps, PageProps } from "../common";
 import Meta from "../../components/meta";
 import Theme from "../../components/theme";
-import { connect } from "react-redux";
 import { withPersistentScroll } from "../../components/with-persistent-scroll";
-import { Col, Container, Row, Card, Button, Form, Table } from "react-bootstrap";
-import "./HomePage.scss";
+import { Col, Container, Row, Card, Button, Form } from "react-bootstrap";
 import { ConfigItems } from "../../../../config";
 import HeadBlock, { Block } from "../../components/headBlock/headBlock";
 import HomeBlocks from "../../components/home/BlocksComponent";
 import HomeTransactions, { HomeTransactionType } from "../../components/home/TransactionsComponent";
-import { SingleTransaction } from "../transaction/SingleTransactionPage";
-import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { SingleTransaction } from "../transaction";
 import { _t } from "../../i18n";
-import { eyeBoldSvg, eyeSvg } from "../../img/svg";
-import moment from "moment";
 import Market from "../../components/market/market";
 import { setHeadBlockData } from "../../store/HeadBlock";
 import { getHeadBlock } from "../../api/urls";
 import SpinnerEffect from "../../components/loader/spinner";
+import { UserAvatar } from "../../components/user-avatar";
 
 interface User {
   map(
@@ -217,14 +217,7 @@ const Index = (props: PageProps) => {
                         return (
                           <>
                             <div key={index} className=" col-md-12 mt-2 mb-2">
-                              <Link to={`/@${suggestion}`}>
-                                <img
-                                  className="search-user"
-                                  src={`https://images.ecency.com/u/${suggestion}/avatar`}
-                                  alt={`suggestion`}
-                                />
-                                {suggestion}
-                              </Link>
+                              <UserAvatar username={suggestion} size="small"/>
                             </div>
                             <hr />
                           </>
