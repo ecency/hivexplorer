@@ -24,7 +24,6 @@ import { HomeBlocksType } from "../../components/home/BlocksComponent";
 import { _t } from "../../i18n";
 import { witnessesType } from ".";
 import { ExternalLink } from "../../img/svg";
-import "./witnesses.scss";
 import { dateToRelative } from "../../helper/parse-date";
 import { UserAvatar } from "../../components/user-avatar";
 
