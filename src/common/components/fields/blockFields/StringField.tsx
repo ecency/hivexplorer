@@ -7,6 +7,7 @@ import { _t } from "../../../i18n";
 import { Link } from "react-router-dom";
 import DefaultImage from "../../../img/default-avatar.png";
 import { DateTimeTable } from "./DateTimeTable";
+import {UserAvatar} from "../../user-avatar";
 
 const timestampKeys = [
   "time",
@@ -49,36 +50,9 @@ const StringField = (props: any) => {
       </Col>
       <Col md={9} xs={12}>
         {item === "witness" || item === "current_witness" ? (
-          <span>
-            <img
-              className="avatar-img"
-              onError={(e: any) => {
-                e.target.src = { DefaultImage };
-              }}
-              src={`https://images.ecency.com/u/${value}/avatar`}
-              alt=""
-            />{" "}
-            <Link to={`/@${value}`}>{value}</Link>
-          </span>
+          <UserAvatar username={value} size="small"/>
         ) : item === "recovery_account" ? (
-          <span>
-            <img
-              className="avatar-img"
-              onError={(e: any) => {
-                e.target.src = { DefaultImage };
-              }}
-              src={`https://images.ecency.com/u/${value}/avatar`}
-              alt=""
-            />{" "}
-            <Link
-              onClick={() => {
-                changeUser(value);
-              }}
-              to={`/@${value}`}
-            >
-              {value}
-            </Link>
-          </span>
+          <UserAvatar username={value} size="small"/>
         ) : item === "block_num" ? (
           <Link to={`/b/${value}`}>{value}</Link>
         ) : item === "transaction_ids" ? (

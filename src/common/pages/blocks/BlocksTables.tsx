@@ -17,6 +17,7 @@ import { HomeBlocksType } from "../../components/home/BlocksComponent";
 import { useSelector } from "react-redux";
 import { _t } from "../../i18n";
 import { Date_time_table } from "../../api/dateTime";
+import UserAvatar from "../../components/user-avatar";
 
 interface Column {
   label: string;
@@ -120,14 +121,7 @@ const BlocksTables = (props: any) => {
                           </TableCell>
                           <TableCell>{Date_time_table(`${block.timestamp}`, "hh:mm:ss")}</TableCell>
                           <TableCell>
-                            <span>
-                              <img
-                                className="avatar-img"
-                                src={`https://images.ecency.com/u/${block.witness}/avatar`}
-                                alt={block.witness}
-                              />
-                            </span>
-                            <Link to={`/@${block.witness}`}>{block.witness}</Link>
+                            <UserAvatar username={block.witness} size="small"/>
                           </TableCell>
                           <TableCell className="text-center">{block.transactions.length}</TableCell>
                           <TableCell className="text-center">{operationsTableCount}</TableCell>

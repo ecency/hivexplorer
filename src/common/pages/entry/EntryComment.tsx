@@ -19,6 +19,7 @@ import EntryProperties from "./EntryProperties";
 import { infoIcon, showLessIcon, showMoreIcon } from "../../img/svg";
 import SpinnerEffect from "../../components/loader/spinner";
 import ToggleButton from "react-toggle-button";
+import UserAvatar from "../../components/user-avatar";
 
 const EntryCommentPage = (props: any) => {
   const { match } = props;
@@ -201,14 +202,7 @@ const EntryCommentPage = (props: any) => {
                                             <Accordion.Body>
                                               <div>
                                                 <p>
-                                                  <img
-                                                    className="avatar-img"
-                                                    src={`https://images.ecency.com/u/${entry[key].author}/avatar`}
-                                                    alt=""
-                                                  />{" "}
-                                                  <Link to={`@${entry[key].author}`}>
-                                                    {entry[key].author}
-                                                  </Link>
+                                                  <UserAvatar username={entry[key].author} size="small"/>
                                                 </p>
                                                 <p>
                                                   {" "}

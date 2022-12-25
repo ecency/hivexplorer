@@ -16,6 +16,7 @@ import { showLessIcon, showMoreIcon } from "../../img/svg";
 import SpinnerEffect from "../../components/loader/spinner";
 import ToggleButton from "react-toggle-button";
 import DefaultImage from "../../img/default-avatar.png";
+import UserAvatar from "../../components/user-avatar";
 
 const EntryPage = (props: any) => {
   const { match } = props;
@@ -200,14 +201,7 @@ const EntryPage = (props: any) => {
                                             <Accordion.Body>
                                               <div>
                                                 <p>
-                                                  <img
-                                                    className="avatar-img"
-                                                    src={`https://images.ecency.com/u/${entry[key].author}/avatar`}
-                                                    alt=""
-                                                  />{" "}
-                                                  <Link to={`@${entry[key].author}`}>
-                                                    {entry[key].author}
-                                                  </Link>
+                                                  <UserAvatar username={entry[key].author} size="small"/>
                                                 </p>
                                                 <p>
                                                   {" "}
