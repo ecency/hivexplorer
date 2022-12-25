@@ -15,7 +15,8 @@
     "tokens-hive": "Hive",
     "tokens-he": "Hive Engine",
     "tokens-speak": "Speak Network",
-    "resources-about": "About"
+    "resources-about": "About",
+    "resources-api": "API Documentation"
   },
   "home": {
     "latest_block": "Latest Blocks",
@@ -130,7 +131,8 @@
     "latest_block": "Latest Blocks",
     "search_block": "Search Blocks",
     "search_proposals": "Search Proposals",
-    "search_witnesses": "Search Witnesses"
+    "search_witnesses": "Search Witnesses",
+    "search_apis": "Search API"
   },
   "about": {
     "page_title": "About",
@@ -232,7 +234,10 @@
     "other_history": "Other History",
     "witness_votes": "Witness Votes",
     "tags_usage": "Tags Usage",
-    "guest_bloggers": "Guest Bloggers"
+    "guest_bloggers": "Guest Bloggers",
+    "last_valid_time": "Last Valid Time",
+    "account": "Account",
+    "previous_owner_authority": "Previous Owner Authority"
   },
   "trans_table": {
     "type": "Type",
@@ -426,5 +431,81 @@
     "net_rshares": "Net RShares",
     "abs_rshares": "Abs Rshares",
     "active_votes": "Active Votes"
+  },
+  "api_documentation": {
+    "page_title": "Hivexplorer API",
+    "page_welcome": "<p>This site is designed to aid those interested in developing applications on the <strong><a href='https://hive.io' target='_blank'>Hive</a></strong> blockchain. REST API for quickly accessing data on Hive.</p><p>The code for this site is on <a href='https://github.com/ecency/hivexplorer'>github</a>. If you’d like to see a specific improvement, you can either submit a pull request or file an issue.</p>",
+    "example_url": "Example URL:",
+    "example_response": "Example Response:",
+    "example_end_point": "Example End Point:",
+    "parameters": "Parameters:"
+  },
+  "block_api": {
+    "title": "Blocks",
+    "description": "Used to query values related to the block plugin. These AppBase API methods are still under development and subject to change.",
+    "head_block": "Head Block (Global Dynamic Properties)",
+    "head_block_description": "Returns the current dynamic global properties. ",
+    "get_blocks_description": "Retrieve a full, signed block of the referenced block, or null if no matching block was found.",
+    "get_block_range_description": "Retrieve a range of full, signed blocks. The list may be shorter than requested if count blocks would take you past the current head block."
+  },
+  "api_transactions": {
+    "title": "Transactions",
+    "description": "Returns the details of the ,latest transactions, transaction by Id, by witnesses",
+    "get_transaction": "Get Transaction",
+    "get_transaction_description": "Returns the details of a transaction based on a transaction id. Parameters: trx_id:string"
+  },
+  "api_witnesses": {
+    "title": "Witnesses",
+    "description": "Returns the details of the witnesses, limit of witnesses etc",
+    "get_witnesses_by_vote": "Get Witnesses By Vote"
+  },
+  "api_proposals": {
+    "title": "Proposals",
+    "description": "Returns the details about Proposals, Proposals permlinks",
+    "get_proposals": "List Proposals",
+    "get_proposals_description": "Returns all proposals, starting with the specified creator or start date.",
+    "find_proposals": "Find Proposals (By ID)",
+    "find_proposals_description": "Finds proposals by proposal.id (not proposal.proposal_id)."
+  },
+  "condenser_api": {
+    "title": "Condenser API",
+    "description": "All calls in condenser_api will return [] as the argument, as the array argument passing is opaque and implemented in the API calls themselves. They follow the current argument formatting. Existing apps should only need to skip using login_api and send all of their calls to condenser_api without any other changes required to use Appbase.",
+    "get_active_votes_description": "Returns all votes for the given post.",
+    "get_witnesses_by_vote_description": "Returns current witnesses by vote. "
+  },
+  "account_history_api": {
+    "title": "Account History API",
+    "description": "Used to lookup account history information. These AppBase API methods are still under development and subject to change.",
+    "get_ops_in_block_description": "Returns all operations contained in a block.",
+    "get_account_history_description": "Returns a history of all operations for a given account. Parameters:"
+  },
+  "database_api": {
+    "title": "Database API",
+    "description": "Used to query information about accounts, transactions, and blockchain data.",
+    "find_proposals_description": "Finds proposals by proposal.id (not proposal.proposal_id).",
+    "get_proposals_description": "Returns all proposals, starting with the specified creator or start date."
+  },
+  "rc_api": {
+    "title": "RC API",
+    "description": "Allows querying of various Resource Credit metrics.",
+    "find_rc_accounts_description": "Returns the available resource credits of accounts.",
+    "get_witnesses_by_vote_description": "Returns accounts, queried by name. "
+  },
+  "bridge": {
+    "title": "Bridge API",
+    "description": "Presents data interpreted by the hivemind database as JSON-RPC.",
+    "get_discussion_description": "Gives a flattened discussion tree starting at given post."
+  },
+  "transaction_status_api": {
+    "title": "Transaction Status API",
+    "description": "This API is intended to evaluate a transaction status after calling condenser_api.broadcast_transaction."
+  },
+  "network_broadcast_api": {
+    "title": "Network Broadcast API",
+    "description": "Used to broadcast transactions and blocks. These AppBase API methods are still under development and subject to change."
+  },
+  "market_history_api": {
+    "title": "Market History API",
+    "description": "Used to lookup market history information. These AppBase API methods are still under development and subject to change."
   }
 }
