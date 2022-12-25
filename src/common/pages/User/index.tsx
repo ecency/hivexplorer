@@ -9,7 +9,7 @@ import { RCAccount } from "@hiveio/dhive/lib/chain/rc";
 import { pageMapDispatchToProps, pageMapStateToProps } from "../common";
 import { withPersistentScroll } from "../../components/with-persistent-scroll";
 import Theme from "../../components/theme";
-import UserHeader from "../../components/user/UserHeader";
+import UserHeader from "../../components/user-header";
 import { UserTypeList } from "./UserTypes";
 import StringField from "../../components/fields/blockFields/StringField";
 import UserTransactionsTable from "./userTransactionTable";

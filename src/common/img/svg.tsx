@@ -443,3 +443,9 @@ export const DefaultUser = (
     </g>
   </svg>
 );
+
+export const chevronDownWhite = (
+  <svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M19 9L12 16L5 9" stroke="#e0e0e0" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+  </svg>
+);

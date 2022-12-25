@@ -1,12 +1,8 @@
 import { RCAccount } from "@hiveio/dhive/lib/chain/rc";
-import { Tab, Tabs } from "@material-ui/core";
-import axios from "axios";
-import moment from "moment";
-import React, { useEffect, useState } from "react";
-import { Button, Card, Col, ProgressBar, Row } from "react-bootstrap";
+import React, { useState } from "react";
+import { Card, Col, ProgressBar, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { ConfigItems } from "../../../../config";
+
 import { CreatedDate } from "../../api/dateTime";
 import { _t } from "../../i18n";
 import {
@@ -17,7 +13,6 @@ import {
   websiteIcon,
   youtubeIcon
 } from "../../img/svg";
-import "./UserHeader.scss";
 
 interface RCState {
   rcAccount: null | RCAccount;

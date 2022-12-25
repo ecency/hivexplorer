@@ -75,9 +75,8 @@
                 .accordion-button{
                     background: $dark-grey-blue;
                     color: #fff;
-                    &::after{
-                       
-                       background-image: url('../../img/chevron-down-white.svg') !important;
+                    &::after {
+                        background-image: url("data:image/svg+xml,%3Csvg fill='none' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M19 9L12 16L5 9' stroke='%23e0e0e0' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'/%3E%3C/svg%3E");
                     }
                 }   
                 .card-header,.MuiTableCell-body{
