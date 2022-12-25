@@ -72,11 +72,12 @@ export const getUserTransaction = async (
   return r.data;
 };
 // Get Witness
-export const getWitnesses = async (limit: number) => {
-  const witnesses_url = `${ConfigItems.baseUrl}/api/get_witnesses_by_vote?limit=${limit}`;
-  const r = await axios.get(witnesses_url);
-  return r.data;
-};
+export const getWitnesses=async (limit:number)=>{
+    const witnesses_url=`${ConfigItems.baseUrl}/api/get_witnesses_by_vote?account=null&limit=${limit}`
+    const r = await axios.get(witnesses_url);
+    return r.data;
+}
+
 
 export const getDiscussion = async (user: string, permlink: string) => {
   const permlink_url = `${ConfigItems.baseUrl}/api/get_discussion?author=${user}&permlink=${permlink}`;
