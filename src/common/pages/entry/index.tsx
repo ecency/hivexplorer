@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { connect, useSelector } from "react-redux";
-import { pageMapDispatchToProps, pageMapStateToProps } from "../../pages/common";
+import { Accordion, Card, Container } from "react-bootstrap";
+import ToggleButton from "react-toggle-button";
+
+import { pageMapDispatchToProps, pageMapStateToProps } from "../common";
 import { withPersistentScroll } from "../../components/with-persistent-scroll";
 import Theme from "../../components/theme";
-import "./EntryPage.scss";
 import { _t } from "../../i18n";
 import { getDiscussion } from "../../api/urls";
-import { Accordion, Card, Container } from "react-bootstrap";
 import EntryBody from "./EntryBody";
 import BackToTopButton from "../../components/Buttons/BackToTop";
 import EntryVotes from "./EntryVotes";
 import EntryProperties from "./EntryProperties";
 import { showLessIcon, showMoreIcon } from "../../img/svg";
 import SpinnerEffect from "../../components/loader/spinner";
-import ToggleButton from "react-toggle-button";
 import DefaultImage from "../../img/default-avatar.png";
 import UserAvatar from "../../components/user-avatar";
 

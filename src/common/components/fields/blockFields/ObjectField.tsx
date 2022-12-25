@@ -9,7 +9,7 @@ import { ConfigItems } from "../../../../../config";
 import JsonField from "./JsonField";
 import JsonMetadata from "../../EntryContent/JsonMetadata";
 import { Date_time_table } from "../../../api/dateTime";
-import TransactionOperationTable from "../../../pages/User/UserOpTable";
+import TransactionOperationTable from "../../../pages/user/UserOpTable";
 import DefaultImage from "../../../img/default-avatar.png";
 import { LinkAccount } from "../../../pages/fields/common_fields";
 import { UserAvatar } from "../../user-avatar";

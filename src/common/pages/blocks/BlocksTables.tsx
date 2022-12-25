@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "../../../style/dataTable/DataTables.scss";
 import { Link } from "react-router-dom";
 import {
   Paper,
@@ -13,8 +12,9 @@ import {
   TextField
 } from "@material-ui/core";
 import { Container } from "react-bootstrap";
-import { HomeBlocksType } from "../../components/home/BlocksComponent";
 import { useSelector } from "react-redux";
+
+import { HomeBlocksType } from "../../components/home/BlocksComponent";
 import { _t } from "../../i18n";
 import { Date_time_table } from "../../api/dateTime";
 import UserAvatar from "../../components/user-avatar";

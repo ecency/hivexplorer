@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+
 import { pageMapDispatchToProps, pageMapStateToProps } from "../../pages/common";
 import { withPersistentScroll } from "../../components/with-persistent-scroll";
 import { _t } from "../../i18n";

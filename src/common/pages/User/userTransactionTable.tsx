@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "../../../style/dataTable/DataTables.scss";
 import { Link } from "react-router-dom";
 import {
   Paper,
@@ -15,10 +14,11 @@ import {
   Box
 } from "@material-ui/core";
 import { useSelector } from "react-redux";
-import { _t } from "../../i18n";
-import { UserTransactionType } from "./UserTypes";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
+
+import { _t } from "../../i18n";
+import { UserTransactionType } from "./UserTypes";
 import TransactionOperationTable from "./UserOpTable";
 import SpinnerEffect from "../../components/loader/spinner";
 import { TimestampField } from "../../components/fields/blockFields/DateTimeTable";

@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-
-import "../../../style/dataTable/DataTables.scss";
 import { Link } from "react-router-dom";
 import {
   Box,
@@ -17,12 +15,13 @@ import {
   TextField
 } from "@material-ui/core";
 import { Card, Container } from "react-bootstrap";
-import { HomeBlocksType } from "../../components/home/BlocksComponent";
 import moment from "moment";
 import { useSelector } from "react-redux";
-import { _t } from "../../i18n";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
+
+import { HomeBlocksType } from "../../components/home/BlocksComponent";
+import { _t } from "../../i18n";
 import { witnessesType } from "./WitnessesPage";
 import { ExternalLink } from "../../img/svg";
 import "./witnesses.scss";

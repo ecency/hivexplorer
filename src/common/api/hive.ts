@@ -1,6 +1,6 @@
 import { Client, RCAPI, utils } from "@hiveio/dhive";
 import SERVERS from "../constants/servers.json";
-import { UserTypeList } from "../pages/User/UserTypes";
+import { UserTypeList } from "../pages/user/UserTypes";
 import { RCAccount } from "@hiveio/dhive/lib/chain/rc";
 
 export const client = new Client(SERVERS, {

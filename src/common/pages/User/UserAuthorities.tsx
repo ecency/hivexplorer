@@ -1,9 +1,9 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
+
 import { _t } from "../../i18n";
 import { UserTransactionType } from "./UserTypes";
-import "../../../style/dataTable/DataTables.scss";
-import { Link } from "react-router-dom";
 
 interface Column {
   label: string;

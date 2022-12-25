@@ -1,24 +1,20 @@
 import React, { useEffect, useMemo, useState } from "react";
-import axios from "axios";
-import { match, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { connect, useSelector } from "react-redux";
-import { pageMapDispatchToProps, pageMapStateToProps, PageProps } from "../../pages/common";
+import { Accordion, Card, Container } from "react-bootstrap";
+import ToggleButton from "react-toggle-button";
+
+import { pageMapDispatchToProps, pageMapStateToProps } from "../common";
 import { withPersistentScroll } from "../../components/with-persistent-scroll";
 import Theme from "../../components/theme";
-import "./EntryPage.scss";
 import { _t } from "../../i18n";
-import { getContent, getDiscussion } from "../../api/urls";
-import { Accordion, Card, Container } from "react-bootstrap";
-import EntryBody from "./EntryBody";
+import { getDiscussion } from "../../api/urls";
+import EntryBody from "../entry/EntryBody";
 import BackToTopButton from "../../components/Buttons/BackToTop";
-import { EntryType } from "./EntryTypes";
-import moment from "moment";
-import parseDate from "../../helper/parse-date";
-import EntryVotes from "./EntryVotes";
-import EntryProperties from "./EntryProperties";
-import { infoIcon, showLessIcon, showMoreIcon } from "../../img/svg";
+import EntryVotes from "../entry/EntryVotes";
+import EntryProperties from "../entry/EntryProperties";
+import { showLessIcon, showMoreIcon } from "../../img/svg";
 import SpinnerEffect from "../../components/loader/spinner";
-import ToggleButton from "react-toggle-button";
 import UserAvatar from "../../components/user-avatar";
 
 const EntryCommentPage = (props: any) => {

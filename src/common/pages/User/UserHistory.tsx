@@ -1,8 +1,8 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
+
 import { _t } from "../../i18n";
 import { UserTransactionType } from "./UserTypes";
-import "../../../style/dataTable/DataTables.scss";
 
 interface Column {
   label: string;

@@ -4,12 +4,12 @@ import cookies from "js-cookie";
 import { useSelector, useDispatch } from "react-redux";
 import { Navbar, Nav, Container, NavDropdown, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import "./appHeader.scss";
-import { brightnessSvg, gbFlag, frFlag, hiveLogo, globeImg } from "../../img/svg";
+import { Link } from "react-router-dom";
+
+import { brightnessSvg, hiveLogo, globeImg } from "../../img/svg";
 import { languages } from "../../languages";
 import { toggleTheme } from "../../store/global/index";
 import { _t } from "../../i18n";
-import { Link } from "react-router-dom";
 
 const RESOURCES_MENU = [
   {

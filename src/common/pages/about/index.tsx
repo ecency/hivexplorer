@@ -1,12 +1,13 @@
-import { pageMapDispatchToProps, pageMapStateToProps, PageProps } from "../common";
 import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import { Container } from "react-bootstrap";
+
+import { pageMapDispatchToProps, pageMapStateToProps, PageProps } from "../common";
 import Meta from "../../components/meta";
 import Theme from "../../components/theme";
 import { getMetaProps } from "../../util/get-meta-props";
-import { connect } from "react-redux";
 import { withPersistentScroll } from "../../components/with-persistent-scroll";
 import { _t } from "../../i18n";
-import { Container } from "react-bootstrap";
 
 const About = (props: PageProps) => {
   const [metaProps, setMetaProps] = useState({});

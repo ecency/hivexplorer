@@ -1,6 +1,5 @@
 import moment from "moment";
 import React from "react";
-import { Button, OverlayTrigger } from "react-bootstrap";
 import Tooltip from "../../tooltip";
 import { Date_time_table } from "../../../api/dateTime";
 import { _t } from "../../../i18n";

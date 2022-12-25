@@ -1,0 +1,54 @@
+.data-table-hive{
+    .trans-table {
+        margin: auto;
+        width: 100%;
+        & th, td{
+            border: 1px solid #706f70;
+        border-collapse: collapse;
+        }
+        tr td:first-child{
+            min-width: 100px;
+        }
+        td{
+            padding: 10px;
+            word-break: break-all;
+        }
+        
+      }
+      .trans-card{
+        box-shadow: 0 0.1rem 1rem rgb(0 0 0 / 10%);
+        width: 80%;
+        margin: auto;
+        &-dark{
+            background-color: #161d26;
+        }
+        &-light{
+            background-color: #f5f5f5;
+        }
+    }
+      .time-date-table {
+        & th, td{
+            border: 1px solid #706f70;
+        border-collapse: collapse;
+        }
+        tr td:first-child{
+            min-width: 100px;
+        }
+        td{
+            padding: 10px ;
+            word-break: break-word;
+        }
+        
+      }
+      .card-header-sort{
+        width: 110px;
+      }
+      .col-w-240{
+        width: 240px !important;
+      }
+      .col-w-110{
+        width: 110x !important;
+      }
+  
+      
+}

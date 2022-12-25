@@ -2,19 +2,17 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, match } from "react-router-dom";
 import { connect } from "react-redux";
-import { pageMapDispatchToProps, pageMapStateToProps, PageProps } from "../common";
-import { withPersistentScroll } from "../../components/with-persistent-scroll";
-import { ConfigItems } from "../../../../config";
-import { HomeTransactionType } from "../../components/home/TransactionsComponent";
-import Theme from "../../components/theme";
 import { Container } from "react-bootstrap";
-import ProposalCard from "./ProposalCard";
-import "./proposalsPage.scss";
+import { renderPostBody } from "@ecency/render-helper";
+
+import { pageMapDispatchToProps, pageMapStateToProps } from "../common";
+import { withPersistentScroll } from "../../components/with-persistent-scroll";
+import Theme from "../../components/theme";
+import ProposalCard from "../proposals/ProposalCard";
 import { getContent, getSingleProposal } from "../../api/urls";
 import { _t } from "../../i18n";
-import { proposalsType } from "./ProposalsPage";
+import { proposalsType } from "../proposals";
 import { EntryType } from "../entry/EntryTypes";
-import { renderPostBody, setProxyBase, catchPostImage } from "@ecency/render-helper";
 import SpinnerEffect from "../../components/loader/spinner";
 
 const SingleProposalPage = (props: any) => {

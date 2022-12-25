@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { pageMapDispatchToProps, pageMapStateToProps } from "../../pages/common";
-import { withPersistentScroll } from "../../components/with-persistent-scroll";
-import { _t } from "../../i18n";
-import { entryVotesType } from "./EntryTypes";
 import { Link } from "react-router-dom";
 import {
   Table,
@@ -14,8 +10,12 @@ import {
   TableRow
 } from "@material-ui/core";
 import moment from "moment";
-import axios from "axios";
+
 import { getEntryVotes } from "../../api/urls";
+import { pageMapDispatchToProps, pageMapStateToProps } from "../../pages/common";
+import { withPersistentScroll } from "../../components/with-persistent-scroll";
+import { _t } from "../../i18n";
+import { entryVotesType } from "./EntryTypes";
 
 interface Column {
   label: string;
