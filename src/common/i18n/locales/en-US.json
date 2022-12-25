@@ -24,7 +24,7 @@
   "common": {
     "id": "ID",
     "by": "By",
-    "for": "For",
+    "for": "for",
     "type": "Type",
     "value": "Value",
     "block": "Block",

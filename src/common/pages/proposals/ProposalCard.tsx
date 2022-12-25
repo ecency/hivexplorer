@@ -8,6 +8,7 @@ import { _t } from "../../i18n";
 import { ClippedLink } from "../../img/svg";
 import { CreatedDate } from "../../api/dateTime";
 import moment from "moment";
+import { UserAvatar } from "../../components/user-avatar";
 
 export interface proposalsType {
   id: Number;
@@ -55,13 +56,7 @@ const ProposalCard = (props: any) => {
           <Card.Body>
             {creator && (
               <p className="mb-2">
-                <img
-                  className="avatar-img"
-                  src={`https://images.ecency.com/u/${creator}/avatar`}
-                  alt=""
-                />
-                {` ${_t("common.by")} `}
-                <Link to={`/@${creator}`}>{creator}</Link>
+                <UserAvatar username={creator} size="small"/>
                 {receiver && receiver !== creator && (
                   <>
                     {` ${_t("common.for")} `}

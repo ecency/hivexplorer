@@ -25,7 +25,6 @@ const EntryCommentPage = (props: any) => {
   const { match } = props;
   const userName = match.params.user_id;
   const permLink = match.params.permlink;
-  const permlink_url = getDiscussion(userName, permLink);
   const [entry, setEntry] = useState<any>();
   const currTheme = useSelector((state: any) => state.global.theme);
   const themeContrastColor = currTheme === "day" ? "black" : "white";
@@ -61,9 +60,9 @@ const EntryCommentPage = (props: any) => {
               .slice(0, 1)
               .map((key, i: number) => {
                 return (
-                  <>
+                  <span key={`${entry[key].author}-${entry[key].permLink}-${i}`}>
                     <h2>{entry[key].title}</h2>
-                    <div key={i}>
+                    <div>
                       <div className="entry-header">
                         <div className="mr-2">
                           <img
@@ -280,7 +279,7 @@ const EntryCommentPage = (props: any) => {
                         </div>
                       </Accordion>
                     </div>
-                  </>
+                  </span>
                 );
               })}
         </>

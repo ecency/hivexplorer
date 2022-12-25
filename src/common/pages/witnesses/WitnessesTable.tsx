@@ -27,6 +27,7 @@ import { witnessesType } from "./WitnessesPage";
 import { ExternalLink } from "../../img/svg";
 import "./witnesses.scss";
 import { dateToRelative } from "../../helper/parse-date";
+import { UserAvatar } from "../../components/user-avatar";
 
 interface Column {
   label: string;
@@ -115,14 +116,7 @@ const WitnessesTables = (props: any) => {
         <TableRow className="main-table-row" hover={true} role="checkbox" tabIndex={-1}>
           <TableCell>{witness.id}</TableCell>
           <TableCell>
-            <span>
-              <img
-                className="avatar-img"
-                src={`https://images.ecency.com/u/${witness.owner}/avatar`}
-                alt={witness.owner}
-              />
-            </span>
-            <Link to={`/@${witness.owner}`}>{witness.owner}</Link>
+            <UserAvatar username={witness.owner} size="small"/>
           </TableCell>
           <TableCell>{`${witness.votes.substring(0, 6)}m`}</TableCell>
           <TableCell>

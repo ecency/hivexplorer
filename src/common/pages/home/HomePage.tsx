@@ -21,6 +21,7 @@ import Market from "../../components/market/market";
 import { setHeadBlockData } from "../../store/HeadBlock";
 import { getHeadBlock } from "../../api/urls";
 import SpinnerEffect from "../../components/loader/spinner";
+import { UserAvatar } from "../../components/user-avatar";
 
 interface User {
   map(
@@ -217,14 +218,7 @@ const Index = (props: PageProps) => {
                         return (
                           <>
                             <div key={index} className=" col-md-12 mt-2 mb-2">
-                              <Link to={`/@${suggestion}`}>
-                                <img
-                                  className="search-user"
-                                  src={`https://images.ecency.com/u/${suggestion}/avatar`}
-                                  alt={`suggestion`}
-                                />
-                                {suggestion}
-                              </Link>
+                              <UserAvatar username={suggestion} size="small"/>
                             </div>
                             <hr />
                           </>
