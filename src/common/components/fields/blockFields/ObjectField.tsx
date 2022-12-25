@@ -1,18 +1,16 @@
 import React, { useState } from "react";
 import { Button, Col, ListGroup, Row } from "react-bootstrap";
-import { infoIcon, showLessIcon, showMoreIcon, trxIcon } from "../../../img/svg";
-import "./ObjectField.scss";
 import { useSelector } from "react-redux";
-import { _t } from "../../../i18n";
 import { Link } from "react-router-dom";
-import { ConfigItems } from "../../../../../config";
+
+import { _t } from "../../../i18n";
 import JsonField from "./JsonField";
 import JsonMetadata from "../../EntryContent/JsonMetadata";
 import { Date_time_table } from "../../../api/dateTime";
-import TransactionOperationTable from "../../../pages/user/UserOpTable";
-import DefaultImage from "../../../img/default-avatar.png";
 import { LinkAccount } from "../../../pages/fields/common_fields";
 import { UserAvatar } from "../../user-avatar";
+import { infoIcon, showLessIcon, showMoreIcon, trxIcon } from "../../../img/svg";
+import "./ObjectField.scss";
 
 const timestampKeys = [
   "time",
