@@ -23,7 +23,7 @@ import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import { HomeBlocksType } from "../../components/home/BlocksComponent";
 import { _t } from "../../i18n";
 import { AscendingIcon, DescendingIcon } from "../../img/svg";
-import TransactionOperationTable from "../user/UserOpTable";
+import TransactionOperationTable from "../profile/UserOpTable";
 import { TimestampField } from "../../components/fields/blockFields/DateTimeTable";
 
 interface Column {
