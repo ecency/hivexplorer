@@ -1,14 +1,14 @@
-import { pageMapDispatchToProps, pageMapStateToProps, PageProps } from '../common';
 import React, { useEffect, useState } from 'react';
-import Theme from '../../components/theme';
 import { connect, useSelector } from 'react-redux';
+import { Accordion, Container } from 'react-bootstrap';
+import { TextField, LinearProgress } from '@material-ui/core';
+
+import Theme from '../../components/theme';
+import { pageMapDispatchToProps, pageMapStateToProps, PageProps } from '../common';
 import { withPersistentScroll } from '../../components/with-persistent-scroll';
 import { _t } from '../../i18n';
-import { Accordion, Container } from 'react-bootstrap';
-import './api_documentation.scss'
 import BackToTopButton from '../../components/Buttons/BackToTop';
 import { methods as methodsData } from '../../../server/handlers/methods';
-import { TextField, LinearProgress } from '@material-ui/core';
 import Api_accordion_body from './Api_accordion_body';
 
 interface api_item_types {
@@ -17,8 +17,7 @@ interface api_item_types {
   description:string,
   url:string,
   parameter:string,
-  response:string,
-  end_point:string
+  response:string
 }
 const APIdocumentation = (props: PageProps) => {
   let methods = methodsData
@@ -67,7 +66,6 @@ const APIdocumentation = (props: PageProps) => {
 
 
   return <>
-
     <Theme global={props.global} />
     <Container className="data-table-hive api-page-container py-5">
       <div className="witness-header">
@@ -89,8 +87,8 @@ const APIdocumentation = (props: PageProps) => {
       <>{!loading && filterVal && Object.keys(collection).map((api, i: number) => {
         const urlCheck = collection[api].some((item: any) => item.hasOwnProperty('url'))
         return (
-          <>
-            {collection[api].length !== 0 && urlCheck && <div key={i + api} className='py-2 api-blocks'>
+          <span key={`${i}-${api}`}>
+            {collection[api].length !== 0 && urlCheck && <div className='py-2 api-blocks'>
               <div >
                 <h1>{_t(`${api}.title`)}</h1>
                 <p>{_t(`${api}.description`)}</p>
@@ -98,8 +96,8 @@ const APIdocumentation = (props: PageProps) => {
               <Accordion className={currTheme === "day" ? "accordion-day" : "accordion_night"} alwaysOpen={true}>
                 {collection[api].map((item: api_item_types, i: number) => {
                   return (
-                    <>
-                      {item.url && <Accordion.Item key={i + item.method} eventKey={`${i}`} >
+                    <span key={`${i}-${item.method}`}>
+                      {item.url && <Accordion.Item eventKey={`${i}`} >
                         <Accordion.Header>
                           <span>{item.method}</span>
                         </Accordion.Header>
@@ -108,18 +106,17 @@ const APIdocumentation = (props: PageProps) => {
                             description={item.description}
                             response={item.response}
                             url={item.url}
-                            end_point={item.end_point}
                             parameter={item.parameter}
                           />
                         </Accordion.Body>
                       </Accordion.Item>}
-                    </>
+                    </span>
                   )
                 })}
               </Accordion>
             </div>
             }
-          </>
+          </span>
         )
       })}
       </>

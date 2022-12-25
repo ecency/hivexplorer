@@ -28,7 +28,7 @@ const ProposalsPage = loadable(() => import("./pages/proposals"));
 const SingleProposalPage = loadable(() => import("./pages/proposal"));
 const EntryPage = loadable(() => import("./pages/entry"));
 const EntryComment = loadable(() => import("./pages/entry-comment"));
-const APIDoc= loadable(() => import('./pages/apiDocumentation/Api_documentation'));
+const APIDoc= loadable(() => import('./pages/documentation'));
 
 const App = ({ setLang }: any) => {
   const dispatch = useDispatch();
