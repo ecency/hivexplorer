@@ -13,8 +13,12 @@ import { _t } from "../../i18n";
 
 const RESOURCES_MENU = [
   {
-    name: _t("nav.resources-about"),
-    link: `/about`
+    name:_t("nav.resources-about"),
+    link:`/about`
+  },
+  {
+    name:_t("nav.resources-api"),
+    link:`/api-docs`
   }
 ];
 const BLOCKCHAIN_MENU = [

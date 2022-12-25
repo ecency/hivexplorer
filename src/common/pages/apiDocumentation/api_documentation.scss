@@ -1,0 +1,132 @@
+@import '../../../style/colors';
+.api-page-container{
+    .search-field{
+        width: 500px;
+        display: flex;
+        margin: auto;
+        margin-bottom: 25px;
+        ::before{
+            display: none ;
+        }
+        input{
+            padding: 10px !important;
+        }
+        .MuiInputBase-input {
+            border: 1px solid #e0e0e0 !important;
+         
+        }
+        @media (max-width:768px){
+            width: 100%;
+        }
+    }
+    .accordion{
+        .accordion-body{
+            word-break: break-all;
+            .pre-raw-format{
+                display: block;
+                white-space: pre-wrap;
+                word-break: break-word;
+                background: transparent;
+                border: none;
+                margin: 0;
+                padding: 0 0 0.5em;
+            }
+            table{
+                max-width: 95%;
+                & th, td{
+                    border: 1px solid #706f70;
+                border-collapse: collapse;
+                    padding: 5px;
+                    word-break: break-word;
+                }
+            }
+        }
+        .accordion-button{
+            display: flex;
+            justify-content: space-between;
+            &:focus{
+                box-shadow: none !important;
+            }
+            // &::after{
+            //     display: none;
+            // }
+        }
+        &.accordion-day{
+            .accordion-header{
+                .accordion-button{
+                    background-color: #f5f5f5;
+                  
+                }
+            }
+            table{
+                th{
+                    background-color: #f5f5f5;
+                }
+            }
+            .text-p{
+                color: #333333;
+            }
+        }   
+        &.accordion_night{
+            background-color: transparent;
+            .accordion-item{
+                background-color: transparent;
+                color: #fff;
+                .accordion-button{
+                    background: $dark-grey-blue;
+                    color: #fff;
+                    &::after{
+                       
+                       background-image: url('../../img/chevron-down-white.svg') !important;
+                    }
+                }   
+                .card-header,.MuiTableCell-body{
+                    color: #fff;
+                }
+                .api-response{
+                    background-color: $dark-grey-blue !important;
+                    color: #e0e0e0 !important;
+                }
+                table{
+                    th{
+                        background-color: $dark-grey-blue !important;
+                    }
+                }
+                .text-p{
+                    color: #e0e0e0;
+                }
+                
+            }
+          
+        }
+        .accordion-item:first-of-type,.accordion-item:last-of-type{
+            border-radius: 0;
+        }
+        .api-response{
+            display: block;
+            padding: 8.5px;
+            margin: 0 0 9px;
+            font-size: 12px;
+            line-height: 18px;
+            word-break: break-all;
+            word-wrap: break-word;
+            max-height: 400px;
+            background-color: #f5f5f5;
+            border: 1px solid #ccc;
+            border: 1px solid rgba(0, 0, 0, 0.15);
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            color: #333333;
+        }
+        
+    }
+
+}
+.theme-night{
+    .api-page-container{
+        .search-field{
+            background-color: #e0e0e0;
+        }
+    }
+}
