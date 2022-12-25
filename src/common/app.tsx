@@ -24,7 +24,7 @@ const AllTransactions = loadable(() => import("./pages/transactions"));
 const SingleTransaction = loadable(() => import("./pages/transaction"));
 const MultipleBlocks = loadable(() => import("./pages/blocks"));
 const UserPage = loadable(() => import("./pages/user"));
-const WitnessesPage = loadable(() => import("./pages/witnesses/WitnessesPage"));
+const WitnessesPage = loadable(() => import("./pages/witnesses"));
 const ProposalsPage = loadable(() => import("./pages/proposals"));
 const SingleProposalPage = loadable(() => import("./pages/proposal"));
 const EntryPage = loadable(() => import("./pages/entry"));

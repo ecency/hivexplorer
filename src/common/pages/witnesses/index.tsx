@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Container } from "react-bootstrap";
 
-import { pageMapDispatchToProps, pageMapStateToProps } from "../../pages/common";
+import { pageMapDispatchToProps, pageMapStateToProps } from "../common";
 import { withPersistentScroll } from "../../components/with-persistent-scroll";
 import Theme from "../../components/theme";
 import WitnessesTables from "./WitnessesTable";

@@ -11,7 +11,6 @@ import { withPersistentScroll } from "../../components/with-persistent-scroll";
 import Theme from "../../components/theme";
 import UserHeader from "../../components/user/UserHeader";
 import { UserTypeList } from "./UserTypes";
-import "./UserPage.scss";
 import StringField from "../../components/fields/blockFields/StringField";
 import UserTransactionsTable from "./userTransactionTable";
 import ObjectField from "../../components/fields/blockFields/ObjectField";
