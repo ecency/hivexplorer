@@ -6,7 +6,7 @@ export const methods = [
     api: "condenser_api",
     method: "get_trending_tags",
     params: ["tag", "limit"],
-    url:`${ConfigItems.baseUrl}/api/get_trending?block_num=867965`,
+    url:`${ConfigItems.baseUrl}api/get_trending_tags?start_tag=%22aaa%22&limit=10`,
      parameter:`<table>
   <thead>
     <tr>
