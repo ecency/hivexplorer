@@ -44,8 +44,6 @@ const APIdocumentation = (props: PageProps) => {
   });
   useEffect(() => {
     setLoading(true);
-
-
     const timer = setTimeout(() => {
       setLoading(false);
       let data = ["block_api", "condenser_api", "database_api", "rc_api", "bridge", "account_history_api", "market_history_api", "network_broadcast_api", "transaction_status_api"]
@@ -120,7 +118,7 @@ const APIdocumentation = (props: PageProps) => {
         )
       })}
       </>
-      {!loading && !filterVal && <h3 className='py-2 text-center'>No Result</h3>}
+      {!loading && !filterVal && <h3 className='py-2 text-center'>{_t('common.no_search_result')}</h3>}
     </Container>
     <BackToTopButton />
   </>;
