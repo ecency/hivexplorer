@@ -78,9 +78,9 @@ export const methods = [
     params: ["query"]
   },
   {
-    api: "condenser_api",
+    api: "block_api",
     method: "get_block_header",
-    params: ["block_num"],
+    params: ["block_num"]
   },
   {
     api: "block_api",
