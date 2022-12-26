@@ -5,7 +5,39 @@ export const methods = [
   {
     api: "condenser_api",
     method: "get_trending_tags",
-    params: ["tag", "limit"]
+    params: ["tag", "limit"],
+    url:`${ConfigItems.baseUrl}/api/get_trending?block_num=867965`,
+     parameter:`<table>
+  <thead>
+    <tr>
+      <th><code class="language-plaintext highlighter-rouge">tag</code> (string)</th>
+      <th><code class="language-plaintext highlighter-rouge">limit</code> (int)</th>
+      <th>&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">null</code></td>
+      <td>100</td>
+      <td>Queries the top 100 trending tags.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">"hive"</code></td>
+      <td>10</td>
+      <td>Queries the tags after “hive”, up to 10 tags.</td>
+    </tr>
+  </tbody>
+</table>`,
+     response: `[
+  {
+    "name": "",
+    "total_payouts": "0.000 HBD",
+    "net_votes": 0,
+    "top_posts": 0,
+    "comments": 0,
+    "trending": ""
+  }
+]`
   },
   {
     api: "condenser_api",
@@ -52,6 +84,7 @@ export const methods = [
     method: "get_discussions_by_children",
     params: ["query"]
   },
+  
   {
     api: "condenser_api",
     method: "get_discussions_by_hot",
