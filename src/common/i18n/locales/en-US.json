@@ -446,7 +446,8 @@
     "head_block":"Head Block (Global Dynamic Properties)",
     "head_block_description":"Returns the current dynamic global properties. ",
     "get_blocks_description":"Retrieve a full, signed block of the referenced block, or null if no matching block was found.",
-    "get_block_range_description":"Retrieve a range of full, signed blocks. The list may be shorter than requested if count blocks would take you past the current head block."
+    "get_block_range_description":"Retrieve a range of full, signed blocks. The list may be shorter than requested if count blocks would take you past the current head block.",
+    "get_trending_description":"Returns the list of trending tags."
   },
   "api_transactions":{
     "title":"Transactions",
