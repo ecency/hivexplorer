@@ -5,9 +5,10 @@ export const methods = [
   {
     api: "condenser_api",
     method: "get_trending_tags",
+    description:_t("block_api.get_trending_tags_description"),
     params: ["tag", "limit"],
     url:`${ConfigItems.baseUrl}api/get_trending_tags?start_tag=%22aaa%22&limit=10`,
-     parameter:`<table>
+    parameter:`<table>
   <thead>
     <tr>
       <th><code class="language-plaintext highlighter-rouge">tag</code> (string)</th>
@@ -42,7 +43,24 @@ export const methods = [
   {
     api: "condenser_api",
     method: "get_tags_used_by_author",
+     description:_t("block_api.get_tags_used_by_author_description"),
     params: ["account"]
+    url:`${ConfigItems.baseUrl}api/get_tags_used_by_author?account=75`,
+    parameter:' <table>
+  <thead>
+    <tr>
+      <th><code class="language-plaintext highlighter-rouge">account</code> (string)</th>
+      <th>&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">"hiveio"</code></td>
+      <td>Queries the tags used by the account named “hiveio”.</td>
+    </tr>
+  </tbody>
+</table>
+ response: '[]'
   },
   {
     api: "condenser_api",
