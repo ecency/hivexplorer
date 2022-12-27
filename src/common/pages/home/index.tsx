@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+//import { useHistory } from "react-router-dom";
+//import { browserHistory } from 'react-router';
 import axios from "axios";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
@@ -127,9 +129,11 @@ const Index = (props: PageProps) => {
       if (numeric.test(value)) {
         const blocks = `${ConfigItems.baseUrl}/api/get_ops_in_block?block_num=${value}`;
         axios.get(blocks).then((res) => {
-          res.data.ops.length > 0
-            ? setSearchResultStateHandler(res.data.ops, undefined, undefined, false)
-            : setSearchResultStateHandler(undefined, undefined, undefined, true);
+          if ( res.data.ops.length > 0 ) {
+            res.data.ops.length > 5 ? setSearchResultStateHandler(res.data.ops.slice(0, 5), undefined, undefined, false) : setSearchResultStateHandler(res.data.ops, undefined, undefined, false)
+          } else {
+            setSearchResultStateHandler(undefined, undefined, undefined, true);
+          }
         });
       } else if (value.length < 16 && AllInputPattern.test(value)) {
         const accounts = `${ConfigItems.baseUrl}/api/lookup_accounts?lower_bound_name=${value}&limit=100`;
@@ -142,9 +146,11 @@ const Index = (props: PageProps) => {
               return usr.match(regex);
             });
           }
-          matches.length > 0
-            ? setSearchResultStateHandler(undefined, matches, undefined, false)
-            : setSearchResultStateHandler(undefined, undefined, undefined, true);
+          if ( matches.length > 0 ) {
+            matches.length > 5 ? setSearchResultStateHandler(undefined, matches.slice(0, 5), undefined, false) : setSearchResultStateHandler(undefined, matches, undefined, false)
+          } else {
+            setSearchResultStateHandler(undefined, undefined, undefined, true);
+          }
         });
       } else if (value.length > 16) {
         const accounts = `${ConfigItems.baseUrl}/api/get_transaction?trx_id=${value}`;
@@ -177,6 +183,39 @@ const Index = (props: PageProps) => {
     return () => clearTimeout(delayDebounceFn);
   }, [enteredValue]);
 
+  const redirectToFirstLink = (e: any) => {
+    console.log('before submit');
+    //e.preventDefault()
+    // console.log('before submit');
+    // if (e.key === 'Enter') {
+    //   const history = useHistory();
+
+    //   console.log("Aslam yes entered");
+    //   history.push({
+    //     pathname:  `/abc`,
+    //  })
+    //   if(accountsApiResult) {
+    //     history.push({
+    //       pathname:  `/@${accountsApiResult[0]}`,
+    //    })
+    //   }
+    //   if(blocksApiResult)  {
+    //     history.push({
+    //       pathname:  `/b/${blocksApiResult[0].block}`,
+    //    })
+    //   }
+    //   if(transationsApiResult)  {
+    //     history.push({
+    //       pathname:  `/tx/${transationsApiResult.transaction_id}`,
+    //    })
+    //   }
+    // return <Redirect to='/login'  />
+    // if(accountsApiResult) return <Redirect to={`/@${accountsApiResult[0]}`}  />
+    // if(blocksApiResult) return <Redirect to={`/b/${blocksApiResult[0].block}`}  />
+    // if(transationsApiResult)  return <Redirect to={`/tx/${transationsApiResult.transaction_id}`}  />
+    //}
+    
+  }
   return (
     <>
       <Meta {...metaProps} />
@@ -186,11 +225,12 @@ const Index = (props: PageProps) => {
           <Row>
             <Col md={6}>
               <div style={{ verticalAlign: "center" }}>
-                <Form className="m-0 search-form">
+                <Form /* onSubmit={(e) => e.preventDefault()} */ className="m-0 search-form">
                   <Form.Group className=" col-12 p-0">
                     <Form.Control
                       className="rounded"
                       onChange={(e) => setEnteredValue(e.target.value)}
+                      //onKeyPress={(e) => redirectToFirstLink(e)}
                       type="text"
                       placeholder="Block, Account, Transaction"
                     />
@@ -216,8 +256,16 @@ const Index = (props: PageProps) => {
                       accountsApiResult.map((suggestion, index) => {
                         return (
                           <>
-                            <div key={index} className=" col-md-12 mt-2 mb-2">
-                              <UserAvatar username={suggestion} size="small"/>
+                            <div  style={{background: (index===0 ? '#E6E6E6' : 'none') }}  key={index} className=" col-md-12 mt-2 p-1 rounded-2 mb-2">
+
+                              <Link to={`/@${suggestion}`}>
+                                <img
+                                  className="search-user"
+                                  src={`https://images.ecency.com/u/${suggestion}/avatar`}
+                                  alt={`suggestion`}
+                                />
+                                {suggestion}
+                              </Link>
                             </div>
                             <hr />
                           </>
