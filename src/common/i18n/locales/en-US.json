@@ -509,15 +509,27 @@
     "get_blog_description":"Returns the list of blog entries for an account.",
     "get_account_reputations_description":"Returns a list of account reputations.",
     "get_reblogged_by_description":"Returns a list of authors that have reblogged a post.",
-    "broadcast_transaction_description":"Used to broadcast a transaction."
-    "broadcast_transaction_synchronous":"Used to broadcast a transaction and waits for it to be processed synchronously."
-    "get_ticker":"Returns the market ticker for the internal HBD:HIVE market."
-    "get_volume":"Returns the market volume for the past 24 hours."
-    "get_trade_history":"Returns the trade history for the internal HBD:HIVE market. "
-    "get_recent_trades":"Returns the most recent trades for the internal HBD:HIVE market."
-    "get_market_history":"Returns the market history for the internal HBD:HIVE market."
-    "get_market_history_buckets":"Returns the bucket seconds being tracked by the plugin."
-    "list_proposal_votes":"Returns all proposal votes, starting with the specified voter or proposal"
+    "broadcast_transaction_description":"Used to broadcast a transaction.",
+    "broadcast_transaction_synchronous_description":"Used to broadcast a transaction and waits for it to be processed synchronously.",
+    "get_ticker_description":"Returns the market ticker for the internal HBD:HIVE market.",
+    "get_volume_description":"Returns the market volume for the past 24 hours.",
+    "get_trade_history_description":"Returns the trade history for the internal HBD:HIVE market.",
+    "get_recent_trades_description":"Returns the most recent trades for the internal HBD:HIVE market.",
+    "get_market_history_description":"Returns the market history for the internal HBD:HIVE market.",
+    "get_market_history_buckets_description":"Returns the bucket seconds being tracked by the plugin.",
+    "list_proposal_votes_description":"Returns all proposal votes, starting with the specified voter or proposal",
+    "get_community_description":"Gets community details.",
+    "list_communities_description":"Gets community information",
+    "get_post_description":"Gives single selected post.",
+    "get_profile_description":"Gets profile information.",
+    "get_account_posts_description":"Lists posts related to a given account.",
+    "get_ranked_posts_description":"Gets ranked posts.",
+    "account_notifications_description":"Account notifications information.",
+    "list_all_subscriptions_description":"List all subscriptions, titles, and roles to a community for an account.",
+    "list_subscribers_description":"Gets a list of subscribers for a given community.",
+    "get_follow_list_description":"Returns blacklisted/muted accounts or list of blacklists/mute lists followed by a given observer.",
+    "does_user_follow_any_lists_description":"Checks if a given observer follows any blacklists or mute lists.",
+    "get_relationship_between_accounts_description":"Tells what relations connect given accounts from the perspective of first account."
   },
   "api_transactions":{
     "title":"Transactions",
