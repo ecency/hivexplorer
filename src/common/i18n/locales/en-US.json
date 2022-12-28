@@ -510,6 +510,14 @@
     "get_account_reputations_description":"Returns a list of account reputations.",
     "get_reblogged_by_description":"Returns a list of authors that have reblogged a post.",
     "broadcast_transaction_description":"Used to broadcast a transaction."
+    "broadcast_transaction_synchronous":"Used to broadcast a transaction and waits for it to be processed synchronously."
+    "get_ticker":"Returns the market ticker for the internal HBD:HIVE market."
+    "get_volume":"Returns the market volume for the past 24 hours."
+    "get_trade_history":"Returns the trade history for the internal HBD:HIVE market. "
+    "get_recent_trades":"Returns the most recent trades for the internal HBD:HIVE market."
+    "get_market_history":"Returns the market history for the internal HBD:HIVE market."
+    "get_market_history_buckets":"Returns the bucket seconds being tracked by the plugin."
+    "list_proposal_votes":"Returns all proposal votes, starting with the specified voter or proposal"
   },
   "api_transactions":{
     "title":"Transactions",
