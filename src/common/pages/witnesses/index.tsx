@@ -5,7 +5,7 @@ import { Container } from "react-bootstrap";
 import { pageMapDispatchToProps, pageMapStateToProps } from "../common";
 import { withPersistentScroll } from "../../components/with-persistent-scroll";
 import Theme from "../../components/theme";
-import WitnessesTables from "./WitnessesTable";
+import WitnessesTables from "./witnessesTable";
 import { _t } from "../../i18n";
 import SpinnerEffect from "../../components/loader/spinner";
 import { getWitnesses } from "../../api/urls";

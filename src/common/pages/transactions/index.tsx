@@ -5,7 +5,7 @@ import { pageMapDispatchToProps, pageMapStateToProps, PageProps } from "../commo
 import { withPersistentScroll } from "../../components/with-persistent-scroll";
 import { HomeTransactionType } from "../../components/home/TransactionsComponent";
 import Theme from "../../components/theme";
-import TransactionsTables from "./TransactionsTables";
+import TransactionsTables from "./transactionsTables";
 import SpinnerEffect from "../../components/loader/spinner";
 import BackToTopButton from "../../components/Buttons/BackToTop";
 import { getHeadBlock, getTransactions } from "../../api/urls";

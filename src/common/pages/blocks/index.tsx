@@ -4,7 +4,7 @@ import { reverse } from "lodash";
 
 import { pageMapDispatchToProps, pageMapStateToProps } from "../../pages/common";
 import { withPersistentScroll } from "../../components/with-persistent-scroll";
-import BlockTables from "./BlocksTables";
+import BlockTables from "../../components/blocks/blocksTables";
 import Theme from "../../components/theme";
 import { HomeBlocksType } from "../../components/home/BlocksComponent";
 import SpinnerEffect from "../../components/loader/spinner";

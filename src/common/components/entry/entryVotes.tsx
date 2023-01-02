@@ -13,9 +13,9 @@ import moment from "moment";
 
 import { getEntryVotes } from "../../api/urls";
 import { pageMapDispatchToProps, pageMapStateToProps } from "../../pages/common";
-import { withPersistentScroll } from "../../components/with-persistent-scroll";
+import { withPersistentScroll } from "../with-persistent-scroll";
 import { _t } from "../../i18n";
-import { entryVotesType } from "./EntryTypes";
+import { entryVotesType } from "../../pages/entry/entryTypes";
 
 interface Column {
   label: string;

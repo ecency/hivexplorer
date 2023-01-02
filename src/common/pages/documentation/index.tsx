@@ -9,7 +9,7 @@ import { withPersistentScroll } from '../../components/with-persistent-scroll';
 import { _t } from '../../i18n';
 import BackToTopButton from '../../components/Buttons/BackToTop';
 import { methods as methodsData } from '../../../server/handlers/methods';
-import Api_accordion_body from './Api_accordion_body';
+import Api_accordion_body from '../../components/documentation/api_accordion_body';
 
 interface api_item_types {
   name:string,

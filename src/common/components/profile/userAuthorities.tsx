@@ -3,7 +3,7 @@ import { Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 import { _t } from "../../i18n";
-import { UserTransactionType } from "./UserTypes";
+import { UserTransactionType } from "../../pages/profile/userTypes";
 
 interface Column {
   label: string;

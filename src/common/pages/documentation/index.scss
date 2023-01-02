@@ -12,7 +12,7 @@
             padding: 10px !important;
         }
         .MuiInputBase-input {
-            border: 1px solid #e0e0e0 !important;
+            border: 1px solid $charcoal-black !important;
          
         }
         @media (max-width:768px){
@@ -34,7 +34,7 @@
             table{
                 max-width: 95%;
                 & th, td{
-                    border: 1px solid #706f70;
+                    border: 1px solid $border-row;
                 border-collapse: collapse;
                     padding: 5px;
                     word-break: break-word;
@@ -54,13 +54,13 @@
         &.accordion-day{
             .accordion-header{
                 .accordion-button{
-                    background-color: #f5f5f5;
+                    background-color: $white-five;
                   
                 }
             }
             table{
                 th{
-                    background-color: #f5f5f5;
+                    background-color: $white-five;
                 }
             }
             .text-p{
@@ -71,20 +71,20 @@
             background-color: transparent;
             .accordion-item{
                 background-color: transparent;
-                color: #fff;
+                color: $white;
                 .accordion-button{
                     background: $dark-grey-blue;
-                    color: #fff;
+                    color: $white;
                     &::after {
                         background-image: url("data:image/svg+xml,%3Csvg fill='none' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M19 9L12 16L5 9' stroke='%23e0e0e0' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'/%3E%3C/svg%3E");
                     }
                 }   
                 .card-header,.MuiTableCell-body{
-                    color: #fff;
+                    color: $white;
                 }
                 .api-response{
                     background-color: $dark-grey-blue !important;
-                    color: #e0e0e0 !important;
+                    color: $charcoal-black !important;
                 }
                 table{
                     th{
@@ -92,7 +92,7 @@
                     }
                 }
                 .text-p{
-                    color: #e0e0e0;
+                    color: $charcoal-black;
                 }
                 
             }
@@ -110,7 +110,7 @@
             word-break: break-all;
             word-wrap: break-word;
             max-height: 400px;
-            background-color: #f5f5f5;
+            background-color: $white-five;
             border: 1px solid #ccc;
             border: 1px solid rgba(0, 0, 0, 0.15);
             -webkit-border-radius: 4px;
@@ -125,7 +125,7 @@
 .theme-night{
     .api-page-container{
         .search-field{
-            background-color: #e0e0e0;
+            background-color: $charcoal-black;
         }
     }
 }

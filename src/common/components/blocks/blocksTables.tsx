@@ -14,10 +14,10 @@ import {
 import { Container } from "react-bootstrap";
 import { useSelector } from "react-redux";
 
-import { HomeBlocksType } from "../../components/home/BlocksComponent";
+import { HomeBlocksType } from "../home/BlocksComponent";
 import { _t } from "../../i18n";
 import { Date_time_table } from "../../api/dateTime";
-import UserAvatar from "../../components/user-avatar";
+import UserAvatar from "../user-avatar";
 
 interface Column {
   label: string;
