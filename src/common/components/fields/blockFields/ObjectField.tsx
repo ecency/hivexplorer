@@ -11,7 +11,22 @@ import { LinkAccount } from "../../../pages/fields/common_fields";
 import { UserAvatar } from "../../user-avatar";
 import { infoIcon, showLessIcon, showMoreIcon, trxIcon } from "../../../img/svg";
 import "./ObjectField.scss";
+import { SMTAssetCalc } from "../../../api/hive";
+import parseAsset from "../../../helper/parse-asset";
 
+
+const SMTAssetArray=[
+  "init_hbd_supply",
+  "virtual_supply",
+  'current_supply',
+  'current_hbd_supply',
+  'total_vesting_fund_hive',
+  'total_vesting_shares',
+  'total_reward_fund_hive',
+  'pending_rewarded_vesting_shares',
+  'pending_rewarded_vesting_hive',
+  'dhf_interval_ledger'
+]
 const timestampKeys = [
   "time",
   "timestamp",
@@ -64,29 +79,8 @@ const ObjectField = (props: any) => {
   const themeBtn = currTheme === "day" ? "showmore-btn btn-light" : "showmore-btn btn-dark";
   let transactionValue: transactionTypeList = [];
 
-  const Date_time = (timeDate: string) => {
-    return (
-      <>
-        <table className="time-date-table">
-          <tbody>
-            <tr>
-              <td>{_t("common.date")}</td>
-              <td>{Date_time_table(`${timeDate}`, "YYYY-MM-DD")}</td>
-            </tr>
-            <tr>
-              <td>{_t("common.time")}</td>
-              <td>{Date_time_table(`${timeDate}`, `hh:mm:ss`)}</td>
-            </tr>
-          </tbody>
-        </table>
-      </>
-    );
-  };
-  // const expand_operation=(value:any,item:string)=>{
-  //     return(
 
-  //     )
-  // }
+
   const expand_view = (value: any, item: string) => {
     return (
       <Row className={`${rowBorder} mt-1`}>
@@ -158,11 +152,11 @@ const ObjectField = (props: any) => {
               <table className="time-date-table">
                 <tbody>
                   <tr>
-                    <td>current_mana</td>
+                    <td>{_t('common.current_mana')}</td>
                     <td>{value.current_mana}</td>
                   </tr>
                   <tr>
-                    <td>Time</td>
+                    <td>{_t('common.time')}</td>
                     <td>{value.last_update_time}</td>
                   </tr>
                 </tbody>
@@ -271,10 +265,8 @@ const ObjectField = (props: any) => {
                   );
                 })}
               </>
-            ) : item === "init_hbd_supply" ||
-              item === "current_hbd_supply" ||
-              item === "virtual_supply" ? (
-              <>{value.amount}</>
+            ) : SMTAssetArray.includes(item) ? (
+              <>{parseAsset(value).amount+' '+parseAsset(value).symbol}</>
             ) : item === "json_metadata" && label_for === "entry" ? (
               <>
                 <JsonMetadata data={value} />

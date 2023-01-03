@@ -45,6 +45,7 @@
     "req_auth": "Req. Auth",
     "req_post_auth": "Req. Posting Auth",
     "info": "Info",
+    "current_mana":"Current Mmana",
     "transaction": "Transaction",
     "authorities": "Authorities",
     "transaction_num": "Trx No",

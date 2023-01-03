@@ -1,5 +1,6 @@
 import { pageMapDispatchToProps, pageMapStateToProps, PageProps } from "../../pages/common";
 import React, { useEffect, useState } from "react";
+import { SMTAsset } from '@hiveio/dhive';
 import axios from "axios";
 import Meta from "../meta";
 import Theme from "../theme";
@@ -11,22 +12,34 @@ import "./headBlock.scss";
 import { Link } from "react-router-dom";
 import { ConfigItems } from "../../../../config";
 import { _t } from "../../i18n";
-
+import { SMTAssetCalc } from "../../api/hive";
+import parseAsset from "../../helper/parse-asset";
+//  interface SMTAsset {
+//   amount: string | number;
+//   precision: number;
+//   nai: string;
+// }
 export interface Block {
   head_block_number: number;
   head_block_id: string;
   time: string;
   num_pow_witnesses: number;
-  init_hbd_supply: string | object;
-  current_hbd_supply: string | object;
-  total_vesting_fund_hive: string | object;
-  total_vesting_shares: string | object;
-  total_reward_fund_hive: string | object;
+  init_hbd_supply: string | SMTAsset;
+  current_hbd_supply: string | SMTAsset;
+  total_vesting_fund_hive: string | SMTAsset;
+  total_vesting_shares: string | SMTAsset;
+  total_reward_fund_hive: string | SMTAsset;
   current_witness: string;
 }
 
 const HeadBlock = (props: Block) => {
   const result = props;
+  const {
+    total_reward_fund_hive,
+    total_vesting_fund_hive,
+    total_vesting_shares,
+    init_hbd_supply
+  }=result
 
   return (
     <div className="head-block">
@@ -54,11 +67,12 @@ const HeadBlock = (props: Block) => {
                 <div>
                   <div className="pt-2">
                     <span className="head-block-attr-span">{_t("block.reward_fund")}: </span>
-                    {result.total_reward_fund_hive}
+                      {parseAsset(total_reward_fund_hive).amount+' '+parseAsset(total_reward_fund_hive).symbol}
                   </div>
                   <div className="pt-2">
                     <span className="head-block-attr-span">{_t("block.vesting_fund")}: </span>
-                    {result.total_vesting_fund_hive}
+           
+                  {parseAsset(total_vesting_fund_hive).amount+' '+parseAsset(total_vesting_fund_hive).symbol}
                   </div>
                 </div>
               </Col>
@@ -66,11 +80,12 @@ const HeadBlock = (props: Block) => {
                 <div>
                   <div className="pt-2">
                     <span className="head-block-attr-span">{_t("block.vesting_shares")}: </span>
-                    {result.total_vesting_shares}
+                    {parseAsset(total_vesting_shares).amount+' '+parseAsset(total_vesting_shares).symbol}
                   </div>
                   <div className="pt-2">
                     <span className="head-block-attr-span">{_t("block.supply")}: </span>
-                    {result.init_hbd_supply}
+                 
+                  {parseAsset(init_hbd_supply).amount+' '+parseAsset(init_hbd_supply).symbol}
                   </div>
                 </div>
               </Col>
