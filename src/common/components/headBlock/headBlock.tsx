@@ -1,5 +1,6 @@
 import { pageMapDispatchToProps, pageMapStateToProps, PageProps } from "../../pages/common";
 import React, { useEffect, useState } from "react";
+import { SMTAsset } from '@hiveio/dhive';
 import axios from "axios";
 import Meta from "../meta";
 import Theme from "../theme";
@@ -11,22 +12,33 @@ import "./headBlock.scss";
 import { Link } from "react-router-dom";
 import { ConfigItems } from "../../../../config";
 import { _t } from "../../i18n";
-
+import { SMTAssetCalc } from "../../api/hive";
+//  interface SMTAsset {
+//   amount: string | number;
+//   precision: number;
+//   nai: string;
+// }
 export interface Block {
   head_block_number: number;
   head_block_id: string;
   time: string;
   num_pow_witnesses: number;
-  init_hbd_supply: string | object;
-  current_hbd_supply: string | object;
-  total_vesting_fund_hive: string | object;
-  total_vesting_shares: string | object;
-  total_reward_fund_hive: string | object;
+  init_hbd_supply: string | SMTAsset;
+  current_hbd_supply: string | SMTAsset;
+  total_vesting_fund_hive: string | SMTAsset;
+  total_vesting_shares: string | SMTAsset;
+  total_reward_fund_hive: string | SMTAsset;
   current_witness: string;
 }
 
 const HeadBlock = (props: Block) => {
   const result = props;
+  const {
+    total_reward_fund_hive,
+    total_vesting_fund_hive,
+    total_vesting_shares,
+    init_hbd_supply
+  }=result
 
   return (
     <div className="head-block">
@@ -54,11 +66,27 @@ const HeadBlock = (props: Block) => {
                 <div>
                   <div className="pt-2">
                     <span className="head-block-attr-span">{_t("block.reward_fund")}: </span>
-                    {result.total_reward_fund_hive}
+                    {typeof(total_reward_fund_hive) === "string"? 
+                    total_reward_fund_hive
+                    : 
+                    SMTAssetCalc(
+                      total_reward_fund_hive.amount,
+                      total_reward_fund_hive.precision,
+                      total_reward_fund_hive.nai
+                      )
+                  }
                   </div>
                   <div className="pt-2">
                     <span className="head-block-attr-span">{_t("block.vesting_fund")}: </span>
-                    {result.total_vesting_fund_hive}
+                    {typeof(total_vesting_fund_hive) === "string"? 
+                    total_vesting_fund_hive
+                    : 
+                    SMTAssetCalc(
+                      total_vesting_fund_hive.amount,
+                      total_vesting_fund_hive.precision,
+                      total_vesting_fund_hive.nai
+                      )
+                  }
                   </div>
                 </div>
               </Col>
@@ -66,11 +94,27 @@ const HeadBlock = (props: Block) => {
                 <div>
                   <div className="pt-2">
                     <span className="head-block-attr-span">{_t("block.vesting_shares")}: </span>
-                    {result.total_vesting_shares}
+                    {typeof(total_vesting_shares) === "string"? 
+                    total_vesting_shares
+                    : 
+                    SMTAssetCalc(
+                      total_vesting_shares.amount,
+                      total_vesting_shares.precision,
+                      total_vesting_shares.nai
+                      )
+                  }
                   </div>
                   <div className="pt-2">
                     <span className="head-block-attr-span">{_t("block.supply")}: </span>
-                    {result.init_hbd_supply}
+                    {typeof(init_hbd_supply) === "string"? 
+                    init_hbd_supply
+                    : 
+                    SMTAssetCalc(
+                      init_hbd_supply.amount,
+                      init_hbd_supply.precision,
+                      init_hbd_supply.nai
+                      )
+                  }
                   </div>
                 </div>
               </Col>

@@ -3,6 +3,21 @@ import SERVERS from "../constants/servers.json";
 import { UserTypeList } from "../pages/profile/userTypes";
 import { RCAccount } from "@hiveio/dhive/lib/chain/rc";
 
+// import { SMTAsset } from '@hiveio/dhive';
+
+// export enum Symbol {
+//     HIVE = 'HIVE',
+//     HBD = 'HBD',
+//     VESTS = 'VESTS',
+// }
+
+// export enum NaiMap {
+//     '@@000000021' = 'HIVE',
+//     '@@000000013' = 'HBD',
+//     '@@000000037' = 'VESTS',
+// }
+
+
 export const client = new Client(SERVERS, {
   timeout: 3000,
   failoverThreshold: 3,
@@ -53,4 +68,13 @@ export const rcPower = (account: RCAccount): number => {
   const calc = client.rc.calculateRCMana(account);
   const { percentage } = calc;
   return percentage / 100;
+};
+export enum NaiMap {
+  '@@000000021' = 'HIVE',
+  '@@000000013' = 'HBD',
+  '@@000000037' = 'VESTS',
+}
+export const SMTAssetCalc = (amount: string | number,precision:number,nai:string):string | number => {
+  const val=parseFloat(amount.toString()) / Math.pow(10,precision)
+ return val+' '+NaiMap[nai]
 };
