@@ -43,7 +43,7 @@ export const methods = [
   {
     api: "condenser_api",
     method: "get_tags_used_by_author",
-     description:_t("block_api.get_tags_used_by_author_description"),
+    description:_t("block_api.get_tags_used_by_author_description"),
     params: ["account"]
     url:`${ConfigItems.baseUrl}api/get_tags_used_by_author?account=75`,
     parameter:' <table>
@@ -65,73 +65,116 @@ export const methods = [
   {
     api: "condenser_api",
     method: "get_post_discussions_by_payout",
+    description:_t("block_api.get_post_discussions_by_payout_description"),
     params: ["query"]
   },
   {
     api: "condenser_api",
     method: "get_comment_discussions_by_payout",
+    description:_t("block_api.get_comment_discussions_by_payout_description"),
     params: ["query"]
   },
   {
-    api: "condenser_api",
+    api: "condenser_api", (removed since HF24)
     method: "get_discussions_by_trending",
+    description:_t("block_api.get_discussions_by_trending_description"),
     params: ["query"]
   },
   {
     api: "condenser_api",
-    method: "get_discussions_by_created",
+    method: "get_discussions_by_created", (Removed since HF24)
+    description:_t("block_api.get_discussions_by_created_description"),
     params: ["query"]
   },
   {
     api: "condenser_api",
-    method: "get_discussions_by_active",
+    method: "get_discussions_by_active", (Removed since HF24)
+    description:_t("block_api.get_discussions_by_active_description"),
     params: ["query"]
   },
   {
     api: "condenser_api",
     method: "get_discussions_by_cashout",
+    description:_t("block_api.get_discussions_by_cashout_description"),
     params: ["query"]
   },
   {
     api: "condenser_api",
     method: "get_discussions_by_votes",
+    description:_t("block_api.get_discussions_by_votes_description"),
     params: ["query"]
   },
   {
     api: "condenser_api",
     method: "get_discussions_by_children",
+    description:_t("block_api.get_discussions_by_children_description"),
     params: ["query"]
   },
   
   {
     api: "condenser_api",
     method: "get_discussions_by_hot",
+    description:_t("block_api.get_discussions_by_hot_description"),
     params: ["query"]
   },
   {
     api: "condenser_api",
-    method: "get_discussions_by_feed",
+    method: "get_discussions_by_feed", (Removed since HF24)
+    description:_t("block_api.get_discussions_by_feed_description"),
     params: ["query"]
   },
   {
     api: "condenser_api",
     method: "get_discussions_by_blog",
+    description:_t("block_api.get_discussions_by_blog_description"),
     params: ["query"]
   },
   {
     api: "condenser_api",
     method: "get_discussions_by_comments",
+    description:_t("block_api.get_discussions_by_comments_description"),
     params: ["query"]
   },
   {
     api: "condenser_api",
     method: "get_discussions_by_promoted",
+    description:_t("block_api.get_discussions_by_promoted_description"),
     params: ["query"]
   },
   {
     api: "block_api",
     method: "get_block_header",
-    params: ["block_num"]
+    params: ["block_num"],
+    description:_t("block_api.get_block_header_description"),
+     parameter: `<table>
+  <thead>
+    <tr>
+      <th><code class="language-plaintext highlighter-rouge">block_num</code> (int)</th>
+      <th>&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">1</code></td>
+      <td>Queries the block headers for the very first block.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">8675309</code></td>
+      <td>Queries block headers for block number 8,675,309.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">62396745</code></td>
+      <td>Queries block headers for block number 62,396,745.</td>
+    </tr>
+  </tbody>
+</table>`,
+response: `{
+  "previous": "0000000000000000000000000000000000000000",
+  "timestamp": "2016-03-24T16:05:00",
+  "witness": "initminer",
+  "transaction_merkle_root": "0000000000000000000000000000000000000000",
+  "extensions": []
+}`,
   },
   {
     api: "block_api",
@@ -350,7 +393,70 @@ export const methods = [
   {
     api: "condenser_api",
     method: "get_state",
-    params: ["path"]
+    params: ["path"],
+    description:_t("block_api.get_state_description"),
+    response: `  {
+  "current_route": "",
+  "props": {
+    "head_block_number": 0,
+    "head_block_id": "0000000000000000000000000000000000000000",
+    "time": "1970-01-01T00:00:00",
+    "current_witness": "",
+    "total_pow": "18446744073709551615",
+    "num_pow_witnesses": 0,
+    "virtual_supply": "0.000 HIVE",
+    "current_supply": "0.000 HIVE",
+    "confidential_supply": "0.000 HIVE",
+    "current_hbd_supply": "0.000 HIVE",
+    "confidential_hbd_supply": "0.000 HIVE",
+    "total_vesting_fund_hive": "0.000 HIVE",
+    "total_vesting_shares": "0.000 HIVE",
+    "total_reward_fund_hive": "0.000 HIVE",
+    "total_reward_shares2": "0",
+    "pending_rewarded_vesting_shares": "0.000 HIVE",
+    "pending_rewarded_vesting_hive": "0.000 HIVE",
+    "hbd_interest_rate": 0,
+    "hbd_print_rate": 10000,
+    "maximum_block_size": 0,
+    "current_aslot": 0,
+    "recent_slots_filled": "0",
+    "participation_count": 0,
+    "last_irreversible_block_num": 0,
+    "vote_power_reserve_rate": 40,
+    "average_block_size": 0,
+    "current_reserve_ratio": 1,
+    "max_virtual_bandwidth": "0"
+  },
+  "tag_idx": {"trending": []},
+  "tags": {},
+  "content": {},
+  "accounts": {},
+  "witnesses": {},
+  "discussion_idx": {},
+  "witness_schedule": {
+    "id": 0,
+    "current_virtual_time": "0",
+    "next_shuffle_block_num": 1,
+    "current_shuffled_witnesses": [],
+    "num_scheduled_witnesses": 1,
+    "top19_weight": 1,
+    "timeshare_weight": 5,
+    "miner_weight": 1,
+    "witness_pay_normalization_factor": 25,
+    "median_props": {
+      "account_creation_fee": "0.000 HIVE",
+      "maximum_block_size": 131072,
+      "hbd_interest_rate": 1000
+    },
+    "majority_version": "0.0.0",
+    "max_voted_witnesses": 19,
+    "max_miner_witnesses": 1,
+    "max_runner_witnesses": 1,
+    "hardfork_required_witnesses": 17
+  },
+  "feed_price": {"base": "0.000 HIVE", "quote": "0.000 HIVE"},
+  "error": ""
+},`
   },
   {
     api: "database_api",
@@ -411,7 +517,19 @@ export const methods = [
   },
   {
     api: "condenser_api",
-    method: "get_chain_properties"
+    method: "get_chain_properties",
+    description:_t("block_api.get_chain_properties_description"),
+    response: ` {
+  "account_creation_fee": {
+    "amount": "1",
+    "precision": 3,
+    "nai": "@@000000021"
+  },
+  "maximum_block_size": 131072,
+  "hbd_interest_rate": 1000,
+  "account_subsidy_budget": 797,
+  "account_subsidy_decay": 347321
+}`,
   },
   {
     api: "database_api",
@@ -424,6 +542,7 @@ export const methods = [
   {
     api: "database_api",
     method: "get_witness_schedule"
+    
   },
   {
     api: "condenser_api",
