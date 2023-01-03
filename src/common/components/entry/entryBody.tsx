@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { renderPostBody } from "@ecency/render-helper";
 
 import { pageMapDispatchToProps, pageMapStateToProps } from "../../pages/common";
-import { withPersistentScroll } from "../../components/with-persistent-scroll";
+import { withPersistentScroll } from "../with-persistent-scroll";
 import { _t } from "../../i18n";
 
 interface EntryType {

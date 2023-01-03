@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { Card } from "react-bootstrap";
 
 import { _t } from "../../i18n";
-import { AuthorityObject } from "./UserAuthorities";
+import { AuthorityObject } from "../../components/profile/userAuthorities";
 import { DecodeJson } from "../../../server/util";
 import { LinkAccount, ObjectFieldArray, StringFieldArray } from "../fields/common_fields";
 import { UserAvatar } from "../../components/user-avatar";

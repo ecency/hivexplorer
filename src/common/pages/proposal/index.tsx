@@ -8,11 +8,11 @@ import { renderPostBody } from "@ecency/render-helper";
 import { pageMapDispatchToProps, pageMapStateToProps } from "../common";
 import { withPersistentScroll } from "../../components/with-persistent-scroll";
 import Theme from "../../components/theme";
-import ProposalCard from "../proposals/ProposalCard";
+import ProposalCard from "../../components/proposals/proposalCard";
 import { getContent, getSingleProposal } from "../../api/urls";
 import { _t } from "../../i18n";
 import { proposalsType } from "../proposals";
-import { EntryType } from "../entry/EntryTypes";
+import { EntryType } from "../entry/entryTypes";
 import SpinnerEffect from "../../components/loader/spinner";
 
 const SingleProposalPage = (props: any) => {

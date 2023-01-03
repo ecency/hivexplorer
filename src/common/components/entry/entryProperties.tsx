@@ -2,10 +2,10 @@ import React from "react";
 import { connect } from "react-redux";
 
 import { pageMapDispatchToProps, pageMapStateToProps } from "../../pages/common";
-import { withPersistentScroll } from "../../components/with-persistent-scroll";
+import { withPersistentScroll } from "../with-persistent-scroll";
 import { _t } from "../../i18n";
-import StringField from "../../components/fields/blockFields/StringField";
-import ObjectField from "../../components/fields/blockFields/ObjectField";
+import StringField from "../fields/blockFields/StringField";
+import ObjectField from "../fields/blockFields/ObjectField";
 
 const EntryProperties = (props: any) => {
   const { entries } = props;

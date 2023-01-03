@@ -10,18 +10,18 @@ import { pageMapDispatchToProps, pageMapStateToProps } from "../common";
 import { withPersistentScroll } from "../../components/with-persistent-scroll";
 import Theme from "../../components/theme";
 import UserHeader from "../../components/user-header";
-import { UserTypeList } from "./UserTypes";
+import { UserTypeList } from "./userTypes";
 import StringField from "../../components/fields/blockFields/StringField";
-import UserTransactionsTable from "./userTransactionTable";
+import UserTransactionsTable from "../../components/profile/userTransactionTable";
 import ObjectField from "../../components/fields/blockFields/ObjectField";
 import { _t } from "../../i18n";
 import { DecodeJson } from "../../../server/util";
 import { downVotingPower, rcPower, votingPower } from "../../api/hive";
-import UserAuthorities from "./UserAuthorities";
+import UserAuthorities from "../../components/profile/userAuthorities";
 import { getAccount, getOwnerHistory, getRCAccount } from "../../api/urls";
 import BackToTopButton from "../../components/Buttons/BackToTop";
 import SpinnerEffect from "../../components/loader/spinner";
-import UserHistory from "./UserHistory";
+import UserHistory from "../../components/profile/userHistory";
 
 interface UserList extends Array<UserTypeList> {}
 interface RCState {

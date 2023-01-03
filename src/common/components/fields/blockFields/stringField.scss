@@ -13,7 +13,7 @@
     align-items: center;
 }
 .border-color-day {
-    border-color: #e7e7e7;
+    border-color: $border-row-day;
 }
 
 .border-color-night {
@@ -21,7 +21,7 @@
 }
 .time-date-table {
     & th, td{
-        border: 1px solid #706f70;
+        border: 1px solid $border-row;
     border-collapse: collapse;
     }
     tr td:first-child{

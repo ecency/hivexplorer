@@ -1147,3 +1147,6 @@ $user-selects: all, auto, none !default;
 
 $print-page-size:                   a3 !default;
 $print-body-min-width:              map-get($grid-breakpoints, "lg") !default;
+
+// shadows
+$light-shadow:#0000001a

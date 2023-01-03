@@ -7,7 +7,7 @@ import numeral from "numeral";
 import { pageMapDispatchToProps, pageMapStateToProps } from "../common";
 import { withPersistentScroll } from "../../components/with-persistent-scroll";
 import Theme from "../../components/theme";
-import ProposalCard from "./ProposalCard";
+import ProposalCard from "../../components/proposals/proposalCard";
 import { getAccount, getProposals } from "../../api/urls";
 import parseAsset from "../../helper/parse-asset";
 import { _t } from "../../i18n";

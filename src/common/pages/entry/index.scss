@@ -55,16 +55,16 @@
             background-color: transparent;
             .accordion-item{
                 background-color: transparent;
-                color: #fff;
+                color: $white;
                 .accordion-button{
                     background: $dark-grey-blue;
-                    color: #fff;
+                    color: $white;
                     &::after{
                         display: none;
                     }
                 }   
                 .card-header,.MuiTableCell-body{
-                    color: #fff;
+                    color: $white;
                 }
             }
 
@@ -77,7 +77,7 @@
     }
     .permlink-discussion-content{
         padding: 15px;
-        border: 1px solid #dee2e6;
+        border: 1px solid $gray-300;
         border-top: 0;
     }
 }

@@ -1,9 +1,9 @@
-@import '../../../style/colors';
+@import '../../../style/colors.scss';
 .proposal-container{
     .search-field-proposals{
         width: 500px;
         padding: 5px 16px;
-        background-color: #ebebeb;
+        background-color: $gray-search;
         border-radius: 20px;
         margin: 10px 0;
         .MuiInput-underline:hover:not(.Mui-disabled):before {
@@ -27,8 +27,8 @@
         }
         .btn:disabled{
             opacity: 1;
-            color:#357ce6;
-            border-bottom: 1px solid #357ce6;
+            color:$dark-sky-blue;
+            border-bottom: 1px solid $dark-sky-blue;
         }
     }
     .funding-numbers{
@@ -37,8 +37,8 @@
         .funding-number{
             padding: 10px;
             .value{
-                background: #357ce6;
-                color: #fff;
+                background: $dark-sky-blue;
+                color: $white;
                 padding:5px 7px;
                 border-radius: 12px;
                 font-weight: 500;
@@ -60,12 +60,12 @@
     .proposal_card{
         border-radius: 10px;
         margin-bottom: 16px;
-        box-shadow: 0 0.1rem 1rem rgb(0 0 0 / 10%);
+        box-shadow: 0 0.1rem 1rem $light-shadow;
         &_day{
-            background: #fafafa;
+            background: $card-bg-white;
         }
         &_night{
-            background: #283241;
+            background: $card-bg-dark;
         }
         .avatar-img{
             height: 25px;
@@ -74,7 +74,7 @@
         }
         span.status{
 
-            &-span{color: #fff;
+            &-span{color: $white;
             border-radius: 12px;
             padding: 4px 9px 4px;
             font-weight: 300;
@@ -86,7 +86,7 @@
                 background-color: #f66;
             }
             &-inactive{
-                background-color: #fd9a47;
+                background-color: $pale-orange;
             }
         }
     }

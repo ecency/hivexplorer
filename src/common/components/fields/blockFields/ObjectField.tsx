@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 import { _t } from "../../../i18n";
 import JsonField from "./JsonField";
-import JsonMetadata from "../../EntryContent/JsonMetadata";
+import JsonMetadata from "../../entryContent/JsonMetadata";
 import { Date_time_table } from "../../../api/dateTime";
 import { LinkAccount } from "../../../pages/fields/common_fields";
 import { UserAvatar } from "../../user-avatar";

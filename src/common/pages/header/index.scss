@@ -4,7 +4,7 @@
     width: 100%;
     z-index: 99999;
     top: 0;
-    box-shadow: 0 5px 5px 0 rgb(0 0 0 / 10%);;
+    box-shadow: 0 5px 5px 0 $light-shadow;
     .container{
         position: relative;
     }
@@ -25,7 +25,7 @@
     
     .switch-theme-btn-day {
         border: none !important;
-        background-color: white !important;
+        background-color: $white !important;
     }
     
     .switch-theme-btn-night {
@@ -36,7 +36,7 @@
         a#nav-dropdown-blockchain,
         a#nav-dropdown-tokens,
         a#nav-dropdown-resources{
-            color: #fcfcfc !important;
+            color: $white-two !important;
         }
     }
     .day-night-btn{
@@ -63,15 +63,15 @@
 }
 
 .appNav-day {
-    background: #fcfcfc;
+    background: $white-two;
 }
 
 .appNav-text-day {
-    color: #030303;
+    color: $text-header;
 }
 
 .appNav-text-night {
-    color: #ffffff;
+    color: $white;
 }
 @media (max-width:992px){
     .navbar-toggler{

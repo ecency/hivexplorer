@@ -1,8 +1,8 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { pageMapDispatchToProps, pageMapStateToProps, PageProps } from '../common';
-import { withPersistentScroll } from '../../components/with-persistent-scroll';
+import { pageMapDispatchToProps, pageMapStateToProps, PageProps } from '../../pages/common';
+import { withPersistentScroll } from '../with-persistent-scroll';
 
 import { _t } from '../../i18n';
 

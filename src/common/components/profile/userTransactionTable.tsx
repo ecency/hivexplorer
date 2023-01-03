@@ -18,10 +18,10 @@ import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 
 import { _t } from "../../i18n";
-import { UserTransactionType } from "./UserTypes";
-import TransactionOperationTable from "./UserOpTable";
-import SpinnerEffect from "../../components/loader/spinner";
-import { TimestampField } from "../../components/fields/blockFields/DateTimeTable";
+import { UserTransactionType } from "../../pages/profile/userTypes";
+import TransactionOperationTable from "../../pages/profile/userOpTable";
+import SpinnerEffect from "../loader/spinner";
+import { TimestampField } from "../fields/blockFields/DateTimeTable";
 import { AscendingIcon, DescendingIcon } from "../../img/svg";
 import { getUserTransaction } from "../../api/urls";
 

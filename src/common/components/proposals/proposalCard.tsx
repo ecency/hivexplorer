@@ -4,12 +4,12 @@ import { connect, useSelector } from "react-redux";
 import { Card } from "react-bootstrap";
 import moment from "moment";
 
-import { pageMapDispatchToProps, pageMapStateToProps } from "../common";
-import { withPersistentScroll } from "../../components/with-persistent-scroll";
+import { pageMapDispatchToProps, pageMapStateToProps } from "../../pages/common";
+import { withPersistentScroll } from "../with-persistent-scroll";
 import { _t } from "../../i18n";
 import { ClippedLink } from "../../img/svg";
 import { CreatedDate } from "../../api/dateTime";
-import { UserAvatar } from "../../components/user-avatar";
+import { UserAvatar } from "../user-avatar";
 
 export interface proposalsType {
   id: Number;
