@@ -12,6 +12,7 @@ import { UserAvatar } from "../../user-avatar";
 import { infoIcon, showLessIcon, showMoreIcon, trxIcon } from "../../../img/svg";
 import "./ObjectField.scss";
 import { SMTAssetCalc } from "../../../api/hive";
+import parseAsset from "../../../helper/parse-asset";
 
 
 const SMTAssetArray=[
@@ -265,7 +266,7 @@ const ObjectField = (props: any) => {
                 })}
               </>
             ) : SMTAssetArray.includes(item) ? (
-              <>{SMTAssetCalc(value.amount,value.precision,value.nai)}</>
+              <>{parseAsset(value).amount+' '+parseAsset(value).symbol}</>
             ) : item === "json_metadata" && label_for === "entry" ? (
               <>
                 <JsonMetadata data={value} />

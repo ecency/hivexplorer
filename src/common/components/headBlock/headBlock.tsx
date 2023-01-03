@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 import { ConfigItems } from "../../../../config";
 import { _t } from "../../i18n";
 import { SMTAssetCalc } from "../../api/hive";
+import parseAsset from "../../helper/parse-asset";
 //  interface SMTAsset {
 //   amount: string | number;
 //   precision: number;
@@ -66,27 +67,12 @@ const HeadBlock = (props: Block) => {
                 <div>
                   <div className="pt-2">
                     <span className="head-block-attr-span">{_t("block.reward_fund")}: </span>
-                    {typeof(total_reward_fund_hive) === "string"? 
-                    total_reward_fund_hive
-                    : 
-                    SMTAssetCalc(
-                      total_reward_fund_hive.amount,
-                      total_reward_fund_hive.precision,
-                      total_reward_fund_hive.nai
-                      )
-                  }
+                      {parseAsset(total_reward_fund_hive).amount+' '+parseAsset(total_reward_fund_hive).symbol}
                   </div>
                   <div className="pt-2">
                     <span className="head-block-attr-span">{_t("block.vesting_fund")}: </span>
-                    {typeof(total_vesting_fund_hive) === "string"? 
-                    total_vesting_fund_hive
-                    : 
-                    SMTAssetCalc(
-                      total_vesting_fund_hive.amount,
-                      total_vesting_fund_hive.precision,
-                      total_vesting_fund_hive.nai
-                      )
-                  }
+           
+                  {parseAsset(total_vesting_fund_hive).amount+' '+parseAsset(total_vesting_fund_hive).symbol}
                   </div>
                 </div>
               </Col>
@@ -94,27 +80,12 @@ const HeadBlock = (props: Block) => {
                 <div>
                   <div className="pt-2">
                     <span className="head-block-attr-span">{_t("block.vesting_shares")}: </span>
-                    {typeof(total_vesting_shares) === "string"? 
-                    total_vesting_shares
-                    : 
-                    SMTAssetCalc(
-                      total_vesting_shares.amount,
-                      total_vesting_shares.precision,
-                      total_vesting_shares.nai
-                      )
-                  }
+                    {parseAsset(total_vesting_shares).amount+' '+parseAsset(total_vesting_shares).symbol}
                   </div>
                   <div className="pt-2">
                     <span className="head-block-attr-span">{_t("block.supply")}: </span>
-                    {typeof(init_hbd_supply) === "string"? 
-                    init_hbd_supply
-                    : 
-                    SMTAssetCalc(
-                      init_hbd_supply.amount,
-                      init_hbd_supply.precision,
-                      init_hbd_supply.nai
-                      )
-                  }
+                 
+                  {parseAsset(init_hbd_supply).amount+' '+parseAsset(init_hbd_supply).symbol}
                   </div>
                 </div>
               </Col>
