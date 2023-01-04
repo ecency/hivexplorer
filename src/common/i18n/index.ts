@@ -6,15 +6,24 @@ export const langOptions = [
   {
     code: "en-US",
     name: "English"
+  },
+  {
+    code: "de-DE",
+    name: "Deutsche"
+
   }
 ];
 
 const enUs = require("./locales/en-US.json");
+const deDE= require("./locales/de-DE.json");
 
 const resources = {
   ["en-US"]: {
     translation: enUs
-  }
+  },
+  ["de-DE"]: {
+    translation: deDE
+  },
 };
 
 i18n.init({
