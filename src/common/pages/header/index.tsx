@@ -37,7 +37,7 @@ const BLOCKCHAIN_MENU = [
 const TOKENS_MENU = [_t("nav.tokens-hive"), _t("nav.tokens-he"), _t("nav.tokens-speak")];
 
 const AppHeader = (props: any) => {
-  const currentLangCode = cookies.get("i18next") ;
+  const currentLangCode = cookies.get("i18next") || "en";
   const currTheme = useSelector((state: any) => state.global.theme);
   const dispatch = useDispatch();
   const appNav = currTheme === "day" ? "appNav appNav-day" : "appNav appNav-night";
@@ -115,9 +115,7 @@ const AppHeader = (props: any) => {
                 {languages.map(({ code, name, country_code, flagImg }) => (
                   <NavDropdown.Item
                     key={country_code}
-                    onClick={() => {
-                      console.log('lang clicked',code, country_code, currentLangCode)
-                      i18next.changeLanguage(code)}}
+                    onClick={() => i18next.changeLanguage(code)}
                     disabled={code === currentLangCode}
                   >
                     <div className="langFlag">
