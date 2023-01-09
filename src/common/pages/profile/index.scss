@@ -45,6 +45,12 @@
         td{
             padding: 10px;
             word-break: break-all;
+            .true{
+                color: green;
+            }
+            .false{
+                color:red
+            }
         }
         
       }

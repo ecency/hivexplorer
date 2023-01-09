@@ -245,6 +245,7 @@
     "curator": "Curator",
     "publisher": "Publisher",
     "value": "Value",
+    "virtual":"Virtual",
     "req_auths": "Active Auths",
     "posting_auths": "Posting Auths",
     "producer": "Producer",
@@ -333,7 +334,13 @@
     "body":"Body",
     "json_metadata":"Json Metadata",
     "hbd_exchange_rate":"HBD Exchange Rate",
-    "key":"Key"
+    "key":"Key",
+    "max_accepted_payout":"Max Accepted Payout",
+    "allow_curation_rewards":"Allow Curation Rewards",
+    "percent_hbd":"Percent HBD",
+    "allow_votes":"Allow Votes",
+    "title":"Title"
+
 
   },
   "witnesses": {

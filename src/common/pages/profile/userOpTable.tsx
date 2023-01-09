@@ -224,8 +224,10 @@ const TransactionOperationTable = (props: any) => {
                                                 {_t(`trans_table.${key}`)}
                                               </td>
                                               <td style={{ width: "50%" }}>
-                                                {typeof jsonSplit[key] === "boolean"
-                                                  ? jsonSplit[key].stringify()
+                                                {typeof jsonSplit[key] === "boolean"?
+                                                 <span className={`${jsonSplit[key]}`}>
+                                                  {jsonSplit[key].toString()}
+                                                 </span>
                                                   : jsonSplit[key]}{" "}
                                               </td>
                                             </tr>

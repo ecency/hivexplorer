@@ -12,6 +12,12 @@
         td{
             padding: 10px;
             word-break: break-all;
+            .true{
+              color: green;
+          }
+          .false{
+              color:red
+          }
         }
         
       }
@@ -43,6 +49,9 @@
       .card-header-sort{
         width: 110px;
       }
+      .card-header-ops{
+        text-align: center !important;
+      }
       .col-w-240{
         width: 240px !important;
       }
@@ -50,5 +59,48 @@
         width: 110x !important;
       }
   
-      
+}
+.switch-view-btn{
+  border: 1px solid #706f70;
+  padding: 7px;
+  border-radius: 10px;
+}
+.trans-card-view{
+  .trans-card-table{
+    min-width: 80%;
+    &-dark{
+      background-color: $dark-grey-blue !important;
+  }
+  &-day{
+      background-color: $white-five !important;
+  }
+    & th, td{
+        border: 1px solid $border-row;
+    border-collapse: collapse;
+    }
+    tr td:first-child{
+        min-width: 100px;
+    }
+    td{
+        padding: 10px ;
+        word-break: break-word;
+    }
+    td.true{
+      color: #080;
+    }
+    td.false{
+      color: #c7254e;
+    }
+  }
+  .trans-card{
+    box-shadow: 0 0.1rem 1rem $light-shadow;
+    
+    margin: auto;
+    &-dark{
+        background-color: $dark-grey-blue;
+    }
+    &-light{
+        background-color: $white-five;
+    }
+}
 }

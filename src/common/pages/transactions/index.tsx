@@ -10,13 +10,19 @@ import SpinnerEffect from "../../components/loader/spinner";
 import BackToTopButton from "../../components/Buttons/BackToTop";
 import { getHeadBlock, getTransactions } from "../../api/urls";
 import { setHeadBlockData } from "../../store/HeadBlock";
+import { cardViewSVG, tableViewSVG } from "../../img/svg";
+import { Button, Container } from "react-bootstrap";
+import TransactionsCards from "./transactionCards";
 
 interface TransactionList extends Array<HomeTransactionType> {}
 const AllTransactions = (props: any) => {
   const { match } = props;
   const [loading, setLoading] = useState(true);
+  const [cardView, setCardView] = useState(true);
   const [transactions, setTransactions] = useState<TransactionList>([]);
   const dispatch = useDispatch();
+  const currTheme = useSelector((state: any) => state.global.theme);
+  const themeContrastColor = currTheme === "day" ? "#535e65" : "#ffffffde";
   const HeadBlock = useSelector((state: any) => state.headBlock.head_block_number);
   // const HeadBlock = 69369062
 
@@ -27,10 +33,10 @@ const AllTransactions = (props: any) => {
         if (HeadBlock === "") {
           const resp = await getHeadBlock();
           dispatch(setHeadBlockData(resp));
-          const response = await getTransactions(resp.head_block_number);
+          const response = await getTransactions(71178931);
           setTransactions(response.ops);
         } else {
-          const response = await getTransactions(HeadBlock);
+          const response = await getTransactions(71178931);
           setTransactions(response.ops);
         }
       } catch (error: any) {
@@ -44,7 +50,13 @@ const AllTransactions = (props: any) => {
     <>
       <Theme global={props.global} />
       {loading && <SpinnerEffect />}
-      {!loading && transactions && <TransactionsTables data={transactions} />}
+      {!loading && transactions &&   <Container className="data-table-hive py-5">
+        <div className="text-center mt-2">
+          <button className="switch-view-btn" style={currTheme==="day"? {backgroundColor: '#bbbb'}:{backgroundColor: '#374852'}} onClick={()=>setCardView(true)} >{cardViewSVG(themeContrastColor)}</button>
+          <button className="switch-view-btn"  style={currTheme==="day"? {backgroundColor: '#bbbb'}:{backgroundColor: '#374852'}} onClick={()=>setCardView(false)} >{tableViewSVG(themeContrastColor)}</button>
+        </div>
+        <>{cardView? <TransactionsCards data={transactions}/>:<TransactionsTables data={transactions}/>}</>
+        </Container>}
       <BackToTopButton />
     </>
   );

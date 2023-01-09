@@ -29,7 +29,12 @@ export const LinkAccount = [
     "expiration",
     "orderid",
     "json_metadata",
-    "body"
+    "body",
+    "title",
+    "allow_votes",
+    "percent_hbd",
+    "allow_curation_rewards"
+
   ];
 
   export const ObjectFieldArray = [
@@ -54,5 +59,6 @@ export const LinkAccount = [
     "current_pays",
     "open_pays",
     "min_to_receive",
-    "amount_to_sell"
+    "amount_to_sell",
+    "max_accepted_payout"
   ];
