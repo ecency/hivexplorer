@@ -24,7 +24,6 @@ interface EntryType {
 const TransactionCard = (props: any) => {
   const { transaction,transactionFields,transactionOp } = props;
   const opVal=transactionOp
-  console.log(transaction,transactionFields,transactionOp)
   const currTheme = useSelector((state: any) => state.global.theme);
   // {const renderedBody = ;}
 
@@ -110,7 +109,6 @@ const TransactionCard = (props: any) => {
                                                                          <tr>
                                                                             <td>{key}</td>
                                                                             <>{item[exVal][key].map((innerKey:any)=>{
-                                                                                console.log('inner',innerKey,typeof(innerKey))
                                                                                 return(
                                                                                     <>
                                                                                    {typeof(innerKey)==="object"?

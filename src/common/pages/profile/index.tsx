@@ -162,7 +162,7 @@ const UserPage = (props: any) => {
                     </Tabs>
                   </Card.Header>
                   <Card.Body className="py-0 user-info-card-body">
-                    <TabPanel value={value} index={1}>
+                    <TabPanel value={value} index={0}>
                       {Object.keys(user).map((k, index) => {
                         return typeof user[k] !== "object" && typeof user[k] !== "boolean" ? (
                           <StringField
@@ -195,7 +195,7 @@ const UserPage = (props: any) => {
                         );
                       })}
                     </TabPanel>
-                    <TabPanel value={value} index={0}>
+                    <TabPanel value={value} index={1}>
                     <div className="text-center mt-2">
                       <button className="switch-view-btn" style={currTheme==="day"? {backgroundColor: '#bbbb'}:{backgroundColor: '#374852'}} onClick={()=>setCardView(true)} >{cardViewSVG(themeContrastColor)}</button>
                       <button className="switch-view-btn"  style={currTheme==="day"? {backgroundColor: '#bbbb'}:{backgroundColor: '#374852'}} onClick={()=>setCardView(false)} >{tableViewSVG(themeContrastColor)}</button>

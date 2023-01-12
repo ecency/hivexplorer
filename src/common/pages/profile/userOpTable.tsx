@@ -232,7 +232,6 @@ const TransactionOperationTable = (props: any) => {
                               )}
                               {jsonSplit  &&
                                 Object.keys(jsonSplit).map((key, j: number) => {
-                                  console.log('item',key,typeof(key),jsonSplit[key], jsonSplit[key]===null)
                                   
                                   j = j + Math.floor(Math.random() * 6000) + 5000;
                                   return (
@@ -279,8 +278,6 @@ const TransactionOperationTable = (props: any) => {
                                             <table>
                                           <tbody>
                                               {Object.keys(jsonSplit[key]).map((innerKey,i)=>{
-                                                 console.log('inneritem',key,typeof(key),typeof(_t(`trans_table.${key}`)))
-                                                 
                                                 return(
                                                   <tr key={i+innerKey+jsonSplit[key]}>
                                                     <td >{_t(`trans_table.${innerKey}`)}</td>

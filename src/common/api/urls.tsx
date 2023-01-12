@@ -4,7 +4,6 @@ import { ConfigItems } from "../../../config";
 // Get witness Account
 export const getAccount = async (user: string) => {
   const account_url = `${ConfigItems.baseUrl}/api/get_accounts?names=["${user}"]`;
-  console.log(account_url)
   const r = await axios.get(account_url);
   return r.data;
 };
@@ -52,7 +51,6 @@ export const getSingleBlock = async (block_id: number) => {
 // Get Transactions
 export const getTransactions = async (block_num: number) => {
   const url_transactions = `${ConfigItems.baseUrl}/api/get_ops_in_block?block_num=${block_num}`;
-  console.log(url_transactions)
   const r = await axios.get(url_transactions);
   return r.data;
 };
@@ -60,7 +58,6 @@ export const getTransactions = async (block_num: number) => {
 // Get Single Transaction
 export const getSingleTransaction = async (transaction_id: number) => {
   const url_single_transaction = `${ConfigItems.baseUrl}/api/get_transaction?trx_id=${transaction_id}`;
-  console.log(url_single_transaction)
   const r = await axios.get(url_single_transaction);
   return r.data;
 };
@@ -69,9 +66,7 @@ export const getUserTransaction = async (
   transactionFrom: number,
   transactionLimit: number
 ) => {
-  // const user_transaction_url = `${ConfigItems.baseUrl}/api/get_account_history?account=${user}&start=${transactionFrom}&limit=${transactionLimit}`;
-  const user_transaction_url = `${ConfigItems.baseUrl}/api/get_account_history?account=${user}&start=${transactionFrom}&limit=50`;
-  console.log(user_transaction_url)
+  const user_transaction_url = `${ConfigItems.baseUrl}/api/get_account_history?account=${user}&start=${transactionFrom}&limit=${transactionLimit}`;
   const r = await axios.get(user_transaction_url);
   return r.data;
 };

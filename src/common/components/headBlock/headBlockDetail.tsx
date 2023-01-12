@@ -90,9 +90,7 @@ const HeadBlockDetail = (props: any) => {
         setLoading(true);
         try {
           if (HeadBlock === "") {
-            console.log('resp',HeadBlock)
             const resp = await getHeadBlock();
-            console.log('resp',resp)
             dispatch(setHeadBlockData(resp));
             setResult(resp);
             setLoading(false);
