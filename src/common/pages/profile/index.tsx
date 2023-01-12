@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import { Container, Card } from "react-bootstrap";
 import PropTypes from "prop-types";
 import { Tab, Tabs } from "@material-ui/core";
@@ -22,6 +22,8 @@ import { getAccount, getOwnerHistory, getRCAccount } from "../../api/urls";
 import BackToTopButton from "../../components/Buttons/BackToTop";
 import SpinnerEffect from "../../components/loader/spinner";
 import UserHistory from "../../components/profile/userHistory";
+import { cardViewSVG, tableViewSVG } from "../../img/svg";
+import UserTransactionsCards from "../../components/profile/UserTransactionCards";
 
 interface UserList extends Array<UserTypeList> {}
 interface RCState {
@@ -62,6 +64,9 @@ const UserPage = (props: any) => {
   const [userId, setUserId] = useState(match.params.user_id);
   const rc_account_url = getRCAccount(userId);
   const owner_history_url = getOwnerHistory(userId);
+  const currTheme = useSelector((state: any) => state.global.theme);
+  const themeContrastColor = currTheme === "day" ? "#535e65" : "#ffffffde";
+  const [cardView, setCardView] = useState(true);
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -157,7 +162,7 @@ const UserPage = (props: any) => {
                     </Tabs>
                   </Card.Header>
                   <Card.Body className="py-0 user-info-card-body">
-                    <TabPanel value={value} index={0}>
+                    <TabPanel value={value} index={1}>
                       {Object.keys(user).map((k, index) => {
                         return typeof user[k] !== "object" && typeof user[k] !== "boolean" ? (
                           <StringField
@@ -190,8 +195,13 @@ const UserPage = (props: any) => {
                         );
                       })}
                     </TabPanel>
-                    <TabPanel value={value} index={1}>
-                      {<UserTransactionsTable user={`${userId}`} />}
+                    <TabPanel value={value} index={0}>
+                    <div className="text-center mt-2">
+                      <button className="switch-view-btn" style={currTheme==="day"? {backgroundColor: '#bbbb'}:{backgroundColor: '#374852'}} onClick={()=>setCardView(true)} >{cardViewSVG(themeContrastColor)}</button>
+                      <button className="switch-view-btn"  style={currTheme==="day"? {backgroundColor: '#bbbb'}:{backgroundColor: '#374852'}} onClick={()=>setCardView(false)} >{tableViewSVG(themeContrastColor)}</button>
+                    </div>
+                    <>{cardView? <UserTransactionsCards user={`${userId}`} /> :<UserTransactionsTable user={`${userId}`} />}</>
+                      {/* {<UserTransactionsTable user={`${userId}`} />} */}
                     </TabPanel>
                     <TabPanel value={value} index={2}>
                       {

@@ -339,8 +339,26 @@
     "allow_curation_rewards":"Allow Curation Rewards",
     "percent_hbd":"Percent HBD",
     "allow_votes":"Allow Votes",
-    "title":"Title"
-
+    "title":"Title",
+    "contractPayload":"Contract Payload",
+    "symbol":"Symbol",
+    "quantity":"Quantity",
+    "price":"Price",
+    "tournament_id":"Tournament ID",
+    "signed_pw":"Signed PW",
+    "payment":"Payment",
+    "dec_price":"DEC Price",
+    "sps_price":"SPS Price",
+    "delegatees":"Delegates",
+    "max_rc":"Max RC",
+    "to_account":"To Account",
+    "hive_vested":"HIVE Vested",
+    "from_account":"From Account",
+    "vesting_shares_received":"Vesting Shares Received",
+    "date":"Date",
+    "0":0,
+    "1":1,
+    "2":2
 
   },
   "witnesses": {

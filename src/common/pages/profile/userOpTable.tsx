@@ -8,6 +8,7 @@ import { AuthorityObject } from "../../components/profile/userAuthorities";
 import { DecodeJson } from "../../../server/util";
 import { LinkAccount, ObjectFieldArray, StringFieldArray } from "../fields/common_fields";
 import { UserAvatar } from "../../components/user-avatar";
+import parseAsset from "../../helper/parse-asset";
 
 const TransactionOperationTable = (props: any) => {
   const { opTrans } = props;
@@ -34,7 +35,7 @@ const TransactionOperationTable = (props: any) => {
 
   const opRequiredAuths = opVal.required_auths;
   const opRequiredPostingAuths = opVal.required_posting_auths;
-
+  let count=0
   const opActive = opVal.active;
   const opPosting = opVal.posting;
 
@@ -47,7 +48,8 @@ const TransactionOperationTable = (props: any) => {
     return (
       <tr>
         <td>{_t(`trans_table.${name}`)}</td>
-        <td>
+        <td>{parseAsset(field).amount+' '+parseAsset(field).symbol}</td>
+        {/* <td>
           <table>
             <tbody>
               <tr>
@@ -64,7 +66,7 @@ const TransactionOperationTable = (props: any) => {
               </tr>
             </tbody>
           </table>
-        </td>
+        </td> */}
       </tr>
     );
   }
@@ -211,8 +213,27 @@ const TransactionOperationTable = (props: any) => {
                                   </tr>
                                 </table>
                               )}
-                              {jsonSplit &&
+                                  {jsonSplit.cards && (
+                                <table style={{ width: "100%" }}>
+                                  <tr>
+                                    <td>{_t(`trans_table.cards`)}</td>
+                                    <td>
+                                      {" "}
+                                      {jsonSplit.cards.map((item: string, i: number) => {
+                                        return (
+                                          <tr key={i}>
+                                            <td>{item}</td>
+                                          </tr>
+                                        );
+                                      })}
+                                    </td>
+                                  </tr>
+                                </table>
+                              )}
+                              {jsonSplit  &&
                                 Object.keys(jsonSplit).map((key, j: number) => {
+                                  console.log('item',key,typeof(key),jsonSplit[key], jsonSplit[key]===null)
+                                  
                                   j = j + Math.floor(Math.random() * 6000) + 5000;
                                   return (
                                     <>
@@ -220,21 +241,78 @@ const TransactionOperationTable = (props: any) => {
                                         <table key={j} style={{ width: "100%" }}>
                                           <tbody>
                                             <tr>
-                                              <td style={{ width: "50%" }}>
+                                              <td style={typeof(_t(`trans_table.${key}`))==="number"?{width:'20px',minWidth:'20px'}:{}}>
                                                 {_t(`trans_table.${key}`)}
                                               </td>
-                                              <td style={{ width: "50%" }}>
-                                                {typeof jsonSplit[key] === "boolean"?
+                                              <td>
+                                                {typeof jsonSplit[key] === "boolean" ?
                                                  <span className={`${jsonSplit[key]}`}>
                                                   {jsonSplit[key].toString()}
                                                  </span>
-                                                  : jsonSplit[key]}{" "}
+                                                  : jsonSplit[key]!==null?
+                                                  jsonSplit[key]:<>{`null`}</>
+                                                  
+                                                }{" "}
                                               </td>
                                             </tr>
                                           </tbody>
                                         </table>
-                                      ) : (
-                                        <></>
+                                      ) : jsonSplit[key]===null?
+                                      <>
+                                      <table>
+                                        <tbody>
+                                          <tr>
+                                            <td>{_t(`trans_table.${key}`)}</td>
+                                            <td>Null</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                      </>
+                                      : (
+                                        <>
+                                        {!jsonSplit.items && !jsonSplit.cards  && <div className="d-flex">
+                                     
+                                        <table>
+                                          <tbody>
+                                            <tr><td style={typeof(_t(`trans_table.${key}`))==="number"?{width:'20px',minWidth:'20px'}:{}}>{_t(`trans_table.${key}`)}</td>
+                                            <td>
+                                            <table>
+                                          <tbody>
+                                              {Object.keys(jsonSplit[key]).map((innerKey,i)=>{
+                                                 console.log('inneritem',key,typeof(key),typeof(_t(`trans_table.${key}`)))
+                                                 
+                                                return(
+                                                  <tr key={i+innerKey+jsonSplit[key]}>
+                                                    <td >{_t(`trans_table.${innerKey}`)}</td>
+                                                    <td>
+                                                      {typeof(jsonSplit[key][innerKey])!=="object"? jsonSplit[key][innerKey].toString()
+                                                      :
+                                                      <><table>
+                                                        <tbody>
+                                                          {Object.keys(jsonSplit[key][innerKey]).map((item,j:number)=>{
+                                                            return(
+                                                              <tr key={item+j+jsonSplit[key][innerKey][item]}> 
+                                                                <td style={typeof(_t(`trans_table.${item}`))==="number"?{width:'20px',minWidth:'20px'}:{}}>{_t(`trans_table.${item}`)}</td>
+                                                                <td>{jsonSplit[key][innerKey][item]}</td>
+                                                              </tr>
+                                                            )
+                                                          })}
+                                                        </tbody>
+                                                        </table></>
+                                                      }
+                                                    </td>
+                                                  </tr>
+                                                )
+                                              })}
+                                              </tbody>
+                                               </table>
+                                         
+                                              </td>
+                                              </tr>
+                                          </tbody>
+                                        </table>
+                                        </div>}
+                                        </>                      
                                       )}
                                     </>
                                   );

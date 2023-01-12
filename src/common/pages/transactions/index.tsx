@@ -33,10 +33,10 @@ const AllTransactions = (props: any) => {
         if (HeadBlock === "") {
           const resp = await getHeadBlock();
           dispatch(setHeadBlockData(resp));
-          const response = await getTransactions(71178931);
+          const response = await getTransactions(71266307);
           setTransactions(response.ops);
         } else {
-          const response = await getTransactions(71178931);
+          const response = await getTransactions(71266307);
           setTransactions(response.ops);
         }
       } catch (error: any) {

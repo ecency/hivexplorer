@@ -74,20 +74,6 @@ const UserHistory = (props: any) => {
           {Object.keys(ownerHistory[0]).map((key: any, i: number) => {
             return (
               <>
-                {/* {authority!=="memo_key"? 
-                        <tr key={i} className="row-border" >
-                        <td className="pt-2 pl-4 pr-2 pb-2">{_t(`user-info.${authority}`)}</td>
-                        <td  className="pt-2 px-4 pb-2">
-                            {props[authority]}
-                        </td>
-                    </tr> 
-                      :  <tr key={i} className="row-border" >
-                      <td className="pt-2 pl-4 pr-2 pb-2">{_t(`user-info.${authority}`)}</td>
-                      <td  className="pt-2 px-2 pb-2">
-                          {AuthorityObject(props[authority])}
-                      </td>
-                  </tr>
-                    } */}
                 {typeof ownerHistory[0][key] !== "object" ? (
                   <tr key={i} className="row-border">
                     <td className="pt-2 pl-4 pr-2 pb-2">{_t(`user-info.${key}`)}</td>

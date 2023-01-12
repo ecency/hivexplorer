@@ -12,6 +12,7 @@ export const LinkAccount = [
     "benefactor",
     "comment_author",
     "parent_author",
+    "delegatees"
   ];
 
   export const StringFieldArray = [
