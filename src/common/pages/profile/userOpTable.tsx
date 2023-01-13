@@ -104,6 +104,7 @@ const TransactionOperationTable = (props: any) => {
                       <tbody>
                         {Object.keys(opVal).map((key, k: number) => {
                           k = k + Math.floor(Math.random() * 10000) + 9000;
+                          console.log('value',opVal)
                           return (
                             <>
                               {(typeof opVal[key] === "string" || typeof opVal[key] === "number") &&
@@ -193,6 +194,8 @@ const TransactionOperationTable = (props: any) => {
                         )}
 
                         {opJson && (
+                          <>
+                         <>{console.log('json',opJson)}</>
                           <tr>
                             <td>{_t(`trans_table.json`)}</td>
                             <td>
@@ -204,9 +207,7 @@ const TransactionOperationTable = (props: any) => {
                                       {" "}
                                       {jsonSplit.items.map((item: string, i: number) => {
                                         return (
-                                          <tr key={i}>
-                                            <td>{item}</td>
-                                          </tr>
+                                            <span className="block-span" key={item+i}>{item}</span>
                                         );
                                       })}
                                     </td>
@@ -221,9 +222,7 @@ const TransactionOperationTable = (props: any) => {
                                       {" "}
                                       {jsonSplit.cards.map((item: string, i: number) => {
                                         return (
-                                          <tr key={i}>
-                                            <td>{item}</td>
-                                          </tr>
+                                            <span className="block-span"  key={item+1}>{item}</span>
                                         );
                                       })}
                                     </td>
@@ -316,6 +315,7 @@ const TransactionOperationTable = (props: any) => {
                                 })}
                             </td>
                           </tr>
+                          </>
                         )}
                         {opPayoutClaim && (
                           <tr>

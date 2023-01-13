@@ -356,6 +356,8 @@
     "from_account":"From Account",
     "vesting_shares_received":"Vesting Shares Received",
     "date":"Date",
+    "season":"Season",
+    "cards":"Cards",
     "0":0,
     "1":1,
     "2":2

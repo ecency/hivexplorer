@@ -7,11 +7,14 @@
         border-collapse: collapse;
         }
         tr td:first-child{
-            min-width: 100px;
+            width: 100px;
         }
         td{
             padding: 10px;
             word-break: break-all;
+            .block-span {
+              display: block;
+          }
             .true{
               color: green;
           }
@@ -38,11 +41,14 @@
         border-collapse: collapse;
         }
         tr td:first-child{
-            min-width: 100px;
+            width: 100px;
         }
         td{
             padding: 10px ;
             word-break: break-word;
+            .block-span {
+              display: block;
+          }
         }
         
       }
@@ -79,12 +85,15 @@
     border-collapse: collapse;
     }
     tr td:first-child{
-        min-width: 100px;
+        width: 100px;
     }
     td{
         padding: 10px ;
         word-break: break-word;
     }
+    .block-span {
+      display: block;
+  }
     td.true{
       color: #080;
     }
