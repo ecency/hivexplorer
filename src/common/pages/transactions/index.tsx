@@ -13,6 +13,7 @@ import { setHeadBlockData } from "../../store/HeadBlock";
 import { cardViewSVG, tableViewSVG } from "../../img/svg";
 import { Button, Container } from "react-bootstrap";
 import TransactionsCards from "./transactionCards";
+import headBlock from "../../components/headBlock/headBlock";
 
 interface TransactionList extends Array<HomeTransactionType> {}
 const AllTransactions = (props: any) => {
@@ -33,10 +34,13 @@ const AllTransactions = (props: any) => {
         if (HeadBlock === "") {
           const resp = await getHeadBlock();
           dispatch(setHeadBlockData(resp));
-          const response = await getTransactions(71266307);
+          const response = await getTransactions(resp.head_block_number);
+          // const response = await getTransactions(71554087);
+          // 71554087
           setTransactions(response.ops);
         } else {
-          const response = await getTransactions(71266307);
+          const response = await getTransactions(HeadBlock);
+          // const response = await getTransactions(71554087);
           setTransactions(response.ops);
         }
       } catch (error: any) {

@@ -8,12 +8,18 @@
         }
         tr td:first-child{
             width: 100px;
+            word-break: break-word;
         }
         td{
             padding: 10px;
             word-break: break-all;
             .block-span {
               display: block;
+              padding: 5px 0px;
+            &:not(:last-child){
+              border-bottom: 1px solid #706f70;
+              padding-bottom: 0
+            }
           }
             .true{
               color: green;
@@ -42,12 +48,18 @@
         }
         tr td:first-child{
             width: 100px;
+            word-break: break-word;
         }
         td{
             padding: 10px ;
             word-break: break-word;
             .block-span {
               display: block;
+              padding: 5px 0px;
+            &:not(:last-child){
+              border-bottom: 1px solid #706f70;
+              padding-bottom: 0
+            }
           }
         }
         
@@ -86,6 +98,7 @@
     }
     tr td:first-child{
         width: 100px;
+        word-break: break-word;
     }
     td{
         padding: 10px ;
@@ -93,6 +106,11 @@
     }
     .block-span {
       display: block;
+      padding: 5px 0px;
+    &:not(:last-child){
+      border-bottom: 1px solid #706f70;
+      padding-bottom: 0
+    }
   }
     td.true{
       color: #080;

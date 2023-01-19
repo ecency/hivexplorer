@@ -9,6 +9,7 @@ import { DecodeJson } from "../../../server/util";
 import { LinkAccount, ObjectFieldArray, StringFieldArray } from "../fields/common_fields";
 import { UserAvatar } from "../../components/user-avatar";
 import parseAsset from "../../helper/parse-asset";
+import { isInteger, isNumber } from "lodash";
 
 const TransactionOperationTable = (props: any) => {
   const { opTrans } = props;
@@ -239,7 +240,7 @@ const TransactionOperationTable = (props: any) => {
                                         <table key={j} style={{ width: "100%" }}>
                                           <tbody>
                                             <tr>
-                                              <td style={typeof(_t(`trans_table.${key}`))==="number"?{width:'20px',minWidth:'20px'}:{}}>
+                                              <td style={isInteger(+key)?{width:'40px',minWidth:'40px'}:{}}>
                                                 {_t(`trans_table.${key}`)}
                                               </td>
                                               <td>
@@ -272,23 +273,25 @@ const TransactionOperationTable = (props: any) => {
                                      
                                         <table>
                                           <tbody>
-                                            <tr><td style={typeof(_t(`trans_table.${key}`))==="number"?{width:'20px',minWidth:'20px'}:{}}>{_t(`trans_table.${key}`)}</td>
+                                            <tr><td style={isInteger(+key)?{width:'40px',minWidth:'40px'}:{}}>{_t(`trans_table.${key}`)}</td>
                                             <td>
                                             <table>
                                           <tbody>
-                                              {Object.keys(jsonSplit[key]).map((innerKey,i)=>{
+                                              {Object.keys(jsonSplit[key]).map((innerKey:any,i)=>{
+                                               
                                                 return(
                                                   <tr key={i+innerKey+jsonSplit[key]}>
-                                                    <td >{_t(`trans_table.${innerKey}`)}</td>
+                                                    <td style={isInteger(+innerKey)?{width:'40px',minWidth:'40px'}:{}}>{isInteger(+innerKey)?<>{innerKey}</>:<>{_t(`trans_table.${innerKey}`)}</>}</td>
                                                     <td>
                                                       {typeof(jsonSplit[key][innerKey])!=="object"? jsonSplit[key][innerKey].toString()
                                                       :
                                                       <><table>
                                                         <tbody>
                                                           {Object.keys(jsonSplit[key][innerKey]).map((item,j:number)=>{
+                                                           
                                                             return(
                                                               <tr key={item+j+jsonSplit[key][innerKey][item]}> 
-                                                                <td style={typeof(_t(`trans_table.${item}`))==="number"?{width:'20px',minWidth:'20px'}:{}}>{_t(`trans_table.${item}`)}</td>
+                                                                <td style={isInteger(+item)?{width:'40px',minWidth:'40px'}:{}}>{_t(`trans_table.${item}`)}</td>
                                                                 <td>{jsonSplit[key][innerKey][item]}</td>
                                                               </tr>
                                                             )

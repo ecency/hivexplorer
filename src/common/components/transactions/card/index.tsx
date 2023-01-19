@@ -86,7 +86,7 @@ const TransactionCard = (props: any) => {
                                         <tr key={i+val+transactionFields.op.type}>
                                         <td>{_t(`trans_table.${val}`)}</td>
                                         <td>
-                                            <table>
+                                            <table style={{width:'100%'}}>
                                                 <tbody>
                                                 {opVal[val].map((item:any,j:number)=>{
                                                   return(
@@ -112,12 +112,12 @@ const TransactionCard = (props: any) => {
                                                                                 return(
                                                                                     <>
                                                                                    {typeof(innerKey)==="object"?
-                                                                                   <><table>
+                                                                                   <><table style={{width:'100%'}}>
                                                                                     <tbody>
                                                                                         {Object.keys(innerKey).map((keyItem,i)=>{
                                                                                             return(
                                                                                                 <tr key={innerKey+i+keyItem}>
-                                                                                                    <td>{_t(`trans-table.${keyItem}`)}</td>
+                                                                                                    <td>{_t(`trans_table.${keyItem}`)}</td>
                                                                                                     <td>{innerKey[keyItem]}</td>
                                                                                                 </tr>
                                                                                             )
@@ -154,7 +154,7 @@ const TransactionCard = (props: any) => {
                                         <tr key={i+val+transactionFields.op.type}>
                                         <td>{_t(`trans_table.${val}`)}</td>
                                         <td>
-                                            <table>
+                                            <table style={{width:'100%'}}>
                                                 <tbody>
                                                 {Object.keys(opVal[val]).map((item:any,j:number)=>{
                                                 return(
