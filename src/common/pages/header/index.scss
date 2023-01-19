@@ -18,6 +18,24 @@
             vertical-align: -5%    
         }
     }
+    .span-language{
+        width: 17px;
+        height: 13px;
+        display: flex;
+        justify-content: center;
+        background-color: #357ce6;
+        color: #fff;
+        border-radius: 100%;
+        font-size: 9px;
+        align-items: center;
+        padding: 8px;
+        line-height: initial;
+        position: absolute;
+        left: 20px;
+        top: 17px;
+        z-index: 99;
+        font-weight: bold;
+    }
     .flag-img{
         width: 24px;
         padding-right: 5px;

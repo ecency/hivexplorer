@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import i18next from "i18next";
 import cookies from "js-cookie";
 import { useSelector, useDispatch } from "react-redux";
@@ -10,6 +10,9 @@ import { brightnessSvg, hiveLogo, globeImg } from "../../img/svg";
 import { languages } from "../../languages";
 import { toggleTheme } from "../../store/global/index";
 import { _t } from "../../i18n";
+import * as ls from "../../util/local-storage";
+import i18n from "i18next";
+import { frFlag } from "../../img/flags";
 
 const RESOURCES_MENU = [
   {
@@ -37,7 +40,11 @@ const BLOCKCHAIN_MENU = [
 const TOKENS_MENU = [_t("nav.tokens-hive"), _t("nav.tokens-he"), _t("nav.tokens-speak")];
 
 const AppHeader = (props: any) => {
-  const currentLangCode = cookies.get("i18next") || "en";
+  // const languageFromLS = ls && ls.get("current-language");
+  //       const [lang,setLang] = useState(languageFromLS !== null ? languageFromLS.slice(0, 2).toUpperCase() : "EN")
+
+  const currentLangCode = ls && ls.get("current-language");
+  const [lang,setLang] = useState(currentLangCode !== null ? currentLangCode.slice(0, 2).toUpperCase() : "EN")
   const currTheme = useSelector((state: any) => state.global.theme);
   const dispatch = useDispatch();
   const appNav = currTheme === "day" ? "appNav appNav-day" : "appNav appNav-night";
@@ -107,6 +114,8 @@ const AppHeader = (props: any) => {
                   </NavDropdown.Item>
                 ))}
               </NavDropdown>
+              <span style={{position:'relative'}}>
+              {currentLangCode && <span className="span-language">{currentLangCode.slice(0, 2).toUpperCase()}</span>}
               <NavDropdown
                 menuVariant={menuVariant}
                 id="nav-dropdown-dark-example"
@@ -115,7 +124,12 @@ const AppHeader = (props: any) => {
                 {languages.map(({ code, name, country_code, flagImg }) => (
                   <NavDropdown.Item
                     key={country_code}
-                    onClick={() => i18next.changeLanguage(code)}
+                    onClick={() => {
+                      console.log('clicked')
+                      i18n.changeLanguage(code).then(() => {
+                      setLang(code);
+                  });
+                  ls.set("current-language", code)}}
                     disabled={code === currentLangCode}
                   >
                     <div className="langFlag">
@@ -128,6 +142,9 @@ const AppHeader = (props: any) => {
                   </NavDropdown.Item>
                 ))}
               </NavDropdown>
+
+              </span>
+             
             </Nav>
           </Navbar.Collapse>
           <Button
