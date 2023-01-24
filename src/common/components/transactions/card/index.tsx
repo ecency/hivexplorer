@@ -169,6 +169,28 @@ const TransactionCard = (props: any) => {
                                         </td>
                                         </tr>
                                         :
+                                        val==="exchange_rate"?
+                                        <>
+                                        <tr key={i+val+transactionFields.op.type}>
+                                        <td>{_t(`trans_table.${val}`)}</td>
+                                        <td>
+                                            <table style={{width:'100%'}}>
+                                                <tbody>
+                                                {Object.keys(opVal[val]).map((item:any,j:number)=>{
+                                                    console.log(opVal[val],item)
+                                                return(
+                                                    <tr key={j+item}>
+                                                    <td>{_t(`trans_table.${item}`)}</td>
+                                                    <td>{parseAsset(opVal[val][item]).amount+' '+parseAsset(opVal[val][item]).symbol}</td>
+                                                    </tr>
+                                                    )
+                                                })}
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                        </tr>
+                                        </>
+                                        :
                                         <tr key={i+val+transactionFields.op.type}>
                                            <td>{_t(`trans_table.${val}`)}</td>
                                             <td>{parseAsset(opVal[val]).amount+' '+parseAsset(opVal[val]).symbol}</td>

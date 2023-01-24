@@ -3,7 +3,7 @@ export default {
     ABOUT:'/about',
     Contact:'/contact',
     Service:'/service',
-    HeadBlock:'/head/b/:id',
+    HeadBlock:'/head/b/',
     TargetBlock:'/b/:id',
     Transactions:'/transactions',
     TargetTransaction:'/tx/:id',

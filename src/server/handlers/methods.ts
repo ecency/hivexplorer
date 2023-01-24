@@ -1106,6 +1106,12 @@ export const methods = [
   },
   {
     api: "database_api",
+    method: "find_accounts",
+    isArray:true,
+    params: ["accounts"]
+  },
+  {
+    api: "database_api",
     method: "find_proposals",
     description:_t("database_api.find_proposals_description"),
     params: ["proposal_ids"],

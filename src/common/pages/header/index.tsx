@@ -26,10 +26,10 @@ const RESOURCES_MENU = [
 ];
 const BLOCKCHAIN_MENU = [
   {
-    name: _t("nav.blockchain-vt"),
+    name: `${_t("nav.blockchain-vt")}`,
     link: `/transactions`
   },
-  { name: _t("nav.blockchain-vb"), link: `/blocks` },
+  { name: `${_t("nav.blockchain-vb")}`, link: `/blocks` },
   { name: _t("nav.blockchain-gov") },
   { name: _t("nav.blockchain-witnesses"), link: `/witnesses` },
   {

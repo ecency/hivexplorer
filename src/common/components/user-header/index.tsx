@@ -64,6 +64,17 @@ const UserHeader = (props: any) => {
               </div>
             </Row>
             <Row className="user-profile-feature-row">
+              <Col md={12} className="user-header-info" >
+              <div>
+                    <h4 className="text-capitalize">
+                      {metaProfile.name ? metaProfile.name : name}
+                    </h4>
+                    <h6 className="text-capitalize">ID: {id}</h6>
+                    {metaProfile.about && (
+                      <h6 className="text-capitalize">About: {metaProfile.about}</h6>
+                    )}
+                  </div>
+              </Col>
               <Col lg={2} md={3}>
                 <div className="user-links-container">
                   <ul className="user-link-list-ul">
@@ -162,7 +173,7 @@ const UserHeader = (props: any) => {
                   </Row>
                   <Row>
                     <Col md={3}>
-                      <p>{_t("user-info.vote_power")}</p>
+                      <p className="pt-1">{_t("user-info.vote_power")}</p>
                     </Col>
                     <Col md={9}>
                       <ProgressBar striped={true} now={votingPower} label={`${votingPower}%`} />
@@ -170,7 +181,7 @@ const UserHeader = (props: any) => {
                   </Row>
                   <Row>
                     <Col md={3}>
-                      <p>{_t("user-info.down_vote_power")}</p>
+                      <p className="pt-1">{_t("user-info.down_vote_power")}</p>
                     </Col>
                     <Col md={9}>
                       <ProgressBar
@@ -183,7 +194,7 @@ const UserHeader = (props: any) => {
                   </Row>
                   <Row>
                     <Col md={3}>
-                      <p>{_t("user-info.resource_credits")}</p>
+                      <p className="pt-1">{_t("user-info.resource_credits")}</p>
                     </Col>
                     <Col md={9}>
                       <ProgressBar

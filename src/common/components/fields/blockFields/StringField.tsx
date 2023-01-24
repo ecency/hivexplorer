@@ -45,10 +45,12 @@ const StringField = (props: any) => {
   return (
     <Row className={rowBorder} key={number}>
       <Col md={3} xs={12} className="attr-col">
+       <b>
         <span>{infoIcon(themeContrastColor)} </span>
         <span className="pl-2"> {_t(`${label_for}.${item}`)}:</span>{" "}
+       </b>
       </Col>
-      <Col md={9} xs={12}>
+      <Col className="val-col" md={9} xs={12}>
         {item === "witness" || item === "current_witness" ? (
           <UserAvatar username={value} size="small"/>
         ) : item === "recovery_account" ? (

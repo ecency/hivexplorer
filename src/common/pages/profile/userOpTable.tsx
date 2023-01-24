@@ -285,14 +285,15 @@ const TransactionOperationTable = (props: any) => {
                                                     <td>
                                                       {typeof(jsonSplit[key][innerKey])!=="object"? jsonSplit[key][innerKey].toString()
                                                       :
-                                                      <><table>
+                                                      <>
+                                                      <table>
                                                         <tbody>
                                                           {Object.keys(jsonSplit[key][innerKey]).map((item,j:number)=>{
-                                                           
+                                                           console.log(DecodeJson(jsonSplit[key][innerKey][item]))
                                                             return(
                                                               <tr key={item+j+jsonSplit[key][innerKey][item]}> 
                                                                 <td style={isInteger(+item)?{width:'40px',minWidth:'40px'}:{}}>{_t(`trans_table.${item}`)}</td>
-                                                                <td>{jsonSplit[key][innerKey][item]}</td>
+                                                                <td>{typeof(jsonSplit[key][innerKey][item])}</td>
                                                               </tr>
                                                             )
                                                           })}

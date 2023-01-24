@@ -5,21 +5,21 @@
   },
   "nav": {
     "blockchain": "Blockchain",
-    "tokens": "Tokens",
-    "resources": "Resources",
-    "blockchain-vt": "View Txs",
-    "blockchain-vb": "View Blocks",
-    "blockchain-gov": "Governance",
-    "blockchain-witnesses": "Witnesses",
-    "blockchain-proposals": "Proposals",
+    "tokens": "Токены",
+    "resources": "Ресурсы",
+    "blockchain-vt": "Просмотр транзакций",
+    "blockchain-vb": "Посмотреть блоки",
+    "blockchain-gov": "Управление",
+    "blockchain-witnesses": "Свидетели",
+    "blockchain-proposals": "Предложения",
     "tokens-hive": "Hive",
     "tokens-he": "Hive Engine",
-    "tokens-speak": "Speak Network",
-    "resources-about": "About"
+    "tokens-speak": "Говорите в сети",
+    "resources-about": "О"
   },
   "home": {
-    "latest_block": "Latest Blocks",
-    "latest_transaction": "Latest Transaction"
+    "latest_block": "Последние блоки",
+    "latest_transaction": "Последние транзакции"
   },
   "common": {
     "id": "ID",

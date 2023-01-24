@@ -49,7 +49,7 @@ const SingleTransaction = (props: any) => {
           <Container>
             <Card>
               <Card.Header>
-                {_t("common.transaction")}: {match.params.id}@{result?.block_num}
+               <b> {_t("common.transaction")}</b>: {match.params.id}@{result?.block_num}
               </Card.Header>
               <Card.Body className="py-0">
                 {result &&

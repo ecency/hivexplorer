@@ -1,7 +1,7 @@
 import i18n from "i18next";
 
 import moment from "moment";
-
+import * as ls from "../util/local-storage";
 export const langOptions = [
   {
     code: "en-US",
@@ -76,7 +76,7 @@ const resources = {
 
 i18n.init({
   resources,
-  fallbackLng: "en-US",
+  fallbackLng: ls.get("current-language"),
   interpolation: {
     escapeValue: false
   }

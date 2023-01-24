@@ -51,7 +51,7 @@ const SingleBlock = (props: any) => {
           <Container>
             <Card>
               <Card.Header>
-                {_t("common.block")}: {match.params.id}
+                <b>{_t("common.block")}</b>: {match.params.id}
               </Card.Header>
               <Card.Body className="pt-0">
                 {result &&

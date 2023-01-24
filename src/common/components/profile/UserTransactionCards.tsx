@@ -129,7 +129,7 @@ const UserTransactionsCards = (props: any) => {
             <Col lg={6}>
                 {filteredTransactionsData && (
                 <TablePagination
-                rowsPerPageOptions={[25, 50, 100, 500, 1000]}
+                rowsPerPageOptions={[1,25, 50, 100, 500, 1000]}
                 component="div"
                 count={filteredTransactionsData.length}
                 rowsPerPage={rowsPerPage}
