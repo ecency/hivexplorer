@@ -37,7 +37,11 @@ export const LinkAccount = [
     "allow_curation_rewards"
 
   ];
-
+export const NestedObjectUserOperations=[
+  'owner',
+  'active',
+  'posting',
+]
   export const ObjectFieldArray = [
     "vesting_shares",
     "reward",

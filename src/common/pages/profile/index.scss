@@ -54,6 +54,15 @@
                 padding-bottom: 0
               }
             }
+            .trans-card-span{
+                display: flex;
+              padding: 5px 0px;
+              justify-content: space-between;
+              &:not(:last-child){
+                border-bottom: 1px solid #706f70;
+                padding-bottom: 0
+              }
+            }
             .true{
                 color: green;
             }
@@ -128,12 +137,18 @@
         box-shadow: 0 0.1rem 1rem $light-shadow;
         width: 80%;
         margin: auto;
+        .trans-span{
+            display: block;
+        }
         &-dark{
             background-color: $dark-grey-blue;
         }
         &-light{
             background-color: $white-five;
         }
+    }
+    @media screen and (max-width:768px) {
+        padding-top: 0;
     }
    
 }

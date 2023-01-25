@@ -10,6 +10,40 @@ import { LinkAccount, ObjectFieldArray, StringFieldArray } from "../fields/commo
 import { UserAvatar } from "../../components/user-avatar";
 import parseAsset from "../../helper/parse-asset";
 import { isInteger, isNumber } from "lodash";
+export const OpObjectValue=(field: any, name: string)=> {
+  return (
+    <tr key={field+name}>
+      <td>{_t(`trans_table.${name}`)}</td>
+      <td>{parseAsset(field).amount+' '+parseAsset(field).symbol}</td>
+      {/* <td>
+        <table>
+          <tbody>
+            <tr>
+              <td>{_t(`trans_table.amount`)}</td>
+              <td>{field.amount}</td>
+            </tr>
+            <tr>
+              <td>{_t(`trans_table.precision`)}</td>
+              <td>{field.precision}</td>
+            </tr>
+            <tr>
+              <td>{_t(`trans_table.nai`)}</td>
+              <td>{field.nai}</td>
+            </tr>
+          </tbody>
+        </table>
+      </td> */}
+    </tr>
+  );
+}
+export function opNestedObject(field: any, name: string) {
+  return (
+    <tr>
+      <td>{_t(`trans_table.${name}`)}</td>
+      <td>{typeof field !== "object" ? field : <AuthorityObject {...field} />}</td>
+    </tr>
+  );
+}
 
 const TransactionOperationTable = (props: any) => {
   const { opTrans } = props;
@@ -45,40 +79,8 @@ const TransactionOperationTable = (props: any) => {
   const OpValArray = new Array();
   OpValArray.push(opRewardHive, opVestShare);
 
-  function OpObjectValue(field: any, name: string) {
-    return (
-      <tr>
-        <td>{_t(`trans_table.${name}`)}</td>
-        <td>{parseAsset(field).amount+' '+parseAsset(field).symbol}</td>
-        {/* <td>
-          <table>
-            <tbody>
-              <tr>
-                <td>{_t(`trans_table.amount`)}</td>
-                <td>{field.amount}</td>
-              </tr>
-              <tr>
-                <td>{_t(`trans_table.precision`)}</td>
-                <td>{field.precision}</td>
-              </tr>
-              <tr>
-                <td>{_t(`trans_table.nai`)}</td>
-                <td>{field.nai}</td>
-              </tr>
-            </tbody>
-          </table>
-        </td> */}
-      </tr>
-    );
-  }
-  function opNestedObject(field: any, name: string) {
-    return (
-      <tr>
-        <td>{_t(`trans_table.${name}`)}</td>
-        <td>{typeof field !== "object" ? field : <AuthorityObject {...field} />}</td>
-      </tr>
-    );
-  }
+
+
   return (
     <>
       <Card

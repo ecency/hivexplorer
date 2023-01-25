@@ -52,9 +52,9 @@ const UserHeader = (props: any) => {
               <div className="profile-user-info">
                 <div className="grey-div">
                   <div>
-                    <h4 className="text-light text-capitalize">
+                    <h3 className="text-light text-capitalize mb-0">
                       {metaProfile.name ? metaProfile.name : name}
-                    </h4>
+                    </h3>
                     <h6 className="text-light text-capitalize">ID: {id}</h6>
                     {metaProfile.about && (
                       <h6 className="text-light text-capitalize">About: {metaProfile.about}</h6>
@@ -66,9 +66,9 @@ const UserHeader = (props: any) => {
             <Row className="user-profile-feature-row">
               <Col md={12} className="user-header-info" >
               <div>
-                    <h4 className="text-capitalize">
+                    <h3 className="text-capitalize mh-0">
                       {metaProfile.name ? metaProfile.name : name}
-                    </h4>
+                    </h3>
                     <h6 className="text-capitalize">ID: {id}</h6>
                     {metaProfile.about && (
                       <h6 className="text-capitalize">About: {metaProfile.about}</h6>

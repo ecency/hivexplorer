@@ -391,7 +391,10 @@
     "monsters":"Monsters",
     "team_hash":"Team Hash",
     "all_or_none":"All or None",
-    
+    "key_auths":"key Auths",
+    "account_auths":"Accounts Auths",
+    "weight_threshold":"Weight Threshold",
+    "posting_json_metadata":"Posting Json Metadata",
     "0":0,
     "1":1,
     "2":2

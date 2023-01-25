@@ -20,6 +20,15 @@
               border-bottom: 1px solid #706f70;
               padding-bottom: 0
             }
+            .trans-card-span{
+              display: flex;
+              padding: 5px 0px;
+              justify-content: space-between;
+            &:not(:last-child){
+              border-bottom: 1px solid #706f70;
+              padding-bottom: 0
+            }
+          }
           }
             .true{
               color: green;
@@ -61,6 +70,15 @@
               padding-bottom: 0
             }
           }
+          .trans-card-span{
+            display: flex;
+            padding: 5px 0px;
+            justify-content: space-between;
+          &:not(:last-child){
+            border-bottom: 1px solid #706f70;
+            padding-bottom: 0
+          }
+        }
         }
         
       }
@@ -112,6 +130,15 @@
       padding-bottom: 0
     }
   }
+  .trans-card-span{
+    display: flex;
+    padding: 5px 0px;
+    justify-content: space-between;
+  &:not(:last-child){
+    border-bottom: 1px solid #706f70;
+    padding-bottom: 0
+  }
+}
     td.true{
       color: #080;
     }

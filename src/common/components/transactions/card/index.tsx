@@ -8,9 +8,11 @@ import { _t } from "../../../i18n";
 import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { TimestampField } from "../../fields/blockFields/DateTimeTable";
-import { LinkAccount } from "../../../pages/fields/common_fields";
+import { LinkAccount, NestedObjectUserOperations } from "../../../pages/fields/common_fields";
 import UserAvatar from "../../user-avatar";
 import parseAsset from "../../../helper/parse-asset";
+import { AuthorityObject } from "../../profile/userAuthorities";
+import { isInteger } from "lodash";
 _t
 
 interface EntryType {
@@ -33,7 +35,7 @@ const TransactionCard = (props: any) => {
                                 <Card.Body>
                                     <Card.Title className="d-flex ">
                                     <>{transactionFields.trx_id==="0000000000000000000000000000000000000000"?
-                                            <p>{_t('trans_table.virtual')}</p>:
+                                            <span>{_t('trans_table.virtual')}</span>:
                                             <Link to={`/tx/${transactionFields.trx_id}`}>{transactionFields.trx_id.substring(0,7)+'...'}</Link>
                                         }</>
                                     </Card.Title>
@@ -81,7 +83,74 @@ const TransactionCard = (props: any) => {
                                             </td>
                                         </tr>
                                         :
-                                    
+                                        typeof(opVal[val]) === "object" && NestedObjectUserOperations.includes(val)?
+                                        <tr key={i+val+transactionFields.op.type}>
+                                        <td>{_t(`trans_table.${val}`)}</td>
+                                        <td>
+                                            <table style={{width:'100%'}}>
+                                                <tbody>
+                                                {Object.keys(opVal[val]).map((item:any,j:number)=>{
+                                                    return( 
+                                                    <tr key={j+item}>
+                                                        <td>{_t(`trans_table.${item}`)}</td>
+                                                        <td>{typeof opVal[val][item] !== "object" ? opVal[val][item] 
+                                                        :<>
+                                                        {Object.keys(opVal[val][item]).map((key, y: number) => {
+                                                            y = y + Math.floor(Math.random() * 10) + 1;
+                                                            return (
+                                                              <>
+                                                                {opVal[val][item][key].length !== 0 && (
+                                                                  <table style={{width:'100%'}} key={y+item+key} id={`${y})}`} className="m-0 py-2 row-border-dotted">
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td style={isInteger(+key)?{width:'40px',minWidth:'40px'}:{}}>
+                                                                            {key}
+                                                                            </td>
+                                                                            <td >
+                                                                            {typeof opVal[val][item][key] !== "object" 
+                                                                          ? opVal[val][item]
+                                                                          : opVal[val][item].map((inner: any, j: number) => {
+                                                                              j = j + Math.floor(Math.random() * 30) + 10;
+                                                                              return (
+                                                                                <span className="trans-card-span">
+                                                                                {/* // <table key={j} style={{width:'100%'}}>
+                                                                                //     <tbody>
+                                                                                //         <tr>
+                                                                                //             <td> */}
+                                                                                            {item === "account_auths" ? (
+                                                                                      <Link to={`/@${inner[0]}`}>
+                                                                                        {inner[0]}
+                                                                                      </Link>
+                                                                                    ) : (
+                                                                                      <span>{inner[0]}</span>
+                                                                                    )}
+                                                                                    <span className="number-span">
+                                                                                      {`  `} {inner[1]}
+                                                                                    </span>
+                                                                                {/* //             </td>
+                                                                                //         </tr>
+                                                                                //     </tbody>
+                                                                                // </table> */}
+                                                                                </span>
+                                                                            )})}
+                                                                                
+                                                                      </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                            </table>
+                                                                )}
+                                                              </>
+                                                            );
+                                                          })}
+                                                        </>
+                                                        }</td>
+                                                      </tr>)
+                                                })}
+                                                </tbody>
+                                            </table>
+                                            </td>
+                                            </tr>
+                                        :
                                         val==="extensions"?
                                         <tr key={i+val+transactionFields.op.type}>
                                         <td>{_t(`trans_table.${val}`)}</td>
