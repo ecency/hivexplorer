@@ -1292,12 +1292,6 @@ export const methods = [
     description:_t("block_api.gbroadcast_transaction_synchronous_description")
   },
   {
-    api: "network_broadcast_api",
-    method: "broadcast_block",
-    params: ["block"],
-    description:_t("block_api.broadcast_block_description")
-  },
-  {
     api: "transaction_status_api",
     method: "find_transaction",
     params: ["transaction_id", "expiration"],
@@ -1700,7 +1694,7 @@ export const methods = [
     description:_t("block_api.list_proposal_votes_description")
   },
   {
-    api: "json-rpc",
+    api: "database_api",
     method: "get_nai_pool",
     description:_t("block_api.get_nai_pool_description")
   },
