@@ -44,74 +44,73 @@ export const methods = [
     api: "condenser_api",
     method: "get_tags_used_by_author",
     description:_t("block_api.get_tags_used_by_author_description"),
-    params: ["account"]
+    params: ["account"],
     url:`${ConfigItems.baseUrl}api/get_tags_used_by_author?account=75`,
-    parameter:' <table>
-  <thead>
-    <tr>
-      <th><code class="language-plaintext highlighter-rouge">account</code> (string)</th>
-      <th>&nbsp;</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">"hiveio"</code></td>
-      <td>Queries the tags used by the account named “hiveio”.</td>
-    </tr>
-  </tbody>
-</table>
- response: '[]'
+    parameter: `<table>
+      <thead>
+        <tr>
+          <th><code class="language-plaintext highlighter-rouge">account</code> (string)</th>
+          <th>&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code class="language-plaintext highlighter-rouge">"hiveio"</code></td>
+          <td>Queries the tags used by the account named “hiveio”.</td>
+        </tr>
+      </tbody>
+    </table>`,
+    response: '[]'
   },
   {
     api: "condenser_api",
     method: "get_post_discussions_by_payout",
     params: ["query"],
-    description:_t("block_api.get_post_discussions_by_payout_description")
+    description:_t("block_api.get_post_discussions_by_payout_description"),
     response: `[]`
   },
   {
     api: "condenser_api",
-    method: "get_comment_discussions_by_payout", (Removed since HF24)
+    method: "get_comment_discussions_by_payout",
     params: ["query"],
     description:_t("block_api.get_comment_discussions_by_payout_description")
   },
   {
-    api: "condenser_api", (removed since HF24)
+    api: "condenser_api",
     method: "get_discussions_by_trending",
     params: ["query"],
-    description:_t("block_api.get_discussions_by_trending_description")
+    description:_t("block_api.get_discussions_by_trending_description"),
   },
   {
     api: "condenser_api",
-    method: "get_discussions_by_created", (Removed since HF24)   
+    method: "get_discussions_by_created",  
     params: ["query"],
     description:_t("block_api.get_discussions_by_created_description")
   },
   {
     api: "condenser_api",
-    method: "get_discussions_by_active", (Removed since HF24)    
+    method: "get_discussions_by_active",
     params: ["query"],
     description:_t("block_api.get_discussions_by_active_description")
   },
   {
-    api: "condenser_api",  (-)
+    api: "condenser_api",
     method: "get_discussions_by_cashout",    
     params: ["query"],
     description:_t("block_api.get_discussions_by_cashout_description")
   },
   {
     api: "condenser_api",
-    method: "get_discussions_by_votes", (-)    
+    method: "get_discussions_by_votes",
     params: ["query"],
     description:_t("block_api.get_discussions_by_votes_description")
   },
   {
     api: "condenser_api",
-    method: "get_discussions_by_children",(-)
+    method: "get_discussions_by_children",
     params: ["query"],
     description:_t("block_api.get_discussions_by_children_description")
   },
-  
   {
     api: "condenser_api",
     method: "get_discussions_by_hot",
@@ -121,25 +120,25 @@ export const methods = [
   },
   {
     api: "condenser_api",
-    method: "get_discussions_by_feed", (Removed since HF24)
+    method: "get_discussions_by_feed",
     params: ["query"],
     description:_t("block_api.get_discussions_by_feed_description")
   },
   {
     api: "condenser_api",
-    method: "get_discussions_by_blog", (Removed since HF24)
+    method: "get_discussions_by_blog",
     params: ["query"],
     description:_t("block_api.get_discussions_by_blog_description")
   },
   {
     api: "condenser_api",
-    method: "get_discussions_by_comments", (-)
+    method: "get_discussions_by_comments",
     params: ["query"],
     description:_t("block_api.get_discussions_by_comments_description")
   },
   {
     api: "condenser_api",
-    method: "get_discussions_by_promoted", (-)
+    method: "get_discussions_by_promoted",
     params: ["query"],
     description:_t("block_api.get_discussions_by_promoted_description")
   },
@@ -148,35 +147,35 @@ export const methods = [
     method: "get_block_header",
     params: ["block_num"],
     description:_t("block_api.get_block_header_description"),
-     parameter: `<table>
-  <thead>
-    <tr>
-      <th><code class="language-plaintext highlighter-rouge">block_num</code> (int)</th>
-      <th>&nbsp;</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">1</code></td>
-      <td>Queries the block headers for the very first block.</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">8675309</code></td>
-      <td>Queries block headers for block number 8,675,309.</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">62396745</code></td>
-      <td>Queries block headers for block number 62,396,745.</td>
-    </tr>
-  </tbody>
-</table>`,
-response: `{
-  "previous": "0000000000000000000000000000000000000000",
-  "timestamp": "2016-03-24T16:05:00",
-  "witness": "initminer",
-  "transaction_merkle_root": "0000000000000000000000000000000000000000",
-  "extensions": []
-}`,
+    parameter: `<table>
+      <thead>
+        <tr>
+          <th><code class="language-plaintext highlighter-rouge">block_num</code> (int)</th>
+          <th>&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code class="language-plaintext highlighter-rouge">1</code></td>
+          <td>Queries the block headers for the very first block.</td>
+        </tr>
+        <tr>
+          <td><code class="language-plaintext highlighter-rouge">8675309</code></td>
+          <td>Queries block headers for block number 8,675,309.</td>
+        </tr>
+        <tr>
+          <td><code class="language-plaintext highlighter-rouge">62396745</code></td>
+          <td>Queries block headers for block number 62,396,745.</td>
+        </tr>
+      </tbody>
+    </table>`,
+    response: `{
+      "previous": "0000000000000000000000000000000000000000",
+      "timestamp": "2016-03-24T16:05:00",
+      "witness": "initminer",
+      "transaction_merkle_root": "0000000000000000000000000000000000000000",
+      "extensions": []
+    }`,
   },
   {
     api: "block_api",
@@ -400,7 +399,7 @@ response: `{
   },
   {
     api: "database_api",
-    method: "get_config"
+    method: "get_config",
     description:_t("block_api.get_state_description"),
     response: `{}`
   },
@@ -467,14 +466,14 @@ response: `{
     method: "get_feed_history",
     description:_t("block_api.get_feed_history_description"),
     response: `{
-  "id": 0,
-  "current_median_history": {"base": "0.000 HIVE", "quote": "0.000 HIVE"},
-  "price_history": []
-}`
+      "id": 0,
+      "current_median_history": {"base": "0.000 HIVE", "quote": "0.000 HIVE"},
+      "price_history": []
+    }`
   },
   {
     api: "condenser_api",
-    method: "get_current_median_history_price", (-)
+    method: "get_current_median_history_price",
     description:_t("block_api.get_current_median_history_price_description")
   },
   {
@@ -482,36 +481,35 @@ response: `{
     method: "get_witness_schedule",
     description:_t("block_api.get_witness_schedule_description"),
     response: `{
-  "id": 0,
-  "current_virtual_time": "0",
-  "next_shuffle_block_num": 1,
-  "current_shuffled_witnesses": [],
-  "num_scheduled_witnesses": 1,
-  "top19_weight": 1,
-  "timeshare_weight": 5,
-  "miner_weight": 1,
-  "witness_pay_normalization_factor": 25,
-  "median_props": {
-    "account_creation_fee": "0.000 HIVE",
-    "maximum_block_size": 131072,
-    "hbd_interest_rate": 1000
-  },
-  "majority_version": "0.0.0",
-  "max_voted_witnesses": 19,
-  "max_miner_witnesses": 1,
-  "max_runner_witnesses": 1,
-  "hardfork_required_witnesses": 17
-}`
-    
+      "id": 0,
+      "current_virtual_time": "0",
+      "next_shuffle_block_num": 1,
+      "current_shuffled_witnesses": [],
+      "num_scheduled_witnesses": 1,
+      "top19_weight": 1,
+      "timeshare_weight": 5,
+      "miner_weight": 1,
+      "witness_pay_normalization_factor": 25,
+      "median_props": {
+        "account_creation_fee": "0.000 HIVE",
+        "maximum_block_size": 131072,
+        "hbd_interest_rate": 1000
+      },
+      "majority_version": "0.0.0",
+      "max_voted_witnesses": 19,
+      "max_miner_witnesses": 1,
+      "max_runner_witnesses": 1,
+      "hardfork_required_witnesses": 17
+    }`
   },
   {
     api: "condenser_api",
-    method: "get_hardfork_version", (-)
+    method: "get_hardfork_version",
     description:_t("block_api.get_hardfork_version_description")                                 
   },
   {
     api: "condenser_api",
-    method: "get_next_scheduled_hardfork", (-)
+    method: "get_next_scheduled_hardfork",
     description:_t("block_api.get_hardfork_version_description")                                         
   },
   {
@@ -668,27 +666,27 @@ response: `{
   },
   {
     api: "condenser_api",
-    method: "get_accounts", (-)
+    method: "get_accounts",
     params: ["names"],
     isArray: true,
     description:_t("block_api.get_accounts_description")    
   },
   {
     api: "condenser_api",
-    method: "get_account_references", (-)
+    method: "get_account_references",
     params: ["accountId"],
     description:_t("block_api.get_account_references_description") 
   },
   {
     api: "condenser_api",
-    method: "lookup_account_names", (-)
+    method: "lookup_account_names",
     params: ["accounts"],
     description:_t("block_api.lookup_account_names_description") 
       
   },
   {
     api: "condenser_api",
-    method: "lookup_accounts", (-)
+    method: "lookup_accounts",
     // "param_type": "params",
     isArray: true,
     params: ["lower_bound_name", "limit"],
@@ -696,12 +694,12 @@ response: `{
   },
   {
     api: "condenser_api",
-    method: "get_account_count", (-)
+    method: "get_account_count",
     description:_t("block_api.get_account_count_description")                                
   },
   {
     api: "condenser_api",
-    method: "get_conversion_requests", (-)
+    method: "get_conversion_requests",
     params: ["accountName"],
     description:_t("block_api.get_conversion_requests_description")
   },
@@ -826,56 +824,56 @@ response: `{
   },
   {
     api: "condenser_api",
-    method: "get_owner_history", (-)
+    method: "get_owner_history",
     params: ["account"],
     isArray: true,
     description:_t("block_api.get_owner_history_description")
   },
   {
     api: "condenser_api",
-    method: "get_recovery_request", (-)
+    method: "get_recovery_request",
     params: ["account"],
     description:_t("block_api.get_recovery_request_description")
   },
   {
     api: "condenser_api",
-    method: "get_escrow", (-)
+    method: "get_escrow",
     params: ["from", "escrow_id"],
     description:_t("block_api.get_escrow_description")
   },
   {
     api: "condenser_api",
-    method: "get_withdraw_routes", (-)
+    method: "get_withdraw_routes",
     params: ["account", "withdraw_route_type"],
     description:_t("block_api.get_withdraw_routes_description")
   },
   {
     api: "condenser_api",
-    method: "get_savings_withdraw_from", (-)
+    method: "get_savings_withdraw_from",
     params: ["account"],
     description:_t("block_api.get_savings_withdraw_from_description")
   },
   {
     api: "condenser_api",
-    method: "get_savings_withdraw_to", (-)
+    method: "get_savings_withdraw_to",
     params: ["account"],
     description:_t("block_api.get_savings_withdraw_to_description")
   },
   {
     api: "condenser_api",
-    method: "get_order_book", (-)
+    method: "get_order_book",
     params: ["limit"],
     description:_t("block_api.get_order_book_description")
   },
   {
     api: "condenser_api",
-    method: "get_open_orders", (-)
+    method: "get_open_orders",
     params: ["owner"],
     description:_t("block_api.get_open_orders_description")
   },
   {
     api: "condenser_api",
-    method: "get_transaction_hex", (-)
+    method: "get_transaction_hex",
     params: ["trx"],
      description:_t("block_api.get_transaction_hex_description")
   },
@@ -909,7 +907,7 @@ response: `{
   {
     api: "database_api",
     method: "get_potential_signatures",
-    params: ["trx"]
+    params: ["trx"],
     description:_t("block_api.get_potential_signatures_description"),
     response: `[]`
   
@@ -923,7 +921,7 @@ response: `{
   },
   {
     api: "database_api",
-    method: "verify_account_authority", (-)
+    method: "verify_account_authority",
     params: ["account", "signers"],
     description:_t("block_api.verify_authority_description")
   },
@@ -974,31 +972,31 @@ response: `{
   },
   {
     api: "condenser_api",
-    method: "get_content", (-)
+    method: "get_content",
     params: ["author", "permlink"],
     description:_t("block_api.get_content_description")
   },
   {
     api: "condenser_api",
-    method: "get_content_replies", (-)
+    method: "get_content_replies",
     params: ["author", "permlink"],
     description:_t("block_api.get_content_replies_description")
   },
   {
     api: "condenser_api",
-    method: "get_discussions_by_author_before_date", (-)
+    method: "get_discussions_by_author_before_date",
     params: ["author", "start_permlink", "before_date", "limit"],
     description:_t("block_api.get_discussions_by_author_before_date_description")
   },
   {
     api: "condenser_api",
-    method: "get_replies_by_last_update", (-)
+    method: "get_replies_by_last_update",
     params: ["start_author", "start_permlink", "limit"],
     description:_t("block_api.get_replies_by_last_update_description")
   },
   {
     api: "condenser_api",
-    method: "get_witnesses", (-)
+    method: "get_witnesses",
     // "param_type":"params",
     isArray: true,
     params: ["witnessIds"],
@@ -1006,7 +1004,7 @@ response: `{
   },
   {
     api: "condenser_api",
-    method: "get_witness_by_account", (-)
+    method: "get_witness_by_account",
     params: ["account"],
     description:_t("block_api.get_witness_by_account_description")
   },
@@ -1141,44 +1139,44 @@ response: `{
   },
   {
     api: "condenser_api",
-    method: "lookup_witness_accounts", (-)
+    method: "lookup_witness_accounts",
     params: ["lower_bound_name", "limit"],
     description:_t("block_api.lookup_witness_accounts_description")
   },
   {
-    api: "condenser_api", (-)
+    api: "condenser_api",
     method: "get_witness_count",
     description:_t("block_api.get_witness_count_description")                       
   },
   {
     api: "database_api",
     method: "get_active_witnesses",
-    description:_t("block_api.get_active_witnesses_description")
+    description:_t("block_api.get_active_witnesses_description"),
     response: `{
-  "witnesses": [
-    "lukestokes.mhth",
-    "gtg",
-    "ausbitbank",
-    "clayop",
-    "yabapmatt",
-    "curie",
-    "thecryptodrive",
-    "roelandp",
-    "followbtcnews",
-    "timcliff",
-    "smooth.witness",
-    "bhuz",
-    "aggroed",
-    "blocktrades",
-    "cervantes",
-    "utopian-io",
-    "anyx",
-    "jesta",
-    "drakos",
-    "someguy123",
-    "good-karma"
-  ]
-}`
+      "witnesses": [
+        "lukestokes.mhth",
+        "gtg",
+        "ausbitbank",
+        "clayop",
+        "yabapmatt",
+        "curie",
+        "thecryptodrive",
+        "roelandp",
+        "followbtcnews",
+        "timcliff",
+        "smooth.witness",
+        "bhuz",
+        "aggroed",
+        "blocktrades",
+        "cervantes",
+        "utopian-io",
+        "anyx",
+        "jesta",
+        "drakos",
+        "someguy123",
+        "good-karma"
+      ]
+    }`
   },
   {
     api: "condenser_api",
@@ -1197,29 +1195,29 @@ response: `{
     method: "get_reward_funds",
     description:_t("block_api.get_reward_funds_description"),
     response: `{
-  "id": 0,
-  "name": "",
-  "reward_balance": "0.000 HIVE",
-  "recent_claims": "0",
-  "last_update": "1970-01-01T00:00:00",
-  "content_constant": "0",
-  "percent_curation_rewards": 0,
-  "percent_content_rewards": 0,
-  "author_reward_curve": "quadratic",
-  "curation_reward_curve": "34723648"
-}`
+      "id": 0,
+      "name": "",
+      "reward_balance": "0.000 HIVE",
+      "recent_claims": "0",
+      "last_update": "1970-01-01T00:00:00",
+      "content_constant": "0",
+      "percent_curation_rewards": 0,
+      "percent_content_rewards": 0,
+      "author_reward_curve": "quadratic",
+      "curation_reward_curve": "34723648"
+    }`
   },
   {
     api: "database_api",
     method: "get_version",
     description:_t("block_api.get_version_description"),
     response: `{
-  "haf_revision": "dd4e984ec4986ba4039e249c2bff468ec16dd332",
-  "blockchain_version": "1.27.0",
-  "hive_revision": "b322c4c19f11f084d09be0dd7d9c615339dce13e",
-  "fc_revision": "b322c4c19f11f084d09be0dd7d9c615339dce13e",
-  "chain_id": "beeab0de00000000000000000000000000000000000000000000000000000000"
-}`
+      "haf_revision": "dd4e984ec4986ba4039e249c2bff468ec16dd332",
+      "blockchain_version": "1.27.0",
+      "hive_revision": "b322c4c19f11f084d09be0dd7d9c615339dce13e",
+      "fc_revision": "b322c4c19f11f084d09be0dd7d9c615339dce13e",
+      "chain_id": "beeab0de00000000000000000000000000000000000000000000000000000000"
+    }`
   },
   {
     api: "condenser_api",
@@ -1311,38 +1309,38 @@ response: `{
     method: "get_ticker",
     description:_t("block_api.get_ticker_description"),
     response: `{
-  "latest": "1.00000000000000000",
-  "lowest_ask": "0.10000000000000001",
-  "highest_bid": "0.00000000000000000",
-  "percent_change": "0.00000000000000000",
-  "hive_volume": {
-    "amount": "100000",
-    "precision": 3,
-    "nai": "@@000000021"
-  },
-  "hbd_volume": {
-    "amount": "100000",
-    "precision": 3,
-    "nai": "@@000000013"
-  }
-}`
+      "latest": "1.00000000000000000",
+      "lowest_ask": "0.10000000000000001",
+      "highest_bid": "0.00000000000000000",
+      "percent_change": "0.00000000000000000",
+      "hive_volume": {
+        "amount": "100000",
+        "precision": 3,
+        "nai": "@@000000021"
+      },
+      "hbd_volume": {
+        "amount": "100000",
+        "precision": 3,
+        "nai": "@@000000013"
+      }
+    }`
   },
   {
     api: "market_history_api",
     method: "get_volume",
     description:_t("block_api.get_volume_description"),
     response: `{
-  "hive_volume": {
-    "amount": "0",
-    "precision": 3,
-    "nai": "@@000000021"
-  },
-  "hbd_volume": {
-    "amount": "0",
-    "precision": 3,
-    "nai": "@@000000013"
-  }
-}`
+      "hive_volume": {
+        "amount": "0",
+        "precision": 3,
+        "nai": "@@000000021"
+      },
+      "hbd_volume": {
+        "amount": "0",
+        "precision": 3,
+        "nai": "@@000000013"
+      }
+    }`
   },
   {
     api: "market_history_api",
@@ -1350,12 +1348,12 @@ response: `{
     params: ["start", "end", "limit"],
     description:_t("block_api.get_trade_history_description"),
     response: `[
-  {
-    "date": "1970-01-01T00:00:00",
-    "current_pays": "0.000 HBD",
-    "open_pays": "0.000 HIVE"
-  }
-]`
+      {
+        "date": "1970-01-01T00:00:00",
+        "current_pays": "0.000 HBD",
+        "open_pays": "0.000 HIVE"
+      }
+    ]`
   },
   {
     api: "market_history_api",
@@ -1363,22 +1361,22 @@ response: `{
     params: ["limit"],
     description:_t("block_api.get_recent_trades_description"),
     response: `{
-  "trades": [
-    {
-      "date": "2019-12-18T01:51:24",
-      "current_pays": {
-        "amount": "100000",
-        "precision": 3,
-        "nai": "@@000000013"
-      },
-      "open_pays": {
-        "amount": "100000",
-        "precision": 3,
-        "nai": "@@000000021"
-      }
-    }
-  ]
-}`
+      "trades": [
+        {
+          "date": "2019-12-18T01:51:24",
+          "current_pays": {
+            "amount": "100000",
+            "precision": 3,
+            "nai": "@@000000013"
+          },
+          "open_pays": {
+            "amount": "100000",
+            "precision": 3,
+            "nai": "@@000000021"
+          }
+        }
+      ]
+    }`
   },
   {
     api: "market_history_api",
@@ -1386,68 +1384,68 @@ response: `{
     params: ["bucket_seconds", "start", "end"],
     description:_t("block_api.get_market_history_description"),
     parameter: `<table>
-  <thead>
-    <tr>
-      <th><code class="language-plaintext highlighter-rouge">bucket_seconds</code> (int)</th>
-      <th><code class="language-plaintext highlighter-rouge">start</code> (timestamp)</th>
-      <th><code class="language-plaintext highlighter-rouge">end</code> (timestamp)</th>
-      <th>&nbsp;</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">15</code></td>
-      <td><code class="language-plaintext highlighter-rouge">"2018-01-01T00:00:00"</code></td>
-      <td><code class="language-plaintext highlighter-rouge">"2018-01-02T00:00:00"</code></td>
-      <td>Queries for market history between January 1st, 2018 and January 2nd, 2018, segmented by 15 seconds.</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">60</code></td>
-      <td><code class="language-plaintext highlighter-rouge">"2018-01-01T00:00:00"</code></td>
-      <td><code class="language-plaintext highlighter-rouge">"2018-01-02T00:00:00"</code></td>
-      <td>Queries for market history between January 1st, 2018 and January 2nd, 2018, segmented by one minute.</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">300</code></td>
-      <td><code class="language-plaintext highlighter-rouge">"2018-01-01T00:00:00"</code></td>
-      <td><code class="language-plaintext highlighter-rouge">"2018-01-02T00:00:00"</code></td>
-      <td>Queries for market history between January 1st, 2018 and January 2nd, 2018, segmented by five minutes.</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">3600</code></td>
-      <td><code class="language-plaintext highlighter-rouge">"2018-01-01T00:00:00"</code></td>
-      <td><code class="language-plaintext highlighter-rouge">"2018-01-02T00:00:00"</code></td>
-      <td>Queries for market history between January 1st, 2018 and January 2nd, 2018, segmented by one hour.</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">86400</code></td>
-      <td><code class="language-plaintext highlighter-rouge">"2018-01-01T00:00:00"</code></td>
-      <td><code class="language-plaintext highlighter-rouge">"2018-01-02T00:00:00"</code></td>
-      <td>Queries for market history between January 1st, 2018 and January 2nd, 2018, segmented by one day.</td>
-    </tr>
-  </tbody>
-</table>`,
+      <thead>
+        <tr>
+          <th><code class="language-plaintext highlighter-rouge">bucket_seconds</code> (int)</th>
+          <th><code class="language-plaintext highlighter-rouge">start</code> (timestamp)</th>
+          <th><code class="language-plaintext highlighter-rouge">end</code> (timestamp)</th>
+          <th>&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code class="language-plaintext highlighter-rouge">15</code></td>
+          <td><code class="language-plaintext highlighter-rouge">"2018-01-01T00:00:00"</code></td>
+          <td><code class="language-plaintext highlighter-rouge">"2018-01-02T00:00:00"</code></td>
+          <td>Queries for market history between January 1st, 2018 and January 2nd, 2018, segmented by 15 seconds.</td>
+        </tr>
+        <tr>
+          <td><code class="language-plaintext highlighter-rouge">60</code></td>
+          <td><code class="language-plaintext highlighter-rouge">"2018-01-01T00:00:00"</code></td>
+          <td><code class="language-plaintext highlighter-rouge">"2018-01-02T00:00:00"</code></td>
+          <td>Queries for market history between January 1st, 2018 and January 2nd, 2018, segmented by one minute.</td>
+        </tr>
+        <tr>
+          <td><code class="language-plaintext highlighter-rouge">300</code></td>
+          <td><code class="language-plaintext highlighter-rouge">"2018-01-01T00:00:00"</code></td>
+          <td><code class="language-plaintext highlighter-rouge">"2018-01-02T00:00:00"</code></td>
+          <td>Queries for market history between January 1st, 2018 and January 2nd, 2018, segmented by five minutes.</td>
+        </tr>
+        <tr>
+          <td><code class="language-plaintext highlighter-rouge">3600</code></td>
+          <td><code class="language-plaintext highlighter-rouge">"2018-01-01T00:00:00"</code></td>
+          <td><code class="language-plaintext highlighter-rouge">"2018-01-02T00:00:00"</code></td>
+          <td>Queries for market history between January 1st, 2018 and January 2nd, 2018, segmented by one hour.</td>
+        </tr>
+        <tr>
+          <td><code class="language-plaintext highlighter-rouge">86400</code></td>
+          <td><code class="language-plaintext highlighter-rouge">"2018-01-01T00:00:00"</code></td>
+          <td><code class="language-plaintext highlighter-rouge">"2018-01-02T00:00:00"</code></td>
+          <td>Queries for market history between January 1st, 2018 and January 2nd, 2018, segmented by one day.</td>
+        </tr>
+      </tbody>
+    </table>`,
     response: `[
-  {
-    "id": 0,
-    "open": "1970-01-01T00:00:00",
-    "seconds": 0,
-    "hive": {
-      "high": 0,
-      "low": 0,
-      "open": 0,
-      "close": 0,
-      "volume": 0
-    },
-    "non_hive": {
-      "high": 0,
-      "low": 0,
-      "open": 0,
-      "close": 0,
-      "volume": 0
-    }
-  }
-]`
+      {
+        "id": 0,
+        "open": "1970-01-01T00:00:00",
+        "seconds": 0,
+        "hive": {
+          "high": 0,
+          "low": 0,
+          "open": 0,
+          "close": 0,
+          "volume": 0
+        },
+        "non_hive": {
+          "high": 0,
+          "low": 0,
+          "open": 0,
+          "close": 0,
+          "volume": 0
+        }
+      }
+    ]`
   },
   {
     api: "market_history_api",
@@ -1702,7 +1700,7 @@ response: `{
     description:_t("block_api.list_proposal_votes_description")
   },
   {
-    api: "database_api",
+    api: "json-rpc",
     method: "get_nai_pool",
     description:_t("block_api.get_nai_pool_description")
   },
@@ -1718,24 +1716,24 @@ response: `{
     params: ["last", "limit", "query", "sort", "observer"],
     description:_t("block_api.list_communities_description"),
     response: `[
-  {
-    "id": 1432978,
-    "name": "hive-103566",
-    "title": "Wall Street Bets",
-    "about": "Wall Street Bets - In Case Reddit Shuts Down.",
-    "lang": "en",
-    "type_id": 1,
-    "is_nsfw": false,
-    "subscribers": 6,
-    "sum_pending": 0,
-    "num_pending": 0,
-    "num_authors": 0,
-    "created_at": "2021-01-28 18:34:09",
-    "avatar_url": "",
-    "context": {},
-    "admins": ["spitr"]
-  }
-]`
+      {
+        "id": 1432978,
+        "name": "hive-103566",
+        "title": "Wall Street Bets",
+        "about": "Wall Street Bets - In Case Reddit Shuts Down.",
+        "lang": "en",
+        "type_id": 1,
+        "is_nsfw": false,
+        "subscribers": 6,
+        "sum_pending": 0,
+        "num_pending": 0,
+        "num_authors": 0,
+        "created_at": "2021-01-28 18:34:09",
+        "avatar_url": "",
+        "context": {},
+        "admins": ["spitr"]
+      }
+    ]`
   },
   {
     api: "bridge",
@@ -1906,7 +1904,7 @@ response: `{
   {
     api: "bridge",
     method: "get_trending_topics",
-    params: ["limit", "observer"], (not found)
+    params: ["limit", "observer"]
   },
   {
     api: "bridge",
