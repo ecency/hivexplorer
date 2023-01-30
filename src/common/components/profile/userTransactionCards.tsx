@@ -1,34 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Col, Row } from "react-bootstrap";
 import {
   Paper,
-  Table,
   TableBody,
-  TableCell,
-  IconButton,
-  TableHead,
   TablePagination,
-  TableRow,
   TextField,
-  Collapse,
-  Box,
   TableContainer
 } from "@material-ui/core";
 import { useSelector } from "react-redux";
-import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
-
 import { _t } from "../../i18n";
 import { UserTransactionType } from "../../pages/profile/userTypes";
-import TransactionOperationTable from "../../pages/profile/userOpTable";
 import SpinnerEffect from "../loader/spinner";
-import { TimestampField } from "../fields/blockFields/DateTimeTable";
-import { AscendingIcon, DescendingIcon } from "../../img/svg";
 import { getUserTransaction } from "../../api/urls";
-import UserAvatar from "../user-avatar";
-import { LinkAccount } from "../../pages/fields/common_fields";
-import parseAsset from "../../helper/parse-asset";
-import { Card, Col, Row } from "react-bootstrap";
 import  TransactionCard  from '../transactions/card'
 
 interface Column {

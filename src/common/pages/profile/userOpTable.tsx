@@ -2,14 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Card } from "react-bootstrap";
-
+import { isInteger, isNumber } from "lodash";
 import { _t } from "../../i18n";
 import { AuthorityObject } from "../../components/profile/userAuthorities";
 import { DecodeJson } from "../../../server/util";
 import { LinkAccount, ObjectFieldArray, StringFieldArray } from "../fields/common_fields";
 import { UserAvatar } from "../../components/user-avatar";
 import parseAsset from "../../helper/parse-asset";
-import { isInteger, isNumber } from "lodash";
 export const OpObjectValue=(field: any, name: string)=> {
   return (
     <tr key={field+name}>
@@ -106,13 +105,12 @@ const TransactionOperationTable = (props: any) => {
                     <table style={{ width: "100%" }}>
                       <tbody>
                         {Object.keys(opVal).map((key, k: number) => {
-                          k = k + Math.floor(Math.random() * 10000) + 9000;
-                          console.log('value',opVal)
+                       
                           return (
                             <>
                               {(typeof opVal[key] === "string" || typeof opVal[key] === "number") &&
                                 LinkAccount.includes(key) && (
-                                  <tr key={k}>
+                                  <tr key={k+key+opVal[key]}>
                                     <td>{_t(`trans_table.${key}`)}</td>
                                     <td>
                                       <UserAvatar username={opVal[key]} size="small"/>
@@ -123,12 +121,12 @@ const TransactionOperationTable = (props: any) => {
                           );
                         })}
                         {Object.keys(opVal).map((key, i: number) => {
-                          i = i + Math.floor(Math.random() * 1000);
+                         
                           return (
                             <>
                               {(typeof opVal[key] === "string" || typeof opVal[key] === "number") &&
                                 StringFieldArray.includes(key) && (
-                                  <tr key={i}>
+                                  <tr key={i+'-+'+key}>
                                     <td>{_t(`trans_table.${key}`)}</td>
                                     <td>{opVal[key]}</td>
                                   </tr>
@@ -198,7 +196,6 @@ const TransactionOperationTable = (props: any) => {
 
                         {opJson && (
                           <>
-                         <>{console.log('json',opJson)}</>
                           <tr>
                             <td>{_t(`trans_table.json`)}</td>
                             <td>
@@ -234,12 +231,10 @@ const TransactionOperationTable = (props: any) => {
                               )}
                               {jsonSplit  &&
                                 Object.keys(jsonSplit).map((key, j: number) => {
-                                  
-                                  j = j + Math.floor(Math.random() * 6000) + 5000;
                                   return (
                                     <>
                                       {typeof jsonSplit[key] !== "object" ? (
-                                        <table key={j} style={{ width: "100%" }}>
+                                        <table key={j+key+jsonSplit[key]} style={{ width: "100%" }}>
                                           <tbody>
                                             <tr>
                                               <td style={isInteger(+key)?{width:'40px',minWidth:'40px'}:{}}>
@@ -291,7 +286,6 @@ const TransactionOperationTable = (props: any) => {
                                                       <table>
                                                         <tbody>
                                                           {Object.keys(jsonSplit[key][innerKey]).map((item,j:number)=>{
-                                                           console.log(DecodeJson(jsonSplit[key][innerKey][item]))
                                                             return(
                                                               <tr key={item+j+jsonSplit[key][innerKey][item]}> 
                                                                 <td style={isInteger(+item)?{width:'40px',minWidth:'40px'}:{}}>{_t(`trans_table.${item}`)}</td>
@@ -339,10 +333,9 @@ const TransactionOperationTable = (props: any) => {
                                     {typeof opProps !== "object" ? (
                                       <>
                                         {opProps.map((pro: any, i: number) => {
-                                          i = i + Math.floor(Math.random() * 500) + 1;
                                           return (
                                             <>
-                                              <td key={1}>
+                                              <td key={1+pro+`${i++}`}>
                                                 <table>
                                                   <tbody>
                                                     <tr>
@@ -363,11 +356,10 @@ const TransactionOperationTable = (props: any) => {
                                         <table>
                                           <tbody>
                                             {Object.keys(opProps).map((pro, k: number) => {
-                                              k = k + Math.floor(Math.random() * 3000) + 2000;
                                               return (
                                                 <>
                                                   {typeof opProps[pro] !== "object" ? (
-                                                    <tr>
+                                                    <tr key={k+pro}>
                                                       <td>{pro}</td>
                                                       <td>{opProps[pro]}</td>
                                                     </tr>
@@ -392,7 +384,6 @@ const TransactionOperationTable = (props: any) => {
                         )}
 
                         {Object.keys(opVal).map((key, m: number) => {
-                          m = m + Math.floor(Math.random() * 7000) + 6000;
                           return (
                             <>
                               {typeof opVal[key] === "object" &&

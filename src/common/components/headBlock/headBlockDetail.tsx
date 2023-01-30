@@ -126,7 +126,7 @@ const HeadBlockDetail = (props: any) => {
                         <>
                           {typeof result[key] !== "object" ? (
                             <StringField
-                              key={index + Math.floor(Math.random() * 3000) + 2000}
+                              key={index + key+result[key]+typeof(result[key])}
                               value={result[key]}
                               item={key}
                               number={index}
@@ -134,7 +134,7 @@ const HeadBlockDetail = (props: any) => {
                             />
                           ) : (
                             <ObjectField
-                              key={index + Math.floor(Math.random() * 4000) + 3001}
+                              key={index + key+result[key]+typeof(result[key])}
                               value={result[key]}
                               item={key}
                               number={index}
@@ -154,7 +154,7 @@ const HeadBlockDetail = (props: any) => {
                           {" "}
                           {typeof result[key] !== "object" ? (
                             <StringField
-                              key={index + Math.floor(Math.random() * 5000) + 4001}
+                              key={index+'-'+ key+result[key]+typeof(result[key])}
                               value={result[key]}
                               item={key}
                               number={index}
@@ -162,7 +162,7 @@ const HeadBlockDetail = (props: any) => {
                             />
                           ) : (
                             <ObjectField
-                              key={index + Math.floor(Math.random() * 6000) + 5001}
+                              key={index+'-'+ key+'-'+result[key]+typeof(result[key])}
                               value={result[key]}
                               item={key}
                               number={index}

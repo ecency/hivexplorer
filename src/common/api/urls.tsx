@@ -4,7 +4,6 @@ import { ConfigItems } from "../../../config";
 // Get witness Account
 export const getAccount = async (user: string) => {
   const account_url = `${ConfigItems.baseUrl}/api/get_accounts?names=["${user}"]`;
-  console.log(account_url)
   const r = await axios.get(account_url);
   return r.data;
 };
@@ -68,8 +67,6 @@ export const getUserTransaction = async (
   transactionLimit: number
 ) => {
   const user_transaction_url = `${ConfigItems.baseUrl}/api/get_account_history?account=${user}&start=${transactionFrom}&limit=${transactionLimit}`;
-  // const user_transaction_url = `${ConfigItems.baseUrl}/api/get_account_history?account=${user}&start=${transactionFrom}&limit=100`
-  console.log(user_transaction_url)
   const r = await axios.get(user_transaction_url);
   return r.data;
 };

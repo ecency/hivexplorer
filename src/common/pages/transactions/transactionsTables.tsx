@@ -19,7 +19,6 @@ import moment from "moment";
 import { useSelector } from "react-redux";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
-
 import { HomeBlocksType } from "../../components/home/BlocksComponent";
 import { _t } from "../../i18n";
 import { AscendingIcon, DescendingIcon } from "../../img/svg";

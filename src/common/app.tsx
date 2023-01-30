@@ -47,7 +47,6 @@ const App = ({ setLang }: any) => {
   };
   useEffect(() => {
     const currentLang = ls.get("current-language");
-    console.log(currentLang)
   //    if (currentLang) {
   //     setLang(currentLang);
   //      i18n.changeLanguage(currentLang);

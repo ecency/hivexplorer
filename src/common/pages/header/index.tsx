@@ -5,13 +5,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { Navbar, Nav, Container, NavDropdown, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { Link } from "react-router-dom";
-
+import i18n from "i18next";
 import { brightnessSvg, hiveLogo, globeImg } from "../../img/svg";
 import { languages } from "../../languages";
 import { toggleTheme } from "../../store/global/index";
 import { _t } from "../../i18n";
 import * as ls from "../../util/local-storage";
-import i18n from "i18next";
+
 import { frFlag } from "../../img/flags";
 
 const RESOURCES_MENU = [
@@ -125,7 +125,6 @@ const AppHeader = (props: any) => {
                   <NavDropdown.Item
                     key={country_code}
                     onClick={() => {
-                      console.log('clicked')
                       i18n.changeLanguage(code).then(() => {
                       setLang(code);
                   });

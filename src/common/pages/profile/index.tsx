@@ -23,7 +23,7 @@ import BackToTopButton from "../../components/Buttons/BackToTop";
 import SpinnerEffect from "../../components/loader/spinner";
 import UserHistory from "../../components/profile/userHistory";
 import { cardViewSVG, tableViewSVG } from "../../img/svg";
-import UserTransactionsCards from "../../components/profile/UserTransactionCards";
+import UserTransactionsCards from "../../components/profile/userTransactionCards";
 
 interface UserList extends Array<UserTypeList> {}
 interface RCState {

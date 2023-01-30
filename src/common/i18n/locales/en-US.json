@@ -24,6 +24,13 @@
   },
   "common": {
     "id": "ID",
+    "about":"About",
+    "facebook":"Facebook",
+    "twitter":"Twitter",
+    "github":"Github",
+    "website":"Website",
+    "youtube":"Youtube",
+    "instagram":"Instagram",
     "by": "By",
     "for": "for",
     "type": "Type",

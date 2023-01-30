@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { connect, useDispatch, useSelector } from "react-redux";
-
+import { Button, Container } from "react-bootstrap";
 import { pageMapDispatchToProps, pageMapStateToProps, PageProps } from "../common";
 import { withPersistentScroll } from "../../components/with-persistent-scroll";
 import { HomeTransactionType } from "../../components/home/TransactionsComponent";
@@ -11,7 +11,7 @@ import BackToTopButton from "../../components/Buttons/BackToTop";
 import { getHeadBlock, getTransactions } from "../../api/urls";
 import { setHeadBlockData } from "../../store/HeadBlock";
 import { cardViewSVG, tableViewSVG } from "../../img/svg";
-import { Button, Container } from "react-bootstrap";
+
 import TransactionsCards from "./transactionCards";
 import headBlock from "../../components/headBlock/headBlock";
 
