@@ -395,6 +395,9 @@
     "account_auths":"Accounts Auths",
     "weight_threshold":"Weight Threshold",
     "posting_json_metadata":"Posting Json Metadata",
+    "withdrawn":"Withdrawn",
+    "deposited":"Deposited",
+
     "0":0,
     "1":1,
     "2":2

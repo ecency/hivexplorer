@@ -29,6 +29,7 @@ const SingleProposalPage = loadable(() => import("./pages/proposal"));
 const EntryPage = loadable(() => import("./pages/entry"));
 const EntryComment = loadable(() => import("./pages/entry-comment"));
 const APIDoc= loadable(() => import('./pages/documentation'));
+// const userAuthorities=loadable(()=>import('./components/profile/userAuthorities'))
 
 const App = ({ setLang }: any) => {
   const dispatch = useDispatch();
@@ -78,6 +79,8 @@ const App = ({ setLang }: any) => {
         <Route exact={true} path={routes.TargetTransaction}  component={SingleTransaction}/>
         <Route exact={true} path={routes.Blocks}  component={MultipleBlocks}/>
         <Route exact={true} path={routes.User}  component={UserPage}/>
+        <Route exact={true} path={routes.UserTransaction}  component={UserPage}/>
+        <Route exact={true} path={routes.UserAuthorities}  component={UserPage}/>
         <Route exact={true} path={routes.Witnesses}  component={WitnessesPage}/>
         <Route exact={true} path={routes.Proposals}  component={ProposalsPage}/>
         <Route exact={true} path={routes.SingleProposal}  component={SingleProposalPage}/>
