@@ -103,6 +103,12 @@ export const methods = [
   },
   {
     api: "condenser_api",
+    method: "get_discussions_by_comments",
+    params: ["query"],
+    description:_t("condenser_api.get_discussions_by_blog_description")
+  },
+  {
+    api: "condenser_api",
     method: "get_discussions_by_promoted",
     params: ["query"],
     description:_t("condenser_api.get_discussions_by_promoted_description")
@@ -1142,6 +1148,12 @@ export const methods = [
       ]
     }`
   },
+    {
+    api: "condenser_api",
+    method: "get_reward_fund",
+    params: ["name"],
+    description:_t("condenser_api.get_reward_fund_description")
+  },
   {
     api: "condenser_api",
     method: "get_vesting_delegations",
@@ -1164,6 +1176,24 @@ export const methods = [
       "author_reward_curve": "quadratic",
       "curation_reward_curve": "34723648"
     }`
+  },
+     {
+    api: "condenser_api",
+    method: "get_followers",
+    params: ["account", "start", "type", "limit"],
+    description:_t("condenser_api.get_followers_description") 
+  },
+  {
+    api: "condenser_api",
+    method: "get_following",
+    params: ["account", "start", "type", "limit"],
+    description:_t("condenser_api.get_following_description") 
+  },
+  {
+    api: "condenser_api",
+    method: "get_follow_count",
+    params: ["account"],
+    description:_t("condenser_api.get_follow_count_description")
   },
   {
     api: "database_api",
@@ -1384,7 +1414,7 @@ export const methods = [
   {
     api: "market_history_api",
     method: "get_market_history_buckets",
-    description:_t("block_api.get_market_history_buckets_description"),
+    description:_t("market_history_api.get_market_history_buckets_description"),
     response: `[15, 60, 300, 3600, 86400]`
   },
   {
@@ -1460,13 +1490,13 @@ export const methods = [
     api: "rc_api",
     method: "list_rc_direct_delegations",
     params: ["start", "limit"],
-    description:_t("block_api.list_rc_direct_delegations_description")
+    description:_t("rc_api.list_rc_direct_delegations_description")
   },
   {
     api: "rc_api",
     method: "list_rc_accounts",
     params: ["start", "limit"],
-    description:_t("block_api.list_rc_accounts_description")
+    description:_t("rc_api.list_rc_accounts_description")
   },
   {
     api: "database_api",
@@ -1631,24 +1661,23 @@ export const methods = [
     api: "database_api",
     method: "list_proposal_votes",
     params: ["start", "limit", "order", "order_direction", "status"],
-    description:_t("block_api.list_proposal_votes_description")
+    description:_t("database_api.list_proposal_votes_description")
   },
   {
     api: "database_api",
     method: "get_nai_pool",
-    description:_t("block_api.get_nai_pool_description")
   },
   {
     api: "bridge",
     method: "get_community",
     params: ["name", "observer"],
-    description:_t("block_api.get_community_description")
+    description:_t("bridge_api.get_community_description")
   },
   {
     api: "bridge",
     method: "list_communities",
     params: ["last", "limit", "query", "sort", "observer"],
-    description:_t("block_api.list_communities_description"),
+    description:_t("bridge_api.list_communities_description"),
     response: `[
       {
         "id": 1432978,
@@ -1827,13 +1856,13 @@ export const methods = [
     api: "bridge",
     method: "get_post",
     params: ["author", "permlink", "observer"],
-    description:_t("block_api.get_post_description")
+    description:_t("bridge_api.get_post_description")
   },
   {
     api: "bridge",
     method: "get_profile",
     params: ["account", "observer"],
-    description:_t("block_api.get_profile_description")
+    description:_t("bridge_api.get_profile_description")
   },
   {
     api: "bridge",
@@ -1844,19 +1873,19 @@ export const methods = [
     api: "bridge",
     method: "get_account_posts",
     params: ["sort", "account", "start_author", "start_permlink", "limit", "observer"],
-    description:_t("block_api.get_account_posts_description")
+    description:_t("bridge_api.get_account_posts_description")
   },
   {
     api: "bridge",
     method: "get_ranked_posts",
     params: ["sort", "start_author", "start_permlink", "limit", "tag", "observer"],
-    description:_t("block_api.get_ranked_posts_description")
+    description:_t("bridge_api.get_ranked_posts_description")
   },
   {
     api: "bridge",
     method: "account_notifications",
     params: ["account", "last_id", "limit"],
-    description:_t("block_api.account_notifications_description")
+    description:_t("bridge_api.account_notifications_description")
   },
   {
     api: "bridge",
@@ -1868,30 +1897,30 @@ export const methods = [
     api: "bridge",
     method: "list_all_subscriptions",
     params: ["account"],
-    description:_t("block_api.list_all_subscriptions_description")
+    description:_t("bridge_api.list_all_subscriptions_description")
   },
   {
     api: "bridge",
     method: "list_subscribers",
     params: ["community"],
-    description:_t("block_api.list_subscribers_description")
+    description:_t("bridge_api.list_subscribers_description")
   },
   {
     api: "bridge",
     method: "get_follow_list",
     params: ["observer", "follow_type"],
-    description:_t("block_api.get_follow_list_description")
+    description:_t("bridge_api.get_follow_list_description")
   },
   {
     api: "bridge",
     method: "does_user_follow_any_lists",
     params: ["observer"],
-    description:_t("block_api.does_user_follow_any_lists_description")
+    description:_t("bridge_api.does_user_follow_any_lists_description")
   },
   {
     api: "bridge",
     method: "get_relationship_between_accounts",
     params: ["follower", "following"],
-    description:_t("block_api.get_relationship_between_accounts_description")
+    description:_t("bridge_api.get_relationship_between_accounts_description")
   }
 ];
