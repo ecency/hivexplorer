@@ -1856,13 +1856,13 @@ export const methods = [
     api: "bridge",
     method: "get_post",
     params: ["author", "permlink", "observer"],
-    description:_t("bridge_api.get_post_description")
+    description:_t("bridge.get_post_description")
   },
   {
     api: "bridge",
     method: "get_profile",
     params: ["account", "observer"],
-    description:_t("bridge_api.get_profile_description")
+    description:_t("bridge.get_profile_description")
   },
   {
     api: "bridge",
@@ -1873,19 +1873,19 @@ export const methods = [
     api: "bridge",
     method: "get_account_posts",
     params: ["sort", "account", "start_author", "start_permlink", "limit", "observer"],
-    description:_t("bridge_api.get_account_posts_description")
+    description:_t("bridge.get_account_posts_description")
   },
   {
     api: "bridge",
     method: "get_ranked_posts",
     params: ["sort", "start_author", "start_permlink", "limit", "tag", "observer"],
-    description:_t("bridge_api.get_ranked_posts_description")
+    description:_t("bridge.get_ranked_posts_description")
   },
   {
     api: "bridge",
     method: "account_notifications",
     params: ["account", "last_id", "limit"],
-    description:_t("bridge_api.account_notifications_description")
+    description:_t("bridge.account_notifications_description")
   },
   {
     api: "bridge",
@@ -1897,30 +1897,30 @@ export const methods = [
     api: "bridge",
     method: "list_all_subscriptions",
     params: ["account"],
-    description:_t("bridge_api.list_all_subscriptions_description")
+    description:_t("bridge.list_all_subscriptions_description")
   },
   {
     api: "bridge",
     method: "list_subscribers",
     params: ["community"],
-    description:_t("bridge_api.list_subscribers_description")
+    description:_t("bridge.list_subscribers_description")
   },
   {
     api: "bridge",
     method: "get_follow_list",
     params: ["observer", "follow_type"],
-    description:_t("bridge_api.get_follow_list_description")
+    description:_t("bridge.get_follow_list_description")
   },
   {
     api: "bridge",
     method: "does_user_follow_any_lists",
     params: ["observer"],
-    description:_t("bridge_api.does_user_follow_any_lists_description")
+    description:_t("bridge.does_user_follow_any_lists_description")
   },
   {
     api: "bridge",
     method: "get_relationship_between_accounts",
     params: ["follower", "following"],
-    description:_t("bridge_api.get_relationship_between_accounts_description")
+    description:_t("bridge.get_relationship_between_accounts_description")
   }
 ];
