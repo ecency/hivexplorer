@@ -1677,7 +1677,7 @@ export const methods = [
     api: "bridge",
     method: "list_communities",
     params: ["last", "limit", "query", "sort", "observer"],
-    description:_t("bridge_api.list_communities_description"),
+    description:_t("bridge.list_communities_description"),
     response: `[
       {
         "id": 1432978,
