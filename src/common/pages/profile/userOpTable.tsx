@@ -173,7 +173,7 @@ const TransactionOperationTable = (props: any) => {
 
                         {opRequiredAuths && opRequiredAuths.length !== 0 && (
                           <tr>
-                            <td style={{ width: "125px" }}>{_t(`trans_table.required_auths`)}</td>
+                            <td >{_t(`trans_table.required_auths`)}</td>
                             <td>
                               {<Link to={`/@${opRequiredAuths[0]}`}>{opRequiredAuths[0]}</Link>}
                             </td>
@@ -181,7 +181,7 @@ const TransactionOperationTable = (props: any) => {
                         )}
                         {opRequiredPostingAuths && opRequiredPostingAuths.length !== 0 && (
                           <tr>
-                            <td style={{ width: "175px" }}>
+                            <td>
                               {_t(`trans_table.required_posting_auths`)}
                             </td>
                             <td>
@@ -289,7 +289,43 @@ const TransactionOperationTable = (props: any) => {
                                                             return(
                                                               <tr key={item+j+jsonSplit[key][innerKey][item]}> 
                                                                 <td style={isInteger(+item)?{width:'40px',minWidth:'40px'}:{}}>{_t(`trans_table.${item}`)}</td>
-                                                                <td>{typeof(jsonSplit[key][innerKey][item])}</td>
+                                                                <td>
+                                                                  {typeof(jsonSplit[key][innerKey][item])!=="object"? jsonSplit[key][innerKey][item].toString()
+                                                                  :<>
+                                                                  <table>
+                                                                    <tbody>
+                                                                    {Object.keys(jsonSplit[key][innerKey][item]).map((innerItem,k:number)=>{
+                                                                      return(
+                                                                        <tr key={k+innerItem+item+j}>
+                                                                          <td>{_t(`trans_table.${innerItem}`)}</td>
+                                                                          <td>
+                                                                              {typeof(jsonSplit[key][innerKey][item][innerItem])!=="object"? 
+                                                                                jsonSplit[key][innerKey][item][innerItem].toString()
+                                                                                :
+                                                                                <>
+                                                                                  <table>
+                                                                                    <tbody>
+                                                                                      {Object.keys(jsonSplit[key][innerKey][item][innerItem]).map((subInnerItem,z:number)=>{
+                                                                                        return(
+                                                                                          <tr key={subInnerItem+innerItem+item+z}>
+                                                                                            <td>{_t(`trans_table.${subInnerItem}`)}</td>
+                                                                                            <td>{jsonSplit[key][innerKey][item][innerItem][subInnerItem]}</td>
+                                                                                          </tr>
+                                                                                        )
+                                                                                      })}
+                                                                                    </tbody>
+                                                                                  </table>
+                                                                                </>
+                                                                              }
+                                                                          </td>
+                                                                        </tr>
+                                                                      )
+                                                                    })}
+                                                                    </tbody>
+                                                                  </table>
+                                                                  </>
+                                                                  }
+                                                                </td>
                                                               </tr>
                                                             )
                                                           })}

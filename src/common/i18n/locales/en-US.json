@@ -402,6 +402,11 @@
     "account_auths":"Accounts Auths",
     "weight_threshold":"Weight Threshold",
     "posting_json_metadata":"Posting Json Metadata",
+    "instances":"Instances",
+    "feeSymbol":"Fee Symbol",
+    "properties":"Properties",
+    "class":"Class",
+    "stats":"Stats",
     "0":0,
     "1":1,
     "2":2

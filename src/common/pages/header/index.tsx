@@ -72,7 +72,8 @@ const AppHeader = (props: any) => {
 
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ml-auto">
-              <NavDropdown
+            <NavDropdown
+                menuVariant={menuVariant}
                 className={currTheme === "day" ? "nav-text-white" : "nav-text-dark"}
                 id="nav-dropdown-blockchain"
                 title={_t("nav.blockchain")}
@@ -104,6 +105,7 @@ const AppHeader = (props: any) => {
                     ))}
                 </NavDropdown> */}
               <NavDropdown
+                menuVariant={menuVariant}
                 className={currTheme === "day" ? "nav-text-white" : "nav-text-dark"}
                 id="nav-dropdown-resources"
                 title={_t("nav.resources")}

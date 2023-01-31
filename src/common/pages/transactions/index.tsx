@@ -34,13 +34,13 @@ const AllTransactions = (props: any) => {
         if (HeadBlock === "") {
           const resp = await getHeadBlock();
           dispatch(setHeadBlockData(resp));
-          // const response = await getTransactions(resp.head_block_number);
-          const response = await getTransactions(71691727);
+          const response = await getTransactions(resp.head_block_number);
+          // const response = await getTransactions(71691727);
           // 71554087
           setTransactions(response.ops);
         } else {
-          // const response = await getTransactions(HeadBlock);
-          const response = await getTransactions(71691727);
+          const response = await getTransactions(HeadBlock);
+          // const response = await getTransactions(71691727);
           setTransactions(response.ops);
         }
       } catch (error: any) {
