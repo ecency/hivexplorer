@@ -50,7 +50,7 @@ export const methods = [
     api: "condenser_api",
     method: "get_discussions_by_trending",
     params: ["query"],
-    description:_t("condenser_api.get_discussions_by_trending_description"),
+    description:_t("condenser_api.get_discussions_by_trending_description")
   },
   {
     api: "condenser_api",
@@ -1116,7 +1116,7 @@ export const methods = [
   },
   {
     api: "condenser_api",
-    method: "get_witness_count",                      
+    method: "get_witness_count"
   },
   {
     api: "database_api",
@@ -1665,7 +1665,7 @@ export const methods = [
   },
   {
     api: "database_api",
-    method: "get_nai_pool",
+    method: "get_nai_pool"
   },
   {
     api: "bridge",
