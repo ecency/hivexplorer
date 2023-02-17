@@ -854,7 +854,7 @@ export const methods = [
     isArray: true,
     method: "get_transaction",
     params: ["trx_id"],
-    description:_t("condenser_api.get_transaction_description")
+    description:_t("condenser_api.get_transaction_description"),
     url:`${ConfigItems.baseUrl}/api/get_transaction?trx_id=6fde0190a97835ea6d9e651293e90c89911f933c`,
     parameter: `<p>trx_id (string)</p>`,
     response: `{
