@@ -5,13 +5,13 @@
   },
   "nav": {
     "blockchain": "Blockchain",
-    "tokens": "Токены",
-    "resources": "Ресурсы",
-    "blockchain-vt": "Просмотр транзакций",
-    "blockchain-vb": "Посмотреть блоки",
-    "blockchain-gov": "Управление",
-    "blockchain-witnesses": "Свидетели",
-    "blockchain-proposals": "Предложения",
+    "tokens": "Tokens",
+    "resources": "Resources",
+    "blockchain-vt": "View Txs",
+    "blockchain-vb": "View Blocks",
+    "blockchain-gov": "Governance",
+    "blockchain-witnesses": "Witnesses",
+    "blockchain-proposals": "Proposals",
     "tokens-hive": "Hive",
     "tokens-he": "Hive Engine",
     "tokens-speak": "Speak Network",
@@ -19,8 +19,8 @@
     "resources-api": "API Documentation"
   },
   "home": {
-    "latest_block": "Последние блоки",
-    "latest_transaction": "Последние транзакции"
+    "latest_block": "Latest Blocks",
+    "latest_transaction": "Latest Transaction"
   },
   "common": {
     "id": "ID",
