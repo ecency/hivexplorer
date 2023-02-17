@@ -1,37 +1,37 @@
 {
   "g": {
-    "when": "When",
-    "price": "Price"
+    "when": "Quand",
+    "price": "Prix"
   },
   "nav": {
     "blockchain": "Blockchain",
-    "tokens": "Tokens",
-    "resources": "Resources",
+    "tokens": "Pions",
+    "resources": "Ressources",
     "blockchain-vt": "View Txs",
-    "blockchain-vb": "View Blocks",
-    "blockchain-gov": "Governance",
-    "blockchain-witnesses": "Witnesses",
+    "blockchain-vb": "Afficher les blocs",
+    "blockchain-gov": "Gouvernance",
+    "blockchain-witnesses": "Témoins",
     "blockchain-proposals": "Proposals",
     "tokens-hive": "Hive",
     "tokens-he": "Hive Engine",
     "tokens-speak": "Speak Network",
-    "resources-about": "About",
+    "resources-about": "A propos",
     "resources-api": "API Documentation"
   },
   "home": {
-    "latest_block": "Latest Blocks",
-    "latest_transaction": "Latest Transaction"
+    "latest_block": "Derniers blocs",
+    "latest_transaction": "Dernière transaction"
   },
   "common": {
     "id": "ID",
-    "by": "By",
+    "by": "Par",
     "for": "for",
     "type": "Type",
-    "value": "Value",
-    "block": "Block",
+    "value": "Arvo",
+    "block": "Bloc",
     "date": "Date",
-    "time": "Time",
-    "show": "Show",
+    "time": "Heure",
+    "show": "Montrer",
     "less": "Less",
     "more": "More",
     "json": "Json",
