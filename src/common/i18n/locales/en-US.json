@@ -570,7 +570,7 @@
   },
   "transaction_status_api":{
     "title":"Transaction Status API",
-    "description":"This API is intended to evaluate a transaction status after calling condenser_api.broadcast_transaction."
+    "description":"This API is intended to evaluate a transaction status after calling condenser_api.broadcast_transaction.",
     "find_transaction_description":"Returns the status of a given transaction id."
   },
   "network_broadcast_api":{
