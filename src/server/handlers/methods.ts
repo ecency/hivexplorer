@@ -152,7 +152,7 @@ export const methods = [
     api: "block_api",
     method: "get_block",
     params: ["block_num"],
-    description:_t("block_api.get_blocks_description"),
+    description:_t("block_api.get_block_description"),
     url:`${ConfigItems.baseUrl}/api/get_block?block_num=8675309`,
     parameter: `<p>block_num(int)<p>
       <table>
