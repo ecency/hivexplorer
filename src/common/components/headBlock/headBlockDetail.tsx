@@ -90,9 +90,7 @@ const HeadBlockDetail = (props: any) => {
         setLoading(true);
         try {
           if (HeadBlock === "") {
-            console.log('resp',HeadBlock)
             const resp = await getHeadBlock();
-            console.log('resp',resp)
             dispatch(setHeadBlockData(resp));
             setResult(resp);
             setLoading(false);
@@ -115,7 +113,7 @@ const HeadBlockDetail = (props: any) => {
         <Container>
           <Card>
             <Card.Header>
-              {_t("common.block")}: {match.params.id}
+              <b>{_t("common.block")}</b>: {result?.head_block_number}
             </Card.Header>
             <Card.Body className="pt-0">
               {showMore
@@ -128,7 +126,7 @@ const HeadBlockDetail = (props: any) => {
                         <>
                           {typeof result[key] !== "object" ? (
                             <StringField
-                              key={index + Math.floor(Math.random() * 3000) + 2000}
+                              key={index + key+result[key]+typeof(result[key])}
                               value={result[key]}
                               item={key}
                               number={index}
@@ -136,7 +134,7 @@ const HeadBlockDetail = (props: any) => {
                             />
                           ) : (
                             <ObjectField
-                              key={index + Math.floor(Math.random() * 4000) + 3001}
+                              key={index + key+result[key]+typeof(result[key])}
                               value={result[key]}
                               item={key}
                               number={index}
@@ -156,7 +154,7 @@ const HeadBlockDetail = (props: any) => {
                           {" "}
                           {typeof result[key] !== "object" ? (
                             <StringField
-                              key={index + Math.floor(Math.random() * 5000) + 4001}
+                              key={index+'-'+ key+result[key]+typeof(result[key])}
                               value={result[key]}
                               item={key}
                               number={index}
@@ -164,7 +162,7 @@ const HeadBlockDetail = (props: any) => {
                             />
                           ) : (
                             <ObjectField
-                              key={index + Math.floor(Math.random() * 6000) + 5001}
+                              key={index+'-'+ key+'-'+result[key]+typeof(result[key])}
                               value={result[key]}
                               item={key}
                               number={index}

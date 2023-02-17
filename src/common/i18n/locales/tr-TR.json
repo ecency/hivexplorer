@@ -5,21 +5,21 @@
   },
   "nav": {
     "blockchain": "Blockchain",
-    "tokens": "Tokens",
-    "resources": "Resources",
-    "blockchain-vt": "View Txs",
-    "blockchain-vb": "View Blocks",
-    "blockchain-gov": "Governance",
-    "blockchain-witnesses": "Witnesses",
-    "blockchain-proposals": "Proposals",
+    "tokens": "Jetonlar",
+    "resources": "Kaynaklar",
+    "blockchain-vt": "Gönderimleri Görüntüle",
+    "blockchain-vb": "Blokları Görüntüle",
+    "blockchain-gov": "Yönetim",
+    "blockchain-witnesses": "tanıklar",
+    "blockchain-proposals": "teklifler",
     "tokens-hive": "Hive",
     "tokens-he": "Hive Engine",
-    "tokens-speak": "Speak Network",
-    "resources-about": "About"
+    "tokens-speak": "Ağı Konuş",
+    "resources-about": "Hakkında"
   },
   "home": {
-    "latest_block": "Latest Blocks",
-    "latest_transaction": "Latest Transaction"
+    "latest_block": "Son Bloklar",
+    "latest_transaction": "Son İşlem"
   },
   "common": {
     "id": "ID",

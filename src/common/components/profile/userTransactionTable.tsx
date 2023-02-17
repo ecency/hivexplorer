@@ -24,6 +24,7 @@ import SpinnerEffect from "../loader/spinner";
 import { TimestampField } from "../fields/blockFields/DateTimeTable";
 import { AscendingIcon, DescendingIcon } from "../../img/svg";
 import { getUserTransaction } from "../../api/urls";
+import { Col, Row } from "react-bootstrap";
 
 interface Column {
   label: string;
@@ -134,7 +135,10 @@ const UserTransactionsTable = (props: any) => {
       <>
         <TableRow className="transaction-table-data-row" hover={true} role="checkbox" tabIndex={-1}>
           <TableCell className="transaction-table-data-cell py-2">
-            <Link to={`/tx/${trans[1].trx_id}`}>{trans[1].trx_id}</Link>
+          <>{trans[1].trx_id==="0000000000000000000000000000000000000000"?
+                <p>{_t('trans_table.virtual')}</p>:
+                <Link to={`/tx/${trans[1].trx_id}`}>{trans[1].trx_id.substring(0,7)+'...'}</Link>
+            }</>
           </TableCell>
           <TableCell className="transaction-table-data-cell py-2">
             <Link to={`/b/${trans[1].block}`}>{trans[1].block}</Link>
@@ -187,6 +191,8 @@ const UserTransactionsTable = (props: any) => {
                 : "paper-night text-white table-paper"
             }
           >
+            <Row>
+            <Col lg={6}>
             <TextField
               id="outlined-basic"
               className="search-field"
@@ -194,17 +200,31 @@ const UserTransactionsTable = (props: any) => {
               onChange={inputHandler}
               placeholder={`${_t("heading_label.search_transaction")}`}
             />
+            </Col>
+            <Col lg={6}>
+                {filteredTransactionsData && (
+                <TablePagination
+                rowsPerPageOptions={[25, 50, 100, 500, 1000]}
+                component="div"
+                count={filteredTransactionsData.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+                />
+            )}
+            </Col>
+          </Row>
             <Table stickyHeader={true} aria-label="sticky table">
               <TableHead className="card-header">
                 <TableRow className="card-header">
                   {columns.map((column, index) => {
-                    index = index + Math.floor(Math.random() * 8000) + 7000;
                     return (
                       <>
                         {column.label === `${_t("common.block")}` ? (
                           <TableCell
                             className={`card-header px-2 col-w-${column.width} card-header-sort`}
-                            key={index + 1}
+                            key={index + 1 +column.label}
                           >
                             {
                               <>
@@ -255,8 +275,7 @@ const UserTransactionsTable = (props: any) => {
                   filteredTransactionsData
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((trans: any, i: number) => {
-                      i = i + Math.floor(Math.random() * 10000) + 9000;
-                      return <TransRow key={i} trans={trans} />;
+                      return <TransRow key={i+trans+'-'} trans={trans} />;
                     })}
               </TableBody>
             </Table>

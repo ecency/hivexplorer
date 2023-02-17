@@ -47,11 +47,11 @@ const App = ({ setLang }: any) => {
   };
   useEffect(() => {
     const currentLang = ls.get("current-language");
-
-    if (currentLang) {
-      setLang(currentLang);
-      i18n.changeLanguage(currentLang);
-    }
+  //    if (currentLang) {
+  //     setLang(currentLang);
+  //      i18n.changeLanguage(currentLang);
+  // }
+    ls.set("current-language", currentLang);
   }, []);
 
   return (

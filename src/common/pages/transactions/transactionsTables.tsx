@@ -14,12 +14,11 @@ import {
   TableRow,
   TextField
 } from "@material-ui/core";
-import { Container } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import moment from "moment";
 import { useSelector } from "react-redux";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
-
 import { HomeBlocksType } from "../../components/home/BlocksComponent";
 import { _t } from "../../i18n";
 import { AscendingIcon, DescendingIcon } from "../../img/svg";
@@ -30,16 +29,17 @@ interface Column {
   label: string;
   align: string;
   width: string;
+  class:string
 }
 
 const columns: Column[] = [
-  { label: `${_t("common.id")}`, align: "right", width: "unset" },
-  { label: `${_t("common.date")}`, align: "right", width: "140" },
+  { label: `${_t("common.id")}`, align: "right", width: "unset",class:"id"},
+  { label: `${_t("common.date")}`, align: "right", width: "140",class:"date" },
 
-  { label: `${_t("common.trx_in_block")}`, align: "right", width: "110" },
-  { label: `${_t("common.op_in_trx")}`, align: "right", width: "110" },
-  { label: `${_t("common.type")}`, align: "right", width: "260" },
-  { label: `${_t("common.ops")}`, align: "right", width: "110" }
+  { label: `${_t("common.trx_in_block")}`, align: "right", width: "110",class:"trx_in_block" },
+  { label: `${_t("common.op_in_trx")}`, align: "right", width: "110",class:"op_in_trx" },
+  { label: `${_t("common.type")}`, align: "right", width: "260",class:"type" },
+  { label: `${_t("common.ops")}`, align: "right", width: "110",class:"ops" }
 ];
 
 interface BlockList extends Array<HomeBlocksType> {}
@@ -128,7 +128,11 @@ const TransactionsTables = (props: any) => {
       <>
         <TableRow hover={true} role="checkbox" tabIndex={-1}>
           <TableCell>
-            <Link to={`/tx/${transaction.trx_id}`}>{transaction.trx_id}</Link>
+            <>{transaction.trx_id==="0000000000000000000000000000000000000000"?
+            <p>{_t('trans_table.virtual')}</p>:
+            <Link to={`/tx/${transaction.trx_id}`}>{transaction.trx_id.substring(0,7)+'...'}</Link>
+            }</>
+           
           </TableCell>
           {/* <TableCell>{Date_time(`${transaction.timestamp}`,"YYYY-MM-DD")}</TableCell> */}
           <TableCell>
@@ -181,20 +185,37 @@ const TransactionsTables = (props: any) => {
   };
   return (
     <>
-      <Container className="data-table-hive py-5">
         <Paper
           className={
             currTheme === "day" ? "paper-day text-dark px-2" : "paper-night text-white px-2"
           }
         >
           <h1>{_t("heading_label.latest_transaction")}</h1>
-          <TextField
-            id="outlined-basic"
-            className="search-field"
-            onChange={inputHandler}
-            fullWidth={false}
-            placeholder={`${_t("heading_label.search_transaction")}`}
-          />
+          <Row>
+            <Col md={6}>
+                <TextField
+                    id="outlined-basic"
+                    className="search-field"
+                    onChange={inputHandler}
+                    fullWidth={false}
+                    placeholder={`${_t("heading_label.search_transaction")}`}
+                />
+                </Col>
+                <Col md={6}>
+                {filteredTransactionsData && (
+                    <TablePagination
+                    rowsPerPageOptions={[10, 25, 100]}
+                    component="div"
+                    count={filteredTransactionsData.length}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    onPageChange={handleChangePage}
+                    onRowsPerPageChange={handleChangeRowsPerPage}
+                    />
+                )}
+              </Col>
+          </Row>
+   
           <TableContainer className="pt-4">
             <Table stickyHeader={true} aria-label="sticky table">
               <TableHead className="card-header">
@@ -227,7 +248,7 @@ const TransactionsTables = (props: any) => {
                           </TableCell>
                         ) : (
                           <TableCell
-                            className={`card-header col-w-${column.width}`}
+                            className={`card-header card-header-${column.class} col-w-${column.width}`}
                             key={index + 2}
                           >
                             {column.label}
@@ -272,7 +293,7 @@ const TransactionsTables = (props: any) => {
             />
           )}
         </Paper>
-      </Container>
+      
     </>
   );
 };

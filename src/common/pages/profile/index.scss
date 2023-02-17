@@ -40,11 +40,35 @@
         border-collapse: collapse;
         }
         tr td:first-child{
-            min-width: 100px;
+            width: 100px;
+            word-break: break-word;
         }
         td{
             padding: 10px;
             word-break: break-all;
+            .block-span {
+                display: block;
+                padding: 5px 0px;
+              &:not(:last-child){
+                border-bottom: 1px solid #706f70;
+                padding-bottom: 0
+              }
+            }
+            .trans-card-span{
+                display: flex;
+              padding: 5px 0px;
+              justify-content: space-between;
+              &:not(:last-child){
+                border-bottom: 1px solid #706f70;
+                padding-bottom: 0
+              }
+            }
+            .true{
+                color: green;
+            }
+            .false{
+                color:red
+            }
         }
         
       }
@@ -93,6 +117,7 @@
         margin-right: -20px !important;
     }
     .user-tabs{
+        font-weight: bold;
         .MuiTabs-fixed{
             overflow-x: scroll !important;
             width: auto !important;
@@ -112,12 +137,18 @@
         box-shadow: 0 0.1rem 1rem $light-shadow;
         width: 80%;
         margin: auto;
+        .trans-span{
+            display: block;
+        }
         &-dark{
             background-color: $dark-grey-blue;
         }
         &-light{
             background-color: $white-five;
         }
+    }
+    @media screen and (max-width:768px) {
+        padding-top: 0;
     }
    
 }

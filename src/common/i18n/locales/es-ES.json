@@ -5,21 +5,21 @@
   },
   "nav": {
     "blockchain": "Blockchain",
-    "tokens": "Tokens",
-    "resources": "Resources",
-    "blockchain-vt": "View Txs",
-    "blockchain-vb": "View Blocks",
-    "blockchain-gov": "Governance",
-    "blockchain-witnesses": "Witnesses",
-    "blockchain-proposals": "Proposals",
+    "tokens": "Fichas",
+    "resources": "Recursos",
+    "blockchain-vt": "Ver Tx",
+    "blockchain-vb": "Ver Bloques",
+    "blockchain-gov": "Gobernancia",
+    "blockchain-witnesses": "Testigos",
+    "blockchain-proposals": "Propuestas",
     "tokens-hive": "Hive",
     "tokens-he": "Hive Engine",
-    "tokens-speak": "Speak Network",
-    "resources-about": "About"
+    "tokens-speak": "hablar red",
+    "resources-about": "Acerca de"
   },
   "home": {
-    "latest_block": "Latest Blocks",
-    "latest_transaction": "Latest Transaction"
+    "latest_block": "Últimos bloques",
+    "latest_transaction": "Última transacción"
   },
   "common": {
     "id": "ID",
@@ -124,12 +124,12 @@
     "transaction_num": "Transaction Num"
   },
   "heading_label": {
-    "latest_transaction": "Latest Transactions",
-    "search_transaction": "Search Transactions",
-    "latest_block": "Latest Blocks",
-    "search_block": "Search Blocks",
-    "search_proposals": "Search Proposals",
-    "search_witnesses": "Search Witnesses"
+    "latest_transaction": "Últimas transacciones",
+    "search_transaction": "Buscar Transacciones",
+    "latest_block": "Últimos Bloques",
+    "search_block": "Bloques de Búsqueda",
+    "search_proposals": "Buscar Propuestas",
+    "search_witnesses": "Buscar Testigos"
   },
   "about": {
     "page_title": "About",

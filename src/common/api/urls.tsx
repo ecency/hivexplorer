@@ -58,7 +58,6 @@ export const getTransactions = async (block_num: number) => {
 // Get Single Transaction
 export const getSingleTransaction = async (transaction_id: number) => {
   const url_single_transaction = `${ConfigItems.baseUrl}/api/get_transaction?trx_id=${transaction_id}`;
-  console.log(url_single_transaction)
   const r = await axios.get(url_single_transaction);
   return r.data;
 };

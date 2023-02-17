@@ -25,11 +25,10 @@ export const AuthorityObject = (field: Authority) => {
   return (
     <>
       {Object.keys(field).map((key, i: number) => {
-        i = i + Math.floor(Math.random() * 1000);
         return (
           <>
             {field[key].length !== 0 && (
-              <Row id={`${i})}`} key={i} className="m-0 py-2 row-border-dotted">
+              <Row id={`${i})}`} key={i+key+ field[key]+i} className="m-0 py-2 row-border-dotted">
                 <>
                   <Col md={3} xs={3}>
                     {key}
@@ -38,9 +37,8 @@ export const AuthorityObject = (field: Authority) => {
                     {typeof field[key] !== "object"
                       ? field[key]
                       : field[key].map((inner: any, j: number) => {
-                          j = j + Math.floor(Math.random() * 1000);
                           return (
-                            <Row key={j}>
+                            <Row key={i+key+ field[key]+'-'+j}>
                               <Col className="auth-col">
                                 {key === "account_auths" ? (
                                   <a href={`/@${inner[0]}`}>{inner[0]}</a>
@@ -74,20 +72,6 @@ const UserHistory = (props: any) => {
           {Object.keys(ownerHistory[0]).map((key: any, i: number) => {
             return (
               <>
-                {/* {authority!=="memo_key"? 
-                        <tr key={i} className="row-border" >
-                        <td className="pt-2 pl-4 pr-2 pb-2">{_t(`user-info.${authority}`)}</td>
-                        <td  className="pt-2 px-4 pb-2">
-                            {props[authority]}
-                        </td>
-                    </tr> 
-                      :  <tr key={i} className="row-border" >
-                      <td className="pt-2 pl-4 pr-2 pb-2">{_t(`user-info.${authority}`)}</td>
-                      <td  className="pt-2 px-2 pb-2">
-                          {AuthorityObject(props[authority])}
-                      </td>
-                  </tr>
-                    } */}
                 {typeof ownerHistory[0][key] !== "object" ? (
                   <tr key={i} className="row-border">
                     <td className="pt-2 pl-4 pr-2 pb-2">{_t(`user-info.${key}`)}</td>

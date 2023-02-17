@@ -137,6 +137,7 @@ const ObjectField = (props: any) => {
       {item !== "posting" && item !== "owner" && item !== "active" && (
         <Row className={rowBorder} key={number}>
           <Col md={3} xs={12} className="attr-col">
+          <b>
             <span>{infoIcon(themeContrastColor)} </span>
             <span className="pl-2">
               {item === "voting_manabar" || item === "downvote_manabar" ? (
@@ -146,6 +147,7 @@ const ObjectField = (props: any) => {
               )}
               :
             </span>
+            </b>
           </Col>
           <Col md={9} xs={12}>
             {item === "voting_manabar" || item === "downvote_manabar" ? (

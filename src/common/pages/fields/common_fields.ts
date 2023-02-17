@@ -12,6 +12,7 @@ export const LinkAccount = [
     "benefactor",
     "comment_author",
     "parent_author",
+    "delegatees"
   ];
 
   export const StringFieldArray = [
@@ -29,9 +30,18 @@ export const LinkAccount = [
     "expiration",
     "orderid",
     "json_metadata",
-    "body"
-  ];
+    "body",
+    "title",
+    "allow_votes",
+    "percent_hbd",
+    "allow_curation_rewards"
 
+  ];
+export const NestedObjectUserOperations=[
+  'owner',
+  'active',
+  'posting',
+]
   export const ObjectFieldArray = [
     "vesting_shares",
     "reward",
@@ -54,5 +64,6 @@ export const LinkAccount = [
     "current_pays",
     "open_pays",
     "min_to_receive",
-    "amount_to_sell"
+    "amount_to_sell",
+    "max_accepted_payout"
   ];
