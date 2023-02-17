@@ -655,7 +655,7 @@
   },
   "market_history_api":{
     "title":"Market History API",
-    "description":"Used to lookup market history information. These AppBase API methods are still under development and subject to change."
+    "description":"Used to lookup market history information. These AppBase API methods are still under development and subject to change.",
     "get_ticker_description":"Returns the market ticker for the internal HBD:HIVE market.",
     "get_volume_description":"Returns the market volume for the past 24 hours.",
     "get_trade_history_description":"Returns the trade history for the internal HBD:HIVE market.",
