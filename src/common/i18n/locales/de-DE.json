@@ -1,39 +1,39 @@
 {
   "g": {
-    "when": "When",
-    "price": "Price"
+    "when": "Wenn",
+    "price": "Preis"
   },
   "nav": {
     "blockchain": "Blockchain",
-    "tokens": "Tokens",
-    "resources": "Resources",
+    "tokens": "Token",
+    "resources": "Ressourcen",
     "blockchain-vt": "View Txs",
-    "blockchain-vb": "View Blocks",
+    "blockchain-vb": "Blöcke anzeigen",
     "blockchain-gov": "Governance",
-    "blockchain-witnesses": "Witnesses",
-    "blockchain-proposals": "Proposals",
+    "blockchain-witnesses": "Zeugen",
+    "blockchain-proposals": "Anträge",
     "tokens-hive": "Hive",
     "tokens-he": "Hive Engine",
     "tokens-speak": "Speak Network",
-    "resources-about": "About",
-    "resources-api": "API Documentation"
+    "resources-about": "Über",
+    "resources-api": "API-Dokumentation"
   },
   "home": {
-    "latest_block": "Latest Blocks",
-    "latest_transaction": "Latest Transaction"
+    "latest_block": "Neueste Blöcke",
+    "latest_transaction": "Neueste Transaktionen"
   },
   "common": {
     "id": "ID",
     "by": "By",
     "for": "for",
     "type": "Type",
-    "value": "Value",
-    "block": "Block",
-    "date": "Date",
-    "time": "Time",
-    "show": "Show",
-    "less": "Less",
-    "more": "More",
+    "value": "Wert",
+    "block": "Blockieren",
+    "date": "Datum",
+    "time": "Zeit",
+    "show": "Anzeigen",
+    "less": "Weniger",
+    "more": "Mehr",
     "json": "Json",
     "witness": "Witness",
     "block_id": "Block ID",
