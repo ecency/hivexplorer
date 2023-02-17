@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { match } from "react-router-dom";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { Col, Container, Row, Card, Button } from "react-bootstrap";
 import "./headBlock.scss";
 import { withPersistentScroll } from "../with-persistent-scroll";
@@ -15,6 +15,8 @@ import StringField from "../fields/blockFields/StringField";
 import BackToTopButton from "../Buttons/BackToTop";
 import ObjectField from "../fields/blockFields/ObjectField";
 import { getHeadBlock } from "../../api/urls";
+import { setHeadBlockData } from "../../store/HeadBlock";
+import SpinnerEffect from "../loader/spinner";
 
 export interface objAmountPrecisionNai {
   amount: string;
@@ -76,23 +78,42 @@ const HeadBlockDetail = (props: any) => {
   const { match } = props;
   const [result, setResult] = useState<LatestBlock>();
   const [showMore, setShowMore] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
   const currTheme = useSelector((state: any) => state.global.theme);
   const HeadBlock = useSelector((state: any) => state.headBlock);
   const themeContrastColor = currTheme === "day" ? "black" : "white";
   const themeBtn = currTheme === "day" ? "showmore-btn btn-light" : "showmore-btn btn-dark";
   useEffect(() => {
     // axios.get(url_global).then(response => {
-    setResult(HeadBlock);
-    // })
+      const fetchData = async () => {
+        setLoading(true);
+        try {
+          if (HeadBlock === "") {
+            const resp = await getHeadBlock();
+            dispatch(setHeadBlockData(resp));
+            setResult(resp);
+            setLoading(false);
+          } else {
+            setResult(HeadBlock);
+            setLoading(false);
+          }
+        } catch (error: any) {
+          console.error(error.message);
+        }
+       
+      };
+      fetchData();
   }, []);
   return (
     <>
       <Theme global={props.global} />
-      <div className="head-block-detail">
+      {loading && <SpinnerEffect />}
+      {!loading && <div className="head-block-detail">
         <Container>
           <Card>
             <Card.Header>
-              {_t("common.block")}: {match.params.id}
+              <b>{_t("common.block")}</b>: {result?.head_block_number}
             </Card.Header>
             <Card.Body className="pt-0">
               {showMore
@@ -105,7 +126,7 @@ const HeadBlockDetail = (props: any) => {
                         <>
                           {typeof result[key] !== "object" ? (
                             <StringField
-                              key={index + Math.floor(Math.random() * 3000) + 2000}
+                              key={index + key+result[key]+typeof(result[key])}
                               value={result[key]}
                               item={key}
                               number={index}
@@ -113,7 +134,7 @@ const HeadBlockDetail = (props: any) => {
                             />
                           ) : (
                             <ObjectField
-                              key={index + Math.floor(Math.random() * 4000) + 3001}
+                              key={index + key+result[key]+typeof(result[key])}
                               value={result[key]}
                               item={key}
                               number={index}
@@ -133,7 +154,7 @@ const HeadBlockDetail = (props: any) => {
                           {" "}
                           {typeof result[key] !== "object" ? (
                             <StringField
-                              key={index + Math.floor(Math.random() * 5000) + 4001}
+                              key={index+'-'+ key+result[key]+typeof(result[key])}
                               value={result[key]}
                               item={key}
                               number={index}
@@ -141,7 +162,7 @@ const HeadBlockDetail = (props: any) => {
                             />
                           ) : (
                             <ObjectField
-                              key={index + Math.floor(Math.random() * 6000) + 5001}
+                              key={index+'-'+ key+'-'+result[key]+typeof(result[key])}
                               value={result[key]}
                               item={key}
                               number={index}
@@ -168,7 +189,8 @@ const HeadBlockDetail = (props: any) => {
             </Card.Footer>
           </Card>
         </Container>
-      </div>
+      </div>}
+   
       <BackToTopButton />
     </>
   );

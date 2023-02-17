@@ -1,0 +1,83 @@
+@import '../../../style/colors';
+.entry-content-container{
+    padding: 5rem 0;
+    .entry-header{
+        padding: 10px 0;
+        display: flex;
+        align-items: center;
+        .avatar-img{
+            height: 50px;
+            width: 50px;
+            border-radius: 100%;
+        }
+    }
+    .toggle-button-container{
+        display: flex;
+        align-items: baseline;
+        margin-left: auto;
+        p{
+            margin-right: 10px;
+        }
+        div{
+            font-size: 14px !important;
+        }
+    }
+    .entry-parent{
+        padding: 10px 0 20px;
+        .card{
+            width: 100%;
+        }
+    }
+    .accordion{
+        .accordion-body{
+            word-break: break-all;
+            .pre-raw-format{
+                display: block;
+                white-space: pre-wrap;
+                word-break: break-word;
+                background: transparent;
+                border: none;
+                margin: 0;
+                padding: 0 0 0.5em;
+            }
+        }
+        .accordion-button{
+            display: flex;
+            justify-content: space-between;
+            &:focus{
+                box-shadow: none !important;
+            }
+            &::after{
+                display: none;
+            }
+        }   
+        &.accordion_night{
+            background-color: transparent;
+            .accordion-item{
+                background-color: transparent;
+                color: $white;
+                .accordion-button{
+                    background: $dark-grey-blue;
+                    color: $white;
+                    &::after{
+                        display: none;
+                    }
+                }   
+                .card-header,.MuiTableCell-body{
+                    color: $white;
+                }
+            }
+
+            
+        }
+        .accordion-item:first-of-type,.accordion-item:last-of-type{
+            border-radius: 0;
+        }
+        
+    }
+    .permlink-discussion-content{
+        padding: 15px;
+        border: 1px solid $gray-300;
+        border-top: 0;
+    }
+}

@@ -1,17 +1,32 @@
 import React, { useState } from "react";
 import { Button, Col, ListGroup, Row } from "react-bootstrap";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+
+import { _t } from "../../../i18n";
+import JsonField from "./JsonField";
+import JsonMetadata from "../../entryContent/JsonMetadata";
+import { Date_time_table } from "../../../api/dateTime";
+import { LinkAccount } from "../../../pages/fields/common_fields";
+import { UserAvatar } from "../../user-avatar";
 import { infoIcon, showLessIcon, showMoreIcon, trxIcon } from "../../../img/svg";
 import "./ObjectField.scss";
-import { useSelector } from "react-redux";
-import { _t } from "../../../i18n";
-import { Link } from "react-router-dom";
-import { ConfigItems } from "../../../../../config";
-import JsonField from "./JsonField";
-import JsonMetadata from "../../EntryContent/JsonMetadata";
-import { Date_time_table } from "../../../api/dateTime";
-import TransactionOperationTable from "../../../pages/User/UserOpTable";
-import DefaultImage from "../../../img/default-avatar.png";
+import { SMTAssetCalc } from "../../../api/hive";
+import parseAsset from "../../../helper/parse-asset";
 
+
+const SMTAssetArray=[
+  "init_hbd_supply",
+  "virtual_supply",
+  'current_supply',
+  'current_hbd_supply',
+  'total_vesting_fund_hive',
+  'total_vesting_shares',
+  'total_reward_fund_hive',
+  'pending_rewarded_vesting_shares',
+  'pending_rewarded_vesting_hive',
+  'dhf_interval_ledger'
+]
 const timestampKeys = [
   "time",
   "timestamp",
@@ -39,6 +54,10 @@ interface opValType {
   json: string;
   author: string;
   permlink: string;
+  comment_author:string;
+  comment_permlink:string;
+  parent_author:string;
+  parent_permlink:string;
   weight: number | string;
 }
 interface transactionType {
@@ -60,29 +79,8 @@ const ObjectField = (props: any) => {
   const themeBtn = currTheme === "day" ? "showmore-btn btn-light" : "showmore-btn btn-dark";
   let transactionValue: transactionTypeList = [];
 
-  const Date_time = (timeDate: string) => {
-    return (
-      <>
-        <table className="time-date-table">
-          <tbody>
-            <tr>
-              <td>{_t("common.date")}</td>
-              <td>{Date_time_table(`${timeDate}`, "YYYY-MM-DD")}</td>
-            </tr>
-            <tr>
-              <td>{_t("common.time")}</td>
-              <td>{Date_time_table(`${timeDate}`, `hh:mm:ss`)}</td>
-            </tr>
-          </tbody>
-        </table>
-      </>
-    );
-  };
-  // const expand_operation=(value:any,item:string)=>{
-  //     return(
 
-  //     )
-  // }
+
   const expand_view = (value: any, item: string) => {
     return (
       <Row className={`${rowBorder} mt-1`}>
@@ -92,24 +90,7 @@ const ObjectField = (props: any) => {
               return (
                 <ListGroup.Item key={i}>
                   {item === "witness_votes" ? (
-                    <Link
-                      onClick={() => {
-                        changeUser(val);
-                      }}
-                      to={`/@${val}`}
-                    >
-                      <span>
-                        <img
-                          className="avatar-img"
-                          onError={(e: any) => {
-                            e.target.src = { DefaultImage };
-                          }}
-                          src={`https://images.ecency.com/u/${val}/avatar`}
-                          alt=""
-                        />
-                      </span>
-                      <span>{val}</span>
-                    </Link>
+                    <UserAvatar username={val} size="small"/>
                   ) : (
                     <>
                       <Link to={`/tx/${val}`}>
@@ -133,24 +114,7 @@ const ObjectField = (props: any) => {
                 return (
                   <ListGroup.Item key={i}>
                     {item === "witness_votes" ? (
-                      <Link
-                        onClick={() => {
-                          changeUser(val);
-                        }}
-                        to={`/@${val}`}
-                      >
-                        <span>
-                          <img
-                            className="avatar-img"
-                            onError={(e: any) => {
-                              e.target.src = { DefaultImage };
-                            }}
-                            src={`https://images.ecency.com/u/${val}/avatar`}
-                            alt=""
-                          />
-                        </span>
-                        <span>{val}</span>
-                      </Link>
+                      <UserAvatar username={val} size="small"/>
                     ) : (
                       <>
                         <Link to={`/tx/${val}`}>
@@ -173,6 +137,7 @@ const ObjectField = (props: any) => {
       {item !== "posting" && item !== "owner" && item !== "active" && (
         <Row className={rowBorder} key={number}>
           <Col md={3} xs={12} className="attr-col">
+          <b>
             <span>{infoIcon(themeContrastColor)} </span>
             <span className="pl-2">
               {item === "voting_manabar" || item === "downvote_manabar" ? (
@@ -182,17 +147,18 @@ const ObjectField = (props: any) => {
               )}
               :
             </span>
+            </b>
           </Col>
           <Col md={9} xs={12}>
             {item === "voting_manabar" || item === "downvote_manabar" ? (
               <table className="time-date-table">
                 <tbody>
                   <tr>
-                    <td>current_mana</td>
+                    <td>{_t('common.current_mana')}</td>
                     <td>{value.current_mana}</td>
                   </tr>
                   <tr>
-                    <td>Time</td>
+                    <td>{_t('common.time')}</td>
                     <td>{value.last_update_time}</td>
                   </tr>
                 </tbody>
@@ -222,58 +188,87 @@ const ObjectField = (props: any) => {
                   const type: string = val[0];
                   const opVal: opValType = val[1];
                   return (
-                    <table key={i} className="time-date-table">
+                    <table key={i+type} className="time-date-table">
                       <tbody>
                         <tr>
                           <td>{_t("trans_table.type")}</td>
                           <td>{type}</td>
                         </tr>
-
-                        {opVal.id && (
-                          <tr>
-                            <td>{_t("trans_table.id")}</td>
-                            <td>{opVal.id}</td>
+                        {Object.keys(opVal).map((val:any,i:number)=>{
+                          return(
+                          <>
+                          {typeof(opVal[val]) !== 'object' && opVal[val]!=="" ?
+                          <tr key={i+val+type}>
+                            <td>{_t(`trans_table.${val}`)}</td>
+                            <td>
+                              {LinkAccount.includes(val)?
+                                <UserAvatar username={opVal[val]} size="small"/>
+                                : 
+                                val==='permlink' ? <Link to={`/@${opVal.author}/${opVal.permlink}`}>{opVal.permlink}</Link>
+                                :
+                                val==='comment_permlink' ? <Link to={`/@${opVal.comment_author}/${opVal.comment_permlink}`}>{opVal.comment_permlink}</Link>
+                                :
+                                val==='parent_permlink' ? <Link to={`/@${opVal.parent_author}/${opVal.parent_permlink}`}>{opVal.parent_permlink}</Link>
+                                :
+                                opVal[val]
+                              }</td>
                           </tr>
-                        )}
-                        {opVal.json && (
-                          <tr>
-                            <td>{_t("trans_table.json")}</td>
-                            <td>{opVal.json}</td>
+                          :
+                          typeof(opVal[val]) === 'object' && opVal[val].length!==0 ?
+                          val==="required_auths" || val==="required_posting_auths" ?
+                          <tr  key={i+val+type}>
+                            <td>{_t(`trans_table.${val}`)}</td>
+                            <td>
+                              <UserAvatar username={opVal[val][0]} size="small"/>
+                            </td>
                           </tr>
-                        )}
-                        {opVal.voter && (
-                          <tr>
-                            <td>{_t("trans_table.voter")}</td>
-                            <td>{opVal.voter}</td>
-                          </tr>
-                        )}
-                        {opVal.author && (
-                          <tr>
-                            <td>{_t("trans_table.author")}</td>
-                            <td>{opVal.author}</td>
-                          </tr>
-                        )}
-                        {opVal.permlink && (
-                          <tr>
-                            <td>{_t("trans_table.permlink")}</td>
-                            <td>{opVal.permlink}</td>
-                          </tr>
-                        )}
-                        {opVal.weight && (
-                          <tr>
-                            <td>{_t("trans_table.weight")}</td>
-                            <td>{opVal.weight}</td>
-                          </tr>
-                        )}
+                          :
+                          val==="props" ? 
+                          <tr key={i+val+type}>
+                          <td>{_t(`trans_table.${val}`)}</td>
+                          <td>
+                              <table>
+                                <tbody>
+                                {Object.keys(opVal[val]).map((item:any,j:number)=>{
+                                  return(
+                                    <tr key={j+item}>
+                                      <td>{_t(`trans_table.${opVal[val][item][0]}`)}</td>
+                                      <td>{opVal[val][item][1]}</td>
+                                    </tr>
+                                    )
+                                  })}
+                                </tbody>
+                              </table>
+                          </td>
+                        </tr>
+                          :
+                          <tr key={i+val+type}>
+                            <td>{_t(`trans_table.${val}`)}</td>
+                            <td>
+                                <table>
+                                  <tbody>
+                                  {Object.keys(opVal[val]).map((item:any,j:number)=>{
+                                    return(
+                                      <tr key={j+item}>
+                                        <td>{_t(`trans_table.${item}`)}</td>
+                                        <td>{opVal[val][item]}</td>
+                                      </tr>
+                                      )
+                                    })}
+                                  </tbody>
+                                </table>
+                            </td>
+                          </tr>:<></>}
+                          </>
+                          )
+                        })}
                       </tbody>
                     </table>
                   );
                 })}
               </>
-            ) : item === "init_hbd_supply" ||
-              item === "current_hbd_supply" ||
-              item === "virtual_supply" ? (
-              <>{value.amount}</>
+            ) : SMTAssetArray.includes(item) ? (
+              <>{parseAsset(value).amount+' '+parseAsset(value).symbol}</>
             ) : item === "json_metadata" && label_for === "entry" ? (
               <>
                 <JsonMetadata data={value} />

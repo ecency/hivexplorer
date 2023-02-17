@@ -1,0 +1,105 @@
+@import '../../../style/colors';
+.appNav{
+    position: fixed;
+    width: 100%;
+    z-index: 99999;
+    top: 0;
+    box-shadow: 0 5px 5px 0 $light-shadow;
+    .container{
+        position: relative;
+    }
+    .navItems{
+        margin-left: auto;
+    }
+    .logo-icon{
+        svg {
+            height: 1em;
+            margin-right: 0px;
+            vertical-align: -5%    
+        }
+    }
+    .span-language{
+        width: 17px;
+        height: 13px;
+        display: flex;
+        justify-content: center;
+        background-color: #357ce6;
+        color: #fff;
+        border-radius: 100%;
+        font-size: 9px;
+        align-items: center;
+        padding: 8px;
+        line-height: initial;
+        position: absolute;
+        left: 20px;
+        top: 17px;
+        z-index: 99;
+        font-weight: bold;
+    }
+    .flag-img{
+        width: 24px;
+        padding-right: 5px;
+    }
+    
+    .switch-theme-btn-day {
+        border: none !important;
+        background-color: $white !important;
+    }
+    
+    .switch-theme-btn-night {
+        border: none !important;
+        background-color: $dark-grey-blue !important;
+    }
+    .nav-text-dark{
+        a#nav-dropdown-blockchain,
+        a#nav-dropdown-tokens,
+        a#nav-dropdown-resources{
+            color: $white-two !important;
+        }
+    }
+    .day-night-btn{
+        background: transparent;
+        border: 0;
+        .day-night-img{
+            height: 24px;
+        }
+        &:focus{
+            outline: 0;
+            box-shadow: none !important;
+        }
+        @media (max-width:992px) {
+            position: absolute;
+            top: 3px;
+            right: 65px;
+        }
+    }
+   
+}
+
+.appNav-night {
+    background: $dark-grey-blue;
+}
+
+.appNav-day {
+    background: $white-two;
+}
+
+.appNav-text-day {
+    color: $text-header;
+}
+
+.appNav-text-night {
+    color: $white;
+}
+@media (max-width:992px){
+    .navbar-toggler{
+        position: absolute;
+        top: 0;
+        right: 10px;
+    }
+    .dark-light-btn{
+        position: absolute;
+        top: 5px;
+        right: 70px;
+    }
+}

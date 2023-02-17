@@ -1,0 +1,93 @@
+@import '../../../style/colors';
+.proposal-container{
+    .search-field-proposals{
+        width: 500px;
+        padding: 5px 16px;
+        background-color: $gray-search;
+        border-radius: 20px;
+        margin: 10px 0;
+        .MuiInput-underline:hover:not(.Mui-disabled):before {
+            border: 0;
+         }
+        .MuiInput-underline:before{
+            border: 0;
+        }
+        .MuiInput-underline::after{
+            border: 0;
+        }
+    }
+    .filter-menu{
+        padding-bottom: 10px;
+        .btn{
+            border-radius: 0;
+        }
+        .btn:focus{
+            border: 0;
+            box-shadow: none;
+        }
+        .btn:disabled{
+            opacity: 1;
+            color:$dark-sky-blue;
+            border-bottom: 1px solid $dark-sky-blue;
+        }
+    }
+    .funding-numbers{
+        display: flex;
+        justify-content: center;
+        .funding-number{
+            padding: 10px;
+            .value{
+                background: $dark-sky-blue;
+                color: $white;
+                padding:5px 7px;
+                border-radius: 12px;
+                font-weight: 500;
+                margin: auto;
+                margin-bottom: 6px;
+                font-size: 14px;
+                width: fit-content;
+            }
+            .label{
+                font-size: 14px;
+                opacity: .8;
+            }
+        }
+        @media (max-width:768px) {
+            display: block;
+            text-align:center ;
+        }
+    }
+    .proposal_card{
+        border-radius: 10px;
+        margin-bottom: 16px;
+        box-shadow: 0 0.1rem 1rem $light-shadow;
+        &_day{
+            background: $card-bg-white
+        }
+        &_night{
+            background: $card-bg-dark;
+        }
+        .avatar-img{
+            height: 25px;
+            width: 25px;
+            border-radius: 100%;
+        }
+        span.status{
+
+            &-span{color: $white;
+            border-radius: 12px;
+            padding: 4px 9px 4px;
+            font-weight: 300;
+            }
+            &-active{
+                background-color: $green1;
+            }
+            &-expired{
+                background-color: #f66;
+            }
+            &-inactive{
+                background-color: $pale-orange;
+            }
+        }
+    }
+}

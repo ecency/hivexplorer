@@ -5,13 +5,13 @@
   },
   "nav": {
     "blockchain": "Blockchain",
-    "tokens": "Tokens",
-    "resources": "Resources",
-    "blockchain-vt": "View Txs",
-    "blockchain-vb": "View Blocks",
-    "blockchain-gov": "Governance",
-    "blockchain-witnesses": "Witnesses",
-    "blockchain-proposals": "Proposals",
+    "tokens": "Jetons",
+    "resources": "Ressources",
+    "blockchain-vt": "Afficher les tx",
+    "blockchain-vb": "Afficher les blocs",
+    "blockchain-gov": "Gouvernance",
+    "blockchain-witnesses": "Les témoins",
+    "blockchain-proposals": "Les Propositions",
     "tokens-hive": "Hive",
     "tokens-he": "Hive Engine",
     "tokens-speak": "Speak Network",
@@ -19,8 +19,8 @@
     "resources-api": "API Documentation"
   },
   "home": {
-    "latest_block": "Latest Blocks",
-    "latest_transaction": "Latest Transaction"
+    "latest_block": "Derniers Blocs",
+    "latest_transaction": "Dernières Transactions"
   },
   "common": {
     "id": "ID",

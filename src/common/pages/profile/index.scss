@@ -1,0 +1,167 @@
+@import '../../../style//colors.scss';
+.user-container{
+    padding: 2rem 0;
+   
+    .MuiTabs-indicator{
+        background-color: $border-row !important;
+    }
+    .table-paper{
+        overflow-x: auto;
+        .search-field{
+            padding: 10px 0 20px;
+            width: 400px;
+            .MuiInput-underline:before{
+                border: none !important;
+            }
+            .MuiInputBase-input {
+                padding: 0.5rem;
+                background-color:$white-five
+            }
+        }
+    }
+    .list-group{
+        border: 1px solid $border-row;
+        .list-group-item{
+            background-color: transparent;
+            border-bottom: 1px solid $border-row;
+            &:last-child{
+                border: 0
+            }
+        }
+    }
+    .trans-table {
+        margin: auto;
+        width: 100%;
+        table{
+            width: 100%;
+        }
+        & th, td{
+            border: 1px solid $table-td;
+        border-collapse: collapse;
+        }
+        tr td:first-child{
+            width: 100px;
+            word-break: break-word;
+        }
+        td{
+            padding: 10px;
+            word-break: break-all;
+            .block-span {
+                display: block;
+                padding: 5px 0px;
+              &:not(:last-child){
+                border-bottom: 1px solid #706f70;
+                padding-bottom: 0
+              }
+            }
+            .trans-card-span{
+                display: flex;
+              padding: 5px 0px;
+              justify-content: space-between;
+              &:not(:last-child){
+                border-bottom: 1px solid #706f70;
+                padding-bottom: 0
+              }
+            }
+            .true{
+                color: green;
+            }
+            .false{
+                color:red
+            }
+        }
+        
+      }
+      .authority-table {
+        width: 100%;
+
+        tbody{
+            tr.row-border:last-child{
+                border-bottom: 0 !important;
+            }
+            .row-border-dotted{
+                border-bottom: 1px dotted $dotted-gray;
+                &:last-child{
+                    border-bottom: 0 !important;
+                }
+            }
+        }
+        .auth-col{
+            display: flex;
+            justify-content: space-between;
+            word-break: break-all;
+            padding-bottom: 5px;
+            .number-span{
+                margin-right: 10%;
+                margin-left: 15px;
+            }
+        }
+        @media (max-width:992px) {
+            width: 990px;
+        }
+      }
+    .paper-night{
+        background: transparent !important;
+        .MuiTableCell-head{
+            color: $white !important;
+        }
+        .transaction-table-data-row{
+            background: transparent !important;
+            .transaction-table-data-cell{
+              color: $white !important;
+            }
+        }
+    }
+    #user-tabpanel-2{
+        margin-left: -20px !important;
+        margin-right: -20px !important;
+    }
+    .user-tabs{
+        font-weight: bold;
+        .MuiTabs-fixed{
+            overflow-x: scroll !important;
+            width: auto !important;
+        }
+        ::-webkit-scrollbar{
+            height: 0px !important;
+            width: 0px !important;
+        }
+        ::-webkit-scrollbar-track{
+            box-shadow:none !important ;
+        }
+    }
+    .user-info-card-body{
+        overflow-x: auto;
+    }
+    .trans-card{
+        box-shadow: 0 0.1rem 1rem $light-shadow;
+        width: 80%;
+        margin: auto;
+        .trans-span{
+            display: block;
+        }
+        &-dark{
+            background-color: $dark-grey-blue;
+        }
+        &-light{
+            background-color: $white-five;
+        }
+    }
+    @media screen and (max-width:768px) {
+        padding-top: 0;
+    }
+   
+}
+.col-w-100{
+    width: 100px;
+}
+.transaction-table-night{
+    .MuiTablePagination-root{
+        p{
+            color: $white;
+        }
+        .MuiTablePagination-select {
+            background-color:$white-five
+        }
+    }
+}

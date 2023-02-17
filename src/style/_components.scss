@@ -2,3 +2,20 @@
 @import "mixins";
 @import "animation";
 
+// component styles
+@import "../common/components/user-avatar";
+@import "../common/components/user-header";
+@import "./dataTable";
+
+// page styles
+@import "../common/pages/documentation";
+@import "../common/pages/entry";
+@import "../common/pages/entry-comment";
+@import "../common/pages/header";
+@import "../common/pages/home";
+@import "../common/pages/profile";
+@import "../common/pages/proposal";
+@import "../common/pages/proposals";
+@import "../common/pages/transaction";
+@import "../common/pages/transactions";
+@import "../common/pages/witnesses";

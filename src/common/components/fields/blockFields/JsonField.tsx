@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { _t } from "../../../i18n";
 import { Link } from "react-router-dom";
 import { DefaultUser } from "../../../img/svg";
+import { UserAvatar } from "../../user-avatar";
 
 const JsonField = (props: any) => {
   const { transactionOperations } = props;
@@ -44,13 +45,7 @@ const JsonField = (props: any) => {
                                 <tr>
                                   <td>{_t(`trans_table.${item}`)}</td>
                                   <td>
-                                    <img
-                                      className="avatar-img"
-                                      src={`https://images.ecency.com/u/${item}/avatar`}
-                                      alt=""
-                                    />
-
-                                    <Link to={`/@${opVal[item]}`}>{opVal[item]}</Link>
+                                    <UserAvatar username={item} size="small"/>
                                   </td>
                                 </tr>
                               ) : (
@@ -64,15 +59,7 @@ const JsonField = (props: any) => {
                             <tr>
                               <td>{_t("trans_table.required_auths")}</td>
                               <td>
-                                <img
-                                  className="avatar-img"
-                                  src={`https://images.ecency.com/u/${opVal.required_auths[0]}/avatar`}
-                                  alt=""
-                                />
-
-                                <Link to={`/@${opVal.required_auths[0]}`}>
-                                  {opVal.required_auths[0]}
-                                </Link>
+                              <UserAvatar username={opVal.required_auths[0]} size="small"/>
                               </td>
                             </tr>
                           ) : (
@@ -86,14 +73,7 @@ const JsonField = (props: any) => {
                             <tr>
                               <td>{_t("trans_table.required_posting_auths")}</td>
                               <td>
-                                <img
-                                  className="avatar-img"
-                                  src={`https://images.ecency.com/u/${opVal.required_posting_auths[0]}/avatar`}
-                                  alt=""
-                                />
-                                <Link to={`/@${opVal.required_posting_auths[0]}`}>
-                                  {opVal.required_posting_auths[0]}
-                                </Link>
+                                <UserAvatar username={opVal.required_posting_auths[0]} size="small"/>
                               </td>
                             </tr>
                           ) : (

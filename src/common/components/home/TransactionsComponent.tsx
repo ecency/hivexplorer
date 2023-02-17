@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { connect, useSelector } from "react-redux";
 import { withPersistentScroll } from "../with-persistent-scroll";
 import { Col, Row } from "react-bootstrap";
@@ -9,8 +8,8 @@ import { Link } from "react-router-dom";
 import { getTransactions } from "../../api/urls";
 import { Date_time_table } from "../../api/dateTime";
 import SpinnerEffect from "../loader/spinner";
-import { DefaultUser } from "../../img/svg";
 import DefaultImage from "../../img/default-avatar.png";
+import UserAvatar from "../user-avatar";
 
 export interface op_type {
   type: string;
@@ -83,7 +82,7 @@ const HomeTransactions = (props: any) => {
     <>
       {loading && <SpinnerEffect />}
       {!loading &&
-        homeTransactions &&
+        homeTransactions && homeTransactions.length>0 &&
         homeTransactions.slice(0, 10).map((trans, index) => {
           const transOpVal = trans.op.value;
           const req_auths: string[] = trans.op.value.required_auths;
@@ -93,7 +92,7 @@ const HomeTransactions = (props: any) => {
             <Row
               className="m-0 block-row row-border"
               id={`${index}+${trans.trx_id}`}
-              key={`${index}+${trans.trx_id}`}
+              key={`${index}-${trans.trx_id}`}
             >
               <Col md={12} xs={12}>
                 <Row>
@@ -113,65 +112,50 @@ const HomeTransactions = (props: any) => {
                 </Row>
               </Col>
               <Col md={12} xs={12}>
-                <Row>
-                  <Col md={7}>
-                    {_t("common.date")}: {Date_time_table(trans.timestamp, "YYYY-MM-DD")}
-                  </Col>
-                  <Col md={5}>
-                    {_t("common.time")}: {Date_time_table(trans.timestamp, "hh:mm:ss")}
-                  </Col>
-                </Row>
+                {_t("common.date")}: {Date_time_table(trans.timestamp, "YYYY-MM-DD hh:mm:ss")}
               </Col>
               <Col md={12} xs={12}>
                 <Row>
-                  {req_auths && req_auths.length !== 0 && (
+                  {req_auths && req_auths.length === 1 && (
+                    <Col md={12}>
+                      {_t("trans_table.req_auths")}:
+                      {UserAvatar({
+                        username: req_auths[0],
+                        size: "small"
+                      })}
+                    </Col>
+                  )}
+                  {req_auths && req_auths.length > 1 && (
                     <Col md={12}>
                       {_t("trans_table.req_auths")}:
                       {req_auths.map((user: string, i: number) => {
                         return (
-                          <>
-                            <span
-                              className={`${i}`}
-                              id={`${i}-${user}-${trans.trx_id}`}
-                              key={`${user}-${trans.trx_id}-${i}`}
-                            >
-                              <img
-                                className="avatar-img"
-                                onError={(e: any) => {
-                                  e.target.src = { DefaultImage };
-                                }}
-                                src={`https://images.ecency.com/u/${user}/avatar`}
-                                alt=""
-                              />
-                              <Link to={`@${user}`}>{user}</Link>
-                            </span>
-                          </>
+                          UserAvatar({
+                            username: user,
+                            size: "small"
+                          })
                         );
                       })}
                     </Col>
                   )}
-                  {posting_auths && posting_auths.length !== 0 && (
+                  {posting_auths && posting_auths.length === 1 && (
+                    <Col md={12}>
+                      {_t("trans_table.posting_auths")}:
+                      {UserAvatar({
+                        username: posting_auths[0],
+                        size: "small"
+                      })}
+                    </Col>
+                  )}
+                  {posting_auths && posting_auths.length > 1 && (
                     <Col md={12}>
                       {_t("trans_table.posting_auths")}:
                       {posting_auths.map((user: string, j: number) => {
                         return (
-                          <>
-                            <span
-                              className={`${j}`}
-                              id={`${user}-${trans.trx_id}-${j}`}
-                              key={`${user}-${trans.op.type}-${trans.trx_id}-${j}`}
-                            >
-                              <img
-                                className="avatar-img"
-                                onError={(e: any) => {
-                                  e.target.src = { DefaultImage };
-                                }}
-                                src={`https://images.ecency.com/u/${user}/avatar`}
-                                alt=""
-                              />
-                              <Link to={`@${user}`}>{user}</Link>
-                            </span>
-                          </>
+                          UserAvatar({
+                            username: user,
+                            size: "small"
+                          })
                         );
                       })}
                     </Col>
@@ -179,31 +163,22 @@ const HomeTransactions = (props: any) => {
                   {transOpVal &&
                     Object.keys(transOpVal).map((key, k: number) => {
                       return (
-                        <>
+                        <span key={`${k}-${transOpVal[key]}-${trans.trx_id}`}>
                           {typeof key === "string" && userType.includes(key) ? (
                             <Col
-                              key={`${k}-${transOpVal[key]}-${trans.trx_id}`}
-                              id={`${k}-${transOpVal[key]}-${trans.op.type}-${trans.trx_id}`}
                               md={6}
                               sm={12}
                             >
                               {_t(`trans_table.${key}`)}:
-                              <>
-                                <img
-                                  className="avatar-img"
-                                  onError={(e: any) => {
-                                    e.target.src = { DefaultImage };
-                                  }}
-                                  src={`https://images.ecency.com/u/${transOpVal[key]}/avatar`}
-                                  alt=""
-                                />
-                                <Link to={`@${transOpVal[key]}`}>{transOpVal[key]}</Link>
-                              </>
+                              {UserAvatar({
+                                username: transOpVal[key],
+                                size: "small"
+                              })}
                             </Col>
                           ) : (
                             <></>
                           )}
-                        </>
+                        </span>
                       );
                     })}
                 </Row>

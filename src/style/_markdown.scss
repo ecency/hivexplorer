@@ -196,7 +196,7 @@
     }
 
     @include themify(night) {
-      background: #283241;
+      background: $card-bg-dark;
       color: $silver;
 
       .ll-nam { color: $silver; }
