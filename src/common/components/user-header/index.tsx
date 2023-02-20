@@ -55,9 +55,9 @@ const UserHeader = (props: any) => {
                     <h3 className="text-light text-capitalize mb-0">
                       {metaProfile.name ? metaProfile.name : name}
                     </h3>
-                    <h6 className="text-light text-capitalize">ID: {id}</h6>
+                    <h6 className="text-light text-capitalize">{_t('common.id')}: {id}</h6>
                     {metaProfile.about && (
-                      <h6 className="text-light text-capitalize">About: {metaProfile.about}</h6>
+                      <h6 className="text-light text-capitalize">{_t('common.about')}: {metaProfile.about}</h6>
                     )}
                   </div>
                 </div>
@@ -69,9 +69,9 @@ const UserHeader = (props: any) => {
                     <h3 className="text-capitalize mh-0">
                       {metaProfile.name ? metaProfile.name : name}
                     </h3>
-                    <h6 className="text-capitalize">ID: {id}</h6>
+                    <h6 className="text-capitalize">{_t('common.id')}: {id}</h6>
                     {metaProfile.about && (
-                      <h6 className="text-capitalize">About: {metaProfile.about}</h6>
+                      <h6 className="text-capitalize">{_t('common.about')}: {metaProfile.about}</h6>
                     )}
                   </div>
               </Col>
@@ -87,7 +87,7 @@ const UserHeader = (props: any) => {
                           <span className={currTheme === "day" ? "icon-bg-white" : "icon-bg-dark"}>
                             {facebookIcon(themeContrastColor)}
                           </span>
-                          <span className="link-text">FaceBook</span>
+                          <span className="link-text">{_t('common.facebook')}</span>
                         </a>
                       </li>
                     )}
@@ -100,7 +100,7 @@ const UserHeader = (props: any) => {
                           <span className={currTheme === "day" ? "icon-bg-white" : "icon-bg-dark"}>
                             {twitterIcon(themeContrastColor)}
                           </span>
-                          <span className="link-text">Twitter</span>
+                          <span className="link-text">{_t('common.twitter')}</span>
                         </a>
                       </li>
                     )}
@@ -113,7 +113,7 @@ const UserHeader = (props: any) => {
                           <span className={currTheme === "day" ? "icon-bg-white" : "icon-bg-dark"}>
                             {instagramIcon(themeContrastColor)}
                           </span>
-                          <span className="link-text">Instagram</span>
+                          <span className="link-text">{_t('common.instagram')}</span>
                         </a>
                       </li>
                     )}
@@ -126,7 +126,7 @@ const UserHeader = (props: any) => {
                           <span className={currTheme === "day" ? "icon-bg-white" : "icon-bg-dark"}>
                             {youtubeIcon(themeContrastColor)}
                           </span>
-                          <span className="link-text">Youtube</span>
+                          <span className="link-text">{_t('common.youtube')}</span>
                         </a>
                       </li>
                     )}
@@ -136,7 +136,7 @@ const UserHeader = (props: any) => {
                           <span className={currTheme === "day" ? "icon-bg-white" : "icon-bg-dark"}>
                             {gitHubIcon(themeContrastColor)}
                           </span>
-                          <span className="link-text">Github</span>
+                          <span className="link-text">{_t('common.github')}</span>
                         </a>
                       </li>
                     )}
@@ -146,7 +146,7 @@ const UserHeader = (props: any) => {
                           <span className={currTheme === "day" ? "icon-bg-white" : "icon-bg-dark"}>
                             {websiteIcon(themeContrastColor)}
                           </span>
-                          <span className="link-text">Website</span>
+                          <span className="link-text">{_t('common.website')}</span>
                         </a>
                       </li>
                     )}

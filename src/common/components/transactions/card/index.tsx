@@ -96,7 +96,6 @@ const TransactionCard = (props: any) => {
                                                         <td>{typeof opVal[val][item] !== "object" ? opVal[val][item] 
                                                         :<>
                                                         {Object.keys(opVal[val][item]).map((key, y: number) => {
-                                                            y = y + Math.floor(Math.random() * 10) + 1;
                                                             return (
                                                               <>
                                                                 {opVal[val][item][key].length !== 0 && (
@@ -110,9 +109,8 @@ const TransactionCard = (props: any) => {
                                                                             {typeof opVal[val][item][key] !== "object" 
                                                                           ? opVal[val][item]
                                                                           : opVal[val][item].map((inner: any, j: number) => {
-                                                                              j = j + Math.floor(Math.random() * 30) + 10;
                                                                               return (
-                                                                                <span className="trans-card-span">
+                                                                                <span key={j+inner+key} className="trans-card-span">
                                                                                 {/* // <table key={j} style={{width:'100%'}}>
                                                                                 //     <tbody>
                                                                                 //         <tr>
@@ -246,7 +244,6 @@ const TransactionCard = (props: any) => {
                                             <table style={{width:'100%'}}>
                                                 <tbody>
                                                 {Object.keys(opVal[val]).map((item:any,j:number)=>{
-                                                    console.log(opVal[val],item)
                                                 return(
                                                     <tr key={j+item}>
                                                     <td>{_t(`trans_table.${item}`)}</td>

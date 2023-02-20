@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { connect, useDispatch, useSelector } from "react-redux";
-
+import { Button, Container } from "react-bootstrap";
 import { pageMapDispatchToProps, pageMapStateToProps, PageProps } from "../common";
 import { withPersistentScroll } from "../../components/with-persistent-scroll";
 import { HomeTransactionType } from "../../components/home/TransactionsComponent";
@@ -11,7 +11,7 @@ import BackToTopButton from "../../components/Buttons/BackToTop";
 import { getHeadBlock, getTransactions } from "../../api/urls";
 import { setHeadBlockData } from "../../store/HeadBlock";
 import { cardViewSVG, tableViewSVG } from "../../img/svg";
-import { Button, Container } from "react-bootstrap";
+
 import TransactionsCards from "./transactionCards";
 import headBlock from "../../components/headBlock/headBlock";
 
@@ -34,13 +34,13 @@ const AllTransactions = (props: any) => {
         if (HeadBlock === "") {
           const resp = await getHeadBlock();
           dispatch(setHeadBlockData(resp));
-          // const response = await getTransactions(resp.head_block_number);
-          const response = await getTransactions(71691727);
+          const response = await getTransactions(resp.head_block_number);
+          // const response = await getTransactions(71691727);
           // 71554087
           setTransactions(response.ops);
         } else {
-          // const response = await getTransactions(HeadBlock);
-          const response = await getTransactions(71691727);
+          const response = await getTransactions(HeadBlock);
+          // const response = await getTransactions(71691727);
           setTransactions(response.ops);
         }
       } catch (error: any) {

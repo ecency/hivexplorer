@@ -76,7 +76,7 @@ const resources = {
 
 i18n.init({
   resources,
-  fallbackLng: ls.get("current-language"),
+  fallbackLng: "en-US",
   interpolation: {
     escapeValue: false
   }

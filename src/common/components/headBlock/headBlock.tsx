@@ -47,7 +47,7 @@ const HeadBlock = (props: Block) => {
         <Card>
           <Card.Header>
             <span className="head-block-attr-span">{_t("common.block")}: </span>
-            <Link to={`/head/b/`}>{result.head_block_number}</Link>
+            <Link to={`/head/b/${result.head_block_number}`}>{result.head_block_number}</Link>
           </Card.Header>
           <Card.Body>
             <Row>
