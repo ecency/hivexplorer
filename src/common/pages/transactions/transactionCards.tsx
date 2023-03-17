@@ -1,24 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, {useState } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import {
-  Box,
-  Collapse,
-  IconButton,
   Paper,
-  Table,
   TableBody,
-  TableCell,
   TableContainer,
-  TableHead,
   TablePagination,
-  TableRow,
   TextField
 } from "@material-ui/core";
-import { Card, Col, Container, Row } from "react-bootstrap";
+import { Col,Row } from "react-bootstrap";
 import { HomeBlocksType } from "../../components/home/BlocksComponent";
 import { _t } from "../../i18n";
-import TransactionCard from '../../components/transactions/card'
+import { TransactionOperation } from "../../components/operations";
 
 interface Column {
   label: string;
@@ -83,7 +75,7 @@ const TransactionsCards = (props: any) => {
             currTheme === "day" ? "paper-day text-dark px-2" : "paper-night text-white px-2"
           }
         >
-          <h1>{_t("heading_label.latest_transaction")}</h1>
+         
           <Row>
             <Col lg={6}>
                 <TextField
@@ -94,49 +86,27 @@ const TransactionsCards = (props: any) => {
                     placeholder={`${_t("heading_label.search_transaction")}`}
                 />
             </Col>
-            <Col lg={6}>
-            {filteredTransactionsData && (
-                <TablePagination
-                rowsPerPageOptions={[10, 25, 100]}
-                component="div"
-                labelRowsPerPage={"Cards per page"}
-                count={filteredTransactionsData.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                onPageChange={handleChangePage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
-                />
-            )}
-            </Col>
+       
           </Row>
       
           <TableContainer className="py-3 trans-card-view">
             <TableBody style={{width:'100%',display:'block'}} >
             {filteredTransactionsData &&
                   filteredTransactionsData
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((transaction: any, i: number) => {
                         const opVal=transaction.op.value
                       return(
                         <>
-                        <TransactionCard transactionFields={transaction} transactionOp={opVal}/>
+                        <div key={i+'vt'+transaction.trx_id}>
+                          <TransactionOperation trans_no={transaction.trx_id} trans_data={[transaction.op]} time={transaction.timestamp} trx_status={transaction.virtual_op}/>
+                        </div>
                         </>
                       );
                     })}
             </TableBody>
           </TableContainer>
        
-          {filteredTransactionsData && (
-            <TablePagination
-              rowsPerPageOptions={[10, 25, 100]}
-              component="div"
-              count={filteredTransactionsData.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              onPageChange={handleChangePage}
-              onRowsPerPageChange={handleChangeRowsPerPage}
-            />
-          )}
+          
         </Paper>
    
     </>

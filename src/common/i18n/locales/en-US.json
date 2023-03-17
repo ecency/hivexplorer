@@ -33,6 +33,7 @@
     "instagram":"Instagram",
     "by": "By",
     "for": "for",
+    "from":"From",
     "type": "Type",
     "value": "Value",
     "block": "Block",
@@ -58,7 +59,10 @@
     "transaction_num": "Trx No",
     "user_names": "User Names",
     "owner_history":"Owner History",
-    "no_search_result": "No record found against searched input."
+    "no_search_result": "No record found against searched input.",
+    "transactions":"Transactions",
+    "virtual_trx":"Virtual Transactions",
+    "raw_format":"Raw Format "
   },
   "block": {
     "reward_fund": "Reward Fund",
@@ -669,5 +673,21 @@
     "get_follow_list_description":"Returns blacklisted/muted accounts or list of blacklists/mute lists followed by a given observer.",
     "get_relationship_between_accounts_description":"Tells what relations connect given accounts from the perspective of first account.",
     "does_user_follow_any_lists_description":"Checks if a given observer follows any blacklists or mute lists."
+ },
+ "operation_type":{
+    "custom_json_operation":"Custom Json",
+    "vote_operation":"Vote Operation",
+    "effective_comment_vote_operation":"Effective Comment Vote Operation",
+    "producer_reward_operation":"Producer Reward Operation",
+    "sm_refresh_quest":"requested a new quest",
+    "sm_start_quest":"started a daily quest",
+    "sm_claim_reward":"claimed quest reward",
+    "sm_combine_cards":"combine cards",
+    "sm_gift_cards":"gifts cards",
+    "sm_sell_cards":"list cards for sale on the market",
+    "sm_combine_all":"combine all cards",
+    "sm_submit_team":"submitted a team for battle",
+    "account_update_operation":"update account data"
+    
  }
 }

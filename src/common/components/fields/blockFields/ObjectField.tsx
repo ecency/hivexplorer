@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Button, Col, ListGroup, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -72,14 +72,44 @@ interface transactionTypeList extends Array<transactionType> {}
 const ObjectField = (props: any) => {
   const { number, item, value, label_for, transactionOperations, changeUser } = props;
   const [expandBtn, setExpandBtn] = useState(false);
+  const [currentHash, setCurrentHash] = useState('');
   const currTheme = useSelector((state: any) => state.global.theme);
   const themeContrastColor = currTheme === "day" ? "#535e65" : "white";
   const rowBorder =
     currTheme === "day" ? "row-border border-color-day" : "row-border border-color-night";
   const themeBtn = currTheme === "day" ? "showmore-btn btn-light" : "showmore-btn btn-dark";
   let transactionValue: transactionTypeList = [];
-
-
+  // useEffect(() => {
+  //   setCurrentHash(window.location.hash.substring(1)) // remove the #
+  //   const element = document.getElementById(currentHash);
+  //   if (element) {
+  //     element.style.backgroundColor = "yellow";
+  //   }
+  // }, [currentHash]);
+  useEffect(() => {
+    const handleHashChange = () => {
+      setCurrentHash(window.location.hash);
+    };
+    window.addEventListener('hashchange', handleHashChange);
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange);
+    };
+  }, []);
+  const targetRef: React.MutableRefObject<HTMLElement | null>=useRef(null)
+useEffect(() => {
+  if (currentHash) {
+    const targetElement = document.getElementById(currentHash.substring(1));
+    if (targetElement) {
+          targetElement.style.backgroundColor = "#cdcdad";
+        }
+    targetRef.current = targetElement;
+  }
+}, [currentHash]);
+useEffect(() => {
+  if (targetRef.current) {
+    targetRef.current.style.backgroundColor = '#cdcdad';
+  }
+}, [targetRef]);
 
   const expand_view = (value: any, item: string) => {
     return (
@@ -88,7 +118,7 @@ const ObjectField = (props: any) => {
           <ListGroup>
             {value.slice(0, Math.ceil(value.length / 2)).map((val: string, i: number) => {
               return (
-                <ListGroup.Item key={i}>
+                <ListGroup.Item key={i} id={val} className='trx-id'>
                   {item === "witness_votes" ? (
                     <UserAvatar username={val} size="small"/>
                   ) : (
@@ -112,16 +142,18 @@ const ObjectField = (props: any) => {
               .map((val: string, i: number) => {
                 const j = i + Math.ceil(value.length / 2);
                 return (
-                  <ListGroup.Item key={i}>
+                  <ListGroup.Item key={i} id={val}>
                     {item === "witness_votes" ? (
                       <UserAvatar username={val} size="small"/>
                     ) : (
                       <>
-                        <Link to={`/tx/${val}`}>
+                      
+                       <Link to={`/tx/${val}`}>
                           <span>{trxIcon(themeContrastColor)}</span>
                           <span> {val} </span>
                         </Link>
                         <JsonField transactionOperations={transactionOperations[j]} />
+                       
                       </>
                     )}
                   </ListGroup.Item>
@@ -137,8 +169,6 @@ const ObjectField = (props: any) => {
       {item !== "posting" && item !== "owner" && item !== "active" && (
         <Row className={rowBorder} key={number}>
           <Col md={3} xs={12} className="attr-col">
-          <b>
-            <span>{infoIcon(themeContrastColor)} </span>
             <span className="pl-2">
               {item === "voting_manabar" || item === "downvote_manabar" ? (
                 <span>{_t(`${label_for}.${item}`)}</span>
@@ -147,7 +177,6 @@ const ObjectField = (props: any) => {
               )}
               :
             </span>
-            </b>
           </Col>
           <Col md={9} xs={12}>
             {item === "voting_manabar" || item === "downvote_manabar" ? (
@@ -165,9 +194,13 @@ const ObjectField = (props: any) => {
               </table>
             ) : item === "transactions" ? (
               <>{transactionValue.push(...value)}</>
-            ) : item === "witness_votes" || item === "transaction_ids" ? (
+           
+            )   : item === "transaction_ids" ? (
+              <>{value.length}</>
+            )
+            : item === "witness_votes" ? (
               <>
-                <Button
+                {/* <Button
                   className={themeBtn}
                   onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>
                     setExpandBtn(!expandBtn)
@@ -180,7 +213,7 @@ const ObjectField = (props: any) => {
                   ) : (
                     <span>{showMoreIcon(themeContrastColor)}</span>
                   )}
-                </Button>
+                </Button> */}
               </>
             ) : item === "operations" ? (
               <>
@@ -282,7 +315,7 @@ const ObjectField = (props: any) => {
         </Row>
       )}
       {item === "witness_votes" && expandBtn ? expand_view(value, item) : <></>}
-      {item === "transaction_ids" && expandBtn ? expand_view(value, item) : <></>}
+      {/* {item === "transaction_ids" && !expandBtn ? expand_view(value, item) : <></>} */}
       {/* {item==='operations' && expandBtn ?expand_operation(value,item):<></>} */}
     </>
   );
