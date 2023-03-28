@@ -21,18 +21,30 @@
     .trans_card_header{
         display: flex;
         justify-content: space-between;
+        code{
+            padding: 2px 4px 0;
+            font-size: 80%;
+            color: #c7254e;
+            background-color: #f9f2f4;
+            border-radius: 4px;
+        }
         .trans-op-basic{
             display: flex;
            
             .trans-owner-date{
                 display: flex;
                 align-items: center;
-                padding-right: 10px;
+                padding-right: 55px;
+                word-break: break-word;
                 div{
                     display: grid;
                 }
             }
 
+        }
+        .time-span{
+            font-size: 13px;
+            color: #888;
         }
 
     }
@@ -74,6 +86,11 @@
         .transaction-operation-table{
             color: #b2b2b2;
       
+        }
+        .trans_card_header{
+            code{
+                background-color: #2a2a2a;
+            }
         }
     }
 }

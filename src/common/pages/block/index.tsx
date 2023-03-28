@@ -13,6 +13,8 @@ import { getSingleBlock, getTransactions } from "../../api/urls";
 import { Link } from "react-router-dom";
 import JsonField from "../../components/fields/blockFields/JsonField";
 import { TransactionOperation } from "../../components/operations";
+import moment from "moment";
+import { CreatedDate, Date_time_table } from "../../api/dateTime";
 
 interface op_type {
   type: string;
@@ -120,7 +122,7 @@ useEffect(() => {
       {!loading && 
         result && <div className="head-block-detail py-3">
           <Container>
-            {result && <h1>{result.transaction_ids.length}</h1>}
+            {result && <h4>{result.transaction_ids.length} {_t('block.sub_heading')} {Date_time_table(`${result.timestamp}`,'YYYY-MM-DD HH:mm:ss')}</h4>}
             <Accordion defaultActiveKey={['0','1']} alwaysOpen={true}>
               <Accordion.Item eventKey="0">
               <Accordion.Header>
@@ -128,7 +130,9 @@ useEffect(() => {
               </Accordion.Header>
               <Accordion.Body className="pt-0">
                 {Object.keys(result).map((key, index) => {
-                    return typeof result[key] === "string" || typeof result[key] === "number" ? (
+                    return (
+                      <>
+                        {key==='transaction_ids'? <></>:typeof result[key] === "string" || typeof result[key] === "number" ? (
                       <StringField
                         key={index}
                         value={result[key]}
@@ -145,14 +149,16 @@ useEffect(() => {
                         number={index}
                         label_for="block"
                       />
-                    );
+                    )}
+                      </>)
+            
                   })}
          
               </Accordion.Body>
               </Accordion.Item>
               <Accordion.Item eventKey="1"> 
                   <Accordion.Header>
-                  {_t('common.transactions')} {result.transaction_ids.length}
+                  {_t('common.transactions')} ({result.transaction_ids.length})
                   </Accordion.Header>
                   <Accordion.Body>
                     {result.transactions.map((transaction:any,index:number)=>{
@@ -166,7 +172,7 @@ useEffect(() => {
               </Accordion.Item>
               {virtualResult.length>0 && <Accordion.Item eventKey="2"> 
                   <Accordion.Header>
-                    {_t('common.virtual_trx')} {virtualResult.length}
+                    {_t('common.virtual_trx')} ({virtualResult.length})
                   </Accordion.Header>
                   <Accordion.Body>
                     {virtualResult.map((transaction:HomeTransactionType,index:number)=>{

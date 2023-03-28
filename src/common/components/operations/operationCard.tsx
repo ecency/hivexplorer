@@ -7,6 +7,7 @@ import { transAvatars } from "./operationArrays";
 import parseAsset from "../../helper/parse-asset";
 import { ObjectFieldArray } from "../../pages/fields/common_fields";
 import { _t } from "../../i18n";
+import { TimestampField } from "../fields/blockFields/DateTimeTable";
 
 
 export const OperationCardData=(props:any)=>{
@@ -47,14 +48,14 @@ export const OperationCardData=(props:any)=>{
 
                                             <span>
                                                 <Link to={`/@${name}`}>{name}&nbsp;</Link>
-                                                <span dangerouslySetInnerHTML={{ __html: type==='comments_operation'? 'replied to' :text}} />
+                                                <span dangerouslySetInnerHTML={{ __html: type==='comment_operation' && value.hasOwnProperty('parent_permlink')? 'comments to' : type==='comment_operation' && value.hasOwnProperty('comment_permlink')? 'replied to':text}} />
                                                 
-                                                {(type==='vote_operation' || type==='comments_operation')  && <span >
-                                                    <Link to={`/@${value.author}/${value.permlink}`}>&nbsp;/@{value.author}/{value.permlink}</Link>
+                                                {type==='vote_operation' && <span >
+                                                    <Link to={`/@${value.author}/${value.permlink}`}>&nbsp;@{value.author}/{value.permlink}</Link>
                                                     {value.weight && <span>&nbsp;({parseFloat(value.weight) / 100}%)</span>}
                                                 </span>}
-                                                {type==='comments_operation' && <span >
-                                                    <Link to={`/@${value.author}/${value.permlink}`}>&nbsp;/@{value.author}/{value.permlink}</Link>
+                                                {type==='comment_operation' && <span >
+                                                    <Link to={`/@${value.author}/${value.permlink}`}>&nbsp;@{value.author}/{value.permlink}</Link>
                                                     {/* {value.weight && <span>&nbsp;({parseFloat(value.weight) / 100}%)</span>} */}
                                                 </span>}
                                                 {type==='producer_reward_operation' && <span>
@@ -86,7 +87,11 @@ export const OperationCardData=(props:any)=>{
                                                 {type==='fill_order_operation' && <span >
                                                     &nbsp;{parseAsset(value.current_pays).amount+' '+parseAsset(value.current_pays).symbol} {_t('common.for')} {parseAsset(value.open_pays).amount+' '+parseAsset(value.open_pays).symbol}  {_t('common.from')}&nbsp;<Link to={`/@${value.open_owner}`}>{value.open_owner}</Link>
                                                 </span>}
+                                                <span className="time-span">
+                                                    &nbsp;(<span className="date" title={dateFormatted}>{dateRelative}</span>)
+                                                </span>
                                             </span>
+                                            
                                                
                                         </span>
                                          

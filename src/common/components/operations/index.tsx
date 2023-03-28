@@ -24,13 +24,22 @@ export const TransactionOperation = (props: any) => {
                 <Card.Body >
                 <div className="op-card-trx-id">{trans_no === "0000000000000000000000000000000000000000" ?
                     <span>{_t('trans_table.virtual')}</span> :
-                    <Link to={`/tx/${trans_no}`}>{trans_no.substring(0, 7) + '...'}</Link>
+                    <Link to={`/tx/${trans_no}`}>{trans_no.substring(0, 8)}</Link>
                 }
                 </div>
                     { trans_data.map((item: any, index: number) => {
                         return (
                             <div key={trans_no + index} className="trans-op-card-data" >
-                                {!operation_types.includes(item.type) && <p>Details not available yet,</p>}
+                                {!operation_types.includes(item.type) &&    
+                                    <OperationCardData
+                                        value={item.value}
+                                        text={item.type.replace('_operation','').replace(/_/g,' ')}
+                                        time={time}
+                                        trx_id={trans_no}
+                                        type={item.type}
+                                        isTable={true}
+                                    />
+                                }
                                 {item.value.id && json_operation_ids.includes(item.value.id) &&
                                     <OperationCardData
                                         value={item.value}
@@ -90,6 +99,15 @@ export const TransactionOperation = (props: any) => {
                                         trx_id={trans_no}
                                         type={item.type}
                                         isTable={true}
+                                    />
+                                }
+                                {item.type === 'claim_account_operation' &&
+                                    <OperationCardData
+                                        value={item.value}
+                                        text={item.type.replace('_operation','').replace(/_/g,' ')}
+                                        time={time}
+                                        trx_id={trans_no}
+                                        type={item.type}
                                     />
                                 }
                                 {item.type === 'claim_reward_balance_operation' &&
@@ -194,6 +212,43 @@ export const TransactionOperation = (props: any) => {
                                         isTable={true}
                                     />
                                 }
+                                    {item.type==='producer_reward_operation' && 
+                                            <OperationCardData
+                                            value={item.value}
+                                            text={item.type.replace('_operation','').replace(/_/g,' ')}
+                                            time={time}
+                                            trx_id={trans_no}
+                                            type={item.type}
+                                        />
+                                    }
+                                    {item.type==='curation_reward_operation' &&
+                                            <OperationCardData
+                                            value={item.value}
+                                            text={item.type.replace('_operation','').replace(/_/g,' ')}
+                                            time={time}
+                                            trx_id={trans_no}
+                                            type={item.type}
+                                        />
+                                    }
+                                    {item.type==='fill_order_operation' &&
+                                        <OperationCardData
+                                            value={item.value}
+                                            text={'paid'}
+                                            time={time}
+                                            trx_id={trans_no}
+                                            type={item.type}
+                                        />
+                                    }
+                                    {item.type==="effective_comment_vote_operation" &&   
+                                        <OperationCardData
+                                            value={item.value}
+                                            text={item.type.replace('_operation','').replace(/_/g,' ')}
+                                            time={time}
+                                            trx_id={trans_no}
+                                            type={item.type}
+                                            isTable={true}
+                                        />
+                                    }
                                 {item.type === 'transfer_operation' &&
                                     <>
                                         <div className="trans_card_header">
@@ -218,6 +273,9 @@ export const TransactionOperation = (props: any) => {
                                                                         {parseAsset(item.value.amount).amount+' '+parseAsset(item.value.amount).symbol} to&nbsp;
                                                                         <Link to={`/@${item.value.to}`}>{item.value.to}</Link>
                                                                         <code>&nbsp;{item.value.memo}</code>
+                                                                        <span className="time-span">
+                                                                            &nbsp;(<span className="date" title={dateFormatted}>{dateRelative}</span>)
+                                                                        </span>
                                                                     </span>
 
                                                                 </span>
@@ -234,7 +292,7 @@ export const TransactionOperation = (props: any) => {
 
 
                                 {/* Virtual Transactions */}
-                                {trx_status && 
+                                {/* {trx_status && 
                                     <>
                                         {
                                         item.type==='producer_reward_operation' ? 
@@ -284,7 +342,7 @@ export const TransactionOperation = (props: any) => {
                                         />}
                                         
                                     </>  
-                                }
+                                } */}
                             </div>
                         )
 

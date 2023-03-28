@@ -103,6 +103,6 @@ export const operation_types= [
     "producer_reward_operation",
     "create_claimed_account_operation",
     "account_update_operation",
-    "delegate_vesting_shares_operation"
+    'claim_account_operation'
 
 ]
