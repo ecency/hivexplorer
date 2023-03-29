@@ -20,7 +20,7 @@ export const OperationCardData=(props:any)=>{
         <>
             <div className="trans_card_header">
                 <div className="trans-op-basic">
-                    {Object.keys(value).map((val:any) => {
+                    {Object.keys(value).map((val:any,index:number) => {
                         //  setRenderedStrings([...renderedStrings,val])
                         if (typeof (value[val] === 'string')) {
                             name = value[val]
@@ -35,7 +35,7 @@ export const OperationCardData=(props:any)=>{
                                     <>
 
                                         {val == 'author' && Object.keys(value).includes('voter') ? <></> :  <>
-                                        <span className="trans-owner-date">
+                                        <span key={index+type+val} className="trans-owner-date">
 
                                             <img
                                                 className="avatar-img"
@@ -48,13 +48,18 @@ export const OperationCardData=(props:any)=>{
 
                                             <span>
                                                 <Link to={`/@${name}`}>{name}&nbsp;</Link>
-                                                <span dangerouslySetInnerHTML={{ __html: type==='comment_operation' && value.hasOwnProperty('parent_permlink')? 'comments to' : type==='comment_operation' && value.hasOwnProperty('comment_permlink')? 'replied to':text}} />
+                                                <span dangerouslySetInnerHTML={{ __html: type==='comment_operation' && value.hasOwnProperty('parent_permlink')? 'replied to' : type==='comment_operation' && value.hasOwnProperty('comment_permlink')? 'comments to':text}} />
                                                 
                                                 {type==='vote_operation' && <span >
-                                                    <Link to={`/@${value.author}/${value.permlink}`}>&nbsp;@{value.author}/{value.permlink}</Link>
                                                     {value.weight && <span>&nbsp;({parseFloat(value.weight) / 100}%)</span>}
+                                                    <Link to={`/@${value.author}/${value.permlink}`}>&nbsp;@{value.author}/{value.permlink}</Link>
+                                                   
                                                 </span>}
-                                                {type==='comment_operation' && <span >
+                                                {type==='comment_operation' &&  value.hasOwnProperty('parent_permlink') && <span >
+                                                    <Link to={`/@${value.parent_author}/${value.parent_permlink}`}>&nbsp;@{value.parent_author}/{value.parent_permlink}</Link>
+                                                    {/* {value.weight && <span>&nbsp;({parseFloat(value.weight) / 100}%)</span>} */}
+                                                </span>}
+                                                {type==='comment_operation' &&  value.hasOwnProperty('comment_operation') && <span >
                                                     <Link to={`/@${value.author}/${value.permlink}`}>&nbsp;@{value.author}/{value.permlink}</Link>
                                                     {/* {value.weight && <span>&nbsp;({parseFloat(value.weight) / 100}%)</span>} */}
                                                 </span>}
@@ -126,7 +131,7 @@ export const OperationCardData=(props:any)=>{
                                         <tbody>
                                         {Object.keys(value[val]).map((item:any,innerKey:number)=>{
                                         return(
-                                            <tr key={innerKey+item}>
+                                            <tr key={innerKey+item+value[val][item]}>
                                              <td style={isInteger(+innerKey)?{width:'40px',minWidth:'40px'}:{}}>{isInteger(+innerKey)?<>{innerKey}</>:<>{_t(`trans_table.${innerKey}`)}</>}</td>
                                             <td>{typeof(value[val][item])==='object'?
                                                     <>

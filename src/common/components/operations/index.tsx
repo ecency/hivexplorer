@@ -29,7 +29,7 @@ export const TransactionOperation = (props: any) => {
                 </div>
                     { trans_data.map((item: any, index: number) => {
                         return (
-                            <div key={trans_no + index} className="trans-op-card-data" >
+                            <div key={trans_no + index+item.type+item.timestamp} className="trans-op-card-data" >
                                 {!operation_types.includes(item.type) &&    
                                     <OperationCardData
                                         value={item.value}
