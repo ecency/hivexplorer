@@ -57,7 +57,7 @@ export const stripLastSlash = (req: any, res: any, next: any) => {
   }
 };
 
-export const DecodeJson = (meta: string) => {
+export const DecodeJson = (meta: any) => {
   try {
     return JSON.parse(meta);
   } catch {

@@ -68,7 +68,7 @@ const HomeTransactions = (props: any) => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const response = await getTransactions(props.block_number);
+        const response = await getTransactions(props.block_number,false);
         setHomeTransactions(response.ops);
       } catch (error: any) {
         console.error(error.message);

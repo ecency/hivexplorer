@@ -44,6 +44,9 @@
   min-height: 1px;
   padding: $card-spacer-x;
   color: $card-color;
+  @media  (max-width:600px) {
+    padding: 5px;
+  }
 }
 
 .card-title {

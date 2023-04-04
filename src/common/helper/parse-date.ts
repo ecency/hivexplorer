@@ -5,7 +5,7 @@ export const dateToRelative = (d: string): string => {
   const dm = moment(new Date(isTimeZoned));
   const dd = dm.fromNow(true);
   return dd
-    .replace("a few seconds", "~1s")
+    .replace("a few seconds", "1s")
     .replace(" seconds", "s")
     .replace(" minutes", "m")
     .replace("a minute", "1m")
@@ -27,7 +27,9 @@ export const dateToFullRelative = (d: string): string => {
 
 export const dateToFormatted = (d: string, format: string = "LLLL"): string => {
   const isTimeZoned = d.indexOf(".") !== -1 || d.indexOf("+") !== -1 ? d : `${d}.000Z`;
+ 
   const dm = moment(new Date(isTimeZoned));
+  console.log('timezoned',isTimeZoned,dm,dm.format(format))
   return dm.format(format);
 };
 

@@ -6,7 +6,20 @@
         background-color: $border-row !important;
     }
     .table-paper{
-        overflow-x: auto;
+        overflow-x: scroll;
+        .search-field{
+            padding: 10px 0 20px;
+            width: 400px;
+            .MuiInput-underline:before{
+                border: none !important;
+            }
+            .MuiInputBase-input {
+                padding: 0.5rem;
+                background-color:$white-five
+            }
+        }
+    }
+    .card-paper{
         .search-field{
             padding: 10px 0 20px;
             width: 400px;
@@ -122,6 +135,14 @@
             overflow-x: scroll !important;
             width: auto !important;
         }
+        .MuiTab-textColorInherit{
+            opacity: 0.8 !important;
+
+        }
+        .Mui-disabled{
+            border-bottom: 1px solid !important;
+            opacity: 0.5 !important;
+        }
         ::-webkit-scrollbar{
             height: 0px !important;
             width: 0px !important;
@@ -149,6 +170,8 @@
     }
     @media screen and (max-width:768px) {
         padding-top: 0;
+        padding-left: 10px;
+        padding-right: 10px;
     }
    
 }

@@ -3,7 +3,6 @@ import { Col, Row } from "react-bootstrap";
 import {
   Paper,
   TableBody,
-  TablePagination,
   TextField,
   TableContainer
 } from "@material-ui/core";
@@ -12,7 +11,7 @@ import { _t } from "../../i18n";
 import { UserTransactionType } from "../../pages/profile/userTypes";
 import SpinnerEffect from "../loader/spinner";
 import { getUserTransaction } from "../../api/urls";
-import  TransactionCard  from '../transactions/card'
+import { TransactionOperation } from "../operations";
 
 interface Column {
   label: string;
@@ -32,9 +31,7 @@ const columns: Column[] = [
 interface UserTransactionTypeList extends Array<UserTransactionType> {}
 const UserTransactionsCards = (props: any) => {
   const { user } = props;
-  const [page, setPage] = useState(0);
   const [loading, setLoading] = useState(true);
-  const [rowsPerPage, setRowsPerPage] = useState(25);
   const [transactionFrom, setTransactionForm] = useState(-1);
   const [transactionLimit, setTransactionLimit] = useState(1000);
   const currTheme = useSelector((state: any) => state.global.theme);
@@ -71,14 +68,7 @@ const UserTransactionsCards = (props: any) => {
       }
     }
   });
-  const handleChangePage = (event: unknown, newPage: number) => {
-    setPage(newPage);
-  };
 
-  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
  
 
   return (
@@ -88,15 +78,15 @@ const UserTransactionsCards = (props: any) => {
         <div
           className={
             currTheme === "day"
-              ? "transaction-table-day px-2 pt-4"
-              : "transaction-table-night px-2 pt-4"
+              ? "transaction-table-day px-2 pt-2"
+              : "transaction-table-night px-2 pt-2"
           }
         >
           <Paper
             className={
               currTheme === "day"
-                ? "paper-day text-dark table-paper"
-                : "paper-night text-white table-paper"
+                ? "paper-day text-dark card-paper"
+                : "paper-night text-white card-paper"
             }
           >
         <Row>
@@ -109,49 +99,27 @@ const UserTransactionsCards = (props: any) => {
               placeholder={`${_t("heading_label.search_transaction")}`}
             />
             </Col>
-            <Col lg={6}>
-                {filteredTransactionsData && (
-                <TablePagination
-                rowsPerPageOptions={[1,25, 50, 100, 500, 1000]}
-                component="div"
-                count={filteredTransactionsData.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                onPageChange={handleChangePage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
-                />
-            )}
-            </Col>
+     
           </Row>
         
         <TableContainer className="py-3 trans-card-view">
             <TableBody style={{width:'100%',display:'block'}} >
             {filteredTransactionsData &&
                   filteredTransactionsData
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((transaction: any, i: number) => {
                        const transactionInfo=transaction[1]
                        const opVal=transaction[1].op.value
                       return(
-                        <>
-                            <TransactionCard transaction={transaction} transactionFields={transactionInfo} transactionOp={opVal} /> 
+                        <>  
+                            <TransactionOperation trans_no={transactionInfo.trx_id} trans_data={[transactionInfo.op]} time={transactionInfo.timestamp} trx_status={transactionInfo.virtual_op}/>
+                            {/* <TransactionCard transaction={transaction} transactionFields={transactionInfo} transactionOp={opVal} />  */}
                         </>
                       );
                     })}
             </TableBody>
           </TableContainer>
           </Paper>
-          {filteredTransactionsData && (
-            <TablePagination
-              rowsPerPageOptions={[25, 50, 100, 500, 1000]}
-              component="div"
-              count={filteredTransactionsData.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              onPageChange={handleChangePage}
-              onRowsPerPageChange={handleChangeRowsPerPage}
-            />
-          )}
+      
         </div>
       )}
     </>

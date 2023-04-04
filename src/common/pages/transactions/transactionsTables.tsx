@@ -190,7 +190,7 @@ const TransactionsTables = (props: any) => {
             currTheme === "day" ? "paper-day text-dark px-2" : "paper-night text-white px-2"
           }
         >
-          <h1>{_t("heading_label.latest_transaction")}</h1>
+          
           <Row>
             <Col md={6}>
                 <TextField

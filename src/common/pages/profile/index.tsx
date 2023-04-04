@@ -5,7 +5,7 @@ import { Container, Card } from "react-bootstrap";
 import PropTypes from "prop-types";
 import { Tab, Tabs } from "@material-ui/core";
 import { RCAccount } from "@hiveio/dhive/lib/chain/rc";
-
+import { Link } from "react-router-dom";
 import { pageMapDispatchToProps, pageMapStateToProps } from "../common";
 import { withPersistentScroll } from "../../components/with-persistent-scroll";
 import Theme from "../../components/theme";
@@ -24,44 +24,25 @@ import SpinnerEffect from "../../components/loader/spinner";
 import UserHistory from "../../components/profile/userHistory";
 import { cardViewSVG, tableViewSVG } from "../../img/svg";
 import UserTransactionsCards from "../../components/profile/userTransactionCards";
+import ToggleButton from "react-toggle-button";
 
-interface UserList extends Array<UserTypeList> {}
+interface UserList extends Array<UserTypeList> { }
 interface RCState {
   rcAccount: null | RCAccount;
 }
 
-function TabPanel(props: any) {
-  const { children, value, index, ...other } = props;
 
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`user-tabpanel-${index}`}
-      aria-labelledby={`user-tab-${index}`}
-      {...other}
-    >
-      {value === index && <>{children}</>}
-    </div>
-  );
-}
-
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired
-};
 const UserPage = (props: any) => {
   const { match } = props;
   const [userAccount, setUserAccount] = useState<UserList>();
   const [value, setValue] = useState(0);
   const [loading, setLoading] = useState(true);
   const [rcAccount, setRCAccount] = useState<RCAccount>();
-  const handleChange = (event: any, newValue: number) => {
-    setValue(newValue);
-  };
+
   const [ownerHistory, setOwnerHistory] = useState([]);
   const [userId, setUserId] = useState(match.params.user_id);
+  const allTabs = [`/@${userId}`, `/@${userId}/transactions`, `/@${userId}/authorities`, `/@${userId}/owner-history`];
+  const [valueID, setValueID] = useState(allTabs.indexOf(match.url));
   const rc_account_url = getRCAccount(userId);
   const owner_history_url = getOwnerHistory(userId);
   const currTheme = useSelector((state: any) => state.global.theme);
@@ -109,8 +90,34 @@ const UserPage = (props: any) => {
       "aria-controls": `user-tabpanel-${index}`
     };
   }
+  const handleChange = (event: any, newValue: string) => {
+
+    setValueID(allTabs.indexOf(newValue));
+  };
   const changeUser = (val: string) => {
     setUserId(val);
+  };
+
+  function TabPaneUser(props: any) {
+    const { children, value, index, ...other } = props;
+  
+    return (
+      <div
+        role="tabpanel"
+        hidden={value !== index}
+        id={`user-tabpanel-${index}`}
+        aria-labelledby={`user-tab-${index}`}
+        {...other}
+      >
+        {value === index && <>{children}</>}
+      </div>
+    );
+  }
+  
+  TabPaneUser.propTypes = {
+    children: PropTypes.node,
+    index: PropTypes.any.isRequired,
+    value: PropTypes.any.isRequired
   };
   return (
     <>
@@ -130,8 +137,8 @@ const UserPage = (props: any) => {
             user.posting_json_metadata === ""
               ? user.json_metadata === ""
                 ? (Json_Meta = JSON.parse(
-                    '{"profile":{"name":"","about":"","website":"","cover_image":"","profile_image":"","dtube_pub":"","witness_description":""}}'
-                  ))
+                  '{"profile":{"name":"","about":"","website":"","cover_image":"","profile_image":"","dtube_pub":"","witness_description":""}}'
+                ))
                 : (Json_Meta = DecodeJson(user.json_metadata))
               : (Json_Meta = DecodeJson(user.posting_json_metadata));
 
@@ -153,16 +160,40 @@ const UserPage = (props: any) => {
                 <Card className="user-card">
                   <Card.Header className="p-0">
                     <Tabs className="user-tabs" value={value} onChange={handleChange} aria-label="simple tabs example">
-                      <Tab label={_t("common.info")} {...a11yProps(0)} />
-                      <Tab label={_t("common.transaction")} {...a11yProps(1)} />
-                      <Tab label={_t("common.authorities")} {...a11yProps(2)} />
+                      <Tab  
+                          label={_t("common.info")}  
+                          value={`/@${userId}`}
+                          component={Link}
+                          to={allTabs[0]}
+                          disabled={valueID===0?true:false} 
+                            {...a11yProps(0)} />
+                      <Tab 
+                          label={_t("common.transaction")}
+                          value={`/@${userId}/transactions`}
+                          component={Link}
+                          to={allTabs[1]}
+                          disabled={valueID===1?true:false}  
+                          {...a11yProps(1)} />
+                      <Tab 
+                          label={_t("common.authorities")}
+                          value={`/@${userId}/authorities`}
+                          component={Link}
+                          to={allTabs[2]}
+                          disabled={valueID===2?true:false}  
+                          {...a11yProps(2)} />
                       {ownerHistory && ownerHistory.length > 0 && (
-                        <Tab label={_t("common.owner_history")} {...a11yProps(3)} />
+                      <Tab 
+                          label={_t("common.owner_history")}
+                          value={`/@${userId}/owner-history`}
+                          component={Link}
+                          to={allTabs[3]}
+                          disabled={valueID===3?true:false}  
+                          {...a11yProps(3)} />
                       )}
                     </Tabs>
                   </Card.Header>
                   <Card.Body className="py-0 user-info-card-body">
-                    <TabPanel value={value} index={0}>
+                    <TabPaneUser value={valueID} index={0}>
                       {Object.keys(user).map((k, index) => {
                         return typeof user[k] !== "object" && typeof user[k] !== "boolean" ? (
                           <StringField
@@ -194,16 +225,26 @@ const UserPage = (props: any) => {
                           <></>
                         );
                       })}
-                    </TabPanel>
-                    <TabPanel value={value} index={1}>
-                    <div className="text-center mt-2">
-                      <button className="switch-view-btn" style={currTheme==="day"? {backgroundColor: '#bbbb'}:{backgroundColor: '#374852'}} onClick={()=>setCardView(true)} >{cardViewSVG(themeContrastColor)}</button>
-                      <button className="switch-view-btn"  style={currTheme==="day"? {backgroundColor: '#bbbb'}:{backgroundColor: '#374852'}} onClick={()=>setCardView(false)} >{tableViewSVG(themeContrastColor)}</button>
-                    </div>
-                    <>{cardView? <UserTransactionsCards user={`${userId}`} /> :<UserTransactionsTable user={`${userId}`} />}</>
+                    </TabPaneUser>
+                    <TabPaneUser value={valueID} index={1} >
+                      <div className="d-flex pt-4 justify-content-end">
+                        <p>{_t("common.raw_format")}&nbsp;</p>
+                        <div>
+                          <ToggleButton
+                            inactiveLabel={""}
+                            activeLabel={""}
+                            value={cardView}
+                            text="n"
+                            onToggle={() => {
+                              setCardView(!cardView);
+                            }}
+                          />
+                        </div>
+                      </div>
+                      <>{cardView ? <UserTransactionsCards user={`${userId}`} /> : <UserTransactionsTable user={`${userId}`} />}</>
                       {/* {<UserTransactionsTable user={`${userId}`} />} */}
-                    </TabPanel>
-                    <TabPanel value={value} index={2}>
+                    </TabPaneUser>
+                    <TabPaneUser value={valueID} index={2}>
                       {
                         <UserAuthorities
                           changeUser={changeUser}
@@ -213,10 +254,10 @@ const UserPage = (props: any) => {
                           active={user.active}
                         />
                       }
-                    </TabPanel>
-                    <TabPanel value={value} index={3}>
+                    </TabPaneUser>
+                    <TabPaneUser value={valueID} index={3}>
                       {<UserHistory changeUser={changeUser} ownerHistory={ownerHistory} />}
-                    </TabPanel>
+                    </TabPaneUser>
                   </Card.Body>
                 </Card>
               </div>

@@ -1,0 +1,19 @@
+.accordion-item{
+    background-color: transparent;
+    border-radius: 0;
+    word-break: break-all;
+    .accordion-header{
+      border-radius: 0;
+      .accordion-button{
+        border-radius: 0;
+        background-color: #f5f5f5;
+      
+        &:focus{
+          box-shadow: none !important;
+      }
+    }
+    }
+    .accordion-body{
+        padding: 15px !important;
+    }
+  }

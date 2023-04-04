@@ -65,5 +65,9 @@ export const NestedObjectUserOperations=[
     "open_pays",
     "min_to_receive",
     "amount_to_sell",
-    "max_accepted_payout"
+    "max_accepted_payout",
+    "withdrawn",
+    "deposited",
+    "payout"
+
   ];

@@ -11,9 +11,13 @@ import BackToTopButton from "../../components/Buttons/BackToTop";
 import { getHeadBlock, getTransactions } from "../../api/urls";
 import { setHeadBlockData } from "../../store/HeadBlock";
 import { cardViewSVG, tableViewSVG } from "../../img/svg";
-
+import ToggleButton from "react-toggle-button";
 import TransactionsCards from "./transactionCards";
 import headBlock from "../../components/headBlock/headBlock";
+import { TransactionOperation } from "../../components/operations";
+import { object } from "prop-types";
+import transaction from "../transaction";
+import { _t } from "../../i18n";
 
 interface TransactionList extends Array<HomeTransactionType> {}
 const AllTransactions = (props: any) => {
@@ -34,12 +38,12 @@ const AllTransactions = (props: any) => {
         if (HeadBlock === "") {
           const resp = await getHeadBlock();
           dispatch(setHeadBlockData(resp));
-          const response = await getTransactions(resp.head_block_number);
+          const response = await getTransactions(resp.head_block_number,false);
           // const response = await getTransactions(71691727);
           // 71554087
           setTransactions(response.ops);
         } else {
-          const response = await getTransactions(HeadBlock);
+          const response = await getTransactions(HeadBlock,false);
           // const response = await getTransactions(71691727);
           setTransactions(response.ops);
         }
@@ -55,11 +59,29 @@ const AllTransactions = (props: any) => {
       <Theme global={props.global} />
       {loading && <SpinnerEffect />}
       {!loading && transactions &&   <Container className="data-table-hive py-5">
-        <div className="text-center mt-2">
-          <button className="switch-view-btn" style={currTheme==="day"? {backgroundColor: '#bbbb'}:{backgroundColor: '#374852'}} onClick={()=>setCardView(true)} >{cardViewSVG(themeContrastColor)}</button>
-          <button className="switch-view-btn"  style={currTheme==="day"? {backgroundColor: '#bbbb'}:{backgroundColor: '#374852'}} onClick={()=>setCardView(false)} >{tableViewSVG(themeContrastColor)}</button>
-        </div>
-        <>{cardView? <TransactionsCards data={transactions}/>:<TransactionsTables data={transactions}/>}</>
+        <div className="d-flex float-right">
+            <p>{_t("common.raw_format")}&nbsp; </p>
+              <div>
+              <ToggleButton
+                inactiveLabel={""}
+                activeLabel={""}
+                value={cardView}
+                text="n"
+                onToggle={() => {
+                  setCardView(!cardView);
+                }}
+              />
+            </div>
+          </div>
+          <h1>{_t("heading_label.latest_transaction")}</h1>
+        <>
+          {cardView?
+          <TransactionsCards data={transactions} />
+          :
+          <TransactionsTables data={transactions}/>
+          }
+        </>
+      
         </Container>}
       <BackToTopButton />
     </>

@@ -85,6 +85,27 @@ $tooltip-max-width: 380px;
   background: $dark-seven;
   color: $white-two;
   padding-top: 60px !important;
+  .accordion-item{
+    color: #fff;
+    background-color: transparent;
+    border-radius: 0;
+    word-break: break-all;
+    .accordion-header{
+      border-radius: 0;
+      .accordion-button{
+        border-radius: 0;
+        background: $dark-grey-blue;
+        color: $white;
+       
+        &::after {
+            background-image: url("data:image/svg+xml,%3Csvg fill='none' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M19 9L12 16L5 9' stroke='%23e0e0e0' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'/%3E%3C/svg%3E");
+        }
+        &:focus{
+          box-shadow: none !important;
+      }
+    }
+    }
+  }
 }
 
 @import "bootstrap";
