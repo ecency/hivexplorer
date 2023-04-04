@@ -68,6 +68,7 @@ export const json_operation_ids = [
     'terracore_battle',
     'reblog',
     'sf_sale_list',
+    '3speak-publish',
     'follow'
 ]
 export const quest_operation = [

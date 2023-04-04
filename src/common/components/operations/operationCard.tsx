@@ -21,12 +21,13 @@ export const OperationCardData=(props:any)=>{
             <div className="trans_card_header">
                 <div className="trans-op-basic">
                     {Object.keys(value).map((val:any,index:number) => {
+                        console.log('req',val,typeof (value[val]), value[val][0])
                         //  setRenderedStrings([...renderedStrings,val])
                         if (typeof (value[val] === 'string')) {
                             name = value[val]
                             // setRenderedStrings([...renderedStrings,val])
                         }
-                        else {
+                        else if (typeof (value[val] === 'object')) {
                             name = value[val][0]
                         }
                         return (
@@ -34,7 +35,7 @@ export const OperationCardData=(props:any)=>{
                                 {transAvatars.includes(val) && value[val][0] !== undefined &&
                                     <>
 
-                                        {val == 'author' && Object.keys(value).includes('voter') ? <></> :  <>
+                                        {val === 'author' && Object.keys(value).includes('voter') ? <></> :  <>
                                         <span key={index+type+val} className="trans-owner-date">
 
                                             <img
@@ -42,12 +43,12 @@ export const OperationCardData=(props:any)=>{
                                                 onError={(e: any) => {
                                                     e.target.src = { DefaultImage };
                                                 }}
-                                                src={`https://images.ecency.com/u/${name}/avatar`}
+                                                src={typeof (value[val] === 'string') ?`https://images.ecency.com/u/${value[val]}/avatar`:`https://images.ecency.com/u/${value[val][0]}/avatar`}
                                                 alt=""
                                             />
 
                                             <span>
-                                                <Link to={`/@${name}`}>{name}&nbsp;</Link>
+                                                <Link to={typeof (value[val] === 'string')?`/@${value[val]}`:`/@${value[val][0]}`}>{typeof (value[val] === 'string')? value[val]:value[val][0]}&nbsp;</Link>
                                                 <span dangerouslySetInnerHTML={{ __html: type==='comment_operation' && value.hasOwnProperty('parent_permlink')? 'replied to' : type==='comment_operation' && value.hasOwnProperty('comment_permlink')? 'comments to':text}} />
                                                 
                                                 {type==='vote_operation' && <span >

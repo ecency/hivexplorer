@@ -51,6 +51,17 @@ export const TransactionOperation = (props: any) => {
 
                                     />
                                 }
+                                {item.value.id && !json_operation_ids.includes(item.value.id) && item.type==='custom_json_operation' &&
+                                    <OperationCardData
+                                        value={item.value}
+                                        text={item.type.replace('_operation','').replace(/_/g,' ')}
+                                        time={time}
+                                        trx_id={trans_no}
+                                        type={item.type}
+                                        isTable={true}
+
+                                    />
+                                }
                                 {item.value.id && quest_operation.includes(item.value.id) &&
                                         <OperationCardData
                                         value={item.value}
