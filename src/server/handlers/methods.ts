@@ -125,6 +125,39 @@ export const methods = [
     method: "get_account_references",
     params: ["accountId"],
     isArray: true
+  },
+  {
+    api: "condenser_api",
+    method: "get_transaction_hex",
+    params: ["trx"],
+    description:_t("condenser_api.get_transaction_hex_description")
+  },
+  {
+    api: "database_api",
+    method: "get_required_signatures",
+    params: ["trx", "available_keys"],
+    description:_t("database_api.get_required_signatures_description"),
+    response: `{"keys": []}`
+  },
+  {
+    api: "database_api",
+    method: "get_potential_signatures",
+    params: ["trx"],
+    description:_t("database_api.get_potential_signatures_description"),
+    response: `[]`
+  
+  },
+  {
+    api: "database_api",
+    method: "verify_authority",
+    params: ["trx"],
+    description:_t("database_api.verify_authority_description"),
+    response: `false`
+  },
+  {
+    api: "database_api",
+    method: "verify_account_authority",
+    params: ["account", "signers"]
   },*/
   {
     api: "block_api",
@@ -1257,20 +1290,49 @@ export const methods = [
   {
     api: "condenser_api",
     method: "get_account_count",
-    description:_t("condenser_api.get_account_count_description")                                
+    isArray: true,
+    description:_t("condenser_api.get_account_count_description"),
+    url: `${ConfigItems.baseUrl}/api/get_account_count`,
+    response: `2445188`
   },
   {
     api: "condenser_api",
     method: "get_conversion_requests",
-    params: ["accountName"],
-    description:_t("condenser_api.get_conversion_requests_description")
+    isArray: true,
+    params: ["name"],
+    parameter: `<code>name: string, username</code>`,
+    description:_t("condenser_api.get_conversion_requests_description"),
+    url: `${ConfigItems.baseUrl}/api/get_conversion_requests?name="hbdstabilizer"`,
+    response: `[
+      {
+        "id": 353555,
+        "owner": "hbdstabilizer",
+        "requestid": 1680395898,
+        "amount": "8236.567 HBD",
+        "conversion_date": "2023-04-05T12:38:18"
+      },
+      {
+        "id": 353556,
+        "owner": "hbdstabilizer",
+        "requestid": 1680396075,
+        "amount": "100.000 HBD",
+        "conversion_date": "2023-04-05T12:41:15"
+      },
+      {
+        "id": 353557,
+        "owner": "hbdstabilizer",
+        "requestid": 1680396623,
+        "amount": "100.875 HBD",
+        "conversion_date": "2023-04-05T12:50:24"
+      }
+    ]`
   },
   {
     api: "account_history_api",
     description:_t("account_history_api.get_account_history_description"),
     method: "get_account_history",
-    url:`${ConfigItems.baseUrl}/api/get_account_history?account=ocd-witness&start=-1&limit=3`,
-    params: ["account", "from", "limit", "operation_filter_low", "operation_filter_high"],
+    url:`${ConfigItems.baseUrl}/api/get_account_history?account=ecency&start=-1&limit=3`,
+    params: ["account", "start", "limit", "operation_filter_low", "operation_filter_high"],
     parameter:`<ul>
         <li><code class="language-plaintext highlighter-rouge">account:string</code></li>
         <li><code class="language-plaintext highlighter-rouge">start:int</code>. e.g.: -1 for reverse history or any positive numeric</li>
@@ -1336,22 +1398,48 @@ export const methods = [
     response: `{
       "history": [
         [
-          2259712,
+          1988393,
           {
-            "trx_id": "0000000000000000000000000000000000000000",
-            "block": 70519001,
-            "trx_in_block": 4294967295,
+            "trx_id": "dbe37b48e56cc6e1ebd970b6f375e96ebafb11b1",
+            "block": 73739699,
+            "trx_in_block": 17,
+            "op_in_trx": 0,
+            "virtual_op": false,
+            "timestamp": "2023-04-05T12:30:03",
+            "op": {
+              "type": "vote_operation",
+              "value": {
+                "voter": "asean.hive",
+                "author": "ecency",
+                "permlink": "re-2023330t43324609z",
+                "weight": 130
+              }
+            },
+            "operation_id": 0
+          }
+        ],
+        [
+          1988394,
+          {
+            "trx_id": "dbe37b48e56cc6e1ebd970b6f375e96ebafb11b1",
+            "block": 73739699,
+            "trx_in_block": 17,
             "op_in_trx": 1,
             "virtual_op": true,
-            "timestamp": "2022-12-14T13:34:33",
+            "timestamp": "2023-04-05T12:30:03",
             "op": {
-              "type": "producer_reward_operation",
+              "type": "effective_comment_vote_operation",
               "value": {
-                "producer": "ocd-witness",
-                "vesting_shares": {
-                  "amount": "476884676",
-                  "precision": 6,
-                  "nai": "@@000000037"
+                "voter": "asean.hive",
+                "author": "ecency",
+                "permlink": "re-2023330t43324609z",
+                "weight": "7292612308",
+                "rshares": "58340898469",
+                "total_vote_weight": "9083606577",
+                "pending_payout": {
+                  "amount": "39",
+                  "precision": 3,
+                  "nai": "@@000000013"
                 }
               }
             },
@@ -1359,23 +1447,24 @@ export const methods = [
           }
         ],
         [
-          2259713,
+          1988395,
           {
-            "trx_id": "0000000000000000000000000000000000000000",
-            "block": 70519026,
-            "trx_in_block": 4294967295,
-            "op_in_trx": 1,
-            "virtual_op": true,
-            "timestamp": "2022-12-14T13:35:48",
+            "trx_id": "af7ad4613b76d27821e180d510e4abcdd32466cd",
+            "block": 73739759,
+            "trx_in_block": 10,
+            "op_in_trx": 0,
+            "virtual_op": false,
+            "timestamp": "2023-04-05T12:33:03",
             "op": {
-              "type": "producer_reward_operation",
+              "type": "claim_account_operation",
               "value": {
-                "producer": "ocd-witness",
-                "vesting_shares": {
-                  "amount": "476884642",
-                  "precision": 6,
-                  "nai": "@@000000037"
-                }
+                "creator": "ecency",
+                "fee": {
+                  "amount": "0",
+                  "precision": 3,
+                  "nai": "@@000000021"
+                },
+                "extensions": []
               }
             },
             "operation_id": 0
@@ -1388,112 +1477,300 @@ export const methods = [
     api: "condenser_api",
     method: "get_owner_history",
     params: ["account"],
+    parameter: `<code>account: string, username</code>`,
     isArray: true,
-    description:_t("condenser_api.get_owner_history_description")
+    description:_t("condenser_api.get_owner_history_description"),
+    url: `${ConfigItems.baseUrl}/api/get_owner_history?account="demo"`,
+    response: `[
+      {
+        "id": 715075,
+        "account": "demo",
+        "previous_owner_authority": {
+          "weight_threshold": 1,
+          "account_auths": [],
+          "key_auths": [
+            [
+              "STM7ZpZ5qckeukBnZ2YerFbdb3VQWaXhJHJW9XSL8mUeD8XLutq2c",
+              1
+            ]
+          ]
+        },
+        "last_valid_time": "2023-03-22T13:53:18"
+      },
+      {
+        "id": 716033,
+        "account": "demo",
+        "previous_owner_authority": {
+          "weight_threshold": 1,
+          "account_auths": [],
+          "key_auths": [
+            [
+              "STM5RpUEnKRApjVARnvW9mgEJ9BpDNxJrtAc9FpcP9zAb4pob3aA5",
+              1
+            ]
+          ]
+        },
+        "last_valid_time": "2023-04-04T21:20:48"
+      }
+    ]`
   },
   {
     api: "condenser_api",
     method: "get_recovery_request",
     params: ["account"],
-    description:_t("condenser_api.get_recovery_request_description")
+    parameter: `<code>account: string, username</code>`,
+    isArray: true,
+    description:_t("condenser_api.get_recovery_request_description"),
+    url: `${ConfigItems.baseUrl}/api/get_recovery_request?account="demo"`,
+    response: `{
+      "id": 3841,
+      "account_to_recover": "demo",
+      "new_owner_authority": {
+        "weight_threshold": 1,
+        "account_auths": [],
+        "key_auths": [
+          [
+            "STM7yCitH4Dk2EySdvAuZ9E94AZjoFvzEdqHKSZ33HbWAXDSfG1mT",
+            1
+          ]
+        ]
+      },
+      "expires": "2023-04-06T18:19:51"
+    }`
   },
   {
     api: "condenser_api",
     method: "get_escrow",
     params: ["from", "escrow_id"],
-    description:_t("condenser_api.get_escrow_description")
+    parameter: `<code>from: string, username, escrow_id: int</code>`,
+    isArray: true,
+    description:_t("condenser_api.get_escrow_description"),
+    url: `${ConfigItems.baseUrl}/api/get_escrow?from="temp"&escrow_id=12345`,
+    response: `{
+      "id": 143,
+      "escrow_id": 12345,
+      "from": "temp",
+      "to": "guest123",
+      "agent": "smitop",
+      "ratification_deadline": "2038-01-19T03:14:06",
+      "escrow_expiration": "2038-01-19T03:14:07",
+      "hbd_balance": "0.000 HBD",
+      "hive_balance": "0.001 HIVE",
+      "pending_fee": "0.001 HIVE",
+      "to_approved": false,
+      "agent_approved": false,
+      "disputed": false
+    }`
   },
   {
     api: "condenser_api",
     method: "get_withdraw_routes",
-    params: ["account", "withdraw_route_type"],
-    description:_t("condenser_api.get_withdraw_routes_description")
+    params: ["account", "type"],
+    parameter: `<code>account:string; type:string, "incoming"|"outgoing"|"all"</code>`,
+    isArray: true,
+    description:_t("condenser_api.get_withdraw_routes_description"),
+    url: `${ConfigItems.baseUrl}/api/get_withdraw_routes?account="blocktrades"&type="all"`,
+    response: `[
+      {
+        "id": 924,
+        "from_account": "blocktrades",
+        "to_account": "anastacia",
+        "percent": 2500,
+        "auto_vest": false
+      },
+      {
+        "id": 912,
+        "from_account": "blocktrades",
+        "to_account": "ashleigh",
+        "percent": 2500,
+        "auto_vest": false
+      },
+      {
+        "id": 925,
+        "from_account": "blocktrades",
+        "to_account": "cleta",
+        "percent": 2500,
+        "auto_vest": false
+      },
+      {
+        "id": 24484,
+        "from_account": "arsahk",
+        "to_account": "blocktrades",
+        "percent": 10000,
+        "auto_vest": true
+      }
+    ]`
   },
   {
     api: "condenser_api",
     method: "get_savings_withdraw_from",
+    isArray: true,
     params: ["account"],
-    description:_t("condenser_api.get_savings_withdraw_from_description")
+    parameter: `<code>account:string;</code>`,
+    description:_t("condenser_api.get_savings_withdraw_from_description"),
+    url: `${ConfigItems.baseUrl}/api/get_savings_withdraw_from?account="ecency"`,
+    response: `[
+      {
+        "id": 167869,
+        "from": "ecency",
+        "to": "ecency",
+        "memo": "",
+        "request_id": 1132116381,
+        "amount": "1.570 HBD",
+        "complete": "2023-04-05T19:38:51"
+      }
+    ]`
   },
   {
     api: "condenser_api",
     method: "get_savings_withdraw_to",
+    isArray: true,
     params: ["account"],
-    description:_t("condenser_api.get_savings_withdraw_to_description")
+    parameter: `<code>account:string;</code>`,
+    description:_t("condenser_api.get_savings_withdraw_to_description"),
+    url: `${ConfigItems.baseUrl}/api/get_savings_withdraw_to?account="ecency"`,
+    response: `[
+      {
+        "id": 167869,
+        "from": "ecency",
+        "to": "ecency",
+        "memo": "",
+        "request_id": 1132116381,
+        "amount": "1.570 HBD",
+        "complete": "2023-04-05T19:38:51"
+      }
+    ]`
   },
   {
     api: "database_api",
     method: "get_order_book",
     params: ["limit"],
-    description:_t("database_api.get_order_book_description")
+    parameter: `<code>limit: int;</code>`,
+    description:_t("database_api.get_order_book_description"),
+    url: `${ConfigItems.baseUrl}/api/get_order_book?limit=2`,
+    response: `{
+      "bids": [
+        {
+          "order_price": {
+            "base": "114.788 HBD",
+            "quote": "274.343 HIVE"
+          },
+          "real_price": "0.41841052988412314",
+          "hive": 274343,
+          "hbd": 114788,
+          "created": "2023-04-05T18:32:18"
+        },
+        {
+          "order_price": {
+            "base": "2.000 HBD",
+            "quote": "4.780 HIVE"
+          },
+          "real_price": "0.41841004184100417",
+          "hive": 4780,
+          "hbd": 2000,
+          "created": "2023-04-05T18:31:21"
+        }
+      ],
+      "asks": [
+        {
+          "order_price": {
+            "base": "45.564 HIVE",
+            "quote": "19.114 HBD"
+          },
+          "real_price": "0.41949784917917654",
+          "hive": 45564,
+          "hbd": 19114,
+          "created": "2023-04-05T18:07:09"
+        },
+        {
+          "order_price": {
+            "base": "4.325 HIVE",
+            "quote": "1.816 HBD"
+          },
+          "real_price": "0.41988439306358383",
+          "hive": 4325,
+          "hbd": 1816,
+          "created": "2023-04-05T18:31:24"
+        }
+      ]
+    }`
   },
   {
     api: "condenser_api",
     method: "get_open_orders",
-    params: ["owner"],
-    description:_t("condenser_api.get_open_orders_description")
-  },
-  {
-    api: "condenser_api",
-    method: "get_transaction_hex",
-    params: ["trx"],
-    description:_t("condenser_api.get_transaction_hex_description")
-  },
-  {
-    api: "condenser_api",
-    // "param_type": "params",
     isArray: true,
+    params: ["owner"],
+    parameter: `<code>owner: string;</code>`,
+    description:_t("condenser_api.get_open_orders_description"),
+    url: `${ConfigItems.baseUrl}/api/get_open_orders?owner="quicktrades"`,
+    response: `[
+      {
+        "id": 7511029,
+        "created": "2023-04-05T18:37:57",
+        "expiration": "2023-04-12T18:37:54",
+        "seller": "quicktrades",
+        "orderid": 337320808,
+        "for_sale": 2000,
+        "sell_price": {
+          "base": "2.000 HBD",
+          "quote": "4.781 HIVE"
+        },
+        "real_price": "0.41832252666806108",
+        "rewarded": false
+      },
+      {
+        "id": 7511030,
+        "created": "2023-04-05T18:37:57",
+        "expiration": "2023-04-12T18:37:54",
+        "seller": "quicktrades",
+        "orderid": 1917393794,
+        "for_sale": 2162,
+        "sell_price": {
+          "base": "2.162 HIVE",
+          "quote": "0.910 HBD"
+        },
+        "real_price": "0.42090656799259946",
+        "rewarded": false
+      }
+    ]`
+  },
+  {
+    api: "condenser_api",
     method: "get_transaction",
+    isArray: true,
     params: ["trx_id"],
+    parameter: `<code>trx_id: string</code>`,
     description:_t("condenser_api.get_transaction_description"),
-    url:`${ConfigItems.baseUrl}/api/get_transaction?trx_id=6fde0190a97835ea6d9e651293e90c89911f933c`,
-    parameter: `<p>trx_id (string)</p>`,
+    url:`${ConfigItems.baseUrl}/api/get_transaction?trx_id="131c3a1af52094efb6dc15d3c56029716eb81bd6"`,
     response: `{
-      "ref_block_num": 0,
-      "ref_block_prefix": 0,
-      "expiration": "1970-01-01T00:00:00",
-      "operations": [],
+      "ref_block_num": 26457,
+      "ref_block_prefix": 2669742647,
+      "expiration": "2020-06-04T15:42:06",
+      "operations": [
+        [
+          "claim_account",
+          {
+            "creator": "ecency",
+            "fee": "0.000 HIVE",
+            "extensions": []
+          }
+        ]
+      ],
       "extensions": [],
-      "signatures": [],
-      "transaction_id": "0000000000000000000000000000000000000000",
-      "block_num": 0,
-      "transaction_num": 0
-      }`
-  },
-  {
-    api: "database_api",
-    method: "get_required_signatures",
-    params: ["trx", "available_keys"],
-    description:_t("database_api.get_required_signatures_description"),
-    response: `{"keys": []}`
-  },
-  {
-    api: "database_api",
-    method: "get_potential_signatures",
-    params: ["trx"],
-    description:_t("database_api.get_potential_signatures_description"),
-    response: `[]`
-  
-  },
-  {
-    api: "database_api",
-    method: "verify_authority",
-    params: ["trx"],
-    description:_t("database_api.verify_authority_description"),
-    response: `false`
-  },
-  {
-    api: "database_api",
-    method: "verify_account_authority",
-    params: ["account", "signers"]
+      "signatures": [
+        "1f3263277fed656d2750f30f31e788c6b25984e891258a6ee72fad2975dbe2d50e6bcd9497a7f70e79c95d07e70db82ebb026c521692715a617616332d75056d8c"
+      ],
+      "transaction_id": "131c3a1af52094efb6dc15d3c56029716eb81bd6",
+      "block_num": 44001115,
+      "transaction_num": 12
+    }`
   },
   {
     api: "condenser_api",
     method: "get_active_votes",
     description:_t("condenser_api.get_active_votes_description"),
     params: ["author", "permlink"],
-    url:`${ConfigItems.baseUrl}/api/get_active_votes?author=deathwing&permlink=re-enforcer48-recsvv`,
-    parameter: `<p> author:string; permlink:string </p>
+    parameter: `<code>author:string; permlink:string</code>
       <table>
         <thead>
           <tr>
@@ -1515,22 +1792,238 @@ export const methods = [
           </tr>
         </tbody>
       </table>`,
+    url:`${ConfigItems.baseUrl}/api/get_active_votes?author="ecency"&permlink="token"`,
     response: `[
       {
-        "percent": 1500,
-        "reputation": 320305519364193,
-        "rshares": 118699513973,
-        "time": "2022-07-01T18:05:12",
-        "voter": "enforcer48",
-        "weight": 118699513973
+        "percent": 4000,
+        "reputation": 341233778618,
+        "rshares": 620233031504,
+        "time": "2021-02-09T10:08:03",
+        "voter": "boatymcboatface",
+        "weight": 54637
+      },
+      {
+        "percent": 10000,
+        "reputation": 29261302889705,
+        "rshares": 102981908948,
+        "time": "2021-02-10T01:36:45",
+        "voter": "pnc",
+        "weight": 10859
+      },
+      {
+        "percent": 4000,
+        "reputation": 2113488095257878,
+        "rshares": 175004643152,
+        "time": "2021-02-09T10:07:51",
+        "voter": "kingscrown",
+        "weight": 16050
+      },
+      {
+        "percent": 4000,
+        "reputation": 4509451541223,
+        "rshares": 166506389261,
+        "time": "2021-02-09T10:08:03",
+        "voter": "theshell",
+        "weight": 14291
+      },
+      {
+        "percent": 1000,
+        "reputation": 111421113086228,
+        "rshares": 53917829731,
+        "time": "2021-02-09T10:30:48",
+        "voter": "mammasitta",
+        "weight": 3523
+      },
+      {
+        "percent": 10000,
+        "reputation": 641780297267791,
+        "rshares": 1476271004323,
+        "time": "2021-02-09T10:10:39",
+        "voter": "good-karma",
+        "weight": 122140
       }
     ]`
   },
   {
     api: "database_api",
     method: "list_votes",
-    params: ["voter"],
-    description:_t("database_api.list_votes_description")
+    params: ["start", "limit", "order"],
+    parameter: `<code>start:array; limit:int; order:string</code>
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">start</code> depends on <code class="language-plaintext highlighter-rouge">order</code> (see below)
+          <ul>
+            <li><code class="language-plaintext highlighter-rouge">voter</code> is optional</li>
+            <li><code class="language-plaintext highlighter-rouge">author</code> and <code class="language-plaintext highlighter-rouge">permlink</code> are optional, but if one is blank, they must both be blank</li>
+          </ul>
+        </li>
+        <li><code class="language-plaintext highlighter-rouge">limit</code> is up to 1000.</li>
+        <li><code class="language-plaintext highlighter-rouge">order</code> can be one of:
+          <ul>
+            <li><code class="language-plaintext highlighter-rouge">by_comment_voter</code> - order by comment voter
+              <ul>
+                <li><code class="language-plaintext highlighter-rouge">start</code> is an array of three optional values: <code class="language-plaintext highlighter-rouge">author</code>, <code class="language-plaintext highlighter-rouge">permlink</code>, <code class="language-plaintext highlighter-rouge">voter</code></li>
+              </ul>
+            </li>
+            <li><code class="language-plaintext highlighter-rouge">by_voter_comment</code> - order by voter comment
+              <ul>
+                <li><code class="language-plaintext highlighter-rouge">start</code> is an array of three optional values: <code class="language-plaintext highlighter-rouge">voter</code>, <code class="language-plaintext highlighter-rouge">author</code>, <code class="language-plaintext highlighter-rouge">permlink</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <table>
+        <thead>
+          <tr>
+            <th><code class="language-plaintext highlighter-rouge">start</code> (array)</th>
+            <th><code class="language-plaintext highlighter-rouge">limit</code> (int)</th>
+            <th><code class="language-plaintext highlighter-rouge">order</code> (string)</th>
+            <th>&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">["", "", ""]</code></td>
+            <td>10</td>
+            <td><code class="language-plaintext highlighter-rouge">"by_comment_voter"</code></td>
+            <td>Queries first 10 votes, sort by comment voter</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">["", "", ""]</code></td>
+            <td>10</td>
+            <td><code class="language-plaintext highlighter-rouge">"by_voter_comment"</code></td>
+            <td>Queries first 10 votes, sort by voter comment</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">["xeroc", "vanteem-config", ""]</code></td>
+            <td>10</td>
+            <td><code class="language-plaintext highlighter-rouge">"by_comment_voter"</code></td>
+            <td>Queries next 10 votes starting on the post <code class="language-plaintext highlighter-rouge">@xeroc/vanteem-config</code>, sort by comment voter</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">["alice", "xeroc", "vanteem-config"]</code></td>
+            <td>10</td>
+            <td><code class="language-plaintext highlighter-rouge">"by_voter_comment"</code></td>
+            <td>Queries next 10 votes starting at alice on the post <code class="language-plaintext highlighter-rouge">@xeroc/vanteem-config</code>, sort by voter comment</td>
+          </tr>
+        </tbody>
+      </table>`,
+    description:_t("database_api.list_votes_description"),
+    url:`${ConfigItems.baseUrl}/api/list_votes?start=["good-karma","ecency","token"]&limit=10&order="by_voter_comment"`,
+    response: `{
+      "votes": [
+        {
+          "id": 635177704,
+          "voter": "good-karma",
+          "author": "ecency",
+          "permlink": "token",
+          "weight": 122140,
+          "rshares": 1476271004323,
+          "vote_percent": 10000,
+          "last_update": "2021-02-09T10:10:39",
+          "num_changes": 0
+        },
+        {
+          "id": 635512875,
+          "voter": "good-karma",
+          "author": "podewils",
+          "permlink": "astronomy-picture-of-the-day-867b5f62880c6",
+          "weight": 88629,
+          "rshares": 281499436177,
+          "vote_percent": 1828,
+          "last_update": "2021-02-10T19:23:27",
+          "num_changes": 0
+        },
+        {
+          "id": 635184320,
+          "voter": "good-karma",
+          "author": "foxkoit",
+          "permlink": "i-had-small-frost",
+          "weight": 43494,
+          "rshares": 258053213886,
+          "vote_percent": 1773,
+          "last_update": "2021-02-09T10:56:48",
+          "num_changes": 0
+        },
+        {
+          "id": 635187966,
+          "voter": "good-karma",
+          "author": "cryptaurus8",
+          "permlink": "big-developer-announcements-from-e2",
+          "weight": 87393,
+          "rshares": 258791131071,
+          "vote_percent": 1789,
+          "last_update": "2021-02-09T11:24:42",
+          "num_changes": 0
+        },
+        {
+          "id": 635276324,
+          "voter": "good-karma",
+          "author": "drax",
+          "permlink": "retro-film-review-jawbreaker-1999",
+          "weight": 32728,
+          "rshares": 74716690773,
+          "vote_percent": 504,
+          "last_update": "2021-02-09T19:50:45",
+          "num_changes": 0
+        },
+        {
+          "id": 635240423,
+          "voter": "good-karma",
+          "author": "tinta-tertuang",
+          "permlink": "fascinating-insects-or-or-15-best-pictures-of-insects-during-drought",
+          "weight": 13730,
+          "rshares": 88416986177,
+          "vote_percent": 596,
+          "last_update": "2021-02-09T16:22:24",
+          "num_changes": 0
+        },
+        {
+          "id": 635755670,
+          "voter": "good-karma",
+          "author": "podewils",
+          "permlink": "astronomy-picture-of-the-day-a9e3e5f8e5976",
+          "weight": 65591,
+          "rshares": 238656149776,
+          "vote_percent": 1519,
+          "last_update": "2021-02-11T19:55:09",
+          "num_changes": 0
+        },
+        {
+          "id": 635351200,
+          "voter": "good-karma",
+          "author": "masummim50",
+          "permlink": "male-portrait-drawing-in-scribble-way-with-blue-ball-point-pen",
+          "weight": 17516,
+          "rshares": 105774927155,
+          "vote_percent": 682,
+          "last_update": "2021-02-10T02:32:21",
+          "num_changes": 0
+        },
+        {
+          "id": 635292867,
+          "voter": "good-karma",
+          "author": "giovannigovo",
+          "permlink": "lungo-la-battigia-respiro-camino-along-the-shoreline-i-breathe-i-walk",
+          "weight": 24974,
+          "rshares": 75315433457,
+          "vote_percent": 506,
+          "last_update": "2021-02-09T21:27:03",
+          "num_changes": 0
+        },
+        {
+          "id": 635206392,
+          "voter": "good-karma",
+          "author": "kriang3tee",
+          "permlink": "qo9ijr",
+          "weight": 20481,
+          "rshares": 83386433587,
+          "vote_percent": 570,
+          "last_update": "2021-02-09T13:13:09",
+          "num_changes": 0
+        }
+      ]
+    }`
   },
   {
     api: "condenser_api",
