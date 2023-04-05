@@ -1,3 +1,4 @@
+import { response } from 'express';
 import { ConfigItems } from "../../../config";
 import { _t } from "../../common/i18n";
 
@@ -9,38 +10,38 @@ export const methods = [
     params: ["tag", "limit"],
     url:`${ConfigItems.baseUrl}api/get_trending_tags?start_tag=%22aaa%22&limit=10`,
     parameter:`<table>
-  <thead>
-    <tr>
-      <th><code class="language-plaintext highlighter-rouge">tag</code> (string)</th>
-      <th><code class="language-plaintext highlighter-rouge">limit</code> (int)</th>
-      <th>&nbsp;</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">null</code></td>
-      <td>100</td>
-      <td>Queries the top 100 trending tags.</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">"hive"</code></td>
-      <td>10</td>
-      <td>Queries the tags after “hive”, up to 10 tags.</td>
-    </tr>
-  </tbody>
-</table>`,
-     response: `[
-  {
-    "name": "",
-    "total_payouts": "0.000 HBD",
-    "net_votes": 0,
-    "top_posts": 0,
-    "comments": 0,
-    "trending": ""
-  }
-]`
+        <thead>
+          <tr>
+            <th><code class="language-plaintext highlighter-rouge">tag</code> (string)</th>
+            <th><code class="language-plaintext highlighter-rouge">limit</code> (int)</th>
+            <th>&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">null</code></td>
+            <td>100</td>
+            <td>Queries the top 100 trending tags.</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">"hive"</code></td>
+            <td>10</td>
+            <td>Queries the tags after “hive”, up to 10 tags.</td>
+          </tr>
+        </tbody>
+      </table>`,
+    response: `[
+      {
+        "name": "",
+        "total_payouts": "0.000 HBD",
+        "net_votes": 0,
+        "top_posts": 0,
+        "comments": 0,
+        "trending": ""
+      }
+    ]`
   },
-  {
+  /*{
     api: "condenser_api",
     method: "get_comment_discussions_by_payout",
     params: ["query"],
@@ -113,6 +114,18 @@ export const methods = [
     params: ["query"],
     description:_t("condenser_api.get_discussions_by_promoted_description")
   },
+  {
+    api: "condenser_api",
+    method: "get_state",
+    params: ["path"],
+    description:_t("condenser_api.get_state_description")
+  },
+  {
+    api: "condenser_api",
+    method: "get_account_references",
+    params: ["accountId"],
+    isArray: true
+  },*/
   {
     api: "block_api",
     method: "get_block_header",
@@ -363,16 +376,252 @@ export const methods = [
     }`
   },
   {
-    api: "condenser_api",
-    method: "get_state",
-    params: ["path"],
-    description:_t("condenser_api.get_state_description")
-  },
-  {
     api: "database_api",
     method: "get_config",
     description:_t("database_api.get_config_description"),
-    response: `{}`
+    url:`${ConfigItems.baseUrl}/api/get_config`,
+    response: `{
+      "HIVE_CHAIN_ID": "beeab0de00000000000000000000000000000000000000000000000000000000",
+      "HIVE_TREASURY_ACCOUNT": "hive.fund",
+      "IS_TEST_NET": false,
+      "HIVE_ENABLE_SMT": false,
+      "HIVE_DEFAULT_HF_9_COMPROMISED_ACCOUNTS_PUBLIC_KEY_STR": "STM7sw22HqsXbz7D2CmJfmMwt9rimtk518dRzsR1f8Cgw52dQR1pR",
+      "HIVE_INIT_PUBLIC_KEY_STR": "STM8GC13uCZbP44HzMLV6zPZGwVQ8Nt4Kji8PapsPiNq1BK153XTX",
+      "HIVE_HF_9_COMPROMISED_ACCOUNTS_PUBLIC_KEY_STR": "STM7sw22HqsXbz7D2CmJfmMwt9rimtk518dRzsR1f8Cgw52dQR1pR",
+      "HIVE_INIT_PUBLIC_KEY": "STM8GC13uCZbP44HzMLV6zPZGwVQ8Nt4Kji8PapsPiNq1BK153XTX",
+      "HIVE_BLOCKCHAIN_VERSION": "1.27.3",
+      "OLD_CHAIN_ID": "0000000000000000000000000000000000000000000000000000000000000000",
+      "HIVE_ADDRESS_PREFIX": "STM",
+      "HIVE_GENESIS_TIME": "2016-03-24T16:00:00",
+      "HIVE_MINING_TIME": "2016-03-24T17:00:00",
+      "HIVE_CASHOUT_WINDOW_SECONDS_PRE_HF12": 86400,
+      "HIVE_CASHOUT_WINDOW_SECONDS_PRE_HF17": 43200,
+      "HIVE_CASHOUT_WINDOW_SECONDS": 604800,
+      "HIVE_SECOND_CASHOUT_WINDOW": 2592000,
+      "HIVE_MAX_CASHOUT_WINDOW_SECONDS": 1209600,
+      "HIVE_UPVOTE_LOCKOUT_HF7": 60000000,
+      "HIVE_UPVOTE_LOCKOUT_SECONDS": 43200,
+      "HIVE_UPVOTE_LOCKOUT_HF17": "43200000000",
+      "HIVE_MIN_ACCOUNT_CREATION_FEE": 1,
+      "HIVE_MAX_ACCOUNT_CREATION_FEE": 1000000000,
+      "HIVE_OWNER_AUTH_RECOVERY_PERIOD": "2592000000000",
+      "HIVE_ACCOUNT_RECOVERY_REQUEST_EXPIRATION_PERIOD": "86400000000",
+      "HIVE_OWNER_UPDATE_LIMIT": 3600000000,
+      "HIVE_OWNER_AUTH_HISTORY_TRACKING_START_BLOCK_NUM": 3186477,
+      "HIVE_INIT_SUPPLY": 0,
+      "HIVE_HBD_INIT_SUPPLY": 0,
+      "HIVE_PROPOSAL_MAINTENANCE_PERIOD": 3600,
+      "HIVE_PROPOSAL_MAINTENANCE_CLEANUP": 86400,
+      "HIVE_DAILY_PROPOSAL_MAINTENANCE_PERIOD": 86400,
+      "HIVE_GOVERNANCE_VOTE_EXPIRATION_PERIOD": "31536000000000",
+      "HIVE_GLOBAL_REMOVE_THRESHOLD": 200,
+      "HIVE_START_MINER_VOTING_BLOCK": 864000,
+      "HIVE_DELAYED_VOTING_TOTAL_INTERVAL_SECONDS": 2592000,
+      "HIVE_DELAYED_VOTING_INTERVAL_SECONDS": 86400,
+      "HIVE_REVERSE_AUCTION_WINDOW_SECONDS_HF25": 0,
+      "HIVE_EARLY_VOTING_SECONDS_HF25": 86400,
+      "HIVE_MID_VOTING_SECONDS_HF25": 172800,
+      "VESTS_SYMBOL": "VESTS",
+      "HIVE_SYMBOL": "HIVE",
+      "HBD_SYMBOL": "HBD",
+      "HIVE_BLOCKCHAIN_HARDFORK_VERSION": "1.27.0",
+      "HIVE_100_PERCENT": 10000,
+      "HIVE_1_PERCENT": 100,
+      "HIVE_1_BASIS_POINT": 1,
+      "HIVE_BLOCK_INTERVAL": 3,
+      "HIVE_BLOCKS_PER_YEAR": 10512000,
+      "HIVE_BLOCKS_PER_DAY": 28800,
+      "HIVE_START_VESTING_BLOCK": 201600,
+      "HIVE_INIT_MINER_NAME": "initminer",
+      "HIVE_NUM_INIT_MINERS": 1,
+      "HIVE_INIT_TIME": "1970-01-01T00:00:00",
+      "HIVE_MAX_WITNESSES": 21,
+      "HIVE_MAX_VOTED_WITNESSES_HF0": 19,
+      "HIVE_MAX_MINER_WITNESSES_HF0": 1,
+      "HIVE_MAX_RUNNER_WITNESSES_HF0": 1,
+      "HIVE_MAX_VOTED_WITNESSES_HF17": 20,
+      "HIVE_MAX_MINER_WITNESSES_HF17": 0,
+      "HIVE_MAX_RUNNER_WITNESSES_HF17": 1,
+      "HIVE_HARDFORK_REQUIRED_WITNESSES": 17,
+      "HIVE_MAX_TIME_UNTIL_EXPIRATION": 3600,
+      "HIVE_MAX_MEMO_SIZE": 2048,
+      "HIVE_MAX_PROXY_RECURSION_DEPTH": 4,
+      "HIVE_VESTING_WITHDRAW_INTERVALS_PRE_HF_16": 104,
+      "HIVE_VESTING_WITHDRAW_INTERVALS": 13,
+      "HIVE_VESTING_WITHDRAW_INTERVAL_SECONDS": 604800,
+      "HIVE_MAX_WITHDRAW_ROUTES": 10,
+      "HIVE_MAX_PENDING_TRANSFERS": 255,
+      "HIVE_MAX_OPEN_RECURRENT_TRANSFERS": 255,
+      "HIVE_MAX_CONSECUTIVE_RECURRENT_TRANSFER_FAILURES": 10,
+      "HIVE_MAX_RECURRENT_TRANSFER_END_DATE": 730,
+      "HIVE_MAX_RECURRENT_TRANSFERS_PER_BLOCK": 1000,
+      "HIVE_MIN_RECURRENT_TRANSFERS_RECURRENCE": 24,
+      "HIVE_SAVINGS_WITHDRAW_TIME": "259200000000",
+      "HIVE_SAVINGS_WITHDRAW_REQUEST_LIMIT": 100,
+      "HIVE_VOTING_MANA_REGENERATION_SECONDS": 432000,
+      "HIVE_MAX_VOTE_CHANGES": 5,
+      "HIVE_REVERSE_AUCTION_WINDOW_SECONDS_HF6": 1800,
+      "HIVE_REVERSE_AUCTION_WINDOW_SECONDS_HF20": 900,
+      "HIVE_REVERSE_AUCTION_WINDOW_SECONDS_HF21": 300,
+      "HIVE_MIN_VOTE_INTERVAL_SEC": 3,
+      "HIVE_VOTE_DUST_THRESHOLD": 50000000,
+      "HIVE_DOWNVOTE_POOL_PERCENT_HF21": 2500,
+      "HIVE_MIN_ROOT_COMMENT_INTERVAL": 300000000,
+      "HIVE_MIN_REPLY_INTERVAL": 20000000,
+      "HIVE_MIN_REPLY_INTERVAL_HF20": 3000000,
+      "HIVE_MIN_COMMENT_EDIT_INTERVAL": 3000000,
+      "HIVE_POST_AVERAGE_WINDOW": 86400,
+      "HIVE_POST_WEIGHT_CONSTANT": 1600000000,
+      "HIVE_MAX_ACCOUNT_WITNESS_VOTES": 30,
+      "HIVE_DEFAULT_HBD_INTEREST_RATE": 1000,
+      "HIVE_INFLATION_RATE_START_PERCENT": 978,
+      "HIVE_INFLATION_RATE_STOP_PERCENT": 95,
+      "HIVE_INFLATION_NARROWING_PERIOD": 250000,
+      "HIVE_CONTENT_REWARD_PERCENT_HF16": 7500,
+      "HIVE_VESTING_FUND_PERCENT_HF16": 1500,
+      "HIVE_PROPOSAL_FUND_PERCENT_HF0": 0,
+      "HIVE_CONTENT_REWARD_PERCENT_HF21": 6500,
+      "HIVE_PROPOSAL_FUND_PERCENT_HF21": 1000,
+      "HIVE_HF21_CONVERGENT_LINEAR_RECENT_CLAIMS": "503600561838938636",
+      "HIVE_CONTENT_CONSTANT_HF21": "2000000000000",
+      "HIVE_MINER_PAY_PERCENT": 100,
+      "HIVE_MAX_RATION_DECAY_RATE": 1000000,
+      "HIVE_BANDWIDTH_AVERAGE_WINDOW_SECONDS": 604800,
+      "HIVE_BANDWIDTH_PRECISION": 1000000,
+      "HIVE_MAX_COMMENT_DEPTH_PRE_HF17": 6,
+      "HIVE_MAX_COMMENT_DEPTH": 65535,
+      "HIVE_SOFT_MAX_COMMENT_DEPTH": 255,
+      "HIVE_MAX_RESERVE_RATIO": 20000,
+      "HIVE_CREATE_ACCOUNT_WITH_HIVE_MODIFIER": 30,
+      "HIVE_CREATE_ACCOUNT_DELEGATION_RATIO": 5,
+      "HIVE_CREATE_ACCOUNT_DELEGATION_TIME": "2592000000000",
+      "HIVE_MINING_REWARD": "1.000 HIVE",
+      "HIVE_EQUIHASH_N": 140,
+      "HIVE_EQUIHASH_K": 6,
+      "HIVE_LIQUIDITY_TIMEOUT_SEC": "604800000000",
+      "HIVE_MIN_LIQUIDITY_REWARD_PERIOD_SEC": 60000000,
+      "HIVE_LIQUIDITY_REWARD_PERIOD_SEC": 3600,
+      "HIVE_LIQUIDITY_REWARD_BLOCKS": 1200,
+      "HIVE_MIN_LIQUIDITY_REWARD": "1200.000 HIVE",
+      "HIVE_MIN_CONTENT_REWARD": "1.000 HIVE",
+      "HIVE_MIN_CURATE_REWARD": "1.000 HIVE",
+      "HIVE_MIN_PRODUCER_REWARD": "1.000 HIVE",
+      "HIVE_MIN_POW_REWARD": "1.000 HIVE",
+      "HIVE_ACTIVE_CHALLENGE_FEE": "2.000 HIVE",
+      "HIVE_OWNER_CHALLENGE_FEE": "30.000 HIVE",
+      "HIVE_ACTIVE_CHALLENGE_COOLDOWN": "86400000000",
+      "HIVE_OWNER_CHALLENGE_COOLDOWN": "86400000000",
+      "HIVE_POST_REWARD_FUND_NAME": "post",
+      "HIVE_COMMENT_REWARD_FUND_NAME": "comment",
+      "HIVE_RECENT_RSHARES_DECAY_TIME_HF17": "2592000000000",
+      "HIVE_RECENT_RSHARES_DECAY_TIME_HF19": "1296000000000",
+      "HIVE_CONTENT_CONSTANT_HF0": "2000000000000",
+      "HIVE_APR_PERCENT_MULTIPLY_PER_BLOCK": "102035135585887",
+      "HIVE_APR_PERCENT_SHIFT_PER_BLOCK": 87,
+      "HIVE_APR_PERCENT_MULTIPLY_PER_ROUND": "133921203762304",
+      "HIVE_APR_PERCENT_SHIFT_PER_ROUND": 83,
+      "HIVE_APR_PERCENT_MULTIPLY_PER_HOUR": "119577151364285",
+      "HIVE_APR_PERCENT_SHIFT_PER_HOUR": 77,
+      "HIVE_CURATE_APR_PERCENT": 3875,
+      "HIVE_CONTENT_APR_PERCENT": 3875,
+      "HIVE_LIQUIDITY_APR_PERCENT": 750,
+      "HIVE_PRODUCER_APR_PERCENT": 750,
+      "HIVE_POW_APR_PERCENT": 750,
+      "HIVE_MIN_PAYOUT_HBD": "0.020 HBD",
+      "HIVE_HBD_START_PERCENT_HF14": 200,
+      "HIVE_HBD_STOP_PERCENT_HF14": 500,
+      "HIVE_HBD_START_PERCENT_HF20": 900,
+      "HIVE_HBD_STOP_PERCENT_HF20": 1000,
+      "HIVE_HBD_START_PERCENT_HF26": 2000,
+      "HIVE_HBD_STOP_PERCENT_HF26": 2000,
+      "HIVE_HBD_HARD_LIMIT_PRE_HF26": 1000,
+      "HIVE_HBD_HARD_LIMIT": 3000,
+      "HIVE_MIN_ACCOUNT_NAME_LENGTH": 3,
+      "HIVE_MAX_ACCOUNT_NAME_LENGTH": 16,
+      "HIVE_MIN_PERMLINK_LENGTH": 0,
+      "HIVE_MAX_PERMLINK_LENGTH": 256,
+      "HIVE_MAX_WITNESS_URL_LENGTH": 2048,
+      "HIVE_MAX_SHARE_SUPPLY": "1000000000000000",
+      "HIVE_MAX_SATOSHIS": "4611686018427387903",
+      "HIVE_MAX_SIG_CHECK_DEPTH": 2,
+      "HIVE_MAX_SIG_CHECK_ACCOUNTS": 125,
+      "HIVE_MIN_TRANSACTION_SIZE_LIMIT": 1024,
+      "HIVE_SECONDS_PER_YEAR": 31536000,
+      "HIVE_HBD_INTEREST_COMPOUND_INTERVAL_SEC": 2592000,
+      "HIVE_MAX_TRANSACTION_SIZE": 65536,
+      "HIVE_MIN_BLOCK_SIZE_LIMIT": 65536,
+      "HIVE_MAX_BLOCK_SIZE": 2097152,
+      "HIVE_MIN_BLOCK_SIZE": 115,
+      "HIVE_BLOCKS_PER_HOUR": 1200,
+      "HIVE_FEED_INTERVAL_BLOCKS": 1200,
+      "HIVE_FEED_HISTORY_WINDOW_PRE_HF_16": 168,
+      "HIVE_FEED_HISTORY_WINDOW": 84,
+      "HIVE_MAX_FEED_AGE_SECONDS": 604800,
+      "HIVE_MIN_FEEDS": 7,
+      "HIVE_CONVERSION_DELAY_PRE_HF_16": "604800000000",
+      "HIVE_CONVERSION_DELAY": "302400000000",
+      "HIVE_COLLATERALIZED_CONVERSION_DELAY": "302400000000",
+      "HIVE_CONVERSION_COLLATERAL_RATIO": 20000,
+      "HIVE_COLLATERALIZED_CONVERSION_FEE": 500,
+      "HIVE_MIN_UNDO_HISTORY": 10,
+      "HIVE_MAX_UNDO_HISTORY": 10000,
+      "HIVE_MIN_TRANSACTION_EXPIRATION_LIMIT": 15,
+      "HIVE_BLOCKCHAIN_PRECISION": 1000,
+      "HIVE_BLOCKCHAIN_PRECISION_DIGITS": 3,
+      "HIVE_MAX_INSTANCE_ID": "281474976710655",
+      "HIVE_MAX_AUTHORITY_MEMBERSHIP": 40,
+      "HIVE_MAX_ASSET_WHITELIST_AUTHORITIES": 10,
+      "HIVE_MAX_URL_LENGTH": 127,
+      "HIVE_IRREVERSIBLE_THRESHOLD": 7500,
+      "HIVE_VIRTUAL_SCHEDULE_LAP_LENGTH": "18446744073709551615",
+      "HIVE_VIRTUAL_SCHEDULE_LAP_LENGTH2": "340282366920938463463374607431768211455",
+      "HIVE_INITIAL_VOTE_POWER_RATE": 40,
+      "HIVE_REDUCED_VOTE_POWER_RATE": 10,
+      "HIVE_MAX_LIMIT_ORDER_EXPIRATION": 2419200,
+      "HIVE_DELEGATION_RETURN_PERIOD_HF0": 604800,
+      "HIVE_DELEGATION_RETURN_PERIOD_HF20": 432000,
+      "HIVE_RD_MIN_DECAY_BITS": 6,
+      "HIVE_RD_MAX_DECAY_BITS": 32,
+      "HIVE_RD_DECAY_DENOM_SHIFT": 36,
+      "HIVE_RD_MAX_POOL_BITS": 64,
+      "HIVE_RD_MAX_BUDGET_1": "17179869183",
+      "HIVE_RD_MAX_BUDGET_2": 268435455,
+      "HIVE_RD_MAX_BUDGET_3": 2147483647,
+      "HIVE_RD_MAX_BUDGET": 268435455,
+      "HIVE_RD_MIN_DECAY": 64,
+      "HIVE_RD_MIN_BUDGET": 1,
+      "HIVE_RD_MAX_DECAY": 4294967295,
+      "HIVE_ACCOUNT_SUBSIDY_PRECISION": 10000,
+      "HIVE_WITNESS_SUBSIDY_BUDGET_PERCENT": 12500,
+      "HIVE_WITNESS_SUBSIDY_DECAY_PERCENT": 210000,
+      "HIVE_DEFAULT_ACCOUNT_SUBSIDY_DECAY": 347321,
+      "HIVE_DEFAULT_ACCOUNT_SUBSIDY_BUDGET": 797,
+      "HIVE_DECAY_BACKSTOP_PERCENT": 9000,
+      "HIVE_BLOCK_GENERATION_POSTPONED_TX_LIMIT": 5,
+      "HIVE_PENDING_TRANSACTION_EXECUTION_LIMIT": 200000,
+      "HIVE_CUSTOM_OP_ID_MAX_LENGTH": 32,
+      "HIVE_CUSTOM_OP_DATA_MAX_LENGTH": 8192,
+      "HIVE_BENEFICIARY_LIMIT": 128,
+      "HIVE_COMMENT_TITLE_LIMIT": 256,
+      "HIVE_ONE_DAY_SECONDS": 86400,
+      "HIVE_UP_TO_DATE_MARGIN__FAST_CONFIRM": 60000000,
+      "HIVE_UP_TO_DATE_MARGIN__BLOCK_STATS": 20000000,
+      "HIVE_UP_TO_DATE_MARGIN__PENDING_TXS": 20000000,
+      "HIVE_MINER_ACCOUNT": "miners",
+      "HIVE_NULL_ACCOUNT": "null",
+      "HIVE_TEMP_ACCOUNT": "temp",
+      "HIVE_PROXY_TO_SELF_ACCOUNT": "",
+      "HIVE_ROOT_POST_PARENT": "",
+      "OBSOLETE_TREASURY_ACCOUNT": "steem.dao",
+      "NEW_HIVE_TREASURY_ACCOUNT": "hive.fund",
+      "HIVE_TREASURY_FEE": 10000,
+      "HIVE_PROPOSAL_SUBJECT_MAX_LENGTH": 80,
+      "HIVE_PROPOSAL_MAX_IDS_NUMBER": 5,
+      "HIVE_PROPOSAL_FEE_INCREASE_DAYS": 60,
+      "HIVE_PROPOSAL_FEE_INCREASE_DAYS_SEC": 5184000,
+      "HIVE_PROPOSAL_FEE_INCREASE_AMOUNT": 1000,
+      "HIVE_PROPOSAL_CONVERSION_RATE": 5
+    }`
   },
   {
     api: "database_api",
@@ -430,238 +679,580 @@ export const methods = [
   {
     api: "condenser_api",
     method: "get_chain_properties",
-    description:_t("condenser_api.get_chain_properties_description")
+    isArray: true,
+    description:_t("condenser_api.get_chain_properties_description"),
+    url:`${ConfigItems.baseUrl}/api/get_chain_properties`,
+    response: `{
+      "account_creation_fee": "3.000 HIVE",
+      "maximum_block_size": 65536,
+      "hbd_interest_rate": 2000,
+      "account_subsidy_budget": 797,
+      "account_subsidy_decay": 347321
+    }`
   },
   {
-    api: "database_api",
+    api: "condenser_api",
     method: "get_feed_history",
+    isArray: true,
     description:_t("condenser_api.get_feed_history_description"),
+    url:`${ConfigItems.baseUrl}/api/get_feed_history`,
     response: `{
       "id": 0,
-      "current_median_history": {"base": "0.000 HIVE", "quote": "0.000 HIVE"},
-      "price_history": []
+      "current_median_history": {
+        "base": "0.405 HBD",
+        "quote": "1.000 HIVE"
+      },
+      "market_median_history": {
+        "base": "0.405 HBD",
+        "quote": "1.000 HIVE"
+      },
+      "current_min_history": {
+        "base": "0.397 HBD",
+        "quote": "1.000 HIVE"
+      },
+      "current_max_history": {
+        "base": "0.422 HBD",
+        "quote": "1.000 HIVE"
+      },
+      "price_history": [
+        {
+          "base": "0.416 HBD",
+          "quote": "1.000 HIVE"
+        },
+        {
+          "base": "0.412 HBD",
+          "quote": "1.000 HIVE"
+        },
+        {
+          "base": "0.411 HBD",
+          "quote": "1.000 HIVE"
+        },
+        {
+          "base": "0.409 HBD",
+          "quote": "1.000 HIVE"
+        }
+      ]
     }`
   },
   {
     api: "condenser_api",
     method: "get_current_median_history_price",
-    description:_t("condenser_api.get_current_median_history_price_description")
+    isArray: true,
+    description:_t("condenser_api.get_current_median_history_price_description"),
+    url:`${ConfigItems.baseUrl}/api/get_current_median_history_price`,
+    response: `{
+      "base": "0.405 HBD",
+      "quote": "1.000 HIVE"
+    }`
   },
   {
     api: "database_api",
     method: "get_witness_schedule",
     description:_t("condenser_api.get_witness_schedule_description"),
+    url:`${ConfigItems.baseUrl}/api/get_witness_schedule`,
     response: `{
       "id": 0,
-      "current_virtual_time": "0",
-      "next_shuffle_block_num": 1,
-      "current_shuffled_witnesses": [],
-      "num_scheduled_witnesses": 1,
-      "top19_weight": 1,
+      "current_virtual_time": "779381989783310301774252553",
+      "next_shuffle_block_num": 73739106,
+      "current_shuffled_witnesses": [
+        "deathwing",
+        "abit",
+        "blocktrades",
+        "steempeak",
+        "arcange",
+        "guiltyparties",
+        "roelandp",
+        "good-karma",
+        "stoodkev",
+        "gtg",
+        "threespeak",
+        "ocd-witness",
+        "therealwolf",
+        "ausbitbank",
+        "yabapmatt",
+        "themarkymark",
+        "emrebeyler",
+        "steempress",
+        "smooth.witness",
+        "engrave",
+        "quochuy"
+      ],
+      "num_scheduled_witnesses": 21,
+      "elected_weight": 1,
       "timeshare_weight": 5,
       "miner_weight": 1,
       "witness_pay_normalization_factor": 25,
       "median_props": {
-        "account_creation_fee": "0.000 HIVE",
-        "maximum_block_size": 131072,
-        "hbd_interest_rate": 1000
+        "account_creation_fee": "3.000 HIVE",
+        "maximum_block_size": 65536,
+        "hbd_interest_rate": 2000,
+        "account_subsidy_budget": 797,
+        "account_subsidy_decay": 347321
       },
-      "majority_version": "0.0.0",
-      "max_voted_witnesses": 19,
-      "max_miner_witnesses": 1,
+      "majority_version": "1.27.3",
+      "max_voted_witnesses": 20,
+      "max_miner_witnesses": 0,
       "max_runner_witnesses": 1,
-      "hardfork_required_witnesses": 17
+      "hardfork_required_witnesses": 17,
+      "account_subsidy_rd": {
+        "resource_unit": 10000,
+        "budget_per_time_unit": 797,
+        "pool_eq": 157691079,
+        "max_pool_size": 157691079,
+        "decay_params": {
+          "decay_per_time_unit": 347321,
+          "decay_per_time_unit_denom_shift": 36
+        },
+        "min_decay": 0
+      },
+      "account_subsidy_witness_rd": {
+        "resource_unit": 10000,
+        "budget_per_time_unit": 996,
+        "pool_eq": 9384019,
+        "max_pool_size": 9384019,
+        "decay_params": {
+          "decay_per_time_unit": 7293741,
+          "decay_per_time_unit_denom_shift": 36
+        },
+        "min_decay": 194
+      },
+      "min_witness_account_subsidy_decay": 0
     }`
   },
   {
-    api: "condenser_api",
+    api: "database_api",
     method: "get_hardfork_version",
-    description:_t("condenser_api.get_hardfork_version_description")                                 
+    description:_t("condenser_api.get_hardfork_version_description"),
+    url:`${ConfigItems.baseUrl}/api/get_hardfork_version`,
+    response: `"1.27.0"`                                 
   },
   {
     api: "condenser_api",
     method: "get_next_scheduled_hardfork",
-    description:_t("condenser_api.get_hardfork_version_description")                                         
+    isArray: true,
+    description:_t("condenser_api.get_hardfork_version_description"),
+    url:`${ConfigItems.baseUrl}/api/get_next_scheduled_hardfork`,
+    response: `{
+      "hf_version": "1.27.0",
+      "live_time": "2022-10-24T12:00:00"
+    }`                                         
   },
   {
     api: "condenser_api",
     method: "get_key_references",
     params: ["keys"],
+    isArray: true,
     description:_t("condenser_api.get_key_references_description"),
-    url:`${ConfigItems.baseUrl}/api/get_accounts?name[]=hiveio`,
-    parameter: `<p>account:string array; delayed_votes_active:boolean</p>
-      <table>
-        <thead>
-          <tr>
-            <th><code class="language-plaintext highlighter-rouge">account</code> (string array)</th>
-            <th><code class="language-plaintext highlighter-rouge">delayed_votes_active</code> (boolean)</th>
-            <th>&nbsp;</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code class="language-plaintext highlighter-rouge">["hiveio"]</code></td>
-            <td>&nbsp;</td>
-            <td>Queries for account named “hiveio”.</td>
-          </tr>
-          <tr>
-            <td><code class="language-plaintext highlighter-rouge">["hiveio", "alice"]</code></td>
-            <td>false</td>
-            <td>Queries for accounts named “hiveio” and “alice” with <code class="language-plaintext highlighter-rouge">delayed_votes</code> hidden.</td>
-          </tr>
-        </tbody>
-      </table>`,
-    response: `{
-      "id": 1370484,
-      "name": "hiveio",
-      "owner": {
-      "weight_threshold": 1,
-      "account_auths": [],
-      "key_auths": [
-          [
-          "STM65PUAPA4yC4RgPtGgsPupxT6yJtMhmT5JHFdsT3uoCbR8WJ25s",
-          1
-          ]
+    url:`${ConfigItems.baseUrl}/api/get_key_references?keys=["STM6vJmrwaX5TjgTS9dPH8KsArso5m91fVodJvv91j7G765wqcNM9"]`,
+    parameter: `<code><span class="p">[</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"STM6vJmrwaX5TjgTS9dPH8KsArso5m91fVodJvv91j7G765wqcNM9"</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+      </span></code>`,
+    response: `[
+      [
+        "hiveio"
       ]
-      },
-      "active": {
-      "weight_threshold": 1,
-      "account_auths": [],
-      "key_auths": [
-          [
-          "STM69zfrFGnZtU3gWFWpQJ6GhND1nz7TJsKBTjcWfebS1JzBEweQy",
-          1
-          ]
-      ]
-      },
-      "posting": {
-      "weight_threshold": 1,
-      "account_auths": [["threespeak", 1], ["vimm.app", 1]],
-      "key_auths": [
-          [
-          "STM6vJmrwaX5TjgTS9dPH8KsArso5m91fVodJvv91j7G765wqcNM9",
-          1
-          ]
-      ]
-      },
-      "memo_key": "STM7wrsg1BZogeK7X3eG4ivxmLaH69FomR8rLkBbepb3z3hm5SbXu",
-      "json_metadata": "",
-      "posting_json_metadata": "{\"profile\":{\"pinned\":\"none\",\"version\":2,\"website\":\"hive.io\",\"profile_image\":\"https://files.peakd.com/file/peakd-hive/hiveio/Jp2YHc6Q-hive-logo.png\",\"cover_image\":\"https://files.peakd.com/file/peakd-hive/hiveio/Xe1TcEBi-hive-banner.png\"}}",
-      "proxy": "",
-      "last_owner_update": "1970-01-01T00:00:00",
-      "last_account_update": "2020-11-12T01:20:48",
-      "created": "2020-03-06T12:22:48",
-      "mined": false,
-      "recovery_account": "steempeak",
-      "last_account_recovery": "1970-01-01T00:00:00",
-      "reset_account": "null",
-      "comment_count": 0,
-      "lifetime_vote_count": 0,
-      "post_count": 31,
-      "can_vote": true,
-      "voting_manabar": {
-      "current_mana": "598442432741",
-      "last_update_time": 1591297380
-      },
-      "downvote_manabar": {
-      "current_mana": "149610608184",
-      "last_update_time": 1591297380
-      },
-      "voting_power": 0,
-      "balance": "11.682 HIVE",
-      "savings_balance": "0.000 HIVE",
-      "hbd_balance": "43.575 HBD",
-      "hbd_seconds": "0",
-      "hbd_seconds_last_update": "2020-10-21T02:45:12",
-      "hbd_last_interest_payment": "2020-10-21T02:45:12",
-      "savings_hbd_balance": "0.000 HBD",
-      "savings_hbd_seconds": "0",
-      "savings_hbd_seconds_last_update": "1970-01-01T00:00:00",
-      "savings_hbd_last_interest_payment": "1970-01-01T00:00:00",
-      "savings_withdraw_requests": 0,
-      "reward_hbd_balance": "0.000 HBD",
-      "reward_hive_balance": "0.000 HIVE",
-      "reward_vesting_balance": "0.000000 VESTS",
-      "reward_vesting_hive": "0.000 HIVE",
-      "vesting_shares": "598442.432741 VESTS",
-      "delegated_vesting_shares": "0.000000 VESTS",
-      "received_vesting_shares": "0.000000 VESTS",
-      "vesting_withdraw_rate": "0.000000 VESTS",
-      "post_voting_power": "598442.432741 VESTS",
-      "next_vesting_withdrawal": "1969-12-31T23:59:59",
-      "withdrawn": 0,
-      "to_withdraw": 0,
-      "withdraw_routes": 0,
-      "pending_transfers": 0,
-      "curation_rewards": 0,
-      "posting_rewards": 604589,
-      "proxied_vsf_votes": [0, 0, 0, 0],
-      "witnesses_voted_for": 0,
-      "last_post": "2021-03-23T18:05:48",
-      "last_root_post": "2021-03-23T18:05:48",
-      "last_vote_time": "1970-01-01T00:00:00",
-      "post_bandwidth": 0,
-      "pending_claimed_accounts": 0,
-      "delayed_votes": [
-      {
-          "time": "2021-02-24T05:08:21",
-          "val": "11550765516955"
-      },
-      {
-          "time": "2021-02-26T15:46:06",
-          "val": "633465684569"
-      },
-      {
-          "time": "2021-03-07T17:54:39",
-          "val": "1000000037683"
-      },
-      {
-          "time": "2021-03-16T05:54:33",
-          "val": "999978763511"
-      },
-      {
-          "time": "2021-03-18T06:06:00",
-          "val": "1000000171317"
-      }
-      ],
-      "vesting_balance": "0.000 HIVE",
-      "reputation": "88826789432105",
-      "transfer_history": [],
-      "market_history": [],
-      "post_history": [],
-      "vote_history": [],
-      "other_history": [],
-      "witness_votes": [],
-      "tags_usage": [],
-      "guest_bloggers": []
-    }`
+    ]`
   },
   {
     api: "condenser_api",
     method: "get_accounts",
-    params: ["names"],
+    params: ["names","delayed_votes_active"],
     isArray: true,
-    description:_t("condenser_api.get_accounts_description")    
-  },
-  {
-    api: "condenser_api",
-    method: "get_account_references",
-    params: ["accountId"]
+    description:_t("condenser_api.get_accounts_description"),
+    url:`${ConfigItems.baseUrl}/api/get_accounts?names=["hiveio","ecency"]`,
+    parameter: `<p><code class="language-plaintext highlighter-rouge">names:string array</code>; <code class="language-plaintext highlighter-rouge">delayed_votes_active:boolean</code></p>`,
+    response: `[
+      {
+        "id": 1370484,
+        "name": "hiveio",
+        "owner": {
+          "weight_threshold": 1,
+          "account_auths": [],
+          "key_auths": [
+            [
+              "STM65PUAPA4yC4RgPtGgsPupxT6yJtMhmT5JHFdsT3uoCbR8WJ25s",
+              1
+            ]
+          ]
+        },
+        "active": {
+          "weight_threshold": 1,
+          "account_auths": [
+            [
+              "pettycash",
+              1
+            ]
+          ],
+          "key_auths": [
+            [
+              "STM69zfrFGnZtU3gWFWpQJ6GhND1nz7TJsKBTjcWfebS1JzBEweQy",
+              1
+            ]
+          ]
+        },
+        "posting": {
+          "weight_threshold": 1,
+          "account_auths": [
+            [
+              "threespeak",
+              1
+            ],
+            [
+              "vimm.app",
+              1
+            ]
+          ],
+          "key_auths": [
+            [
+              "STM6vJmrwaX5TjgTS9dPH8KsArso5m91fVodJvv91j7G765wqcNM9",
+              1
+            ]
+          ]
+        },
+        "memo_key": "STM7wrsg1BZogeK7X3eG4ivxmLaH69FomR8rLkBbepb3z3hm5SbXu",
+        "json_metadata": "",
+        "posting_json_metadata": "{\"profile\":{\"pinned\":\"none\",\"version\":2,\"website\":\"hive.io\",\"profile_image\":\"https://files.peakd.com/file/peakd-hive/hiveio/Jp2YHc6Q-hive-logo.png\",\"cover_image\":\"https://files.peakd.com/file/peakd-hive/hiveio/Xe1TcEBi-hive-banner.png\"}}",
+        "proxy": "",
+        "previous_owner_update": "1970-01-01T00:00:00",
+        "last_owner_update": "1970-01-01T00:00:00",
+        "last_account_update": "2021-11-09T21:56:27",
+        "created": "2020-03-06T12:22:48",
+        "mined": false,
+        "recovery_account": "steempeak",
+        "last_account_recovery": "1970-01-01T00:00:00",
+        "reset_account": "null",
+        "comment_count": 0,
+        "lifetime_vote_count": 0,
+        "post_count": 60,
+        "can_vote": true,
+        "voting_manabar": {
+          "current_mana": "1488034897889",
+          "last_update_time": 1667197029
+        },
+        "downvote_manabar": {
+          "current_mana": "372008724471",
+          "last_update_time": 1667197029
+        },
+        "voting_power": 0,
+        "balance": "456.266 HIVE",
+        "savings_balance": "0.000 HIVE",
+        "hbd_balance": "289.712 HBD",
+        "hbd_seconds": "0",
+        "hbd_seconds_last_update": "2020-10-21T02:45:12",
+        "hbd_last_interest_payment": "2020-10-21T02:45:12",
+        "savings_hbd_balance": "0.000 HBD",
+        "savings_hbd_seconds": "0",
+        "savings_hbd_seconds_last_update": "1970-01-01T00:00:00",
+        "savings_hbd_last_interest_payment": "1970-01-01T00:00:00",
+        "savings_withdraw_requests": 0,
+        "reward_hbd_balance": "0.070 HBD",
+        "reward_hive_balance": "0.000 HIVE",
+        "reward_vesting_balance": "472.363539 VESTS",
+        "reward_vesting_hive": "0.263 HIVE",
+        "vesting_shares": "1488034.897889 VESTS",
+        "delegated_vesting_shares": "0.000000 VESTS",
+        "received_vesting_shares": "0.000000 VESTS",
+        "vesting_withdraw_rate": "0.000000 VESTS",
+        "post_voting_power": "1488034.897889 VESTS",
+        "next_vesting_withdrawal": "1969-12-31T23:59:59",
+        "withdrawn": 0,
+        "to_withdraw": 0,
+        "withdraw_routes": 0,
+        "pending_transfers": 0,
+        "curation_rewards": 0,
+        "posting_rewards": 1578377,
+        "proxied_vsf_votes": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "witnesses_voted_for": 0,
+        "last_post": "2023-03-21T03:05:36",
+        "last_root_post": "2023-03-21T03:05:36",
+        "last_vote_time": "1970-01-01T00:00:00",
+        "post_bandwidth": 0,
+        "pending_claimed_accounts": 0,
+        "governance_vote_expiration_ts": "2023-07-14T17:52:15",
+        "delayed_votes": [],
+        "open_recurrent_transfers": 0,
+        "vesting_balance": "0.000 HIVE",
+        "reputation": "207993891756354",
+        "transfer_history": [],
+        "market_history": [],
+        "post_history": [],
+        "vote_history": [],
+        "other_history": [],
+        "witness_votes": [],
+        "tags_usage": [],
+        "guest_bloggers": []
+      },
+      {
+        "id": 1382792,
+        "name": "ecency",
+        "owner": {
+          "weight_threshold": 1,
+          "account_auths": [],
+          "key_auths": [
+            [
+              "STM4yhxC7Bum8St36z3nZmj9VA59EXM7DXReMLMRn8fwrazgNbKYQ",
+              1
+            ]
+          ]
+        },
+        "active": {
+          "weight_threshold": 1,
+          "account_auths": [],
+          "key_auths": [
+            [
+              "STM51ApnQm3HNieuy3ZUQNtXbdu8CzEFEWRPqMLY1422i8Gy7g2PJ",
+              1
+            ]
+          ]
+        },
+        "posting": {
+          "weight_threshold": 1,
+          "account_auths": [
+            [
+              "ecency.app",
+              1
+            ]
+          ],
+          "key_auths": [
+            [
+              "STM8AZuk2ja5vSFySFL2zpB9bNew8wJAg8r4QFtbnoamEX8Jvvq43",
+              1
+            ]
+          ]
+        },
+        "memo_key": "STM5vCxUjSAZAgKBornswBuzXgAZasbE3EkPHpLmDEVHmPVGMnnah",
+        "json_metadata": "{\"profile\":{\"name\":\"\",\"about\":\"\",\"cover_image\":\"\",\"profile_image\":\"https://images.esteem.app/DQmWCcJcicyck5atZcgXt5rQstoQVSrumHdsmeQNKXHjgPa/ecenct_logo.png\",\"website\":\"https://ecency.com\",\"location\":\"\"}}",
+        "posting_json_metadata": "{\"profile\":{\"name\":\"Ecency\",\"about\":\"Set it free, be free! Join immutable, uncensored, rewarding communities! https://ecency.com\",\"cover_image\":\"\",\"profile_image\":\"https://images.ecency.com/DQmWCcJcicyck5atZcgXt5rQstoQVSrumHdsmeQNKXHjgPa/ecenct_logo.png\",\"website\":\"https://ecency.com\",\"location\":\"Blockchain\",\"pinned\":\"ecency-development-and-maintenance-3\",\"version\":2,\"tokens\":[{\"symbol\":\"SPT\",\"type\":\"ENGINE\"},{\"symbol\":\"LEO\",\"type\":\"ENGINE\"},{\"symbol\":\"POB\",\"type\":\"ENGINE\"}]}}",
+        "proxy": "good-karma",
+        "previous_owner_update": "1970-01-01T00:00:00",
+        "last_owner_update": "1970-01-01T00:00:00",
+        "last_account_update": "2023-03-14T06:10:00",
+        "created": "2020-05-13T07:50:03",
+        "mined": false,
+        "recovery_account": "esteemapp",
+        "last_account_recovery": "1970-01-01T00:00:00",
+        "reset_account": "null",
+        "comment_count": 0,
+        "lifetime_vote_count": 0,
+        "post_count": 209860,
+        "can_vote": true,
+        "voting_manabar": {
+          "current_mana": "1561357466363770",
+          "last_update_time": 1680694197
+        },
+        "downvote_manabar": {
+          "current_mana": "550678930593065",
+          "last_update_time": 1680694197
+        },
+        "voting_power": 7088,
+        "balance": "1108.361 HIVE",
+        "savings_balance": "0.000 HIVE",
+        "hbd_balance": "66.243 HBD",
+        "hbd_seconds": "3282007838238",
+        "hbd_seconds_last_update": "2021-06-30T13:30:33",
+        "hbd_last_interest_payment": "2021-06-14T09:30:27",
+        "savings_hbd_balance": "0.000 HBD",
+        "savings_hbd_seconds": "187726470",
+        "savings_hbd_seconds_last_update": "2023-04-02T19:38:51",
+        "savings_hbd_last_interest_payment": "2023-04-01T10:26:00",
+        "savings_withdraw_requests": 1,
+        "reward_hbd_balance": "0.000 HBD",
+        "reward_hive_balance": "0.000 HIVE",
+        "reward_vesting_balance": "3383.680870 VESTS",
+        "reward_vesting_hive": "1.897 HIVE",
+        "vesting_shares": "224658604.259260 VESTS",
+        "delegated_vesting_shares": "4844928.897781 VESTS",
+        "received_vesting_shares": "1982902047.010782 VESTS",
+        "vesting_withdraw_rate": "0.000000 VESTS",
+        "post_voting_power": "2202715722.372261 VESTS",
+        "next_vesting_withdrawal": "1969-12-31T23:59:59",
+        "withdrawn": 0,
+        "to_withdraw": 0,
+        "withdraw_routes": 0,
+        "pending_transfers": 0,
+        "curation_rewards": 253211364,
+        "posting_rewards": 18945709,
+        "proxied_vsf_votes": [
+          "1665116204971",
+          0,
+          0,
+          0
+        ],
+        "witnesses_voted_for": 0,
+        "last_post": "2023-04-05T11:29:57",
+        "last_root_post": "2023-04-04T07:07:03",
+        "last_vote_time": "2023-04-05T11:29:57",
+        "post_bandwidth": 0,
+        "pending_claimed_accounts": 21964,
+        "governance_vote_expiration_ts": "2023-08-03T10:28:12",
+        "delayed_votes": [],
+        "open_recurrent_transfers": 0,
+        "vesting_balance": "0.000 HIVE",
+        "reputation": "378900796068348",
+        "transfer_history": [],
+        "market_history": [],
+        "post_history": [],
+        "vote_history": [],
+        "other_history": [],
+        "witness_votes": [],
+        "tags_usage": [],
+        "guest_bloggers": []
+      }
+    ]`
   },
   {
     api: "condenser_api",
     method: "lookup_account_names",
-    params: ["accounts"],
-    description:_t("condenser_api.lookup_account_names_description") 
-      
+    params: ["accounts","delayed_votes_active"],
+    isArray: true,
+    description:_t("condenser_api.lookup_account_names_description"),
+    url: `${ConfigItems.baseUrl}/api/lookup_account_names?accounts=["hiveio"]&delayed_votes_active=false`,
+    parameter: `<code>accounts:[string]; delayed_votes_active:boolean</code>`,
+    response: `[
+      {
+        "id": 1370484,
+        "name": "hiveio",
+        "owner": {
+          "weight_threshold": 1,
+          "account_auths": [],
+          "key_auths": [
+            [
+              "STM65PUAPA4yC4RgPtGgsPupxT6yJtMhmT5JHFdsT3uoCbR8WJ25s",
+              1
+            ]
+          ]
+        },
+        "active": {
+          "weight_threshold": 1,
+          "account_auths": [
+            [
+              "pettycash",
+              1
+            ]
+          ],
+          "key_auths": [
+            [
+              "STM69zfrFGnZtU3gWFWpQJ6GhND1nz7TJsKBTjcWfebS1JzBEweQy",
+              1
+            ]
+          ]
+        },
+        "posting": {
+          "weight_threshold": 1,
+          "account_auths": [
+            [
+              "threespeak",
+              1
+            ],
+            [
+              "vimm.app",
+              1
+            ]
+          ],
+          "key_auths": [
+            [
+              "STM6vJmrwaX5TjgTS9dPH8KsArso5m91fVodJvv91j7G765wqcNM9",
+              1
+            ]
+          ]
+        },
+        "memo_key": "STM7wrsg1BZogeK7X3eG4ivxmLaH69FomR8rLkBbepb3z3hm5SbXu",
+        "json_metadata": "",
+        "posting_json_metadata": "{\"profile\":{\"pinned\":\"none\",\"version\":2,\"website\":\"hive.io\",\"profile_image\":\"https://files.peakd.com/file/peakd-hive/hiveio/Jp2YHc6Q-hive-logo.png\",\"cover_image\":\"https://files.peakd.com/file/peakd-hive/hiveio/Xe1TcEBi-hive-banner.png\"}}",
+        "proxy": "",
+        "previous_owner_update": "1970-01-01T00:00:00",
+        "last_owner_update": "1970-01-01T00:00:00",
+        "last_account_update": "2021-11-09T21:56:27",
+        "created": "2020-03-06T12:22:48",
+        "mined": false,
+        "recovery_account": "steempeak",
+        "last_account_recovery": "1970-01-01T00:00:00",
+        "reset_account": "null",
+        "comment_count": 0,
+        "lifetime_vote_count": 0,
+        "post_count": 60,
+        "can_vote": true,
+        "voting_manabar": {
+          "current_mana": "1488034897889",
+          "last_update_time": 1667197029
+        },
+        "downvote_manabar": {
+          "current_mana": "372008724471",
+          "last_update_time": 1667197029
+        },
+        "voting_power": 0,
+        "balance": "456.266 HIVE",
+        "savings_balance": "0.000 HIVE",
+        "hbd_balance": "289.712 HBD",
+        "hbd_seconds": "0",
+        "hbd_seconds_last_update": "2020-10-21T02:45:12",
+        "hbd_last_interest_payment": "2020-10-21T02:45:12",
+        "savings_hbd_balance": "0.000 HBD",
+        "savings_hbd_seconds": "0",
+        "savings_hbd_seconds_last_update": "1970-01-01T00:00:00",
+        "savings_hbd_last_interest_payment": "1970-01-01T00:00:00",
+        "savings_withdraw_requests": 0,
+        "reward_hbd_balance": "0.070 HBD",
+        "reward_hive_balance": "0.000 HIVE",
+        "reward_vesting_balance": "472.363539 VESTS",
+        "reward_vesting_hive": "0.263 HIVE",
+        "vesting_shares": "1488034.897889 VESTS",
+        "delegated_vesting_shares": "0.000000 VESTS",
+        "received_vesting_shares": "0.000000 VESTS",
+        "vesting_withdraw_rate": "0.000000 VESTS",
+        "post_voting_power": "1488034.897889 VESTS",
+        "next_vesting_withdrawal": "1969-12-31T23:59:59",
+        "withdrawn": 0,
+        "to_withdraw": 0,
+        "withdraw_routes": 0,
+        "pending_transfers": 0,
+        "curation_rewards": 0,
+        "posting_rewards": 1578377,
+        "proxied_vsf_votes": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "witnesses_voted_for": 0,
+        "last_post": "2023-03-21T03:05:36",
+        "last_root_post": "2023-03-21T03:05:36",
+        "last_vote_time": "1970-01-01T00:00:00",
+        "post_bandwidth": 0,
+        "pending_claimed_accounts": 0,
+        "governance_vote_expiration_ts": "2023-07-14T17:52:15",
+        "open_recurrent_transfers": 0
+      }
+    ]`
   },
   {
     api: "condenser_api",
     method: "lookup_accounts",
-    // "param_type": "params",
     isArray: true,
     params: ["lower_bound_name", "limit"],
-    description:_t("condenser_api.lookup_accounts_description") 
+    parameter: `<code>lower_bound_name:string; limit:int up to 1000</code>`,
+    description:_t("condenser_api.lookup_accounts_description"),
+    url: `${ConfigItems.baseUrl}/api/lookup_accounts?lower_bound_name="dem"&limit=10`,
+    response: `[
+      "dem",
+      "dem-of-ashes",
+      "dem0",
+      "dem0n0cracy",
+      "dem0n9",
+      "dem0nangel",
+      "dem0nix",
+      "dem0nprince",
+      "dem0nyito",
+      "dem0rvil"
+    ]`
   },
   {
     api: "condenser_api",
