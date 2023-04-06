@@ -16,6 +16,15 @@ const Api_accordion_body = (props: any) => {
                 className="body text-p"
                 dangerouslySetInnerHTML={{ __html: `${description}`}}
                 />}
+                <h6>{_t('api_documentation.parameters')}</h6>
+                {parameter ?
+                <>
+                   <p
+                className="body text-p"
+                dangerouslySetInnerHTML={{ __html: `${parameter}`}}
+                />
+                </>: 
+                <p className='text-p'>None</p>}
                 {url && 
                     <>
                         <h6>{_t('api_documentation.example_url')}</h6>
@@ -27,19 +36,7 @@ const Api_accordion_body = (props: any) => {
                         <h6>{_t('api_documentation.example_response')}</h6>
                         <pre className='api-response'>{response}</pre>
                     </>
-                }
-    
-                <h6>{_t('api_documentation.parameters')}</h6>
-                {parameter ?
-                <>
-                   <p
-                className="body text-p"
-                dangerouslySetInnerHTML={{ __html: `${parameter}`}}
-                />
-                </>: 
-                <p className='text-p'>None</p>}
-
-                    
+                }   
         </div>
 
         </>
