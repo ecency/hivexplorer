@@ -84,7 +84,7 @@ const APIdocumentation = (props: PageProps) => {
         placeholder={`${_t("heading_label.search_apis")}`}
       />
       {loading && <LinearProgress />}
-      <>{!loading && filterVal && Object.keys(collection).map((api, i: number) => {
+      <>{filterVal && Object.keys(collection).map((api, i: number) => {
         const urlCheck = collection[api].some((item: any) => item.hasOwnProperty('url'))
         return (
           <span key={`${i}-${api}`}>
