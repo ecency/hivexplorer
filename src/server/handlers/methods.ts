@@ -3223,34 +3223,221 @@ export const methods = [
     api: "condenser_api",
     method: "get_discussions_by_author_before_date",
     params: ["author", "start_permlink", "before_date", "limit"],
-    description:_t("condenser_api.get_discussions_by_author_before_date_description")
-  },
-  {
-    api: "condenser_api",
-    method: "get_replies_by_last_update",
-    params: ["start_author", "start_permlink", "limit"],
-    description:_t("condenser_api.get_replies_by_last_update_description")
+    parameter: `<code>author: string; start_permlink: string; before_date: string; limit: int;</code>`,
+    description:_t("condenser_api.get_discussions_by_author_before_date_description"),
+    url: `${ConfigItems.baseUrl}/api/get_discussions_by_author_before_date?author="ecency"&start_permlink="token"&limit=2&before_date="2016-04-19T22:49:43"`,
+    response: `[
+      {
+        "author": "ecency",
+        "permlink": "desktop-search-snippets-password-change",
+        "category": "hive-125125",
+        "title": "Desktop - search, snippets, password change",
+        "body": "We just pushed desktop update including latest [website updates and improvements](https://ecency.com/hive-125125/@ecency/vision-best-search-snippets-password). You should receive notification within desktop app about new version, feel free to try it out and let us know how new changes work for you. Are you mobile user, try [Ecency mobile app](https://ecency.com/hive-125125/@ecency/mobile-performance-reply-switch-deeplinking) as well.\n\n![ecency-blockchain-social-desktop-wallet-app](https://images.ecency.com/DQmWXQQroNnua8djg6AGbdRW4fcRkv2teoYoctoQWa3tHGj/desktop_3013.png)\n\n# What's new \n \n- Advanced search \n- Snippets\n- Italian, Bulgarian added \n- Profile edit\n- Password change\n- Other fixes included in [last website update](https://ecency.com/hive-125125/@ecency/vision-best-search-snippets-password)\n- Many more fixes and improvements which you can monitor from [our official Github page](https://github.com/ecency/ecency-vision) \n \n### https://ecency.com  \n##### Desktop https://desktop.ecency.com  \n##### iOS https://ios.ecency.com  \n##### Android https://android.ecency.com\n \n---  \n \n### Do you like our work? Support [Ecency proposal](https://ecency.com/hive/@ecency/proposal-ecency-development-and-maintenance):  \nEcency: https://ecency.com/proposals/141  \nHivesigner: [Vote for Proposal](https://hivesigner.com/sign/update-proposal-votes?proposal_ids=%5B141%5D&approve=true)",
+        "json_metadata": "{\"links\":[\"https://ecency.com/hive-125125/@ecency/vision-best-search-snippets-password\",\"https://ecency.com/hive-125125/@ecency/mobile-performance-reply-switch-deeplinking\",\"https://ecency.com/hive-125125/@ecency/vision-best-search-snippets-password\",\"https://github.com/ecency/ecency-vision\",\"https://ecency.com\",\"https://desktop.ecency.com\",\"https://ios.ecency.com\",\"https://android.ecency.com\",\"https://ecency.com/hive/@ecency/proposal-ecency-development-and-maintenance\",\"https://ecency.com/proposals/141\",\"https://hivesigner.com/sign/update-proposal-votes?proposal_ids=%5B141%5D&approve=true\"],\"image\":[\"https://images.ecency.com/DQmWXQQroNnua8djg6AGbdRW4fcRkv2teoYoctoQWa3tHGj/desktop_3013.png\"],\"tags\":[\"hive-125125\",\"hive\",\"ecency\",\"uncensored\",\"blockchain\",\"dapp\",\"desktop\",\"windows\",\"linux\",\"mac\"],\"app\":\"ecency/3.0.13-vision\",\"format\":\"markdown+html\"}",
+        "created": "2021-02-05T09:50:42",
+        "last_update": "2021-02-05T09:54:24",
+        "depth": 0,
+        "children": 45,
+        "last_payout": "2021-02-12T09:50:42",
+        "cashout_time": "1969-12-31T23:59:59",
+        "total_payout_value": "37.154 HBD",
+        "curator_payout_value": "33.397 HBD",
+        "pending_payout_value": "0.000 HBD",
+        "promoted": "0.000 HBD",
+        "replies": [],
+        "body_length": 1391,
+        "author_reputation": 403998028397345,
+        "parent_author": "",
+        "parent_permlink": "hive-125125",
+        "url": "/hive-125125/@ecency/desktop-search-snippets-password-change",
+        "root_title": "Desktop - search, snippets, password change",
+        "beneficiaries": [],
+        "max_accepted_payout": "1000000.000 HBD",
+        "percent_hbd": 10000,
+        "post_id": 101723002,
+        "net_rshares": 203930600802336,
+        "active_votes": [
+          {
+            "percent": "10000",
+            "reputation": 992668988891913,
+            "rshares": 154597460703157,
+            "voter": "blocktrades"
+          },
+          {
+            "percent": "10000",
+            "reputation": 29261302889705,
+            "rshares": 105078473357,
+            "voter": "pnc"
+          }
+        ]
+      },
+      {
+        "author": "ecency",
+        "permlink": "mobile-performance-reply-switch-deeplinking",
+        "category": "hive-125125",
+        "title": "Mobile - performance, reply switch, deeplinking",
+        "body": "This update is purely focused on performance improvements and of course some cool addition, you will all love. Normally we wait couple weeks before doing another release but this one we couldn't wait to release. 🎉\n\n![ecency-fast-social-mobile-app](https://images.ecency.com/DQmcotQaUCf1RjG3PnsUdFPUvGRUMBDF5bpER2GwG83wHBo/mobile_release3014.png)\n\n# What's new \n \n- Feeds screen - Performance issues are fixed across all feeds, you should notice some significant changes depending on your device. Here is the short video (~40seconds) showing loading differences on Feed screen, it is 2x faster  🚀\n\nhttps://youtu.be/2kNSMO_MjsE\n \n- Reply switch - in reply screen you can now change/switch your account while replying. Recent changes in account switch component allowing us to do really great things and improve user experience. When Ecency sends you mention or reply push notifications, you can open and reply them with any account without leaving screen. 🚀\n- Deeplinking - we have fixed few deeplinking issues, Ecency mobile app can open post, comment, profile, community links without issues now.\n- Thumbnail loading improved\n- Language files updated\n- Many small bug fixes which you can monitor from [our official Github page](https://github.com/ecency/ecency-mobile)\n\n**Android/Playstore update is ready for you to try!\niOS/AppStore in review, we expect it will be available later today!**\n \nIf you are React Native developer, feel free to join and help developing features we all love using, [our mobile application is opensource](https://github.com/ecency/ecency-mobile).  \n \n**Join mobile translation team**: https://translate-mobile.ecency.com  \n30 languages already enabled on Ecency mobile app, thanks to [our awesome contributors](https://ecency.com/contributors).  \n \nStay tuned, stay excited, stay united! Don't forget to share news with your friends.  \n\n# Download  \n \n### Android Playstore: https://android.ecency.com \n### iOS Appstore: https://ios.ecency.com \n### [Direct Android APK file](https://github.com/ecency/ecency-mobile/releases) \n \n--- \n \n<center> \n# Support Ecency Team \n[Approve Ecency](https://hivesigner.com/sign/update-proposal-votes?proposal_ids=%5B141%5D&approve=true) | [Approve Hivesearcher](https://hivesigner.com/sign/update-proposal-votes?proposal_ids=%5B146%5D&approve=true)  \n</center>",
+        "json_metadata": "{\"links\":[\"https://youtu.be/2kNSMO_MjsE\",\"https://github.com/ecency/ecency-mobile\",\"https://github.com/ecency/ecency-mobile\",\"https://translate-mobile.ecency.com\",\"https://ecency.com/contributors\",\"https://android.ecency.com\",\"https://ios.ecency.com\",\"https://github.com/ecency/ecency-mobile/releases\",\"https://hivesigner.com/sign/update-proposal-votes?proposal_ids=%5B141%5D&approve=true\",\"https://hivesigner.com/sign/update-proposal-votes?proposal_ids=%5B146%5D&approve=true\"],\"image\":[\"https://images.ecency.com/DQmcotQaUCf1RjG3PnsUdFPUvGRUMBDF5bpER2GwG83wHBo/mobile_release3014.png\"],\"tags\":[\"hive-125125\",\"hive\",\"ecency\",\"uncensored\",\"decentralized\",\"blockchain\",\"dapp\",\"mobile\",\"android\",\"ios\"],\"app\":\"ecency/3.0.13-vision\",\"format\":\"markdown+html\"}",
+        "created": "2021-02-05T04:32:00",
+        "last_update": "2021-02-05T05:02:03",
+        "depth": 0,
+        "children": 44,
+        "last_payout": "2021-02-12T04:32:00",
+        "cashout_time": "1969-12-31T23:59:59",
+        "total_payout_value": "38.370 HBD",
+        "curator_payout_value": "34.414 HBD",
+        "pending_payout_value": "0.000 HBD",
+        "promoted": "0.000 HBD",
+        "replies": [],
+        "body_length": 2328,
+        "author_reputation": 403998028397345,
+        "parent_author": "",
+        "parent_permlink": "hive-125125",
+        "url": "/hive-125125/@ecency/mobile-performance-reply-switch-deeplinking",
+        "root_title": "Mobile - performance, reply switch, deeplinking",
+        "beneficiaries": [],
+        "max_accepted_payout": "1000000.000 HBD",
+        "percent_hbd": 10000,
+        "post_id": 101720248,
+        "net_rshares": 214239391821698,
+        "active_votes": [
+          {
+            "percent": "10000",
+            "reputation": 992668988891913,
+            "rshares": 156836019654462,
+            "voter": "blocktrades"
+          },
+          {
+            "percent": "4000",
+            "reputation": 341233778618,
+            "rshares": 639697359093,
+            "voter": "boatymcboatface"
+          }
+        ]
+      }
+    ]`
   },
   {
     api: "condenser_api",
     method: "get_witnesses",
     isArray: true,
-    params: ["witnessIds"],
-    description:_t("condenser_api.get_witnesses_description")
+    params: ["witness_ids"],
+    parameter: `<code>witness_ids: int array;</code>`,
+    description:_t("condenser_api.get_witnesses_description"),
+    url: `${ConfigItems.baseUrl}/api/get_witnesses?witness_ids=[12286,9493]`,
+    response: `[
+      {
+        "id": 12286,
+        "owner": "good-karma",
+        "created": "2016-09-08T04:12:18",
+        "url": "https://ecency.com",
+        "votes": "128452106700009483",
+        "virtual_last_update": "779600793762441068600957405",
+        "virtual_position": "76477066890640291006285686133305868609",
+        "virtual_scheduled_time": "779602847487419253631339077",
+        "total_missed": 4123,
+        "last_aslot": 73979090,
+        "last_confirmed_block_num": 73764568,
+        "pow_worker": 0,
+        "signing_key": "STM7SFYEkSyrqNem7dfea8MkBAQmgtMDQWWfCv3T7fMr7KhwcZjdZ",
+        "props": {
+          "account_creation_fee": "3.000 HIVE",
+          "maximum_block_size": 65536,
+          "hbd_interest_rate": 2000,
+          "account_subsidy_budget": 797,
+          "account_subsidy_decay": 347321
+        },
+        "hbd_exchange_rate": {
+          "base": "0.457 HBD",
+          "quote": "1.000 HIVE"
+        },
+        "last_hbd_exchange_update": "2023-04-06T07:07:42",
+        "last_work": "0000000000000000000000000000000000000000000000000000000000000000",
+        "running_version": "1.27.3",
+        "hardfork_version_vote": "1.27.0",
+        "hardfork_time_vote": "2022-10-24T12:00:00",
+        "available_witness_account_subsidies": 592274
+      },
+      {
+        "id": 9493,
+        "owner": "gtg",
+        "created": "2016-06-30T17:22:18",
+        "url": "https://gtg.openhive.network",
+        "votes": "142785211024307040",
+        "virtual_last_update": "779600793762441068600957405",
+        "virtual_position": "31451475055880480899755740890273218157",
+        "virtual_scheduled_time": "779602956667756329045923140",
+        "total_missed": 697,
+        "last_aslot": 73979069,
+        "last_confirmed_block_num": 73764547,
+        "pow_worker": 0,
+        "signing_key": "STM6BapgZRgKT72onF7p1rKuakkNqqS1bzGT31PubidXfZcWnvpJZ",
+        "props": {
+          "account_creation_fee": "3.000 HIVE",
+          "maximum_block_size": 65536,
+          "hbd_interest_rate": 2000,
+          "account_subsidy_budget": 797,
+          "account_subsidy_decay": 347321
+        },
+        "hbd_exchange_rate": {
+          "base": "0.464 HBD",
+          "quote": "1.000 HIVE"
+        },
+        "last_hbd_exchange_update": "2023-04-06T08:57:57",
+        "last_work": "0000000048bf77f525731f28db7c1aa9ad853a475ccc78e71ea952a7782e5459",
+        "running_version": "1.27.3",
+        "hardfork_version_vote": "1.27.0",
+        "hardfork_time_vote": "2022-10-24T12:00:00",
+        "available_witness_account_subsidies": 888598
+      }
+    ]`
   },
   {
     api: "condenser_api",
     method: "get_witness_by_account",
+    isArray: true,
     params: ["account"],
-    description:_t("condenser_api.get_witness_by_account_description")
+    parameter: `<code>account: string;</code>`,
+    description:_t("condenser_api.get_witness_by_account_description"),
+    url: `${ConfigItems.baseUrl}/api/get_witness_by_account?account="good-karma"`,
+    response: `{
+      "id": 12286,
+      "owner": "good-karma",
+      "created": "2016-09-08T04:12:18",
+      "url": "https://ecency.com",
+      "votes": "128452070242055649",
+      "virtual_last_update": "779600650127096638772049001",
+      "virtual_position": "58026808199863247818701179538784898415",
+      "virtual_scheduled_time": "779602847488012575678249523",
+      "total_missed": 4123,
+      "last_aslot": 73979040,
+      "last_confirmed_block_num": 73764518,
+      "pow_worker": 0,
+      "signing_key": "STM7SFYEkSyrqNem7dfea8MkBAQmgtMDQWWfCv3T7fMr7KhwcZjdZ",
+      "props": {
+        "account_creation_fee": "3.000 HIVE",
+        "maximum_block_size": 65536,
+        "hbd_interest_rate": 2000,
+        "account_subsidy_budget": 797,
+        "account_subsidy_decay": 347321
+      },
+      "hbd_exchange_rate": {
+        "base": "0.457 HBD",
+        "quote": "1.000 HIVE"
+      },
+      "last_hbd_exchange_update": "2023-04-06T07:07:42",
+      "last_work": "0000000000000000000000000000000000000000000000000000000000000000",
+      "running_version": "1.27.3",
+      "hardfork_version_vote": "1.27.0",
+      "hardfork_time_vote": "2022-10-24T12:00:00",
+      "available_witness_account_subsidies": 590594
+    }`
   },
   {
     api: "condenser_api",
     method: "get_witnesses_by_vote",
     isArray: true,
     params: ["account", "limit"],
-    description:_t("condenser_api.get_witnesses_by_vote_description"),
-    url:`${ConfigItems.baseUrl}/api/get_witnesses_by_vote?account=null&limit=100`,
     parameter: `<p>account:string; limit:int up to 1000</p>
       <table>
         <thead>
@@ -3273,6 +3460,8 @@ export const methods = [
           </tr>
         </tbody>
       </table>`,
+    description:_t("condenser_api.get_witnesses_by_vote_description"),
+    url:`${ConfigItems.baseUrl}/api/get_witnesses_by_vote?account=null&limit=100`,
     response: `[
       {
         "id": 437,
@@ -3375,12 +3564,25 @@ export const methods = [
   {
     api: "condenser_api",
     method: "lookup_witness_accounts",
+    isArray: true,
     params: ["lower_bound_name", "limit"],
-    description:_t("condenser_api.lookup_witness_accounts_description")
+    parameter: `<code>delegator:string; start:string; limit:int up to 1000</code>`,
+    description:_t("condenser_api.lookup_witness_accounts_description"),
+    url: `${ConfigItems.baseUrl}/api/lookup_witness_accounts?lower_bound_name="good-karma"&limit=4`,
+    response: `[
+      "good-karma",
+      "gooddream",
+      "goodguy24",
+      "goodjob"
+    ]`
   },
   {
     api: "condenser_api",
-    method: "get_witness_count"
+    method: "get_witness_count",
+    isArray: true,
+    description:_t("condenser_api.get_witness_count_description"),
+    url: `${ConfigItems.baseUrl}/api/get_witness_count`,
+    response: `14979`
   },
   {
     api: "database_api",
@@ -3414,8 +3616,58 @@ export const methods = [
   {
     api: "condenser_api",
     method: "get_vesting_delegations",
-    params: ["account", "from", "limit"],
-    description:_t("condenser_api.get_vesting_delegations_description")
+    isArray: true,
+    params: ["delegator", "start", "limit"],
+    parameter: `<code>delegator:string; start:string; limit:int up to 1000</code><table>
+        <thead>
+          <tr>
+            <th><code class="language-plaintext highlighter-rouge">delegator</code> (string)</th>
+            <th><code class="language-plaintext highlighter-rouge">start</code> (string)</th>
+            <th><code class="language-plaintext highlighter-rouge">limit</code> (int)</th>
+            <th>&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">"hiveio"</code></td>
+            <td><code class="language-plaintext highlighter-rouge">null</code></td>
+            <td><code class="language-plaintext highlighter-rouge">10</code></td>
+            <td>Queries up to 10 vesting delegations by “hiveio”.</td>
+          </tr>
+        </tbody>
+      </table>`,
+    description:_t("condenser_api.get_vesting_delegations_description"),
+    url: `${ConfigItems.baseUrl}/api/get_vesting_delegations?delegator="ecency"&start="demo"&limit=4`,
+    response: `[
+      {
+        "id": 2422655,
+        "delegator": "ecency",
+        "delegatee": "demo",
+        "vesting_shares": "18534.406691 VESTS",
+        "min_delegation_time": "2023-02-12T15:55:03"
+      },
+      {
+        "id": 2418836,
+        "delegator": "ecency",
+        "delegatee": "ashokcan143",
+        "vesting_shares": "18534.406691 VESTS",
+        "min_delegation_time": "2023-01-18T17:20:00"
+      },
+      {
+        "id": 2419411,
+        "delegator": "ecency",
+        "delegatee": "gboyegaogunmola",
+        "vesting_shares": "27038.011192 VESTS",
+        "min_delegation_time": "2023-01-22T17:10:00"
+      },
+      {
+        "id": 2407154,
+        "delegator": "ecency",
+        "delegatee": "testers",
+        "vesting_shares": "27038.011192 VESTS",
+        "min_delegation_time": "2022-11-25T04:02:15"
+      }
+    ]`
   },
   {
     api: "database_api",
@@ -3438,23 +3690,146 @@ export const methods = [
       "curation_reward_curve": "linear"
     }`
   },
-     {
+  {
     api: "condenser_api",
     method: "get_followers",
     params: ["account", "start", "type", "limit"],
-    description:_t("condenser_api.get_followers_description") 
+    parameter: `<code>account:string; start:string (account to start from); type:string e.g.: blog; limit:int up to 1000</code><table>
+        <thead>
+          <tr>
+            <th><code class="language-plaintext highlighter-rouge">account</code> (string)</th>
+            <th><code class="language-plaintext highlighter-rouge">start</code> (string)</th>
+            <th><code class="language-plaintext highlighter-rouge">type</code> (string)</th>
+            <th><code class="language-plaintext highlighter-rouge">limit</code> (int)</th>
+            <th>&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">"hiveio"</code></td>
+            <td><code class="language-plaintext highlighter-rouge">null</code></td>
+            <td><code class="language-plaintext highlighter-rouge">"blog"</code></td>
+            <td><code class="language-plaintext highlighter-rouge">10</code></td>
+            <td>Queries for follows of the account named <code class="language-plaintext highlighter-rouge">hiveio</code>, up to 10 results.</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">"alice"</code></td>
+            <td><code class="language-plaintext highlighter-rouge">null</code></td>
+            <td><code class="language-plaintext highlighter-rouge">"ignore"</code></td>
+            <td><code class="language-plaintext highlighter-rouge">100</code></td>
+            <td>Queries for mutes of the account named <code class="language-plaintext highlighter-rouge">alice</code>, up to 100 results.</td>
+          </tr>
+        </tbody>
+      </table>`,
+    description:_t("condenser_api.get_followers_description"),
+    url: `${ConfigItems.baseUrl}/api/get_followers?account="ecency"&start=""&limit=4&type="blog"`,
+    response: `[
+      {
+        "follower": "viclau",
+        "following": "ecency",
+        "what": [
+          "blog"
+        ]
+      },
+      {
+        "follower": "agbostephen",
+        "following": "ecency",
+        "what": [
+          "blog"
+        ]
+      },
+      {
+        "follower": "hairunnas",
+        "following": "ecency",
+        "what": [
+          "blog"
+        ]
+      },
+      {
+        "follower": "esbat",
+        "following": "ecency",
+        "what": [
+          "blog"
+        ]
+      }
+    ]` 
   },
   {
     api: "condenser_api",
     method: "get_following",
     params: ["account", "start", "type", "limit"],
-    description:_t("condenser_api.get_following_description") 
+    parameter: `<code>account:string; start:string (account to start from); type:string e.g.: blog; limit:int up to 1000</code><table>
+        <thead>
+          <tr>
+            <th><code class="language-plaintext highlighter-rouge">account</code> (string)</th>
+            <th><code class="language-plaintext highlighter-rouge">start</code> (string)</th>
+            <th><code class="language-plaintext highlighter-rouge">type</code> (string)</th>
+            <th><code class="language-plaintext highlighter-rouge">limit</code> (int)</th>
+            <th>&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">"hiveio"</code></td>
+            <td><code class="language-plaintext highlighter-rouge">null</code></td>
+            <td><code class="language-plaintext highlighter-rouge">"blog"</code></td>
+            <td><code class="language-plaintext highlighter-rouge">10</code></td>
+            <td>Queries for follows of the account named <code class="language-plaintext highlighter-rouge">hiveio</code>, up to 10 results.</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">"alice"</code></td>
+            <td><code class="language-plaintext highlighter-rouge">null</code></td>
+            <td><code class="language-plaintext highlighter-rouge">"ignore"</code></td>
+            <td><code class="language-plaintext highlighter-rouge">100</code></td>
+            <td>Queries for mutes of the account named <code class="language-plaintext highlighter-rouge">alice</code>, up to 100 results.</td>
+          </tr>
+        </tbody>
+      </table>`,
+    description:_t("condenser_api.get_following_description"),
+    url: `${ConfigItems.baseUrl}/api/get_following?account="ecency"&start=""&limit=4&type="blog"`,
+    response: `[
+      {
+        "follower": "ecency",
+        "following": "demo.com",
+        "what": [
+          "blog"
+        ]
+      },
+      {
+        "follower": "ecency",
+        "following": "melinda010100",
+        "what": [
+          "blog"
+        ]
+      },
+      {
+        "follower": "ecency",
+        "following": "hellomsq",
+        "what": [
+          "blog"
+        ]
+      },
+      {
+        "follower": "ecency",
+        "following": "jobonlineclub",
+        "what": [
+          "blog"
+        ]
+      }
+    ]`
   },
   {
     api: "condenser_api",
     method: "get_follow_count",
     params: ["account"],
-    description:_t("condenser_api.get_follow_count_description")
+    parameter: `<code>account: string;</code>`,
+    description:_t("condenser_api.get_follow_count_description"),
+    url: `${ConfigItems.baseUrl}/api/get_follow_count?account="ecency"`,
+    response: `{
+      "account": "ecency",
+      "following_count": 7,
+      "follower_count": 11057
+    }`
   },
   {
     api: "database_api",
@@ -3471,64 +3846,257 @@ export const methods = [
   },
   {
     api: "condenser_api",
-    method: "get_feed_entries",
-    params: ["account", "start_entry_id", "limit"],
-    description:_t("condenser_api.get_feed_entries_description")
-  },
-  {
-    api: "condenser_api",
-    method: "get_feed",
-    params: ["account", "start_entry_id", "limit"],
-    description:_t("block_api.get_feed_description")
-  },
-  {
-    api: "condenser_api",
     method: "get_blog_entries",
     params: ["account", "start_entry_id", "limit"],
-    description:_t("condenser_api.get_blog_entries_description")
+    parameter: `<code>account: string; start_entry_id: int; limit: int;</code>`,
+    description:_t("condenser_api.get_blog_entries_description"),
+    url: `${ConfigItems.baseUrl}/api/get_blog_entries?account="ecency"&limit=4`,
+    response: `[
+      {
+        "blog": "ecency",
+        "entry_id": 402,
+        "author": "ecency",
+        "permlink": "discord-monthly-giveaway-winners-51",
+        "reblogged_on": "1970-01-01T00:00:00"
+      },
+      {
+        "blog": "ecency",
+        "entry_id": 401,
+        "author": "ecency",
+        "permlink": "ecency-monthly-guest-curation-program-30048fe77234e",
+        "reblogged_on": "1970-01-01T00:00:00"
+      },
+      {
+        "blog": "ecency",
+        "entry_id": 400,
+        "author": "thinkermind",
+        "permlink": "testing-ecency-trading-alpha-version",
+        "reblogged_on": "2023-03-27T19:49:36"
+      },
+      {
+        "blog": "ecency",
+        "entry_id": 399,
+        "author": "ecency",
+        "permlink": "mobile-performance-cache-and-bug",
+        "reblogged_on": "1970-01-01T00:00:00"
+      }
+    ]`
   },
   {
     api: "condenser_api",
     method: "get_blog",
     params: ["account", "start_entry_id", "limit"],
-    description:_t("condenser_api.get_blog_description")
+    parameter: `<code>account: string; start_entry_id: int; limit: int;</code>`,
+    description:_t("condenser_api.get_blog_description"),
+    url: `${ConfigItems.baseUrl}/api/get_blog?account="ecency"&limit=2&start_entry_id=401`,
+    response: `[
+      {
+        "blog": "ecency",
+        "entry_id": 401,
+        "comment": {
+          "author": "ecency",
+          "permlink": "ecency-monthly-guest-curation-program-30048fe77234e",
+          "category": "hive-125125",
+          "title": "Ecency Monthly Guest Curation Program #18",
+          "body": "![](https://images.ecency.com/DQmeWGL3PLw5AKuaDhhx8kYcXsDNFSeJaJ6jmmyiV1dcUMw/image.png)\n\n***The 17th edition of the [Monthly Guest Curation Program](https://ecency.com/hive-125125/@ecency/ecency-monthly-guest-curation-program-446d24f79b1de) here on Hive was a great success, and it was a really tough job to pick curators from all the great applications that we received. In the end, an awesome set of Guest Curators joined our team and did a fantastic job during their term. It is now time to commence the 18th edition of the Guest Curation Program, giving a chance for Ecency users to learn the ropes of curation and in the process also grow their own profiles on the blockchain.***\n\n---\n\nOur [encouragement program](https://ecency.com/esteem/@good-karma/encouragement-program-continues-82eafcd10a299) has been encouraging and rewarding users of the **Ecency Web**, **Ecency Desktop** and **Ecency Mobile** apps over the past several months, and many users have been curious about the curation program and the job our curators do.\n\nCurators have to navigate spam, abusive accounts and those trying to game our encouragement system, to find genuine users and deserving content to reward, encourage and appreciate.\n\nSince curation is an integral part of the hive ecosystem, the **Guest Curation Program** is an initiative to allow dedicated Ecency users to learn more about curation, and in the process help support several other Ecency users as well as grow their own profile on the hive blockchain.\n\n### <center>How To Apply</center>\n\nWe have a growing and thriving discord community, so join us on the [Ecency Discord](https://discord.me/ecency) if you haven't already, and fill up the form pinned in the #🏁-curator-internship discord channel.\n\n### <center>About Guest Curator Program</center>\n\n- 2 Guest curators will be appointed every month for a period of 30 days.\n\n- Selection will be based upon responses received in the questionnaire. It would be desired for the user to be a dedicated Ecency user and the decision of the selectors is final.\n\n- The rules to be followed and perks for being appointed as a **Guest Curator** will be shared upon selection.\n\n- As a curator, it is expected that you have a desire to help the community, spread some love, cheer and goodwill among users of Ecency. And also, have the ability to identify and report abuse.\n\n- If the guest curator is found to be abusing the granted role and powers, it will lead to immediate removal from the program.\n\n- If you are not selected as a Guest Curator, you may reapply again in the next cycle. But a selected Guest Curator can apply to the program again only after the end of 60 days (i.e. 2 cycles after their selection). \n\nWe are looking forward to hear from you! Join [Discord](https://discord.me/ecency) and show your curation skills to be part of the [Ecency](https://ecency.com/) curator team.\n\n---  \n \n### Delegate Hive Power now and mine [Ecency Points + curation reward daily](https://ecency.com/hive-125125/@ecency/daily-100-curation-rewards) + help us onboard more people:  \n \n[50 HP](https://hivesigner.com/sign/delegateVestingShares?delegator=&delegatee=ecency&vesting_shares=50%20HP) | [100 HP](https://hivesigner.com/sign/delegateVestingShares?delegator=&delegatee=ecency&vesting_shares=100%20HP) | [500 HP](https://hivesigner.com/sign/delegateVestingShares?delegator=&delegatee=ecency&vesting_shares=500%20HP) | [1000 HP](https://hivesigner.com/sign/delegateVestingShares?delegator=&delegatee=ecency&vesting_shares=1000%20HP) | [5000 HP](https://hivesigner.com/sign/delegateVestingShares?delegator=&delegatee=ecency&vesting_shares=5000%20HP) | [10K HP](https://hivesigner.com/sign/delegateVestingShares?delegator=&delegatee=ecency&vesting_shares=10000%20HP) | [20K HP](https://hivesigner.com/sign/delegateVestingShares?delegator=&delegatee=ecency&vesting_shares=20000%20HP) | [50K HP](https://hivesigner.com/sign/delegateVestingShares?delegator=&delegatee=ecency&vesting_shares=50000%20HP) | [100K HP](https://hivesigner.com/sign/delegateVestingShares?delegator=&delegatee=ecency&vesting_shares=100000%20HP)  \n \n### Support our proposals  \n \n[Ecency](https://hivesigner.com/sign/update-proposal-votes?proposal_ids=%5B245%5D&approve=true) ",
+          "json_metadata": "{\"image\":[\"https://images.ecency.com/DQmeWGL3PLw5AKuaDhhx8kYcXsDNFSeJaJ6jmmyiV1dcUMw/image.png\"],\"tags\":[\"hive-125125\",\"vision\",\"hive\",\"curation\",\"ecency\",\"community\"],\"description\":\"\",\"app\":\"ecency/3.0.31-vision\",\"format\":\"markdown+html\",\"image_ratios\":[1.6666666666666667]}",
+          "created": "2023-03-31T11:34:00",
+          "last_update": "2023-03-31T11:34:00",
+          "depth": 0,
+          "children": 14,
+          "last_payout": "1969-12-31T23:59:59",
+          "cashout_time": "2023-04-07T11:34:00",
+          "total_payout_value": "0.000 HBD",
+          "curator_payout_value": "0.000 HBD",
+          "pending_payout_value": "18.693 HBD",
+          "promoted": "0.000 HBD",
+          "replies": [],
+          "body_length": 4242,
+          "author_reputation": 403998028397345,
+          "parent_author": "",
+          "parent_permlink": "hive-125125",
+          "url": "/hive-125125/@ecency/ecency-monthly-guest-curation-program-30048fe77234e",
+          "root_title": "Ecency Monthly Guest Curation Program #18",
+          "beneficiaries": [],
+          "max_accepted_payout": "1000000.000 HBD",
+          "percent_hbd": 10000,
+          "post_id": 122138180,
+          "net_rshares": 34086392177688,
+          "active_votes": [
+            {
+              "percent": "4000",
+              "reputation": 341233778618,
+              "rshares": 747050035711,
+              "voter": "boatymcboatface"
+            },
+            {
+              "percent": "4000",
+              "reputation": 2113489703373420,
+              "rshares": 72007589633,
+              "voter": "kingscrown"
+            }
+          ]
+        },
+        "reblogged_on": "1970-01-01T00:00:00"
+      },
+      {
+        "blog": "ecency",
+        "entry_id": 400,
+        "comment": {
+          "author": "thinkermind",
+          "permlink": "testing-ecency-trading-alpha-version",
+          "category": "hive-125125",
+          "title": "Testing  ecency trading alpha version for TWM system (ENG/FR)",
+          "body": "I manage a revenue pool that generates a portion of its profits from trading Hive (Delegation or transfert to @thinkermind with the memo \"Trade with me\" or **TWM**). Usually, I use Ecency's simplified trading interface to present my results, but in reality, I use more specialized tools and indicators to develop my strategies and forecasts.\n\nCurrently, I am testing and using more and more the advanced version of Ecency's trading interface, which adds new features.\n||\n|-----|\n|![](https://images.ecency.com/DQmTtTcCc25HqgDARxgNM16Xk53E4GBqW5N5ZG7pD3FVbBT/image.png)\n\n\n\n🌐 [Invitation for Traders to test advance trading](/@ecency/invitation-for-traders-to-test) -  by @ecency\n🌐 Interface direct link (alpha): https://alpha.ecency.com/market#advanced\n🌐 Interface direct link: https://ecency.com/market#advanced\n\n# What I particularly appreciated in ecency trading alpha version\n\n✅ Customizable blocks that allow creating an interface adapted to the needs of each trader (presentation/design, movement, zoom in/zoom out, etc.).\n\n<center> ![](https://images.ecency.com/DQmUzMovZDFMGoU6Pjh9fXp2DLg4x94rAnwJqEVSok3V7CN/image.png)</center>\n<center>Presentation/design (fonction)</center>\n\n\n<center>![](https://images.ecency.com/DQmP46o2xSBy49JuMWRJv6nuEGYgjgsaXpomZ8nar7CXo9s/image.png)</center>\n<center>Resize blocks</center>\n\n\n\n✅ Candlestick charts with time display options that facilitate tracking sudden fluctuations and allow for better short / or long-term trading\n![](https://images.ecency.com/DQmeVsV5CUArbNhEM45zpRnnmpZ1i92Sx95WnyHSvM2f2gF/image.png)\n\n<center>![](https://images.ecency.com/DQmTkju9VjhdPo6K1L3hyjVPYq7zkodoQVc6V2j5v5HXyjf/image.png)</center>\n<center>Chart & Bucket size</center>\n.\n✅ The interface that allows tracking our own trading history through the **Open/Completed/All/** tabs.\n![](https://images.ecency.com/DQmT799afyKXH1Jy7kebUkjNkjVHRp9FFRa67VYW85KcfNg/image.png)\n\n✅ Access to trade details directly linked to the block explorer (hivexplorer.com).\n\n![](https://images.ecency.com/DQmYAxtpwmu57o43KStDygJukJpVg6Zky6efCqZagRhZx2L/image.png)\n\n<center> **block explorer** </center>\n![](https://images.ecency.com/DQmZY5Lr1HQq9irHA39qkRncajUmTmVekFnFqiy3wTDudtU/image.png)\n\n\n**I think this interface, heavily inspired by Binance, is very promising and will probably continue to evolve as new customizable indicators are added.**\n\n---\n---\nVERSION EN FRANCAIS\n\nJe gère un pool de revenus qui génère une partie de ses bénéfices du trading de Hive (via une délégation à @thinkermind avec le mémo \"Trade with me\" ou TWM). Habituellement, j'utilise l'interface de trading simplifiée d'Ecency pour présenter mes résultats, mais en réalité, j'utilise des outils et des indicateurs plus spécialisés pour développer mes stratégies et mes prévisions.\n\nActuellement, je teste et utilise de plus en plus la version avancée de l'interface de trading d'Ecency, qui ajoute de nouvelles fonctionnalités.\n\n🌐 [Invitation pour tester l'interface avancée de gestion de trading via Ecency](/@ecency/invitation-for-traders-to-test) - par @ecency\n🌐 Lien direct de l'interface (alpha) : https://alpha.ecency.com/market#advanced\n🌐 Lien direct de l'interface: https://ecency.com/market#advanced\n\n# Ce que j'ai particulièrement apprécié dans leur version alpha\n\n✅ Des blocs personnalisables qui permettent de créer une interface adaptée aux besoins de chaque trader (présentation/design, mouvement, agrandisement/reduction des blocs, etc.).\n\n<center> ![](https://images.ecency.com/DQmUzMovZDFMGoU6Pjh9fXp2DLg4x94rAnwJqEVSok3V7CN/image.png)</center>\n<center>Présentation/design (fonction)</center>\n\n\n<center> ![](https://images.ecency.com/DQmP46o2xSBy49JuMWRJv6nuEGYgjgsaXpomZ8nar7CXo9s/image.png)</center>\n<center>Redimensionner les blocs</center>\n\n\n\n✅ Graphiques en chandeliers avec options d'affichage du temps qui facilitent le suivi des fluctuations brusques et permettent un meilleur trading à court / ou long terme\n![](https://images.ecency.com/DQmeVsV5CUArbNhEM45zpRnnmpZ1i92Sx95WnyHSvM2f2gF/image.png)\n\n<center> ![](https://images.ecency.com/DQmTkju9VjhdPo6K1L3hyjVPYq7zkodoQVc6V2j5v5HXyjf/image.png)</center>\n<center> Choix de la durée des affichages de trading</center>\n.\n✅ L'interface qui permet de suivre notre propre historique de trading via les onglets **Open/Completed/All/**.\n![](https://images.ecency.com/DQmT799afyKXH1Jy7kebUkjNkjVHRp9FFRa67VYW85KcfNg/image.png)\n\n✅ Accès aux détails commerciaux directement liés à l'explorateur de blocs (hivexplorer.com).\n\n![](https://images.ecency.com/DQmYAxtpwmu57o43KStDygJukJpVg6Zky6efCqZagRhZx2L/image.png)\n\n<center> **Exemple d'explorateur de blocs** </center>\n![](https://images.ecency.com/DQmZY5Lr1HQq9irHA39qkRncajUmTmVekFnFqiy3wTDudtU/image.png)\n\n\n**Je pense que cette interface, fortement inspirée de Binance, est très prometteuse et continuera probablement d'évoluer au fur et à mesure de l'ajout de nouveaux indicateurs personnalisables.**\n\n---\nAll images are screenshots of the interfaces offered by ecency applications (Toutes les images sont des captures d'écran des interfaces proposées par les applications ecency)",
+          "json_metadata": "{\"tags\":[\"hive-125125\",\"bee\",\"cent\",\"pimp\",\"lolz\",\"fun\",\"archon\",\"leofinance\",\"lassecash\",\"trading\",\"testing\",\"photography\",\"ecency\",\"hive-engine\"],\"users\":[\"thinkermind\",\"ecency\"],\"image\":[\"https://images.ecency.com/DQmTtTcCc25HqgDARxgNM16Xk53E4GBqW5N5ZG7pD3FVbBT/image.png\",\"https://images.ecency.com/DQmUzMovZDFMGoU6Pjh9fXp2DLg4x94rAnwJqEVSok3V7CN/image.png\",\"https://images.ecency.com/DQmP46o2xSBy49JuMWRJv6nuEGYgjgsaXpomZ8nar7CXo9s/image.png\",\"https://images.ecency.com/DQmeVsV5CUArbNhEM45zpRnnmpZ1i92Sx95WnyHSvM2f2gF/image.png\",\"https://images.ecency.com/DQmTkju9VjhdPo6K1L3hyjVPYq7zkodoQVc6V2j5v5HXyjf/image.png\",\"https://images.ecency.com/DQmT799afyKXH1Jy7kebUkjNkjVHRp9FFRa67VYW85KcfNg/image.png\",\"https://images.ecency.com/DQmYAxtpwmu57o43KStDygJukJpVg6Zky6efCqZagRhZx2L/image.png\",\"https://images.ecency.com/DQmZY5Lr1HQq9irHA39qkRncajUmTmVekFnFqiy3wTDudtU/image.png\"],\"links\":[\"/@ecency/invitation-for-traders-to-test\"],\"format\":\"markdown+html\",\"canonical_url\":\"https://www.lassecash.com/@thinkermind/testing-ecency-trading-alpha-version\",\"app\":\"ecency/3.0.31-vision\",\"description\":\"I manage a revenue pool that generates a portion of its profits from trading Hive (Delegation or transfert to @thinkermind with the memo \\\"Trade with me\\\" or TWM). Usually, I use Ecency's simplified\",\"image_ratios\":[2.3315118397085612,4.714285714285714,9.720930232558139,2.4196597353497165,0.48044692737430167]}",
+          "created": "2023-03-26T10:15:12",
+          "last_update": "2023-03-26T10:26:03",
+          "depth": 0,
+          "children": 18,
+          "last_payout": "2023-04-02T10:15:12",
+          "cashout_time": "1969-12-31T23:59:59",
+          "total_payout_value": "4.762 HBD",
+          "curator_payout_value": "4.737 HBD",
+          "pending_payout_value": "0.000 HBD",
+          "promoted": "0.000 HBD",
+          "replies": [],
+          "body_length": 5082,
+          "author_reputation": 6007464580879,
+          "parent_author": "",
+          "parent_permlink": "hive-125125",
+          "url": "/hive-125125/@thinkermind/testing-ecency-trading-alpha-version",
+          "root_title": "Testing  ecency trading alpha version for TWM system (ENG/FR)",
+          "beneficiaries": [],
+          "max_accepted_payout": "1000000.000 HBD",
+          "percent_hbd": 10000,
+          "post_id": 121977185,
+          "net_rshares": 17253181765438,
+          "active_votes": [
+            {
+              "percent": "10000",
+              "reputation": 18679650010340,
+              "rshares": 2880137705,
+              "voter": "alexft"
+            },
+            {
+              "percent": "2002",
+              "reputation": 641780297267791,
+              "rshares": 185051047662,
+              "voter": "good-karma"
+            },
+            {
+              "percent": "10000",
+              "reputation": 4557676655584,
+              "rshares": 846218992043,
+              "voter": "themonetaryfew"
+            }
+          ]
+        },
+        "reblogged_on": "2023-03-27T19:49:36"
+      }
+    ]`
   },
   {
     api: "condenser_api",
     method: "get_account_reputations",
-    params: ["lower_bound_name", "limit"],
-    description:_t("condenser_api.get_account_reputations_description")
+    params: ["account_lower_bound", "limit"],
+    parameter: `<code>account_lower_bound: string; limit: int;</code>`,
+    description:_t("condenser_api.get_account_reputations_description"),
+    url: `${ConfigItems.baseUrl}/api/get_account_reputations?account_lower_bound="ecency"&limit=4`,
+    response: `[
+      {
+        "account": "ecency",
+        "reputation": 403998028397345
+      },
+      {
+        "account": "ecency-987",
+        "reputation": 0
+      },
+      {
+        "account": "ecency-bulgaria",
+        "reputation": 1158825371091
+      },
+      {
+        "account": "ecency-indonesia",
+        "reputation": 24437199429
+      }
+    ]`
   },
   {
     api: "condenser_api",
     method: "get_reblogged_by",
     params: ["author", "permlink"],
-    description:_t("condenser_api.get_reblogged_by_description")
-  },
-  {
-    api: "condenser_api",
-    method: "get_blog_authors",
-    params: ["account"],
-    description:_t("condenser_api.get_blog_authors_description")
-  },
-  {
-    api: "condenser_api",
-    method: "broadcast_transaction",
-    params: ["trx"],
-    description:_t("condenser_api.broadcast_transaction_description")
-  },
-  {
-    api: "condenser_api",
-    method: "broadcast_transaction_synchronous",
-    params: ["trx"],
-    description:_t("condenser_api.gbroadcast_transaction_synchronous_description")
+    parameter: `<code>author: string; permlink: string;</code>`,
+    description:_t("condenser_api.get_reblogged_by_description"),
+    url: `${ConfigItems.baseUrl}/api/get_reblogged_by?author="ecency"&permlink="token"`,
+    response: `[
+      "absgaming",
+      "bigtakosensei",
+      "chrisbolten",
+      "eglois",
+      "esteemapp",
+      "gamer00",
+      "good-karma",
+      "guruvaj",
+      "helmibireuen",
+      "melinda010100",
+      "returned",
+      "riyuuhi",
+      "roky",
+      "samzine",
+      "seayplum",
+      "talhasch",
+      "text2speech",
+      "viniciotricolor"
+    ]`
   },
   {
     api: "transaction_status_api",
     method: "find_transaction",
     params: ["transaction_id", "expiration"],
+    parameter: `<code>transaction_id: string; expiration: string;</code><p>Possible results</p><table>
+        <thead>
+          <tr>
+            <th>Status</th>
+            <th>Meaning</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">unknown</code></td>
+            <td>Expiration time in future, transaction not included in block or mempool</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">within_mempool</code></td>
+            <td>Transaction in mempool</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">within_reversible_block</code></td>
+            <td>Transaction has been included in block, block not irreversible</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">within_irreversible_block</code></td>
+            <td>Transaction has been included in block, block is irreversible</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">expired_reversible</code></td>
+            <td>Transaction has expired, transaction is not irreversible (transaction could be in a fork)</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">expired_irreversible</code></td>
+            <td>Transaction has expired, transaction is irreversible (transaction cannot be in a fork)</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">too_old</code></td>
+            <td>Transaction is too old, I don’t know about it</td>
+          </tr>
+        </tbody>
+      </table>`,
     description:_t("transaction_status_api.find_transaction_description"),
-    response: `{"is_known": false}`
+    url: `${ConfigItems.baseUrl}/api/find_transaction?transaction_id="0000000000000000000000000000000000000000"&expiration="2016-03-24T18:00:21"`,
+    response: `{
+      "status": "too_old"
+    }`
   },
   {
     api: "market_history_api",
