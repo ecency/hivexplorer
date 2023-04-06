@@ -632,7 +632,8 @@
     "list_votes_description":"Returns all votes, starting with the specified voter and/or author and permlink.",
     "get_active_witnesses_description":"Returns the list of active witnesses.",
     "get_reward_funds_description":"Returns information about the current reward funds.",
-    "list_proposal_votes_description":"Returns all proposal votes, starting with the specified voter or proposal"
+    "list_proposal_votes_description":"Returns all proposal votes, starting with the specified voter or proposal",
+    "find_rc_accounts_description": "Returns accounts, queried by name."
   },
   "rc_api":{
     "title":"RC API",
@@ -648,7 +649,8 @@
     "list_communities_description":"Gets community information",
     "get_post_description":"Gives single selected post.",
     "get_profile_description":"Gets profile information.",
-    "get_account_posts_description":"Lists posts related to a given account."
+    "get_account_posts_description":"Lists posts related to a given account.",
+    "get_trending_topics_description": "Get trending topics/categories."
   },
   "transaction_status_api":{
     "title":"Transaction Status API",

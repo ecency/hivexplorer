@@ -1,4 +1,3 @@
-import { response } from 'express';
 import { ConfigItems } from "../../../config";
 import { _t } from "../../common/i18n";
 
@@ -41,124 +40,6 @@ export const methods = [
       }
     ]`
   },
-  /*{
-    api: "condenser_api",
-    method: "get_comment_discussions_by_payout",
-    params: ["query"],
-    description:_t("condenser_api.get_comment_discussions_by_payout_description")
-  },
-  {
-    api: "condenser_api",
-    method: "get_discussions_by_trending",
-    params: ["query"],
-    description:_t("condenser_api.get_discussions_by_trending_description")
-  },
-  {
-    api: "condenser_api",
-    method: "get_discussions_by_created",  
-    params: ["query"],
-    description:_t("condenser_api.get_discussions_by_created_description")
-  },
-  {
-    api: "condenser_api",
-    method: "get_discussions_by_active",
-    params: ["query"],
-    description:_t("condenser_api.get_discussions_by_active_description")
-  },
-  {
-    api: "condenser_api",
-    method: "get_discussions_by_cashout",    
-    params: ["query"],
-    description:_t("condenser_api.get_discussions_by_cashout_description")
-  },
-  {
-    api: "condenser_api",
-    method: "get_discussions_by_votes",
-    params: ["query"],
-    description:_t("condenser_api.get_discussions_by_votes_description")
-  },
-  {
-    api: "condenser_api",
-    method: "get_discussions_by_children",
-    params: ["query"],
-    description:_t("condenser_api.get_discussions_by_children_description")
-  },
-  {
-    api: "condenser_api",
-    method: "get_discussions_by_hot",
-    params: ["query"],
-    description:_t("condenser_api.get_discussions_by_hot_description"),
-    response: `[]`
-  },
-  {
-    api: "condenser_api",
-    method: "get_discussions_by_feed",
-    params: ["query"],
-    description:_t("condenser_api.get_discussions_by_feed_description")
-  },
-  {
-    api: "condenser_api",
-    method: "get_discussions_by_blog",
-    params: ["query"],
-    description:_t("condenser_api.get_discussions_by_blog_description")
-  },
-  {
-    api: "condenser_api",
-    method: "get_discussions_by_comments",
-    params: ["query"],
-    description:_t("condenser_api.get_discussions_by_blog_description")
-  },
-  {
-    api: "condenser_api",
-    method: "get_discussions_by_promoted",
-    params: ["query"],
-    description:_t("condenser_api.get_discussions_by_promoted_description")
-  },
-  {
-    api: "condenser_api",
-    method: "get_state",
-    params: ["path"],
-    description:_t("condenser_api.get_state_description")
-  },
-  {
-    api: "condenser_api",
-    method: "get_account_references",
-    params: ["accountId"],
-    isArray: true
-  },
-  {
-    api: "condenser_api",
-    method: "get_transaction_hex",
-    params: ["trx"],
-    description:_t("condenser_api.get_transaction_hex_description")
-  },
-  {
-    api: "database_api",
-    method: "get_required_signatures",
-    params: ["trx", "available_keys"],
-    description:_t("database_api.get_required_signatures_description"),
-    response: `{"keys": []}`
-  },
-  {
-    api: "database_api",
-    method: "get_potential_signatures",
-    params: ["trx"],
-    description:_t("database_api.get_potential_signatures_description"),
-    response: `[]`
-  
-  },
-  {
-    api: "database_api",
-    method: "verify_authority",
-    params: ["trx"],
-    description:_t("database_api.verify_authority_description"),
-    response: `false`
-  },
-  {
-    api: "database_api",
-    method: "verify_account_authority",
-    params: ["account", "signers"]
-  },*/
   {
     api: "block_api",
     method: "get_block_header",
@@ -2029,13 +1910,1314 @@ export const methods = [
     api: "condenser_api",
     method: "get_content",
     params: ["author", "permlink"],
-    description:_t("condenser_api.get_content_description")
+    parameter: `<code>author:string; permlink:string;</code>`,
+    description:_t("condenser_api.get_content_description"),
+    url: `${ConfigItems.baseUrl}/api/get_content?author="ecency"&permlink="token"`,
+    response: `{
+      "author": "ecency",
+      "permlink": "token",
+      "category": "hive-125125",
+      "title": "Token",
+      "body": "Most Ecency users know about history of our [Points](https://ecency.com/esteem/@esteemapp/estm-mining-use-cases-and-investment-opportunities) and how after rebranding we gave it placeholder name as Points. Since 2nd layer tokenization is still being worked on by multiple teams on Hive, we had extra time to work on our website, apps and add more functionality. Work on improving use cases, which in this post we want to give you an update about state of Points (\"your entry to Token\").\n\n![ecen_token.png](https://images.ecency.com/DQmRUffaVuBDqWTDCNsAtYEAkLA2Q1nwRq4KPQKY9bZW14p/ecen_token.png)\n\n# Supply \n\nTotal fixed supply: 1,000,000,000\n\nMining/minting allocation: 65%\nIncentive, referral, bounty programs: 15%\nIn-app purchases: 10%\nReserve: 5%\nTeam allocation: 5%\n\n### Current state\n\nCirculating supply: 360,056,955.134\n\nTop 10 holders:\n@roundbeargames\n@lebin\n@noel83\n@melinda010100\n@tempravis\n@btscn\n@circa\n@mcoinz79\n@janton\n@gamer00\n\n# Economics\n\nWe have decided fixed supply to make sure system is self-sustaining, so with time demand and supply equation would find equilibrium. Points are minted just by using Ecency apps or by delegating to HP to @ecency, so everyone who uses either Ecency website, desktop or mobile app, already knows how earning works and how fun it is.\n\nOnce max supply is reached, pool allocation is recycled. How this works?! Currently every time user uses Points to promote or boost their content, points are sent to reward pool reserve and after max supply is reached those points are sent back to reward pool which is minted by users again, token cycles in system. Some similar token-economics usually add small fee to burn and lower the supply, which might be interesting to analize in future.  Now, we wanted to decentralize this new rewarding system but on-chain SMT or other solutions were not ready or mature enough that gives us smart contract functionality. But since current Points system is great for distribution of our actual token, we are not rushing this decision and do what's best for growth, plan long term.\n\n# Use cases\n\nPoints can be used for Promoting content which will promote content across the feeds to all Ecency users. Boosting content is getting limited boost to content in form of curation/vote. Gifting is to basically tip or transfer Points to another user. Now we are working on next use cases which we thinking might help us gradually decentralize and establish our token that's both sustainable and widely used. \nOne of such use case that we think will excite everyone is Community points and have your own community standout, as more people post in your community from Ecency the more your community account earn Points, that way you can use extra rewards to organize giveaway, contest and manage, grow your community. \nMore on other use cases later, there is one more which we think will take this into next level. Stay tuned.\n\n# Earn now\n\n- Earn Ecency Points now by using Ecency apps.\n- Refer friends to earn even more, referral link example: https://ecency.com/signup?referral=ecency\n- By delegating HP to @ecency account. Delegation rewards daily Points, for example 1000 HP delegation mints out ~100 Points daily. Delegation also helps us to onboard more users to Hive which we have been doing for few months now, successfully.\n\nLearn more in our FAQ: https://ecency.com/faq\n \n### https://ecency.com  \n##### iOS https://ios.ecency.com  \n##### Android https://android.ecency.com  \n##### Desktop https://desktop.ecency.com  \n \n---  \n \n### Do you like our work? Support [Ecency proposal](https://ecency.com/hive/@ecency/proposal-ecency-development-and-maintenance):  \nEcency: https://ecency.com/proposals/141  \nHivesigner: [Vote for Proposal](https://hivesigner.com/sign/update-proposal-votes?proposal_ids=%5B141%5D&approve=true)",
+      "json_metadata": "{\"links\":[\"https://ecency.com/esteem/@esteemapp/estm-mining-use-cases-and-investment-opportunities\",\"https://ecency.com/signup?referral=ecency\",\"https://ecency.com/faq\",\"https://ecency.com\",\"https://ios.ecency.com\",\"https://android.ecency.com\",\"https://desktop.ecency.com\",\"https://ecency.com/hive/@ecency/proposal-ecency-development-and-maintenance\",\"https://ecency.com/proposals/141\",\"https://hivesigner.com/sign/update-proposal-votes?proposal_ids=%5B141%5D&approve=true\"],\"image\":[\"https://images.ecency.com/DQmRUffaVuBDqWTDCNsAtYEAkLA2Q1nwRq4KPQKY9bZW14p/ecen_token.png\"],\"users\":[\"roundbeargames\",\"lebin\",\"noel83\",\"melinda010100\",\"tempravis\",\"btscn\",\"circa\",\"mcoinz79\",\"janton\",\"gamer00\",\"ecency\",\"ecency\"],\"tags\":[\"hive-125125\",\"hive\",\"ecency\",\"uncensored\",\"blockchain\",\"dapp\",\"token\",\"smart-contracts\"],\"app\":\"ecency/3.0.13-vision\",\"format\":\"markdown+html\"}",
+      "created": "2021-02-09T10:02:36",
+      "last_update": "2021-02-09T10:34:06",
+      "depth": 0,
+      "children": 44,
+      "last_payout": "2021-02-16T10:02:36",
+      "cashout_time": "1969-12-31T23:59:59",
+      "total_payout_value": "0.000 HBD",
+      "curator_payout_value": "0.000 HBD",
+      "pending_payout_value": "0.000 HBD",
+      "promoted": "0.000 HBD",
+      "replies": [],
+      "body_length": 3812,
+      "author_reputation": 403995043911687,
+      "parent_author": "",
+      "parent_permlink": "hive-125125",
+      "url": "/hive-125125/@ecency/token",
+      "root_title": "Token",
+      "beneficiaries": [],
+      "max_accepted_payout": "0.000 HBD",
+      "percent_hbd": 10000,
+      "id": 101790300,
+      "author_rewards": 0,
+      "max_cashout_time": "1969-12-31T23:59:59",
+      "reward_weight": 10000,
+      "root_author": "ecency",
+      "root_permlink": "token",
+      "allow_replies": true,
+      "allow_votes": true,
+      "allow_curation_rewards": true,
+      "reblogged_by": [],
+      "net_votes": 242,
+      "children_abs_rshares": 0,
+      "total_pending_payout_value": "0.000 HBD",
+      "total_vote_weight": 0,
+      "vote_rshares": 0,
+      "net_rshares": 0,
+      "abs_rshares": 0,
+      "active_votes": [
+        {
+          "percent": 4000,
+          "reputation": 341233778618,
+          "rshares": 620233031504,
+          "time": "2021-02-09T10:08:03",
+          "voter": "boatymcboatface",
+          "weight": 54637
+        },
+        {
+          "percent": 10000,
+          "reputation": 29261302889705,
+          "rshares": 102981908948,
+          "time": "2021-02-10T01:36:45",
+          "voter": "pnc",
+          "weight": 10859
+        },
+        {
+          "percent": 4000,
+          "reputation": 2113489043779584,
+          "rshares": 175004643152,
+          "time": "2021-02-09T10:07:51",
+          "voter": "kingscrown",
+          "weight": 16050
+        }
+      ]
+    }`
   },
   {
     api: "condenser_api",
     method: "get_content_replies",
     params: ["author", "permlink"],
-    description:_t("condenser_api.get_content_replies_description")
+    parameter: `<code>author:string; permlink:string;</code>`,
+    description:_t("condenser_api.get_content_replies_description"),
+    url: `${ConfigItems.baseUrl}/api/get_content_replies?author="ecency"&permlink="token"`,
+    response: `[
+      {
+        "author": "iliyan90",
+        "permlink": "re-ecency-202129t121559910z",
+        "category": "hive-125125",
+        "title": "",
+        "body": "@ecency I'm gonna be teaching how to use ecency to the Bulgarian community from scratch very soon as I've tried to do in:\n## [This post](https://ecency.com/hive-172868/@iliyan90/predizvikatelstvo-1-den-v-socialnite-mrezhi)\n\nto show them and to use different futures of @ecency @dapplr @peakd by me sharing the rewards from the post with some of them.\n\nBut still for many of them is very complicated to operate on the network.\n\n\n![img_3051.png](https://images.ecency.com/DQme1i3maKDZHFwZqceRHWHeZ5to5NATm19V5stNcMj3Nyn/img_3051.png)\n\n\n",
+        "json_metadata": "{\"tags\":[\"hive-125125\",\"hive\",\"ecency\",\"uncensored\",\"blockchain\",\"dapp\",\"token\",\"smart-contracts\"],\"app\":\"ecency/3.0.14-mobile\",\"format\":\"markdown+html\"}",
+        "created": "2021-02-09T10:16:00",
+        "last_update": "2021-02-09T10:16:00",
+        "depth": 1,
+        "children": 7,
+        "last_payout": "2021-02-16T10:16:00",
+        "cashout_time": "1969-12-31T23:59:59",
+        "total_payout_value": "0.026 HBD",
+        "curator_payout_value": "0.026 HBD",
+        "pending_payout_value": "0.000 HBD",
+        "promoted": "0.000 HBD",
+        "replies": [],
+        "body_length": 534,
+        "author_reputation": 139027745069976,
+        "parent_author": "ecency",
+        "parent_permlink": "token",
+        "url": "/hive-125125/@ecency/token#@iliyan90/re-ecency-202129t121559910z",
+        "root_title": "Token",
+        "beneficiaries": [],
+        "max_accepted_payout": "1000000.000 HBD",
+        "percent_hbd": 10000,
+        "id": 101790408,
+        "author_rewards": 110,
+        "max_cashout_time": "1969-12-31T23:59:59",
+        "reward_weight": 10000,
+        "root_author": "ecency",
+        "root_permlink": "token",
+        "allow_replies": true,
+        "allow_votes": true,
+        "allow_curation_rewards": true,
+        "reblogged_by": [],
+        "net_votes": 1,
+        "children_abs_rshares": 0,
+        "total_pending_payout_value": "0.000 HBD",
+        "total_vote_weight": 0,
+        "vote_rshares": 0,
+        "net_rshares": 0,
+        "abs_rshares": 0,
+        "active_votes": [
+          {
+            "percent": 2050,
+            "reputation": 146260184545656,
+            "rshares": 231974905961,
+            "time": "2021-02-09T17:08:33",
+            "voter": "gamer00",
+            "weight": 112742
+          },
+          {
+            "percent": 10000,
+            "reputation": 6651953091,
+            "rshares": 0,
+            "time": "2022-01-11T13:10:36",
+            "voter": "johnbaby54",
+            "weight": 0
+          }
+        ]
+      },
+      {
+        "author": "cwow2",
+        "permlink": "re-ecency-202129t11162483z",
+        "category": "hive-125125",
+        "title": "",
+        "body": "Well there be a internal system where we can buy and sell tokens? E.g to other users where ecency maybe take a fee or will the token be on HE?",
+        "json_metadata": "{\"tags\":[\"hive-125125\",\"hive\",\"ecency\",\"uncensored\",\"blockchain\",\"dapp\",\"token\",\"smart-contracts\"],\"app\":\"ecency/3.0.14-mobile\",\"format\":\"markdown+html\"}",
+        "created": "2021-02-09T10:16:03",
+        "last_update": "2021-02-09T10:16:03",
+        "depth": 1,
+        "children": 3,
+        "last_payout": "2021-02-16T10:16:03",
+        "cashout_time": "1969-12-31T23:59:59",
+        "total_payout_value": "0.026 HBD",
+        "curator_payout_value": "0.026 HBD",
+        "pending_payout_value": "0.000 HBD",
+        "promoted": "0.000 HBD",
+        "replies": [],
+        "body_length": 142,
+        "author_reputation": 153779939680571,
+        "parent_author": "ecency",
+        "parent_permlink": "token",
+        "url": "/hive-125125/@ecency/token#@cwow2/re-ecency-202129t11162483z",
+        "root_title": "Token",
+        "beneficiaries": [],
+        "max_accepted_payout": "1000000.000 HBD",
+        "percent_hbd": 10000,
+        "id": 101790409,
+        "author_rewards": 109,
+        "max_cashout_time": "1969-12-31T23:59:59",
+        "reward_weight": 10000,
+        "root_author": "ecency",
+        "root_permlink": "token",
+        "allow_replies": true,
+        "allow_votes": true,
+        "allow_curation_rewards": true,
+        "reblogged_by": [],
+        "net_votes": 1,
+        "children_abs_rshares": 0,
+        "total_pending_payout_value": "0.000 HBD",
+        "total_vote_weight": 0,
+        "vote_rshares": 0,
+        "net_rshares": 0,
+        "abs_rshares": 0,
+        "active_votes": [
+          {
+            "percent": 2050,
+            "reputation": 146260184545656,
+            "rshares": 228169294789,
+            "time": "2021-02-09T11:41:48",
+            "voter": "gamer00",
+            "weight": 110942
+          },
+          {
+            "percent": 10000,
+            "reputation": 6651953091,
+            "rshares": 0,
+            "time": "2022-01-11T13:10:42",
+            "voter": "johnbaby54",
+            "weight": 0
+          }
+        ]
+      },
+      {
+        "author": "iliyan90",
+        "permlink": "re-ecency-202129t121614663z",
+        "category": "hive-125125",
+        "title": "",
+        "body": "@tipu curate",
+        "json_metadata": "{\"tags\":[\"hive-125125\",\"hive\",\"ecency\",\"uncensored\",\"blockchain\",\"dapp\",\"token\",\"smart-contracts\"],\"app\":\"ecency/3.0.14-mobile\",\"format\":\"markdown+html\"}",
+        "created": "2021-02-09T10:16:15",
+        "last_update": "2021-02-09T10:16:15",
+        "depth": 1,
+        "children": 1,
+        "last_payout": "2021-02-16T10:16:15",
+        "cashout_time": "1969-12-31T23:59:59",
+        "total_payout_value": "0.000 HBD",
+        "curator_payout_value": "0.000 HBD",
+        "pending_payout_value": "0.000 HBD",
+        "promoted": "0.000 HBD",
+        "replies": [],
+        "body_length": 12,
+        "author_reputation": 139027745069976,
+        "parent_author": "ecency",
+        "parent_permlink": "token",
+        "url": "/hive-125125/@ecency/token#@iliyan90/re-ecency-202129t121614663z",
+        "root_title": "Token",
+        "beneficiaries": [],
+        "max_accepted_payout": "1000000.000 HBD",
+        "percent_hbd": 10000,
+        "id": 101790412,
+        "author_rewards": 0,
+        "max_cashout_time": "1969-12-31T23:59:59",
+        "reward_weight": 10000,
+        "root_author": "ecency",
+        "root_permlink": "token",
+        "allow_replies": true,
+        "allow_votes": true,
+        "allow_curation_rewards": true,
+        "reblogged_by": [],
+        "net_votes": 0,
+        "children_abs_rshares": 0,
+        "total_pending_payout_value": "0.000 HBD",
+        "total_vote_weight": 0,
+        "vote_rshares": 0,
+        "net_rshares": 0,
+        "abs_rshares": 0,
+        "active_votes": [
+          {
+            "percent": 10000,
+            "reputation": 6651953091,
+            "rshares": 0,
+            "time": "2022-01-11T13:11:00",
+            "voter": "johnbaby54",
+            "weight": 0
+          }
+        ]
+      },
+      {
+        "author": "melinda010100",
+        "permlink": "re-ecency-202129t45253855z",
+        "category": "hive-125125",
+        "title": "",
+        "body": "Wow! Community POINTS sounds really exciting! ♥️",
+        "json_metadata": "{\"tags\":[\"hive-125125\",\"hive\",\"ecency\",\"uncensored\",\"blockchain\",\"dapp\",\"token\",\"smart-contracts\"],\"app\":\"ecency/3.0.14-mobile\",\"format\":\"markdown+html\"}",
+        "created": "2021-02-09T10:52:54",
+        "last_update": "2021-02-09T10:52:54",
+        "depth": 1,
+        "children": 2,
+        "last_payout": "2021-02-16T10:52:54",
+        "cashout_time": "1969-12-31T23:59:59",
+        "total_payout_value": "0.094 HBD",
+        "curator_payout_value": "0.094 HBD",
+        "pending_payout_value": "0.000 HBD",
+        "promoted": "0.000 HBD",
+        "replies": [],
+        "body_length": 48,
+        "author_reputation": 601625354285830,
+        "parent_author": "ecency",
+        "parent_permlink": "token",
+        "url": "/hive-125125/@ecency/token#@melinda010100/re-ecency-202129t45253855z",
+        "root_title": "Token",
+        "beneficiaries": [],
+        "max_accepted_payout": "1000000.000 HBD",
+        "percent_hbd": 10000,
+        "id": 101790780,
+        "author_rewards": 392,
+        "max_cashout_time": "1969-12-31T23:59:59",
+        "reward_weight": 10000,
+        "root_author": "ecency",
+        "root_permlink": "token",
+        "allow_replies": true,
+        "allow_votes": true,
+        "allow_curation_rewards": true,
+        "reblogged_by": [],
+        "net_votes": 2,
+        "children_abs_rshares": 0,
+        "total_pending_payout_value": "0.000 HBD",
+        "total_vote_weight": 0,
+        "vote_rshares": 0,
+        "net_rshares": 0,
+        "abs_rshares": 0,
+        "active_votes": [
+          {
+            "percent": 2050,
+            "reputation": 146260184545656,
+            "rshares": 229153686302,
+            "time": "2021-02-09T17:09:12",
+            "voter": "gamer00",
+            "weight": 98311
+          },
+          {
+            "percent": 580,
+            "reputation": 403995043911687,
+            "rshares": 549240345348,
+            "time": "2021-02-09T11:18:54",
+            "voter": "ecency",
+            "weight": 257472
+          },
+          {
+            "percent": 10000,
+            "reputation": 6651953091,
+            "rshares": 0,
+            "time": "2022-01-11T13:10:18",
+            "voter": "johnbaby54",
+            "weight": 0
+          }
+        ]
+      },
+      {
+        "author": "poshbot",
+        "permlink": "re-token-20210209t113253z",
+        "category": "hive-125125",
+        "title": "",
+        "body": "https://twitter.com/Bhattg18/status/1359102943601905669",
+        "json_metadata": "{\"app\": \"beem/0.24.20\"}",
+        "created": "2021-02-09T11:32:54",
+        "last_update": "2021-02-09T11:32:54",
+        "depth": 1,
+        "children": 0,
+        "last_payout": "2021-02-16T11:32:54",
+        "cashout_time": "1969-12-31T23:59:59",
+        "total_payout_value": "0.000 HBD",
+        "curator_payout_value": "0.000 HBD",
+        "pending_payout_value": "0.000 HBD",
+        "promoted": "0.000 HBD",
+        "replies": [],
+        "body_length": 55,
+        "author_reputation": 5554335374496,
+        "parent_author": "ecency",
+        "parent_permlink": "token",
+        "url": "/hive-125125/@ecency/token#@poshbot/re-token-20210209t113253z",
+        "root_title": "Token",
+        "beneficiaries": [],
+        "max_accepted_payout": "1000000.000 HBD",
+        "percent_hbd": 10000,
+        "id": 101791189,
+        "author_rewards": 0,
+        "max_cashout_time": "1969-12-31T23:59:59",
+        "reward_weight": 10000,
+        "root_author": "ecency",
+        "root_permlink": "token",
+        "allow_replies": true,
+        "allow_votes": true,
+        "allow_curation_rewards": true,
+        "reblogged_by": [],
+        "net_votes": 0,
+        "children_abs_rshares": 0,
+        "total_pending_payout_value": "0.000 HBD",
+        "total_vote_weight": 0,
+        "vote_rshares": 0,
+        "net_rshares": 0,
+        "abs_rshares": 0,
+        "active_votes": []
+      },
+      {
+        "author": "bhattg",
+        "permlink": "re-ecency-202129t17537906z",
+        "category": "hive-125125",
+        "title": "",
+        "body": "Wow this is really a great new 😀🙏🍻.\n",
+        "json_metadata": "{\"tags\":[\"hive-125125\",\"hive\",\"ecency\",\"uncensored\",\"blockchain\",\"dapp\",\"token\",\"smart-contracts\"],\"app\":\"ecency/3.0.13-vision\",\"format\":\"markdown+html\"}",
+        "created": "2021-02-09T11:35:39",
+        "last_update": "2021-02-09T11:35:39",
+        "depth": 1,
+        "children": 0,
+        "last_payout": "2021-02-16T11:35:39",
+        "cashout_time": "1969-12-31T23:59:59",
+        "total_payout_value": "0.026 HBD",
+        "curator_payout_value": "0.026 HBD",
+        "pending_payout_value": "0.000 HBD",
+        "promoted": "0.000 HBD",
+        "replies": [],
+        "body_length": 36,
+        "author_reputation": 295203113476886,
+        "parent_author": "ecency",
+        "parent_permlink": "token",
+        "url": "/hive-125125/@ecency/token#@bhattg/re-ecency-202129t17537906z",
+        "root_title": "Token",
+        "beneficiaries": [],
+        "max_accepted_payout": "1000000.000 HBD",
+        "percent_hbd": 10000,
+        "id": 101791226,
+        "author_rewards": 109,
+        "max_cashout_time": "1969-12-31T23:59:59",
+        "reward_weight": 10000,
+        "root_author": "ecency",
+        "root_permlink": "token",
+        "allow_replies": true,
+        "allow_votes": true,
+        "allow_curation_rewards": true,
+        "reblogged_by": [],
+        "net_votes": 1,
+        "children_abs_rshares": 0,
+        "total_pending_payout_value": "0.000 HBD",
+        "total_vote_weight": 0,
+        "vote_rshares": 0,
+        "net_rshares": 0,
+        "abs_rshares": 0,
+        "active_votes": [
+          {
+            "percent": 2050,
+            "reputation": 146260184545656,
+            "rshares": 229099073265,
+            "time": "2021-02-09T11:41:30",
+            "voter": "gamer00",
+            "weight": 111382
+          },
+          {
+            "percent": 10000,
+            "reputation": 6651953091,
+            "rshares": 0,
+            "time": "2022-01-11T13:10:57",
+            "voter": "johnbaby54",
+            "weight": 0
+          }
+        ]
+      },
+      {
+        "author": "alokkumar121",
+        "permlink": "re-ecency-202129t17464935z",
+        "category": "hive-125125",
+        "title": "",
+        "body": "this is exciting and I look forward to having more details about it. ",
+        "json_metadata": "{\"tags\":[\"hive-125125\",\"hive\",\"ecency\",\"uncensored\",\"blockchain\",\"dapp\",\"token\",\"smart-contracts\"],\"app\":\"ecency/3.0.13-vision\",\"format\":\"markdown+html\"}",
+        "created": "2021-02-09T12:16:03",
+        "last_update": "2021-02-09T12:16:03",
+        "depth": 1,
+        "children": 0,
+        "last_payout": "2021-02-16T12:16:03",
+        "cashout_time": "1969-12-31T23:59:59",
+        "total_payout_value": "0.000 HBD",
+        "curator_payout_value": "0.000 HBD",
+        "pending_payout_value": "0.000 HBD",
+        "promoted": "0.000 HBD",
+        "replies": [],
+        "body_length": 69,
+        "author_reputation": 1249643260012318,
+        "parent_author": "ecency",
+        "parent_permlink": "token",
+        "url": "/hive-125125/@ecency/token#@alokkumar121/re-ecency-202129t17464935z",
+        "root_title": "Token",
+        "beneficiaries": [],
+        "max_accepted_payout": "1000000.000 HBD",
+        "percent_hbd": 10000,
+        "id": 101791609,
+        "author_rewards": 0,
+        "max_cashout_time": "1969-12-31T23:59:59",
+        "reward_weight": 10000,
+        "root_author": "ecency",
+        "root_permlink": "token",
+        "allow_replies": true,
+        "allow_votes": true,
+        "allow_curation_rewards": true,
+        "reblogged_by": [],
+        "net_votes": 0,
+        "children_abs_rshares": 0,
+        "total_pending_payout_value": "0.000 HBD",
+        "total_vote_weight": 0,
+        "vote_rshares": 0,
+        "net_rshares": 0,
+        "abs_rshares": 0,
+        "active_votes": []
+      },
+      {
+        "author": "seckorama",
+        "permlink": "re-ecency-202129t1595613z",
+        "category": "hive-125125",
+        "title": "",
+        "body": "I support Community points. That's a good idea to form some basic fund for community functioning. 👍",
+        "json_metadata": "{\"tags\":[\"hive-125125\",\"hive\",\"ecency\",\"uncensored\",\"blockchain\",\"dapp\",\"token\",\"smart-contracts\"],\"app\":\"ecency/3.0.13-vision\",\"format\":\"markdown+html\"}",
+        "created": "2021-02-09T14:09:06",
+        "last_update": "2021-02-09T14:09:06",
+        "depth": 1,
+        "children": 1,
+        "last_payout": "2021-02-16T14:09:06",
+        "cashout_time": "1969-12-31T23:59:59",
+        "total_payout_value": "0.000 HBD",
+        "curator_payout_value": "0.000 HBD",
+        "pending_payout_value": "0.000 HBD",
+        "promoted": "0.000 HBD",
+        "replies": [],
+        "body_length": 99,
+        "author_reputation": 295768300933256,
+        "parent_author": "ecency",
+        "parent_permlink": "token",
+        "url": "/hive-125125/@ecency/token#@seckorama/re-ecency-202129t1595613z",
+        "root_title": "Token",
+        "beneficiaries": [],
+        "max_accepted_payout": "1000000.000 HBD",
+        "percent_hbd": 10000,
+        "id": 101793075,
+        "author_rewards": 0,
+        "max_cashout_time": "1969-12-31T23:59:59",
+        "reward_weight": 10000,
+        "root_author": "ecency",
+        "root_permlink": "token",
+        "allow_replies": true,
+        "allow_votes": true,
+        "allow_curation_rewards": true,
+        "reblogged_by": [],
+        "net_votes": 0,
+        "children_abs_rshares": 0,
+        "total_pending_payout_value": "0.000 HBD",
+        "total_vote_weight": 0,
+        "vote_rshares": 0,
+        "net_rshares": 0,
+        "abs_rshares": 0,
+        "active_votes": []
+      },
+      {
+        "author": "jozef230",
+        "permlink": "re-ecency-202129t153841664z",
+        "category": "hive-125125",
+        "title": "",
+        "body": "Great info🙏",
+        "json_metadata": "{\"tags\":[\"hive-125125\",\"hive\",\"ecency\",\"uncensored\",\"blockchain\",\"dapp\",\"token\",\"smart-contracts\"],\"app\":\"ecency/3.0.14-mobile\",\"format\":\"markdown+html\"}",
+        "created": "2021-02-09T14:38:42",
+        "last_update": "2021-02-09T14:38:42",
+        "depth": 1,
+        "children": 0,
+        "last_payout": "2021-02-16T14:38:42",
+        "cashout_time": "1969-12-31T23:59:59",
+        "total_payout_value": "0.000 HBD",
+        "curator_payout_value": "0.000 HBD",
+        "pending_payout_value": "0.000 HBD",
+        "promoted": "0.000 HBD",
+        "replies": [],
+        "body_length": 11,
+        "author_reputation": 176437603283189,
+        "parent_author": "ecency",
+        "parent_permlink": "token",
+        "url": "/hive-125125/@ecency/token#@jozef230/re-ecency-202129t153841664z",
+        "root_title": "Token",
+        "beneficiaries": [],
+        "max_accepted_payout": "1000000.000 HBD",
+        "percent_hbd": 10000,
+        "id": 101793501,
+        "author_rewards": 0,
+        "max_cashout_time": "1969-12-31T23:59:59",
+        "reward_weight": 10000,
+        "root_author": "ecency",
+        "root_permlink": "token",
+        "allow_replies": true,
+        "allow_votes": true,
+        "allow_curation_rewards": true,
+        "reblogged_by": [],
+        "net_votes": -1,
+        "children_abs_rshares": 0,
+        "total_pending_payout_value": "0.000 HBD",
+        "total_vote_weight": 0,
+        "vote_rshares": 0,
+        "net_rshares": 0,
+        "abs_rshares": 0,
+        "active_votes": [
+          {
+            "percent": -25,
+            "reputation": 68307351609170,
+            "rshares": -5397906788,
+            "time": "2021-02-09T14:39:51",
+            "voter": "spaminator",
+            "weight": 0
+          }
+        ]
+      },
+      {
+        "author": "ninahaskin",
+        "permlink": "re-ecency-202129t92948372z",
+        "category": "hive-125125",
+        "title": "",
+        "body": "The techie guys and gals behind the scenes at @ecency are spoiling us with all of the upcoming bells and whistles -- but we don't mind! 💯",
+        "json_metadata": "{\"tags\":[\"hive-125125\",\"hive\",\"ecency\",\"uncensored\",\"blockchain\",\"dapp\",\"token\",\"smart-contracts\"],\"app\":\"ecency/3.0.14-mobile\",\"format\":\"markdown+html\"}",
+        "created": "2021-02-09T15:29:48",
+        "last_update": "2021-02-09T15:29:48",
+        "depth": 1,
+        "children": 0,
+        "last_payout": "2021-02-16T15:29:48",
+        "cashout_time": "1969-12-31T23:59:59",
+        "total_payout_value": "0.032 HBD",
+        "curator_payout_value": "0.033 HBD",
+        "pending_payout_value": "0.000 HBD",
+        "promoted": "0.000 HBD",
+        "replies": [],
+        "body_length": 137,
+        "author_reputation": 139987441472367,
+        "parent_author": "ecency",
+        "parent_permlink": "token",
+        "url": "/hive-125125/@ecency/token#@ninahaskin/re-ecency-202129t92948372z",
+        "root_title": "Token",
+        "beneficiaries": [],
+        "max_accepted_payout": "1000000.000 HBD",
+        "percent_hbd": 10000,
+        "id": 101794161,
+        "author_rewards": 136,
+        "max_cashout_time": "1969-12-31T23:59:59",
+        "reward_weight": 10000,
+        "root_author": "ecency",
+        "root_permlink": "token",
+        "allow_replies": true,
+        "allow_votes": true,
+        "allow_curation_rewards": true,
+        "reblogged_by": [],
+        "net_votes": 1,
+        "children_abs_rshares": 0,
+        "total_pending_payout_value": "0.000 HBD",
+        "total_vote_weight": 0,
+        "vote_rshares": 0,
+        "net_rshares": 0,
+        "abs_rshares": 0,
+        "active_votes": [
+          {
+            "percent": 300,
+            "reputation": 403995043911687,
+            "rshares": 286257316878,
+            "time": "2021-02-09T18:03:48",
+            "voter": "ecency",
+            "weight": 138255
+          },
+          {
+            "percent": 10000,
+            "reputation": 6651953091,
+            "rshares": 0,
+            "time": "2022-01-11T13:10:21",
+            "voter": "johnbaby54",
+            "weight": 0
+          }
+        ]
+      },
+      {
+        "author": "jilt",
+        "permlink": "re-ecency-2021210t111416421z",
+        "category": "hive-125125",
+        "title": "",
+        "body": "!discovery nest",
+        "json_metadata": "{\"tags\":[\"hive-125125\",\"hive\",\"ecency\",\"uncensored\",\"blockchain\",\"dapp\",\"token\",\"smart-contracts\"],\"app\":\"ecency/3.0.14-mobile\",\"format\":\"markdown+html\"}",
+        "created": "2021-02-10T10:14:15",
+        "last_update": "2021-02-10T10:14:15",
+        "depth": 1,
+        "children": 0,
+        "last_payout": "2021-02-17T10:14:15",
+        "cashout_time": "1969-12-31T23:59:59",
+        "total_payout_value": "0.000 HBD",
+        "curator_payout_value": "0.000 HBD",
+        "pending_payout_value": "0.000 HBD",
+        "promoted": "0.000 HBD",
+        "replies": [],
+        "body_length": 15,
+        "author_reputation": 24866531417502,
+        "parent_author": "ecency",
+        "parent_permlink": "token",
+        "url": "/hive-125125/@ecency/token#@jilt/re-ecency-2021210t111416421z",
+        "root_title": "Token",
+        "beneficiaries": [],
+        "max_accepted_payout": "1000000.000 HBD",
+        "percent_hbd": 10000,
+        "id": 101805305,
+        "author_rewards": 0,
+        "max_cashout_time": "1969-12-31T23:59:59",
+        "reward_weight": 10000,
+        "root_author": "ecency",
+        "root_permlink": "token",
+        "allow_replies": true,
+        "allow_votes": true,
+        "allow_curation_rewards": true,
+        "reblogged_by": [],
+        "net_votes": 0,
+        "children_abs_rshares": 0,
+        "total_pending_payout_value": "0.000 HBD",
+        "total_vote_weight": 0,
+        "vote_rshares": 0,
+        "net_rshares": 0,
+        "abs_rshares": 0,
+        "active_votes": []
+      },
+      {
+        "author": "discovery-it",
+        "permlink": "re-ecency-qx1mi8uh5r",
+        "category": "hive-125125",
+        "title": "",
+        "body": "<div class=\"pull-left\">https://images.hive.blog/DQmUebzCryxzBU1c2BKo1KSvcp8nnwnNTKA22ugJxtibK58/banner-smafffffll.gif</div><br><br><br>This post was shared and voted inside the discord by the curators team of <a href=\"https://discord.gg/cMMp943\"> Discovery-it</a> in collaboration with <a href=\"https://hive.blog/trending/hive-196294\"> Nestedneons</a> community. <br>Discovery-it is also a Witness, vote for us <a href = \"https://hivesigner.com/sign/account-witness-vote?witness=discovery-it&approve=true\"> here</a> <br>Delegate to us for passive income. Check our <a href = \"https://hive.blog/hive-193212/@discovery-it/delegations-program-80-fee-back\"> 80% fee-back Program</a> <hr>",
+        "json_metadata": "{\"app\": \"beem/0.24.19\"}",
+        "created": "2021-02-10T10:14:30",
+        "last_update": "2021-02-10T10:14:30",
+        "depth": 1,
+        "children": 0,
+        "last_payout": "2021-02-17T10:14:30",
+        "cashout_time": "1969-12-31T23:59:59",
+        "total_payout_value": "0.000 HBD",
+        "curator_payout_value": "0.000 HBD",
+        "pending_payout_value": "0.000 HBD",
+        "promoted": "0.000 HBD",
+        "replies": [],
+        "body_length": 683,
+        "author_reputation": 30856212949541,
+        "parent_author": "ecency",
+        "parent_permlink": "token",
+        "url": "/hive-125125/@ecency/token#@discovery-it/re-ecency-qx1mi8uh5r",
+        "root_title": "Token",
+        "beneficiaries": [],
+        "max_accepted_payout": "1000000.000 HBD",
+        "percent_hbd": 10000,
+        "id": 101805308,
+        "author_rewards": 0,
+        "max_cashout_time": "1969-12-31T23:59:59",
+        "reward_weight": 10000,
+        "root_author": "ecency",
+        "root_permlink": "token",
+        "allow_replies": true,
+        "allow_votes": true,
+        "allow_curation_rewards": true,
+        "reblogged_by": [],
+        "net_votes": 0,
+        "children_abs_rshares": 0,
+        "total_pending_payout_value": "0.000 HBD",
+        "total_vote_weight": 0,
+        "vote_rshares": 0,
+        "net_rshares": 0,
+        "abs_rshares": 0,
+        "active_votes": []
+      },
+      {
+        "author": "stefano.massari",
+        "permlink": "re-ecency-2021210t11412643z",
+        "category": "hive-125125",
+        "title": "",
+        "body": "great news!  we are also waiting for the new token name",
+        "json_metadata": "{\"tags\":[\"hive-125125\",\"hive\",\"ecency\",\"uncensored\",\"blockchain\",\"dapp\",\"token\",\"smart-contracts\"],\"app\":\"ecency/3.0.14-mobile\",\"format\":\"markdown+html\"}",
+        "created": "2021-02-10T10:41:24",
+        "last_update": "2021-02-10T10:41:24",
+        "depth": 1,
+        "children": 0,
+        "last_payout": "2021-02-17T10:41:24",
+        "cashout_time": "1969-12-31T23:59:59",
+        "total_payout_value": "0.000 HBD",
+        "curator_payout_value": "0.000 HBD",
+        "pending_payout_value": "0.000 HBD",
+        "promoted": "0.000 HBD",
+        "replies": [],
+        "body_length": 55,
+        "author_reputation": 108204028620451,
+        "parent_author": "ecency",
+        "parent_permlink": "token",
+        "url": "/hive-125125/@ecency/token#@stefano.massari/re-ecency-2021210t11412643z",
+        "root_title": "Token",
+        "beneficiaries": [],
+        "max_accepted_payout": "1000000.000 HBD",
+        "percent_hbd": 10000,
+        "id": 101805509,
+        "author_rewards": 0,
+        "max_cashout_time": "1969-12-31T23:59:59",
+        "reward_weight": 10000,
+        "root_author": "ecency",
+        "root_permlink": "token",
+        "allow_replies": true,
+        "allow_votes": true,
+        "allow_curation_rewards": true,
+        "reblogged_by": [],
+        "net_votes": 0,
+        "children_abs_rshares": 0,
+        "total_pending_payout_value": "0.000 HBD",
+        "total_vote_weight": 0,
+        "vote_rshares": 0,
+        "net_rshares": 0,
+        "abs_rshares": 0,
+        "active_votes": []
+      },
+      {
+        "author": "zo3d",
+        "permlink": "re-ecency-2021211t15127631z",
+        "category": "hive-125125",
+        "title": "",
+        "body": "Is there a way to personally refer a friend to ecency? Not a generic new user link?",
+        "json_metadata": "{\"tags\":[\"hive-125125\",\"hive\",\"ecency\",\"uncensored\",\"blockchain\",\"dapp\",\"token\",\"smart-contracts\"],\"app\":\"ecency/3.0.14-mobile\",\"format\":\"markdown+html\"}",
+        "created": "2021-02-11T13:01:30",
+        "last_update": "2021-02-11T13:01:30",
+        "depth": 1,
+        "children": 1,
+        "last_payout": "2021-02-18T13:01:30",
+        "cashout_time": "1969-12-31T23:59:59",
+        "total_payout_value": "0.000 HBD",
+        "curator_payout_value": "0.000 HBD",
+        "pending_payout_value": "0.000 HBD",
+        "promoted": "0.000 HBD",
+        "replies": [],
+        "body_length": 83,
+        "author_reputation": 190810033590760,
+        "parent_author": "ecency",
+        "parent_permlink": "token",
+        "url": "/hive-125125/@ecency/token#@zo3d/re-ecency-2021211t15127631z",
+        "root_title": "Token",
+        "beneficiaries": [],
+        "max_accepted_payout": "1000000.000 HBD",
+        "percent_hbd": 10000,
+        "id": 101822478,
+        "author_rewards": 0,
+        "max_cashout_time": "1969-12-31T23:59:59",
+        "reward_weight": 10000,
+        "root_author": "ecency",
+        "root_permlink": "token",
+        "allow_replies": true,
+        "allow_votes": true,
+        "allow_curation_rewards": true,
+        "reblogged_by": [],
+        "net_votes": 0,
+        "children_abs_rshares": 0,
+        "total_pending_payout_value": "0.000 HBD",
+        "total_vote_weight": 0,
+        "vote_rshares": 0,
+        "net_rshares": 0,
+        "abs_rshares": 0,
+        "active_votes": []
+      },
+      {
+        "author": "bigtakosensei",
+        "permlink": "re-ecency-2021211t1281275z",
+        "category": "hive-125125",
+        "title": "",
+        "body": "This is amazing! I just st did a walkthrough on the mobile app a couple of days ago but I didn’t know this was going on. This is puts ecency o er the top for me. I already really enjoyed using this app ",
+        "json_metadata": "{\"tags\":[\"hive-125125\",\"hive\",\"ecency\",\"uncensored\",\"blockchain\",\"dapp\",\"token\",\"smart-contracts\"],\"app\":\"ecency/3.0.14-mobile\",\"format\":\"markdown+html\"}",
+        "created": "2021-02-11T18:08:12",
+        "last_update": "2021-02-11T18:08:12",
+        "depth": 1,
+        "children": 0,
+        "last_payout": "2021-02-18T18:08:12",
+        "cashout_time": "1969-12-31T23:59:59",
+        "total_payout_value": "0.000 HBD",
+        "curator_payout_value": "0.000 HBD",
+        "pending_payout_value": "0.000 HBD",
+        "promoted": "0.000 HBD",
+        "replies": [],
+        "body_length": 202,
+        "author_reputation": 46765053372711,
+        "parent_author": "ecency",
+        "parent_permlink": "token",
+        "url": "/hive-125125/@ecency/token#@bigtakosensei/re-ecency-2021211t1281275z",
+        "root_title": "Token",
+        "beneficiaries": [],
+        "max_accepted_payout": "1000000.000 HBD",
+        "percent_hbd": 10000,
+        "id": 101826366,
+        "author_rewards": 0,
+        "max_cashout_time": "1969-12-31T23:59:59",
+        "reward_weight": 10000,
+        "root_author": "ecency",
+        "root_permlink": "token",
+        "allow_replies": true,
+        "allow_votes": true,
+        "allow_curation_rewards": true,
+        "reblogged_by": [],
+        "net_votes": 0,
+        "children_abs_rshares": 0,
+        "total_pending_payout_value": "0.000 HBD",
+        "total_vote_weight": 0,
+        "vote_rshares": 0,
+        "net_rshares": 0,
+        "abs_rshares": 0,
+        "active_votes": []
+      },
+      {
+        "author": "natepowers",
+        "permlink": "re-ecency-2021212t17842350z",
+        "category": "hive-125125",
+        "title": "",
+        "body": "Help @ecency I have used ecency point's to advertise and I tried advertising twice, each time the transaction went through, but I don't know if you received the right information to promote my link, I am confused with how im supposed to enter the username/permlink \n\nMy username is @natepowers than how do I add the link https://hive.blog/hive/@natepowers/hive-campaign-sam-tripoli-cash-daddies,\n please help\n\n\n\n",
+        "json_metadata": "{\"tags\":[\"hive-125125\",\"hive\",\"ecency\",\"uncensored\",\"blockchain\",\"dapp\",\"token\",\"smart-contracts\"],\"app\":\"ecency/3.0.13-vision\",\"format\":\"markdown+html\"}",
+        "created": "2021-02-12T23:08:42",
+        "last_update": "2021-02-12T23:08:42",
+        "depth": 1,
+        "children": 1,
+        "last_payout": "2021-02-19T23:08:42",
+        "cashout_time": "1969-12-31T23:59:59",
+        "total_payout_value": "0.000 HBD",
+        "curator_payout_value": "0.000 HBD",
+        "pending_payout_value": "0.000 HBD",
+        "promoted": "0.000 HBD",
+        "replies": [],
+        "body_length": 412,
+        "author_reputation": 26761401660669,
+        "parent_author": "ecency",
+        "parent_permlink": "token",
+        "url": "/hive-125125/@ecency/token#@natepowers/re-ecency-2021212t17842350z",
+        "root_title": "Token",
+        "beneficiaries": [],
+        "max_accepted_payout": "1000000.000 HBD",
+        "percent_hbd": 10000,
+        "id": 101847293,
+        "author_rewards": 0,
+        "max_cashout_time": "1969-12-31T23:59:59",
+        "reward_weight": 10000,
+        "root_author": "ecency",
+        "root_permlink": "token",
+        "allow_replies": true,
+        "allow_votes": true,
+        "allow_curation_rewards": true,
+        "reblogged_by": [],
+        "net_votes": 0,
+        "children_abs_rshares": 0,
+        "total_pending_payout_value": "0.000 HBD",
+        "total_vote_weight": 0,
+        "vote_rshares": 0,
+        "net_rshares": 0,
+        "abs_rshares": 0,
+        "active_votes": []
+      },
+      {
+        "author": "cmmemes",
+        "permlink": "re-ecency-qoh44z",
+        "category": "hive-125125",
+        "title": "",
+        "body": "I'm a bit confused, will current point hodlers receive an airdrop of the new ecency token or have will they a special discount on the new tokens?",
+        "json_metadata": "{\"tags\":[\"hive-125125\"],\"app\":\"peakd/2021.01.3\"}",
+        "created": "2021-02-13T15:24:36",
+        "last_update": "2021-02-13T15:26:42",
+        "depth": 1,
+        "children": 2,
+        "last_payout": "2021-02-20T15:24:36",
+        "cashout_time": "1969-12-31T23:59:59",
+        "total_payout_value": "0.000 HBD",
+        "curator_payout_value": "0.000 HBD",
+        "pending_payout_value": "0.000 HBD",
+        "promoted": "0.000 HBD",
+        "replies": [],
+        "body_length": 145,
+        "author_reputation": 84153997306700,
+        "parent_author": "ecency",
+        "parent_permlink": "token",
+        "url": "/hive-125125/@ecency/token#@cmmemes/re-ecency-qoh44z",
+        "root_title": "Token",
+        "beneficiaries": [],
+        "max_accepted_payout": "1000000.000 HBD",
+        "percent_hbd": 10000,
+        "id": 101856509,
+        "author_rewards": 0,
+        "max_cashout_time": "1969-12-31T23:59:59",
+        "reward_weight": 10000,
+        "root_author": "ecency",
+        "root_permlink": "token",
+        "allow_replies": true,
+        "allow_votes": true,
+        "allow_curation_rewards": true,
+        "reblogged_by": [],
+        "net_votes": 0,
+        "children_abs_rshares": 0,
+        "total_pending_payout_value": "0.000 HBD",
+        "total_vote_weight": 0,
+        "vote_rshares": 0,
+        "net_rshares": 0,
+        "abs_rshares": 0,
+        "active_votes": []
+      },
+      {
+        "author": "charlonius",
+        "permlink": "re-ecency-2021616t2138473z",
+        "category": "hive-125125",
+        "title": "",
+        "body": "Nice",
+        "json_metadata": "{\"tags\":[\"hive-125125\",\"hive\",\"ecency\",\"uncensored\",\"blockchain\",\"dapp\",\"token\",\"smart-contracts\"],\"app\":\"ecency/3.0.18-mobile\",\"format\":\"markdown+html\"}",
+        "created": "2021-06-15T19:01:42",
+        "last_update": "2021-06-15T19:01:42",
+        "depth": 1,
+        "children": 0,
+        "last_payout": "2021-06-22T19:01:42",
+        "cashout_time": "1969-12-31T23:59:59",
+        "total_payout_value": "0.000 HBD",
+        "curator_payout_value": "0.000 HBD",
+        "pending_payout_value": "0.000 HBD",
+        "promoted": "0.000 HBD",
+        "replies": [],
+        "body_length": 4,
+        "author_reputation": 0,
+        "parent_author": "ecency",
+        "parent_permlink": "token",
+        "url": "/hive-125125/@ecency/token#@charlonius/re-ecency-2021616t2138473z",
+        "root_title": "Token",
+        "beneficiaries": [],
+        "max_accepted_payout": "1000000.000 HBD",
+        "percent_hbd": 10000,
+        "id": 104352099,
+        "author_rewards": 0,
+        "max_cashout_time": "1969-12-31T23:59:59",
+        "reward_weight": 10000,
+        "root_author": "ecency",
+        "root_permlink": "token",
+        "allow_replies": true,
+        "allow_votes": true,
+        "allow_curation_rewards": true,
+        "reblogged_by": [],
+        "net_votes": 0,
+        "children_abs_rshares": 0,
+        "total_pending_payout_value": "0.000 HBD",
+        "total_vote_weight": 0,
+        "vote_rshares": 0,
+        "net_rshares": 0,
+        "abs_rshares": 0,
+        "active_votes": []
+      },
+      {
+        "author": "marthaisela",
+        "permlink": "re-ecency-2021728t184053824z",
+        "category": "hive-125125",
+        "title": "",
+        "body": "Excelente!!! Feliz de estar aqui ",
+        "json_metadata": "{\"tags\":[\"hive-125125\",\"hive\",\"ecency\",\"uncensored\",\"blockchain\",\"dapp\",\"token\",\"smart-contracts\"],\"app\":\"ecency/3.0.18-vision\",\"format\":\"markdown+html\"}",
+        "created": "2021-07-28T23:40:54",
+        "last_update": "2021-07-28T23:40:54",
+        "depth": 1,
+        "children": 0,
+        "last_payout": "2021-08-04T23:40:54",
+        "cashout_time": "1969-12-31T23:59:59",
+        "total_payout_value": "0.000 HBD",
+        "curator_payout_value": "0.000 HBD",
+        "pending_payout_value": "0.000 HBD",
+        "promoted": "0.000 HBD",
+        "replies": [],
+        "body_length": 33,
+        "author_reputation": 1000954736811,
+        "parent_author": "ecency",
+        "parent_permlink": "token",
+        "url": "/hive-125125/@ecency/token#@marthaisela/re-ecency-2021728t184053824z",
+        "root_title": "Token",
+        "beneficiaries": [],
+        "max_accepted_payout": "1000000.000 HBD",
+        "percent_hbd": 10000,
+        "id": 105178943,
+        "author_rewards": 0,
+        "max_cashout_time": "1969-12-31T23:59:59",
+        "reward_weight": 10000,
+        "root_author": "ecency",
+        "root_permlink": "token",
+        "allow_replies": true,
+        "allow_votes": true,
+        "allow_curation_rewards": true,
+        "reblogged_by": [],
+        "net_votes": 1,
+        "children_abs_rshares": 0,
+        "total_pending_payout_value": "0.000 HBD",
+        "total_vote_weight": 0,
+        "vote_rshares": 0,
+        "net_rshares": 0,
+        "abs_rshares": 0,
+        "active_votes": [
+          {
+            "percent": 10000,
+            "reputation": 967746464,
+            "rshares": 3878820197,
+            "time": "2021-08-04T00:08:06",
+            "voter": "javier42",
+            "weight": 484852524
+          }
+        ]
+      },
+      {
+        "author": "shiftrox",
+        "permlink": "re-ecency-2021912t175017141z",
+        "category": "hive-125125",
+        "title": "",
+        "body": "Nice site, nice token <3",
+        "json_metadata": "{\"tags\":[\"hive-125125\",\"hive\",\"ecency\",\"uncensored\",\"blockchain\",\"dapp\",\"token\",\"smart-contracts\"],\"app\":\"ecency/3.0.19-vision\",\"format\":\"markdown+html\"}",
+        "created": "2021-09-12T20:50:18",
+        "last_update": "2021-09-12T20:50:18",
+        "depth": 1,
+        "children": 0,
+        "last_payout": "2021-09-19T20:50:18",
+        "cashout_time": "1969-12-31T23:59:59",
+        "total_payout_value": "0.000 HBD",
+        "curator_payout_value": "0.000 HBD",
+        "pending_payout_value": "0.000 HBD",
+        "promoted": "0.000 HBD",
+        "replies": [],
+        "body_length": 24,
+        "author_reputation": 172286347759391,
+        "parent_author": "ecency",
+        "parent_permlink": "token",
+        "url": "/hive-125125/@ecency/token#@shiftrox/re-ecency-2021912t175017141z",
+        "root_title": "Token",
+        "beneficiaries": [],
+        "max_accepted_payout": "1000000.000 HBD",
+        "percent_hbd": 10000,
+        "id": 106230591,
+        "author_rewards": 0,
+        "max_cashout_time": "1969-12-31T23:59:59",
+        "reward_weight": 10000,
+        "root_author": "ecency",
+        "root_permlink": "token",
+        "allow_replies": true,
+        "allow_votes": true,
+        "allow_curation_rewards": true,
+        "reblogged_by": [],
+        "net_votes": 0,
+        "children_abs_rshares": 0,
+        "total_pending_payout_value": "0.000 HBD",
+        "total_vote_weight": 0,
+        "vote_rshares": 0,
+        "net_rshares": 0,
+        "abs_rshares": 0,
+        "active_votes": []
+      },
+      {
+        "author": "aulaikings0121",
+        "permlink": "re-ecency-20211231t01416526z",
+        "category": "hive-125125",
+        "title": "",
+        "body": "Awesome 👍",
+        "json_metadata": "{\"tags\":[\"hive-125125\",\"hive\",\"ecency\",\"uncensored\",\"blockchain\",\"dapp\",\"token\",\"smart-contracts\"],\"app\":\"ecency/3.0.23-mobile\",\"format\":\"markdown+html\"}",
+        "created": "2021-12-31T08:14:15",
+        "last_update": "2021-12-31T08:14:15",
+        "depth": 1,
+        "children": 0,
+        "last_payout": "2022-01-07T08:14:15",
+        "cashout_time": "1969-12-31T23:59:59",
+        "total_payout_value": "0.000 HBD",
+        "curator_payout_value": "0.000 HBD",
+        "pending_payout_value": "0.000 HBD",
+        "promoted": "0.000 HBD",
+        "replies": [],
+        "body_length": 9,
+        "author_reputation": 1016368938,
+        "parent_author": "ecency",
+        "parent_permlink": "token",
+        "url": "/hive-125125/@ecency/token#@aulaikings0121/re-ecency-20211231t01416526z",
+        "root_title": "Token",
+        "beneficiaries": [],
+        "max_accepted_payout": "1000000.000 HBD",
+        "percent_hbd": 10000,
+        "id": 109018194,
+        "author_rewards": 0,
+        "max_cashout_time": "1969-12-31T23:59:59",
+        "reward_weight": 10000,
+        "root_author": "ecency",
+        "root_permlink": "token",
+        "allow_replies": true,
+        "allow_votes": true,
+        "allow_curation_rewards": true,
+        "reblogged_by": [],
+        "net_votes": 0,
+        "children_abs_rshares": 0,
+        "total_pending_payout_value": "0.000 HBD",
+        "total_vote_weight": 0,
+        "vote_rshares": 0,
+        "net_rshares": 0,
+        "abs_rshares": 0,
+        "active_votes": []
+      },
+      {
+        "author": "mythcrusher",
+        "permlink": "re-ecency-202229t17339395z",
+        "category": "hive-125125",
+        "title": "",
+        "body": "I think it would be a good idea if Ecency points could also be bought and sold easier on the Hive engine.",
+        "json_metadata": "{\"tags\":[\"hive-125125\",\"hive\",\"ecency\",\"uncensored\",\"blockchain\",\"dapp\",\"token\",\"smart-contracts\"],\"app\":\"ecency/3.0.21-vision\",\"format\":\"markdown+html\"}",
+        "created": "2022-02-09T22:33:09",
+        "last_update": "2022-02-09T22:33:09",
+        "depth": 1,
+        "children": 0,
+        "last_payout": "2022-02-16T22:33:09",
+        "cashout_time": "1969-12-31T23:59:59",
+        "total_payout_value": "0.000 HBD",
+        "curator_payout_value": "0.000 HBD",
+        "pending_payout_value": "0.000 HBD",
+        "promoted": "0.000 HBD",
+        "replies": [],
+        "body_length": 105,
+        "author_reputation": 1642737690940,
+        "parent_author": "ecency",
+        "parent_permlink": "token",
+        "url": "/hive-125125/@ecency/token#@mythcrusher/re-ecency-202229t17339395z",
+        "root_title": "Token",
+        "beneficiaries": [],
+        "max_accepted_payout": "1000000.000 HBD",
+        "percent_hbd": 10000,
+        "id": 110312972,
+        "author_rewards": 0,
+        "max_cashout_time": "1969-12-31T23:59:59",
+        "reward_weight": 10000,
+        "root_author": "ecency",
+        "root_permlink": "token",
+        "allow_replies": true,
+        "allow_votes": true,
+        "allow_curation_rewards": true,
+        "reblogged_by": [],
+        "net_votes": 0,
+        "children_abs_rshares": 0,
+        "total_pending_payout_value": "0.000 HBD",
+        "total_vote_weight": 0,
+        "vote_rshares": 0,
+        "net_rshares": 0,
+        "abs_rshares": 0,
+        "active_votes": []
+      },
+      {
+        "author": "detroyt31",
+        "permlink": "re-ecency-2022214t153935665z",
+        "category": "hive-125125",
+        "title": "",
+        "body": "What is the minimum investment I need to make to become a participant of this program? And how long will the rewards last?",
+        "json_metadata": "{\"tags\":[\"hive-125125\",\"hive\",\"ecency\",\"uncensored\",\"blockchain\",\"dapp\",\"token\",\"smart-contracts\"],\"app\":\"ecency/3.0.21-vision\",\"format\":\"markdown+html\"}",
+        "created": "2022-02-14T13:39:36",
+        "last_update": "2022-02-14T13:39:36",
+        "depth": 1,
+        "children": 0,
+        "last_payout": "2022-02-21T13:39:36",
+        "cashout_time": "1969-12-31T23:59:59",
+        "total_payout_value": "0.000 HBD",
+        "curator_payout_value": "0.000 HBD",
+        "pending_payout_value": "0.000 HBD",
+        "promoted": "0.000 HBD",
+        "replies": [],
+        "body_length": 122,
+        "author_reputation": 1159055805765,
+        "parent_author": "ecency",
+        "parent_permlink": "token",
+        "url": "/hive-125125/@ecency/token#@detroyt31/re-ecency-2022214t153935665z",
+        "root_title": "Token",
+        "beneficiaries": [],
+        "max_accepted_payout": "1000000.000 HBD",
+        "percent_hbd": 10000,
+        "id": 110455752,
+        "author_rewards": 0,
+        "max_cashout_time": "1969-12-31T23:59:59",
+        "reward_weight": 10000,
+        "root_author": "ecency",
+        "root_permlink": "token",
+        "allow_replies": true,
+        "allow_votes": true,
+        "allow_curation_rewards": true,
+        "reblogged_by": [],
+        "net_votes": 0,
+        "children_abs_rshares": 0,
+        "total_pending_payout_value": "0.000 HBD",
+        "total_vote_weight": 0,
+        "vote_rshares": 0,
+        "net_rshares": 0,
+        "abs_rshares": 0,
+        "active_votes": []
+      },
+      {
+        "author": "svanbo",
+        "permlink": "re-ecency-2022117t214239653z",
+        "category": "hive-125125",
+        "title": "",
+        "body": "When I follow the link \"vote for proposal\" I get the message that the proposal has expired.",
+        "json_metadata": "{\"tags\":[\"hive-125125\",\"hive\",\"ecency\",\"uncensored\",\"blockchain\",\"dapp\",\"token\",\"smart-contracts\"],\"app\":\"ecency/3.0.28-vision\",\"format\":\"markdown+html\"}",
+        "created": "2022-11-07T20:42:39",
+        "last_update": "2022-11-07T20:42:39",
+        "depth": 1,
+        "children": 2,
+        "last_payout": "2022-11-14T20:42:39",
+        "cashout_time": "1969-12-31T23:59:59",
+        "total_payout_value": "0.000 HBD",
+        "curator_payout_value": "0.000 HBD",
+        "pending_payout_value": "0.000 HBD",
+        "promoted": "0.000 HBD",
+        "replies": [],
+        "body_length": 91,
+        "author_reputation": 32860146642256,
+        "parent_author": "ecency",
+        "parent_permlink": "token",
+        "url": "/hive-125125/@ecency/token#@svanbo/re-ecency-2022117t214239653z",
+        "root_title": "Token",
+        "beneficiaries": [],
+        "max_accepted_payout": "1000000.000 HBD",
+        "percent_hbd": 10000,
+        "id": 118149501,
+        "author_rewards": 0,
+        "max_cashout_time": "1969-12-31T23:59:59",
+        "reward_weight": 10000,
+        "root_author": "ecency",
+        "root_permlink": "token",
+        "allow_replies": true,
+        "allow_votes": true,
+        "allow_curation_rewards": true,
+        "reblogged_by": [],
+        "net_votes": 0,
+        "children_abs_rshares": 0,
+        "total_pending_payout_value": "0.000 HBD",
+        "total_vote_weight": 0,
+        "vote_rshares": 0,
+        "net_rshares": 0,
+        "abs_rshares": 0,
+        "active_votes": []
+      }
+    ]`
   },
   {
     api: "condenser_api",
@@ -2052,7 +3234,6 @@ export const methods = [
   {
     api: "condenser_api",
     method: "get_witnesses",
-    // "param_type":"params",
     isArray: true,
     params: ["witnessIds"],
     description:_t("condenser_api.get_witnesses_description")
@@ -2066,12 +3247,11 @@ export const methods = [
   {
     api: "condenser_api",
     method: "get_witnesses_by_vote",
-    // "param_type":"params",
     isArray: true,
     params: ["account", "limit"],
     description:_t("condenser_api.get_witnesses_by_vote_description"),
     url:`${ConfigItems.baseUrl}/api/get_witnesses_by_vote?account=null&limit=100`,
-    parameter: `<p>start_name:string; limit:int up to 1000</p>
+    parameter: `<p>account:string; limit:int up to 1000</p>
       <table>
         <thead>
           <tr>
@@ -2206,37 +3386,30 @@ export const methods = [
     api: "database_api",
     method: "get_active_witnesses",
     description:_t("database_api.get_active_witnesses_description"),
-    response: `{
-      "witnesses": [
-        "lukestokes.mhth",
-        "gtg",
-        "ausbitbank",
-        "clayop",
-        "yabapmatt",
-        "curie",
-        "thecryptodrive",
-        "roelandp",
-        "followbtcnews",
-        "timcliff",
-        "smooth.witness",
-        "bhuz",
-        "aggroed",
-        "blocktrades",
-        "cervantes",
-        "utopian-io",
-        "anyx",
-        "jesta",
-        "drakos",
-        "someguy123",
-        "good-karma"
-      ]
-    }`
-  },
-    {
-    api: "condenser_api",
-    method: "get_reward_fund",
-    params: ["name"],
-    description:_t("condenser_api.get_reward_fund_description")
+    url: `${ConfigItems.baseUrl}/api/get_active_witnesses`,
+    response: `[
+      "blocktrades",
+      "good-karma",
+      "cervantes",
+      "emrebeyler",
+      "threespeak",
+      "abit",
+      "ocd-witness",
+      "gtg",
+      "smooth.witness",
+      "stoodkev",
+      "ausbitbank",
+      "yabapmatt",
+      "guiltyparties",
+      "themarkymark",
+      "steempeak",
+      "deathwing",
+      "arcange",
+      "quochuy",
+      "roelandp",
+      "steempress",
+      "therealwolf"
+    ]`
   },
   {
     api: "condenser_api",
@@ -2246,19 +3419,23 @@ export const methods = [
   },
   {
     api: "database_api",
-    method: "get_reward_funds",
+    method: "get_reward_fund",
+    isArray: true,
+    params: ["type"],
+    parameter: `<code>type: string;</code>`,
     description:_t("database_api.get_reward_funds_description"),
+    url: `${ConfigItems.baseUrl}/api/get_reward_fund?type="post"`,
     response: `{
       "id": 0,
-      "name": "",
-      "reward_balance": "0.000 HIVE",
-      "recent_claims": "0",
-      "last_update": "1970-01-01T00:00:00",
-      "content_constant": "0",
-      "percent_curation_rewards": 0,
-      "percent_content_rewards": 0,
-      "author_reward_curve": "quadratic",
-      "curation_reward_curve": "34723648"
+      "name": "post",
+      "reward_balance": "867628.813 HIVE",
+      "recent_claims": "652524061978120982",
+      "last_update": "2023-04-06T07:16:15",
+      "content_constant": "2000000000000",
+      "percent_curation_rewards": 5000,
+      "percent_content_rewards": 10000,
+      "author_reward_curve": "linear",
+      "curation_reward_curve": "linear"
     }`
   },
      {
@@ -2283,11 +3460,12 @@ export const methods = [
     api: "database_api",
     method: "get_version",
     description:_t("condenser_api.get_version_description"),
+    url: `${ConfigItems.baseUrl}/api/get_version`,
     response: `{
-      "haf_revision": "dd4e984ec4986ba4039e249c2bff468ec16dd332",
-      "blockchain_version": "1.27.0",
-      "hive_revision": "b322c4c19f11f084d09be0dd7d9c615339dce13e",
-      "fc_revision": "b322c4c19f11f084d09be0dd7d9c615339dce13e",
+      "blockchain_version": "1.27.3",
+      "hive_revision": "b512d8fc126fbbfb23d4de5b9154517aa00fcc4e",
+      "fc_revision": "b512d8fc126fbbfb23d4de5b9154517aa00fcc4e",
+      "node_type": "mainnet",
       "chain_id": "beeab0de00000000000000000000000000000000000000000000000000000000"
     }`
   },
@@ -2356,18 +3534,19 @@ export const methods = [
     api: "market_history_api",
     method: "get_ticker",
     description:_t("market_history_api.get_ticker_description"),
+    url: `${ConfigItems.baseUrl}/api/get_ticker`,
     response: `{
-      "latest": "1.00000000000000000",
-      "lowest_ask": "0.10000000000000001",
-      "highest_bid": "0.00000000000000000",
-      "percent_change": "0.00000000000000000",
+      "latest": "0.44998132857557777",
+      "lowest_ask": "0.45155289039005136",
+      "highest_bid": "0.44958368550722033",
+      "percent_change": "7.39674430385600701",
       "hive_volume": {
-        "amount": "100000",
+        "amount": "344063878",
         "precision": 3,
         "nai": "@@000000021"
       },
       "hbd_volume": {
-        "amount": "100000",
+        "amount": "154279533",
         "precision": 3,
         "nai": "@@000000013"
       }
@@ -2377,14 +3556,15 @@ export const methods = [
     api: "market_history_api",
     method: "get_volume",
     description:_t("market_history_api.get_volume_description"),
+    url: `${ConfigItems.baseUrl}/api/get_volume`,
     response: `{
       "hive_volume": {
-        "amount": "0",
+        "amount": "343589290",
         "precision": 3,
         "nai": "@@000000021"
       },
       "hbd_volume": {
-        "amount": "0",
+        "amount": "154080590",
         "precision": 3,
         "nai": "@@000000013"
       }
@@ -2394,31 +3574,123 @@ export const methods = [
     api: "market_history_api",
     method: "get_trade_history",
     params: ["start", "end", "limit"],
+    parameter: `<code>limit: int; start: string; end: string;</code>`,
     description:_t("market_history_api.get_trade_history_description"),
-    response: `[
-      {
-        "date": "1970-01-01T00:00:00",
-        "current_pays": "0.000 HBD",
-        "open_pays": "0.000 HIVE"
-      }
-    ]`
+    url: `${ConfigItems.baseUrl}/api/get_trade_history?limit=4&start="2023-04-01T11:00:00"&end="2023-04-03T11:00:00"`,
+    response: `{
+      "trades": [
+        {
+          "date": "2023-04-01T11:01:21",
+          "current_pays": {
+            "amount": "1428",
+            "precision": 3,
+            "nai": "@@000000013"
+          },
+          "open_pays": {
+            "amount": "3444",
+            "precision": 3,
+            "nai": "@@000000021"
+          }
+        },
+        {
+          "date": "2023-04-01T11:01:21",
+          "current_pays": {
+            "amount": "2668",
+            "precision": 3,
+            "nai": "@@000000013"
+          },
+          "open_pays": {
+            "amount": "6430",
+            "precision": 3,
+            "nai": "@@000000021"
+          }
+        },
+        {
+          "date": "2023-04-01T11:08:39",
+          "current_pays": {
+            "amount": "714",
+            "precision": 3,
+            "nai": "@@000000013"
+          },
+          "open_pays": {
+            "amount": "1722",
+            "precision": 3,
+            "nai": "@@000000021"
+          }
+        },
+        {
+          "date": "2023-04-01T11:08:54",
+          "current_pays": {
+            "amount": "3278",
+            "precision": 3,
+            "nai": "@@000000021"
+          },
+          "open_pays": {
+            "amount": "1360",
+            "precision": 3,
+            "nai": "@@000000013"
+          }
+        }
+      ]
+    }`
   },
   {
     api: "market_history_api",
     method: "get_recent_trades",
     params: ["limit"],
+    parameter: `<code>limit: int;</code>`,
     description:_t("market_history_api.get_recent_trades_description"),
+    url: `${ConfigItems.baseUrl}/api/get_recent_trades?limit=4`,
     response: `{
       "trades": [
         {
-          "date": "2019-12-18T01:51:24",
+          "date": "2023-04-06T07:19:39",
           "current_pays": {
             "amount": "100000",
             "precision": 3,
             "nai": "@@000000013"
           },
           "open_pays": {
+            "amount": "221458",
+            "precision": 3,
+            "nai": "@@000000021"
+          }
+        },
+        {
+          "date": "2023-04-06T07:19:15",
+          "current_pays": {
+            "amount": "1999",
+            "precision": 3,
+            "nai": "@@000000013"
+          },
+          "open_pays": {
+            "amount": "4429",
+            "precision": 3,
+            "nai": "@@000000021"
+          }
+        },
+        {
+          "date": "2023-04-06T07:18:00",
+          "current_pays": {
+            "amount": "21690",
+            "precision": 3,
+            "nai": "@@000000013"
+          },
+          "open_pays": {
+            "amount": "48202",
+            "precision": 3,
+            "nai": "@@000000021"
+          }
+        },
+        {
+          "date": "2023-04-06T07:17:57",
+          "current_pays": {
             "amount": "100000",
+            "precision": 3,
+            "nai": "@@000000013"
+          },
+          "open_pays": {
+            "amount": "222222",
             "precision": 3,
             "nai": "@@000000021"
           }
@@ -2428,95 +3700,347 @@ export const methods = [
   },
   {
     api: "market_history_api",
-    method: "get_market_history",
-    params: ["bucket_seconds", "start", "end"],
-    description:_t("market_history_api.get_market_history_description"),
-    parameter: `<table>
-      <thead>
-        <tr>
-          <th><code class="language-plaintext highlighter-rouge">bucket_seconds</code> (int)</th>
-          <th><code class="language-plaintext highlighter-rouge">start</code> (timestamp)</th>
-          <th><code class="language-plaintext highlighter-rouge">end</code> (timestamp)</th>
-          <th>&nbsp;</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code class="language-plaintext highlighter-rouge">15</code></td>
-          <td><code class="language-plaintext highlighter-rouge">"2018-01-01T00:00:00"</code></td>
-          <td><code class="language-plaintext highlighter-rouge">"2018-01-02T00:00:00"</code></td>
-          <td>Queries for market history between January 1st, 2018 and January 2nd, 2018, segmented by 15 seconds.</td>
-        </tr>
-        <tr>
-          <td><code class="language-plaintext highlighter-rouge">60</code></td>
-          <td><code class="language-plaintext highlighter-rouge">"2018-01-01T00:00:00"</code></td>
-          <td><code class="language-plaintext highlighter-rouge">"2018-01-02T00:00:00"</code></td>
-          <td>Queries for market history between January 1st, 2018 and January 2nd, 2018, segmented by one minute.</td>
-        </tr>
-        <tr>
-          <td><code class="language-plaintext highlighter-rouge">300</code></td>
-          <td><code class="language-plaintext highlighter-rouge">"2018-01-01T00:00:00"</code></td>
-          <td><code class="language-plaintext highlighter-rouge">"2018-01-02T00:00:00"</code></td>
-          <td>Queries for market history between January 1st, 2018 and January 2nd, 2018, segmented by five minutes.</td>
-        </tr>
-        <tr>
-          <td><code class="language-plaintext highlighter-rouge">3600</code></td>
-          <td><code class="language-plaintext highlighter-rouge">"2018-01-01T00:00:00"</code></td>
-          <td><code class="language-plaintext highlighter-rouge">"2018-01-02T00:00:00"</code></td>
-          <td>Queries for market history between January 1st, 2018 and January 2nd, 2018, segmented by one hour.</td>
-        </tr>
-        <tr>
-          <td><code class="language-plaintext highlighter-rouge">86400</code></td>
-          <td><code class="language-plaintext highlighter-rouge">"2018-01-01T00:00:00"</code></td>
-          <td><code class="language-plaintext highlighter-rouge">"2018-01-02T00:00:00"</code></td>
-          <td>Queries for market history between January 1st, 2018 and January 2nd, 2018, segmented by one day.</td>
-        </tr>
-      </tbody>
-    </table>`,
-    response: `[
-      {
-        "id": 0,
-        "open": "1970-01-01T00:00:00",
-        "seconds": 0,
-        "hive": {
-          "high": 0,
-          "low": 0,
-          "open": 0,
-          "close": 0,
-          "volume": 0
-        },
-        "non_hive": {
-          "high": 0,
-          "low": 0,
-          "open": 0,
-          "close": 0,
-          "volume": 0
-        }
-      }
-    ]`
+    method: "get_market_history_buckets",
+    description:_t("market_history_api.get_market_history_buckets_description"),
+    url: `${ConfigItems.baseUrl}/api/get_market_history_buckets`,
+    response: `{
+      "bucket_sizes": [
+        15,
+        60,
+        300,
+        3600,
+        86400
+      ]
+    }`
   },
   {
     api: "market_history_api",
-    method: "get_market_history_buckets",
-    description:_t("market_history_api.get_market_history_buckets_description"),
-    response: `[15, 60, 300, 3600, 86400]`
+    method: "get_market_history",
+    params: ["bucket_seconds", "start", "end"],
+    parameter: `<table>
+        <thead>
+          <tr>
+            <th><code class="language-plaintext highlighter-rouge">bucket_seconds</code> (int)</th>
+            <th><code class="language-plaintext highlighter-rouge">start</code> (timestamp)</th>
+            <th><code class="language-plaintext highlighter-rouge">end</code> (timestamp)</th>
+            <th>&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">15</code></td>
+            <td><code class="language-plaintext highlighter-rouge">"2018-01-01T00:00:00"</code></td>
+            <td><code class="language-plaintext highlighter-rouge">"2018-01-02T00:00:00"</code></td>
+            <td>Queries for market history between January 1st, 2018 and January 2nd, 2018, segmented by 15 seconds.</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">60</code></td>
+            <td><code class="language-plaintext highlighter-rouge">"2018-01-01T00:00:00"</code></td>
+            <td><code class="language-plaintext highlighter-rouge">"2018-01-02T00:00:00"</code></td>
+            <td>Queries for market history between January 1st, 2018 and January 2nd, 2018, segmented by one minute.</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">300</code></td>
+            <td><code class="language-plaintext highlighter-rouge">"2018-01-01T00:00:00"</code></td>
+            <td><code class="language-plaintext highlighter-rouge">"2018-01-02T00:00:00"</code></td>
+            <td>Queries for market history between January 1st, 2018 and January 2nd, 2018, segmented by five minutes.</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">3600</code></td>
+            <td><code class="language-plaintext highlighter-rouge">"2018-01-01T00:00:00"</code></td>
+            <td><code class="language-plaintext highlighter-rouge">"2018-01-02T00:00:00"</code></td>
+            <td>Queries for market history between January 1st, 2018 and January 2nd, 2018, segmented by one hour.</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">86400</code></td>
+            <td><code class="language-plaintext highlighter-rouge">"2018-01-01T00:00:00"</code></td>
+            <td><code class="language-plaintext highlighter-rouge">"2018-01-02T00:00:00"</code></td>
+            <td>Queries for market history between January 1st, 2018 and January 2nd, 2018, segmented by one day.</td>
+          </tr>
+        </tbody>
+      </table>`,
+    description:_t("market_history_api.get_market_history_description"),
+    url: `${ConfigItems.baseUrl}/api/get_market_history?bucket_seconds=86400&start="2023-04-01T11:00:00"&end="2023-04-03T11:00:00"`,
+    response: `{
+      "buckets": [
+        {
+          "id": 4169643,
+          "open": "2023-04-02T00:00:00",
+          "seconds": 86400,
+          "hive": {
+            "high": 4,
+            "low": 132,
+            "open": 12058,
+            "close": 242987,
+            "volume": 95716721
+          },
+          "non_hive": {
+            "high": 2,
+            "low": 53,
+            "open": 5018,
+            "close": 100000,
+            "volume": 39013943
+          }
+        },
+        {
+          "id": 4171243,
+          "open": "2023-04-03T00:00:00",
+          "seconds": 86400,
+          "hive": {
+            "high": 2081232,
+            "low": 19,
+            "open": 1688,
+            "close": 806,
+            "volume": 223059545
+          },
+          "non_hive": {
+            "high": 936538,
+            "low": 7,
+            "open": 696,
+            "close": 325,
+            "volume": 90983631
+          }
+        }
+      ]
+    }`
   },
   {
     api: "database_api",
     method: "find_accounts",
-    isArray:true,
-    params: ["accounts"]
+    params: ["accounts", "delayed_votes_active"],
+    parameter: `<code>accounts: string array; delayed_votes_active: boolean</code>`,
+    description:_t("database_api.find_accounts_description"),
+    url:`${ConfigItems.baseUrl}/api/find_accounts?accounts=["demo"]`,
+    response: `{
+      "accounts": [
+        {
+          "id": 43593,
+          "name": "demo",
+          "owner": {
+            "weight_threshold": 1,
+            "account_auths": [],
+            "key_auths": [
+              [
+                "STM7N79vVmojHW4ZkCTytB753Eg938R3f8GA3M2ra7dd7TsTQKSCb",
+                1
+              ]
+            ]
+          },
+          "active": {
+            "weight_threshold": 1,
+            "account_auths": [],
+            "key_auths": [
+              [
+                "STM5YR5MnAkAP4iKRWuzPv9Z33sdqDvyWHtknDse3c94M2krs9CDd",
+                1
+              ],
+              [
+                "STM5YRGgcSyWr9PWgPfMucw8sAaryQ71vaHwv1SNsSETcf5jQZj36",
+                1
+              ],
+              [
+                "STM5Z5Dmqt5hyidjhQYZkaoze3AW1BGm9LXVHL8oLt8gMTPhyZQm2",
+                1
+              ],
+              [
+                "STM5auKGdpPM5bJuQeeayASWn4yCifgrSWgn4K3tH5f123N7M41gB",
+                1
+              ],
+              [
+                "STM64nx2weChqikvdeYMzaR3hdVNrgvDtJyjNCAL4N8jQLC9kTmTX",
+                1
+              ],
+              [
+                "STM77EkCQWHwVfCESvhevCzw3TWgVLexwr2f4pxmY1oZtMnz7gsEJ",
+                1
+              ],
+              [
+                "STM7Vo1uyWAoyWKM7A7ExHEkfFCnq8ZRGyrZwZGpuJESCQ79cJ5cc",
+                1
+              ],
+              [
+                "STM7bvNHzp4nMNmVysBbicDtogYg7TyWrPxnXw9aegCzNgELsNvM4",
+                1
+              ],
+              [
+                "STM7nWjvRqLrdKKuqYZ2kL75TPMePNFc4dQpq6cHUkPJzmz5shP35",
+                1
+              ],
+              [
+                "STM7nnkD6ZdoMHKta3rA9XVeeqQ3wy41Kmv3J8JWc5hx5oHbZXEK5",
+                1
+              ],
+              [
+                "STM7sxc377Hac7vfVAT6xusAjVTMSHR4qSNy41CvZoJjnMLTePzK2",
+                1
+              ],
+              [
+                "STM8PcNaC4Zk5yKXYiUjikj4P3hadU7H6WBCKtqPQzkhMiK3YBr5t",
+                1
+              ],
+              [
+                "STM8fFik5Q7D8u9cD1WZW9pXGbqATxcyZT1SPaS21NCjqEar7zibD",
+                1
+              ]
+            ]
+          },
+          "posting": {
+            "weight_threshold": 1,
+            "account_auths": [
+              [
+                "demo-app",
+                1
+              ],
+              [
+                "ecency.app",
+                1
+              ],
+              [
+                "hivesigner",
+                1
+              ]
+            ],
+            "key_auths": [
+              [
+                "STM62fkRnTJSeJoWMLS5r61cgQbxSo3JJ7BoxCgZrkfRuNN71hA1A",
+                1
+              ]
+            ]
+          },
+          "memo_key": "STM5PV4XZSdKe9JdPXm7nxn3AtZPSzsrcD8hxFqueokxpqXbKxEs7",
+          "json_metadata": "{\"profile\":{\"name\":\"Demo\",\"about\":\"Demo\",\"cover_image\":\"\",\"profile_image\":\"https://images.esteem.app/p/368La1qZAv72UNuUJmYLXh5uxTzxdkRiY9c6AefjagyHBARYpEPjZQnvFAFsXJbQA3KX4VPJXABuZJ1kcq6DadNE\",\"website\":\"\",\"location\":\"Hive\",\"is_public\":true,\"redirect_uris\":[\"https://demo.hivesigner.com\",\"http://localhost:3000\",\"http://localhost:4000\",\"http://localhost:8000\",\"http://localhost:8080\"],\"type\":\"app\",\"creator\":\"good-karma\"}}",
+          "posting_json_metadata": "{\"profile\":{\"name\":\"Hello world\",\"about\":\"New way of blogging\",\"cover_image\":\"\",\"profile_image\":\"https://images.ecency.com/DQmUNLgt33m8sWssJ6bATMHq5Ws6YS2GK2aEmq4vjuuM6ek/play_icon.png\",\"website\":\"\",\"location\":\"Hive\",\"version\":2,\"is_public\":false,\"redirect_uris\":\"\",\"type\":\"user\"}}",
+          "proxy": "",
+          "previous_owner_update": "2017-10-30T13:03:42",
+          "last_owner_update": "2017-10-30T15:34:45",
+          "last_account_update": "2022-08-29T08:41:33",
+          "created": "2016-08-01T14:18:51",
+          "mined": false,
+          "recovery_account": "esteemapp",
+          "last_account_recovery": "1970-01-01T00:00:00",
+          "reset_account": "null",
+          "comment_count": 0,
+          "lifetime_vote_count": 0,
+          "post_count": 224,
+          "can_vote": true,
+          "voting_manabar": {
+            "current_mana": "96231203710",
+            "last_update_time": 1676217303
+          },
+          "downvote_manabar": {
+            "current_mana": "24057800926",
+            "last_update_time": 1676217303
+          },
+          "balance": {
+            "amount": "0",
+            "precision": 3,
+            "nai": "@@000000021"
+          },
+          "savings_balance": {
+            "amount": "100",
+            "precision": 3,
+            "nai": "@@000000021"
+          },
+          "hbd_balance": {
+            "amount": "0",
+            "precision": 3,
+            "nai": "@@000000013"
+          },
+          "hbd_seconds": "23826",
+          "hbd_seconds_last_update": "2021-05-27T02:54:09",
+          "hbd_last_interest_payment": "2021-05-27T02:36:09",
+          "savings_hbd_balance": {
+            "amount": "6",
+            "precision": 3,
+            "nai": "@@000000013"
+          },
+          "savings_hbd_seconds": "1911",
+          "savings_hbd_seconds_last_update": "2021-04-21T06:27:24",
+          "savings_hbd_last_interest_payment": "2021-04-21T06:22:51",
+          "savings_withdraw_requests": 0,
+          "reward_hbd_balance": {
+            "amount": "0",
+            "precision": 3,
+            "nai": "@@000000013"
+          },
+          "reward_hive_balance": {
+            "amount": "0",
+            "precision": 3,
+            "nai": "@@000000021"
+          },
+          "reward_vesting_balance": {
+            "amount": "0",
+            "precision": 6,
+            "nai": "@@000000037"
+          },
+          "reward_vesting_hive": {
+            "amount": "0",
+            "precision": 3,
+            "nai": "@@000000021"
+          },
+          "vesting_shares": {
+            "amount": "67271150624",
+            "precision": 6,
+            "nai": "@@000000037"
+          },
+          "delegated_vesting_shares": {
+            "amount": "2122718300",
+            "precision": 6,
+            "nai": "@@000000037"
+          },
+          "received_vesting_shares": {
+            "amount": "31082771386",
+            "precision": 6,
+            "nai": "@@000000037"
+          },
+          "vesting_withdraw_rate": {
+            "amount": "0",
+            "precision": 6,
+            "nai": "@@000000037"
+          },
+          "post_voting_power": {
+            "amount": "96231203710",
+            "precision": 6,
+            "nai": "@@000000037"
+          },
+          "next_vesting_withdrawal": "1969-12-31T23:59:59",
+          "withdrawn": 0,
+          "to_withdraw": 0,
+          "withdraw_routes": 1,
+          "pending_transfers": 0,
+          "curation_rewards": 6239,
+          "posting_rewards": 3191,
+          "proxied_vsf_votes": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "witnesses_voted_for": 0,
+          "last_post": "2023-01-07T19:15:45",
+          "last_root_post": "2020-07-06T14:32:24",
+          "last_post_edit": "2023-01-07T19:15:45",
+          "last_vote_time": "2021-08-10T05:12:30",
+          "post_bandwidth": 14144,
+          "pending_claimed_accounts": 0,
+          "open_recurrent_transfers": 0,
+          "is_smt": false,
+          "delayed_votes": [],
+          "governance_vote_expiration_ts": "1969-12-31T23:59:59"
+        }
+      ]
+    }`
   },
   {
     api: "database_api",
     method: "find_proposals",
-    description:_t("database_api.find_proposals_description"),
     params: ["proposal_ids"],
+    parameter: `<code>proposal_ids: int array</code>`,
+    description:_t("database_api.find_proposals_description"),
     url:`${ConfigItems.baseUrl}/api/find_proposals?proposal_ids=[0]`,
-    parameter: `<p>id (int)<p>`,
     response: `{
       "proposals": [
-          {
+        {
           "id": 0,
           "proposal_id": 0,
           "creator": "gtg",
@@ -2524,15 +4048,15 @@ export const methods = [
           "start_date": "2019-08-27T00:00:00",
           "end_date": "2029-12-31T23:59:59",
           "daily_pay": {
-              "amount": "240000000000",
-              "precision": 3,
-              "nai": "@@000000013"
+            "amount": "240000000000",
+            "precision": 3,
+            "nai": "@@000000013"
           },
           "subject": "Return Proposal",
           "permlink": "dhf",
-          "total_votes": "25306465910393959",
+          "total_votes": "25058961671862119",
           "status": "active"
-          }
+        }
       ]
     }`
   },
@@ -2540,8 +4064,6 @@ export const methods = [
     api: "rc_api",
     method: "find_rc_accounts",
     params: ["accounts"],
-    description:_t("rc_api.find_rc_accounts_description"),
-    url:`${ConfigItems.baseUrl}/api/find_rc_accounts?accounts[]=good-karma`,
     parameter: `<p><code class="language-plaintext highlighter-rouge">accounts:string array</code></p>
       <table>
         <thead>
@@ -2561,17 +4083,24 @@ export const methods = [
           </tr>
         </tbody>
       </table>`,
+    description:_t("rc_api.find_rc_accounts_description"),
+    url:`${ConfigItems.baseUrl}/api/find_rc_accounts?accounts=["good-karma"]`,
     response: `{
       "rc_accounts": [
         {
-          "account": "",
-          "rc_manabar": {"current_mana": "0", "last_update_time": 0},
+          "account": "good-karma",
+          "rc_manabar": {
+            "current_mana": "4683593772705",
+            "last_update_time": 1680766308
+          },
           "max_rc_creation_adjustment": {
-            "amount": "0",
+            "amount": "2020748973",
             "precision": 6,
             "nai": "@@000000037"
           },
-          "max_rc": "0"
+          "max_rc": "4683593772705",
+          "delegated_rc": "56117121104391",
+          "received_delegated_rc": 10000
         }
       ]
     }`
@@ -2580,19 +4109,99 @@ export const methods = [
     api: "rc_api",
     method: "list_rc_direct_delegations",
     params: ["start", "limit"],
-    description:_t("rc_api.list_rc_direct_delegations_description")
+    parameter: `<code>start: array [from, to]; limit: int;</code>`,
+    description:_t("rc_api.list_rc_direct_delegations_description"),
+    url: `${ConfigItems.baseUrl}/api/list_rc_direct_delegations?start=["ecency",""]&limit=3`,
+    response: `{
+      "rc_direct_delegations": [
+        {
+          "from": "ecency",
+          "to": "feruz",
+          "delegated_rc": "15000000000"
+        },
+        {
+          "from": "ecency",
+          "to": "hive-189310",
+          "delegated_rc": "40000000000"
+        },
+        {
+          "from": "ecency",
+          "to": "xuwi",
+          "delegated_rc": "25000000000"
+        },
+        {
+          "from": "ecency",
+          "to": "mtsaeed",
+          "delegated_rc": "40000000000"
+        },
+        {
+          "from": "ecency",
+          "to": "ecency.devs",
+          "delegated_rc": "15000000000"
+        }
+      ]
+    }`
   },
   {
     api: "rc_api",
     method: "list_rc_accounts",
     params: ["start", "limit"],
-    description:_t("rc_api.list_rc_accounts_description")
+    parameter: `<code>start: string; limit: int;</code>`,
+    description:_t("rc_api.list_rc_accounts_description"),
+    url: `${ConfigItems.baseUrl}/api/list_rc_accounts?start="ecency"&limit=3`,
+    response: `{
+      "rc_accounts": [
+        {
+          "account": "ecency",
+          "rc_manabar": {
+            "current_mana": "7436127842846",
+            "last_update_time": 1680769293
+          },
+          "max_rc_creation_adjustment": {
+            "amount": "5851327807",
+            "precision": 6,
+            "nai": "@@000000037"
+          },
+          "max_rc": "6665653962241377",
+          "delegated_rc": "1945000000000",
+          "received_delegated_rc": "4462145533767980"
+        },
+        {
+          "account": "ecency-987",
+          "rc_manabar": {
+            "current_mana": "5568323871",
+            "last_update_time": 1637136366
+          },
+          "max_rc_creation_adjustment": {
+            "amount": "5568323871",
+            "precision": 6,
+            "nai": "@@000000037"
+          },
+          "max_rc": "5568323871",
+          "delegated_rc": 0,
+          "received_delegated_rc": 0
+        },
+        {
+          "account": "ecency-bulgaria",
+          "rc_manabar": {
+            "current_mana": "149414763318",
+            "last_update_time": 1680766794
+          },
+          "max_rc_creation_adjustment": {
+            "amount": "5629189791",
+            "precision": 6,
+            "nai": "@@000000037"
+          },
+          "max_rc": "149643837483",
+          "delegated_rc": 0,
+          "received_delegated_rc": 0
+        }
+      ]
+    }`
   },
   {
     api: "database_api",
     method: "list_proposals",
-    description:_t("database_api.get_proposals_description"),
-    url:`${ConfigItems.baseUrl}/api/list_proposals?order="by_total_votes"&order_direction="ascending"&status="all"&limit=5&start=["0"]`,
     params: ["start", "limit", "order", "order_direction", "status"],
     parameter: `<p>start:array; limit:int; order:string; order_direction:string; status:string</p>
       <ul>
@@ -2691,110 +4300,362 @@ export const methods = [
           </tr>
         </tbody>
       </table>`,
+    description:_t("database_api.get_proposals_description"),
+    url: `${ConfigItems.baseUrl}/api/list_proposals?order="by_creator"&order_direction="ascending"&status="all"&limit=3&start=["ecency"]`,
     response: `{
       "proposals": [
-          {
-          "id": 3,
-          "proposal_id": 3,
-          "creator": "geronimo.jones",
-          "receiver": "geronimo.jones",
-          "start_date": "2019-08-01T00:00:00",
-          "end_date": "2020-08-01T00:00:00",
+        {
+          "id": 141,
+          "proposal_id": 141,
+          "creator": "ecency",
+          "receiver": "ecency",
+          "start_date": "2020-11-25T00:00:00",
+          "end_date": "2021-11-25T00:00:00",
           "daily_pay": {
-              "amount": "88888",
-              "precision": 3,
-              "nai": "@@000000013"
+            "amount": "350000",
+            "precision": 3,
+            "nai": "@@000000013"
           },
-          "subject": "This is a test of the SPS",
-          "permlink": "a",
-          "total_votes": "15032962995126",
+          "subject": "Proposal: Ecency opensource development and maintenance",
+          "permlink": "proposal-ecency-development-and-maintenance",
+          "total_votes": "55805737926128695",
           "status": "expired"
-          },
-          {
-          "id": 4,
-          "proposal_id": 4,
-          "creator": "fabien",
-          "receiver": "fabien",
-          "start_date": "2019-09-01T00:00:00",
-          "end_date": "2019-09-07T00:00:00",
+        },
+        {
+          "id": 197,
+          "proposal_id": 197,
+          "creator": "ecency",
+          "receiver": "ecency",
+          "start_date": "2021-11-30T00:00:00",
+          "end_date": "2022-11-30T00:00:00",
           "daily_pay": {
-              "amount": "1000",
-              "precision": 3,
-              "nai": "@@000000013"
+            "amount": "369000",
+            "precision": 3,
+            "nai": "@@000000013"
           },
-          "subject": "Test with steemconnect",
-          "permlink": "test",
-          "total_votes": "18798113686047",
+          "subject": "Ecency development and maintenance #2",
+          "permlink": "ecency-development-and-maintenance-2",
+          "total_votes": "85884127652126644",
           "status": "expired"
-          },
-          {
-          "id": 32,
-          "proposal_id": 32,
-          "creator": "lightproject",
-          "receiver": "lightproject",
-          "start_date": "2019-09-13T23:14:18",
-          "end_date": "2019-09-20T23:14:46",
+        },
+        {
+          "id": 245,
+          "proposal_id": 245,
+          "creator": "ecency",
+          "receiver": "ecency",
+          "start_date": "2022-11-30T00:00:00",
+          "end_date": "2023-11-30T00:00:00",
           "daily_pay": {
-              "amount": "100000",
-              "precision": 3,
-              "nai": "@@000000013"
+            "amount": "396000",
+            "precision": 3,
+            "nai": "@@000000013"
           },
-          "subject": "steem trx finder DevTool",
-          "permlink": "devtool-sps-proposal-steem-trx-finder",
-          "total_votes": "37979186248457",
-          "status": "expired"
-          }
-          ]
-      }`
+          "subject": "Ecency development and maintenance #3",
+          "permlink": "ecency-development-and-maintenance-3",
+          "total_votes": "78399494377340575",
+          "status": "active"
+        }
+      ]
+    }`
   },
   {
     api: "database_api",
     method: "list_proposal_votes",
     params: ["start", "limit", "order", "order_direction", "status"],
-    description:_t("database_api.list_proposal_votes_description")
-  },
-  {
-    api: "database_api",
-    method: "get_nai_pool"
+    parameter: `<code>start:array; limit:int; order:string; order_direction:string; status:string</code><ul>
+        <li><code class="language-plaintext highlighter-rouge">start</code> depends on <code class="language-plaintext highlighter-rouge">order</code> (see below)
+          <ul>
+            <li><code class="language-plaintext highlighter-rouge">voter</code> - voter of the proposal  (account name string)</li>
+            <li><code class="language-plaintext highlighter-rouge">proposal.id</code> - id the proposal (int)</li>
+          </ul>
+        </li>
+        <li><code class="language-plaintext highlighter-rouge">limit</code> is up to 1000.</li>
+        <li><code class="language-plaintext highlighter-rouge">order</code> can be one of:
+          <ul>
+            <li><code class="language-plaintext highlighter-rouge">by_voter_proposal</code> - order by proposal voter</li>
+            <li><code class="language-plaintext highlighter-rouge">by_proposal_voter</code> - order by <code class="language-plaintext highlighter-rouge">proposal.id</code></li>
+          </ul>
+        </li>
+        <li><code class="language-plaintext highlighter-rouge">order_direction</code> can be one of:
+          <ul>
+            <li><code class="language-plaintext highlighter-rouge">ascending</code></li>
+            <li><code class="language-plaintext highlighter-rouge">descending</code></li>
+          </ul>
+        </li>
+        <li><code class="language-plaintext highlighter-rouge">status</code>
+          <ul>
+            <li><code class="language-plaintext highlighter-rouge">all</code></li>
+            <li><code class="language-plaintext highlighter-rouge">inactive</code></li>
+            <li><code class="language-plaintext highlighter-rouge">active</code></li>
+            <li><code class="language-plaintext highlighter-rouge">expired</code></li>
+            <li><code class="language-plaintext highlighter-rouge">votable</code></li>
+          </ul>
+        </li>
+      </ul>`,
+    description:_t("database_api.list_proposal_votes_description"),
+    url:`${ConfigItems.baseUrl}/api/list_proposal_votes?order="by_proposal_voter"&start=[0]&limit=2&status="all"`,
+    response: `{
+      "proposal_votes": [
+        {
+          "id": 43163,
+          "voter": "abit",
+          "proposal": {
+            "id": 0,
+            "proposal_id": 0,
+            "creator": "gtg",
+            "receiver": "steem.dao",
+            "start_date": "2019-08-27T00:00:00",
+            "end_date": "2029-12-31T23:59:59",
+            "daily_pay": {
+              "amount": "240000000000",
+              "precision": 3,
+              "nai": "@@000000013"
+            },
+            "subject": "Return Proposal",
+            "permlink": "dhf",
+            "total_votes": "25059676264649756",
+            "status": "active"
+          }
+        },
+        {
+          "id": 43156,
+          "voter": "abitcoinskeptic",
+          "proposal": {
+            "id": 0,
+            "proposal_id": 0,
+            "creator": "gtg",
+            "receiver": "steem.dao",
+            "start_date": "2019-08-27T00:00:00",
+            "end_date": "2029-12-31T23:59:59",
+            "daily_pay": {
+              "amount": "240000000000",
+              "precision": 3,
+              "nai": "@@000000013"
+            },
+            "subject": "Return Proposal",
+            "permlink": "dhf",
+            "total_votes": "25059676264649756",
+            "status": "active"
+          }
+        }
+      ]
+    }`
   },
   {
     api: "bridge",
     method: "get_community",
     params: ["name", "observer"],
-    description:_t("bridge_api.get_community_description")
+    parameter: `<code>name: string, observer: string </code>`,
+    description:_t("bridge_api.get_community_description"),
+    url:`${ConfigItems.baseUrl}/api/get_community?name=hive-125125`,
+    response: `{
+      "id": 1336929,
+      "name": "hive-125125",
+      "title": "Ecency",
+      "about": "microblogging platform",
+      "lang": "en",
+      "type_id": 1,
+      "is_nsfw": false,
+      "subscribers": 6046,
+      "created_at": "2019-11-12 09:52:15",
+      "sum_pending": 160,
+      "num_pending": 437,
+      "num_authors": 144,
+      "avatar_url": "",
+      "description": "https://ecency.com",
+      "flag_text": "",
+      "settings": {},
+      "context": {},
+      "team": [
+        [
+          "hive-125125",
+          "owner",
+          ""
+        ],
+        [
+          "ecency",
+          "admin",
+          ""
+        ],
+        [
+          "melinda010100",
+          "admin",
+          ""
+        ],
+        [
+          "esteemapp",
+          "admin",
+          ""
+        ],
+        [
+          "good-karma",
+          "admin",
+          ""
+        ],
+        [
+          "noumantahir",
+          "mod",
+          ""
+        ],
+        [
+          "jznsamuel",
+          "mod",
+          ""
+        ]
+      ]
+    }`
   },
   {
     api: "bridge",
     method: "list_communities",
     params: ["last", "limit", "query", "sort", "observer"],
+    parameter: `<ul>
+        <li><code class="language-plaintext highlighter-rouge">last</code> - name of community; paging mechanism [optional]</li>
+        <li><code class="language-plaintext highlighter-rouge">limit</code> - limit number of listed communities, default: <code class="language-plaintext highlighter-rouge">100</code> [optional]</li>
+        <li><code class="language-plaintext highlighter-rouge">query</code> - filters against <code class="language-plaintext highlighter-rouge">title</code> and <code class="language-plaintext highlighter-rouge">about</code> community fields [optional]</li>
+        <li><code class="language-plaintext highlighter-rouge">sort</code> - default: <code class="language-plaintext highlighter-rouge">rank</code> [optional]
+          <ul>
+            <li><code class="language-plaintext highlighter-rouge">rank</code> - sort by community rank</li>
+            <li><code class="language-plaintext highlighter-rouge">new</code> - sort by newest community</li>
+            <li><code class="language-plaintext highlighter-rouge">subs</code> - sort by subscriptions</li>
+          </ul>
+        </li>
+        <li><code class="language-plaintext highlighter-rouge">observer</code> - a valid account [optional]</li>
+      </ul>`,
     description:_t("bridge.list_communities_description"),
+    url: `${ConfigItems.baseUrl}/api/list_communities?query="ecency"`,
     response: `[
       {
-        "id": 1432978,
-        "name": "hive-103566",
-        "title": "Wall Street Bets",
-        "about": "Wall Street Bets - In Case Reddit Shuts Down.",
+        "id": 1336929,
+        "name": "hive-125125",
+        "title": "Ecency",
+        "about": "microblogging platform",
         "lang": "en",
         "type_id": 1,
         "is_nsfw": false,
-        "subscribers": 6,
+        "subscribers": 6046,
+        "sum_pending": 160,
+        "num_pending": 436,
+        "num_authors": 142,
+        "created_at": "2019-11-12 09:52:15",
+        "avatar_url": "",
+        "context": {},
+        "admins": [
+          "ecency",
+          "esteemapp",
+          "good-karma",
+          "melinda010100"
+        ]
+      },
+      {
+        "id": 1368110,
+        "name": "hive-172868",
+        "title": "Ecency Bulgaria",
+        "about": "Това е групата на България в www.ecency.com Ecency Mobile App",
+        "lang": "bg",
+        "type_id": 1,
+        "is_nsfw": false,
+        "subscribers": 499,
+        "sum_pending": 29,
+        "num_pending": 289,
+        "num_authors": 34,
+        "created_at": "2020-02-22 07:57:15",
+        "avatar_url": "",
+        "context": {},
+        "admins": [
+          "bulgaria-sports",
+          "calisthenicsdrop",
+          "ecency-bulgaria",
+          "hive-bulgaria",
+          "iliyan90"
+        ]
+      },
+      {
+        "id": 2436676,
+        "name": "hive-133311",
+        "title": "Ecency Support",
+        "about": "Support, promote, succeed with Ecency",
+        "lang": "en",
+        "type_id": 1,
+        "is_nsfw": false,
+        "subscribers": 94,
+        "sum_pending": 23,
+        "num_pending": 191,
+        "num_authors": 48,
+        "created_at": "2023-01-22 09:29:24",
+        "avatar_url": "",
+        "context": {},
+        "admins": [
+          "ecency-star"
+        ]
+      },
+      {
+        "id": 2434208,
+        "name": "hive-125126",
+        "title": "Ecency Help",
+        "about": "Ecency Help Community",
+        "lang": "en",
+        "type_id": 1,
+        "is_nsfw": false,
+        "subscribers": 43,
         "sum_pending": 0,
         "num_pending": 0,
         "num_authors": 0,
-        "created_at": "2021-01-28 18:34:09",
+        "created_at": "2022-12-27 15:35:21",
         "avatar_url": "",
         "context": {},
-        "admins": ["spitr"]
+        "admins": [
+          "ecency",
+          "melinda010100"
+        ]
+      },
+      {
+        "id": 1462198,
+        "name": "hive-199256",
+        "title": "TrueNoble Poency",
+        "about": "A community of Poets - Please create Original Poetry/Prose that cannot be found outside of Ecency :)",
+        "lang": "en",
+        "type_id": 1,
+        "is_nsfw": false,
+        "subscribers": 15,
+        "sum_pending": 0,
+        "num_pending": 0,
+        "num_authors": 0,
+        "created_at": "2021-05-05 17:49:51",
+        "avatar_url": "",
+        "context": {},
+        "admins": [
+          "unitethearts"
+        ]
+      },
+      {
+        "id": 1933555,
+        "name": "hive-19219",
+        "title": "Epic Cash",
+        "about": "A place for the Epic Cash Community on Ecency",
+        "lang": "en",
+        "type_id": 1,
+        "is_nsfw": false,
+        "subscribers": 9,
+        "sum_pending": 0,
+        "num_pending": 0,
+        "num_authors": 0,
+        "created_at": "2021-09-26 00:09:39",
+        "avatar_url": "",
+        "context": {},
+        "admins": [
+          "grendel25"
+        ]
       }
     ]`
   },
   {
     api: "bridge",
     method: "get_discussion",
-    description:_t("bridge.get_discussion_description"),
     params: ["author", "permlink"],
+    parameter: `<code>author: string, permlink: string </code>`,
+    description:_t("bridge.get_discussion_description"),
     url:`${ConfigItems.baseUrl}/api/get_discussion?author=hiveio&permlink=around-the-hive-reflections`,
-    parameter: `<p> author: string, permlink: string </p>`,
     response: `{
       "hiveio/around-the-hive-reflections": {
         "post_id": 101867403,
@@ -2802,7 +4663,7 @@ export const methods = [
         "permlink": "around-the-hive-reflections",
         "category": "hiveecosystem",
         "title": "Around the Hive: Reflections",
-        "body": "![hive](https://images.hive.blog/768x0/https://files.peakd.com/file/peakd-hive/hiveio/pKjrNcbK-Hive-Wallpaper-1920x1080.png)\n\nIt's been a busy year so far for developers on Hive. Layer 2 solutions are in progress, key optimization is an ongoing priority, and many excellent dapps and services are being developed. \n\n![hive](https://images.hive.blog/DQmR3iwCn9yvwXDXfuNjmMX6FrjAvFfYQWgA4QRckpens1j/hive%20dividers-02.png)\n\n## A Clear and Consistent Vision\n\nLast year we came out with the [Technical Vision](https://gitlab.syncad.com/hive/hive-whitepaper/-/blob/master/technical-vision/infographic.pdf) for Hive....",
+        "body": "![hive](https://images.hive.blog/768x0/https://files.peakd.com/file/peakd-hive/hiveio/pKjrNcbK-Hive-Wallpaper-1920x1080.png)\n\nIt's been a busy year so far for developers on Hive. Layer 2 solutions are in progress, key optimization is an ongoing priority, and many excellent dapps and services are being developed. \n\n![hive](https://images.hive.blog/DQmR3iwCn9yvwXDXfuNjmMX6FrjAvFfYQWgA4QRckpens1j/hive%20dividers-02.png)\n\n## A Clear and Consistent Vision\n\nLast year we came out with the [Technical Vision](https://gitlab.syncad.com/hive/hive-whitepaper/-/blob/master/technical-vision/infographic.pdf) for Hive. Some of the key points are:\n- Lowering the operating cost of nodes and baseline infrastructure to promote robust scaling.\n- Focus on ease of integration and ease of new development.\n- Second layer solutions to support custom functions such as smart contracts, fungible and non-fungible tokens, and interactive social applications.\n- Standardized microservices to support easy integration of new 2nd layer applications into the Hive ecosystem.\n- Full utilization of and emphasis on the promotion of Open Source developed and incorporated solutions.\n\nThis document still stands and outlines our mutual journey towards testing the limits of DPoS technology while innovating new solutions.\n\n![hive](https://images.hive.blog/DQmR3iwCn9yvwXDXfuNjmMX6FrjAvFfYQWgA4QRckpens1j/hive%20dividers-02.png)\n\n## Scalable Enterprise-level Solutions\n\nFor this year, 'scalability' is the term to remember. With ongoing optimization of our underlying technology by the @Blocktrades team, @Howo and many other  talented developers, Hive is rapidly reaching its potential as an enterprise-level blockchain. \n\nDifferent developers and development teams on Hive are exploring and building a selection of unique Layer 2 solutions. There are several complimentary and competing approaches under review and consideration. We are excited about all the possibilities ahead of us.\n\n![hive](https://images.hive.blog/DQmR3iwCn9yvwXDXfuNjmMX6FrjAvFfYQWgA4QRckpens1j/hive%20dividers-02.png)\n\n## The Strength of Hive\n\nOver the last few months we've seen a troubling trend among mainstream social media platforms engaging in censorship of users and manipulation of public opinion. This has become a very concerning global norm. We are therefore proud to, as a diverse ecosystem, provide an immutable blockchain for content storage and thus support the freedoms of speech and of information to all.\n\nThe strength of Hive lies in our decentralization. In a centralized system, the user is the customer or the product. In decentralized Hive, the user is the owner. Any individual enjoys the absolute freedom of contribution to Hive; you can build a dapp, you can start a community, you can nurture a blog, you can curate others, you can test core algorithm changes, you can work on a portal, etc. And you can do one or all of those in your own way, in whatever language you speak, from wherever on the planet you call home, championing your own creativity and uniqueness. **The possibilities are endless!**",
         "json_metadata": {
           "tags": [
             "hiveecosystem"
@@ -2837,9 +4698,22 @@ export const methods = [
         "replies": [
           "poshbot/re-around-the-hive-reflections-20210214t082348z",
           "poshbot/re-around-the-hive-reflections-20210214t083018z",
-          
+          "poshbot/re-around-the-hive-reflections-20210214t094348z",
+          "nathanmars/qoil53",
+          "steevc/re-hiveio-qoimw3",
+          "poshbot/re-around-the-hive-reflections-20210214t113818z",
+          "bhattg/re-hiveio-2021214t194127326z",
+          "blockchainyouth/re-hiveio-qoiydg",
+          "oaldamster/qojaa5",
+          "marybellrg/re-hiveio-qojkt5",
+          "hiveqa/re-hiveio-qojp46",
+          "antisocialist/re-hiveio-qojsft",
+          "juanvegetarian/re-hiveio-qok3y9",
+          "poshbot/re-around-the-hive-reflections-20210215t061513z",
+          "forykw/qopys8",
+          "hivebuzz/hivebuzz-notify-hiveio-20210306t131835000z"
         ],
-        "author_reputation": 72.53,
+        "author_reputation": 73.59,
         "stats": {
           "hide": false,
           "gray": false,
@@ -2858,10 +4732,26 @@ export const methods = [
           {
             "rshares": 738972031,
             "voter": "modeprator"
+          },
+          {
+            "rshares": 1716184716790,
+            "voter": "lunaticpandora"
+          },
+          {
+            "rshares": 1541319122546,
+            "voter": "holger80"
+          },
+          {
+            "rshares": 8561450494,
+            "voter": "orlandumike"
+          },
+          {
+            "rshares": 154615133660,
+            "voter": "cryptosharon"
           }
-    ],
-     "blacklists": []
-    },
+        ],
+        "blacklists": []
+      },
       "poshbot/re-around-the-hive-reflections-20210214t082348z": {
         "post_id": 101867470,
         "author": "poshbot",
@@ -2940,77 +4830,988 @@ export const methods = [
         "active_votes": [],
         "blacklists": []
       },
+      "poshbot/re-around-the-hive-reflections-20210214t094348z": {
+        "post_id": 101868250,
+        "author": "poshbot",
+        "permlink": "re-around-the-hive-reflections-20210214t094348z",
+        "category": "hiveecosystem",
+        "title": "RE: Around the Hive: Reflections",
+        "body": "https://twitter.com/ilbiscom/status/1360887430199586816",
+        "json_metadata": {
+          "app": "beem/0.24.20"
+        },
+        "created": "2021-02-14T09:43:48",
+        "updated": "2021-02-14T09:43:48",
+        "depth": 1,
+        "children": 0,
+        "net_rshares": 0,
+        "is_paidout": true,
+        "payout_at": "2021-02-21T09:43:48",
+        "payout": 0,
+        "pending_payout_value": "0.000 HBD",
+        "author_payout_value": "0.000 HBD",
+        "curator_payout_value": "0.000 HBD",
+        "promoted": "0.000 HBD",
+        "replies": [],
+        "author_reputation": 58.7,
+        "stats": {
+          "hide": false,
+          "gray": false,
+          "total_votes": 0,
+          "flag_weight": 0
+        },
+        "url": "/hiveecosystem/@hiveio/around-the-hive-reflections#@poshbot/re-around-the-hive-reflections-20210214t094348z",
+        "beneficiaries": [],
+        "max_accepted_payout": "1000000.000 HBD",
+        "percent_hbd": 10000,
+        "parent_author": "hiveio",
+        "parent_permlink": "around-the-hive-reflections",
+        "active_votes": [],
+        "blacklists": []
+      },
+      "nathanmars/qoil53": {
+        "post_id": 101868654,
+        "author": "nathanmars",
+        "permlink": "qoil53",
+        "category": "hiveecosystem",
+        "title": "RE: Around the Hive: Reflections",
+        "body": "The possibilities are endless! \n\n2021 is a mega year for HIVE",
+        "json_metadata": {
+          "app": "hiveblog/0.1"
+        },
+        "created": "2021-02-14T10:29:27",
+        "updated": "2021-02-14T10:29:27",
+        "depth": 1,
+        "children": 0,
+        "net_rshares": 347028300703,
+        "is_paidout": true,
+        "payout_at": "2021-02-21T10:29:27",
+        "payout": 0.1,
+        "pending_payout_value": "0.000 HBD",
+        "author_payout_value": "0.050 HBD",
+        "curator_payout_value": "0.050 HBD",
+        "promoted": "0.000 HBD",
+        "replies": [],
+        "author_reputation": 74.74,
+        "stats": {
+          "hide": false,
+          "gray": false,
+          "total_votes": 3,
+          "flag_weight": 0
+        },
+        "url": "/hiveecosystem/@hiveio/around-the-hive-reflections#@nathanmars/qoil53",
+        "beneficiaries": [],
+        "max_accepted_payout": "1000000.000 HBD",
+        "percent_hbd": 10000,
+        "parent_author": "hiveio",
+        "parent_permlink": "around-the-hive-reflections",
+        "active_votes": [
+          {
+            "rshares": 255702935830,
+            "voter": "steevc"
+          },
+          {
+            "rshares": 60457273296,
+            "voter": "marybellrg"
+          },
+          {
+            "rshares": 30868091577,
+            "voter": "montycashmusic"
+          }
+        ],
+        "blacklists": []
+      },
+      "steevc/re-hiveio-qoimw3": {
+        "post_id": 101869017,
+        "author": "steevc",
+        "permlink": "re-hiveio-qoimw3",
+        "category": "hiveecosystem",
+        "title": "RE: Around the Hive: Reflections",
+        "body": "Technically Hive seems to be a good place. We have lots of cool projects going on that can make it more usable. We just need more people using it. That could mean a real marketing drive. I see Justin is buying mentions from some big Twitter users, but we can be more organic and real. \n\nHive five!",
+        "json_metadata": {
+          "tags": [
+            "hiveecosystem"
+          ],
+          "app": "peakd/2021.01.3"
+        },
+        "created": "2021-02-14T11:07:15",
+        "updated": "2021-02-14T11:07:15",
+        "depth": 1,
+        "children": 0,
+        "net_rshares": 183158584656,
+        "is_paidout": true,
+        "payout_at": "2021-02-21T11:07:15",
+        "payout": 0.051,
+        "pending_payout_value": "0.000 HBD",
+        "author_payout_value": "0.026 HBD",
+        "curator_payout_value": "0.025 HBD",
+        "promoted": "0.000 HBD",
+        "replies": [],
+        "author_reputation": 78.04,
+        "stats": {
+          "hide": false,
+          "gray": false,
+          "total_votes": 3,
+          "flag_weight": 0
+        },
+        "url": "/hiveecosystem/@hiveio/around-the-hive-reflections#@steevc/re-hiveio-qoimw3",
+        "beneficiaries": [],
+        "max_accepted_payout": "1000000.000 HBD",
+        "percent_hbd": 10000,
+        "parent_author": "hiveio",
+        "parent_permlink": "around-the-hive-reflections",
+        "active_votes": [
+          {
+            "rshares": 66800471918,
+            "voter": "blockchainyouth"
+          },
+          {
+            "rshares": 86075046512,
+            "voter": "antisocialist"
+          },
+          {
+            "rshares": 30283066226,
+            "voter": "montycashmusic"
+          }
+        ],
+        "blacklists": []
+      }
     }`
   },
   {
     api: "bridge",
     method: "get_post",
     params: ["author", "permlink", "observer"],
-    description:_t("bridge.get_post_description")
+    parameter: `<code>author: string; permlink: string; observer: string;</code>`,
+    description:_t("bridge.get_post_description"),
+    url: `${ConfigItems.baseUrl}/api/get_post?author="ecency"&permlink="token"`,
+    response: `{
+      "post_id": 101790300,
+      "author": "ecency",
+      "permlink": "token",
+      "category": "hive-125125",
+      "title": "Token",
+      "body": "Most Ecency users know about history of our [Points](https://ecency.com/esteem/@esteemapp/estm-mining-use-cases-and-investment-opportunities) and how after rebranding we gave it placeholder name as *Points*. Since 2nd layer tokenization is still being worked on by multiple teams on Hive, we had extra time to work on our website, apps and add more functionality. Work on improving use cases, which in this post we want to give you an update about state of Points (\"your entry to Token\").\n\n![ecen_token.png](https://images.ecency.com/DQmRUffaVuBDqWTDCNsAtYEAkLA2Q1nwRq4KPQKY9bZW14p/ecen_token.png)\n\n# Supply \n\nTotal fixed supply: 1,000,000,000\n\nMining/minting allocation: 65%\nIncentive, referral, bounty programs: 15%\nIn-app purchases: 10%\nReserve: 5%\nTeam allocation: 5%\n\n### Current state\n\nCirculating supply: 360,056,955.134\n\nTop 10 holders:\n@roundbeargames\n@lebin\n@noel83\n@melinda010100\n@tempravis\n@btscn\n@circa\n@mcoinz79\n@janton\n@gamer00\n\n# Economics\n\nWe have decided fixed supply to make sure system is self-sustaining, so with time demand and supply equation would find equilibrium. Points are minted just by using Ecency apps or by delegating to HP to @ecency, so everyone who uses either Ecency website, desktop or mobile app, already knows how earning works and how fun it is.\n\nOnce max supply is reached, pool allocation is recycled. How this works?! Currently every time user uses Points to promote or boost their content, points are sent to reward pool reserve and after max supply is reached those points are sent back to reward pool which is minted by users again, token cycles in system. Some similar token-economics usually add small fee to burn and lower the supply, which might be interesting to analize in future.  Now, we wanted to decentralize this new rewarding system but on-chain SMT or other solutions were not ready or mature enough that gives us smart contract functionality. But since current Points system is great for distribution of our actual token, we are not rushing this decision and do what's best for growth, plan long term.\n\n# Use cases\n\nPoints can be used for *Promoting content* which will promote content across the feeds to all Ecency users. &Boosting content* is getting limited boost to content in form of curation/vote. *Gifting* is to basically tip or transfer Points to another user. Now we are working on next use cases which we thinking might help us gradually decentralize and establish our token that's both sustainable and widely used. \nOne of such use case that we think will excite everyone is *Community points* and have your own community standout, as more people post in your community from Ecency the more your community account earn Points, that way you can use extra rewards to organize giveaway, contest and manage, grow your community. \nMore on other use cases later, there is one more which we think will take this into next level. Stay tuned.\n\n# Earn now\n\n- Earn Ecency Points now by using Ecency apps.\n- Refer friends to earn even more, referral link example: https://ecency.com/signup?referral=ecency\n- By delegating HP to @ecency account. Delegation rewards daily Points, for example 1000 HP delegation mints out ~100 Points daily. Delegation also helps us to onboard more users to Hive which we have been doing for few months now, successfully.\n\nLearn more in our FAQ: https://ecency.com/faq\n \n### https://ecency.com  \n##### iOS https://ios.ecency.com  \n##### Android https://android.ecency.com  \n##### Desktop https://desktop.ecency.com  \n \n---  \n \n### Do you like our work? Support [Ecency proposal](https://ecency.com/hive/@ecency/proposal-ecency-development-and-maintenance):  \nEcency: https://ecency.com/proposals/141  \nHivesigner: [Vote for Proposal](https://hivesigner.com/sign/update-proposal-votes?proposal_ids=%5B141%5D&approve=true)",
+      "json_metadata": {
+        "links": [
+          "https://ecency.com/esteem/@esteemapp/estm-mining-use-cases-and-investment-opportunities",
+          "https://ecency.com/signup?referral=ecency",
+          "https://ecency.com/faq",
+          "https://ecency.com",
+          "https://ios.ecency.com",
+          "https://android.ecency.com",
+          "https://desktop.ecency.com",
+          "https://ecency.com/hive/@ecency/proposal-ecency-development-and-maintenance",
+          "https://ecency.com/proposals/141",
+          "https://hivesigner.com/sign/update-proposal-votes?proposal_ids=%5B141%5D&approve=true"
+        ],
+        "image": [
+          "https://images.ecency.com/DQmRUffaVuBDqWTDCNsAtYEAkLA2Q1nwRq4KPQKY9bZW14p/ecen_token.png"
+        ],
+        "users": [
+          "roundbeargames",
+          "lebin",
+          "noel83",
+          "melinda010100",
+          "tempravis",
+          "btscn",
+          "circa",
+          "mcoinz79",
+          "janton",
+          "gamer00",
+          "ecency",
+          "ecency"
+        ],
+        "tags": [
+          "hive-125125",
+          "hive",
+          "ecency",
+          "uncensored",
+          "blockchain",
+          "dapp",
+          "token",
+          "smart-contracts"
+        ],
+        "app": "ecency/3.0.13-vision",
+        "format": "markdown+html"
+      },
+      "created": "2021-02-09T10:02:36",
+      "updated": "2021-02-09T10:34:06",
+      "depth": 0,
+      "children": 44,
+      "net_rshares": 38787708973049,
+      "is_paidout": true,
+      "payout_at": "2021-02-16T10:02:36",
+      "payout": 0,
+      "pending_payout_value": "0.000 HBD",
+      "author_payout_value": "0.000 HBD",
+      "curator_payout_value": "0.000 HBD",
+      "promoted": "0.000 HBD",
+      "replies": [],
+      "author_reputation": 75.46,
+      "stats": {
+        "hide": false,
+        "gray": false,
+        "total_votes": 248,
+        "flag_weight": 0
+      },
+      "url": "/hive-125125/@ecency/token",
+      "beneficiaries": [],
+      "max_accepted_payout": "0.000 HBD",
+      "percent_hbd": 10000,
+      "active_votes": [
+        {
+          "rshares": 620233031504,
+          "voter": "boatymcboatface"
+        },
+        {
+          "rshares": 102981908948,
+          "voter": "pnc"
+        },
+        {
+          "rshares": 175004643152,
+          "voter": "kingscrown"
+        }
+      ],
+      "blacklists": [],
+      "community": "hive-125125",
+      "community_title": "Ecency",
+      "author_role": "admin",
+      "author_title": ""
+    }`
   },
   {
     api: "bridge",
     method: "get_profile",
     params: ["account", "observer"],
-    description:_t("bridge.get_profile_description")
+    parameter: `<code>account: string; observer: string;</code>`,
+    description:_t("bridge.get_profile_description"),
+    url: `${ConfigItems.baseUrl}/api/get_profile?account="ecency"`,
+    response: `{
+      "id": 1382793,
+      "name": "ecency",
+      "created": "2020-05-13T07:50:03",
+      "active": "2023-04-06T07:51:03",
+      "post_count": 209922,
+      "reputation": 75.46,
+      "blacklists": [],
+      "stats": {
+        "rank": 0,
+        "following": 7,
+        "followers": 11057
+      },
+      "metadata": {
+        "profile": {
+          "name": "Ecency",
+          "about": "Set it free, be free! Join immutable, uncensored, rewarding communities! https://ecency.com",
+          "website": "https://ecency.com",
+          "location": "Blockchain",
+          "cover_image": "",
+          "profile_image": "https://images.ecency.com/DQmWCcJcicyck5atZcgXt5rQstoQVSrumHdsmeQNKXHjgPa/ecenct_logo.png",
+          "blacklist_description": "",
+          "muted_list_description": ""
+        }
+      }
+    }`
   },
   {
     api: "bridge",
     method: "get_trending_topics",
-    params: ["limit", "observer"]
+    params: ["limit", "observer"],
+    parameter: `<code>limit: int; observer: string;</code>`,
+    description:_t("bridge.get_trending_topics_description"),
+    url: `${ConfigItems.baseUrl}/api/get_trending_topics?limit=3`,
+    response: `[
+      [
+        "hive-167922",
+        "LeoFinance"
+      ],
+      [
+        "hive-163772",
+        "Pinmapple"
+      ],
+      [
+        "hive-13323",
+        "Splinterlands"
+      ]
+    ]`
   },
   {
     api: "bridge",
     method: "get_account_posts",
     params: ["sort", "account", "start_author", "start_permlink", "limit", "observer"],
-    description:_t("bridge.get_account_posts_description")
+    parameter: `<ul>
+        <li><code class="language-plaintext highlighter-rouge">sort</code> - Supported values:
+          <ul>
+            <li><code class="language-plaintext highlighter-rouge">blog</code> - top posts authored by given account (excluding posts to communities - unless explicitely reblogged) plus reblogs ranked by creation/reblog time</li>
+            <li><code class="language-plaintext highlighter-rouge">feed</code> - top posts from blogs of accounts that given account is following ranked by creation/reblog time, not older than last month</li>
+            <li><code class="language-plaintext highlighter-rouge">posts</code> - op posts authored by given account, newer first   comments - replies authored by given account, newer first</li>
+            <li><code class="language-plaintext highlighter-rouge">replies</code> - replies to posts of given account, newer first</li>
+            <li><code class="language-plaintext highlighter-rouge">payout</code> - all posts authored by given account that were not yet cashed out</li>
+          </ul>
+        </li>
+        <li><code class="language-plaintext highlighter-rouge">account</code>: account name, points to valid account</li>
+        <li><code class="language-plaintext highlighter-rouge">start_author</code>: author account name, if passed must be passed with <code class="language-plaintext highlighter-rouge">start_permlink</code> [optional]</li>
+        <li><code class="language-plaintext highlighter-rouge">start_permlink</code>: post permlink of given author, point to valid post, paging mechanism [optional]</li>
+        <li><code class="language-plaintext highlighter-rouge">limit</code>: if omitted the server will use the default value of 20 [optional]</li>
+        <li><code class="language-plaintext highlighter-rouge">observer</code>: ignored for <code class="language-plaintext highlighter-rouge">blog</code>, feed and <code class="language-plaintext highlighter-rouge">replies</code>, otherwise when passed has to point to valid account used to fill blacklist stats and mark posts of authors blacklisted by observer, at this time ignored [optional]</li>
+      </ul>`,
+    description:_t("bridge.get_account_posts_description"),
+    url: `${ConfigItems.baseUrl}/api/get_account_posts?sort="posts"&account="ecency"&limit=2`,
+    response: `[
+      {
+        "post_id": 122243074,
+        "author": "ecency",
+        "permlink": "discord-monthly-giveaway-winners-51",
+        "category": "hive-125125",
+        "title": "Discord Monthly Giveaway Winners #51",
+        "body": "![ecency-discord-giveaway](https://images.ecency.com/p/o1AJ9qDyyJNSpZWhUgGYc3MngFqoAMgdruQe3hEgLEE4zkBTt.png?format=match&mode=fit)\n\n> Every month, 5 users who actively help others in our discord chat will win the following prizes on the basis of their ranking:\n1st place - 500 Points\n2nd place - 400 Points\n3rd place - 300 Points\n4th, 5th places - 100 Points each\n\n### Basic rules\n\nFor the giveaway, you need to be active on [our discord](https://discord.me/ecency) and reach at least level 1 with the Ecency bot. You must not spam or abuse to gain levels or you will be banned forever. \n\nYou can check your ranks [using this link](https://mee6.xyz/leaderboard/385034494555455488). Any changes or updates in the rules will be notified on [our Discord](https://discord.me/ecency) and here in the Ecency news.\n\n![](https://images.ecency.com/DQmdu88A2V1MXdF8kxZdR7rJx2RJ2oMzD2MHbZXHgDvE9Sk/image.png)\n\nWe would like to appreciate the efforts of @YENMENDT, @aguamiel, @nanixxx, @sacra97, @joalheal for being active and helpful on the [Ecency Discord](https://discord.me/ecency), and congratulate them for winning the [51st Discord Giveaway]().\n\n*Rewards have been sent!*\n\n> *1st & 2nd Place Winners from previous month aren't eligible for 1st & 2nd Place in current month's prizes.*\n\nGood luck and keep Ecencing! 🎉🎉🎉\nThe 52nd Ecency Discord Giveaway is now live!!\n\n---  \n \n### Delegate Hive Power now and mine [Ecency Points + curation reward daily](https://ecency.com/hive-125125/@ecency/daily-100-curation-rewards) + help us onboard more people:  \n \n[50 HP](https://hivesigner.com/sign/delegateVestingShares?delegator=&delegatee=ecency&vesting_shares=50%20HP) | [100 HP](https://hivesigner.com/sign/delegateVestingShares?delegator=&delegatee=ecency&vesting_shares=100%20HP) | [500 HP](https://hivesigner.com/sign/delegateVestingShares?delegator=&delegatee=ecency&vesting_shares=500%20HP) | [1000 HP](https://hivesigner.com/sign/delegateVestingShares?delegator=&delegatee=ecency&vesting_shares=1000%20HP) | [5000 HP](https://hivesigner.com/sign/delegateVestingShares?delegator=&delegatee=ecency&vesting_shares=5000%20HP) | [10K HP](https://hivesigner.com/sign/delegateVestingShares?delegator=&delegatee=ecency&vesting_shares=10000%20HP) | [20K HP](https://hivesigner.com/sign/delegateVestingShares?delegator=&delegatee=ecency&vesting_shares=20000%20HP) | [50K HP](https://hivesigner.com/sign/delegateVestingShares?delegator=&delegatee=ecency&vesting_shares=50000%20HP) | [100K HP](https://hivesigner.com/sign/delegateVestingShares?delegator=&delegatee=ecency&vesting_shares=100000%20HP)  \n \n### Support our proposals  \n \n[Ecency](https://hivesigner.com/sign/update-proposal-votes?proposal_ids=%5B245%5D&approve=true)",
+        "json_metadata": {
+          "image": [
+            "https://images.ecency.com/p/o1AJ9qDyyJNSpZWhUgGYc3MngFqoAMgdruQe3hEgLEE4zkBTt.png?format=match&mode=fit",
+            "https://images.ecency.com/DQmdu88A2V1MXdF8kxZdR7rJx2RJ2oMzD2MHbZXHgDvE9Sk/image.png"
+          ],
+          "tags": [
+            "hive-125125",
+            "hive",
+            "ecency",
+            "points",
+            "discord",
+            "giveaway",
+            "contest"
+          ],
+          "description": "",
+          "app": "ecency/3.0.31-vision",
+          "format": "markdown+html",
+          "image_ratios": [
+            1.6666666666666667,
+            0.9776315789473684
+          ]
+        },
+        "created": "2023-04-04T07:07:03",
+        "updated": "2023-04-04T07:07:03",
+        "depth": 0,
+        "children": 4,
+        "net_rshares": 48861191159072,
+        "is_paidout": false,
+        "payout_at": "2023-04-11T07:07:03",
+        "payout": 27.038,
+        "pending_payout_value": "27.038 HBD",
+        "author_payout_value": "0.000 HBD",
+        "curator_payout_value": "0.000 HBD",
+        "promoted": "0.000 HBD",
+        "replies": [],
+        "author_reputation": 75.46,
+        "stats": {
+          "hide": false,
+          "gray": false,
+          "total_votes": 242,
+          "flag_weight": 0
+        },
+        "url": "/hive-125125/@ecency/discord-monthly-giveaway-winners-51",
+        "beneficiaries": [],
+        "max_accepted_payout": "1000000.000 HBD",
+        "percent_hbd": 10000,
+        "active_votes": [
+          {
+            "rshares": 147893707953,
+            "voter": "steemychicken1"
+          },
+          {
+            "rshares": 748870399980,
+            "voter": "boatymcboatface"
+          },
+          {
+            "rshares": 68975356021,
+            "voter": "kingscrown"
+          }
+        ],
+        "blacklists": [],
+        "community": "hive-125125",
+        "community_title": "Ecency",
+        "author_role": "admin",
+        "author_title": ""
+      },
+      {
+        "post_id": 122138180,
+        "author": "ecency",
+        "permlink": "ecency-monthly-guest-curation-program-30048fe77234e",
+        "category": "hive-125125",
+        "title": "Ecency Monthly Guest Curation Program #18",
+        "body": "![](https://images.ecency.com/DQmeWGL3PLw5AKuaDhhx8kYcXsDNFSeJaJ6jmmyiV1dcUMw/image.png)\n\n***The 17th edition of the [Monthly Guest Curation Program](https://ecency.com/hive-125125/@ecency/ecency-monthly-guest-curation-program-446d24f79b1de) here on Hive was a great success, and it was a really tough job to pick curators from all the great applications that we received. In the end, an awesome set of Guest Curators joined our team and did a fantastic job during their term. It is now time to commence the 18th edition of the Guest Curation Program, giving a chance for Ecency users to learn the ropes of curation and in the process also grow their own profiles on the blockchain.***\n\n---\n\nOur [encouragement program](https://ecency.com/esteem/@good-karma/encouragement-program-continues-82eafcd10a299) has been encouraging and rewarding users of the **Ecency Web**, **Ecency Desktop** and **Ecency Mobile** apps over the past several months, and many users have been curious about the curation program and the job our curators do.\n\nCurators have to navigate spam, abusive accounts and those trying to game our encouragement system, to find genuine users and deserving content to reward, encourage and appreciate.\n\nSince curation is an integral part of the hive ecosystem, the **Guest Curation Program** is an initiative to allow dedicated Ecency users to learn more about curation, and in the process help support several other Ecency users as well as grow their own profile on the hive blockchain.\n\n### <center>How To Apply</center>\n\nWe have a growing and thriving discord community, so join us on the [Ecency Discord](https://discord.me/ecency) if you haven't already, and fill up the form pinned in the #🏁-curator-internship discord channel.\n\n### <center>About Guest Curator Program</center>\n\n- 2 Guest curators will be appointed every month for a period of 30 days.\n\n- Selection will be based upon responses received in the questionnaire. It would be desired for the user to be a dedicated Ecency user and the decision of the selectors is final.\n\n- The rules to be followed and perks for being appointed as a **Guest Curator** will be shared upon selection.\n\n- As a curator, it is expected that you have a desire to help the community, spread some love, cheer and goodwill among users of Ecency. And also, have the ability to identify and report abuse.\n\n- If the guest curator is found to be abusing the granted role and powers, it will lead to immediate removal from the program.\n\n- If you are not selected as a Guest Curator, you may reapply again in the next cycle. But a selected Guest Curator can apply to the program again only after the end of 60 days (i.e. 2 cycles after their selection). \n\nWe are looking forward to hear from you! Join [Discord](https://discord.me/ecency) and show your curation skills to be part of the [Ecency](https://ecency.com/) curator team.\n\n---  \n \n### Delegate Hive Power now and mine [Ecency Points + curation reward daily](https://ecency.com/hive-125125/@ecency/daily-100-curation-rewards) + help us onboard more people:  \n \n[50 HP](https://hivesigner.com/sign/delegateVestingShares?delegator=&delegatee=ecency&vesting_shares=50%20HP) | [100 HP](https://hivesigner.com/sign/delegateVestingShares?delegator=&delegatee=ecency&vesting_shares=100%20HP) | [500 HP](https://hivesigner.com/sign/delegateVestingShares?delegator=&delegatee=ecency&vesting_shares=500%20HP) | [1000 HP](https://hivesigner.com/sign/delegateVestingShares?delegator=&delegatee=ecency&vesting_shares=1000%20HP) | [5000 HP](https://hivesigner.com/sign/delegateVestingShares?delegator=&delegatee=ecency&vesting_shares=5000%20HP) | [10K HP](https://hivesigner.com/sign/delegateVestingShares?delegator=&delegatee=ecency&vesting_shares=10000%20HP) | [20K HP](https://hivesigner.com/sign/delegateVestingShares?delegator=&delegatee=ecency&vesting_shares=20000%20HP) | [50K HP](https://hivesigner.com/sign/delegateVestingShares?delegator=&delegatee=ecency&vesting_shares=50000%20HP) | [100K HP](https://hivesigner.com/sign/delegateVestingShares?delegator=&delegatee=ecency&vesting_shares=100000%20HP)  \n \n### Support our proposals  \n \n[Ecency](https://hivesigner.com/sign/update-proposal-votes?proposal_ids=%5B245%5D&approve=true) ",
+        "json_metadata": {
+          "image": [
+            "https://images.ecency.com/DQmeWGL3PLw5AKuaDhhx8kYcXsDNFSeJaJ6jmmyiV1dcUMw/image.png"
+          ],
+          "tags": [
+            "hive-125125",
+            "vision",
+            "hive",
+            "curation",
+            "ecency",
+            "community"
+          ],
+          "description": "",
+          "app": "ecency/3.0.31-vision",
+          "format": "markdown+html",
+          "image_ratios": [
+            1.6666666666666667
+          ]
+        },
+        "created": "2023-03-31T11:34:00",
+        "updated": "2023-03-31T11:34:00",
+        "depth": 0,
+        "children": 14,
+        "net_rshares": 34086392177688,
+        "is_paidout": false,
+        "payout_at": "2023-04-07T11:34:00",
+        "payout": 18.693,
+        "pending_payout_value": "18.693 HBD",
+        "author_payout_value": "0.000 HBD",
+        "curator_payout_value": "0.000 HBD",
+        "promoted": "0.000 HBD",
+        "replies": [],
+        "author_reputation": 75.46,
+        "stats": {
+          "hide": false,
+          "gray": false,
+          "total_votes": 167,
+          "flag_weight": 0
+        },
+        "url": "/hive-125125/@ecency/ecency-monthly-guest-curation-program-30048fe77234e",
+        "beneficiaries": [],
+        "max_accepted_payout": "1000000.000 HBD",
+        "percent_hbd": 10000,
+        "active_votes": [
+          {
+            "rshares": 747050035711,
+            "voter": "boatymcboatface"
+          },
+          {
+            "rshares": 72007589633,
+            "voter": "kingscrown"
+          },
+          {
+            "rshares": 200162798696,
+            "voter": "theshell"
+          }
+        ],
+        "blacklists": [],
+        "community": "hive-125125",
+        "community_title": "Ecency",
+        "author_role": "admin",
+        "author_title": ""
+      }
+    ]`
   },
   {
     api: "bridge",
     method: "get_ranked_posts",
     params: ["sort", "start_author", "start_permlink", "limit", "tag", "observer"],
-    description:_t("bridge.get_ranked_posts_description")
+    parameter: `<p>Supported values for <code class="language-plaintext highlighter-rouge">sort</code>:</p><ul>
+        <li><code class="language-plaintext highlighter-rouge">trending</code></li>
+        <li><code class="language-plaintext highlighter-rouge">hot</code></li>
+        <li><code class="language-plaintext highlighter-rouge">created</code></li>
+        <li><code class="language-plaintext highlighter-rouge">promoted</code></li>
+        <li><code class="language-plaintext highlighter-rouge">payout</code></li>
+        <li><code class="language-plaintext highlighter-rouge">payout_comments</code></li>
+        <li><code class="language-plaintext highlighter-rouge">muted</code></li>
+      </ul><p>The value for <code class="language-plaintext highlighter-rouge">tag</code> can be any valid tag.</p><p>The value for <code class="language-plaintext highlighter-rouge">observer</code> can be any valid account or empty string.</p>`,
+    description:_t("bridge.get_ranked_posts_description"),
+    url: `${ConfigItems.baseUrl}/api/get_ranked_posts?sort="trending"&limit=2&tag="hive-125125"`,
+    response: `[
+      {
+        "post_id": 122243074,
+        "author": "ecency",
+        "permlink": "discord-monthly-giveaway-winners-51",
+        "category": "hive-125125",
+        "title": "Discord Monthly Giveaway Winners #51",
+        "body": "![ecency-discord-giveaway](https://images.ecency.com/p/o1AJ9qDyyJNSpZWhUgGYc3MngFqoAMgdruQe3hEgLEE4zkBTt.png?format=match&mode=fit)\n\n> Every month, 5 users who actively help others in our discord chat will win the following prizes on the basis of their ranking:\n1st place - 500 Points\n2nd place - 400 Points\n3rd place - 300 Points\n4th, 5th places - 100 Points each\n\n### Basic rules\n\nFor the giveaway, you need to be active on [our discord](https://discord.me/ecency) and reach at least level 1 with the Ecency bot. You must not spam or abuse to gain levels or you will be banned forever. \n\nYou can check your ranks [using this link](https://mee6.xyz/leaderboard/385034494555455488). Any changes or updates in the rules will be notified on [our Discord](https://discord.me/ecency) and here in the Ecency news.\n\n![](https://images.ecency.com/DQmdu88A2V1MXdF8kxZdR7rJx2RJ2oMzD2MHbZXHgDvE9Sk/image.png)\n\nWe would like to appreciate the efforts of @YENMENDT, @aguamiel, @nanixxx, @sacra97, @joalheal for being active and helpful on the [Ecency Discord](https://discord.me/ecency), and congratulate them for winning the [51st Discord Giveaway]().\n\n*Rewards have been sent!*\n\n> *1st & 2nd Place Winners from previous month aren't eligible for 1st & 2nd Place in current month's prizes.*\n\nGood luck and keep Ecencing! 🎉🎉🎉\nThe 52nd Ecency Discord Giveaway is now live!!\n\n---  \n \n### Delegate Hive Power now and mine [Ecency Points + curation reward daily](https://ecency.com/hive-125125/@ecency/daily-100-curation-rewards) + help us onboard more people:  \n \n[50 HP](https://hivesigner.com/sign/delegateVestingShares?delegator=&delegatee=ecency&vesting_shares=50%20HP) | [100 HP](https://hivesigner.com/sign/delegateVestingShares?delegator=&delegatee=ecency&vesting_shares=100%20HP) | [500 HP](https://hivesigner.com/sign/delegateVestingShares?delegator=&delegatee=ecency&vesting_shares=500%20HP) | [1000 HP](https://hivesigner.com/sign/delegateVestingShares?delegator=&delegatee=ecency&vesting_shares=1000%20HP) | [5000 HP](https://hivesigner.com/sign/delegateVestingShares?delegator=&delegatee=ecency&vesting_shares=5000%20HP) | [10K HP](https://hivesigner.com/sign/delegateVestingShares?delegator=&delegatee=ecency&vesting_shares=10000%20HP) | [20K HP](https://hivesigner.com/sign/delegateVestingShares?delegator=&delegatee=ecency&vesting_shares=20000%20HP) | [50K HP](https://hivesigner.com/sign/delegateVestingShares?delegator=&delegatee=ecency&vesting_shares=50000%20HP) | [100K HP](https://hivesigner.com/sign/delegateVestingShares?delegator=&delegatee=ecency&vesting_shares=100000%20HP)  \n \n### Support our proposals  \n \n[Ecency](https://hivesigner.com/sign/update-proposal-votes?proposal_ids=%5B245%5D&approve=true)",
+        "json_metadata": {
+          "image": [
+            "https://images.ecency.com/p/o1AJ9qDyyJNSpZWhUgGYc3MngFqoAMgdruQe3hEgLEE4zkBTt.png?format=match&mode=fit",
+            "https://images.ecency.com/DQmdu88A2V1MXdF8kxZdR7rJx2RJ2oMzD2MHbZXHgDvE9Sk/image.png"
+          ],
+          "tags": [
+            "hive-125125",
+            "hive",
+            "ecency",
+            "points",
+            "discord",
+            "giveaway",
+            "contest"
+          ],
+          "description": "",
+          "app": "ecency/3.0.31-vision",
+          "format": "markdown+html",
+          "image_ratios": [
+            1.6666666666666667,
+            0.9776315789473684
+          ]
+        },
+        "created": "2023-04-04T07:07:03",
+        "updated": "2023-04-04T07:07:03",
+        "depth": 0,
+        "children": 4,
+        "net_rshares": 48861191159072,
+        "is_paidout": false,
+        "payout_at": "2023-04-11T07:07:03",
+        "payout": 27.038,
+        "pending_payout_value": "27.038 HBD",
+        "author_payout_value": "0.000 HBD",
+        "curator_payout_value": "0.000 HBD",
+        "promoted": "0.000 HBD",
+        "replies": [],
+        "author_reputation": 75.46,
+        "stats": {
+          "hide": false,
+          "gray": false,
+          "total_votes": 242,
+          "flag_weight": 0,
+          "is_pinned": true
+        },
+        "url": "/hive-125125/@ecency/discord-monthly-giveaway-winners-51",
+        "beneficiaries": [],
+        "max_accepted_payout": "1000000.000 HBD",
+        "percent_hbd": 10000,
+        "active_votes": [
+          {
+            "rshares": 147893707953,
+            "voter": "steemychicken1"
+          },
+          {
+            "rshares": 748870399980,
+            "voter": "boatymcboatface"
+          },
+          {
+            "rshares": 68975356021,
+            "voter": "kingscrown"
+          },
+          {
+            "rshares": 777208343,
+            "voter": "leprechaun"
+          },
+          {
+            "rshares": 200649099643,
+            "voter": "theshell"
+          }
+        ],
+        "blacklists": [],
+        "community": "hive-125125",
+        "community_title": "Ecency",
+        "author_role": "admin",
+        "author_title": ""
+      },
+      {
+        "post_id": 122230378,
+        "author": "melinda010100",
+        "permlink": "ecency-points-for-the-engagement-dca6e55cdbcc8",
+        "category": "hive-125125",
+        "title": "Ecency POINTS for the Engagement League 21-30",
+        "body": "\n\n![](https://images.ecency.com/DQmcKRgBzSqWJhuA39EX1fcUR4e2bo5iPjs3jbi2ZbkS38Y/1680552400383.gif)\n\n\n\n\n*Ecency is happy to once again award POINTS to Engagement League Engagers!* \n\n***This week we are celebrating 21-30 rank spots on the Engagement League list.  These Engagers will each receive 300 POINTS from @ecency!***\n\n\n\n\n### ⭐To join the [The Engagement League](https://ecency.com/hive-167922/@abh12345/the-hive-engagement-league-5m6rev) and see where the number of comments you have made during the week rank along side others, just go to the weekly post and ask @abh12345 to be included!  It is simple and easy to join! ⬇️\n\n## <center>[The Engagement League](https://ecency.com/hive-167922/@abh12345/the-hive-engagement-league-5m6rev) ⭐⭐⭐⭐⭐</center> \n\n\n![](https://images.ecency.com/DQmYN881BQGM2qcRuhtVB2vcprwzCuCtNXjiZoZRsqNbCfL/ecency_congrats.gif)\n\n\n##   <center>Congrats to POINTS WINNERS</center>\n\n### @joanstewart\n### @mypathtofire\n### @mehmetfix\n### @alokkumar121\n### @rtonline\n### @tengolotodo\n### @princessbusayo\n### @rmsadkri\n### @theinkwell\n### @woelfchen\n\n\n\n\n\n<br>\n\n![](https://images.ecency.com/DQmTE1u9tmpZAf9G1ftvSGgnDnjSCGY6LQvmBzBAJG9EmvP/1673303659943.gif)\n\n## I am sending  200 Ecency POINTS to @macchiata for being Lucky Number 40 this week! 🍀🍀\n\n**To see your POINTS go to your Ecency wallet on the app (download from Google Playstore) or the POINTS wallet on the website  https://ecency.com**\n\n## To learn more about using your [POINTS click HERE](https://ecency.com/hive-125126/@melinda010100/how-to-Use-your-Ecency) \n\n🔥By delegating to Ecency  you earn 100% ***DAILY*** curation rewards according to delegation ratio. And for your delegation, along with the Hive you receive, you also receive 10% of your delegation ***EACH DAY*** in Ecency POINTS. It's a really sweet deal!🔥 \n\n You can buy more POINTS on the Ecency mobile app or earn them each time you use @ecency! \n\n\n![](https://images.ecency.com/DQmW1ZRtKj2PUu74C6Cyzt82y3H8ekzxaddu7QxLbKfKGn9/5a5a4ca4_2d5d_469e_8feb_da4d4e5f3c81.jpg)\n\n## <center>[The Engagement League](https://ecency.com/hive-167922/@abh12345/the-hive-engagement-league-5m6rev) ⭐⭐⭐⭐⭐</center> \n\n**Remember to show your support for the contests and communities that you enjoy.**\n\n20% of this posts rewards will go to @abh12345 /The Engagement League. Thanks for tallying up all the numbers! \n\n\n![](https://images.ecency.com/DQmVgWB6LFhXFwAuVENpvCsHjB7jmHWoGxwQyZivAvAwtAt/c58e89d4_99e6_4110_b660_6b343e096e41.jpg)\n\n\n***All comments written on my posts, and any posts in Feathered Friends, Shadow Hunters, \nLadies of Hive, and Feel Good Community posts receive staked ARCHON tokens.Thanks to @taskmanager for encouraging Engagement within communities***\n\n\n![](https://images.ecency.com/DQmVgWB6LFhXFwAuVENpvCsHjB7jmHWoGxwQyZivAvAwtAt/b00c73de_003d_4e5f_bfdf_9aa85673d3ad.jpg)\n\n![](https://images.ecency.com/DQmYrGJxogFcFRWcBqAmkGmuyBaZRkyo1MtJCaJUMTNGZj8/1676942668057.gif)\n\n***Banners by @irisworld***",
+        "json_metadata": {
+          "image": [
+            "https://images.ecency.com/DQmcKRgBzSqWJhuA39EX1fcUR4e2bo5iPjs3jbi2ZbkS38Y/1680552400383.gif",
+            "https://images.ecency.com/DQmVgWB6LFhXFwAuVENpvCsHjB7jmHWoGxwQyZivAvAwtAt/c58e89d4_99e6_4110_b660_6b343e096e41.jpg",
+            "https://images.ecency.com/DQmYrGJxogFcFRWcBqAmkGmuyBaZRkyo1MtJCaJUMTNGZj8/1676942668057.gif",
+            "https://images.ecency.com/DQmVgWB6LFhXFwAuVENpvCsHjB7jmHWoGxwQyZivAvAwtAt/b00c73de_003d_4e5f_bfdf_9aa85673d3ad.jpg",
+            "https://images.ecency.com/DQmW1ZRtKj2PUu74C6Cyzt82y3H8ekzxaddu7QxLbKfKGn9/5a5a4ca4_2d5d_469e_8feb_da4d4e5f3c81.jpg",
+            "https://images.ecency.com/DQmYN881BQGM2qcRuhtVB2vcprwzCuCtNXjiZoZRsqNbCfL/ecency_congrats.gif",
+            "https://images.ecency.com/DQmTE1u9tmpZAf9G1ftvSGgnDnjSCGY6LQvmBzBAJG9EmvP/1673303659943.gif"
+          ],
+          "image_ratios": [
+            1,
+            16,
+            1,
+            16,
+            1.7391304347826086
+          ],
+          "tags": [
+            "hive-125125",
+            "engagement",
+            "points",
+            "archon",
+            "pob"
+          ],
+          "app": "ecency/3.0.40-mobile",
+          "format": "markdown+html"
+        },
+        "created": "2023-04-03T20:18:12",
+        "updated": "2023-04-03T20:18:12",
+        "depth": 0,
+        "children": 17,
+        "net_rshares": 10505767130305,
+        "is_paidout": false,
+        "payout_at": "2023-04-10T20:18:12",
+        "payout": 5.722,
+        "pending_payout_value": "5.722 HBD",
+        "author_payout_value": "0.000 HBD",
+        "curator_payout_value": "0.000 HBD",
+        "promoted": "0.000 HBD",
+        "replies": [],
+        "author_reputation": 77.01,
+        "stats": {
+          "hide": false,
+          "gray": false,
+          "total_votes": 133,
+          "flag_weight": 0,
+          "is_pinned": true
+        },
+        "url": "/hive-125125/@melinda010100/ecency-points-for-the-engagement-dca6e55cdbcc8",
+        "beneficiaries": [
+          {
+            "account": "abh12345",
+            "weight": 2000
+          }
+        ],
+        "max_accepted_payout": "1000000.000 HBD",
+        "percent_hbd": 10000,
+        "active_votes": [
+          {
+            "rshares": 303134136234,
+            "voter": "ratel"
+          },
+          {
+            "rshares": 43317894011,
+            "voter": "good-karma"
+          },
+          {
+            "rshares": 10072137806,
+            "voter": "jlufer"
+          }
+        ],
+        "blacklists": [],
+        "community": "hive-125125",
+        "community_title": "Ecency",
+        "author_role": "admin",
+        "author_title": ""
+      }
+    ]`
   },
   {
     api: "bridge",
     method: "account_notifications",
     params: ["account", "last_id", "limit"],
-    description:_t("bridge.account_notifications_description")
-  },
-  {
-    api: "bridge",
-    method: "normalize_post",
-    params: ["post"],
-    description:_t("block_api.normalize_post_description")
+    parameter: `<code>account: string; last_id: int; limit: int;</code><p>Types:</p><ul>
+        <li><code class="language-plaintext highlighter-rouge">new_community</code> - a new community was created</li>
+        <li><code class="language-plaintext highlighter-rouge">set_role</code> - mod/admin adds a role to an account</li>
+        <li><code class="language-plaintext highlighter-rouge">set_props</code> - properties set for a community</li>
+        <li><code class="language-plaintext highlighter-rouge">set_label</code> - a title/badge/label has been set for an account</li>
+        <li><code class="language-plaintext highlighter-rouge">mute_post</code> - a post has been muted, with a reason</li>
+        <li><code class="language-plaintext highlighter-rouge">unmute_post</code> - a post has been unmuted, with a reason</li>
+        <li><code class="language-plaintext highlighter-rouge">pin_post</code> - a post has been pinned</li>
+        <li><code class="language-plaintext highlighter-rouge">unpin_post</code> - a post has been unpinned</li>
+        <li><code class="language-plaintext highlighter-rouge">flag_post</code> - a post has been flagged by a member, with a reason</li>
+        <li><code class="language-plaintext highlighter-rouge">error</code> - provides feedback to developers for ops that cannot be interpreted</li>
+        <li><code class="language-plaintext highlighter-rouge">subscribe</code> - an account has subscribed to a community</li>
+        <li><code class="language-plaintext highlighter-rouge">reply</code> - a post has been replied to</li>
+        <li><code class="language-plaintext highlighter-rouge">reblog</code> - a post has been reblogged/reblogged</li>
+        <li><code class="language-plaintext highlighter-rouge">follow</code> - an account has followed another account</li>
+        <li><code class="language-plaintext highlighter-rouge">mention</code> - author mentions an account</li>
+        <li><code class="language-plaintext highlighter-rouge">vote</code> - voter votes for an author</li>
+      </ul>`,
+    description:_t("bridge.account_notifications_description"),
+    url: `${ConfigItems.baseUrl}/api/account_notifications?account="ecency"&limit=5`,
+    response: `[
+      {
+        "id": 9049587,
+        "type": "mention",
+        "score": 40,
+        "date": "2023-04-06T07:55:36",
+        "msg": "@youarealive mentioned you and 2 others",
+        "url": "@youarealive/re-re-ecency-202346t105514269z-20230406t075535z"
+      },
+      {
+        "id": 9049566,
+        "type": "reply_comment",
+        "score": 50,
+        "date": "2023-04-06T07:55:15",
+        "msg": "@stdd replied to your comment",
+        "url": "@stdd/re-ecency-202346t105514269z"
+      },
+      {
+        "id": 9047772,
+        "type": "vote",
+        "score": 25,
+        "date": "2023-04-06T07:25:39",
+        "msg": "@asean.hive voted on your post ($0.03)",
+        "url": "@ecency/re-2023330t21048430z"
+      },
+      {
+        "id": 9047635,
+        "type": "mention",
+        "score": 60,
+        "date": "2023-04-06T07:22:18",
+        "msg": "@justclickindiva mentioned you and 1 others",
+        "url": "@justclickindiva/re-ecency-rson55"
+      },
+      {
+        "id": 9047633,
+        "type": "reply_comment",
+        "score": 60,
+        "date": "2023-04-06T07:22:18",
+        "msg": "@justclickindiva replied to your comment",
+        "url": "@justclickindiva/re-ecency-rson55"
+      }
+    ]`
   },
   {
     api: "bridge",
     method: "list_all_subscriptions",
     params: ["account"],
-    description:_t("bridge.list_all_subscriptions_description")
+    parameter: `<code>account: string;</code>`,
+    description:_t("bridge.list_all_subscriptions_description"),
+    url: `${ConfigItems.baseUrl}/api/list_all_subscriptions?account="ecency"`,
+    response: `[
+      [
+        "hive-125125",
+        "Ecency",
+        "admin",
+        ""
+      ],
+      [
+        "hive-125126",
+        "Ecency Help",
+        "admin",
+        ""
+      ],
+      [
+        "hive-194913",
+        "Photography Lovers",
+        "guest",
+        ""
+      ],
+      [
+        "hive-130560",
+        "Hive Diy",
+        "guest",
+        ""
+      ],
+      [
+        "hive-120136",
+        "Hive SEO",
+        "guest",
+        ""
+      ]
+    ]`
   },
   {
     api: "bridge",
     method: "list_subscribers",
     params: ["community"],
-    description:_t("bridge.list_subscribers_description")
+    parameter: `<code>community: string (community id/username);</code>`,
+    description:_t("bridge.list_subscribers_description"),
+    url: `${ConfigItems.baseUrl}/api/list_subscribers?community="hive-125125"`,
+    response: `[
+      [
+        "kathryn95",
+        "guest",
+        null,
+        "2023-04-05T19:15:51"
+      ],
+      [
+        "azzm984",
+        "guest",
+        null,
+        "2023-04-05T09:26:33"
+      ],
+      [
+        "voiceless12",
+        "guest",
+        null,
+        "2023-04-04T11:37:54"
+      ],
+      [
+        "gigglingmistress",
+        "guest",
+        null,
+        "2023-04-03T22:26:51"
+      ],
+      [
+        "exerzite",
+        "guest",
+        null,
+        "2023-04-03T10:37:54"
+      ],
+      [
+        "yoyocuban",
+        "guest",
+        null,
+        "2023-04-03T06:05:39"
+      ],
+      [
+        "foundlios",
+        "guest",
+        null,
+        "2023-04-02T20:25:45"
+      ]
+    ]`
   },
   {
     api: "bridge",
     method: "get_follow_list",
     params: ["observer", "follow_type"],
-    description:_t("bridge.get_follow_list_description")
+    parameter: `<code>observer: string; follow_type: string;</code><ul>
+        <li><code class="language-plaintext highlighter-rouge">observer</code> - valid account</li>
+        <li><code class="language-plaintext highlighter-rouge">follow_type</code> - Supported values:
+          <ul>
+            <li><code class="language-plaintext highlighter-rouge">follow_blacklist</code></li>
+            <li><code class="language-plaintext highlighter-rouge">follow_muted</code></li>
+            <li><code class="language-plaintext highlighter-rouge">blacklisted</code></li>
+            <li><code class="language-plaintext highlighter-rouge">muted</code></li>
+          </ul>
+        </li>
+      </ul>`,
+    description:_t("bridge.get_follow_list_description"),
+    url: `${ConfigItems.baseUrl}/api/get_follow_list?observer="blocktrades"&follow_type="follow_blacklist"`,
+    response: `[
+      {
+        "name": "hive.blog",
+        "blacklist_description": "",
+        "muted_list_description": "Phishing accounts"
+      }
+    ]`
   },
   {
     api: "bridge",
     method: "does_user_follow_any_lists",
     params: ["observer"],
-    description:_t("bridge.does_user_follow_any_lists_description")
+    parameter: `<code>observer: string;</code>`,
+    description:_t("bridge.does_user_follow_any_lists_description"),
+    url: `${ConfigItems.baseUrl}/api/does_user_follow_any_lists?observer="blocktrades"`,
+    response: `true`
   },
   {
     api: "bridge",
     method: "get_relationship_between_accounts",
-    params: ["follower", "following"],
-    description:_t("bridge.get_relationship_between_accounts_description")
+    params: ["account1", "account2"],
+    parameter: `<code>account1: string; account2: string</code>`,
+    description:_t("bridge.get_relationship_between_accounts_description"),
+    url: `${ConfigItems.baseUrl}/api/get_relationship_between_accounts?account1="ecency"&account2="good-karma"`,
+    response: `{
+      "follows": true,
+      "ignores": false,
+      "blacklists": false,
+      "follows_blacklists": false,
+      "follows_muted": false
+    }`
   }
+  /*{
+    api: "condenser_api",
+    method: "get_comment_discussions_by_payout",
+    params: ["query"],
+    description:_t("condenser_api.get_comment_discussions_by_payout_description")
+  },
+  {
+    api: "condenser_api",
+    method: "get_discussions_by_trending",
+    params: ["query"],
+    description:_t("condenser_api.get_discussions_by_trending_description")
+  },
+  {
+    api: "condenser_api",
+    method: "get_discussions_by_created",  
+    params: ["query"],
+    description:_t("condenser_api.get_discussions_by_created_description")
+  },
+  {
+    api: "condenser_api",
+    method: "get_discussions_by_active",
+    params: ["query"],
+    description:_t("condenser_api.get_discussions_by_active_description")
+  },
+  {
+    api: "condenser_api",
+    method: "get_discussions_by_cashout",    
+    params: ["query"],
+    description:_t("condenser_api.get_discussions_by_cashout_description")
+  },
+  {
+    api: "condenser_api",
+    method: "get_discussions_by_votes",
+    params: ["query"],
+    description:_t("condenser_api.get_discussions_by_votes_description")
+  },
+  {
+    api: "condenser_api",
+    method: "get_discussions_by_children",
+    params: ["query"],
+    description:_t("condenser_api.get_discussions_by_children_description")
+  },
+  {
+    api: "condenser_api",
+    method: "get_discussions_by_hot",
+    params: ["query"],
+    description:_t("condenser_api.get_discussions_by_hot_description"),
+    response: `[]`
+  },
+  {
+    api: "condenser_api",
+    method: "get_discussions_by_feed",
+    params: ["query"],
+    description:_t("condenser_api.get_discussions_by_feed_description")
+  },
+  {
+    api: "condenser_api",
+    method: "get_discussions_by_blog",
+    params: ["query"],
+    description:_t("condenser_api.get_discussions_by_blog_description")
+  },
+  {
+    api: "condenser_api",
+    method: "get_discussions_by_comments",
+    params: ["query"],
+    description:_t("condenser_api.get_discussions_by_blog_description")
+  },
+  {
+    api: "condenser_api",
+    method: "get_discussions_by_promoted",
+    params: ["query"],
+    description:_t("condenser_api.get_discussions_by_promoted_description")
+  },
+  {
+    api: "condenser_api",
+    method: "get_state",
+    params: ["path"],
+    description:_t("condenser_api.get_state_description")
+  },
+  {
+    api: "condenser_api",
+    method: "get_account_references",
+    params: ["accountId"],
+    isArray: true
+  },
+  {
+    api: "condenser_api",
+    method: "get_transaction_hex",
+    params: ["trx"],
+    description:_t("condenser_api.get_transaction_hex_description")
+  },
+  {
+    api: "database_api",
+    method: "get_required_signatures",
+    params: ["trx", "available_keys"],
+    description:_t("database_api.get_required_signatures_description"),
+    response: `{"keys": []}`
+  },
+  {
+    api: "database_api",
+    method: "get_potential_signatures",
+    params: ["trx"],
+    description:_t("database_api.get_potential_signatures_description"),
+    response: `[]`
+  
+  },
+  {
+    api: "database_api",
+    method: "verify_authority",
+    params: ["trx"],
+    description:_t("database_api.verify_authority_description"),
+    response: `false`
+  },
+  {
+    api: "database_api",
+    method: "verify_account_authority",
+    params: ["account", "signers"]
+  },*/
 ];
