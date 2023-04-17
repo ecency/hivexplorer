@@ -1212,24 +1212,22 @@ export const methods = [
     api: "account_history_api",
     description:_t("account_history_api.get_account_history_description"),
     method: "get_account_history",
-    url:`${ConfigItems.baseUrl}/api/get_account_history?account=ecency&start=-1&limit=3`,
-    params: ["account", "start", "limit", "operation_filter_low", "operation_filter_high"],
+    url:`${ConfigItems.baseUrl}/api/get_account_history?account=ecency&start=-1&limit=3&operation_type="vote"`,
+    params: ["account", "start", "limit", "operation_type"],
     parameter:`<ul>
         <li><code class="language-plaintext highlighter-rouge">account:string</code></li>
         <li><code class="language-plaintext highlighter-rouge">start:int</code>. e.g.: -1 for reverse history or any positive numeric</li>
         <li><code class="language-plaintext highlighter-rouge">limit:int</code> up to 1000</li>
-        <li><code class="language-plaintext highlighter-rouge">operation_filter_low:int</code> (optional)</li>
-        <li><code class="language-plaintext highlighter-rouge">operation_filter_high:int</code> (optional)</li>
+        <li><code class="language-plaintext highlighter-rouge">operation_type:string</code> (optional)</li>
       </ul>
-      <p>If either <code class="language-plaintext highlighter-rouge">operation_filter_low</code> or <code class="language-plaintext highlighter-rouge">operation_filter_high</code> are set, the set of returned operations will include only these matching bitwise filter.</p>
+      <p>If <code class="language-plaintext highlighter-rouge">operation_type</code> are set, the set of returned operations will include only these matching operations filter.</p>
       <table>
         <thead>
           <tr>
             <th><code class="language-plaintext highlighter-rouge">account</code> (string)</th>
             <th><code class="language-plaintext highlighter-rouge">start</code> (int)</th>
             <th><code class="language-plaintext highlighter-rouge">limit</code> (int)</th>
-            <th><code class="language-plaintext highlighter-rouge">operation_filter_low</code> (int)</th>
-            <th><code class="language-plaintext highlighter-rouge">operation_filter_low</code> (int)</th>
+            <th><code class="language-plaintext highlighter-rouge">operation_type</code> (string)</th>
             <th>&nbsp;</th>
           </tr>
         </thead>
@@ -1239,7 +1237,6 @@ export const methods = [
             <td><code class="language-plaintext highlighter-rouge">1000</code></td>
             <td><code class="language-plaintext highlighter-rouge">1000</code></td>
             <td>&nbsp;</td>
-            <td>&nbsp;</td>
             <td>Queries the account named <code class="language-plaintext highlighter-rouge">hiveio</code> starting on the latest item in history, up to 1,000 results.</td>
           </tr>
           <tr>
@@ -1247,31 +1244,27 @@ export const methods = [
             <td><code class="language-plaintext highlighter-rouge">-1</code></td>
             <td><code class="language-plaintext highlighter-rouge">1000</code></td>
             <td>&nbsp;</td>
-            <td>&nbsp;</td>
             <td>Queries the account named <code class="language-plaintext highlighter-rouge">alice</code> starting on the oldest item in history, up to 1,000 results.</td>
           </tr>
           <tr>
             <td><code class="language-plaintext highlighter-rouge">"bob"</code></td>
             <td><code class="language-plaintext highlighter-rouge">-1</code></td>
             <td><code class="language-plaintext highlighter-rouge">1000</code></td>
-            <td>1</td>
-            <td>&nbsp;</td>
+            <td>"vote"</td>
             <td>Queries <strong>only votes</strong> by the account named <code class="language-plaintext highlighter-rouge">bob</code> starting on the oldest item in history, up to 1,000 results.</td>
           </tr>
           <tr>
             <td><code class="language-plaintext highlighter-rouge">"charlie"</code></td>
             <td><code class="language-plaintext highlighter-rouge">-1</code></td>
             <td><code class="language-plaintext highlighter-rouge">1000</code></td>
-            <td>262144</td>
-            <td>&nbsp;</td>
-            <td>Queries <strong>only custom jsons</strong> by the account named <code class="language-plaintext highlighter-rouge">charlie</code> starting on the oldest item in history, up to 1,000 results.</td>
+            <td>"vote,custom_json"</td>
+            <td>Queries <strong>only vote and custom jsons</strong> by the account named <code class="language-plaintext highlighter-rouge">charlie</code> starting on the oldest item in history, up to 1,000 results.</td>
           </tr>
           <tr>
             <td><code class="language-plaintext highlighter-rouge">"emma"</code></td>
             <td><code class="language-plaintext highlighter-rouge">-1</code></td>
             <td><code class="language-plaintext highlighter-rouge">1000</code></td>
-            <td>0</td>
-            <td>1</td>
+            <td>"proposal_pay"</td>
             <td>Queries <strong>only proposal payments</strong> by the account named <code class="language-plaintext highlighter-rouge">emma</code> starting on the oldest item in history, up to 1,000 results.</td>
           </tr>
         </tbody>
