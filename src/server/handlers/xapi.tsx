@@ -42,18 +42,20 @@ export default async (req: express.Request, res: express.Response) => {
 
         // custom handling of account history, filter with operations
         if (method == 'get_account_history') {
-          const ops = utils.operationOrders;
           const {operation_type} = method_type;
-          const mops = operation_type.split(',');
-          let filters;
+          if (operation_type) {
+            const ops = utils.operationOrders;
+            const mops = operation_type.split(',');
+            let filters;
 
-          if (mops.length === 1) {
-            filters = utils.makeBitMaskFilter([ops[`${mops[0]}`]]);
-          } else {
-            filters = utils.makeBitMaskFilter(mops.map((x: string) => ops[`${x}`]));
+            if (mops.length === 1) {
+              filters = utils.makeBitMaskFilter([ops[`${mops[0]}`]]);
+            } else {
+              filters = utils.makeBitMaskFilter(mops.map((x: string) => ops[`${x}`]));
+            }
+            method_type.operation_filter_low = Number(filters[0]);
+            method_type.operation_filter_high = filters[1];
           }
-          method_type.operation_filter_low = Number(filters[0]);
-          method_type.operation_filter_high = filters[1];
           delete method_type.operation_type;
         }
         result = await client.call(mapping[0].api, method, method_type);
