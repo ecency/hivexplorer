@@ -31,13 +31,23 @@
     border-collapse: collapse;
     }
     tr td:first-child{
-        min-width: 100px;
+        min-width: 200px;
     }
     td{
-        padding: 10px;
+        padding: 5px;
         word-break: break-word;
+        vertical-align: initial !important;
+        &.integer-td{
+            width: 40px !important;
+            min-width: 40px !important;
+            text-align: center !important;
+            
+        }
     }
-    
+    @media screen and (max-width:768px) {
+        table-layout: fixed;
+        max-width: 100%;
+    }
   }
   .json-table {
     width: 100%;

@@ -7,7 +7,6 @@ import { transAvatars } from "./operationArrays";
 import parseAsset from "../../helper/parse-asset";
 import { ObjectFieldArray } from "../../pages/fields/common_fields";
 import { _t } from "../../i18n";
-import { TimestampField } from "../fields/blockFields/DateTimeTable";
 
 
 export const OperationCardData=(props:any)=>{
@@ -21,7 +20,6 @@ export const OperationCardData=(props:any)=>{
             <div className="trans_card_header">
                 <div className="trans-op-basic">
                     {Object.keys(value).map((val:any,index:number) => {
-                        console.log('req',val,typeof (value[val]), value[val][0])
                         //  setRenderedStrings([...renderedStrings,val])
                         if (typeof (value[val] === 'string')) {
                             name = value[val]
@@ -35,7 +33,8 @@ export const OperationCardData=(props:any)=>{
                                 {transAvatars.includes(val) && value[val][0] !== undefined &&
                                     <>
 
-                                        {val === 'author' && Object.keys(value).includes('voter') ? <></> :  <>
+                                        {val === 'author'  && Object.keys(value).includes('voter') ? <></> :
+                                        val === 'author'  && Object.keys(value).includes('benefactor') ? <></> :  <>
                                         <span key={index+type+val} className="trans-owner-date">
 
                                             <img
@@ -67,13 +66,21 @@ export const OperationCardData=(props:any)=>{
                                                 {type==='producer_reward_operation' && <span>
                                                     :&nbsp;{parseAsset(value.vesting_shares).amount+' '+parseAsset(value.vesting_shares).symbol}
                                                 </span>}
+                                                {type==='delegate_vesting_shares_operation' && <span>
+                                                &nbsp;{_t('common.delegate')} {parseAsset(value.vesting_shares).amount+' '+parseAsset(value.vesting_shares).symbol} {_t('common.to')} {value.delegatee}
+                                                   
+                                                </span>}
                                                 {type==='curation_reward_operation' && <span>
-                                                    :&nbsp;{parseAsset(value.reward).amount+' '+parseAsset(value.reward).symbol} {_t('common.for')} <Link to={`/@${value.comment_author}/${value.comment_permlink}`}>&nbsp;/@{value.comment_author}/{value.comment_permlink}</Link>
+                                                    :&nbsp;{parseAsset(value.reward).amount+' '+parseAsset(value.reward).symbol} {_t('common.for')} <Link to={`/@${value.comment_author}/${value.comment_permlink}`}>&nbsp;@{value.comment_author}/{value.comment_permlink}</Link>
                                                 </span>}
                                                 {type==='limit_order_create_operation' && <span>
                                                     &nbsp;{parseAsset(value.min_to_receive).amount+' '+parseAsset(value.min_to_receive).symbol} {_t('common.for')} {parseAsset(value.amount_to_sell).amount+' '+parseAsset(value.amount_to_sell).symbol}
                                                 </span>}
-
+                                                {type==='comment_benefactor_reward_operation' && <span>
+                                                    :&nbsp;{parseAsset(value.hbd_payout).amount+' '+parseAsset(value.hbd_payout).symbol} {_t('common.and')} 
+                                                    :&nbsp;{parseAsset(value.vesting_payout).amount+' '+parseAsset(value.vesting_payout).symbol} {_t('common.for')} 
+                                                    <Link to={`/@${value.author}/${value.permlink}`}>&nbsp;@{value.author}/{value.permlink}</Link>
+                                                </span>}
                                                 {type==='feed_publish_operation' && <span>
                                                     &nbsp;{parseAsset(value.exchange_rate.base).amount+' '+parseAsset(value.exchange_rate.base).symbol}
                                                 </span>}

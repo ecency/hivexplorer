@@ -1,5 +1,6 @@
 import axios from "axios";
 import { ConfigItems } from "../../../config";
+import { utils } from '@hiveio/dhive';
 
 // Get witness Account
 export const getAccount = async (user: string) => {
@@ -64,11 +65,25 @@ export const getSingleTransaction = async (transaction_id: number) => {
 export const getUserTransaction = async (
   user: string,
   transactionFrom: number,
-  transactionLimit: number
+  transactionLimit: number,
+  filters: any[] | string,
 ) => {
-  const user_transaction_url = `${ConfigItems.baseUrl}/api/get_account_history?account=${user}&start=${transactionFrom}&limit=${transactionLimit}`;
+  const user_transaction_url = `${ConfigItems.baseUrl}/api/get_account_history?account=${user}&start=${transactionFrom}&limit=${transactionLimit}&operation_type="${filters}"`;
+  console.log('URL',user_transaction_url)
   const r = await axios.get(user_transaction_url);
-  return r.data;
+  let resp = r.data.history;
+  // let collection:any = [];
+  // console.log('filters',filters)
+  // if(filters===''){
+    return resp
+  // } else{
+  //   resp.forEach(function(item:any){
+  //     if(item[1]['op']['type']===filters){
+  //       collection.push(item) 
+  //     }
+  //   })
+  //     return collection
+  // }
 };
 // Get Witness
 export const getWitnesses=async (limit:number)=>{

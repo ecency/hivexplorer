@@ -68,6 +68,7 @@ const UserPage = (props: any) => {
   }, []);
   useEffect(() => {
     axios.get(rc_account_url).then((res) => {
+      console.log('resource_credit',res.data)
       setRCAccount(res.data.rc_accounts[0]);
     });
   }, []);

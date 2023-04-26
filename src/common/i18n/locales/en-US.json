@@ -32,6 +32,7 @@
     "youtube":"Youtube",
     "instagram":"Instagram",
     "by": "By",
+    "to":"To",
     "for": "for",
     "from":"From",
     "type": "Type",
@@ -62,7 +63,8 @@
     "no_search_result": "No record found against searched input.",
     "transactions":"Transactions",
     "virtual_trx":"Virtual Transactions",
-    "raw_format":"Raw Format "
+    "raw_format":"Raw Format ",
+    "delegate":"delegate"
   },
   "block": {
     "reward_fund": "Reward Fund",
@@ -691,6 +693,7 @@
     "sm_sell_cards":"list cards for sale on the market",
     "sm_combine_all":"combine all cards",
     "sm_submit_team":"submitted a team for battle",
+    "sm_cancel_sell":"remove cards listed for sale on the market",
     "account_update_operation":"update account data"
     
  }

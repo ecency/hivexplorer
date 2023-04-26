@@ -13,6 +13,7 @@ import { infoIcon, showLessIcon, showMoreIcon, trxIcon } from "../../../img/svg"
 import "./ObjectField.scss";
 import { SMTAssetCalc } from "../../../api/hive";
 import parseAsset from "../../../helper/parse-asset";
+import { isInteger } from "lodash";
 
 
 const SMTAssetArray=[
@@ -168,7 +169,7 @@ useEffect(() => {
     <>
       {item !== "posting" && item !== "owner" && item !== "active" && (
         <Row className={rowBorder} key={number}>
-          <Col md={3} xs={12} className="attr-col">
+          <Col lg={2} md={3} xs={12} className="attr-col">
             <span className="pl-2">
               {item === "voting_manabar" || item === "downvote_manabar" ? (
                 <span>{_t(`${label_for}.${item}`)}</span>
@@ -178,7 +179,7 @@ useEffect(() => {
               :
             </span>
           </Col>
-          <Col md={9} xs={12}>
+          <Col lg={10} md={9} xs={12}>
             {item === "voting_manabar" || item === "downvote_manabar" ? (
               <table className="time-date-table">
                 <tbody>
@@ -217,7 +218,7 @@ useEffect(() => {
               </>
             ) : item === "operations" ? (
               <>
-                {value.map((val: any, i: number) => {
+                {/* {value.map((val: any, i: number) => {
                   const type: string = val[0];
                   const opVal: opValType = val[1];
                   return (
@@ -298,7 +299,58 @@ useEffect(() => {
                       </tbody>
                     </table>
                   );
-                })}
+                })} */}
+                <table className="time-date-table">
+                  <tbody>
+                  {value.map((val: any, i: number) => {
+                    console.log('val',val)
+                    return (
+                    <>
+                    {typeof(val)!=='object'?
+                     <tr key={i}>
+                     <td>{val}</td>
+                    </tr>
+                    :
+                    <tr>
+                      <td className="integer-td">{i}</td>
+                      <td>
+                        <table>
+                          <tbody>
+                            {Object.keys(val).map((key:any,j:number)=>{
+                            console.log(typeof(key))
+                            return(
+                            <tr key={val[key]+i}>
+                              <td className={isInteger(+key)? "integer-td":""}>{key}</td>
+                              <td>{typeof(val[key])!=='object'?<>{val[key]}</>:
+                              <>
+                                <table>
+                                  <tbody>
+                                    <>{Object.keys(val[key]).map((item:any,k:number)=>(
+                                      <tr key={val[key][item].toString()+i}>
+                                        <td className={isInteger(+item)? "integer-td":""}>{item}</td>
+                                        <td>{typeof(val[key][item])!=='object'? val[key][item].toString():<>{typeof(val[key][item])}</>}</td>
+                                      </tr>
+                                    ))}</>
+                                  </tbody>
+                                </table>
+                              </>
+                              }</td>
+                            </tr>
+                            )
+                          })}
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                   
+                    }
+                    </> 
+                   
+                    )
+                  })}
+                  </tbody>
+                </table>
+               
               </>
             ) : SMTAssetArray.includes(item) ? (
               <>{parseAsset(value).amount+' '+parseAsset(value).symbol}</>

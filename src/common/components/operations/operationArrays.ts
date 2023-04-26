@@ -12,8 +12,9 @@ export const transAvatars = [
     'from',
     'curator',
     'creator',
-    'current_owner'
-
+    'current_owner',
+    'benefactor',
+    'delegator'
 ]
 export const json_operation_ids = [
     'dcrops',
@@ -79,7 +80,8 @@ export const quest_operation = [
     'sm_gift_cards',
     'sm_combine_all',
     'sm_combine_cards', 
-    'sm_submit_team'
+    'sm_submit_team',
+    'sm_cancel_sell'
 ]
 
 export const operation_types= [
@@ -96,6 +98,7 @@ export const operation_types= [
     "transfer_from_savings_operation",
     "interest_operation",
     "cancel_transfer_from_savings_operation",
+    "curation_reward_operation",
     "transfer_operation",
     "producer_reward_operation",
     "fill_order_operation",
@@ -103,7 +106,16 @@ export const operation_types= [
     "effective_comment_vote_operation",
     "producer_reward_operation",
     "create_claimed_account_operation",
-    "account_update_operation",
-    'claim_account_operation'
-
+    'claim_account_operation',
+    'delegate_vesting_shares_operation',
+    'comment_benefactor_reward_operation',
+    'account_created_operation',
+    'account_update_operation',
+    'account_update2_operation'
 ]
+operation_types.sort()
+const options_operations =new Array(); // empty option array to be populated dynamically
+for (let i = 1; i < operation_types.length; i++) {
+    options_operations.push({value: operation_types[i].replace('_operation',''), label: operation_types[i].replace('_operation','').replace(/_/g,' ')});
+};
+export default options_operations

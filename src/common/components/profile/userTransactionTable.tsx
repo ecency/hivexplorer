@@ -25,6 +25,8 @@ import { TimestampField } from "../fields/blockFields/DateTimeTable";
 import { AscendingIcon, DescendingIcon } from "../../img/svg";
 import { getUserTransaction } from "../../api/urls";
 import { Col, Row } from "react-bootstrap";
+import { FilterDropdown } from "../filterTypes";
+import options_operations from "../operations/operationArrays";
 
 interface Column {
   label: string;
@@ -40,7 +42,10 @@ const columns: Column[] = [
   { label: `${_t("common.type")}`, align: "right", width: "unset" },
   { label: `${_t("common.ops")}`, align: "right", width: "unset" }
 ];
-
+type Option = {
+  value: string;
+  label: string;
+};
 interface UserTransactionTypeList extends Array<UserTransactionType> {}
 const UserTransactionsTable = (props: any) => {
   const { user } = props;
@@ -48,20 +53,23 @@ const UserTransactionsTable = (props: any) => {
   const [loading, setLoading] = useState(true);
   const [rowsPerPage, setRowsPerPage] = useState(25);
   const [transactionFrom, setTransactionForm] = useState(-1);
-  const [transactionLimit, setTransactionLimit] = useState(1000);
+  const [transactionLimit, setTransactionLimit] = useState(250);
   const currTheme = useSelector((state: any) => state.global.theme);
   const [userTransaction, setUserTransaction] = useState<UserTransactionTypeList>();
   const [allOpen, setAllOpen] = useState(false);
   const [sortBlockBtn, setSortBlockBtn] = useState(false);
   const [sortTransBtn, setSortTransBtn] = useState(false);
+  const [selectedValues, setSelectedValues] = useState<string[]>([]);
+  const [options, setOptions] = useState<Option[]>(options_operations);
+  const [searchValue, setSearchValue] = useState<string>('');
   const themeContrastColor = currTheme === "day" ? "#535e65" : "#ffffffde ";
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const response = await getUserTransaction(user, transactionFrom, transactionLimit);
-        setUserTransaction(response.history.reverse());
+        const response = await getUserTransaction(user, transactionFrom, transactionLimit,selectedValues);
+        setUserTransaction(response.reverse());
       } catch (error: any) {
         console.error(error.message);
       }
@@ -69,6 +77,20 @@ const UserTransactionsTable = (props: any) => {
     };
     fetchData();
   }, []);
+  useEffect(() => {
+   
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const response = await getUserTransaction(user, transactionFrom, transactionLimit,selectedValues);
+        setUserTransaction(response.reverse());
+      } catch (error: any) {
+        console.error(error.message);
+      }
+      setLoading(false);
+    };
+    fetchData();
+  }, [selectedValues]);
   const [inputText, setInputText] = useState("");
   let inputHandler = (e: any) => {
     const lowerCase = e.target.value.toLowerCase();
@@ -86,14 +108,27 @@ const UserTransactionsTable = (props: any) => {
       }
     }
   });
-  const handleChangePage = (event: unknown, newPage: number) => {
-    setPage(newPage);
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(e.target.value);
   };
 
-  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
+  const handleSelect = (value:any) => {
+    if (selectedValues.includes(value)) {
+      setSelectedValues(selectedValues.filter((val) => val !== value));
+    } else {
+      setSelectedValues([...selectedValues, value]);
+    }
+
   };
+  const handleRemove = (value: string) => {
+    setSelectedValues(selectedValues.filter((val) => val !== value));
+  
+  };
+  const filteredOptions = options_operations.filter((option:any) =>
+    option.label.toLowerCase().includes(searchValue.toLowerCase())
+  );
+ 
   const sortTransaction = (colName: string, sortState: boolean) => {
     if (colName === `${_t("common.block")}` && sortState === true) {
       setUserTransaction(
@@ -201,19 +236,25 @@ const UserTransactionsTable = (props: any) => {
               placeholder={`${_t("heading_label.search_transaction")}`}
             />
             </Col>
+            {/* <Col lg={6}>
+          
+            </Col> */}
+          </Row>
+          <Row>
             <Col lg={6}>
-                {filteredTransactionsData && (
-                <TablePagination
-                rowsPerPageOptions={[25, 50, 100, 500, 1000]}
-                component="div"
-                count={filteredTransactionsData.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                onPageChange={handleChangePage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
-                />
-            )}
+            <FilterDropdown
+              handleSelect={handleSelect}
+              selectedValues={selectedValues}
+              handleRemove={handleRemove}
+              searchValue={searchValue}
+              handleSearchChange={handleSearchChange}
+              filteredOptions={filteredOptions}
+
+             />
             </Col>
+            {/* <Col lg={6}>
+          
+            </Col> */}
           </Row>
             <Table stickyHeader={true} aria-label="sticky table">
               <TableHead className="card-header">
@@ -273,24 +314,13 @@ const UserTransactionsTable = (props: any) => {
               <TableBody>
                 {filteredTransactionsData &&
                   filteredTransactionsData
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((trans: any, i: number) => {
                       return <TransRow key={i+trans+'-'} trans={trans} />;
                     })}
               </TableBody>
             </Table>
           </Paper>
-          {filteredTransactionsData && (
-            <TablePagination
-              rowsPerPageOptions={[25, 50, 100, 500, 1000]}
-              component="div"
-              count={filteredTransactionsData.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              onPageChange={handleChangePage}
-              onRowsPerPageChange={handleChangeRowsPerPage}
-            />
-          )}
+
         </div>
       )}
     </>

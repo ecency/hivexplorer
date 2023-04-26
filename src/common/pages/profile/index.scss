@@ -188,3 +188,34 @@
         }
     }
 }
+.select_dropdown{
+    .dropdown{
+      width: 400px !important;
+      button{
+        background-color:#f5f5f5 !important;
+        color: #706f70;
+        border: 0;
+        border-radius: 0;
+        width: 100%;
+        text-align: left;
+        &:focus{
+            color: #706f70;
+            border: 0;
+        }
+        &:hover{
+            color: #706f70;
+            border: 0;
+        }
+        &::after{
+            position: absolute !important;
+            right: 10px;
+            top: 45%;
+        }
+      }
+      .dropdown-menu.show{
+        padding: 10px;
+        max-height: 360px;
+        overflow-y: auto;
+      }
+    }
+  }

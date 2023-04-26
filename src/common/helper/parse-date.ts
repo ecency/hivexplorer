@@ -29,7 +29,6 @@ export const dateToFormatted = (d: string, format: string = "LLLL"): string => {
   const isTimeZoned = d.indexOf(".") !== -1 || d.indexOf("+") !== -1 ? d : `${d}.000Z`;
  
   const dm = moment(new Date(isTimeZoned));
-  console.log('timezoned',isTimeZoned,dm,dm.format(format))
   return dm.format(format);
 };
 

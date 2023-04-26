@@ -1,6 +1,6 @@
 import { RCAccount } from "@hiveio/dhive/lib/chain/rc";
 import React, { useState } from "react";
-import { Card, Col, ProgressBar, Row } from "react-bootstrap";
+import { Card, Col, Modal, ProgressBar, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 
 import { CreatedDate } from "../../api/dateTime";
@@ -21,7 +21,7 @@ const UserHeader = (props: any) => {
   const { id, name, created, postCount, metaData, votingPower, downVotingPower, resourceCredits } =
     props;
   const [rcAccount, setRCAccount] = useState<RCState>();
-
+  const [showModal,setShowModal]=useState(false)
   const metaProfile = metaData.profile;
   const currTheme = useSelector((state: any) => state.global.theme);
   const themeContrastColor = currTheme === "day" ? "#535e65" : "white";
@@ -29,7 +29,8 @@ const UserHeader = (props: any) => {
   // Created Date
 
   const createdDate = CreatedDate(created);
-
+  const handleModalClose = () => setShowModal(false);
+  const handleModalShow = () => setShowModal(true);
   return (
     <>
       {metaProfile && (
@@ -194,7 +195,7 @@ const UserHeader = (props: any) => {
                   </Row>
                   <Row>
                     <Col md={3}>
-                      <p className="pt-1">{_t("user-info.resource_credits")}</p>
+                      <p className="pt-1" onClick={handleModalShow}>{_t("user-info.resource_credits")}</p>
                     </Col>
                     <Col md={9}>
                       <ProgressBar
@@ -205,6 +206,21 @@ const UserHeader = (props: any) => {
                       />
                     </Col>
                   </Row>
+                  {/* {openModal && ( */}
+                     <Modal {...props}
+                        size="lg"
+                        aria-labelledby="contained-modal-title-vcenter"
+                        centered={true}
+                        show={showModal}
+                        onHide={handleModalClose}
+                      >
+                     <Modal.Header closeButton={true}>
+                       <Modal.Title>Modal heading</Modal.Title>
+                     </Modal.Header>
+                     <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+                    
+                   </Modal>
+                {/* )} */}
                 </div>
               </Col>
             </Row>
