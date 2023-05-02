@@ -31,6 +31,10 @@
                 background-color:$white-five
             }
         }
+        .pagination-col{
+            display: flex;
+            justify-content: end;
+        }
     }
     .list-group{
         border: 1px solid $border-row;

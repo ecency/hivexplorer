@@ -22,7 +22,6 @@ import { getAccount, getOwnerHistory, getRCAccount } from "../../api/urls";
 import BackToTopButton from "../../components/Buttons/BackToTop";
 import SpinnerEffect from "../../components/loader/spinner";
 import UserHistory from "../../components/profile/userHistory";
-import { cardViewSVG, tableViewSVG } from "../../img/svg";
 import UserTransactionsCards from "../../components/profile/userTransactionCards";
 import ToggleButton from "react-toggle-button";
 
@@ -49,30 +48,7 @@ const UserPage = (props: any) => {
   const themeContrastColor = currTheme === "day" ? "#535e65" : "#ffffffde";
   const [cardView, setCardView] = useState(true);
   useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const response = await getAccount(userId);
-        setUserAccount(response);
-      } catch (error: any) {
-        console.error(error.message);
-      }
-      setLoading(false);
-    };
-    fetchData();
-  }, []);
-  useEffect(() => {
-    axios.get(owner_history_url).then((res) => {
-      setOwnerHistory(res.data);
-    });
-  }, []);
-  useEffect(() => {
-    axios.get(rc_account_url).then((res) => {
-      console.log('resource_credit',res.data)
-      setRCAccount(res.data.rc_accounts[0]);
-    });
-  }, []);
-  useEffect(() => {
+    console.log('paramter',userId)
     const fetchData = async () => {
       setLoading(true);
       try {
@@ -85,6 +61,30 @@ const UserPage = (props: any) => {
     };
     fetchData();
   }, [userId]);
+  useEffect(() => {
+    axios.get(owner_history_url).then((res) => {
+      setOwnerHistory(res.data);
+    });
+  }, [userId]);
+  useEffect(() => {
+    axios.get(rc_account_url).then((res) => {
+      console.log('resource_credit',res.data)
+      setRCAccount(res.data.rc_accounts[0]);
+    });
+  }, [userId]);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     setLoading(true);
+  //     try {
+  //       const response = await getAccount(userId);
+  //       setUserAccount(response);
+  //     } catch (error: any) {
+  //       console.error(error.message);
+  //     }
+  //     setLoading(false);
+  //   };
+  //   fetchData();
+  // }, [userId]);
   function a11yProps(index: number) {
     return {
       id: `user-tab-${index}`,

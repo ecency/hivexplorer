@@ -15,7 +15,50 @@ import { SMTAssetCalc } from "../../../api/hive";
 import parseAsset from "../../../helper/parse-asset";
 import { isInteger } from "lodash";
 
+function renderTable(data: any) {
+  return (
+    <table className="time-date-table">
+      <tbody>
+        {Object.entries(data).map(([key, value]) => (
+          <tr key={key}>
+            <td className={isInteger(+key)? "integer-td":""}>{key}</td>
+            <td>{renderData(value)}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
 
+function renderData(data: any) {
+  if (typeof data === "object" && data !== null) {
+    if (Array.isArray(data)) {
+      return (
+        <table className="time-date-table">
+          <tbody>
+            
+            {data.map((item: any, i: number) => (
+            <tr key={i}>
+              <td className="integer-td">
+                {i}
+              </td>
+              <td  >
+                {renderData(item)}
+              </td>
+            </tr>
+          ))}
+            
+          </tbody>
+        
+        </table>
+      );
+    } else {
+      return renderTable(data);
+    }
+  } else {
+    return <span>{data.toString()}</span>;
+  }
+}
 const SMTAssetArray=[
   "init_hbd_supply",
   "virtual_supply",
@@ -217,141 +260,145 @@ useEffect(() => {
                 </Button> */}
               </>
             ) : item === "operations" ? (
-              <>
-                {/* {value.map((val: any, i: number) => {
-                  const type: string = val[0];
-                  const opVal: opValType = val[1];
-                  return (
-                    <table key={i+type} className="time-date-table">
-                      <tbody>
-                        <tr>
-                          <td>{_t("trans_table.type")}</td>
-                          <td>{type}</td>
-                        </tr>
-                        {Object.keys(opVal).map((val:any,i:number)=>{
-                          return(
-                          <>
-                          {typeof(opVal[val]) !== 'object' && opVal[val]!=="" ?
-                          <tr key={i+val+type}>
-                            <td>{_t(`trans_table.${val}`)}</td>
-                            <td>
-                              {LinkAccount.includes(val)?
-                                <UserAvatar username={opVal[val]} size="small"/>
-                                : 
-                                val==='permlink' ? <Link to={`/@${opVal.author}/${opVal.permlink}`}>{opVal.permlink}</Link>
-                                :
-                                val==='comment_permlink' ? <Link to={`/@${opVal.comment_author}/${opVal.comment_permlink}`}>{opVal.comment_permlink}</Link>
-                                :
-                                val==='parent_permlink' ? <Link to={`/@${opVal.parent_author}/${opVal.parent_permlink}`}>{opVal.parent_permlink}</Link>
-                                :
-                                opVal[val]
-                              }</td>
-                          </tr>
-                          :
-                          typeof(opVal[val]) === 'object' && opVal[val].length!==0 ?
-                          val==="required_auths" || val==="required_posting_auths" ?
-                          <tr  key={i+val+type}>
-                            <td>{_t(`trans_table.${val}`)}</td>
-                            <td>
-                              <UserAvatar username={opVal[val][0]} size="small"/>
-                            </td>
-                          </tr>
-                          :
-                          val==="props" ? 
-                          <tr key={i+val+type}>
-                          <td>{_t(`trans_table.${val}`)}</td>
-                          <td>
-                              <table>
-                                <tbody>
-                                {Object.keys(opVal[val]).map((item:any,j:number)=>{
-                                  return(
-                                    <tr key={j+item}>
-                                      <td>{_t(`trans_table.${opVal[val][item][0]}`)}</td>
-                                      <td>{opVal[val][item][1]}</td>
-                                    </tr>
-                                    )
-                                  })}
-                                </tbody>
-                              </table>
-                          </td>
-                        </tr>
-                          :
-                          <tr key={i+val+type}>
-                            <td>{_t(`trans_table.${val}`)}</td>
-                            <td>
-                                <table>
-                                  <tbody>
-                                  {Object.keys(opVal[val]).map((item:any,j:number)=>{
-                                    return(
-                                      <tr key={j+item}>
-                                        <td>{_t(`trans_table.${item}`)}</td>
-                                        <td>{opVal[val][item]}</td>
-                                      </tr>
-                                      )
-                                    })}
-                                  </tbody>
-                                </table>
-                            </td>
-                          </tr>:<></>}
-                          </>
-                          )
-                        })}
-                      </tbody>
-                    </table>
-                  );
-                })} */}
-                <table className="time-date-table">
-                  <tbody>
-                  {value.map((val: any, i: number) => {
-                    console.log('val',val)
-                    return (
-                    <>
-                    {typeof(val)!=='object'?
-                     <tr key={i}>
-                     <td>{val}</td>
-                    </tr>
-                    :
-                    <tr>
-                      <td className="integer-td">{i}</td>
-                      <td>
-                        <table>
-                          <tbody>
-                            {Object.keys(val).map((key:any,j:number)=>{
-                            console.log(typeof(key))
-                            return(
-                            <tr key={val[key]+i}>
-                              <td className={isInteger(+key)? "integer-td":""}>{key}</td>
-                              <td>{typeof(val[key])!=='object'?<>{val[key]}</>:
-                              <>
-                                <table>
-                                  <tbody>
-                                    <>{Object.keys(val[key]).map((item:any,k:number)=>(
-                                      <tr key={val[key][item].toString()+i}>
-                                        <td className={isInteger(+item)? "integer-td":""}>{item}</td>
-                                        <td>{typeof(val[key][item])!=='object'? val[key][item].toString():<>{typeof(val[key][item])}</>}</td>
-                                      </tr>
-                                    ))}</>
-                                  </tbody>
-                                </table>
-                              </>
-                              }</td>
-                            </tr>
-                            )
-                          })}
-                          </tbody>
-                        </table>
-                      </td>
-                    </tr>
+              <><div>{renderData(value)}</div></>
+              // <>
+              //   <table className="time-date-table">
+              //     <tbody>
+              //     {value.map((val: any, i: number) => {
+              //       console.log('val',val)
+              //       return (
+              //       <>
+              //       {typeof(val)!=='object'?
+              //        <tr key={i}>
+              //        <td>{val}</td>
+              //       </tr>
+              //       :
+              //       <tr>
+              //         <td className="integer-td">{i}</td>
+              //         <td>
+              //           <table>
+              //             <tbody>
+              //               {Object.keys(val).map((key:any,j:number)=>{
+              //               console.log(typeof(key))
+              //               return(
+              //               <tr key={val[key]+i}>
+              //                 <td className={isInteger(+key)? "integer-td":""}>{key}</td>
+              //                 <td>{typeof(val[key])!=='object'?<>{val[key]}</>:
+              //                 <>
+              //                   <table>
+              //                     <tbody>
+              //                       <>{Object.keys(val[key]).map((item:any,k:number)=>(
+              //                         <tr key={val[key][item].toString()+i}>
+              //                           <td className={isInteger(+item)? "integer-td":""}>{item}</td>
+              //                           <td>{typeof(val[key][item])!=='object'? val[key][item].toString()
+              //                           :
+              //                           // <>{typeof(val[key][item])}</>
+              //                           <>{val[key][item].length!==0 ?
+              //                             <table>
+              //                               <tbody>
+              //                               {Object.keys(val[key][item]).map((inner:any,i:number)=>{
+              //                                 console.log('inner',val[key][item][inner])
+              //                                 return(
+              //                                   <tr>
+              //                                   <td className={isInteger(+inner)? "integer-td":""}>{inner}</td>
+              //                                  <td>{typeof(val[key][item][inner])!=='object'? val[key][item][inner].toString():
+              //                                  <>
+              //                                  <table>
+              //                                   <tbody>
+              //                                   {Object.keys(val[key][item][inner]).map((inside)=>{
+              //                                   return(
+              //                                    <tr>
+              //                                      <td className={isInteger(+inside)? "integer-td":""}>{inside}</td>
+              //                                     <td>{typeof(val[key][item][inner][inside])!=='object'? val[key][item][inner][inside].toString():
+              //                                     <>
+              //                                     <table>
+              //                                     <tbody>
+              //                                     {Object.keys(val[key][item][inner][inside]).map((nested)=>{
+              //                                     return(
+              //                                      <tr>
+              //                                        <td className={isInteger(+nested)? "integer-td":""}>{nested}</td>
+              //                                       <td>{typeof(val[key][item][inner][inside][nested])!=='object'? val[key][item][inner][inside][nested].toString():
+              //                                       <>
+              //                                     <table>
+              //                                     <tbody>
+              //                                     {Object.keys(val[key][item][inner][inside][nested]).map((firstNested)=>{
+              //                                     return(
+              //                                      <tr>
+              //                                        <td className={isInteger(+firstNested)? "integer-td":""}>{firstNested}</td>
+              //                                       <td>{typeof(val[key][item][inner][inside][nested][firstNested])!=='object'? val[key][item][inner][inside][nested][firstNested].toString():
+              //                                       <>
+              //                                           <table>
+              //                                     <tbody>
+              //                                     {Object.keys(val[key][item][inner][inside][nested][firstNested]).map((secondNested)=>{
+              //                                     return(
+              //                                      <tr>
+              //                                        <td className={isInteger(+secondNested)? "integer-td":""}>{secondNested}</td>
+              //                                       <td>{typeof(val[key][item][inner][inside][nested][firstNested][secondNested])!=='object'? val[key][item][inner][inside][nested][firstNested][secondNested].toString():
+              //                                       <></>
+              //                                       }</td>
+              //                                      </tr>
+              //                                     )
+              //                                    })}
+  
+              //                                     </tbody>
+              //                                    </table>
+              //                                       </>
+              //                                       }</td>
+              //                                      </tr>
+              //                                     )
+              //                                    })}
+  
+              //                                     </tbody>
+              //                                    </table>
+              //                                       </>
+              //                                       }</td>
+              //                                      </tr>
+              //                                     )
+              //                                    })}
+  
+              //                                     </tbody>
+              //                                    </table>
+              //                                     </>
+              //                                     }</td>
+              //                                    </tr>
+              //                                   )
+              //                                  })}
+
+              //                                   </tbody>
+              //                                  </table>
+                                   
+              //                                  </>}
+              //                                  </td>
+              //                                </tr>
+              //                                 )})}
+              //                               </tbody>
+              //                             </table>
+                                          
+              //                             :'[ ]'}</>
+              //                           }</td>
+              //                         </tr>
+              //                       ))}</>
+              //                     </tbody>
+              //                   </table>
+              //                 </>
+              //                 }</td>
+              //               </tr>
+              //               )
+              //             })}
+              //             </tbody>
+              //           </table>
+              //         </td>
+              //       </tr>
                    
-                    }
-                    </> 
+              //       }
+              //       </> 
                    
-                    )
-                  })}
-                  </tbody>
-                </table>
+              //       )
+              //     })}
+              //     </tbody>
+              //   </table>
                
-              </>
+              // </>
             ) : SMTAssetArray.includes(item) ? (
               <>{parseAsset(value).amount+' '+parseAsset(value).symbol}</>
             ) : item === "json_metadata" && label_for === "entry" ? (

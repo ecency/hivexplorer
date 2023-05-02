@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Col, Dropdown, FormControl, Row } from "react-bootstrap";
+// import { useHistory, useLocation } from 'react-router-dom';
 import {
   Paper,
   TableBody,
@@ -15,8 +16,7 @@ import { TransactionOperation } from "../operations";
 import options_operations from "../operations/operationArrays";
 import MyPagination from "../pagination";
 import { FilterDropdown } from "../filterTypes";
-
-
+import { useHistory, useLocation } from 'react-router-dom';
 
 
 type Option = {
@@ -35,8 +35,14 @@ const UserTransactionsCards = (props: any) => {
   const [selectedValues, setSelectedValues] = useState<string[]>([]);
   const [options, setOptions] = useState<Option[]>(options_operations);
   const [searchValue, setSearchValue] = useState<string>('');
+  const [pageLimit,setPageLimit]=useState(1)
+  
+  const [targetPage,setTargetPage]=useState<number>(parseInt(window.location.search.split('=')[1]))
 
-
+// console.log('search',window.location.search.split('=')[1])
+const history = useHistory();
+const location = useLocation();
+console.log(history,location)
   useEffect(() => {
 
     const fetchData = async () => {
@@ -44,6 +50,7 @@ const UserTransactionsCards = (props: any) => {
       try {
         const response = await getUserTransaction(user, transactionFrom, transactionLimit,selectedValues);
         setUserTransaction(response.reverse());
+        setPageLimit(response.reverse()[0][0]/250)
       } catch (error: any) {
         console.error(error.message);
       }
@@ -52,19 +59,23 @@ const UserTransactionsCards = (props: any) => {
     fetchData();
   }, []);
   useEffect(() => {
-   
+   console.log('target page',targetPage)
     const fetchData = async () => {
       setLoading(true);
       try {
         const response = await getUserTransaction(user, transactionFrom, transactionLimit,selectedValues);
+       
         setUserTransaction(response.reverse());
+        setPage(targetPage)
+        console.log('length',response.length,userTransaction?.length)
+        setPageLimit(response.reverse()[0][0]/250)
       } catch (error: any) {
         console.error(error.message);
       }
       setLoading(false);
     };
     fetchData();
-  }, [selectedValues]);
+  }, [targetPage,selectedValues]);
   const [inputText, setInputText] = useState("");
   let inputHandler = (e: any) => {
     const lowerCase = e.target.value.toLowerCase();
@@ -140,11 +151,15 @@ const UserTransactionsCards = (props: any) => {
 
              />
             </Col>
-            <Col md={6}>
-              <MyPagination dataLength={250} pageSize={12} maxItems={4} page={page} onPageChange={(page) => {
-                            setPage(page)
-                        }}/>
-            </Col>
+            {userTransaction && pageLimit>250 && 
+            <Col md={6} className="pagination-col">
+              <MyPagination dataLength={userTransaction[0][0]} pageSize={250} maxItems={4} page={page} onPageChange={(page) => {
+                console.log(page)
+                    setPage(page)
+                    setTargetPage(page)
+                    history.push(`?page=${page}`);
+                }}/>
+            </Col>}
      
           </Row>
         
