@@ -636,7 +636,8 @@
     "title": "RC API",
     "description": "Allows querying of various Resource Credit metrics.",
     "find_rc_accounts_description": "Returns the available resource credits of accounts.",
-    "get_witnesses_by_vote_description": "Returns accounts, queried by name. "
+    "get_witnesses_by_vote_description": "Returns accounts, queried by name.",
+    "get_rc_stats": "Get RC stats"
   },
   "bridge": {
     "title": "Bridge API",
