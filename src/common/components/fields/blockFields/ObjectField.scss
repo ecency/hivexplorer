@@ -31,16 +31,17 @@
     border-collapse: collapse;
     }
     tr td:first-child{
-        min-width: 200px;
+        min-width: 100px;
     }
     td{
         padding: 5px;
         word-break: break-word;
         vertical-align: initial !important;
         &.integer-td{
-            width: 25px !important;
+          
             min-width: 25px !important;
             text-align: center !important;
+            font-size: 12px;
             
         }
     }
@@ -56,7 +57,7 @@
         width: 100%;
     }
     & th, td{
-        border: 1px solid $border-row;
+        border: 1px solid $grey-line;
     border-collapse: collapse;
     }
     tr td:first-child{

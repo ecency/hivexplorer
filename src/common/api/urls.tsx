@@ -11,6 +11,7 @@ export const getAccount = async (user: string) => {
 
 // Get RC Account
 export const getRCAccount = (user: string) => {
+  console.log(`${ConfigItems.baseUrl}/api/find_rc_accounts?accounts[]=${user}`)
   return `${ConfigItems.baseUrl}/api/find_rc_accounts?accounts[]=${user}`;
 };
 
@@ -59,6 +60,7 @@ export const getTransactions = async (block_num: number, isVirtual:boolean) => {
 // Get Single Transaction
 export const getSingleTransaction = async (transaction_id: number) => {
   const url_single_transaction = `${ConfigItems.baseUrl}/api/get_transaction?trx_id=${transaction_id}`;
+  console.log(url_single_transaction)
   const r = await axios.get(url_single_transaction);
   return r.data;
 };
@@ -122,4 +124,10 @@ export const getEntryVotes = async (user: string, permlink: string) => {
 
 export const getOwnerHistory = (user: string) => {
   return `${ConfigItems.baseUrl}/api/get_owner_history?account=${user}`;
+};
+
+export const  getRcOperationStats= async () => {
+  const rc_stats_url = `${ConfigItems.baseUrl}/api/get_rc_stats`;
+  const r = await axios.get(rc_stats_url);
+  return r.data;
 };

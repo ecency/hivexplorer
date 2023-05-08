@@ -30,7 +30,7 @@ function renderTable(data: any) {
   );
 }
 
-function renderData(data: any) {
+export function renderData(data: any) {
   if (typeof data === "object" && data !== null) {
     if (Array.isArray(data)) {
       return (
@@ -244,161 +244,10 @@ useEffect(() => {
             )
             : item === "witness_votes" ? (
               <>
-                {/* <Button
-                  className={themeBtn}
-                  onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>
-                    setExpandBtn(!expandBtn)
-                  }
-                  disabled={value.length === 0 ? true : false}
-                >
-                  {value.length}{" "}
-                  {expandBtn ? (
-                    <span>{showLessIcon(themeContrastColor)} </span>
-                  ) : (
-                    <span>{showMoreIcon(themeContrastColor)}</span>
-                  )}
-                </Button> */}
+              
               </>
             ) : item === "operations" ? (
               <><div>{renderData(value)}</div></>
-              // <>
-              //   <table className="time-date-table">
-              //     <tbody>
-              //     {value.map((val: any, i: number) => {
-              //       console.log('val',val)
-              //       return (
-              //       <>
-              //       {typeof(val)!=='object'?
-              //        <tr key={i}>
-              //        <td>{val}</td>
-              //       </tr>
-              //       :
-              //       <tr>
-              //         <td className="integer-td">{i}</td>
-              //         <td>
-              //           <table>
-              //             <tbody>
-              //               {Object.keys(val).map((key:any,j:number)=>{
-              //               console.log(typeof(key))
-              //               return(
-              //               <tr key={val[key]+i}>
-              //                 <td className={isInteger(+key)? "integer-td":""}>{key}</td>
-              //                 <td>{typeof(val[key])!=='object'?<>{val[key]}</>:
-              //                 <>
-              //                   <table>
-              //                     <tbody>
-              //                       <>{Object.keys(val[key]).map((item:any,k:number)=>(
-              //                         <tr key={val[key][item].toString()+i}>
-              //                           <td className={isInteger(+item)? "integer-td":""}>{item}</td>
-              //                           <td>{typeof(val[key][item])!=='object'? val[key][item].toString()
-              //                           :
-              //                           // <>{typeof(val[key][item])}</>
-              //                           <>{val[key][item].length!==0 ?
-              //                             <table>
-              //                               <tbody>
-              //                               {Object.keys(val[key][item]).map((inner:any,i:number)=>{
-              //                                 console.log('inner',val[key][item][inner])
-              //                                 return(
-              //                                   <tr>
-              //                                   <td className={isInteger(+inner)? "integer-td":""}>{inner}</td>
-              //                                  <td>{typeof(val[key][item][inner])!=='object'? val[key][item][inner].toString():
-              //                                  <>
-              //                                  <table>
-              //                                   <tbody>
-              //                                   {Object.keys(val[key][item][inner]).map((inside)=>{
-              //                                   return(
-              //                                    <tr>
-              //                                      <td className={isInteger(+inside)? "integer-td":""}>{inside}</td>
-              //                                     <td>{typeof(val[key][item][inner][inside])!=='object'? val[key][item][inner][inside].toString():
-              //                                     <>
-              //                                     <table>
-              //                                     <tbody>
-              //                                     {Object.keys(val[key][item][inner][inside]).map((nested)=>{
-              //                                     return(
-              //                                      <tr>
-              //                                        <td className={isInteger(+nested)? "integer-td":""}>{nested}</td>
-              //                                       <td>{typeof(val[key][item][inner][inside][nested])!=='object'? val[key][item][inner][inside][nested].toString():
-              //                                       <>
-              //                                     <table>
-              //                                     <tbody>
-              //                                     {Object.keys(val[key][item][inner][inside][nested]).map((firstNested)=>{
-              //                                     return(
-              //                                      <tr>
-              //                                        <td className={isInteger(+firstNested)? "integer-td":""}>{firstNested}</td>
-              //                                       <td>{typeof(val[key][item][inner][inside][nested][firstNested])!=='object'? val[key][item][inner][inside][nested][firstNested].toString():
-              //                                       <>
-              //                                           <table>
-              //                                     <tbody>
-              //                                     {Object.keys(val[key][item][inner][inside][nested][firstNested]).map((secondNested)=>{
-              //                                     return(
-              //                                      <tr>
-              //                                        <td className={isInteger(+secondNested)? "integer-td":""}>{secondNested}</td>
-              //                                       <td>{typeof(val[key][item][inner][inside][nested][firstNested][secondNested])!=='object'? val[key][item][inner][inside][nested][firstNested][secondNested].toString():
-              //                                       <></>
-              //                                       }</td>
-              //                                      </tr>
-              //                                     )
-              //                                    })}
-  
-              //                                     </tbody>
-              //                                    </table>
-              //                                       </>
-              //                                       }</td>
-              //                                      </tr>
-              //                                     )
-              //                                    })}
-  
-              //                                     </tbody>
-              //                                    </table>
-              //                                       </>
-              //                                       }</td>
-              //                                      </tr>
-              //                                     )
-              //                                    })}
-  
-              //                                     </tbody>
-              //                                    </table>
-              //                                     </>
-              //                                     }</td>
-              //                                    </tr>
-              //                                   )
-              //                                  })}
-
-              //                                   </tbody>
-              //                                  </table>
-                                   
-              //                                  </>}
-              //                                  </td>
-              //                                </tr>
-              //                                 )})}
-              //                               </tbody>
-              //                             </table>
-                                          
-              //                             :'[ ]'}</>
-              //                           }</td>
-              //                         </tr>
-              //                       ))}</>
-              //                     </tbody>
-              //                   </table>
-              //                 </>
-              //                 }</td>
-              //               </tr>
-              //               )
-              //             })}
-              //             </tbody>
-              //           </table>
-              //         </td>
-              //       </tr>
-                   
-              //       }
-              //       </> 
-                   
-              //       )
-              //     })}
-              //     </tbody>
-              //   </table>
-               
-              // </>
             ) : SMTAssetArray.includes(item) ? (
               <>{parseAsset(value).amount+' '+parseAsset(value).symbol}</>
             ) : item === "json_metadata" && label_for === "entry" ? (
@@ -406,9 +255,9 @@ useEffect(() => {
                 <JsonMetadata data={value} />
               </>
             ) : item === "signatures" ? (
-              <>{value[0]}</>
+              <>{renderData(value)}</>
             ) : (
-              <>{value.length}</>
+              <>{value.length===0? '[ ]':value.length}</>
             )}
           </Col>
         </Row>

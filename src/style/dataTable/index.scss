@@ -1,4 +1,19 @@
 @import'../colors.scss';
+.text-action{
+    color: #357ce6;
+    text-decoration: underline;
+    background-color: transparent;
+    cursor: pointer;
+    &:hover{
+        color: #1757b8;
+       
+    }
+    
+}
+.trans-op-box{
+    display: flex;
+    justify-content: center;
+}
 .data-table-hive{
     .rdt_Table{
         border: 1px solid #c5c5c5;

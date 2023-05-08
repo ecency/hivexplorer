@@ -27,6 +27,9 @@ import { getUserTransaction } from "../../api/urls";
 import { Col, Row } from "react-bootstrap";
 import { FilterDropdown } from "../filterTypes";
 import options_operations from "../operations/operationArrays";
+import { useHistory, useLocation } from 'react-router-dom';
+import MyPagination from "../pagination";
+import { renderData } from "../fields/blockFields/ObjectField";
 
 interface Column {
   label: string;
@@ -49,7 +52,7 @@ type Option = {
 interface UserTransactionTypeList extends Array<UserTransactionType> {}
 const UserTransactionsTable = (props: any) => {
   const { user } = props;
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const [rowsPerPage, setRowsPerPage] = useState(25);
   const [transactionFrom, setTransactionForm] = useState(-1);
@@ -62,35 +65,53 @@ const UserTransactionsTable = (props: any) => {
   const [selectedValues, setSelectedValues] = useState<string[]>([]);
   const [options, setOptions] = useState<Option[]>(options_operations);
   const [searchValue, setSearchValue] = useState<string>('');
+  const [pageLimit,setPageLimit]=useState(1)
   const themeContrastColor = currTheme === "day" ? "#535e65" : "#ffffffde ";
+  const [targetPage,setTargetPage]=useState<number>(parseInt(window.location.search.split('=')[1]))
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const response = await getUserTransaction(user, transactionFrom, transactionLimit,selectedValues);
+  const history = useHistory();
+const location = useLocation();
+
+useEffect(() => {
+
+  const fetchData = async () => {
+    setLoading(true);
+    try {
+      const response = await getUserTransaction(user, transactionFrom, transactionLimit,selectedValues);
+      setUserTransaction(response.reverse());
+      setPageLimit(response.reverse()[0][0])
+    } catch (error: any) {
+      console.error(error.message);
+    }
+    setLoading(false);
+  };
+  fetchData();
+}, [targetPage<1]);
+useEffect(() => {
+ console.log('target page',targetPage)
+ setPage(targetPage)
+  const fetchData = async () => {
+    setLoading(true);
+    try {
+      const response = await getUserTransaction(user, transactionFrom, transactionLimit,selectedValues);
+      
+      const countStart=Math.ceil(response.reverse()[0][0])
+      console.log('count start',`${countStart}-(${targetPage}*250)`,response.reverse()[0][0]/250)
+      const respPage = await getUserTransaction(user, countStart-(targetPage*250), transactionLimit,selectedValues);
+      if(targetPage===1){
         setUserTransaction(response.reverse());
-      } catch (error: any) {
-        console.error(error.message);
       }
-      setLoading(false);
-    };
-    fetchData();
-  }, []);
-  useEffect(() => {
-   
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const response = await getUserTransaction(user, transactionFrom, transactionLimit,selectedValues);
-        setUserTransaction(response.reverse());
-      } catch (error: any) {
-        console.error(error.message);
+      else{
+        setUserTransaction(respPage.reverse());
       }
-      setLoading(false);
-    };
-    fetchData();
-  }, [selectedValues]);
+      setPageLimit(response.reverse()[0][0])
+    } catch (error: any) {
+      console.error(error.message);
+    }
+    setLoading(false);
+  };
+  fetchData();
+}, [targetPage,selectedValues]);
   const [inputText, setInputText] = useState("");
   let inputHandler = (e: any) => {
     const lowerCase = e.target.value.toLowerCase();
@@ -199,8 +220,9 @@ const UserTransactionsTable = (props: any) => {
         <TableRow>
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
             <Collapse in={openRow} timeout="auto" unmountOnExit={true}>
-              <Box margin={1}>
-                <TransactionOperationTable opTrans={...opTrans} />
+              <Box margin={1} className="trans-op-box">
+                {/* <TransactionOperationTable opTrans={...opTrans} /> */}
+                <>{renderData({...opTrans})}</>
               </Box>
             </Collapse>
           </TableCell>
@@ -219,7 +241,7 @@ const UserTransactionsTable = (props: any) => {
               : "transaction-table-night px-2 pt-4"
           }
         >
-          <Paper
+          <div
             className={
               currTheme === "day"
                 ? "paper-day text-dark table-paper"
@@ -240,8 +262,9 @@ const UserTransactionsTable = (props: any) => {
           
             </Col> */}
           </Row>
+
           <Row>
-            <Col lg={6}>
+            <Col lg={6} className="select_dropdown">
             <FilterDropdown
               handleSelect={handleSelect}
               selectedValues={selectedValues}
@@ -252,10 +275,19 @@ const UserTransactionsTable = (props: any) => {
 
              />
             </Col>
-            {/* <Col lg={6}>
-          
-            </Col> */}
+            {userTransaction && 
+            <Col md={6} className="pagination-col">
+              <MyPagination dataLength={pageLimit} pageSize={250} maxItems={4} page={page} onPageChange={(page) => {
+                console.log(page)
+                    setPage(page)
+                    setTargetPage(page)
+                    history.push(`?page=${page}`);
+                }}/>
+            </Col>}
+     
           </Row>
+          <br />
+
             <Table stickyHeader={true} aria-label="sticky table">
               <TableHead className="card-header">
                 <TableRow className="card-header">
@@ -319,7 +351,7 @@ const UserTransactionsTable = (props: any) => {
                     })}
               </TableBody>
             </Table>
-          </Paper>
+          </div>
 
         </div>
       )}

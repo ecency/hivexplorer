@@ -70,7 +70,7 @@ const TransactionsCards = (props: any) => {
   return (
     <>
     
-        <Paper
+        <div
           className={
             currTheme === "day" ? "paper-day text-dark px-2" : "paper-night text-white px-2"
           }
@@ -107,7 +107,7 @@ const TransactionsCards = (props: any) => {
           </TableContainer>
        
           
-        </Paper>
+        </div>
    
     </>
   );

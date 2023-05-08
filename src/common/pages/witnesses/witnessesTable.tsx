@@ -223,7 +223,7 @@ const WitnessesTables = (props: any) => {
   };
   return (
     <>
-      <Paper
+      <div
         id="witnesses-paper"
         className={currTheme === "day" ? "paper-day text-dark px-2" : "paper-night text-white px-2"}
       >
@@ -287,7 +287,7 @@ const WitnessesTables = (props: any) => {
             onRowsPerPageChange={handleChangeRowsPerPage}
           />
         )}
-      </Paper>
+      </div>
     </>
   );
 };

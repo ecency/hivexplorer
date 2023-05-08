@@ -42,7 +42,7 @@ const UserTransactionsCards = (props: any) => {
 // console.log('search',window.location.search.split('=')[1])
 const history = useHistory();
 const location = useLocation();
-console.log(history,location)
+
   useEffect(() => {
 
     const fetchData = async () => {
@@ -50,25 +50,32 @@ console.log(history,location)
       try {
         const response = await getUserTransaction(user, transactionFrom, transactionLimit,selectedValues);
         setUserTransaction(response.reverse());
-        setPageLimit(response.reverse()[0][0]/250)
+        setPageLimit(response.reverse()[0][0])
       } catch (error: any) {
         console.error(error.message);
       }
       setLoading(false);
     };
     fetchData();
-  }, []);
+  }, [targetPage<1]);
   useEffect(() => {
    console.log('target page',targetPage)
+   setPage(targetPage)
     const fetchData = async () => {
       setLoading(true);
       try {
         const response = await getUserTransaction(user, transactionFrom, transactionLimit,selectedValues);
-       
-        setUserTransaction(response.reverse());
-        setPage(targetPage)
-        console.log('length',response.length,userTransaction?.length)
-        setPageLimit(response.reverse()[0][0]/250)
+        
+        const countStart=Math.ceil(response.reverse()[0][0])
+        console.log('count start',`${countStart}-(${targetPage}*250)`,response.reverse()[0][0]/250)
+        const respPage = await getUserTransaction(user, countStart-(targetPage*250), transactionLimit,selectedValues);
+        if(targetPage===1 || Number.isNaN(targetPage)){
+          setUserTransaction(response.reverse());
+        }
+        else{
+          setUserTransaction(respPage.reverse());
+        }
+        setPageLimit(response.reverse()[0][0])
       } catch (error: any) {
         console.error(error.message);
       }
@@ -151,9 +158,9 @@ console.log(history,location)
 
              />
             </Col>
-            {userTransaction && pageLimit>250 && 
+            {userTransaction && 
             <Col md={6} className="pagination-col">
-              <MyPagination dataLength={userTransaction[0][0]} pageSize={250} maxItems={4} page={page} onPageChange={(page) => {
+              <MyPagination dataLength={pageLimit} pageSize={250} maxItems={4} page={page} onPageChange={(page) => {
                 console.log(page)
                     setPage(page)
                     setTargetPage(page)

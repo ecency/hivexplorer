@@ -24,6 +24,7 @@ import { _t } from "../../i18n";
 import { AscendingIcon, DescendingIcon } from "../../img/svg";
 import TransactionOperationTable from "../profile/userOpTable";
 import { TimestampField } from "../../components/fields/blockFields/DateTimeTable";
+import { renderData } from "../../components/fields/blockFields/ObjectField";
 
 interface Column {
   label: string;
@@ -173,9 +174,10 @@ const TransactionsTables = (props: any) => {
         <TableRow>
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
             <Collapse in={open} timeout="auto" unmountOnExit={true}>
-              <Box margin={1}>
+              <Box margin={1} className="trans-op-box">
                 {/* <TransactionOpTable opTrans={transaction.op} /> */}
-                <TransactionOperationTable opTrans={...transaction.op} />
+                {/* <TransactionOperationTable opTrans={...transaction.op} /> */}
+                <>{renderData({...transaction.op})}</>
               </Box>
             </Collapse>
           </TableCell>
@@ -185,7 +187,7 @@ const TransactionsTables = (props: any) => {
   };
   return (
     <>
-        <Paper
+        <div
           className={
             currTheme === "day" ? "paper-day text-dark px-2" : "paper-night text-white px-2"
           }
@@ -202,17 +204,7 @@ const TransactionsTables = (props: any) => {
                 />
                 </Col>
                 <Col md={6}>
-                {filteredTransactionsData && (
-                    <TablePagination
-                    rowsPerPageOptions={[10, 25, 100]}
-                    component="div"
-                    count={filteredTransactionsData.length}
-                    rowsPerPage={rowsPerPage}
-                    page={page}
-                    onPageChange={handleChangePage}
-                    onRowsPerPageChange={handleChangeRowsPerPage}
-                    />
-                )}
+           
               </Col>
           </Row>
    
@@ -274,25 +266,14 @@ const TransactionsTables = (props: any) => {
               <TableBody>
                 {filteredTransactionsData &&
                   filteredTransactionsData
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((transaction: any, i: number) => {
                       return <TransRow key={i} transaction={transaction} />;
                     })}
               </TableBody>
             </Table>
           </TableContainer>
-          {filteredTransactionsData && (
-            <TablePagination
-              rowsPerPageOptions={[10, 25, 100]}
-              component="div"
-              count={filteredTransactionsData.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              onPageChange={handleChangePage}
-              onRowsPerPageChange={handleChangeRowsPerPage}
-            />
-          )}
-        </Paper>
+     
+        </div>
       
     </>
   );

@@ -7,10 +7,12 @@ import { transAvatars } from "./operationArrays";
 import parseAsset from "../../helper/parse-asset";
 import { ObjectFieldArray } from "../../pages/fields/common_fields";
 import { _t } from "../../i18n";
+import { renderData } from "../fields/blockFields/ObjectField";
 
 
 export const OperationCardData=(props:any)=>{
     const {value,text,time,trx_id,type,isTable}=props
+    const [showTable,setShowTable]=useState(isTable)
     const dateRelative = dateToRelative(time);
     const dateFormatted = dateToFormatted(time);
     const [renderedStrings, setRenderedStrings] = useState([]);
@@ -40,14 +42,14 @@ export const OperationCardData=(props:any)=>{
                                             <img
                                                 className="avatar-img"
                                                 onError={(e: any) => {
-                                                    e.target.src = { DefaultImage };
+                                                    e.target.src = DefaultImage
                                                 }}
-                                                src={typeof (value[val] === 'string') ?`https://images.ecency.com/u/${value[val]}/avatar`:`https://images.ecency.com/u/${value[val][0]}/avatar`}
+                                                src={typeof (value[val] === 'string') && index===0 ?`https://images.ecency.com/u/${value[val]}/avatar`:`https://images.ecency.com/u/${value[val][0]}/avatar`}
                                                 alt=""
                                             />
 
                                             <span>
-                                                <Link to={typeof (value[val] === 'string')?`/@${value[val]}`:`/@${value[val][0]}`}>{typeof (value[val] === 'string')? value[val]:value[val][0]}&nbsp;</Link>
+                                                <Link to={typeof (value[val] === 'string') && index===0?`/@${value[val]}`:`/@${value[val][0]}`}>{typeof (value[val] === 'string') && index===0? value[val]:value[val][0]}&nbsp;</Link>
                                                 <span dangerouslySetInnerHTML={{ __html: type==='comment_operation' && value.hasOwnProperty('parent_permlink')? 'replied to' : type==='comment_operation' && value.hasOwnProperty('comment_permlink')? 'comments to':text}} />
                                                 
                                                 {type==='vote_operation' && <span >
@@ -81,6 +83,12 @@ export const OperationCardData=(props:any)=>{
                                                     :&nbsp;{parseAsset(value.vesting_payout).amount+' '+parseAsset(value.vesting_payout).symbol} {_t('common.for')} 
                                                     <Link to={`/@${value.author}/${value.permlink}`}>&nbsp;@{value.author}/{value.permlink}</Link>
                                                 </span>}
+                                                {type==='fill_vesting_withdraw_operation' && <span>
+                                                    {_t('common.withdraw')}&nbsp;{parseAsset(value.withdrawn).amount+' '+parseAsset(value.withdrawn).symbol} {_t('common.as')} 
+                                                    &nbsp;{parseAsset(value.deposited).amount+' '+parseAsset(value.deposited).symbol} {_t('common.to')} 
+                                                    <Link to={`/@${value.to_account}`}>&nbsp;{value.to_account}</Link>
+                                                    &nbsp;(<span className="text-action" onClick={()=>setShowTable(!showTable)}>show details</span>)
+                                                </span>}
                                                 {type==='feed_publish_operation' && <span>
                                                     &nbsp;{parseAsset(value.exchange_rate.base).amount+' '+parseAsset(value.exchange_rate.base).symbol}
                                                 </span>}
@@ -100,6 +108,7 @@ export const OperationCardData=(props:any)=>{
                                                 {type==='fill_order_operation' && <span >
                                                     &nbsp;{parseAsset(value.current_pays).amount+' '+parseAsset(value.current_pays).symbol} {_t('common.for')} {parseAsset(value.open_pays).amount+' '+parseAsset(value.open_pays).symbol}  {_t('common.from')}&nbsp;<Link to={`/@${value.open_owner}`}>{value.open_owner}</Link>
                                                 </span>}
+                                           
                                                 <span className="time-span">
                                                     &nbsp;(<span className="date" title={dateFormatted}>{dateRelative}</span>)
                                                 </span>
@@ -120,7 +129,7 @@ export const OperationCardData=(props:any)=>{
               
 
             </div>
-            {isTable && <table  className="transaction-operation-table">
+            {showTable && <table  className="transaction-operation-table">
                 <tbody>
                     {Object.keys(value).map((val: any, index: number) => {
                         return (
@@ -131,44 +140,14 @@ export const OperationCardData=(props:any)=>{
                                     <td>{parseAsset(value[val]).amount+' '+parseAsset(value[val]).symbol}</td>
                                 </tr>
                                 :
-                                val==="props" ? 
+                                typeof(value[val]) ==='object' && !ObjectFieldArray.includes(val) ? 
                                 <tr key={index}>
-                                <td>{_t(`trans_table.${val}`)}</td>
+                               
                                 <td>
-                                    <table style={{width:'100%'}}>
-                                        <tbody>
-                                        {Object.keys(value[val]).map((item:any,innerKey:number)=>{
-                                        return(
-                                            <tr key={innerKey+item+value[val][item]}>
-                                             <td style={isInteger(+innerKey)?{width:'40px',minWidth:'40px'}:{}}>{isInteger(+innerKey)?<>{innerKey}</>:<>{_t(`trans_table.${innerKey}`)}</>}</td>
-                                            <td>{typeof(value[val][item])==='object'?
-                                                    <>
-                                                        <table style={{width:'100%'}}>
-                                                            <tbody>
-                                                                {value[val][item].map((key:any,i:number)=>{
-                                                                    return(
-                                                                        <tr key={i+value[val][item][key]}>
-                                                                            <td>
-                                                                            <td style={isInteger(+i)?{width:'40px',minWidth:'40px'}:{}}>{isInteger(+i)?<>{i}</>:<>{_t(`trans_table.${i}`)}</>}</td>
-                                                                            <td style={{width:'100%'}}>{value[val][item][i]}</td>
-                                                                            </td>
-                                                                        </tr>
-                                                                    )
-                                                                })}
-                                                            </tbody>
-                                                        </table>
-                                                    </>
-                                                    :
-                                                    <>
-                                                    {value[val][item]}
-                                                    </>
-                                                }
-                                                </td>
-                                            </tr>
-                                            )
-                                        })}
-                                        </tbody>
-                                    </table>
+                                   {val}
+                                </td>
+                                <td>
+                                {renderData(value[val])}
                                 </td>
                                 </tr>
                                 :

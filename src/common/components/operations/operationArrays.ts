@@ -14,7 +14,9 @@ export const transAvatars = [
     'creator',
     'current_owner',
     'benefactor',
-    'delegator'
+    'delegator',
+    'from_account',
+    'worker_account'
 ]
 export const json_operation_ids = [
     'dcrops',
@@ -102,6 +104,7 @@ export const operation_types= [
     "transfer_operation",
     "producer_reward_operation",
     "fill_order_operation",
+    "fill_vesting_withdraw_operation",
     "custom_json_operation",
     "effective_comment_vote_operation",
     "producer_reward_operation",
@@ -111,7 +114,8 @@ export const operation_types= [
     'comment_benefactor_reward_operation',
     'account_created_operation',
     'account_update_operation',
-    'account_update2_operation'
+    'account_update2_operation',
+    'pow2_operation'
 ]
 operation_types.sort()
 const options_operations =new Array(); // empty option array to be populated dynamically

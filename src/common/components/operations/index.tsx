@@ -176,6 +176,7 @@ export const TransactionOperation = (props: any) => {
                                         type={item.type}
                                     />
                                 }
+                               
                                    {item.type === 'comment_benefactor_reward_operation'  &&
                                     <OperationCardData
                                         value={item.value}
@@ -192,6 +193,16 @@ export const TransactionOperation = (props: any) => {
                                         time={time}
                                         trx_id={trans_no}
                                         type={item.type}
+                                    />
+                                }
+                                  {item.type === 'fill_vesting_withdraw_operation'  &&
+                                    <OperationCardData
+                                        value={item.value}
+                                        text={''}
+                                        time={time}
+                                        trx_id={trans_no}
+                                        type={item.type}
+                                        
                                     />
                                 }
                                 {item.type === 'witness_update_operation'  &&
@@ -288,6 +299,54 @@ export const TransactionOperation = (props: any) => {
                                             isTable={true}
                                         />
                                     }
+                                {item.type === 'pow2_operation'  &&
+                                   <>
+                                   <div className="trans_card_header">
+                                    <div className="trans-op-basic">
+                                        <span className="trans-owner-date">
+                                        {window.location.pathname.includes('/tx/')?
+                                        <>
+                                           <img
+                                            className="avatar-img"
+                                            onError={(e: any) => {
+                                                e.target.src = { DefaultImage };
+                                            }}
+                                            src={`https://images.ecency.com/u/${item.value.work[1].input.worker_account}/avatar`}
+                                            alt=""
+                                        />
+                                        <span>
+                                        <Link to={`/@$${item.value.work[1].input.worker_account}`}>
+                                            {item.value.work[1].input.worker_account}
+                                        </Link>
+                                        </span>
+                                        </>
+                                        :
+                                        <>
+                                           <img
+                                            className="avatar-img"
+                                            onError={(e: any) => {
+                                                e.target.src = { DefaultImage };
+                                            }}
+                                            src={`https://images.ecency.com/u/${item.value.work.value.input.worker_account}/avatar`}
+                                            alt=""
+                                        />
+                                        <span>
+                                        <Link to={`/@${item.value.work.value.input.worker_account}`}>
+                                            {item.value.work.value.input.worker_account}
+                                        </Link>
+                                        </span>
+                                        </>
+                                        }
+                                        <span>&nbsp;found a pow</span>
+                                        <span className="time-span">
+                                            &nbsp;(<span className="date" title={dateFormatted}>{dateRelative}</span>)
+                                        </span>
+                                     
+                                        </span>
+                                    </div>
+                                   </div>
+                                   </>
+                                }
                                 {item.type === 'transfer_operation' &&
                                     <>
                                         <div className="trans_card_header">

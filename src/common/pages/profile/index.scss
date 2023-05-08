@@ -17,6 +17,11 @@
                 padding: 0.5rem;
                 background-color:$white-five
             }
+           
+        }
+        .pagination-col{
+            display: flex;
+            justify-content: end;
         }
     }
     .card-paper{
