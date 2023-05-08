@@ -4623,6 +4623,241 @@ export const methods = [
   },
   {
     api: "rc_api",
+    method: "get_rc_stats",
+    parameter: `none`,
+    description:_t("rc_api.get_rc_stats"),
+    url:`${ConfigItems.baseUrl}/api/get_rc_stats`,
+    response: `{
+      "rc_stats": {
+        "block": 74649600,
+        "regen": "2059605691947",
+        "budget": [
+          43403,
+          797,
+          72338,
+          43546196,
+          40000000
+        ],
+        "pool": [
+          "17196348946",
+          10422577,
+          1963110198,
+          "23833739365970",
+          "58750912815"
+        ],
+        "share": [
+          5322,
+          10000,
+          322,
+          1963,
+          2391
+        ],
+        "vote": 113563154,
+        "comment": 1260730911,
+        "transfer": 176746255,
+        "ops": {
+          "vote_operation": {
+            "count": 303631,
+            "avg_cost": 114915279
+          },
+          "comment_operation": {
+            "count": 20907,
+            "avg_cost": 1239215483
+          },
+          "transfer_operation": {
+            "count": 14495,
+            "avg_cost": 175394760
+          },
+          "transfer_to_vesting_operation": {
+            "count": 489,
+            "avg_cost": 117231517
+          },
+          "withdraw_vesting_operation": {
+            "count": 102,
+            "avg_cost": 132967227
+          },
+          "limit_order_create_operation": {
+            "count": 3105,
+            "avg_cost": 140598792
+          },
+          "limit_order_cancel_operation": {
+            "count": 778,
+            "avg_cost": 78815706
+          },
+          "feed_publish_operation": {
+            "count": 1957,
+            "avg_cost": 94452805
+          },
+          "convert_operation": {
+            "count": 189,
+            "avg_cost": 94730571
+          },
+          "account_create_operation": {
+            "count": 37,
+            "avg_cost": "7750933220"
+          },
+          "account_update_operation": {
+            "count": 275,
+            "avg_cost": 1082248208
+          },
+          "witness_update_operation": {
+            "count": 2,
+            "avg_cost": 161383552
+          },
+          "account_witness_vote_operation": {
+            "count": 139,
+            "avg_cost": 191072687
+          },
+          "account_witness_proxy_operation": {
+            "count": 18,
+            "avg_cost": 95008959
+          },
+          "delete_comment_operation": {
+            "count": 61,
+            "avg_cost": 96921663
+          },
+          "custom_json_operation": {
+            "count": 1143880,
+            "avg_cost": 189389329
+          },
+          "set_withdraw_vesting_route_operation": {
+            "count": 4,
+            "avg_cost": 319711848
+          },
+          "claim_account_operation": {
+            "count": 1740,
+            "avg_cost": "12909000261767"
+          },
+          "create_claimed_account_operation": {
+            "count": 93,
+            "avg_cost": "7821629104"
+          },
+          "transfer_to_savings_operation": {
+            "count": 487,
+            "avg_cost": 93344097
+          },
+          "transfer_from_savings_operation": {
+            "count": 37,
+            "avg_cost": 100506891
+          },
+          "cancel_transfer_from_savings_operation": {
+            "count": 1,
+            "avg_cost": 76385767
+          },
+          "claim_reward_balance_operation": {
+            "count": 33680,
+            "avg_cost": 110316264
+          },
+          "delegate_vesting_shares_operation": {
+            "count": 345,
+            "avg_cost": 322575115
+          },
+          "witness_set_properties_operation": {
+            "count": 783,
+            "avg_cost": 131746396
+          },
+          "account_update2_operation": {
+            "count": 445,
+            "avg_cost": 282057431
+          },
+          "create_proposal_operation": {
+            "count": 1,
+            "avg_cost": 462963338
+          },
+          "update_proposal_votes_operation": {
+            "count": 271,
+            "avg_cost": 194887009
+          },
+          "collateralized_convert_operation": {
+            "count": 21,
+            "avg_cost": 94235376
+          },
+          "multiop": {
+            "count": 27136,
+            "avg_cost": "159935519224"
+          }
+        },
+        "payers": [
+          {
+            "rank": 0,
+            "count": 239684,
+            "lt5": 774,
+            "lt10": 1446,
+            "lt20": 6314,
+            "cant_afford": {
+              "vote": 424,
+              "comment": 14024,
+              "transfer": 567
+            }
+          },
+          {
+            "rank": 1,
+            "count": 202208,
+            "lt5": 1833,
+            "lt10": 2662,
+            "lt20": 3898,
+            "cant_afford": {
+              "vote": 604,
+              "comment": 1695,
+              "transfer": 816
+            }
+          },
+          {
+            "rank": 2,
+            "count": 286547,
+            "lt5": 1901,
+            "lt10": 2017,
+            "lt20": 2523,
+            "cant_afford": {
+              "vote": 369,
+              "comment": 859,
+              "transfer": 541
+            }
+          },
+          {
+            "rank": 3,
+            "count": 523404,
+            "lt5": 152313,
+            "lt10": 155195,
+            "lt20": 155572,
+            "cant_afford": {
+              "vote": 1074,
+              "comment": 1318,
+              "transfer": 1199
+            }
+          },
+          {
+            "rank": 4,
+            "count": 273824,
+            "lt5": 52,
+            "lt10": 246,
+            "lt20": 1331
+          },
+          {
+            "rank": 5,
+            "count": 19925,
+            "lt5": 75,
+            "lt10": 248,
+            "lt20": 401
+          },
+          {
+            "rank": 6,
+            "count": 8394,
+            "lt5": 534,
+            "lt10": 534,
+            "lt20": 618
+          },
+          {
+            "rank": 7,
+            "count": 1123,
+            "lt20": 95
+          }
+        ]
+      }
+    }`
+  },
+  {
+    api: "rc_api",
     method: "find_rc_accounts",
     params: ["accounts"],
     parameter: `<p><code class="language-plaintext highlighter-rouge">accounts:string array</code></p>
