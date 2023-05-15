@@ -32,7 +32,7 @@
     "youtube":"Youtube",
     "instagram":"Instagram",
     "by": "By",
-    "to":"To",
+    "to":"to",
     "for": "for",
     "from":"From",
     "type": "Type",
@@ -64,7 +64,9 @@
     "transactions":"Transactions",
     "virtual_trx":"Virtual Transactions",
     "raw_format":"Raw Format ",
-    "delegate":"delegate"
+    "delegate":"delegate",
+    "withdraw":"withdraw",
+    "as":"as"
   },
   "block": {
     "reward_fund": "Reward Fund",
