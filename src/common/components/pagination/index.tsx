@@ -89,13 +89,13 @@ const MyPagination = ({
           {sliceStart === 2 && (
             <Pagination.Item onClick={() => changePage(2)}>{2}</Pagination.Item>
           )}
-          <Pagination.Ellipsis disabled />
+          <Pagination.Ellipsis disabled={true} />
         </>
       )}
       {items}
       {sliceEnd < pages && (
         <>
-          <Pagination.Ellipsis disabled />
+          <Pagination.Ellipsis disabled={true} />
           {sliceEnd === pages - 2 && (
             <Pagination.Item onClick={() => changePage(pages - 1)}>
               {pages - 1}

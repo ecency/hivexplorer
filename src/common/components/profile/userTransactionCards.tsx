@@ -16,7 +16,7 @@ import { TransactionOperation } from "../operations";
 import options_operations from "../operations/operationArrays";
 import MyPagination from "../pagination";
 import { FilterDropdown } from "../filterTypes";
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router';
 
 
 type Option = {

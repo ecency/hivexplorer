@@ -203,9 +203,7 @@ const TransactionsTables = (props: any) => {
                     placeholder={`${_t("heading_label.search_transaction")}`}
                 />
                 </Col>
-                <Col md={6}>
-           
-              </Col>
+                <Col md={6}/>
           </Row>
    
           <TableContainer className="pt-4">

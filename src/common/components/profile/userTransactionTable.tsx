@@ -27,7 +27,7 @@ import { getUserTransaction } from "../../api/urls";
 import { Col, Row } from "react-bootstrap";
 import { FilterDropdown } from "../filterTypes";
 import options_operations from "../operations/operationArrays";
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router';
 import MyPagination from "../pagination";
 import { renderData } from "../fields/blockFields/ObjectField";
 
