@@ -17,11 +17,17 @@
                 padding: 0.5rem;
                 background-color:$white-five
             }
+            @media (max-width:768px){
+                width: 100%;
+            }
            
         }
         .pagination-col{
             display: flex;
             justify-content: end;
+            @media (max-width:768px) {
+                padding-top: 15px;
+            }
         }
     }
     .card-paper{
@@ -35,10 +41,16 @@
                 padding: 0.5rem;
                 background-color:$white-five
             }
+            @media (max-width:768px){
+                width: 100%;
+            }
         }
         .pagination-col{
             display: flex;
             justify-content: end;
+            @media (max-width:768px) {
+                padding-top: 15px;
+            }
         }
     }
     .list-group{
@@ -225,6 +237,9 @@
         padding: 10px;
         max-height: 360px;
         overflow-y: auto;
+      }
+      @media (max-width:768px) {
+        width: 100% !important;
       }
     }
   }

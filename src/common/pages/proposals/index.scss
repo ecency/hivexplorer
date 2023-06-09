@@ -15,6 +15,9 @@
         .MuiInput-underline::after{
             border: 0;
         }
+        @media (max-width:600px) {
+            width: 100%;
+        }
     }
     .filter-menu{
         padding-bottom: 10px;
@@ -88,6 +91,9 @@
             &-inactive{
                 background-color: $pale-orange;
             }
+        }
+        @media (max-width:768px) {
+            line-height: 25px;
         }
     }
 }

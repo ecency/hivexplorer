@@ -57,6 +57,11 @@
             margin-right: 10px;
         }
     }
+    @media (max-width:768px) {
+        .home-trans-col{
+            padding-top: 20px;
+        }
+    }
 }
 
 .cardCollapsible {

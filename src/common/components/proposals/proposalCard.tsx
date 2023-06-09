@@ -74,7 +74,7 @@ const ProposalCard = (props: any) => {
                 {proposal_id && <span>{`#${proposal_id}`}</span>}
               </Link>
             </h5>
-            <p>
+            <p className="prop-status">
               {status && (
                 <span
                   className={

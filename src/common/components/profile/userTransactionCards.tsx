@@ -158,7 +158,7 @@ const location = useLocation();
 
              />
             </Col>
-            {userTransaction && 
+            {userTransaction && selectedValues.length===0  && 
             <Col md={6} className="pagination-col">
               <MyPagination dataLength={pageLimit} pageSize={250} maxItems={4} page={page} onPageChange={(page) => {
                 console.log(page)
