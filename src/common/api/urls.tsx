@@ -11,7 +11,6 @@ export const getAccount = async (user: string) => {
 
 // Get RC Account
 export const getRCAccount = (user: string) => {
-  console.debug(`${ConfigItems.baseUrl}/api/find_rc_accounts?accounts[]=${user}`)
   return `${ConfigItems.baseUrl}/api/find_rc_accounts?accounts[]=${user}`;
 };
 
