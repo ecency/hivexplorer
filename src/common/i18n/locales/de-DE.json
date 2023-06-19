@@ -32,6 +32,7 @@
     "youtube": "Youtube",
     "instagram": "Instagram",
     "by": "By",
+    "to": "to",
     "for": "for",
     "from": "From",
     "type": "Type",
@@ -62,7 +63,11 @@
     "no_search_result": "No record found against searched input.",
     "transactions": "Transactions",
     "virtual_trx": "Virtual Transactions",
-    "raw_format": "Raw Format "
+    "list_format": "List",
+    "table_format": "Table",
+    "delegate": "delegate",
+    "withdraw": "withdraw",
+    "as": "as"
   },
   "block": {
     "reward_fund": "Reward Fund",
@@ -465,8 +470,8 @@
     "page_intro": "The Decentralized Hive Fund (DHF) is an on-chain funding mechanism that allows anyone to submit a proposal and get funding once community votes pass certain threshold."
   },
   "entry": {
-    "view_response": "Viewing a response to:",
-    "rendered_data": "Rendered Data",
+    "view_response": "Viewing responses to:",
+    "rendered_data": "Raw",
     "votes": "Votes",
     "properties": "Properties",
     "author": "Author",
@@ -637,7 +642,14 @@
     "description": "Allows querying of various Resource Credit metrics.",
     "find_rc_accounts_description": "Returns the available resource credits of accounts.",
     "get_witnesses_by_vote_description": "Returns accounts, queried by name.",
-    "get_rc_stats": "Get RC stats"
+    "get_rc_stats": "Get RC stats",
+    "rc-available": "Available",
+    "rc-used": "Used",
+    "comments-posts": "Posts / Comments",
+    "votes": "Votes",
+    "transfers": "Transfers",
+    "reblogs-follows": "Reblogs / Follows",
+    "extra-details-heading": "What's possible with current available RC?"
   },
   "bridge": {
     "title": "Bridge API",
@@ -646,6 +658,7 @@
     "get_community_description": "Gets community details.",
     "list_communities_description": "Gets community information",
     "get_post_description": "Gives single selected post.",
+    "get_post_header_description": "Gives very basic information on given post.",
     "get_profile_description": "Gets profile information.",
     "get_account_posts_description": "Lists posts related to a given account.",
     "get_trending_topics_description": "Get trending topics/categories."
@@ -689,6 +702,7 @@
     "sm_sell_cards": "list cards for sale on the market",
     "sm_combine_all": "combine all cards",
     "sm_submit_team": "submitted a team for battle",
+    "sm_cancel_sell": "remove cards listed for sale on the market",
     "account_update_operation": "update account data"
   }
 }
