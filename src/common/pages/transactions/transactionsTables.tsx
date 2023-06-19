@@ -24,6 +24,7 @@ import { _t } from "../../i18n";
 import { AscendingIcon, DescendingIcon } from "../../img/svg";
 import TransactionOperationTable from "../profile/userOpTable";
 import { TimestampField } from "../../components/fields/blockFields/DateTimeTable";
+import { renderData } from "../../components/fields/blockFields/ObjectField";
 
 interface Column {
   label: string;
@@ -173,9 +174,10 @@ const TransactionsTables = (props: any) => {
         <TableRow>
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
             <Collapse in={open} timeout="auto" unmountOnExit={true}>
-              <Box margin={1}>
+              <Box margin={1} className="trans-op-box">
                 {/* <TransactionOpTable opTrans={transaction.op} /> */}
-                <TransactionOperationTable opTrans={...transaction.op} />
+                {/* <TransactionOperationTable opTrans={...transaction.op} /> */}
+                <>{renderData({...transaction.op})}</>
               </Box>
             </Collapse>
           </TableCell>
@@ -184,117 +186,88 @@ const TransactionsTables = (props: any) => {
     );
   };
   return (
-    <>
-        <Paper
-          className={
-            currTheme === "day" ? "paper-day text-dark px-2" : "paper-night text-white px-2"
-          }
-        >
-          
-          <Row>
-            <Col md={6}>
-                <TextField
-                    id="outlined-basic"
-                    className="search-field"
-                    onChange={inputHandler}
-                    fullWidth={false}
-                    placeholder={`${_t("heading_label.search_transaction")}`}
-                />
-                </Col>
-                <Col md={6}>
-                {filteredTransactionsData && (
-                    <TablePagination
-                    rowsPerPageOptions={[10, 25, 100]}
-                    component="div"
-                    count={filteredTransactionsData.length}
-                    rowsPerPage={rowsPerPage}
-                    page={page}
-                    onPageChange={handleChangePage}
-                    onRowsPerPageChange={handleChangeRowsPerPage}
-                    />
-                )}
-              </Col>
-          </Row>
-   
-          <TableContainer className="pt-4">
-            <Table stickyHeader={true} aria-label="sticky table">
-              <TableHead className="card-header">
-                <TableRow>
-                  {columns.map((column, index) => {
-                    const [sortBtn, setSortBtn] = useState(false);
-                    return (
-                      <>
-                        {column.label === `${_t("common.trx_in_block")}` ||
-                        column.label === `${_t("common.op_in_trx")}` ? (
-                          <TableCell className="card-header px-2 card-header-sort" key={index + 1}>
-                            {
-                              <>
-                                <span
-                                  onClick={(e) => {
-                                    setSortBtn(!sortBtn);
-                                    sortTransaction(
-                                      e.currentTarget.innerText.substring(-1),
-                                      sortBtn
-                                    );
-                                  }}
-                                >
-                                  {column.label}
-                                  {sortBtn
-                                    ? AscendingIcon(themeContrastColor)
-                                    : DescendingIcon(themeContrastColor)}
-                                </span>
-                              </>
-                            }
-                          </TableCell>
-                        ) : (
-                          <TableCell
-                            className={`card-header card-header-${column.class} col-w-${column.width}`}
-                            key={index + 2}
-                          >
-                            {column.label}
-                            {column.label === `${_t("common.ops")}` ? (
-                              <IconButton
-                                style={{ color: currTheme === "day" ? "#535e65" : "#fcfcfc" }}
-                                aria-label="expand row"
-                                size="small"
-                                onClick={() => setAllOpen(!allOpen)}
-                              >
-                                {allOpen ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-                              </IconButton>
-                            ) : (
-                              <></>
-                            )}
-                          </TableCell>
-                        )}
-                      </>
-                    );
-                  })}
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {filteredTransactionsData &&
-                  filteredTransactionsData
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map((transaction: any, i: number) => {
-                      return <TransRow key={i} transaction={transaction} />;
-                    })}
-              </TableBody>
-            </Table>
-          </TableContainer>
-          {filteredTransactionsData && (
-            <TablePagination
-              rowsPerPageOptions={[10, 25, 100]}
-              component="div"
-              count={filteredTransactionsData.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              onPageChange={handleChangePage}
-              onRowsPerPageChange={handleChangeRowsPerPage}
+    <div
+      className={
+        currTheme === "day" ? "paper-day text-dark px-2" : "paper-night text-white px-2"
+      }
+    >
+      <Row>
+        <Col md={6}>
+            <TextField
+                id="outlined-basic"
+                className="search-field"
+                onChange={inputHandler}
+                fullWidth={false}
+                placeholder={`${_t("heading_label.search_transaction")}`}
             />
-          )}
-        </Paper>
-      
-    </>
+            </Col>
+            <Col md={6}/>
+      </Row>
+      <TableContainer className="pt-4">
+        <Table stickyHeader={true} aria-label="sticky table">
+          <TableHead className="card-header">
+            <TableRow>
+              {columns.map((column, index) => {
+                const [sortBtn, setSortBtn] = useState(false);
+                return (
+                  <>
+                    {column.label === `${_t("common.trx_in_block")}` ||
+                    column.label === `${_t("common.op_in_trx")}` ? (
+                      <TableCell className="card-header px-2 card-header-sort" key={index + 1}>
+                        {
+                          <>
+                            <span
+                              onClick={(e) => {
+                                setSortBtn(!sortBtn);
+                                sortTransaction(
+                                  e.currentTarget.innerText.substring(-1),
+                                  sortBtn
+                                );
+                              }}
+                            >
+                              {column.label}
+                              {sortBtn
+                                ? AscendingIcon(themeContrastColor)
+                                : DescendingIcon(themeContrastColor)}
+                            </span>
+                          </>
+                        }
+                      </TableCell>
+                    ) : (
+                      <TableCell
+                        className={`card-header card-header-${column.class} col-w-${column.width}`}
+                        key={index + 2}
+                      >
+                        {column.label}
+                        {column.label === `${_t("common.ops")}` ? (
+                          <IconButton
+                            style={{ color: currTheme === "day" ? "#535e65" : "#fcfcfc" }}
+                            aria-label="expand row"
+                            size="small"
+                            onClick={() => setAllOpen(!allOpen)}
+                          >
+                            {allOpen ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                          </IconButton>
+                        ) : (
+                          <></>
+                        )}
+                      </TableCell>
+                    )}
+                  </>
+                );
+              })}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {filteredTransactionsData &&
+              filteredTransactionsData
+                .map((transaction: any, i: number) => {
+                  return <TransRow key={i} transaction={transaction} />;
+                })}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </div>
   );
 };
 

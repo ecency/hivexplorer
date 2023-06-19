@@ -70,7 +70,7 @@ const BlocksTables = (props: any) => {
   return (
     <>
       <Container className="data-table-hive py-5">
-        <Paper
+        <div
           className={
             currTheme === "day" ? "paper-day text-dark px-2" : "paper-night text-white px-2"
           }
@@ -142,7 +142,7 @@ const BlocksTables = (props: any) => {
               onRowsPerPageChange={handleChangeRowsPerPage}
             />
           )}
-        </Paper>
+        </div>
       </Container>
     </>
   );

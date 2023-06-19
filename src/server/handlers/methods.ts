@@ -5776,6 +5776,20 @@ export const methods = [
   },
   {
     api: "bridge",
+    method: "get_post_header",
+    params: ["author", "permlink"],
+    parameter: `<code>author: string; permlink: string;</code>`,
+    description:_t("bridge.get_post_header_description"),
+    url: `${ConfigItems.baseUrl}/api/get_post_header?author="ecency"&permlink="token"`,
+    response: `{
+      "author":"ecency",
+      "permlink":"token",
+      "category":"hive-125125",
+      "depth":0
+    }`
+  },
+  {
+    api: "bridge",
     method: "get_post",
     params: ["author", "permlink", "observer"],
     parameter: `<code>author: string; permlink: string; observer: string;</code>`,

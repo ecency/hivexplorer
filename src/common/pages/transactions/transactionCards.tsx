@@ -68,48 +68,37 @@ const TransactionsCards = (props: any) => {
 
 
   return (
-    <>
-    
-        <Paper
-          className={
-            currTheme === "day" ? "paper-day text-dark px-2" : "paper-night text-white px-2"
-          }
-        >
-         
-          <Row>
-            <Col lg={6}>
-                <TextField
-                    id="outlined-basic"
-                    className="search-field"
-                    onChange={inputHandler}
-                    fullWidth={false}
-                    placeholder={`${_t("heading_label.search_transaction")}`}
-                />
-            </Col>
-       
-          </Row>
-      
-          <TableContainer className="py-3 trans-card-view">
-            <TableBody style={{width:'100%',display:'block'}} >
-            {filteredTransactionsData &&
-                  filteredTransactionsData
-                    .map((transaction: any, i: number) => {
-                        const opVal=transaction.op.value
-                      return(
-                        <>
-                        <div key={i+'vt'+transaction.trx_id}>
-                          <TransactionOperation trans_no={transaction.trx_id} trans_data={[transaction.op]} time={transaction.timestamp} trx_status={transaction.virtual_op}/>
-                        </div>
-                        </>
-                      );
-                    })}
-            </TableBody>
-          </TableContainer>
-       
-          
-        </Paper>
-   
-    </>
+    <div
+      className={
+        currTheme === "day" ? "paper-day text-dark px-2" : "paper-night text-white px-2"
+      }
+    >
+      <Row>
+        <Col lg={6}>
+            <TextField
+                id="outlined-basic"
+                className="search-field"
+                onChange={inputHandler}
+                fullWidth={false}
+                placeholder={`${_t("heading_label.search_transaction")}`}
+            />
+        </Col>
+      </Row>
+      <TableContainer className="py-3 trans-card-view">
+        <TableBody style={{width:'100%',display:'block'}} >
+        {filteredTransactionsData &&
+              filteredTransactionsData
+                .map((transaction: any, i: number) => {
+                    const opVal=transaction.op.value
+                  return(
+                    <div key={i+'vt'+transaction.trx_id}>
+                      <TransactionOperation trans_no={transaction.trx_id} trans_data={[transaction.op]} time={transaction.timestamp} trx_status={transaction.virtual_op}/>
+                    </div>
+                  );
+                })}
+        </TableBody>
+      </TableContainer>
+    </div>
   );
 };
 

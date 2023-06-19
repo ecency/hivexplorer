@@ -2,6 +2,7 @@
   display: flex;
   @include list-unstyled();
   @include border-radius();
+  overflow-x: auto;
 }
 
 .page-link {
@@ -27,6 +28,9 @@
     z-index: 3;
     outline: $pagination-focus-outline;
     box-shadow: $pagination-focus-box-shadow;
+  }
+  @media  (max-width:400px) {
+    padding: 5px 10px !important;
   }
 }
 

@@ -25,6 +25,11 @@ import { TimestampField } from "../fields/blockFields/DateTimeTable";
 import { AscendingIcon, DescendingIcon } from "../../img/svg";
 import { getUserTransaction } from "../../api/urls";
 import { Col, Row } from "react-bootstrap";
+import { FilterDropdown } from "../filterTypes";
+import options_operations from "../operations/operationArrays";
+import { useHistory, useLocation } from 'react-router';
+import MyPagination from "../pagination";
+import { renderData } from "../fields/blockFields/ObjectField";
 
 interface Column {
   label: string;
@@ -40,35 +45,72 @@ const columns: Column[] = [
   { label: `${_t("common.type")}`, align: "right", width: "unset" },
   { label: `${_t("common.ops")}`, align: "right", width: "unset" }
 ];
-
+type Option = {
+  value: string;
+  label: string;
+};
 interface UserTransactionTypeList extends Array<UserTransactionType> {}
 const UserTransactionsTable = (props: any) => {
   const { user } = props;
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const [rowsPerPage, setRowsPerPage] = useState(25);
   const [transactionFrom, setTransactionForm] = useState(-1);
-  const [transactionLimit, setTransactionLimit] = useState(1000);
+  const [transactionLimit, setTransactionLimit] = useState(250);
   const currTheme = useSelector((state: any) => state.global.theme);
   const [userTransaction, setUserTransaction] = useState<UserTransactionTypeList>();
   const [allOpen, setAllOpen] = useState(false);
   const [sortBlockBtn, setSortBlockBtn] = useState(false);
   const [sortTransBtn, setSortTransBtn] = useState(false);
+  const [selectedValues, setSelectedValues] = useState<string[]>([]);
+  const [options, setOptions] = useState<Option[]>(options_operations);
+  const [searchValue, setSearchValue] = useState<string>('');
+  const [pageLimit,setPageLimit]=useState(1)
   const themeContrastColor = currTheme === "day" ? "#535e65" : "#ffffffde ";
+  const [targetPage,setTargetPage]=useState<number>(parseInt(window.location.search.split('=')[1]))
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const response = await getUserTransaction(user, transactionFrom, transactionLimit);
-        setUserTransaction(response.history.reverse());
-      } catch (error: any) {
-        console.error(error.message);
+  const history = useHistory();
+const location = useLocation();
+
+useEffect(() => {
+
+  const fetchData = async () => {
+    setLoading(true);
+    try {
+      const response = await getUserTransaction(user, transactionFrom, transactionLimit,selectedValues);
+      setUserTransaction(response.reverse());
+      setPageLimit(response.reverse()[0][0])
+    } catch (error: any) {
+      console.error(error.message);
+    }
+    setLoading(false);
+  };
+  fetchData();
+}, [targetPage<1]);
+useEffect(() => {
+ setPage(targetPage)
+  const fetchData = async () => {
+    setLoading(true);
+    try {
+      const response = await getUserTransaction(user, transactionFrom, transactionLimit,selectedValues);
+      
+      const countStart=Math.ceil(response.reverse()[0][0])
+      //console.log('count start',`${countStart}-(${targetPage}*250)`,response.reverse()[0][0]/250)
+      const respPage = await getUserTransaction(user, countStart-(targetPage*250), transactionLimit,selectedValues);
+      if(targetPage===1){
+        setUserTransaction(response.reverse());
       }
-      setLoading(false);
-    };
-    fetchData();
-  }, []);
+      else{
+        setUserTransaction(respPage.reverse());
+      }
+      setPageLimit(response.reverse()[0][0])
+    } catch (error: any) {
+      console.error(error.message);
+    }
+    setLoading(false);
+  };
+  fetchData();
+}, [targetPage,selectedValues]);
   const [inputText, setInputText] = useState("");
   let inputHandler = (e: any) => {
     const lowerCase = e.target.value.toLowerCase();
@@ -86,14 +128,27 @@ const UserTransactionsTable = (props: any) => {
       }
     }
   });
-  const handleChangePage = (event: unknown, newPage: number) => {
-    setPage(newPage);
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(e.target.value);
   };
 
-  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
+  const handleSelect = (value:any) => {
+    if (selectedValues.includes(value)) {
+      setSelectedValues(selectedValues.filter((val) => val !== value));
+    } else {
+      setSelectedValues([...selectedValues, value]);
+    }
+
   };
+  const handleRemove = (value: string) => {
+    setSelectedValues(selectedValues.filter((val) => val !== value));
+  
+  };
+  const filteredOptions = options_operations.filter((option:any) =>
+    option.label.toLowerCase().includes(searchValue.toLowerCase())
+  );
+ 
   const sortTransaction = (colName: string, sortState: boolean) => {
     if (colName === `${_t("common.block")}` && sortState === true) {
       setUserTransaction(
@@ -164,8 +219,9 @@ const UserTransactionsTable = (props: any) => {
         <TableRow>
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
             <Collapse in={openRow} timeout="auto" unmountOnExit={true}>
-              <Box margin={1}>
-                <TransactionOperationTable opTrans={...opTrans} />
+              <Box margin={1} className="trans-op-box">
+                {/* <TransactionOperationTable opTrans={...opTrans} /> */}
+                <>{renderData({...opTrans})}</>
               </Box>
             </Collapse>
           </TableCell>
@@ -184,7 +240,7 @@ const UserTransactionsTable = (props: any) => {
               : "transaction-table-night px-2 pt-4"
           }
         >
-          <Paper
+          <div
             className={
               currTheme === "day"
                 ? "paper-day text-dark table-paper"
@@ -201,20 +257,35 @@ const UserTransactionsTable = (props: any) => {
               placeholder={`${_t("heading_label.search_transaction")}`}
             />
             </Col>
-            <Col lg={6}>
-                {filteredTransactionsData && (
-                <TablePagination
-                rowsPerPageOptions={[25, 50, 100, 500, 1000]}
-                component="div"
-                count={filteredTransactionsData.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                onPageChange={handleChangePage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
-                />
-            )}
-            </Col>
+            {/* <Col lg={6}>
+          
+            </Col> */}
           </Row>
+
+          <Row>
+            <Col lg={6} className="select_dropdown">
+            <FilterDropdown
+              handleSelect={handleSelect}
+              selectedValues={selectedValues}
+              handleRemove={handleRemove}
+              searchValue={searchValue}
+              handleSearchChange={handleSearchChange}
+              filteredOptions={filteredOptions}
+
+             />
+            </Col>
+            {userTransaction && 
+            <Col md={6} className="pagination-col">
+              <MyPagination dataLength={pageLimit} pageSize={250} maxItems={4} page={page} onPageChange={(page) => {
+                setPage(page)
+                setTargetPage(page)
+                history.push(`?page=${page}`);
+              }}/>
+            </Col>}
+     
+          </Row>
+          <br />
+
             <Table stickyHeader={true} aria-label="sticky table">
               <TableHead className="card-header">
                 <TableRow className="card-header">
@@ -273,24 +344,13 @@ const UserTransactionsTable = (props: any) => {
               <TableBody>
                 {filteredTransactionsData &&
                   filteredTransactionsData
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((trans: any, i: number) => {
                       return <TransRow key={i+trans+'-'} trans={trans} />;
                     })}
               </TableBody>
             </Table>
-          </Paper>
-          {filteredTransactionsData && (
-            <TablePagination
-              rowsPerPageOptions={[25, 50, 100, 500, 1000]}
-              component="div"
-              count={filteredTransactionsData.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              onPageChange={handleChangePage}
-              onRowsPerPageChange={handleChangeRowsPerPage}
-            />
-          )}
+          </div>
+
         </div>
       )}
     </>

@@ -22,7 +22,6 @@ import { getAccount, getOwnerHistory, getRCAccount } from "../../api/urls";
 import BackToTopButton from "../../components/Buttons/BackToTop";
 import SpinnerEffect from "../../components/loader/spinner";
 import UserHistory from "../../components/profile/userHistory";
-import { cardViewSVG, tableViewSVG } from "../../img/svg";
 import UserTransactionsCards from "../../components/profile/userTransactionCards";
 import ToggleButton from "react-toggle-button";
 
@@ -60,30 +59,30 @@ const UserPage = (props: any) => {
       setLoading(false);
     };
     fetchData();
-  }, []);
+  }, [userId]);
   useEffect(() => {
     axios.get(owner_history_url).then((res) => {
       setOwnerHistory(res.data);
     });
-  }, []);
+  }, [userId]);
   useEffect(() => {
     axios.get(rc_account_url).then((res) => {
       setRCAccount(res.data.rc_accounts[0]);
     });
-  }, []);
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const response = await getAccount(userId);
-        setUserAccount(response);
-      } catch (error: any) {
-        console.error(error.message);
-      }
-      setLoading(false);
-    };
-    fetchData();
   }, [userId]);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     setLoading(true);
+  //     try {
+  //       const response = await getAccount(userId);
+  //       setUserAccount(response);
+  //     } catch (error: any) {
+  //       console.error(error.message);
+  //     }
+  //     setLoading(false);
+  //   };
+  //   fetchData();
+  // }, [userId]);
   function a11yProps(index: number) {
     return {
       id: `user-tab-${index}`,
@@ -159,7 +158,7 @@ const UserPage = (props: any) => {
                 {/* Tabs view Section */}
                 <Card className="user-card">
                   <Card.Header className="p-0">
-                    <Tabs className="user-tabs" value={value} onChange={handleChange} aria-label="simple tabs example">
+                    <Tabs className="user-tabs" value={allTabs[value]} onChange={handleChange} aria-label="simple tabs example">
                       <Tab  
                           label={_t("common.info")}  
                           value={`/@${userId}`}
@@ -228,7 +227,7 @@ const UserPage = (props: any) => {
                     </TabPaneUser>
                     <TabPaneUser value={valueID} index={1} >
                       <div className="d-flex pt-4 justify-content-end">
-                        <p>{_t("common.raw_format")}&nbsp;</p>
+                        <p>{!cardView?_t("common.table_format"):_t("common.list_format")}&nbsp;</p>
                         <div>
                           <ToggleButton
                             inactiveLabel={""}

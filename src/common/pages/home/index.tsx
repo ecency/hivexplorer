@@ -260,7 +260,7 @@ const Index = (props: PageProps) => {
                         theme={currTheme}
                       />
                     </Col>
-                    <Col md={6} sm={12}>
+                    <Col md={6} sm={12} >
                       <Market
                         label="HBD"
                         coin="hive_dollar"
@@ -294,7 +294,7 @@ const Index = (props: PageProps) => {
                     </Card.Footer>
                   </Card>
                 </Col>
-                <Col xs={12} md={6}>
+                <Col xs={12} md={6} className="home-trans-col">
                   <Card>
                     <Card.Header>{_t("home.latest_transaction")}</Card.Header>
                     <Card.Body className="block-transaction-body p-0">

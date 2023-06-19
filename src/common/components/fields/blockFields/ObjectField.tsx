@@ -13,8 +13,52 @@ import { infoIcon, showLessIcon, showMoreIcon, trxIcon } from "../../../img/svg"
 import "./ObjectField.scss";
 import { SMTAssetCalc } from "../../../api/hive";
 import parseAsset from "../../../helper/parse-asset";
+import { isInteger } from "lodash";
 
+function renderTable(data: any) {
+  return (
+    <table className="time-date-table">
+      <tbody>
+        {Object.entries(data).map(([key, value]) => (
+          <tr key={key}>
+            <td className={isInteger(+key)? "integer-td":""}>{key}</td>
+            <td>{renderData(value)}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
 
+export function renderData(data: any) {
+  if (typeof data === "object" && data !== null) {
+    if (Array.isArray(data)) {
+      return (
+        <table className="time-date-table">
+          <tbody>
+            
+            {data.map((item: any, i: number) => (
+            <tr key={i}>
+              <td className="integer-td">
+                {i}
+              </td>
+              <td  >
+                {renderData(item)}
+              </td>
+            </tr>
+          ))}
+            
+          </tbody>
+        
+        </table>
+      );
+    } else {
+      return renderTable(data);
+    }
+  } else {
+    return <span>{data.toString()}</span>;
+  }
+}
 const SMTAssetArray=[
   "init_hbd_supply",
   "virtual_supply",
@@ -168,7 +212,7 @@ useEffect(() => {
     <>
       {item !== "posting" && item !== "owner" && item !== "active" && (
         <Row className={rowBorder} key={number}>
-          <Col md={3} xs={12} className="attr-col">
+          <Col lg={2} md={3} xs={12} className="attr-col">
             <span className="pl-2">
               {item === "voting_manabar" || item === "downvote_manabar" ? (
                 <span>{_t(`${label_for}.${item}`)}</span>
@@ -178,7 +222,7 @@ useEffect(() => {
               :
             </span>
           </Col>
-          <Col md={9} xs={12}>
+          <Col lg={10} md={9} xs={12}>
             {item === "voting_manabar" || item === "downvote_manabar" ? (
               <table className="time-date-table">
                 <tbody>
@@ -200,106 +244,10 @@ useEffect(() => {
             )
             : item === "witness_votes" ? (
               <>
-                {/* <Button
-                  className={themeBtn}
-                  onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>
-                    setExpandBtn(!expandBtn)
-                  }
-                  disabled={value.length === 0 ? true : false}
-                >
-                  {value.length}{" "}
-                  {expandBtn ? (
-                    <span>{showLessIcon(themeContrastColor)} </span>
-                  ) : (
-                    <span>{showMoreIcon(themeContrastColor)}</span>
-                  )}
-                </Button> */}
+              
               </>
             ) : item === "operations" ? (
-              <>
-                {value.map((val: any, i: number) => {
-                  const type: string = val[0];
-                  const opVal: opValType = val[1];
-                  return (
-                    <table key={i+type} className="time-date-table">
-                      <tbody>
-                        <tr>
-                          <td>{_t("trans_table.type")}</td>
-                          <td>{type}</td>
-                        </tr>
-                        {Object.keys(opVal).map((val:any,i:number)=>{
-                          return(
-                          <>
-                          {typeof(opVal[val]) !== 'object' && opVal[val]!=="" ?
-                          <tr key={i+val+type}>
-                            <td>{_t(`trans_table.${val}`)}</td>
-                            <td>
-                              {LinkAccount.includes(val)?
-                                <UserAvatar username={opVal[val]} size="small"/>
-                                : 
-                                val==='permlink' ? <Link to={`/@${opVal.author}/${opVal.permlink}`}>{opVal.permlink}</Link>
-                                :
-                                val==='comment_permlink' ? <Link to={`/@${opVal.comment_author}/${opVal.comment_permlink}`}>{opVal.comment_permlink}</Link>
-                                :
-                                val==='parent_permlink' ? <Link to={`/@${opVal.parent_author}/${opVal.parent_permlink}`}>{opVal.parent_permlink}</Link>
-                                :
-                                opVal[val]
-                              }</td>
-                          </tr>
-                          :
-                          typeof(opVal[val]) === 'object' && opVal[val].length!==0 ?
-                          val==="required_auths" || val==="required_posting_auths" ?
-                          <tr  key={i+val+type}>
-                            <td>{_t(`trans_table.${val}`)}</td>
-                            <td>
-                              <UserAvatar username={opVal[val][0]} size="small"/>
-                            </td>
-                          </tr>
-                          :
-                          val==="props" ? 
-                          <tr key={i+val+type}>
-                          <td>{_t(`trans_table.${val}`)}</td>
-                          <td>
-                              <table>
-                                <tbody>
-                                {Object.keys(opVal[val]).map((item:any,j:number)=>{
-                                  return(
-                                    <tr key={j+item}>
-                                      <td>{_t(`trans_table.${opVal[val][item][0]}`)}</td>
-                                      <td>{opVal[val][item][1]}</td>
-                                    </tr>
-                                    )
-                                  })}
-                                </tbody>
-                              </table>
-                          </td>
-                        </tr>
-                          :
-                          <tr key={i+val+type}>
-                            <td>{_t(`trans_table.${val}`)}</td>
-                            <td>
-                                <table>
-                                  <tbody>
-                                  {Object.keys(opVal[val]).map((item:any,j:number)=>{
-                                    return(
-                                      <tr key={j+item}>
-                                        <td>{_t(`trans_table.${item}`)}</td>
-                                        <td>{opVal[val][item]}</td>
-                                      </tr>
-                                      )
-                                    })}
-                                  </tbody>
-                                </table>
-                            </td>
-                          </tr>:<></>}
-                          </>
-                          )
-                        })}
-                      </tbody>
-                    </table>
-                  );
-                })}
-              </>
+              <><div>{renderData(value)}</div></>
             ) : SMTAssetArray.includes(item) ? (
               <>{parseAsset(value).amount+' '+parseAsset(value).symbol}</>
             ) : item === "json_metadata" && label_for === "entry" ? (
@@ -307,9 +255,9 @@ useEffect(() => {
                 <JsonMetadata data={value} />
               </>
             ) : item === "signatures" ? (
-              <>{value[0]}</>
+              <>{renderData(value)}</>
             ) : (
-              <>{value.length}</>
+              <>{value.length===0? '[ ]':value.length}</>
             )}
           </Col>
         </Row>

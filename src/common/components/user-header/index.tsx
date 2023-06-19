@@ -1,8 +1,8 @@
 import { RCAccount } from "@hiveio/dhive/lib/chain/rc";
-import React, { useState } from "react";
-import { Card, Col, ProgressBar, Row } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Card, Col, Modal, ProgressBar, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
-
+import DefaultImage from "../../img/default-avatar.png";
 import { CreatedDate } from "../../api/dateTime";
 import { _t } from "../../i18n";
 import {
@@ -13,6 +13,10 @@ import {
   websiteIcon,
   youtubeIcon
 } from "../../img/svg";
+import RcProgressCircle from "../rc-progress-circle";
+import { findRcAccounts } from "../../api/hive";
+import { rcFormatter } from "../../util/formatted-number";
+import { getRcOperationStats } from "../../api/urls";
 
 interface RCState {
   rcAccount: null | RCAccount;
@@ -21,15 +25,65 @@ const UserHeader = (props: any) => {
   const { id, name, created, postCount, metaData, votingPower, downVotingPower, resourceCredits } =
     props;
   const [rcAccount, setRCAccount] = useState<RCState>();
-
+  const [showModal,setShowModal]=useState(false)
+  const [showRcInfo, setShowRcInfo] = useState(false);
   const metaProfile = metaData.profile;
+  const [delegated, setDelegated] = useState();
+  const [resourceCredit, setResourceCredit] = useState<any>();
   const currTheme = useSelector((state: any) => state.global.theme);
+  const [commentAmount, setCommentAmount] = useState(0);
+  const [voteAmount, setVoteAmount] = useState(0);
+  const [transferAmount, setTransferAmount] = useState(0);
+  const [customJsonAmount, setCustomJsonAmount] = useState(0);
   const themeContrastColor = currTheme === "day" ? "#535e65" : "white";
 
   // Created Date
 
   const createdDate = CreatedDate(created);
+  const handleModalClose = () => setShowModal(false);
+  const handleModalShow = () => setShowModal(true);
 
+  const radius = 70;
+  const dasharray = 440;
+  const unUsedOffset = (resourceCredits / 100) * dasharray;
+  const usedOffset = ((100 - resourceCredits) / 100) * dasharray;
+  
+  useEffect(() => {
+  findRcAccounts(name)
+  .then((r) => {
+    const outGoing = r.map((a: any) => a.delegated_rc);
+    const delegated = outGoing[0];
+    const formatOutGoing: any = rcFormatter(delegated);
+    setDelegated(formatOutGoing);
+    const availableResourceCredit: any = r.map((a: any) => Number(a.rc_manabar.current_mana));
+    const inComing: any = r.map((a: any) => Number(a.received_delegated_rc));
+    const formatIncoming = rcFormatter(inComing);
+    const totalRc = Number(availableResourceCredit) + Number(inComing);
+    setResourceCredit(totalRc);
+
+    const rcOperationsCost = async () => {
+      const rcStats: any = await getRcOperationStats();
+      const operationCosts = rcStats.rc_stats.ops;
+      const commentCost = operationCosts.comment_operation.avg_cost;
+      const transferCost = operationCosts.transfer_operation.avg_cost;
+      const voteCost = operationCosts.vote_operation.avg_cost;
+      const customJsonOperationsCosts = operationCosts.custom_json_operation.avg_cost;
+
+      const commentCount: number = Math.ceil(Number(availableResourceCredit) / commentCost);
+      const votetCount: number = Math.ceil(Number(availableResourceCredit) / voteCost);
+      const transferCount: number = Math.ceil(Number(availableResourceCredit) / transferCost);
+      const customJsonCount: number = Math.ceil(
+        Number(availableResourceCredit) / customJsonOperationsCosts
+      );
+      setCommentAmount(commentCount);
+      setVoteAmount(votetCount);
+      setTransferAmount(transferCount);
+      setCustomJsonAmount(customJsonCount);
+    };
+    rcOperationsCost();
+  })
+  .catch(console.log);
+}, []);
   return (
     <>
       {metaProfile && (
@@ -42,7 +96,7 @@ const UserHeader = (props: any) => {
               <div className="profile-image-container">
                 <img
                   onError={(e: any) => {
-                    e.target.src = `https://images.ecency.com/u/${name}/avatar`;
+                    e.target.src = DefaultImage;
                   }}
                   className="profile-image-user"
                   src={`${metaProfile.profile_image}`}
@@ -192,9 +246,9 @@ const UserHeader = (props: any) => {
                       />
                     </Col>
                   </Row>
-                  <Row>
+                  <Row onClick={handleModalShow}>
                     <Col md={3}>
-                      <p className="pt-1">{_t("user-info.resource_credits")}</p>
+                      <p className="pt-1 text-action" >{_t("user-info.resource_credits")}</p>
                     </Col>
                     <Col md={9}>
                       <ProgressBar
@@ -205,6 +259,80 @@ const UserHeader = (props: any) => {
                       />
                     </Col>
                   </Row>
+                  {/* {openModal && ( */}
+                  <Modal
+        size="lg"
+        animation={false}
+        show={showModal}
+        centered={true}
+        onHide={handleModalClose}
+        keyboard={false}
+        className="purchase-qr-dialog"
+        dialogClassName="modal-90w"
+      >
+        <Modal.Header closeButton={true}>
+          <Modal.Title>
+            <div className="rc-header">
+              <span>{_t("user-info.resource_credits")}</span>
+          
+            </div>
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div className="rc-infocontainer">
+            <div className="percent">
+              <div className="circle">
+                <div className="outer-circle progress">
+                  <div className="inner-circle">
+                    <span>{resourceCredits}</span>
+                  </div>
+                </div>
+                <RcProgressCircle
+                  radius={radius}
+                  usedOffset={usedOffset}
+                  dasharray={dasharray}
+                  unUsedOffset={unUsedOffset}
+                />
+              </div>
+
+              <div className="percentage-info">
+                <div className="unused">
+                  <div className="unused-box" />
+                  <span>{`${_t("rc_api.rc-available")}: ${rcFormatter(
+                    (resourceCredits / 100) * resourceCredit
+                  )}`}</span>
+                </div>
+                <div className="used">
+                  <div className="used-box" />
+                  <span>
+                    {`${_t("rc_api.rc-used")}: ${rcFormatter(
+                      ((100 - resourceCredits) / 100) * resourceCredit
+                    )}`}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div className="rc-details">
+        
+              <div className="extra-details">
+                <p>{_t("rc_api.extra-details-heading")}</p>
+                <div className="extras">
+                  <ul>
+                    <li>{`${_t("rc_api.comments-posts")}: ${commentAmount}`}</li>
+                    <li>{`${_t("rc_api.votes")}: ${voteAmount}`}</li>
+                    <li>{`${_t("rc_api.transfers")}: ${transferAmount}`}</li>
+                    <li>{`${_t("rc_api.reblogs-follows")}: ${customJsonAmount}`}</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+      
+        </Modal.Body>
+      </Modal>
+                {/* )} */}
                 </div>
               </Col>
             </Row>

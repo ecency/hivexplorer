@@ -106,6 +106,13 @@ $tooltip-max-width: 380px;
     }
     }
   }
+  .integer-td{
+    background-color:$dark-grey-blue !important
+  }
+  .trans-op-box{
+    table{
+      color: #b2b2b2    }
+  }
 }
 
 @import "bootstrap";
