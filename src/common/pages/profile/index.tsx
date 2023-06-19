@@ -48,7 +48,6 @@ const UserPage = (props: any) => {
   const themeContrastColor = currTheme === "day" ? "#535e65" : "#ffffffde";
   const [cardView, setCardView] = useState(true);
   useEffect(() => {
-    console.log('paramter',userId)
     const fetchData = async () => {
       setLoading(true);
       try {
@@ -68,7 +67,6 @@ const UserPage = (props: any) => {
   }, [userId]);
   useEffect(() => {
     axios.get(rc_account_url).then((res) => {
-      console.log('resource_credit',res.data)
       setRCAccount(res.data.rc_accounts[0]);
     });
   }, [userId]);
@@ -160,7 +158,7 @@ const UserPage = (props: any) => {
                 {/* Tabs view Section */}
                 <Card className="user-card">
                   <Card.Header className="p-0">
-                    <Tabs className="user-tabs" value={value} onChange={handleChange} aria-label="simple tabs example">
+                    <Tabs className="user-tabs" value={allTabs[value]} onChange={handleChange} aria-label="simple tabs example">
                       <Tab  
                           label={_t("common.info")}  
                           value={`/@${userId}`}
@@ -229,7 +227,7 @@ const UserPage = (props: any) => {
                     </TabPaneUser>
                     <TabPaneUser value={valueID} index={1} >
                       <div className="d-flex pt-4 justify-content-end">
-                        <p>{_t("common.raw_format")}&nbsp;</p>
+                        <p>{!cardView?_t("common.table_format"):_t("common.list_format")}&nbsp;</p>
                         <div>
                           <ToggleButton
                             inactiveLabel={""}

@@ -9,14 +9,14 @@ import { json_operation_ids, operation_types, quest_operation } from "./operatio
 import { OperationCardData } from "./operationCard";
 
 export const TransactionOperation = (props: any) => {
-    const { trans_no, trans_data, time, trx_status,memo,permlink,from,to } = props
+    const { trans_no, trans_data, time, trx_status,memo,permlink,from,to, key } = props
     const dateRelative = dateToRelative(time);
     const dateFormatted = dateToFormatted(time);
     const [renderedStrings, setRenderedStrings] = useState<string []>([]);
    
     var name: string
     return (
-        <>
+        <div key={key}>
             {<Card className="transaction_operations_cards">
                 <Card.Body >
                 <div className="op-card-trx-id">{trans_no === "0000000000000000000000000000000000000000" ?
@@ -353,7 +353,7 @@ export const TransactionOperation = (props: any) => {
                                             <div className="trans-op-basic">
                                                 {Object.keys(item.value).map((val: any) => {
                                                     return (
-                                                        <>
+                                                        <div key={val}>
                                                             {val==='from' && <>
                                                                 <span className="trans-owner-date">
                                                                     <img
@@ -379,7 +379,7 @@ export const TransactionOperation = (props: any) => {
                                                                 </span>
                                                                 </>
                                                             }
-                                                        </>
+                                                        </div>
                                                     )
                                                 })}
 
@@ -392,6 +392,6 @@ export const TransactionOperation = (props: any) => {
                     })}
                 </Card.Body>
             </Card>}
-        </>
+        </div>
     )
 }

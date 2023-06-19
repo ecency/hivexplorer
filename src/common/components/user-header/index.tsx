@@ -36,7 +36,7 @@ const UserHeader = (props: any) => {
   const [transferAmount, setTransferAmount] = useState(0);
   const [customJsonAmount, setCustomJsonAmount] = useState(0);
   const themeContrastColor = currTheme === "day" ? "#535e65" : "white";
-  console.log(resourceCredits)
+
   // Created Date
 
   const createdDate = CreatedDate(created);

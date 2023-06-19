@@ -106,12 +106,12 @@ const WitnessesTables = (props: any) => {
     return moment(timeSet).format(timeFormat);
   };
   const WitnessRow = (props: any) => {
-    const { witness } = props;
+    const { witness, key } = props;
     const [open, setOpen] = useState(allOpen);
 
     return (
       <>
-        <TableRow className="main-table-row" hover={true} role="checkbox" tabIndex={-1}>
+        <TableRow key={key} className="main-table-row" hover={true} role="checkbox" tabIndex={-1}>
           <TableCell>{witness.id}</TableCell>
           <TableCell>
             <UserAvatar username={witness.owner} size="small"/>
@@ -151,7 +151,7 @@ const WitnessesTables = (props: any) => {
             </IconButton>
           </TableCell>
         </TableRow>
-        <TableRow className="Nested-row">
+        <TableRow className="Nested-row" key={key+1}>
           <TableCell style={{ paddingBottom: 0, paddingTop: 0, borderTop: 0 }} colSpan={12}>
             <Collapse in={open} timeout="auto" unmountOnExit={true}>
               <Box margin={1}>

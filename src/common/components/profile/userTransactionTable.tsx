@@ -88,7 +88,6 @@ useEffect(() => {
   fetchData();
 }, [targetPage<1]);
 useEffect(() => {
- console.log('target page',targetPage)
  setPage(targetPage)
   const fetchData = async () => {
     setLoading(true);
@@ -96,7 +95,7 @@ useEffect(() => {
       const response = await getUserTransaction(user, transactionFrom, transactionLimit,selectedValues);
       
       const countStart=Math.ceil(response.reverse()[0][0])
-      console.log('count start',`${countStart}-(${targetPage}*250)`,response.reverse()[0][0]/250)
+      //console.log('count start',`${countStart}-(${targetPage}*250)`,response.reverse()[0][0]/250)
       const respPage = await getUserTransaction(user, countStart-(targetPage*250), transactionLimit,selectedValues);
       if(targetPage===1){
         setUserTransaction(response.reverse());
@@ -278,11 +277,10 @@ useEffect(() => {
             {userTransaction && 
             <Col md={6} className="pagination-col">
               <MyPagination dataLength={pageLimit} pageSize={250} maxItems={4} page={page} onPageChange={(page) => {
-                console.log(page)
-                    setPage(page)
-                    setTargetPage(page)
-                    history.push(`?page=${page}`);
-                }}/>
+                setPage(page)
+                setTargetPage(page)
+                history.push(`?page=${page}`);
+              }}/>
             </Col>}
      
           </Row>

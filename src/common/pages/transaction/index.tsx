@@ -36,7 +36,6 @@ const SingleTransaction = (props: any) => {
         const response = await getSingleTransaction(match.params.id);
         setResult(response);
         setTransData({type:response.operations[0][0]+'_operation',value:response.operations[0][1]})
-        console.log('trans',transData)
       } catch (error: any) {
         console.error(error.message);
       }

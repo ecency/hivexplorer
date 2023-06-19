@@ -11,7 +11,7 @@ export const getAccount = async (user: string) => {
 
 // Get RC Account
 export const getRCAccount = (user: string) => {
-  console.log(`${ConfigItems.baseUrl}/api/find_rc_accounts?accounts[]=${user}`)
+  console.debug(`${ConfigItems.baseUrl}/api/find_rc_accounts?accounts[]=${user}`)
   return `${ConfigItems.baseUrl}/api/find_rc_accounts?accounts[]=${user}`;
 };
 
@@ -60,7 +60,6 @@ export const getTransactions = async (block_num: number, isVirtual:boolean) => {
 // Get Single Transaction
 export const getSingleTransaction = async (transaction_id: number) => {
   const url_single_transaction = `${ConfigItems.baseUrl}/api/get_transaction?trx_id=${transaction_id}`;
-  console.log(url_single_transaction)
   const r = await axios.get(url_single_transaction);
   return r.data;
 };
@@ -71,7 +70,6 @@ export const getUserTransaction = async (
   filters: any[] | string,
 ) => {
   const user_transaction_url = `${ConfigItems.baseUrl}/api/get_account_history?account=${user}&start=${transactionFrom}&limit=${transactionLimit}&operation_type="${filters}"`;
-  console.log('URL',user_transaction_url)
   const r = await axios.get(user_transaction_url);
   let resp = r.data.history;
   // let collection:any = [];

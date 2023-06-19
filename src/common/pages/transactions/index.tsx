@@ -60,7 +60,7 @@ const AllTransactions = (props: any) => {
       {loading && <SpinnerEffect />}
       {!loading && transactions &&   <Container className="data-table-hive py-5">
         <div className="d-flex float-right">
-            <p>{_t("common.raw_format")}&nbsp; </p>
+            <p>{!cardView?_t("common.table_format"):_t("common.list_format")}&nbsp; </p>
               <div>
               <ToggleButton
                 inactiveLabel={""}

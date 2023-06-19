@@ -77,19 +77,19 @@ const UserAuthorities = (props: any) => {
           {Object.keys(props).map((authority, i: number) => {
             const field = props[authority];
             return (
-              <>
+              <tr key={i+authority+props[authority]} className="row-border">  
                 {authority === "memo_key" ? (
-                  <tr key={i+authority+props[authority]} className="row-border">
-                    <td className="pt-3 pl-4 pr-2 pb-3">{_t(`user-info.${authority}`)}</td>
-                    <td className="pt-3 px-4 pb-3">{props[authority]}</td>
-                  </tr>
+                <>
+                  <td className="pt-3 pl-4 pr-2 pb-3">{_t(`user-info.${authority}`)}</td>
+                  <td className="pt-3 px-4 pb-3">{props[authority]}</td>
+                </>
                 ) : authority !== "changeUser" ? (
-                  <tr key={i+authority+i+props[authority]} className="row-border">
+                  <>
                     <td className="pt-2 pl-4 pr-2 pb-2">{_t(`user-info.${authority}`)}</td>
                     <td className="pt-2 px-2 pb-2">
                       {Object.keys(field).map((key, l: number) => {
                         return (
-                          <>
+                          <div key={i+key+ field[key]+l}>
                             {field[key].length !== 0 && (
                               <Row id={`${i})}`} key={i+key+ field[key]+l} className="m-0 py-2 row-border-dotted">
                                 <>
@@ -124,15 +124,15 @@ const UserAuthorities = (props: any) => {
                                 </>
                               </Row>
                             )}
-                          </>
+                          </div>
                         );
                       })}
                     </td>
-                  </tr>
+                  </>
                 ) : (
                   <></>
                 )}
-              </>
+              </tr>
             );
           })}
         </tbody>

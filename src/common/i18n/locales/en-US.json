@@ -63,7 +63,8 @@
     "no_search_result": "No record found against searched input.",
     "transactions":"Transactions",
     "virtual_trx":"Virtual Transactions",
-    "raw_format":"Raw Format ",
+    "list_format":"List",
+    "table_format":"Table",
     "delegate":"delegate",
     "withdraw":"withdraw",
     "as":"as"
@@ -470,8 +471,8 @@
     "page_intro": "The Decentralized Hive Fund (DHF) is an on-chain funding mechanism that allows anyone to submit a proposal and get funding once community votes pass certain threshold."
   },
   "entry":{
-    "view_response":"Viewing a response to:",
-    "rendered_data":"Rendered Data",
+    "view_response":"Viewing responses to:",
+    "rendered_data":"Raw",
     "votes":"Votes",
     "properties":"Properties",
     "author":"Author",

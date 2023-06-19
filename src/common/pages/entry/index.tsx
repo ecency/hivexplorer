@@ -57,7 +57,7 @@ const EntryPage = (props: any) => {
               .slice(0, 1)
               .map((key, i: number) => {
                 return (
-                  <>
+                  <div key={entry[key].id+entry[key].post_id+i}>
                     <h2>{entry[key].title}</h2>
                     <div key={i}>
                       <div className="entry-header">
@@ -78,7 +78,7 @@ const EntryPage = (props: any) => {
                           <p>{entry[key].created}</p>
                         </div>
                         <div className="toggle-button-container">
-                          <p>{_t("entry.rendered_data")}</p>
+                          <div>{_t("entry.rendered_data")}&nbsp;</div>
                           <div>
                             <ToggleButton
                               inactiveLabel={""}
@@ -98,9 +98,7 @@ const EntryPage = (props: any) => {
                             <Card.Header>
                               <p className="m-0">
                                 {_t("entry.view_response")}{" "}
-                                <a
-                                  href={`/@${entry[key].parent_author}/${entry[key].parent_permlink}`}
-                                >{`@${entry[key].parent_author}/${entry[key].parent_permlink}`}</a>
+                                <Link to={`/@${entry[key].parent_author}/${entry[key].parent_permlink}`}>{`@${entry[key].parent_author}/${entry[key].parent_permlink}`}</Link>
                               </p>
                             </Card.Header>
                           </Card>
@@ -182,104 +180,102 @@ const EntryPage = (props: any) => {
                               .slice(1)
                               .map((key, i: number) => {
                                 return (
-                                  <>
-                                    <div key={i}>
-                                      <div className="permlink-discussion-content">
-                                        <Accordion
-                                          className={
-                                            currTheme === "day"
-                                              ? "accordion-day"
-                                              : "accordion_night"
-                                          }
-                                          defaultActiveKey={["0"]}
-                                          alwaysOpen={true}
+                                  <div key={i}>
+                                    <div className="permlink-discussion-content">
+                                      <Accordion
+                                        className={
+                                          currTheme === "day"
+                                            ? "accordion-day"
+                                            : "accordion_night"
+                                        }
+                                        defaultActiveKey={["0"]}
+                                        alwaysOpen={true}
+                                      >
+                                        <Accordion.Item
+                                          eventKey="0"
+                                          onClick={() => setOpenBody(!openBody)}
                                         >
-                                          <Accordion.Item
-                                            eventKey="0"
-                                            onClick={() => setOpenBody(!openBody)}
-                                          >
-                                            <Accordion.Body>
-                                              <div>
-                                                <p>
-                                                  <UserAvatar username={entry[key].author} size="small"/>
-                                                </p>
-                                                <p>
-                                                  {" "}
-                                                  <Link
-                                                    to={`/${entry[key].category}/@${entry[key].author}/${entry[key].permlink}`}
-                                                  >
-                                                    {entry[key].permlink}
-                                                  </Link>
-                                                </p>
-                                              </div>
+                                          <Accordion.Body>
+                                            <div>
+                                              <p>
+                                                <UserAvatar username={entry[key].author} size="small"/>
+                                              </p>
+                                              <p>
+                                                {" "}
+                                                <Link
+                                                  to={`/${entry[key].category}/@${entry[key].author}/${entry[key].permlink}`}
+                                                >
+                                                  {entry[key].permlink}
+                                                </Link>
+                                              </p>
+                                            </div>
 
-                                              {entry[key].body && (
-                                                <>
-                                                  {state ? (
-                                                    <pre className="pre-raw-format">
-                                                      {entry[key].body}
-                                                    </pre>
-                                                  ) : (
-                                                    <EntryBody body={entry[key].body} />
-                                                  )}
-                                                </>
-                                              )}
-                                            </Accordion.Body>
-                                          </Accordion.Item>
+                                            {entry[key].body && (
+                                              <>
+                                                {state ? (
+                                                  <pre className="pre-raw-format">
+                                                    {entry[key].body}
+                                                  </pre>
+                                                ) : (
+                                                  <EntryBody body={entry[key].body} />
+                                                )}
+                                              </>
+                                            )}
+                                          </Accordion.Body>
+                                        </Accordion.Item>
+                                        <Accordion.Item
+                                          eventKey="1"
+                                          onClick={() => setOpenProperties(!openProperties)}
+                                        >
+                                          <Accordion.Header>
+                                            <span>{_t("entry.properties")}</span>
+                                            <span>
+                                              {openProperties
+                                                ? showLessIcon(themeContrastColor)
+                                                : showMoreIcon(themeContrastColor)}
+                                            </span>
+                                          </Accordion.Header>
+                                          <Accordion.Body>
+                                            {entry[key] && (
+                                              <EntryProperties entries={entry[key]} />
+                                            )}
+                                          </Accordion.Body>
+                                        </Accordion.Item>
+                                        {entry[key].active_votes.length !== 0 && (
                                           <Accordion.Item
-                                            eventKey="1"
-                                            onClick={() => setOpenProperties(!openProperties)}
+                                            eventKey="2"
+                                            onClick={() => setOpenVotes(!openVotes)}
                                           >
                                             <Accordion.Header>
-                                              <span>{_t("entry.properties")}</span>
                                               <span>
-                                                {openProperties
+                                                <span className="mr-2">{_t("entry.votes")}</span>{" "}
+                                                {entry[key].active_votes && (
+                                                  <span>{` (${entry[key].active_votes.length}) `}</span>
+                                                )}
+                                              </span>
+                                              <span>
+                                                {openVotes
                                                   ? showLessIcon(themeContrastColor)
                                                   : showMoreIcon(themeContrastColor)}
                                               </span>
                                             </Accordion.Header>
                                             <Accordion.Body>
-                                              {entry[key] && (
-                                                <EntryProperties entries={entry[key]} />
-                                              )}
+                                              <EntryVotes
+                                                user={entry[key].author}
+                                                permlink={entry[key].permlink}
+                                              />
                                             </Accordion.Body>
                                           </Accordion.Item>
-                                          {entry[key].active_votes.length !== 0 && (
-                                            <Accordion.Item
-                                              eventKey="2"
-                                              onClick={() => setOpenVotes(!openVotes)}
-                                            >
-                                              <Accordion.Header>
-                                                <span>
-                                                  <span className="mr-2">{_t("entry.votes")}</span>{" "}
-                                                  {entry[key].active_votes && (
-                                                    <span>{` (${entry[key].active_votes.length}) `}</span>
-                                                  )}
-                                                </span>
-                                                <span>
-                                                  {openVotes
-                                                    ? showLessIcon(themeContrastColor)
-                                                    : showMoreIcon(themeContrastColor)}
-                                                </span>
-                                              </Accordion.Header>
-                                              <Accordion.Body>
-                                                <EntryVotes
-                                                  user={entry[key].author}
-                                                  permlink={entry[key].permlink}
-                                                />
-                                              </Accordion.Body>
-                                            </Accordion.Item>
-                                          )}
-                                        </Accordion>
-                                      </div>
+                                        )}
+                                      </Accordion>
                                     </div>
-                                  </>
+                                  </div>
                                 );
                               })}
                         </div>
                       </Accordion>
                     </div>
-                  </>
+                  </div>
                 );
               })}
         </>

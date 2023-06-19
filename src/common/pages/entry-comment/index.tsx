@@ -74,7 +74,7 @@ const EntryCommentPage = (props: any) => {
                           <p>{entry[key].created}</p>
                         </div>
                         <div className="toggle-button-container">
-                          <p>{_t("entry.rendered_data")}</p>
+                          <div>{_t("entry.rendered_data")}&nbsp;</div>
                           <div>
                             <ToggleButton
                               inactiveLabel={""}
@@ -94,9 +94,7 @@ const EntryCommentPage = (props: any) => {
                             <Card.Header>
                               <p className="m-0">
                                 {_t("entry.view_response")}{" "}
-                                <a
-                                  href={`/@${entry[key].parent_author}/${entry[key].parent_permlink}`}
-                                >{`@${entry[key].parent_author}/${entry[key].parent_permlink}`}</a>
+                                <Link to={`/@${entry[key].parent_author}/${entry[key].parent_permlink}`}>{`@${entry[key].parent_author}/${entry[key].parent_permlink}`}</Link>
                               </p>
                             </Card.Header>
                           </Card>

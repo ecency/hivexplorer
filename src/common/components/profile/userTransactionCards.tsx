@@ -39,9 +39,8 @@ const UserTransactionsCards = (props: any) => {
   
   const [targetPage,setTargetPage]=useState<number>(parseInt(window.location.search.split('=')[1]))
 
-// console.log('search',window.location.search.split('=')[1])
-const history = useHistory();
-const location = useLocation();
+  const history = useHistory();
+  const location = useLocation();
 
   useEffect(() => {
 
@@ -59,7 +58,6 @@ const location = useLocation();
     fetchData();
   }, [targetPage<1]);
   useEffect(() => {
-   console.log('target page',targetPage)
    setPage(targetPage)
     const fetchData = async () => {
       setLoading(true);
@@ -67,7 +65,7 @@ const location = useLocation();
         const response = await getUserTransaction(user, transactionFrom, transactionLimit,selectedValues);
         
         const countStart=Math.ceil(response.reverse()[0][0])
-        console.log('count start',`${countStart}-(${targetPage}*250)`,response.reverse()[0][0]/250)
+        //console.log('count start',`${countStart}-(${targetPage}*250)`,response.reverse()[0][0]/250)
         const respPage = await getUserTransaction(user, countStart-(targetPage*250), transactionLimit,selectedValues);
         if(targetPage===1 || Number.isNaN(targetPage)){
           setUserTransaction(response.reverse());
@@ -161,11 +159,10 @@ const location = useLocation();
             {userTransaction && selectedValues.length===0  && 
             <Col md={6} className="pagination-col">
               <MyPagination dataLength={pageLimit} pageSize={250} maxItems={4} page={page} onPageChange={(page) => {
-                console.log(page)
-                    setPage(page)
-                    setTargetPage(page)
-                    history.push(`?page=${page}`);
-                }}/>
+                setPage(page)
+                setTargetPage(page)
+                history.push(`?page=${page}`);
+              }}/>
             </Col>}
      
           </Row>
@@ -177,10 +174,7 @@ const location = useLocation();
                     .map((transaction: any, i: number) => {
                        const transactionInfo=transaction[1]
                       return(
-                        <>  
-                            <TransactionOperation trans_no={transactionInfo.trx_id} trans_data={[transactionInfo.op]} time={transactionInfo.timestamp} trx_status={transactionInfo.virtual_op}/>
-                            {/* <TransactionCard transaction={transaction} transactionFields={transactionInfo} transactionOp={opVal} />  */}
-                        </>
+                        <TransactionOperation key={transactionInfo.trx_id+transactionInfo.timestamp+transactionInfo.block+transactionInfo.op_in_trx} trans_no={transactionInfo.trx_id} trans_data={[transactionInfo.op]} time={transactionInfo.timestamp} trx_status={transactionInfo.virtual_op}/>
                       );
                     })}
             </TableBody>
