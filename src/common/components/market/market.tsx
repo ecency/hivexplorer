@@ -154,6 +154,11 @@ class Market extends BaseComponent<Props, State> {
           fillColor: theme === Theme.night ? "#2e3d51" : "#f3f7fb",
           lineColor: "#81acef",
           lineWidth: 3
+        },
+        line: {
+          marker: {
+            enabled: false
+          }
         }
       },
       tooltip: {
