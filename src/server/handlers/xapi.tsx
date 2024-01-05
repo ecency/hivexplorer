@@ -5,7 +5,7 @@ import { filter, isArray } from "lodash";
 import { methods } from "./methods";
 import { cache } from "../cache";
 
-const client = new Client(["https://rpc.ecency.com", "https://api.deathwing.me"]);
+const client = new Client(["https://api.hive.blog", "https://api.deathwing.me","https://anyx.io"]);
 const parseQuery = (query: any) => {
   let newQuery = {};
   Object.keys(query).map((key) => {
