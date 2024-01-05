@@ -16,7 +16,7 @@ export const OperationCardData=(props:any)=>{
     const dateRelative = dateToRelative(time);
     const dateFormatted = dateToFormatted(time);
     const [renderedStrings, setRenderedStrings] = useState([]);
-    var name: string
+    let name: string
     return(
         <>
             <div className="trans_card_header">
@@ -31,7 +31,7 @@ export const OperationCardData=(props:any)=>{
                             name = value[val][0]
                         }
                         return (
-                            <>
+                            <div key={value[val]+val+index}>
                                 {transAvatars.includes(val) && value[val][0] !== undefined &&
                                     <>
 
@@ -51,11 +51,11 @@ export const OperationCardData=(props:any)=>{
                                             <span>
                                                 <Link to={typeof (value[val] === 'string') && index===0?`/@${value[val]}`:`/@${value[val][0]}`}>{typeof (value[val] === 'string') && index===0? value[val]:value[val][0]}&nbsp;</Link>
                                                 <span dangerouslySetInnerHTML={{ __html: type==='comment_operation' && value.hasOwnProperty('parent_permlink')? 'replied to' : type==='comment_operation' && value.hasOwnProperty('comment_permlink')? 'comments to':text}} />
-                                                
+
                                                 {type==='vote_operation' && <span >
                                                     {value.weight && <span>&nbsp;({parseFloat(value.weight) / 100}%)</span>}
                                                     <Link to={`/@${value.author}/${value.permlink}`}>&nbsp;@{value.author}/{value.permlink}</Link>
-                                                   
+
                                                 </span>}
                                                 {type==='comment_operation' &&  value.hasOwnProperty('parent_permlink') && <span >
                                                     <Link to={`/@${value.parent_author}/${value.parent_permlink}`}>&nbsp;@{value.parent_author}/{value.parent_permlink}</Link>
@@ -70,7 +70,7 @@ export const OperationCardData=(props:any)=>{
                                                 </span>}
                                                 {type==='delegate_vesting_shares_operation' && <span>
                                                 &nbsp;{_t('common.delegate')} {parseAsset(value.vesting_shares).amount+' '+parseAsset(value.vesting_shares).symbol} {_t('common.to')} {value.delegatee}
-                                                   
+
                                                 </span>}
                                                 {type==='curation_reward_operation' && <span>
                                                     :&nbsp;{parseAsset(value.reward).amount+' '+parseAsset(value.reward).symbol} {_t('common.for')} <Link to={`/@${value.comment_author}/${value.comment_permlink}`}>&nbsp;@{value.comment_author}/{value.comment_permlink}</Link>
@@ -79,13 +79,13 @@ export const OperationCardData=(props:any)=>{
                                                     &nbsp;{parseAsset(value.min_to_receive).amount+' '+parseAsset(value.min_to_receive).symbol} {_t('common.for')} {parseAsset(value.amount_to_sell).amount+' '+parseAsset(value.amount_to_sell).symbol}
                                                 </span>}
                                                 {type==='comment_benefactor_reward_operation' && <span>
-                                                    :&nbsp;{parseAsset(value.hbd_payout).amount+' '+parseAsset(value.hbd_payout).symbol} {_t('common.and')} 
-                                                    :&nbsp;{parseAsset(value.vesting_payout).amount+' '+parseAsset(value.vesting_payout).symbol} {_t('common.for')} 
+                                                    :&nbsp;{parseAsset(value.hbd_payout).amount+' '+parseAsset(value.hbd_payout).symbol} {_t('common.and')}
+                                                    :&nbsp;{parseAsset(value.vesting_payout).amount+' '+parseAsset(value.vesting_payout).symbol} {_t('common.for')}
                                                     <Link to={`/@${value.author}/${value.permlink}`}>&nbsp;@{value.author}/{value.permlink}</Link>
                                                 </span>}
                                                 {type==='fill_vesting_withdraw_operation' && <span>
-                                                    {_t('common.withdraw')}&nbsp;{parseAsset(value.withdrawn).amount+' '+parseAsset(value.withdrawn).symbol} {_t('common.as')} 
-                                                    &nbsp;{parseAsset(value.deposited).amount+' '+parseAsset(value.deposited).symbol} {_t('common.to')} 
+                                                    {_t('common.withdraw')}&nbsp;{parseAsset(value.withdrawn).amount+' '+parseAsset(value.withdrawn).symbol} {_t('common.as')}
+                                                    &nbsp;{parseAsset(value.deposited).amount+' '+parseAsset(value.deposited).symbol} {_t('common.to')}
                                                     <Link to={`/@${value.to_account}`}>&nbsp;{value.to_account}</Link>
                                                     &nbsp;(<span className="text-action" onClick={()=>setShowTable(!showTable)}>show details</span>)
                                                 </span>}
@@ -95,7 +95,7 @@ export const OperationCardData=(props:any)=>{
                                                 {type==='feed_publish_operation' && <span>
                                                     &nbsp;{parseAsset(value.exchange_rate.base).amount+' '+parseAsset(value.exchange_rate.base).symbol}
                                                 </span>}
-                                                
+
                                                 {type==='comment_options_operation' && <span>
                                                     &nbsp;{value.percent_hbd}% HBD, {_t('operation.allow_votes')}: {value.allow_votes.toString()}, {_t('operation.allow_curation_rewards')}: {value.allow_curation_rewards.toString()}
                                                 </span>}
@@ -108,25 +108,25 @@ export const OperationCardData=(props:any)=>{
                                                 {type==='fill_order_operation' && <span >
                                                     &nbsp;{parseAsset(value.current_pays).amount+' '+parseAsset(value.current_pays).symbol} {_t('common.for')} {parseAsset(value.open_pays).amount+' '+parseAsset(value.open_pays).symbol}  {_t('common.from')}&nbsp;<Link to={`/@${value.open_owner}`}>{value.open_owner}</Link>
                                                 </span>}
-                                           
+
                                                 <span className="time-span">
                                                     &nbsp;(<span className="date" title={dateFormatted}>{dateRelative}</span>)
                                                 </span>
                                             </span>
-                                            
-                                               
+
+
                                         </span>
-                                         
+
                                         </>}
-                                        
+
                                     </>
                                 }
-                            </>
+                            </div>
                         )
                     })}
 
                 </div>
-              
+
 
             </div>
             {showTable && <table  className="transaction-operation-table">
@@ -134,15 +134,15 @@ export const OperationCardData=(props:any)=>{
                     {Object.keys(value).map((val: any, index: number) => {
                         return (
                             <>
-                                {typeof(value[val]) ==='object' && ObjectFieldArray.includes(val) ? 
+                                {typeof(value[val]) ==='object' && ObjectFieldArray.includes(val) ?
                                 <tr key={val + index +value.id}>
                                     <th className="th-operation">{val}</th>
                                     <td>{parseAsset(value[val]).amount+' '+parseAsset(value[val]).symbol}</td>
                                 </tr>
                                 :
-                                typeof(value[val]) ==='object' && !ObjectFieldArray.includes(val) ? 
+                                typeof(value[val]) ==='object' && !ObjectFieldArray.includes(val) ?
                                 <tr key={index}>
-                               
+
                                 <td>
                                    {val}
                                 </td>

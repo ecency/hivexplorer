@@ -19,7 +19,6 @@ import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 
 import { _t } from "../../i18n";
 import { UserTransactionType } from "../../pages/profile/userTypes";
-import TransactionOperationTable from "../../pages/profile/userOpTable";
 import SpinnerEffect from "../loader/spinner";
 import { TimestampField } from "../fields/blockFields/DateTimeTable";
 import { AscendingIcon, DescendingIcon } from "../../img/svg";
@@ -93,7 +92,7 @@ useEffect(() => {
     setLoading(true);
     try {
       const response = await getUserTransaction(user, transactionFrom, transactionLimit,selectedValues);
-      
+
       const countStart=Math.ceil(response.reverse()[0][0])
       //console.log('count start',`${countStart}-(${targetPage}*250)`,response.reverse()[0][0]/250)
       const respPage = await getUserTransaction(user, countStart-(targetPage*250), transactionLimit,selectedValues);
@@ -143,12 +142,12 @@ useEffect(() => {
   };
   const handleRemove = (value: string) => {
     setSelectedValues(selectedValues.filter((val) => val !== value));
-  
+
   };
   const filteredOptions = options_operations.filter((option:any) =>
     option.label.toLowerCase().includes(searchValue.toLowerCase())
   );
- 
+
   const sortTransaction = (colName: string, sortState: boolean) => {
     if (colName === `${_t("common.block")}` && sortState === true) {
       setUserTransaction(
@@ -258,7 +257,7 @@ useEffect(() => {
             />
             </Col>
             {/* <Col lg={6}>
-          
+
             </Col> */}
           </Row>
 
@@ -274,7 +273,7 @@ useEffect(() => {
 
              />
             </Col>
-            {userTransaction && 
+            {userTransaction &&
             <Col md={6} className="pagination-col">
               <MyPagination dataLength={pageLimit} pageSize={250} maxItems={4} page={page} onPageChange={(page) => {
                 setPage(page)
@@ -282,7 +281,7 @@ useEffect(() => {
                 history.push(`?page=${page}`);
               }}/>
             </Col>}
-     
+
           </Row>
           <br />
 
@@ -291,11 +290,10 @@ useEffect(() => {
                 <TableRow className="card-header">
                   {columns.map((column, index) => {
                     return (
-                      <>
+                      <div key={index + 1 +column.label}>
                         {column.label === `${_t("common.block")}` ? (
                           <TableCell
                             className={`card-header px-2 col-w-${column.width} card-header-sort`}
-                            key={index + 1 +column.label}
                           >
                             {
                               <>
@@ -336,7 +334,7 @@ useEffect(() => {
                             )}
                           </TableCell>
                         )}
-                      </>
+                      </div>
                     );
                   })}
                 </TableRow>

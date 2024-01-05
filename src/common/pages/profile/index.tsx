@@ -34,42 +34,40 @@ interface RCState {
 const UserPage = (props: any) => {
   const { match } = props;
   const [userAccount, setUserAccount] = useState<UserList>();
-  const [value, setValue] = useState(0);
   const [loading, setLoading] = useState(true);
   const [rcAccount, setRCAccount] = useState<RCAccount>();
 
   const [ownerHistory, setOwnerHistory] = useState([]);
   const [userId, setUserId] = useState(match.params.user_id);
   const allTabs = [`/@${userId}`, `/@${userId}/transactions`, `/@${userId}/authorities`, `/@${userId}/owner-history`];
-  const [valueID, setValueID] = useState(allTabs.indexOf(match.url));
+  const [value, setValue] = useState(allTabs.indexOf(match.url));
   const rc_account_url = getRCAccount(userId);
   const owner_history_url = getOwnerHistory(userId);
   const currTheme = useSelector((state: any) => state.global.theme);
   const themeContrastColor = currTheme === "day" ? "#535e65" : "#ffffffde";
   const [cardView, setCardView] = useState(true);
+
+  const fetchData = async () => {
+    setLoading(true);
+    try {
+      const response = await getAccount(userId);
+      setUserAccount(response);
+    } catch (error: any) {
+      console.error(error.message);
+    }
+    setLoading(false);
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const response = await getAccount(userId);
-        setUserAccount(response);
-      } catch (error: any) {
-        console.error(error.message);
-      }
-      setLoading(false);
-    };
     fetchData();
-  }, [userId]);
-  useEffect(() => {
     axios.get(owner_history_url).then((res) => {
       setOwnerHistory(res.data);
     });
-  }, [userId]);
-  useEffect(() => {
     axios.get(rc_account_url).then((res) => {
       setRCAccount(res.data.rc_accounts[0]);
     });
   }, [userId]);
+
   // useEffect(() => {
   //   const fetchData = async () => {
   //     setLoading(true);
@@ -89,9 +87,8 @@ const UserPage = (props: any) => {
       "aria-controls": `user-tabpanel-${index}`
     };
   }
-  const handleChange = (event: any, newValue: string) => {
-
-    setValueID(allTabs.indexOf(newValue));
+  const handleChange = (event: any, newValue: number) => {
+    setValue(newValue);
   };
   const changeUser = (val: string) => {
     setUserId(val);
@@ -99,7 +96,7 @@ const UserPage = (props: any) => {
 
   function TabPaneUser(props: any) {
     const { children, value, index, ...other } = props;
-  
+
     return (
       <div
         role="tabpanel"
@@ -112,7 +109,7 @@ const UserPage = (props: any) => {
       </div>
     );
   }
-  
+
   TabPaneUser.propTypes = {
     children: PropTypes.node,
     index: PropTypes.any.isRequired,
@@ -158,41 +155,34 @@ const UserPage = (props: any) => {
                 {/* Tabs view Section */}
                 <Card className="user-card">
                   <Card.Header className="p-0">
-                    <Tabs className="user-tabs" value={allTabs[value]} onChange={handleChange} aria-label="simple tabs example">
-                      <Tab  
-                          label={_t("common.info")}  
-                          value={`/@${userId}`}
+                    <Tabs className="user-tabs" value={value} onChange={handleChange} aria-label="simple tabs example">
+                      <Tab
+                          label={_t("common.info")}
                           component={Link}
                           to={allTabs[0]}
-                          disabled={valueID===0?true:false} 
-                            {...a11yProps(0)} />
-                      <Tab 
+                            {...a11yProps(0)}
+                      />
+                      <Tab
                           label={_t("common.transaction")}
-                          value={`/@${userId}/transactions`}
                           component={Link}
                           to={allTabs[1]}
-                          disabled={valueID===1?true:false}  
                           {...a11yProps(1)} />
-                      <Tab 
+                      <Tab
                           label={_t("common.authorities")}
-                          value={`/@${userId}/authorities`}
                           component={Link}
                           to={allTabs[2]}
-                          disabled={valueID===2?true:false}  
                           {...a11yProps(2)} />
                       {ownerHistory && ownerHistory.length > 0 && (
-                      <Tab 
+                      <Tab
                           label={_t("common.owner_history")}
-                          value={`/@${userId}/owner-history`}
                           component={Link}
                           to={allTabs[3]}
-                          disabled={valueID===3?true:false}  
                           {...a11yProps(3)} />
                       )}
                     </Tabs>
                   </Card.Header>
                   <Card.Body className="py-0 user-info-card-body">
-                    <TabPaneUser value={valueID} index={0}>
+                    <TabPaneUser value={value} index={0}>
                       {Object.keys(user).map((k, index) => {
                         return typeof user[k] !== "object" && typeof user[k] !== "boolean" ? (
                           <StringField
@@ -225,25 +215,11 @@ const UserPage = (props: any) => {
                         );
                       })}
                     </TabPaneUser>
-                    <TabPaneUser value={valueID} index={1} >
-                      <div className="d-flex pt-4 justify-content-end">
-                        <p>{!cardView?_t("common.table_format"):_t("common.list_format")}&nbsp;</p>
-                        <div>
-                          <ToggleButton
-                            inactiveLabel={""}
-                            activeLabel={""}
-                            value={cardView}
-                            text="n"
-                            onToggle={() => {
-                              setCardView(!cardView);
-                            }}
-                          />
-                        </div>
-                      </div>
-                      <>{cardView ? <UserTransactionsCards user={`${userId}`} /> : <UserTransactionsTable user={`${userId}`} />}</>
+                    <TabPaneUser value={value} index={1} >
+                      <UserTransactionsCards user={`${userId}`} />
                       {/* {<UserTransactionsTable user={`${userId}`} />} */}
                     </TabPaneUser>
-                    <TabPaneUser value={valueID} index={2}>
+                    <TabPaneUser value={value} index={2}>
                       {
                         <UserAuthorities
                           changeUser={changeUser}
@@ -254,7 +230,7 @@ const UserPage = (props: any) => {
                         />
                       }
                     </TabPaneUser>
-                    <TabPaneUser value={valueID} index={3}>
+                    <TabPaneUser value={value} index={3}>
                       {<UserHistory changeUser={changeUser} ownerHistory={ownerHistory} />}
                     </TabPaneUser>
                   </Card.Body>
