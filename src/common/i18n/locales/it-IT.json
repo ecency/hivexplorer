@@ -155,7 +155,7 @@
   },
   "about": {
     "page_title": "About",
-    "page_description": "Hivexplorer is build with ❤️ by Ecency team. <br/><br/>It is <a href='https://github.com/ecency/hivexplorer' target='_blank'>opensource block explorer</a> for <a href='https://hive.io' target='_blank'>Hive</a> blockchain. It is easy to get started API provider for Hive developers as well. <br/><br/>To support our efforts please go to <b><a href='https://ecency.com/proposals/245' target='_blank'>here</a></b> and consider voting. To reach out, please join our <a href='https://discord.me/ecency' target='_blank'>Discord channel</a>."
+    "page_description": "Hivexplorer is build with ❤️ by Ecency team. <br/><br/>It is <a href='https://github.com/ecency/hivexplorer' target='_blank'>opensource block explorer</a> for <a href='https://hive.io' target='_blank'>Hive</a> blockchain. It is easy to get started API provider for Hive developers as well. <br/><br/>To support our efforts please go to <b><a href='https://ecency.com/proposals?filter=team' target='_blank'>here</a></b> and consider voting. To reach out, please join our <a href='https://discord.me/ecency' target='_blank'>Discord channel</a>."
   },
   "table_column": {
     "type": "Type",
