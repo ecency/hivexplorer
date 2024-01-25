@@ -49,7 +49,7 @@ export const OperationCardData=(props:any)=>{
                                             />
 
                                             <span>
-                                                <Link to={typeof (value[val] === 'string') && index===0?`/@${value[val]}`:`/@${value[val][0]}`}>{typeof (value[val] === 'string') && index===0? value[val]:value[val][0]}&nbsp;</Link>
+                                                <Link to={typeof (value[val] === 'string') && index===0?`/@${value[val]}`:`/@${value[val][0]}`}>{typeof (value[val] === 'string') ? value[val]:value[val][0]}&nbsp;</Link>
                                                 <span dangerouslySetInnerHTML={{ __html: type==='comment_operation' && value.hasOwnProperty('parent_permlink')? 'replied to' : type==='comment_operation' && value.hasOwnProperty('comment_permlink')? 'comments to':text}} />
 
                                                 {type==='vote_operation' && <span >
