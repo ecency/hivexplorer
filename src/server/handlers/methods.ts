@@ -290,6 +290,488 @@ export const methods = [
     }`
   },
   {
+    api: "account_history_api",
+    method: "enum_virtual_ops",
+    params: ["block_range_begin", "block_range_end","include_reversible","group_by_block","operation_begin","limit","filter"],
+    description:_t("account_history_api.enum_virtual_ops"),
+    url:`${ConfigItems.baseUrl}/api/enum_virtual_ops?block_range_begin=20000000&block_range_end=20002000&include_reversible=true&group_by_block=true&operation_begin=0&limit=10&filter=2`,
+    parameter: `<ul>
+      <li><code class="language-plaintext highlighter-rouge">block_range_begin:int</code> starting block number (inclusive) to search for virtual operations</li>
+      <li><code class="language-plaintext highlighter-rouge">block_range_end:int</code> last block number (exclusive) to search for virtual operations</li>
+      <li><code class="language-plaintext highlighter-rouge">include_reversible:boolean</code> (optional) If set to true also operations from reversible block will be included if block_num points to such block.</li>
+      <li><code class="language-plaintext highlighter-rouge">group_by_block</code> (optional) true/false</li>
+      <li><code class="language-plaintext highlighter-rouge">operation_begin</code> (optional) starting virtual operation in given block (inclusive)</li>
+      <li><code class="language-plaintext highlighter-rouge">limit</code> (optional) a limit of retrieved operations</li>
+      <li><code class="language-plaintext highlighter-rouge">filter</code> (optional) a filter that decides which an operation matches - used bitwise filtering equals to position such as:
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">fill_convert_request_operation                        = 0x000001</code></li>
+          <li><code class="language-plaintext highlighter-rouge">author_reward_operation                               = 0x000002</code></li>
+          <li><code class="language-plaintext highlighter-rouge">curation_reward_operation                             = 0x000004</code></li>
+          <li><code class="language-plaintext highlighter-rouge">comment_reward_operation                              = 0x000008</code></li>
+          <li><code class="language-plaintext highlighter-rouge">liquidity_reward_operation                            = 0x000010</code></li>
+          <li><code class="language-plaintext highlighter-rouge">interest_operation                                    = 0x000020</code></li>
+          <li><code class="language-plaintext highlighter-rouge">fill_vesting_withdraw_operation                       = 0x000040</code></li>
+          <li><code class="language-plaintext highlighter-rouge">fill_order_operation                                  = 0x000080</code></li>
+          <li><code class="language-plaintext highlighter-rouge">shutdown_witness_operation                            = 0x000100</code></li>
+          <li><code class="language-plaintext highlighter-rouge">fill_transfer_from_savings_operation                  = 0x000200</code></li>
+          <li><code class="language-plaintext highlighter-rouge">hardfork_operation                                    = 0x000400</code></li>
+          <li><code class="language-plaintext highlighter-rouge">comment_payout_update_operation                       = 0x000800</code></li>
+          <li><code class="language-plaintext highlighter-rouge">return_vesting_delegation_operation                   = 0x001000</code></li>
+          <li><code class="language-plaintext highlighter-rouge">comment_benefactor_reward_operation                   = 0x002000</code></li>
+          <li><code class="language-plaintext highlighter-rouge">producer_reward_operation                             = 0x004000</code></li>
+          <li><code class="language-plaintext highlighter-rouge">clear_null_account_balance_operation                  = 0x008000</code></li>
+          <li><code class="language-plaintext highlighter-rouge">proposal_pay_operation                                = 0x010000</code></li>
+          <li><code class="language-plaintext highlighter-rouge">sps_fund_operation                                    = 0x020000</code></li>
+          <li><code class="language-plaintext highlighter-rouge">hardfork_hive_operation                               = 0x040000</code></li>
+          <li><code class="language-plaintext highlighter-rouge">hardfork_hive_restore_operation                       = 0x080000</code></li>
+          <li><code class="language-plaintext highlighter-rouge">delayed_voting_operation                              = 0x100000</code></li>
+          <li><code class="language-plaintext highlighter-rouge">consolidate_treasury_balance_operation                = 0x200000</code></li>
+          <li><code class="language-plaintext highlighter-rouge">effective_comment_vote_operation                      = 0x400000</code></li>
+          <li><code class="language-plaintext highlighter-rouge">ineffective_delete_comment_operation                  = 0x800000</code></li>
+          <li><code class="language-plaintext highlighter-rouge">sps_convert_operation                                 = 0x1000000</code></li>
+          <li><code class="language-plaintext highlighter-rouge">dhf_funding_operation                                 = 0x0020000</code></li>
+          <li><code class="language-plaintext highlighter-rouge">dhf_conversion_operation                              = 0x1000000</code></li>
+          <li><code class="language-plaintext highlighter-rouge">expired_account_notification_operation                = 0x2000000</code></li>
+          <li><code class="language-plaintext highlighter-rouge">changed_recovery_account_operation                    = 0x4000000</code></li>
+          <li><code class="language-plaintext highlighter-rouge">transfer_to_vesting_completed_operation               = 0x8000000</code></li>
+          <li><code class="language-plaintext highlighter-rouge">pow_reward_operation                                  = 0x10000000</code></li>
+          <li><code class="language-plaintext highlighter-rouge">vesting_shares_split_operation                        = 0x20000000</code></li>
+          <li><code class="language-plaintext highlighter-rouge">account_created_operation                             = 0x40000000</code></li>
+          <li><code class="language-plaintext highlighter-rouge">fill_collateralized_convert_request_operation         = 0x80000000</code></li>
+          <li><code class="language-plaintext highlighter-rouge">system_warning_operation                              = 0x100000000</code></li>
+          <li><code class="language-plaintext highlighter-rouge">fill_recurrent_transfer_operation                     = 0x200000000</code></li>
+          <li><code class="language-plaintext highlighter-rouge">failed_recurrent_transfer_operation                   = 0x400000000</code></li>
+          <li><code class="language-plaintext highlighter-rouge">limit_order_cancelled_operation                       = 0x800000000</code></li>
+          <li><code class="language-plaintext highlighter-rouge">producer_missed_operation                             = 0x1000000000</code></li>
+          <li><code class="language-plaintext highlighter-rouge">proposal_fee_operation                                = 0x2000000000</code></li>
+          <li><code class="language-plaintext highlighter-rouge">collateralized_convert_immediate_conversion_operation = 0x4000000000</code></li>
+          <li><code class="language-plaintext highlighter-rouge">escrow_approved_operation                             = 0x8000000000</code></li>
+          <li><code class="language-plaintext highlighter-rouge">escrow_rejected_operation                             = 0x10000000000</code></li>
+          <li><code class="language-plaintext highlighter-rouge">proxy_cleared_operation                               = 0x20000000000</code></li>
+        </ul>
+      </li>
+    </ul>`,
+    response: `{
+      "next_block_range_begin": 20000007,
+      "next_operation_begin": "85899375984791605",
+      "ops": [],
+      "ops_by_block": [
+        {
+          "block": 20000000,
+          "irreversible": true,
+          "ops": [
+            {
+              "block": 20000000,
+              "op": {
+                "type": "author_reward_operation",
+                "value": {
+                  "author": "gemsborg",
+                  "curators_vesting_payout": {
+                    "amount": "30661469",
+                    "nai": "@@000000037",
+                    "precision": 6
+                  },
+                  "hbd_payout": {
+                    "amount": "261",
+                    "nai": "@@000000013",
+                    "precision": 3
+                  },
+                  "hive_payout": {
+                    "amount": "0",
+                    "nai": "@@000000021",
+                    "precision": 3
+                  },
+                  "payout_must_be_claimed": true,
+                  "permlink": "kingfisher-looks-totally-at-home-perched-on-the-roadside-f81d2d05fcbc9",
+                  "vesting_payout": {
+                    "amount": "126734073",
+                    "nai": "@@000000037",
+                    "precision": 6
+                  }
+                }
+              },
+              "op_in_trx": 5,
+              "operation_id": "85899345920018995",
+              "timestamp": "2018-02-19T07:16:54",
+              "trx_id": "0000000000000000000000000000000000000000",
+              "trx_in_block": 4294967295,
+              "virtual_op": true
+            },
+            {
+              "block": 20000000,
+              "op": {
+                "type": "author_reward_operation",
+                "value": {
+                  "author": "ivelina89",
+                  "curators_vesting_payout": {
+                    "amount": "874873929",
+                    "nai": "@@000000037",
+                    "precision": 6
+                  },
+                  "hbd_payout": {
+                    "amount": "2865",
+                    "nai": "@@000000013",
+                    "precision": 3
+                  },
+                  "hive_payout": {
+                    "amount": "0",
+                    "nai": "@@000000021",
+                    "precision": 3
+                  },
+                  "payout_must_be_claimed": true,
+                  "permlink": "friends-forever",
+                  "vesting_payout": {
+                    "amount": "1365457442",
+                    "nai": "@@000000037",
+                    "precision": 6
+                  }
+                }
+              },
+              "op_in_trx": 12,
+              "operation_id": "85899345920020787",
+              "timestamp": "2018-02-19T07:16:54",
+              "trx_id": "0000000000000000000000000000000000000000",
+              "trx_in_block": 4294967295,
+              "virtual_op": true
+            }
+          ],
+          "timestamp": "2018-02-19T07:16:54"
+        },
+        {
+          "block": 20000003,
+          "irreversible": true,
+          "ops": [
+            {
+              "block": 20000003,
+              "op": {
+                "type": "author_reward_operation",
+                "value": {
+                  "author": "s4heart",
+                  "curators_vesting_payout": {
+                    "amount": "921888178",
+                    "nai": "@@000000037",
+                    "precision": 6
+                  },
+                  "hbd_payout": {
+                    "amount": "3277",
+                    "nai": "@@000000013",
+                    "precision": 3
+                  },
+                  "hive_payout": {
+                    "amount": "0",
+                    "nai": "@@000000021",
+                    "precision": 3
+                  },
+                  "payout_must_be_claimed": true,
+                  "permlink": "adobe-illustrator-cc-bangla-tutorial-part-08",
+                  "vesting_payout": {
+                    "amount": "1563734936",
+                    "nai": "@@000000037",
+                    "precision": 6
+                  }
+                }
+              },
+              "op_in_trx": 8,
+              "operation_id": "85899358804934707",
+              "timestamp": "2018-02-19T07:17:03",
+              "trx_id": "0000000000000000000000000000000000000000",
+              "trx_in_block": 4294967295,
+              "virtual_op": true
+            }
+          ],
+          "timestamp": "2018-02-19T07:17:03"
+        },
+        {
+          "block": 20000004,
+          "irreversible": true,
+          "ops": [
+            {
+              "block": 20000004,
+              "op": {
+                "type": "author_reward_operation",
+                "value": {
+                  "author": "jiruu",
+                  "curators_vesting_payout": {
+                    "amount": "16352783",
+                    "nai": "@@000000037",
+                    "precision": 6
+                  },
+                  "hbd_payout": {
+                    "amount": "68",
+                    "nai": "@@000000013",
+                    "precision": 3
+                  },
+                  "hive_payout": {
+                    "amount": "0",
+                    "nai": "@@000000021",
+                    "precision": 3
+                  },
+                  "payout_must_be_claimed": true,
+                  "permlink": "walk-with-me-training-6b00edfc9e172",
+                  "vesting_payout": {
+                    "amount": "34749665",
+                    "nai": "@@000000037",
+                    "precision": 6
+                  }
+                }
+              },
+              "op_in_trx": 6,
+              "operation_id": "85899363099888691",
+              "timestamp": "2018-02-19T07:17:06",
+              "trx_id": "0000000000000000000000000000000000000000",
+              "trx_in_block": 4294967295,
+              "virtual_op": true
+            }
+          ],
+          "timestamp": "2018-02-19T07:17:06"
+        },
+        {
+          "block": 20000005,
+          "irreversible": true,
+          "ops": [
+            {
+              "block": 20000005,
+              "op": {
+                "type": "author_reward_operation",
+                "value": {
+                  "author": "derletwins",
+                  "curators_vesting_payout": {
+                    "amount": "468098430",
+                    "nai": "@@000000037",
+                    "precision": 6
+                  },
+                  "hbd_payout": {
+                    "amount": "1951",
+                    "nai": "@@000000013",
+                    "precision": 3
+                  },
+                  "hive_payout": {
+                    "amount": "0",
+                    "nai": "@@000000021",
+                    "precision": 3
+                  },
+                  "payout_must_be_claimed": true,
+                  "permlink": "start-right-episode-19-do-it-now",
+                  "vesting_payout": {
+                    "amount": "930064566",
+                    "nai": "@@000000037",
+                    "precision": 6
+                  }
+                }
+              },
+              "op_in_trx": 12,
+              "operation_id": "85899367394860595",
+              "timestamp": "2018-02-19T07:17:09",
+              "trx_id": "0000000000000000000000000000000000000000",
+              "trx_in_block": 4294967295,
+              "virtual_op": true
+            }
+          ],
+          "timestamp": "2018-02-19T07:17:09"
+        },
+        {
+          "block": 20000006,
+          "irreversible": true,
+          "ops": [
+            {
+              "block": 20000006,
+              "op": {
+                "type": "author_reward_operation",
+                "value": {
+                  "author": "tikotiko",
+                  "curators_vesting_payout": {
+                    "amount": "4088195",
+                    "nai": "@@000000037",
+                    "precision": 6
+                  },
+                  "hbd_payout": {
+                    "amount": "25",
+                    "nai": "@@000000013",
+                    "precision": 3
+                  },
+                  "hive_payout": {
+                    "amount": "0",
+                    "nai": "@@000000021",
+                    "precision": 3
+                  },
+                  "payout_must_be_claimed": true,
+                  "permlink": "re-trumpman-til-animal-prostitution-is-a-real-thing-and-u-s-military-had-developed-an-experimental-bomb-with-real-bats-20180212t071710685z",
+                  "vesting_payout": {
+                    "amount": "12264587",
+                    "nai": "@@000000037",
+                    "precision": 6
+                  }
+                }
+              },
+              "op_in_trx": 4,
+              "operation_id": "85899371689827891",
+              "timestamp": "2018-02-19T07:17:12",
+              "trx_id": "0000000000000000000000000000000000000000",
+              "trx_in_block": 4294967295,
+              "virtual_op": true
+            },
+            {
+              "block": 20000006,
+              "op": {
+                "type": "author_reward_operation",
+                "value": {
+                  "author": "jofri47",
+                  "curators_vesting_payout": {
+                    "amount": "18396881",
+                    "nai": "@@000000037",
+                    "precision": 6
+                  },
+                  "hbd_payout": {
+                    "amount": "180",
+                    "nai": "@@000000013",
+                    "precision": 3
+                  },
+                  "hive_payout": {
+                    "amount": "0",
+                    "nai": "@@000000021",
+                    "precision": 3
+                  },
+                  "payout_must_be_claimed": true,
+                  "permlink": "re-fred703-my-world-of-reading-and-jan-smuts-20180212t071706243z",
+                  "vesting_payout": {
+                    "amount": "85852113",
+                    "nai": "@@000000037",
+                    "precision": 6
+                  }
+                }
+              },
+              "op_in_trx": 8,
+              "operation_id": "85899371689828915",
+              "timestamp": "2018-02-19T07:17:12",
+              "trx_id": "0000000000000000000000000000000000000000",
+              "trx_in_block": 4294967295,
+              "virtual_op": true
+            },
+            {
+              "block": 20000006,
+              "op": {
+                "type": "author_reward_operation",
+                "value": {
+                  "author": "zamialyusufi",
+                  "curators_vesting_payout": {
+                    "amount": "10220489",
+                    "nai": "@@000000037",
+                    "precision": 6
+                  },
+                  "hbd_payout": {
+                    "amount": "68",
+                    "nai": "@@000000013",
+                    "precision": 3
+                  },
+                  "hive_payout": {
+                    "amount": "0",
+                    "nai": "@@000000021",
+                    "precision": 3
+                  },
+                  "payout_must_be_claimed": true,
+                  "permlink": "kompak-6a161466c29ee",
+                  "vesting_payout": {
+                    "amount": "34749665",
+                    "nai": "@@000000037",
+                    "precision": 6
+                  }
+                }
+              },
+              "op_in_trx": 14,
+              "operation_id": "85899371689830451",
+              "timestamp": "2018-02-19T07:17:12",
+              "trx_id": "0000000000000000000000000000000000000000",
+              "trx_in_block": 4294967295,
+              "virtual_op": true
+            },
+            {
+              "block": 20000006,
+              "op": {
+                "type": "author_reward_operation",
+                "value": {
+                  "author": "lighteye",
+                  "curators_vesting_payout": {
+                    "amount": "8176391",
+                    "nai": "@@000000037",
+                    "precision": 6
+                  },
+                  "hbd_payout": {
+                    "amount": "30",
+                    "nai": "@@000000013",
+                    "precision": 3
+                  },
+                  "hive_payout": {
+                    "amount": "0",
+                    "nai": "@@000000021",
+                    "precision": 3
+                  },
+                  "payout_must_be_claimed": true,
+                  "permlink": "re-tecnosgirl-my-40th-birthday-flower-2018-02-11-14-10-31-20180212t071626351z",
+                  "vesting_payout": {
+                    "amount": "14308685",
+                    "nai": "@@000000037",
+                    "precision": 6
+                  }
+                }
+              },
+              "op_in_trx": 18,
+              "operation_id": "85899371689831475",
+              "timestamp": "2018-02-19T07:17:12",
+              "trx_id": "0000000000000000000000000000000000000000",
+              "trx_in_block": 4294967295,
+              "virtual_op": true
+            }
+          ],
+          "timestamp": "2018-02-19T07:17:12"
+        },
+        {
+          "block": 20000007,
+          "irreversible": true,
+          "ops": [
+            {
+              "block": 20000007,
+              "op": {
+                "type": "author_reward_operation",
+                "value": {
+                  "author": "grandeur",
+                  "curators_vesting_payout": {
+                    "amount": "16352783",
+                    "nai": "@@000000037",
+                    "precision": 6
+                  },
+                  "hbd_payout": {
+                    "amount": "102",
+                    "nai": "@@000000013",
+                    "precision": 3
+                  },
+                  "hive_payout": {
+                    "amount": "0",
+                    "nai": "@@000000021",
+                    "precision": 3
+                  },
+                  "payout_must_be_claimed": true,
+                  "permlink": "coconut-milk-and-vegetable",
+                  "vesting_payout": {
+                    "amount": "51102448",
+                    "nai": "@@000000037",
+                    "precision": 6
+                  }
+                }
+              },
+              "op_in_trx": 5,
+              "operation_id": "85899375984791347",
+              "timestamp": "2018-02-19T07:17:15",
+              "trx_id": "0000000000000000000000000000000000000000",
+              "trx_in_block": 4294967295,
+              "virtual_op": true
+            }
+          ],
+          "timestamp": "2018-02-19T07:17:15"
+        }
+      ]
+    }`
+  },
+  {
     api: "database_api",
     method: "get_config",
     description:_t("database_api.get_config_description"),
@@ -738,7 +1220,7 @@ export const methods = [
     method: "get_hardfork_version",
     description:_t("condenser_api.get_hardfork_version_description"),
     url:`${ConfigItems.baseUrl}/api/get_hardfork_version`,
-    response: `"1.27.0"`                                 
+    response: `"1.27.0"`
   },
   {
     api: "condenser_api",
@@ -749,7 +1231,7 @@ export const methods = [
     response: `{
       "hf_version": "1.27.0",
       "live_time": "2022-10-24T12:00:00"
-    }`                                         
+    }`
   },
   {
     api: "condenser_api",
@@ -3745,7 +4227,7 @@ export const methods = [
           "blog"
         ]
       }
-    ]` 
+    ]`
   },
   {
     api: "condenser_api",
@@ -6520,7 +7002,7 @@ export const methods = [
   },
   {
     api: "condenser_api",
-    method: "get_discussions_by_created",  
+    method: "get_discussions_by_created",
     params: ["query"],
     description:_t("condenser_api.get_discussions_by_created_description")
   },
@@ -6532,7 +7014,7 @@ export const methods = [
   },
   {
     api: "condenser_api",
-    method: "get_discussions_by_cashout",    
+    method: "get_discussions_by_cashout",
     params: ["query"],
     description:_t("condenser_api.get_discussions_by_cashout_description")
   },
@@ -6610,7 +7092,7 @@ export const methods = [
     params: ["trx"],
     description:_t("database_api.get_potential_signatures_description"),
     response: `[]`
-  
+
   },
   {
     api: "database_api",
