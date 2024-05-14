@@ -20,12 +20,17 @@ interface api_item_types {
   response:string
 }
 const APIdocumentation = (props: PageProps) => {
+  const { location } = props;
+  let searchParam = location.search.replace("?", "");
+  searchParam = searchParam.replace("q", "");
+  searchParam = searchParam.replace("=", "");
+
   let methods = methodsData
   const currTheme = useSelector((state: any) => state.global.theme)
   const [loading, setLoading] = useState(true);
   const [filterVal, setFilterVal] = useState(true);
   const [collection, setCollection] = useState({})
-  const [inputText, setInputText] = useState("");
+  const [inputText, setInputText] = useState(searchParam);
   let inputHandler = (e: any) => {
     const lowerCase = e.target.value.toLowerCase();
     setInputText(lowerCase);
@@ -80,6 +85,7 @@ const APIdocumentation = (props: PageProps) => {
         className="search-field"
         onChange={inputHandler}
         fullWidth={false}
+        value={inputText}
         type="search"
         placeholder={`${_t("heading_label.search_apis")}`}
       />
@@ -93,11 +99,11 @@ const APIdocumentation = (props: PageProps) => {
                 <h1>{_t(`${api}.title`)}</h1>
                 <p>{_t(`${api}.description`)}</p>
               </div>
-              <Accordion className={currTheme === "day" ? "accordion-day" : "accordion_night"} alwaysOpen={true}>
+              <Accordion className={currTheme === "day" ? "accordion-day" : "accordion_night"} defaultActiveKey={`0`} alwaysOpen={true}>
                 {collection[api].map((item: api_item_types, i: number) => {
                   return (
                     <span key={`${i}-${item.method}`}>
-                      {item.url && <Accordion.Item eventKey={`${i}`} >
+                      {item.url && <Accordion.Item eventKey={`${i}`}>
                         <Accordion.Header>
                           <span>{item.method}</span>
                         </Accordion.Header>
