@@ -619,7 +619,8 @@
     "title": "Account History API",
     "description": "Used to lookup account history information. These AppBase API methods are still under development and subject to change.",
     "get_ops_in_block_description": "Returns all operations contained in a block.",
-    "get_account_history_description": "Returns a history of all operations for a given account."
+    "get_account_history_description": "Returns a history of all operations for a given account.",
+    "enum_virtual_ops_description": "Allows to specify range of blocks to retrieve virtual operations for."
   },
   "database_api": {
     "title": "Database API",
