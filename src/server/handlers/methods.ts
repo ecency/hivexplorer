@@ -44,6 +44,7 @@ export const methods = [
     api: "block_api",
     method: "get_block_header",
     params: ["block_num"],
+    url:`${ConfigItems.baseUrl}/api/get_block_header?block_num=8675309`,
     description:_t("block_api.get_block_header_description"),
     parameter: `<table>
       <thead>
@@ -68,11 +69,13 @@ export const methods = [
       </tbody>
     </table>`,
     response: `{
-      "previous": "0000000000000000000000000000000000000000",
-      "timestamp": "2016-03-24T16:05:00",
-      "witness": "initminer",
-      "transaction_merkle_root": "0000000000000000000000000000000000000000",
-      "extensions": []
+      "header": {
+        "extensions": [],
+        "previous": "00845fec1c00bd07264f68c1fc50e989b7ca0160",
+        "timestamp": "2017-01-21T16:33:06",
+        "transaction_merkle_root": "c034bfb36fe4401ce2a4d10f3e595a62be2eddd7",
+        "witness": "pfunk"
+      }
     }`,
   },
   {
@@ -5781,6 +5784,153 @@ export const methods = [
           ""
         ]
       ]
+    }`
+  },
+  {
+    api: "bridge",
+    method: "get_community_context",
+    params: ["name", "account"],
+    parameter: `<code>name: string, account: string </code>`,
+    description:_t("bridge_api.get_community_context"),
+    url:`${ConfigItems.baseUrl}/api/get_community_context?name=hive-125125&account=demo`,
+    response: `{
+      "role": "guest",
+      "subscribed": true,
+      "title": ""
+    }`
+  },
+  {
+    api: "bridge",
+    method: "list_pop_communities",
+    params: ["limit"],
+    parameter: `<code>limit: integer </code>`,
+    description:_t("bridge_api.list_pop_communities"),
+    url:`${ConfigItems.baseUrl}/api/list_pop_communities?limit=10`,
+    response: `[
+      [
+        "hive-140169",
+        "Vibes"
+      ],
+      [
+        "hive-194913",
+        "Photography Lovers"
+      ],
+      [
+        "hive-167922",
+        "LeoFinance"
+      ],
+      [
+        "hive-187189",
+        "Lifestyle"
+      ],
+      [
+        "hive-163772",
+        "Pinmapple"
+      ],
+      [
+        "hive-153850",
+        "Hive Learners"
+      ],
+      [
+        "hive-147010",
+        "Liketu"
+      ],
+      [
+        "hive-108045",
+        "Family & Friends"
+      ],
+      [
+        "hive-161155",
+        "Freewriters"
+      ],
+      [
+        "hive-120586",
+        "Foodies Bee Hive"
+      ]
+    ]`
+  },
+  {
+    api: "bridge",
+    method: "list_community_roles",
+    params: ["community", "last", "limit"],
+    parameter: `<code>community: string; last: string (optional); limit: integer </code>`,
+    description:_t("bridge_api.list_community_roles"),
+    url:`${ConfigItems.baseUrl}/api/list_community_roles?community=hive-125125&limit=5`,
+    response: `[
+      [
+        "hive-125125",
+        "owner",
+        ""
+      ],
+      [
+        "ecency",
+        "admin",
+        ""
+      ],
+      [
+        "esteemapp",
+        "admin",
+        ""
+      ],
+      [
+        "good-karma",
+        "admin",
+        ""
+      ],
+      [
+        "melinda010100",
+        "admin",
+        ""
+      ]
+    ]`
+  },
+  {
+    api: "bridge",
+    method: "get_payout_stats",
+    params: ["limit"],
+    parameter: `<code>limit: integer </code>`,
+    description:_t("bridge_api.get_payout_stats"),
+    url:`${ConfigItems.baseUrl}/api/get_payout_stats?limit=5`,
+    response: `{
+      "blogs": 38922.225,
+      "items": [
+        [
+          "@hbd.funder",
+          "@hbd.funder",
+          30720.169,
+          77,
+          null
+        ],
+        [
+          "hive-167922",
+          "LeoFinance",
+          10030.423,
+          19921,
+          1155
+        ],
+        [
+          "hive-140169",
+          "Vibes",
+          4981.996,
+          1897,
+          408
+        ],
+        [
+          "hive-163772",
+          "Pinmapple",
+          2972.592,
+          1906,
+          404
+        ],
+        [
+          "hive-105017",
+          "HIVE CN 中文社区",
+          2943.449,
+          1263,
+          99
+        ]
+      ],
+      "total": 124981.732
     }`
   },
   {

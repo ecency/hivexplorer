@@ -665,7 +665,11 @@
     "get_post_header_description":"Gives very basic information on given post.",
     "get_profile_description":"Gets profile information.",
     "get_account_posts_description":"Lists posts related to a given account.",
-    "get_trending_topics_description": "Get trending topics/categories."
+    "get_trending_topics_description": "Get trending topics/categories.",
+    "get_payout_stats": "Lists communities ordered by payout with stats (total payout, number of posts and authors).",
+    "list_community_roles": "List community roles and labels for each account in the community.",
+    "list_pop_communities": "Gets a list of popular communities.",
+    "get_community_context": "Gets the role, subscription status, and title for a given account in a given community."
   },
   "transaction_status_api":{
     "title":"Transaction Status API",
