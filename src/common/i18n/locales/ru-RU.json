@@ -613,7 +613,10 @@
     "get_reward_fund_description": "Returns information about the current reward funds.",
     "get_followers_description": "Returns the list of followers for an account. ",
     "get_following_description": "Returns the list of accounts that are following an account.",
-    "get_follow_count_description": "Returns the count of followers/following for an account."
+    "get_follow_count_description": "Returns the count of followers/following for an account.",
+    "get_current_median_history_price": "Get current median market price.",
+    "get_expiring_vesting_delegations": "Get expiring delegations.",
+    "get_collateralized_conversion_requests": "Get HIVE to HBD (Collateralized) convert requests."
   },
   "account_history_api": {
     "title": "Account History API",
@@ -635,8 +638,7 @@
     "list_votes_description": "Returns all votes, starting with the specified voter and/or author and permlink.",
     "get_active_witnesses_description": "Returns the list of active witnesses.",
     "get_reward_funds_description": "Returns information about the current reward funds.",
-    "list_proposal_votes_description": "Returns all proposal votes, starting with the specified voter or proposal",
-    "find_rc_accounts_description": "Returns accounts, queried by name."
+    "list_proposal_votes_description": "Returns all proposal votes, starting with the specified voter or proposal"
   },
   "rc_api": {
     "title": "RC API",
@@ -650,7 +652,9 @@
     "votes": "Votes",
     "transfers": "Transfers",
     "reblogs-follows": "Reblogs / Follows",
-    "extra-details-heading": "What's possible with current available RC?"
+    "extra-details-heading": "What's possible with current available RC?",
+    "list_rc_accounts": "Find accounts and their RC delegations",
+    "list_rc_direct_delegations": "List from to which account how much RC was delegated."
   },
   "bridge": {
     "title": "Bridge API",
