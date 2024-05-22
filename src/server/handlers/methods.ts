@@ -1137,12 +1137,355 @@ export const methods = [
     api: "condenser_api",
     method: "get_current_median_history_price",
     isArray: true,
-    description:_t("condenser_api.get_current_median_history_price_description"),
+    description:_t("condenser_api.get_current_median_history_price"),
     url:`${ConfigItems.baseUrl}/api/get_current_median_history_price`,
     response: `{
       "base": "0.405 HBD",
       "quote": "1.000 HIVE"
     }`
+  },
+  {
+    api: "condenser_api",
+    method: "get_discussions_by_author_before_date",
+    params: ["author","permlink","date","limit"],
+    isArray: true,
+    description:_t("condenser_api.get_discussions_by_author_before_date"),
+    url:`${ConfigItems.baseUrl}/api/get_discussions_by_author_before_date?author="ecency"&permlink="ecency-development-and-maintenance-4"&date=2023-11-04T22:49:43&limit=2`,
+    response: `[
+      {
+        "active_votes": [
+          {
+            "percent": "4000",
+            "reputation": 341233778618,
+            "rshares": 768760982022,
+            "voter": "boatymcboatface"
+          },
+          {
+            "percent": "4000",
+            "reputation": 2107189950411875,
+            "rshares": 94384731190,
+            "voter": "kingscrown"
+          },
+          {
+            "percent": "10000",
+            "reputation": 131524410663,
+            "rshares": 0,
+            "voter": "jazteem"
+          }
+        ],
+        "author": "ecency",
+        "author_reputation": 481129921188588,
+        "beneficiaries": [],
+        "body": "The #24 edition of the Monthly Guest Curation Program here on Hive was a great success, and it was a challenging task to select curators between the numerous outstanding options. In the end, an amazing group of Guest Curators joined our team and performed exceptionally well during their term. \\n\\nIt is now time to commence the #25 edition of the Guest Curation Program, which offers Ecency users the opportunity to learn about curation and, in the process also grow their profiles on the blockchain. \\n\\n\\nThe Monthly Guest Program was created to address misunderstandings and answer questions about Ecency's curation. As a member of our curation team for a month, you will have the opportunity to observe how posts are reviewed and curated by our curators. Curators have to navigate spam, abusive accounts, and individuals attempting to manipulate our encouragement system in order to identify authentic users and deserving content that deserves recognition, encouragement, and appreciation.\\n\\n# How To Apply \\n\\nIf you have become a member of our [Ecency Discord](https://discord.me/ecency) community, you can share your Hive username by commenting in the #curator-internship channel or on this post.\\n\\nAbout the Guest Curator Program\\n\\n* Two guest curators will be appointed every month for a period of 30 days.\\n\\n* The selection will be based on the user being a dedicated Ecency user, and the decision of the selectors is final.\\n\\n* The rules to be followed and the perks for being appointed as a Guest Curator will be shared upon selection.\\n\\n* As a curator, it is expected that you have a desire to help the community, and spread love, cheer, and goodwill among users of Ecency. And also, have the ability to identify and report instances of abuse.\\n\\n* If the guest curator is found to be abusing the granted role and powers, they will be immediately removed from the program.\\n\\n* If you are not selected as a Guest Curator, you may reapply in the next cycle. However, a selected Guest Curator can apply to the program again only after the end of 60 days (i.e., 2 cycles after their selection).\\n\\nWe are looking forward to hearing from you! Join [Discord](https://discord.me/ecency) and showcase your curation skills to become a member of the Ecency curator team.\\n\\nhttps://cdn.discordapp.com/attachments/1003838978920812626/1168488074662125598/boost_approval1.gif?ex=6551f252&is=653f7d52&hm=301052474bdd00df8690c53b8f030270712e80dd04932abe3cbfdf2de6587ad2&\\n\\n### Delegate Hive Power now and mine [Ecency Points + curation reward daily](https://ecency.com/hive-125125/@ecency/daily-100-curation-rewards) + help us onboard more people:  \\n \\n[50 HP](https://hivesigner.com/sign/delegateVestingShares?delegator=&delegatee=ecency&vesting_shares=50%20HP) | [100 HP](https://hivesigner.com/sign/delegateVestingShares?delegator=&delegatee=ecency&vesting_shares=100%20HP) | [500 HP](https://hivesigner.com/sign/delegateVestingShares?delegator=&delegatee=ecency&vesting_shares=500%20HP) | [1000 HP](https://hivesigner.com/sign/delegateVestingShares?delegator=&delegatee=ecency&vesting_shares=1000%20HP) | [5000 HP](https://hivesigner.com/sign/delegateVestingShares?delegator=&delegatee=ecency&vesting_shares=5000%20HP) | [10K HP](https://hivesigner.com/sign/delegateVestingShares?delegator=&delegatee=ecency&vesting_shares=10000%20HP) | [20K HP](https://hivesigner.com/sign/delegateVestingShares?delegator=&delegatee=ecency&vesting_shares=20000%20HP) | [50K HP](https://hivesigner.com/sign/delegateVestingShares?delegator=&delegatee=ecency&vesting_shares=50000%20HP) | [100K HP](https://hivesigner.com/sign/delegateVestingShares?delegator=&delegatee=ecency&vesting_shares=100000%20HP)  \\n \\n### Support our proposals  \\n \\n[\`Ecency\`](https://hivesigner.com/sign/update-proposal-votes?proposal_ids=%5B283%5D&approve=true)",
+        "body_length": 3797,
+        "cashout_time": "1969-12-31T23:59:59",
+        "category": "ecency",
+        "children": 15,
+        "created": "2023-10-30T09:45:54",
+        "curator_payout_value": "8.845 HBD",
+        "depth": 0,
+        "json_metadata": "{\\"image\\":[\\"https://cdn.discordapp.com/attachments/1003838978920812626/1168488074662125598/boost_approval1.gif?ex=6551f252&is=653f7d52&hm=301052474bdd00df8690c53b8f030270712e80dd04932abe3cbfdf2de6587ad2&\\"],\\"tags\\":[\\"ecency\\",\\"hive\\",\\"curation\\",\\"guestcurators\\"],\\"description\\":\\"\\",\\"app\\":\\"ecency/3.0.36-vision\\",\\"format\\":\\"markdown+html\\",\\"image_ratios\\":[\\"1.0000\\"]}",
+        "last_payout": "2023-11-06T09:45:54",
+        "last_update": "2023-11-04T11:11:30",
+        "max_accepted_payout": "1000000.000 HBD",
+        "net_rshares": 37317216249639,
+        "parent_author": "",
+        "parent_permlink": "ecency",
+        "pending_payout_value": "0.000 HBD",
+        "percent_hbd": 10000,
+        "permlink": "ecency-monthly-guest-curation-program-d34368ec623ec",
+        "post_id": 128422803,
+        "promoted": "0.000 HBD",
+        "replies": [],
+        "root_title": "Ecency Monthly Guest Curation Program #25",
+        "title": "Ecency Monthly Guest Curation Program #25",
+        "total_payout_value": "8.902 HBD",
+        "url": "/ecency/@ecency/ecency-monthly-guest-curation-program-d34368ec623ec"
+      },
+      {
+        "active_votes": [
+          {
+            "percent": "2500",
+            "reputation": 1099373991783505,
+            "rshares": 52618911274147,
+            "voter": "blocktrades"
+          },
+          {
+            "percent": "10000",
+            "reputation": 0,
+            "rshares": 0,
+            "voter": "limboxd"
+          }
+        ],
+        "author": "ecency",
+        "author_reputation": 481129921188588,
+        "beneficiaries": [],
+        "body": "Dear Ecencials, \\n\\nWe have released a new update for our Ecency Mobile App right after the Vision Web App update. This update brings several changes and fixes, one of which is about the popular \\"Waves\\" feature that has captured the attention of many of our users. One of the notable changes is the ability to hide spam content by downvoting them. If you are curious about the content that was hidden, you can click on the \\"Reveal content\\" button. Additionally, we have fixed an issue regarding duplicate Waves that were observed in the previous version.\\nYou now have the ability to receive Media Rich Push Notifications. When you receive notifications, they will include a thumbnail image on your phone. This feature enables you to quickly and conveniently identify the sender of a notification upon its arrival or detect relevant post quickly with thumbnail.\\n\\n![](https://images.ecency.com/DQmcGcLYsULdwyYNg95FVSwJ1MJ6RMnSJ33zRTXpZj1DF9P/mobile_release_copy.jpg)\\n\\n![](https://images.ecency.com/DQmQJSDg5rGbfFUDvwtZ5bTk7W2sRvm4xr7k2Prxh8iBMED/_.png)\\n\\n\\n\\n## What's Changed\\n\\n* using RefreshControl and List/Scroll in pair from same package by @noumantahir in https://github.com/ecency/ecency-mobile/pull/2750\\n* Nt/wave vote percent by @noumantahir in https://github.com/ecency/ecency-mobile/pull/2751\\n* feat: #2745 add support of repeat transfer by @gamingumar in https://github.com/ecency/ecency-mobile/pull/2749\\n* Wave duplication fix by @noumantahir in https://github.com/ecency/ecency-mobile/pull/2752\\n* Nt/rshares cache by @noumantahir in https://github.com/ecency/ecency-mobile/pull/2753\\n* hiding muted waves in real time by @noumantahir in https://github.com/ecency/ecency-mobile/pull/2754\\n* hide downvoted content with reveal button by @noumantahir in https://github.com/ecency/ecency-mobile/pull/2757\\n* Nt/wave media by @noumantahir in https://github.com/ecency/ecency-mobile/pull/2758\\n* Nt/wave scroll top by @noumantahir in https://github.com/ecency/ecency-mobile/pull/2759\\n* Nt/wave image ratios by @noumantahir in https://github.com/ecency/ecency-mobile/pull/2760\\n* New Crowdin updates by @feruzm in https://github.com/ecency/ecency-mobile/pull/2743\\n* update current user data on drawer open by @noumantahir in https://github.com/ecency/ecency-mobile/pull/2762\\n* Nt/wave post data by @noumantahir in https://github.com/ecency/ecency-mobile/pull/2761\\n* Nt/latest wave check by @noumantahir in https://github.com/ecency/ecency-mobile/pull/2765\\n* Improve hive uri QR support by @aliseyalvi in https://github.com/ecency/ecency-mobile/pull/2755\\n* [Bug Fix] json meta not saving in mobile editor by @aliseyalvi in https://github.com/ecency/ecency-mobile/pull/2767\\n* [Bug Fix] vote count bug in post screen by @aliseyalvi in https://github.com/ecency/ecency-mobile/pull/2768\\n* feat: GU-2766 add flash list for performance by @gamingumar in https://github.com/ecency/ecency-mobile/pull/2771\\n* fix: GU-2766 add key prop in flash list by @gamingumar in https://github.com/ecency/ecency-mobile/pull/2772\\n* Nt/ios build fix by @noumantahir in https://github.com/ecency/ecency-mobile/pull/2773\\n* separated ImageNotifi, no longer need updating build settings by @noumantahir in https://github.com/ecency/ecency-mobile/pull/2774\\n* fix: GU-2766 fix posts flicker and profile comments by @gamingumar in https://github.com/ecency/ecency-mobile/pull/2775\\n* avoid rendering reply title by @noumantahir in https://github.com/ecency/ecency-mobile/pull/2776\\n* update powering down text with time by @noumantahir in https://github.com/ecency/ecency-mobile/pull/2777\\n* New Crowdin updates by @feruzm in https://github.com/ecency/ecency-mobile/pull/2763\\n* avoid rendering undefined as vote value by @noumantahir in https://github.com/ecency/ecency-mobile/pull/2778\\n* checking new waves on tab reactive by @noumantahir in https://github.com/ecency/ecency-mobile/pull/2779\\n* injecting image urls and ratios in comment metadata by @noumantahir in https://github.com/ecency/ecency-mobile/pull/2780\\n\\n## New Contributors\\n* @gamingumar made their first contribution in https://github.com/ecency/ecency-mobile/pull/2749\\n\\n**Full Changelog**: https://github.com/ecency/ecency-mobile/compare/3.0.43...3.0.44\\n\\nIf you are React Native developer, feel free to join and help developing features we all love using, [our mobile application is completely opensource](https://github.com/ecency/ecency-mobile).  \\n \\n**Join mobile translation team**: https://translate-mobile.ecency.com  \\n31 languages already enabled on Ecency mobile app, thanks to [our awesome contributors](https://ecency.com/contributors).  \\n \\nStay safe, stay excited, stay united! Don't forget to share news with your friends.  \\n \\n# Download  \\n \\n[Ecency.com](https://ecency.com) | [iOS app](https://ios.ecency.com) | [Android app](https://android.ecency.com) | [Direct Android APK and iOS IPA file](https://github.com/ecency/ecency-mobile/releases)  \\n \\n---  \\n \\n## Support us  \\n \\n### Delegate HP and earn [Ecency Points + curation reward daily](https://ecency.com/hive-125125/@ecency/daily-100-curation-rewards) + help us onboard more people:  \\n \\n[500 HP](https://hivesigner.com/sign/delegateVestingShares?delegator=&delegatee=ecency&vesting_shares=500%20HP) | [1000 HP](https://hivesigner.com/sign/delegateVestingShares?delegator=&delegatee=ecency&vesting_shares=1000%20HP) | [5000 HP](https://hivesigner.com/sign/delegateVestingShares?delegator=&delegatee=ecency&vesting_shares=5000%20HP) | [10K HP](https://hivesigner.com/sign/delegateVestingShares?delegator=&delegatee=ecency&vesting_shares=10000%20HP) | [20K HP](https://hivesigner.com/sign/delegateVestingShares?delegator=&delegatee=ecency&vesting_shares=20000%20HP) | [50K HP](https://hivesigner.com/sign/delegateVestingShares?delegator=&delegatee=ecency&vesting_shares=50000%20HP)  \\n \\n### Support our proposals  \\n \\n[\`Ecency\`](https://hivesigner.com/sign/update-proposal-votes?proposal_ids=%5B245%5D&approve=true)",
+        "body_length": 5902,
+        "cashout_time": "1969-12-31T23:59:59",
+        "category": "hive-125125",
+        "children": 14,
+        "created": "2023-10-18T07:30:12",
+        "curator_payout_value": "55.892 HBD",
+        "depth": 0,
+        "json_metadata": "{\\"image\\":[\\"https://images.ecency.com/DQmcGcLYsULdwyYNg95FVSwJ1MJ6RMnSJ33zRTXpZj1DF9P/mobile_release_copy.jpg\\",\\"https://images.ecency.com/DQmQJSDg5rGbfFUDvwtZ5bTk7W2sRvm4xr7k2Prxh8iBMED/_.png\\"],\\"tags\\":[\\"hive-125125\\",\\"waves\\",\\"rich\\",\\"notifications\\",\\"qr\\",\\"fixes\\",\\"ecency\\",\\"hive-uri\\",\\"caching\\",\\"android\\"],\\"description\\":\\"Media Rich Push Notifications, QR improvements and Waves fixes are part of this new Ecency mobile app update.\\",\\"app\\":\\"ecency/3.0.36-vision\\",\\"format\\":\\"markdown+html\\",\\"image_ratios\\":[\\"1.6667\\",\\"1.4781\\"]}",
+        "last_payout": "2023-10-25T07:30:12",
+        "last_update": "2023-10-18T07:30:12",
+        "max_accepted_payout": "1000000.000 HBD",
+        "net_rshares": 252426442065766,
+        "parent_author": "",
+        "parent_permlink": "hive-125125",
+        "pending_payout_value": "0.000 HBD",
+        "percent_hbd": 0,
+        "permlink": "mobile-rich-notifications-waves-and",
+        "post_id": 128090838,
+        "promoted": "0.000 HBD",
+        "replies": [],
+        "root_title": "Mobile - Rich notifications, Waves and QR improvements...",
+        "title": "Mobile - Rich notifications, Waves and QR improvements...",
+        "total_payout_value": "55.968 HBD",
+        "url": "/hive-125125/@ecency/mobile-rich-notifications-waves-and"
+      }
+    ]`
+  },
+  {
+    api: "condenser_api",
+    method: "get_collateralized_conversion_requests",
+    params: ["account"],
+    isArray: true,
+    description: _t("condenser_api.get_collateralized_conversion_requests"),
+    url:`${ConfigItems.baseUrl}/api/get_collateralized_conversion_requests?account="hbdstabilizer"`,
+    response: `[]`
+  },
+  {
+    api: "condenser_api",
+    method: "find_recurrent_transfers",
+    params: ["account"],
+    isArray: true,
+    description: _t("condenser_api.find_recurrent_transfers"),
+    url:`${ConfigItems.baseUrl}/api/find_recurrent_transfers?account="peak.open"`,
+    response: `[
+      {
+        "amount": "3750.000 HBD",
+        "consecutive_failures": 0,
+        "from": "peak.open",
+        "id": 1452,
+        "memo": "pay 4 team members",
+        "pair_id": 0,
+        "recurrence": 168,
+        "remaining_executions": 12,
+        "to": "peakd",
+        "trigger_date": "2024-05-23T12:01:54"
+      }
+    ]`
+  },
+  {
+    api: "condenser_api",
+    method: "get_expiring_vesting_delegations",
+    params: ["account", "date"],
+    isArray: true,
+    description: _t("condenser_api.get_expiring_vesting_delegations"),
+    url:`${ConfigItems.baseUrl}/api/get_expiring_vesting_delegations?account="ecency"&date="1970-01-01T00:00:00"`,
+    response: `[
+      {
+        "delegator": "ecency",
+        "expiration": "2024-05-20T12:10:03",
+        "id": 5925594,
+        "vesting_shares": "350000.000000 VESTS"
+      },
+      {
+        "delegator": "ecency",
+        "expiration": "2024-05-20T16:20:06",
+        "id": 5925607,
+        "vesting_shares": "350000.000000 VESTS"
+      },
+      {
+        "delegator": "ecency",
+        "expiration": "2024-05-21T06:40:06",
+        "id": 5925642,
+        "vesting_shares": "350000.000000 VESTS"
+      },
+      {
+        "delegator": "ecency",
+        "expiration": "2024-05-21T09:25:06",
+        "id": 5925647,
+        "vesting_shares": "350000.000000 VESTS"
+      },
+      {
+        "delegator": "ecency",
+        "expiration": "2024-05-21T10:30:06",
+        "id": 5925648,
+        "vesting_shares": "350000.000000 VESTS"
+      },
+      {
+        "delegator": "ecency",
+        "expiration": "2024-05-21T16:55:06",
+        "id": 5925665,
+        "vesting_shares": "350000.000000 VESTS"
+      },
+      {
+        "delegator": "ecency",
+        "expiration": "2024-05-21T17:55:06",
+        "id": 5925667,
+        "vesting_shares": "350000.000000 VESTS"
+      },
+      {
+        "delegator": "ecency",
+        "expiration": "2024-05-21T18:05:03",
+        "id": 5925669,
+        "vesting_shares": "350000.000000 VESTS"
+      },
+      {
+        "delegator": "ecency",
+        "expiration": "2024-05-21T20:10:06",
+        "id": 5925670,
+        "vesting_shares": "350000.000000 VESTS"
+      },
+      {
+        "delegator": "ecency",
+        "expiration": "2024-05-22T03:20:03",
+        "id": 5925679,
+        "vesting_shares": "350000.000000 VESTS"
+      },
+      {
+        "delegator": "ecency",
+        "expiration": "2024-05-22T06:00:06",
+        "id": 5925690,
+        "vesting_shares": "350000.000000 VESTS"
+      },
+      {
+        "delegator": "ecency",
+        "expiration": "2024-05-22T06:05:06",
+        "id": 5925692,
+        "vesting_shares": "350000.000000 VESTS"
+      },
+      {
+        "delegator": "ecency",
+        "expiration": "2024-05-22T07:25:03",
+        "id": 5925697,
+        "vesting_shares": "350000.000000 VESTS"
+      },
+      {
+        "delegator": "ecency",
+        "expiration": "2024-05-22T08:35:06",
+        "id": 5925700,
+        "vesting_shares": "350000.000000 VESTS"
+      },
+      {
+        "delegator": "ecency",
+        "expiration": "2024-05-22T11:45:06",
+        "id": 5925706,
+        "vesting_shares": "350000.000000 VESTS"
+      },
+      {
+        "delegator": "ecency",
+        "expiration": "2024-05-22T12:30:06",
+        "id": 5925708,
+        "vesting_shares": "350000.000000 VESTS"
+      },
+      {
+        "delegator": "ecency",
+        "expiration": "2024-05-23T02:05:06",
+        "id": 5925732,
+        "vesting_shares": "350000.000000 VESTS"
+      },
+      {
+        "delegator": "ecency",
+        "expiration": "2024-05-23T05:45:03",
+        "id": 5925737,
+        "vesting_shares": "350000.000000 VESTS"
+      },
+      {
+        "delegator": "ecency",
+        "expiration": "2024-05-23T10:50:06",
+        "id": 5925748,
+        "vesting_shares": "350000.000000 VESTS"
+      },
+      {
+        "delegator": "ecency",
+        "expiration": "2024-05-23T16:00:06",
+        "id": 5925758,
+        "vesting_shares": "350000.000000 VESTS"
+      },
+      {
+        "delegator": "ecency",
+        "expiration": "2024-05-23T16:00:06",
+        "id": 5925759,
+        "vesting_shares": "350000.000000 VESTS"
+      },
+      {
+        "delegator": "ecency",
+        "expiration": "2024-05-23T19:25:03",
+        "id": 5925765,
+        "vesting_shares": "350000.000000 VESTS"
+      },
+      {
+        "delegator": "ecency",
+        "expiration": "2024-05-24T00:00:09",
+        "id": 5925783,
+        "vesting_shares": "350000.000000 VESTS"
+      },
+      {
+        "delegator": "ecency",
+        "expiration": "2024-05-24T05:00:03",
+        "id": 5925834,
+        "vesting_shares": "350000.000000 VESTS"
+      },
+      {
+        "delegator": "ecency",
+        "expiration": "2024-05-24T06:10:03",
+        "id": 5925837,
+        "vesting_shares": "350000.000000 VESTS"
+      },
+      {
+        "delegator": "ecency",
+        "expiration": "2024-05-24T10:15:03",
+        "id": 5925846,
+        "vesting_shares": "350000.000000 VESTS"
+      },
+      {
+        "delegator": "ecency",
+        "expiration": "2024-05-24T10:20:03",
+        "id": 5925847,
+        "vesting_shares": "350000.000000 VESTS"
+      },
+      {
+        "delegator": "ecency",
+        "expiration": "2024-05-24T15:20:03",
+        "id": 5925856,
+        "vesting_shares": "350000.000000 VESTS"
+      },
+      {
+        "delegator": "ecency",
+        "expiration": "2024-05-24T16:10:03",
+        "id": 5925858,
+        "vesting_shares": "350000.000000 VESTS"
+      },
+      {
+        "delegator": "ecency",
+        "expiration": "2024-05-24T23:45:03",
+        "id": 5925878,
+        "vesting_shares": "350000.000000 VESTS"
+      },
+      {
+        "delegator": "ecency",
+        "expiration": "2024-05-25T02:10:06",
+        "id": 5925880,
+        "vesting_shares": "350000.000000 VESTS"
+      },
+      {
+        "delegator": "ecency",
+        "expiration": "2024-05-25T02:55:03",
+        "id": 5925882,
+        "vesting_shares": "350000.000000 VESTS"
+      },
+      {
+        "delegator": "ecency",
+        "expiration": "2024-05-25T05:25:06",
+        "id": 5925893,
+        "vesting_shares": "350000.000000 VESTS"
+      }
+    ]`
   },
   {
     api: "database_api",
@@ -4476,6 +4819,152 @@ export const methods = [
   },
   {
     api: "condenser_api",
+    method: "get_comment_discussions_by_payout",
+    params: ["tag","","limit","truncate_body"],
+    parameter: `<code>tag: string; limit:integer; truncate_body: integer (optional);</code>`,
+    description:_t("condenser_api.get_comment_discussions_by_payout_description"),
+    url: `${ConfigItems.baseUrl}/api/get_comment_discussions_by_payout?tag="ecency"&limit=2`,
+    response: `[
+      {
+        "active_votes": [
+          {
+            "percent": "7500",
+            "reputation": 5237585248428,
+            "rshares": 30366286369,
+            "voter": "ubg"
+          },
+          {
+            "percent": "7500",
+            "reputation": 1268223453927,
+            "rshares": 295184273129,
+            "voter": "nrg"
+          },
+          {
+            "percent": "10000",
+            "reputation": 32621424211875,
+            "rshares": 361268378475,
+            "voter": "dalersilfver"
+          },
+          {
+            "percent": "10000",
+            "reputation": 2783837848818,
+            "rshares": 478294896899,
+            "voter": "wharfagein"
+          },
+          {
+            "percent": "10000",
+            "reputation": 10900136586194,
+            "rshares": 799222516436,
+            "voter": "ashlinn"
+          },
+          {
+            "percent": "100",
+            "reputation": 176344643811,
+            "rshares": 3138105596,
+            "voter": "cowboy.curator"
+          },
+          {
+            "percent": "10000",
+            "reputation": 898998243537,
+            "rshares": 3279570953,
+            "voter": "fenisen"
+          }
+        ],
+        "author": "fenisen",
+        "author_reputation": 898998243537,
+        "beneficiaries": [],
+        "body": "I never thought about using wildflowers like that… very interesting",
+        "body_length": 67,
+        "cashout_time": "2024-05-25T18:24:15",
+        "category": "ecency",
+        "children": 1,
+        "created": "2024-05-18T18:24:15",
+        "curator_payout_value": "0.000 HBD",
+        "depth": 1,
+        "json_metadata": "{\\"type\\":\\"comment\\",\\"tags\\":[\\"ecency\\",\\"garden\\",\\"life\\",\\"photography\\",\\"plants\\",\\"foxkoit\\",\\"photos\\",\\"summer\\",\\"green\\"],\\"app\\":\\"ecency/3.1.0-mobile\\",\\"format\\":\\"markdown+html\\"}",
+        "last_payout": "1969-12-31T23:59:59",
+        "last_update": "2024-05-18T18:24:15",
+        "max_accepted_payout": "1000000.000 HBD",
+        "net_rshares": 1970754027857,
+        "parent_author": "foxkoit",
+        "parent_permlink": "garden-life-a418b2b185a1e",
+        "pending_payout_value": "0.835 HBD",
+        "percent_hbd": 10000,
+        "permlink": "re-foxkoit-2024518t202415867z",
+        "post_id": 133766353,
+        "promoted": "0.000 HBD",
+        "replies": [],
+        "root_title": "Garden life ",
+        "title": "",
+        "total_payout_value": "0.000 HBD",
+        "url": "/ecency/@foxkoit/garden-life-a418b2b185a1e#@fenisen/re-foxkoit-2024518t202415867z"
+      },
+      {
+        "active_votes": [
+          {
+            "percent": "10000",
+            "reputation": 32621424211875,
+            "rshares": 354044775981,
+            "voter": "dalersilfver"
+          },
+          {
+            "percent": "10000",
+            "reputation": 2783837848818,
+            "rshares": 498018405767,
+            "voter": "wharfagein"
+          },
+          {
+            "percent": "10000",
+            "reputation": 10900136586194,
+            "rshares": 783237066107,
+            "voter": "ashlinn"
+          },
+          {
+            "percent": "100",
+            "reputation": 176344643811,
+            "rshares": 3142327852,
+            "voter": "cowboy.curator"
+          },
+          {
+            "percent": "10000",
+            "reputation": 898998243537,
+            "rshares": 3213005204,
+            "voter": "fenisen"
+          }
+        ],
+        "author": "fenisen",
+        "author_reputation": 898998243537,
+        "beneficiaries": [],
+        "body": "The wild animals don’t do as I want either! ",
+        "body_length": 44,
+        "cashout_time": "2024-05-25T18:27:21",
+        "category": "ecency",
+        "children": 0,
+        "created": "2024-05-18T18:27:21",
+        "curator_payout_value": "0.000 HBD",
+        "depth": 1,
+        "json_metadata": "{\\"type\\":\\"comment\\",\\"tags\\":[\\"ecency\\",\\"photography\\",\\"life\\",\\"blog\\",\\"nature\\",\\"naturephotography\\",\\"photos\\",\\"foxkoit\\",\\"walk\\",\\"forest\\",\\"ecency\\"],\\"app\\":\\"ecency/3.1.0-mobile\\",\\"format\\":\\"markdown+html\\"}",
+        "last_payout": "1969-12-31T23:59:59",
+        "last_update": "2024-05-18T18:27:21",
+        "max_accepted_payout": "1000000.000 HBD",
+        "net_rshares": 1641655580911,
+        "parent_author": "foxkoit",
+        "parent_permlink": "everything-cant-always-be-perfect",
+        "pending_payout_value": "0.696 HBD",
+        "percent_hbd": 10000,
+        "permlink": "re-foxkoit-2024518t202721385z",
+        "post_id": 133766391,
+        "promoted": "0.000 HBD",
+        "replies": [],
+        "root_title": "Everything cant always be perfect",
+        "title": "",
+        "total_payout_value": "0.000 HBD",
+        "url": "/ecency/@foxkoit/everything-cant-always-be-perfect#@fenisen/re-foxkoit-2024518t202721385z"
+      }
+    ]`
+  },
+  {
+    api: "condenser_api",
     method: "get_account_reputations",
     params: ["account_lower_bound", "limit"],
     parameter: `<code>account_lower_bound: string; limit: int;</code>`,
@@ -5391,7 +5880,7 @@ export const methods = [
     method: "list_rc_direct_delegations",
     params: ["start", "limit"],
     parameter: `<code>start: array [from, to]; limit: int;</code>`,
-    description:_t("rc_api.list_rc_direct_delegations_description"),
+    description:_t("rc_api.list_rc_direct_delegations"),
     url: `${ConfigItems.baseUrl}/api/list_rc_direct_delegations?start=["ecency",""]&limit=3`,
     response: `{
       "rc_direct_delegations": [
@@ -5428,7 +5917,7 @@ export const methods = [
     method: "list_rc_accounts",
     params: ["start", "limit"],
     parameter: `<code>start: string; limit: int;</code>`,
-    description:_t("rc_api.list_rc_accounts_description"),
+    description:_t("rc_api.list_rc_accounts"),
     url: `${ConfigItems.baseUrl}/api/list_rc_accounts?start="ecency"&limit=3`,
     response: `{
       "rc_accounts": [
@@ -7156,12 +7645,7 @@ export const methods = [
     params: ["query"],
     description:_t("condenser_api.get_discussions_by_created_description")
   },
-  {
-    api: "condenser_api",
-    method: "get_discussions_by_active",
-    params: ["query"],
-    description:_t("condenser_api.get_discussions_by_active_description")
-  },
+
   {
     api: "condenser_api",
     method: "get_discussions_by_cashout",
