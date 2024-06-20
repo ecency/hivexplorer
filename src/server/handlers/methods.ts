@@ -5971,6 +5971,1996 @@ export const methods = [
   },
   {
     api: "database_api",
+    method: "find_account_recovery_requests",
+    params: ["accounts"],
+    parameter: `<p>accounts:array(string);</p>`,
+    description:_t("database_api.find_account_recovery_requests"),
+    url: `${ConfigItems.baseUrl}/api/find_account_recovery_requests?accounts=["ecency"]`,
+    response: `{
+      "requests": []
+    }`
+  },
+  {
+    api: "database_api",
+    method: "find_change_recovery_account_requests",
+    params: ["accounts"],
+    parameter: `<p>accounts:array(string);</p>`,
+    description:_t("database_api.find_change_recovery_account_requests"),
+    url: `${ConfigItems.baseUrl}/api/find_change_recovery_account_requests?accounts=["ecency"]`,
+    response: `{
+      "requests": []
+    }`
+  },
+  {
+    api: "database_api",
+    method: "find_comments",
+    params: ["comments"],
+    parameter: `<p>comments:array(string);</p>`,
+    description:_t("database_api.find_comments"),
+    url: `${ConfigItems.baseUrl}/api/find_comments?comments=[["demo","test"],["demo","tests"]]`,
+    response: `{
+      "comments": [
+        {
+          "abs_rshares": 0,
+          "allow_curation_rewards": true,
+          "allow_replies": true,
+          "allow_votes": true,
+          "author": "demo",
+          "author_rewards": 0,
+          "beneficiaries": [],
+          "body": "testing post, don't vote\\n<div steempoll='5915e5e5440cbfd17615fae4'></div><br><h1>title of an idea</h1><p>description of it in details</p><br>\\nasdasdasdslkdjalskdjasd",
+          "cashout_time": "1969-12-31T23:59:59",
+          "category": "test",
+          "children": 8,
+          "children_abs_rshares": 0,
+          "created": "2017-05-12T16:51:57",
+          "curator_payout_value": {
+            "amount": "0",
+            "nai": "@@000000013",
+            "precision": 3
+          },
+          "depth": 0,
+          "id": 3358533,
+          "json_metadata": "{\\"tags\\":[\\"test\\",\\"steempoll\\"],\\"app\\":\\"steemit/0.1\\",\\"format\\":\\"markdown\\"}",
+          "last_payout": "2017-05-19T16:51:57",
+          "last_update": "2017-05-12T16:56:48",
+          "max_accepted_payout": {
+            "amount": "0",
+            "nai": "@@000000013",
+            "precision": 3
+          },
+          "max_cashout_time": "1969-12-31T23:59:59",
+          "net_rshares": 0,
+          "net_votes": 2,
+          "parent_author": "",
+          "parent_permlink": "test",
+          "percent_hbd": 10000,
+          "permlink": "test",
+          "reward_weight": 10000,
+          "root_author": "demo",
+          "root_permlink": "test",
+          "title": "test",
+          "total_payout_value": {
+            "amount": "0",
+            "nai": "@@000000013",
+            "precision": 3
+          },
+          "total_vote_weight": 0,
+          "vote_rshares": 0
+        },
+        {
+          "abs_rshares": 0,
+          "allow_curation_rewards": true,
+          "allow_replies": true,
+          "allow_votes": true,
+          "author": "demo",
+          "author_rewards": 0,
+          "beneficiaries": [
+            {
+              "account": "esteemapp",
+              "weight": 100
+            }
+          ],
+          "body": "This is test post, please don't vote..",
+          "cashout_time": "1969-12-31T23:59:59",
+          "category": "test",
+          "children": 1,
+          "children_abs_rshares": 0,
+          "created": "2017-05-23T04:05:12",
+          "curator_payout_value": {
+            "amount": "0",
+            "nai": "@@000000013",
+            "precision": 3
+          },
+          "depth": 0,
+          "id": 3687135,
+          "json_metadata": "{\\"tags\\":[\\"test\\"],\\"app\\":\\"esteem/1.4.5\\",\\"format\\":\\"markdown+html\\",\\"community\\":\\"esteem\\"}",
+          "last_payout": "2017-05-30T04:05:12",
+          "last_update": "2017-05-25T07:46:39",
+          "max_accepted_payout": {
+            "amount": "1000000000",
+            "nai": "@@000000013",
+            "precision": 3
+          },
+          "max_cashout_time": "1969-12-31T23:59:59",
+          "net_rshares": 0,
+          "net_votes": 0,
+          "parent_author": "",
+          "parent_permlink": "test",
+          "percent_hbd": 10000,
+          "permlink": "tests",
+          "reward_weight": 10000,
+          "root_author": "demo",
+          "root_permlink": "tests",
+          "title": "Test post",
+          "total_payout_value": {
+            "amount": "0",
+            "nai": "@@000000013",
+            "precision": 3
+          },
+          "total_vote_weight": 0,
+          "vote_rshares": 0
+        }
+      ]
+    }`
+  },
+  {
+    api: "database_api",
+    method: "find_decline_voting_rights_requests",
+    params: ["accounts"],
+    parameter: `<p>account:array</p>`,
+    description:_t("database_api.find_decline_voting_rights_requests"),
+    url: `${ConfigItems.baseUrl}/api/find_decline_voting_rights_requests?accounts=["null","temp"]`,
+    response: `{
+      "requests": []
+    }`
+  },
+  {
+    api: "database_api",
+    method: "find_escrows",
+    params: ["from"],
+    parameter: `<p>from:string</p>`,
+    description:_t("database_api.find_escrows"),
+    url: `${ConfigItems.baseUrl}/api/find_escrows?from="temp"`,
+    response: `{
+      "escrows": [
+        {
+          "agent": "smitop",
+          "agent_approved": false,
+          "disputed": false,
+          "escrow_expiration": "2038-01-19T03:14:07",
+          "escrow_id": 12345,
+          "from": "temp",
+          "hbd_balance": {
+            "amount": "0",
+            "nai": "@@000000013",
+            "precision": 3
+          },
+          "hive_balance": {
+            "amount": "1",
+            "nai": "@@000000021",
+            "precision": 3
+          },
+          "id": 143,
+          "pending_fee": {
+            "amount": "1",
+            "nai": "@@000000021",
+            "precision": 3
+          },
+          "ratification_deadline": "2038-01-19T03:14:06",
+          "to": "guest123",
+          "to_approved": false
+        }
+      ]
+    }`
+  },
+  {
+    api: "database_api",
+    method: "find_limit_orders",
+    params: ["account"],
+    parameter: `<p>account:string</p>`,
+    description:_t("database_api.find_limit_orders"),
+    url: `${ConfigItems.baseUrl}/api/find_limit_orders?account="ecency"`,
+    response: `{
+      "orders": [
+        {
+          "created": "2024-05-28T11:45:00",
+          "expiration": "2024-06-24T11:44:43",
+          "for_sale": 82500,
+          "id": 9617759,
+          "orderid": 16896683,
+          "sell_price": {
+            "base": {
+              "amount": "82500",
+              "nai": "@@000000013",
+              "precision": 3
+            },
+            "quote": {
+              "amount": "259434",
+              "nai": "@@000000021",
+              "precision": 3
+            }
+          },
+          "seller": "ecency"
+        }
+      ]
+    }`
+  },
+  {
+    api: "database_api",
+    method: "find_owner_histories",
+    params: ["owner"],
+    parameter: `<p>owner:string</p>`,
+    description:_t("database_api.find_owner_histories"),
+    url: `${ConfigItems.baseUrl}/api/find_owner_histories?owner="noorkh"`,
+    response: `{
+      "owner_auths": [
+        {
+          "account": "noorkh",
+          "id": 765309,
+          "last_valid_time": "2024-05-16T11:40:09",
+          "previous_owner_authority": {
+            "account_auths": [],
+            "key_auths": [
+              [
+                "STM6c31ppwyJH4MJycYw5UxdSG6zeLjykgp58GtKV5uf6twZVB5GL",
+                1
+              ]
+            ],
+            "weight_threshold": 1
+          }
+        }
+      ]
+    }`
+  },
+  {
+    api: "database_api",
+    method: "find_savings_withdrawals",
+    params: ["account"],
+    parameter: `<p>account:string</p>`,
+    description:_t("database_api.find_savings_withdrawals"),
+    url: `${ConfigItems.baseUrl}/api/find_savings_withdrawals?account="demo.com"`,
+    response: `{
+      "withdrawals": [
+        {
+          "amount": {
+            "amount": "1",
+            "nai": "@@000000021",
+            "precision": 3
+          },
+          "complete": "2024-05-31T11:51:39",
+          "from": "demo.com",
+          "id": 213646,
+          "memo": "",
+          "request_id": 3205148605,
+          "to": "demo.com"
+        }
+      ]
+    }`
+  },
+  {
+    api: "database_api",
+    method: "find_hbd_conversion_requests",
+    params: ["account"],
+    parameter: `<p>account:string</p>`,
+    description:_t("database_api.find_hbd_conversion_requests"),
+    url: `${ConfigItems.baseUrl}/api/find_hbd_conversion_requests?account="demo.com"`,
+    response: `{
+      "requests": [
+        {
+          "amount": {
+            "amount": "20",
+            "nai": "@@000000013",
+            "precision": 3
+          },
+          "conversion_date": "2024-05-31T23:53:51",
+          "id": 433539,
+          "owner": "demo.com",
+          "requestid": 3205281453
+        }
+      ]
+    }`
+  },
+  {
+    api: "database_api",
+    method: "find_vesting_delegation_expirations",
+    params: ["account"],
+    parameter: `<p>account:string</p>`,
+    description:_t("database_api.find_vesting_delegation_expirations"),
+    url: `${ConfigItems.baseUrl}/api/find_vesting_delegation_expirations?account="ecency"`,
+    response: `{
+      "delegations": [
+        {
+          "delegator": "ecency",
+          "expiration": "2024-05-28T12:25:03",
+          "id": 5926131,
+          "vesting_shares": {
+            "amount": "350000000000",
+            "nai": "@@000000037",
+            "precision": 6
+          }
+        },
+        {
+          "delegator": "ecency",
+          "expiration": "2024-05-28T17:00:06",
+          "id": 5926144,
+          "vesting_shares": {
+            "amount": "350000000000",
+            "nai": "@@000000037",
+            "precision": 6
+          }
+        },
+        {
+          "delegator": "ecency",
+          "expiration": "2024-05-28T18:20:03",
+          "id": 5926148,
+          "vesting_shares": {
+            "amount": "350000000000",
+            "nai": "@@000000037",
+            "precision": 6
+          }
+        }
+      ]
+    }`
+  },
+  {
+    api: "database_api",
+    method: "find_vesting_delegations",
+    params: ["account"],
+    parameter: `<p>account:string</p>`,
+    description:_t("database_api.find_vesting_delegations"),
+    url: `${ConfigItems.baseUrl}/api/find_vesting_delegations?account="ecency"`,
+    response: `{
+      "delegations": [
+        {
+          "delegatee": "sharker",
+          "delegator": "ecency",
+          "id": 2454889,
+          "min_delegation_time": "2024-03-07T15:35:00",
+          "vesting_shares": {
+            "amount": "350000000000",
+            "nai": "@@000000037",
+            "precision": 6
+          }
+        },
+        {
+          "delegatee": "demo",
+          "delegator": "ecency",
+          "id": 2458936,
+          "min_delegation_time": "2024-05-24T03:55:06",
+          "vesting_shares": {
+            "amount": "350000000000",
+            "nai": "@@000000037",
+            "precision": 6
+          }
+        },
+        {
+          "delegatee": "seckorama",
+          "delegator": "ecency",
+          "id": 2458253,
+          "min_delegation_time": "2024-05-09T13:20:03",
+          "vesting_shares": {
+            "amount": "350000000000",
+            "nai": "@@000000037",
+            "precision": 6
+          }
+        }
+      ]
+    }`
+  },
+  {
+    api: "database_api",
+    method: "find_votes",
+    params: ["author","permlink"],
+    parameter: `<p>author:string; permlink:string;</p>`,
+    description:_t("database_api.find_votes"),
+    url: `${ConfigItems.baseUrl}/api/find_votes?author="demo"&permlink="tests"`,
+    response: `{
+      "votes": [
+        {
+          "author": "demo",
+          "id": 42631493,
+          "last_update": "2017-07-11T22:37:51",
+          "num_changes": 0,
+          "permlink": "tests",
+          "rshares": 0,
+          "vote_percent": 83,
+          "voter": "duckmast3r",
+          "weight": 0
+        },
+        {
+          "author": "demo",
+          "id": 80630046,
+          "last_update": "2017-10-21T20:02:36",
+          "num_changes": 0,
+          "permlink": "tests",
+          "rshares": 0,
+          "vote_percent": 10000,
+          "voter": "mikolla",
+          "weight": 0
+        },
+        {
+          "author": "demo",
+          "id": 46511456,
+          "last_update": "2017-07-23T16:08:09",
+          "num_changes": 0,
+          "permlink": "tests",
+          "rshares": 0,
+          "vote_percent": 10000,
+          "voter": "teukufata10",
+          "weight": 0
+        },
+        {
+          "author": "demo",
+          "id": 147034442,
+          "last_update": "2018-02-17T20:43:18",
+          "num_changes": 0,
+          "permlink": "tests",
+          "rshares": 0,
+          "vote_percent": 10000,
+          "voter": "karmapala",
+          "weight": 0
+        },
+        {
+          "author": "demo",
+          "id": 134255474,
+          "last_update": "2018-01-31T07:10:00",
+          "num_changes": 0,
+          "permlink": "tests",
+          "rshares": 0,
+          "vote_percent": 10000,
+          "voter": "zahry",
+          "weight": 0
+        }
+      ]
+    }`
+  },
+  {
+    api: "database_api",
+    method: "find_withdraw_vesting_routes",
+    params: ["account","order"],
+    parameter: `<p>account:string; order:string;</p>`,
+    description:_t("database_api.find_withdraw_vesting_routes"),
+    url: `${ConfigItems.baseUrl}/api/find_withdraw_vesting_routes?account="ecency"&order="by_destination"`,
+    response: `{
+      "routes": [
+        {
+          "auto_vest": true,
+          "from_account": "feruz",
+          "id": 49677,
+          "percent": 100,
+          "to_account": "ecency"
+        },
+        {
+          "auto_vest": true,
+          "from_account": "esteemapp",
+          "id": 49784,
+          "percent": 10000,
+          "to_account": "ecency"
+        },
+        {
+          "auto_vest": false,
+          "from_account": "parker97",
+          "id": 49828,
+          "percent": 25,
+          "to_account": "ecency"
+        },
+        {
+          "auto_vest": false,
+          "from_account": "gotinazsum2",
+          "id": 50504,
+          "percent": 25,
+          "to_account": "ecency"
+        },
+        {
+          "auto_vest": true,
+          "from_account": "prettiblk1",
+          "id": 50524,
+          "percent": 1000,
+          "to_account": "ecency"
+        },
+        {
+          "auto_vest": false,
+          "from_account": "good-karma",
+          "id": 52240,
+          "percent": 10000,
+          "to_account": "ecency"
+        }
+      ]
+    }`
+  },
+  {
+    api: "database_api",
+    method: "find_witnesses",
+    params: ["owners"],
+    parameter: `<p>owners:array(string);</p>`,
+    description:_t("database_api.find_witnesses"),
+    url: `${ConfigItems.baseUrl}/api/find_witnesses?owners=["gtg","good-karma"]`,
+    response: `{
+      "witnesses": [
+        {
+          "available_witness_account_subsidies": 1724427,
+          "created": "2016-06-30T17:22:18",
+          "hardfork_time_vote": "2022-10-24T12:00:00",
+          "hardfork_version_vote": "1.27.0",
+          "hbd_exchange_rate": {
+            "base": {
+              "amount": "317",
+              "nai": "@@000000013",
+              "precision": 3
+            },
+            "quote": {
+              "amount": "1000",
+              "nai": "@@000000021",
+              "precision": 3
+            }
+          },
+          "id": 9493,
+          "last_aslot": 86020960,
+          "last_confirmed_block_num": 85791643,
+          "last_hbd_exchange_update": "2024-05-28T11:44:54",
+          "last_work": "0000000048bf77f525731f28db7c1aa9ad853a475ccc78e71ea952a7782e5459",
+          "owner": "gtg",
+          "pow_worker": 0,
+          "props": {
+            "account_creation_fee": {
+              "amount": "3000",
+              "nai": "@@000000021",
+              "precision": 3
+            },
+            "account_subsidy_budget": 797,
+            "account_subsidy_decay": 347321,
+            "hbd_interest_rate": 1300,
+            "maximum_block_size": 65536
+          },
+          "running_version": "1.27.5",
+          "signing_key": "STM5dLh5HxjjawY4Gm6o6ugmJUmEXgnfXXXRJPRTxRnvfFBJ24c1M",
+          "total_missed": 986,
+          "url": "https://gtg.openhive.network",
+          "virtual_last_update": "882054217388005272315736164",
+          "virtual_position": "261853782346845940990230536878133812177",
+          "virtual_scheduled_time": "882054773824420050938836179",
+          "votes": "140947972654333105"
+        },
+        {
+          "available_witness_account_subsidies": 1564109,
+          "created": "2016-09-08T04:12:18",
+          "hardfork_time_vote": "2022-10-24T12:00:00",
+          "hardfork_version_vote": "1.27.0",
+          "hbd_exchange_rate": {
+            "base": {
+              "amount": "314",
+              "nai": "@@000000013",
+              "precision": 3
+            },
+            "quote": {
+              "amount": "1000",
+              "nai": "@@000000021",
+              "precision": 3
+            }
+          },
+          "id": 12286,
+          "last_aslot": 86020967,
+          "last_confirmed_block_num": 85791650,
+          "last_hbd_exchange_update": "2024-05-28T08:20:33",
+          "last_work": "0000000000000000000000000000000000000000000000000000000000000000",
+          "owner": "good-karma",
+          "pow_worker": 0,
+          "props": {
+            "account_creation_fee": {
+              "amount": "3000",
+              "nai": "@@000000021",
+              "precision": 3
+            },
+            "account_subsidy_budget": 797,
+            "account_subsidy_decay": 347321,
+            "hbd_interest_rate": 2000,
+            "maximum_block_size": 65536
+          },
+          "running_version": "1.27.3",
+          "signing_key": "STM8eCuFRWTUvbxgo1WLS8Lm1FowXCvucoYm16Uahi57ng7umEw2x",
+          "total_missed": 4642,
+          "url": "https://ecency.com",
+          "virtual_last_update": "882054217388005272315736164",
+          "virtual_position": "253045269572645035592111619059003954787",
+          "virtual_scheduled_time": "882054857864213510174271017",
+          "votes": "136206616617826842"
+        }
+      ]
+    }`
+  },
+  {
+    api: "database_api",
+    method: "get_current_price_feed",
+    description:_t("database_api.get_current_price_feed"),
+    url: `${ConfigItems.baseUrl}/api/get_current_price_feed`,
+    response: `{
+      "base": {
+        "amount": "310",
+        "nai": "@@000000013",
+        "precision": 3
+      },
+      "quote": {
+        "amount": "1000",
+        "nai": "@@000000021",
+        "precision": 3
+      }
+    }`
+  },
+  {
+    api: "database_api",
+    method: "get_hardfork_properties",
+    description:_t("database_api.get_hardfork_properties"),
+    url: `${ConfigItems.baseUrl}/api/get_hardfork_properties`,
+    response: `{
+      "current_hardfork_version": "1.27.0",
+      "id": 0,
+      "last_hardfork": 27,
+      "next_hardfork": "1.27.0",
+      "next_hardfork_time": "2022-10-24T12:00:00",
+      "processed_hardforks": [
+        "2016-03-24T16:00:00",
+        "2016-04-25T17:30:00",
+        "2016-04-26T18:00:00",
+        "2016-04-27T13:00:00",
+        "2016-04-30T15:00:00",
+        "2016-05-31T17:00:00",
+        "2016-06-30T14:00:00",
+        "2016-07-04T00:00:00",
+        "2016-07-04T01:00:00",
+        "2016-07-14T00:00:00",
+        "2016-07-15T12:00:00",
+        "2016-07-17T15:00:00",
+        "2016-07-26T15:00:00",
+        "2016-08-15T14:00:00",
+        "2016-09-20T15:00:00",
+        "2016-11-08T16:00:00",
+        "2016-12-06T16:00:00",
+        "2017-03-30T15:00:00",
+        "2017-03-30T15:00:00",
+        "2017-06-20T15:00:00",
+        "2018-09-25T15:00:00",
+        "2019-08-27T15:00:00",
+        "2019-08-29T15:00:00",
+        "2020-03-20T14:00:00",
+        "2020-10-06T14:00:00",
+        "2021-06-30T14:00:00",
+        "2022-10-11T12:00:00",
+        "2022-10-24T12:00:00"
+      ]
+    }`
+  },
+  {
+    api: "database_api",
+    method: "get_reward_funds",
+    description:_t("database_api.get_reward_funds"),
+    url: `${ConfigItems.baseUrl}/api/get_reward_funds`,
+    response: `{
+      "funds": [
+        {
+          "author_reward_curve": "linear",
+          "content_constant": "2000000000000",
+          "curation_reward_curve": "linear",
+          "id": 0,
+          "last_update": "2024-06-01T06:25:45",
+          "name": "post",
+          "percent_content_rewards": 10000,
+          "percent_curation_rewards": 5000,
+          "recent_claims": "683555165086242118",
+          "reward_balance": {
+            "amount": "914133959",
+            "nai": "@@000000021",
+            "precision": 3
+          }
+        }
+      ]
+    }`
+  },
+  {
+    api: "database_api",
+    method: "list_account_recovery_requests",
+    params: ["start", "limit", "order"],
+    parameter: `<p>start: string; limit: int; order: string(by_account, by_expiration)</p>`,
+    description:_t("database_api.list_account_recovery_requests"),
+    url: `${ConfigItems.baseUrl}/api/list_account_recovery_requests?start=demo&limit=5&order=by_account`,
+    response: `{
+      "requests": []
+    }`
+  },
+  {
+    api: "database_api",
+    method: "list_accounts",
+    params: ["start", "limit", "order", "delayed_votes_active"],
+    parameter: `<p>start: string; limit: int; order: string(by_name, by_proxy, by_next_vesting_withdrawal);delayed_votes_active: boolean (optional, default true)</p>`,
+    description:_t("database_api.list_accounts"),
+    url: `${ConfigItems.baseUrl}/api/list_accounts?start=demo&limit=5&order=by_name`,
+    response: `{
+      "accounts": [
+        {
+          "active": {
+            "account_auths": [],
+            "key_auths": [
+              [
+                "STM51ApnQm3HNieuy3ZUQNtXbdu8CzEFEWRPqMLY1422i8Gy7g2PJ",
+                1
+              ]
+            ],
+            "weight_threshold": 1
+          },
+          "balance": {
+            "amount": "22003",
+            "nai": "@@000000021",
+            "precision": 3
+          },
+          "can_vote": true,
+          "comment_count": 0,
+          "created": "2020-05-13T07:50:03",
+          "curation_rewards": 404802887,
+          "delayed_votes": [],
+          "delegated_vesting_shares": {
+            "amount": "66669866000000",
+            "nai": "@@000000037",
+            "precision": 6
+          },
+          "downvote_manabar": {
+            "current_mana": 567306907775683,
+            "last_update_time": 1717223442
+          },
+          "governance_vote_expiration_ts": "2025-02-14T09:11:30",
+          "hbd_balance": {
+            "amount": "16500",
+            "nai": "@@000000013",
+            "precision": 3
+          },
+          "hbd_last_interest_payment": "2021-06-14T09:30:27",
+          "hbd_seconds": "3282007838238",
+          "hbd_seconds_last_update": "2021-06-30T13:30:33",
+          "id": 1382792,
+          "is_smt": false,
+          "json_metadata": "{\\"profile\\":{\\"name\\":\\"\\",\\"about\\":\\"\\",\\"cover_image\\":\\"\\",\\"profile_image\\":\\"https://images.esteem.app/DQmWCcJcicyck5atZcgXt5rQstoQVSrumHdsmeQNKXHjgPa/ecenct_logo.png\\",\\"website\\":\\"https://ecency.com\\",\\"location\\":\\"\\"}}",
+          "last_account_recovery": "1970-01-01T00:00:00",
+          "last_account_update": "2024-03-21T15:16:03",
+          "last_owner_update": "1970-01-01T00:00:00",
+          "last_post": "2024-05-29T10:24:21",
+          "last_post_edit": "2024-05-29T10:24:21",
+          "last_root_post": "2024-05-20T11:42:24",
+          "last_vote_time": "2024-06-01T06:30:42",
+          "lifetime_vote_count": 0,
+          "memo_key": "STM5vCxUjSAZAgKBornswBuzXgAZasbE3EkPHpLmDEVHmPVGMnnah",
+          "mined": false,
+          "name": "ecency",
+          "next_vesting_withdrawal": "2024-06-08T05:11:12",
+          "open_recurrent_transfers": 0,
+          "owner": {
+            "account_auths": [],
+            "key_auths": [
+              [
+                "STM4yhxC7Bum8St36z3nZmj9VA59EXM7DXReMLMRn8fwrazgNbKYQ",
+                1
+              ]
+            ],
+            "weight_threshold": 1
+          },
+          "pending_claimed_accounts": 64746,
+          "pending_transfers": 0,
+          "post_bandwidth": 0,
+          "post_count": 260355,
+          "post_voting_power": {
+            "amount": "2273875343223380",
+            "nai": "@@000000037",
+            "precision": 6
+          },
+          "posting": {
+            "account_auths": [
+              [
+                "ecency.app",
+                1
+              ]
+            ],
+            "key_auths": [
+              [
+                "STM8AZuk2ja5vSFySFL2zpB9bNew8wJAg8r4QFtbnoamEX8Jvvq43",
+                1
+              ]
+            ],
+            "weight_threshold": 1
+          },
+          "posting_json_metadata": "{\\"profile\\":{\\"name\\":\\"Ecency\\",\\"about\\":\\"You love something set it free! Join immutable, uncensored, rewarding communities! https://ecency.com\\",\\"cover_image\\":\\"\\",\\"profile_image\\":\\"https://images.ecency.com/DQmWCcJcicyck5atZcgXt5rQstoQVSrumHdsmeQNKXHjgPa/ecenct_logo.png\\",\\"website\\":\\"https://ecency.com\\",\\"location\\":\\"Blockchain\\",\\"pinned\\":\\"ecency-development-and-maintenance-4\\",\\"version\\":2,\\"tokens\\":[]}}",
+          "posting_rewards": 23266913,
+          "previous_owner_update": "1970-01-01T00:00:00",
+          "proxied_vsf_votes": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "proxy": "good-karma",
+          "received_vesting_shares": {
+            "amount": "2171630590677302",
+            "nai": "@@000000037",
+            "precision": 6
+          },
+          "recovery_account": "esteemapp",
+          "reset_account": "null",
+          "reward_hbd_balance": {
+            "amount": "0",
+            "nai": "@@000000013",
+            "precision": 3
+          },
+          "reward_hive_balance": {
+            "amount": "0",
+            "nai": "@@000000021",
+            "precision": 3
+          },
+          "reward_vesting_balance": {
+            "amount": "13135338426",
+            "nai": "@@000000037",
+            "precision": 6
+          },
+          "reward_vesting_hive": {
+            "amount": "7620",
+            "nai": "@@000000021",
+            "precision": 3
+          },
+          "savings_balance": {
+            "amount": "0",
+            "nai": "@@000000021",
+            "precision": 3
+          },
+          "savings_hbd_balance": {
+            "amount": "0",
+            "nai": "@@000000013",
+            "precision": 3
+          },
+          "savings_hbd_last_interest_payment": "2023-05-03T04:14:45",
+          "savings_hbd_seconds": "24",
+          "savings_hbd_seconds_last_update": "2023-05-03T04:14:57",
+          "savings_withdraw_requests": 0,
+          "to_withdraw": 60420257568383,
+          "vesting_shares": {
+            "amount": "168914618546078",
+            "nai": "@@000000037",
+            "precision": 6
+          },
+          "vesting_withdraw_rate": {
+            "amount": "4647712120645",
+            "nai": "@@000000037",
+            "precision": 6
+          },
+          "voting_manabar": {
+            "current_mana": 2042568667057063,
+            "last_update_time": 1717223442
+          },
+          "withdraw_routes": 0,
+          "withdrawn": 13943136361935,
+          "witnesses_voted_for": 0
+        },
+        {
+          "active": {
+            "account_auths": [],
+            "key_auths": [
+              [
+                "STM6SwR495DBmnqyHR9pPtBCnMfdgCgeQkSCvXdN7G4xkuRqefmFa",
+                1
+              ]
+            ],
+            "weight_threshold": 1
+          },
+          "balance": {
+            "amount": "0",
+            "nai": "@@000000021",
+            "precision": 3
+          },
+          "can_vote": true,
+          "comment_count": 0,
+          "created": "2021-11-17T08:06:06",
+          "curation_rewards": 0,
+          "delayed_votes": [],
+          "delegated_vesting_shares": {
+            "amount": "0",
+            "nai": "@@000000037",
+            "precision": 6
+          },
+          "downvote_manabar": {
+            "current_mana": 0,
+            "last_update_time": 1637136366
+          },
+          "governance_vote_expiration_ts": "1969-12-31T23:59:59",
+          "hbd_balance": {
+            "amount": "0",
+            "nai": "@@000000013",
+            "precision": 3
+          },
+          "hbd_last_interest_payment": "1970-01-01T00:00:00",
+          "hbd_seconds": "0",
+          "hbd_seconds_last_update": "1970-01-01T00:00:00",
+          "id": 2262551,
+          "is_smt": false,
+          "json_metadata": "",
+          "last_account_recovery": "1970-01-01T00:00:00",
+          "last_account_update": "1970-01-01T00:00:00",
+          "last_owner_update": "1970-01-01T00:00:00",
+          "last_post": "1970-01-01T00:00:00",
+          "last_post_edit": "1970-01-01T00:00:00",
+          "last_root_post": "1970-01-01T00:00:00",
+          "last_vote_time": "1970-01-01T00:00:00",
+          "lifetime_vote_count": 0,
+          "memo_key": "STM8V4w9L4zRZL9mbyGdo3agoMrHvoYERciH9zP9qBh1KzRoDiDmJ",
+          "mined": false,
+          "name": "ecency-987",
+          "next_vesting_withdrawal": "1969-12-31T23:59:59",
+          "open_recurrent_transfers": 0,
+          "owner": {
+            "account_auths": [],
+            "key_auths": [
+              [
+                "STM7hoSVfAbCMhRe1h1NcrhCAYWaYpuxkGMs2tGLqJKxFUWpssfmH",
+                1
+              ]
+            ],
+            "weight_threshold": 1
+          },
+          "pending_claimed_accounts": 0,
+          "pending_transfers": 0,
+          "post_bandwidth": 0,
+          "post_count": 0,
+          "post_voting_power": {
+            "amount": "0",
+            "nai": "@@000000037",
+            "precision": 6
+          },
+          "posting": {
+            "account_auths": [
+              [
+                "ecency.app",
+                1
+              ]
+            ],
+            "key_auths": [
+              [
+                "STM5u78GBiXqvTtF5EY8ZKRbBDknaiVKg5rCihaWRsJYr85A6GHxZ",
+                1
+              ]
+            ],
+            "weight_threshold": 1
+          },
+          "posting_json_metadata": "",
+          "posting_rewards": 0,
+          "previous_owner_update": "1970-01-01T00:00:00",
+          "proxied_vsf_votes": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "proxy": "",
+          "received_vesting_shares": {
+            "amount": "0",
+            "nai": "@@000000037",
+            "precision": 6
+          },
+          "recovery_account": "appreciator",
+          "reset_account": "null",
+          "reward_hbd_balance": {
+            "amount": "0",
+            "nai": "@@000000013",
+            "precision": 3
+          },
+          "reward_hive_balance": {
+            "amount": "0",
+            "nai": "@@000000021",
+            "precision": 3
+          },
+          "reward_vesting_balance": {
+            "amount": "0",
+            "nai": "@@000000037",
+            "precision": 6
+          },
+          "reward_vesting_hive": {
+            "amount": "0",
+            "nai": "@@000000021",
+            "precision": 3
+          },
+          "savings_balance": {
+            "amount": "0",
+            "nai": "@@000000021",
+            "precision": 3
+          },
+          "savings_hbd_balance": {
+            "amount": "0",
+            "nai": "@@000000013",
+            "precision": 3
+          },
+          "savings_hbd_last_interest_payment": "1970-01-01T00:00:00",
+          "savings_hbd_seconds": "0",
+          "savings_hbd_seconds_last_update": "1970-01-01T00:00:00",
+          "savings_withdraw_requests": 0,
+          "to_withdraw": 0,
+          "vesting_shares": {
+            "amount": "0",
+            "nai": "@@000000037",
+            "precision": 6
+          },
+          "vesting_withdraw_rate": {
+            "amount": "0",
+            "nai": "@@000000037",
+            "precision": 6
+          },
+          "voting_manabar": {
+            "current_mana": 0,
+            "last_update_time": 1637136366
+          },
+          "withdraw_routes": 0,
+          "withdrawn": 0,
+          "witnesses_voted_for": 0
+        },
+        {
+          "active": {
+            "account_auths": [],
+            "key_auths": [
+              [
+                "STM7D7EW2udLzW6B6wokhSJokjoe1NY81DEmwP41CgKgYgweQhmAo",
+                1
+              ]
+            ],
+            "weight_threshold": 1
+          },
+          "balance": {
+            "amount": "0",
+            "nai": "@@000000021",
+            "precision": 3
+          },
+          "can_vote": true,
+          "comment_count": 0,
+          "created": "2021-07-12T13:59:21",
+          "curation_rewards": 9186,
+          "delayed_votes": [],
+          "delegated_vesting_shares": {
+            "amount": "0",
+            "nai": "@@000000037",
+            "precision": 6
+          },
+          "downvote_manabar": {
+            "current_mana": 48361867831,
+            "last_update_time": 1717184934
+          },
+          "governance_vote_expiration_ts": "1969-12-31T23:59:59",
+          "hbd_balance": {
+            "amount": "248",
+            "nai": "@@000000013",
+            "precision": 3
+          },
+          "hbd_last_interest_payment": "1970-01-01T00:00:00",
+          "hbd_seconds": "0",
+          "hbd_seconds_last_update": "1970-01-01T00:00:00",
+          "id": 1482618,
+          "is_smt": false,
+          "json_metadata": "",
+          "last_account_recovery": "1970-01-01T00:00:00",
+          "last_account_update": "2024-02-02T14:57:12",
+          "last_owner_update": "1970-01-01T00:00:00",
+          "last_post": "2024-02-12T14:56:42",
+          "last_post_edit": "2024-02-12T14:56:42",
+          "last_root_post": "2024-02-02T14:36:48",
+          "last_vote_time": "2024-05-31T19:48:54",
+          "lifetime_vote_count": 0,
+          "memo_key": "STM5JFJmi2z1mH7tyDW9eY7xi5dodbdev5wqcAesBmNVXP6wWEjsU",
+          "mined": false,
+          "name": "ecency-bulgaria",
+          "next_vesting_withdrawal": "1969-12-31T23:59:59",
+          "open_recurrent_transfers": 0,
+          "owner": {
+            "account_auths": [],
+            "key_auths": [
+              [
+                "STM6qP24RRyeZa1E273Podm3Xag1kP5KsyH5acMkCsPRorTDmaPY2",
+                1
+              ]
+            ],
+            "weight_threshold": 1
+          },
+          "pending_claimed_accounts": 0,
+          "pending_transfers": 0,
+          "post_bandwidth": 0,
+          "post_count": 39,
+          "post_voting_power": {
+            "amount": "193447471327",
+            "nai": "@@000000037",
+            "precision": 6
+          },
+          "posting": {
+            "account_auths": [
+              [
+                "ecency.app",
+                1
+              ],
+              [
+                "engrave.app",
+                1
+              ],
+              [
+                "peakd.app",
+                1
+              ],
+              [
+                "steemauto",
+                1
+              ],
+              [
+                "threespeak",
+                1
+              ]
+            ],
+            "key_auths": [
+              [
+                "STM5nvQZkM5gpyohjduw1yh2jfMqkyBaoGaJ971UmytWiYzDcr79Y",
+                1
+              ]
+            ],
+            "weight_threshold": 1
+          },
+          "posting_json_metadata": "{\\"profile\\":{\\"name\\":\\"@ecency-bulgaria\\",\\"about\\":\\"Социална мрежа която създава стойност за вас. Ecency Bulgaria/България\\",\\"cover_image\\":\\"https://images.ecency.com/DQmSgBQPGDXg71XcoNaoiDeotE3BBwVbA8DHGSxeaGxrLrh/webp.net_resizeimage_19_.jpg\\",\\"profile_image\\":\\"https://images.ecency.com/DQmcnxeFw8L2kRMv4wEXhkwscgK9Dp8PiczADRNHi6rpXtB/263505616_617949199417178_3549995650523106033_n.png\\",\\"website\\":\\"\\",\\"location\\":\\"bulgaria\\",\\"pinned\\":\\"registraciya-pomosh-za-mrezhata-vkhod\\",\\"version\\":2}}",
+          "posting_rewards": 43326,
+          "previous_owner_update": "1970-01-01T00:00:00",
+          "proxied_vsf_votes": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "proxy": "",
+          "received_vesting_shares": {
+            "amount": "0",
+            "nai": "@@000000037",
+            "precision": 6
+          },
+          "recovery_account": "iliyan90",
+          "reset_account": "null",
+          "reward_hbd_balance": {
+            "amount": "0",
+            "nai": "@@000000013",
+            "precision": 3
+          },
+          "reward_hive_balance": {
+            "amount": "0",
+            "nai": "@@000000021",
+            "precision": 3
+          },
+          "reward_vesting_balance": {
+            "amount": "296617809",
+            "nai": "@@000000037",
+            "precision": 6
+          },
+          "reward_vesting_hive": {
+            "amount": "172",
+            "nai": "@@000000021",
+            "precision": 3
+          },
+          "savings_balance": {
+            "amount": "0",
+            "nai": "@@000000021",
+            "precision": 3
+          },
+          "savings_hbd_balance": {
+            "amount": "0",
+            "nai": "@@000000013",
+            "precision": 3
+          },
+          "savings_hbd_last_interest_payment": "1970-01-01T00:00:00",
+          "savings_hbd_seconds": "0",
+          "savings_hbd_seconds_last_update": "1970-01-01T00:00:00",
+          "savings_withdraw_requests": 0,
+          "to_withdraw": 0,
+          "vesting_shares": {
+            "amount": "193447471327",
+            "nai": "@@000000037",
+            "precision": 6
+          },
+          "vesting_withdraw_rate": {
+            "amount": "0",
+            "nai": "@@000000037",
+            "precision": 6
+          },
+          "voting_manabar": {
+            "current_mana": 174900497214,
+            "last_update_time": 1717184934
+          },
+          "withdraw_routes": 0,
+          "withdrawn": 0,
+          "witnesses_voted_for": 0
+        }
+      ]
+    }`
+  },
+  {
+    api: "database_api",
+    method: "list_comments",
+    params: ["start", "limit", "order"],
+    parameter: `<ul>
+      <li><code class="language-plaintext highlighter-rouge">start</code> depends on <code class="language-plaintext highlighter-rouge">order</code> (see below)</li>
+      <li><code class="language-plaintext highlighter-rouge">limit</code> is up to 1000.</li>
+      <li><code class="language-plaintext highlighter-rouge">order</code> can be one of:
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">by_cashout_time</code> - order by cashout time
+            <ul>
+              <li><code class="language-plaintext highlighter-rouge">start</code> is an array of three required values (two optionally blank): <code class="language-plaintext highlighter-rouge">timestamp</code>, <code class="language-plaintext highlighter-rouge">author</code>, <code class="language-plaintext highlighter-rouge">permlink</code></li>
+            </ul>
+          </li>
+          <li><code class="language-plaintext highlighter-rouge">by_permlink</code> - order by permlink
+            <ul>
+              <li><code class="language-plaintext highlighter-rouge">start</code> is an array of two required values (both optionally blank): <code class="language-plaintext highlighter-rouge">author</code>, <code class="language-plaintext highlighter-rouge">permlink</code></li>
+            </ul>
+          </li>
+          <li><code class="language-plaintext highlighter-rouge">by_root</code> - order by root
+            <ul>
+              <li><code class="language-plaintext highlighter-rouge">start</code> is an array of four required values (two optional blank): <code class="language-plaintext highlighter-rouge">root_author</code>, <code class="language-plaintext highlighter-rouge">root_permlink</code>, <code class="language-plaintext highlighter-rouge">child_author</code>, <code class="language-plaintext highlighter-rouge">child_permlink</code></li>
+            </ul>
+          </li>
+          <li><code class="language-plaintext highlighter-rouge">by_parent</code> - order by parent
+            <ul>
+              <li><code class="language-plaintext highlighter-rouge">start</code> is an array of four required values (two optional blank): <code class="language-plaintext highlighter-rouge">parent_author</code>, <code class="language-plaintext highlighter-rouge">parent_permlink</code>, <code class="language-plaintext highlighter-rouge">child_author</code>, <code class="language-plaintext highlighter-rouge">child_permlink</code></li>
+            </ul>
+          </li>
+          <li><code class="language-plaintext highlighter-rouge">by_last_update</code> - order by last update
+            <ul>
+              <li><code class="language-plaintext highlighter-rouge">start</code> is an array of four required values (two optionally blank): <code class="language-plaintext highlighter-rouge">parent_author</code>, <code class="language-plaintext highlighter-rouge">update_time</code>, <code class="language-plaintext highlighter-rouge">start_author</code>, <code class="language-plaintext highlighter-rouge">permlink</code></li>
+            </ul>
+          </li>
+          <li><code class="language-plaintext highlighter-rouge">by_author_last_update</code> - order by author’s last update
+            <ul>
+              <li><code class="language-plaintext highlighter-rouge">start</code> is an array of four required values (two optionally blank): <code class="language-plaintext highlighter-rouge">parent_author</code>, <code class="language-plaintext highlighter-rouge">update_time</code>, <code class="language-plaintext highlighter-rouge">start_author</code>, <code class="language-plaintext highlighter-rouge">permlink</code></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <table>
+      <thead>
+        <tr>
+          <th><code class="language-plaintext highlighter-rouge">start</code> (array)</th>
+          <th><code class="language-plaintext highlighter-rouge">limit</code> (int)</th>
+          <th><code class="language-plaintext highlighter-rouge">order</code> (string)</th>
+          <th>&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code class="language-plaintext highlighter-rouge">["1970-01-01T00:00:00", "", ""]</code></td>
+          <td>10</td>
+          <td><code class="language-plaintext highlighter-rouge">"by_cashout_time"</code></td>
+          <td>Queries first 10 comments, sort by cashout time</td>
+        </tr>
+        <tr>
+          <td><code class="language-plaintext highlighter-rouge">["", ""]</code></td>
+          <td>10</td>
+          <td><code class="language-plaintext highlighter-rouge">"by_permlink"</code></td>
+          <td>Queries first 10 comments, sort by permlink</td>
+        </tr>
+        <tr>
+          <td><code class="language-plaintext highlighter-rouge">["hiveio","announcing-the-launch-of-hive-blockchain", "", ""]</code></td>
+          <td>10</td>
+          <td><code class="language-plaintext highlighter-rouge">"by_root"</code></td>
+          <td>Queries next 10 comments starting at @hiveio/firstpost, sort by root</td>
+        </tr>
+        <tr>
+          <td><code class="language-plaintext highlighter-rouge">["hiveio","announcing-the-launch-of-hive-blockchain", "", ""]</code></td>
+          <td>10</td>
+          <td><code class="language-plaintext highlighter-rouge">"by_parent"</code></td>
+          <td>Queries next 10 comments starting at @hiveio/firstpost, sort by parent</td>
+        </tr>
+        <tr>
+          <td><code class="language-plaintext highlighter-rouge">["hiveio","1970-01-01T00:00:00", "", ""]</code></td>
+          <td>10</td>
+          <td><code class="language-plaintext highlighter-rouge">"by_last_update"</code></td>
+          <td>Queries next 10 comments starting at @hiveio’s updates since timpstamp, sort by last update</td>
+        </tr>
+        <tr>
+          <td><code class="language-plaintext highlighter-rouge">["hiveio","1970-01-01T00:00:00", "", ""]</code></td>
+          <td>10</td>
+          <td><code class="language-plaintext highlighter-rouge">"by_author_last_update"</code></td>
+          <td>Queries next 10 comments starting at @hiveio’s updates since timestamp, sort by author’s last update</td>
+        </tr>
+      </tbody>
+    </table>`,
+    description:_t("database_api.list_comments"),
+    url: `${ConfigItems.baseUrl}/api/list_comments?start=["",""]&limit=5&order=by_permlink`,
+    response: `{
+      "comments": [
+        {
+          "abs_rshares": 0,
+          "allow_curation_rewards": true,
+          "allow_replies": true,
+          "allow_votes": true,
+          "author": "a-0-0-0-0-0-0",
+          "author_rewards": 2146,
+          "beneficiaries": [],
+          "body": "<center>\\n<img src=\\"https://steemitimages.com/DQmPGxBK4512q2CGZ71KH8NjzTmpufQX858GRz8uC6MKjVJ/hands-connecting-logo_23-2147507857.jpg\\">\\n<h1>Everyday unused upvotes go in drain.\\nWhy not use it for charity.</h1></center>",
+          "cashout_time": "1969-12-31T23:59:59",
+          "category": "charity",
+          "children": 1,
+          "children_abs_rshares": 0,
+          "created": "2018-06-09T04:14:03",
+          "curator_payout_value": {
+            "amount": "121",
+            "nai": "@@000000013",
+            "precision": 3
+          },
+          "depth": 0,
+          "id": 59940601,
+          "json_metadata": "{\\"tags\\":[\\"charity\\",\\"love\\",\\"life\\",\\"care\\",\\"steemit\\"],\\"image\\":[\\"https://steemitimages.com/DQmPGxBK4512q2CGZ71KH8NjzTmpufQX858GRz8uC6MKjVJ/hands-connecting-logo_23-2147507857.jpg\\"],\\"app\\":\\"steemit/0.1\\",\\"format\\":\\"markdown\\"}",
+          "last_payout": "2018-06-16T04:14:03",
+          "last_update": "2018-06-09T04:14:03",
+          "max_accepted_payout": {
+            "amount": "1000000000",
+            "nai": "@@000000013",
+            "precision": 3
+          },
+          "max_cashout_time": "1969-12-31T23:59:59",
+          "net_rshares": 0,
+          "net_votes": 61,
+          "parent_author": "",
+          "parent_permlink": "charity",
+          "percent_hbd": 10000,
+          "permlink": "245dkq-upvote-4-charity",
+          "reward_weight": 10000,
+          "root_author": "a-0-0-0-0-0-0",
+          "root_permlink": "245dkq-upvote-4-charity",
+          "title": "Upvote 4 Charity 👍",
+          "total_payout_value": {
+            "amount": "3675",
+            "nai": "@@000000013",
+            "precision": 3
+          },
+          "total_vote_weight": 0,
+          "vote_rshares": 0
+        },
+        {
+          "abs_rshares": 0,
+          "allow_curation_rewards": true,
+          "allow_replies": true,
+          "allow_votes": true,
+          "author": "a-0-0-0-0-0-0",
+          "author_rewards": 30,
+          "beneficiaries": [],
+          "body": "<center>\\n<img src=\\"https://steemitimages.com/DQmPGxBK4512q2CGZ71KH8NjzTmpufQX858GRz8uC6MKjVJ/hands-connecting-logo_23-2147507857.jpg\\">\\n<h1>Everyday unused upvotes go in drain.\\nWhy not use it for charity.</h1></center>",
+          "cashout_time": "1969-12-31T23:59:59",
+          "category": "charity",
+          "children": 2,
+          "children_abs_rshares": 0,
+          "created": "2018-06-06T16:58:30",
+          "curator_payout_value": {
+            "amount": "0",
+            "nai": "@@000000013",
+            "precision": 3
+          },
+          "depth": 0,
+          "id": 59557390,
+          "json_metadata": "{\\"tags\\":[\\"charity\\",\\"love\\",\\"life\\",\\"care\\",\\"steemit\\"],\\"image\\":[\\"https://steemitimages.com/DQmPGxBK4512q2CGZ71KH8NjzTmpufQX858GRz8uC6MKjVJ/hands-connecting-logo_23-2147507857.jpg\\"],\\"app\\":\\"steemit/0.1\\",\\"format\\":\\"markdown\\"}",
+          "last_payout": "2018-06-13T16:58:30",
+          "last_update": "2018-06-06T16:58:30",
+          "max_accepted_payout": {
+            "amount": "1000000000",
+            "nai": "@@000000013",
+            "precision": 3
+          },
+          "max_cashout_time": "1969-12-31T23:59:59",
+          "net_rshares": 0,
+          "net_votes": 12,
+          "parent_author": "",
+          "parent_permlink": "charity",
+          "percent_hbd": 10000,
+          "permlink": "24w57k-upvote-4-charity",
+          "reward_weight": 10000,
+          "root_author": "a-0-0-0-0-0-0",
+          "root_permlink": "24w57k-upvote-4-charity",
+          "title": "Upvote 4 Charity 👍",
+          "total_payout_value": {
+            "amount": "54",
+            "nai": "@@000000013",
+            "precision": 3
+          },
+          "total_vote_weight": 0,
+          "vote_rshares": 0
+        },
+        {
+          "abs_rshares": 0,
+          "allow_curation_rewards": true,
+          "allow_replies": true,
+          "allow_votes": true,
+          "author": "a-0-0-0-0-0-0",
+          "author_rewards": 104,
+          "beneficiaries": [],
+          "body": "<center>\\n<img src=\\"https://steemitimages.com/DQmPGxBK4512q2CGZ71KH8NjzTmpufQX858GRz8uC6MKjVJ/hands-connecting-logo_23-2147507857.jpg\\">\\n<h1>Everyday unused upvotes go in drain.\\nWhy not use it for charity.</h1></center>",
+          "cashout_time": "1969-12-31T23:59:59",
+          "category": "charity",
+          "children": 2,
+          "children_abs_rshares": 0,
+          "created": "2018-06-08T03:32:39",
+          "curator_payout_value": {
+            "amount": "31",
+            "nai": "@@000000013",
+            "precision": 3
+          },
+          "depth": 0,
+          "id": 59785240,
+          "json_metadata": "{\\"tags\\":[\\"charity\\",\\"love\\",\\"life\\",\\"care\\",\\"steemit\\"],\\"image\\":[\\"https://steemitimages.com/DQmPGxBK4512q2CGZ71KH8NjzTmpufQX858GRz8uC6MKjVJ/hands-connecting-logo_23-2147507857.jpg\\"],\\"app\\":\\"steemit/0.1\\",\\"format\\":\\"markdown\\"}",
+          "last_payout": "2018-06-15T03:32:39",
+          "last_update": "2018-06-08T03:32:39",
+          "max_accepted_payout": {
+            "amount": "1000000000",
+            "nai": "@@000000013",
+            "precision": 3
+          },
+          "max_cashout_time": "1969-12-31T23:59:59",
+          "net_rshares": 0,
+          "net_votes": 18,
+          "parent_author": "",
+          "parent_permlink": "charity",
+          "percent_hbd": 10000,
+          "permlink": "2ahvhk-upvote-4-charity",
+          "reward_weight": 10000,
+          "root_author": "a-0-0-0-0-0-0",
+          "root_permlink": "2ahvhk-upvote-4-charity",
+          "title": "Upvote 4 Charity 👍",
+          "total_payout_value": {
+            "amount": "179",
+            "nai": "@@000000013",
+            "precision": 3
+          },
+          "total_vote_weight": 0,
+          "vote_rshares": 0
+        },
+        {
+          "abs_rshares": 0,
+          "allow_curation_rewards": true,
+          "allow_replies": true,
+          "allow_votes": true,
+          "author": "a-0-0-0-0-0-0",
+          "author_rewards": 26,
+          "beneficiaries": [],
+          "body": "<center>\\n<img src=\\"https://steemitimages.com/DQmPGxBK4512q2CGZ71KH8NjzTmpufQX858GRz8uC6MKjVJ/hands-connecting-logo_23-2147507857.jpg\\">\\n<h1>Everyday unused upvotes go in drain.\\nWhy not use it for charity.</h1></center>",
+          "cashout_time": "1969-12-31T23:59:59",
+          "category": "charity",
+          "children": 0,
+          "children_abs_rshares": 0,
+          "created": "2018-06-08T10:20:09",
+          "curator_payout_value": {
+            "amount": "0",
+            "nai": "@@000000013",
+            "precision": 3
+          },
+          "depth": 0,
+          "id": 59827763,
+          "json_metadata": "{\\"tags\\":[\\"charity\\",\\"love\\",\\"life\\",\\"care\\",\\"steemit\\"],\\"image\\":[\\"https://steemitimages.com/DQmPGxBK4512q2CGZ71KH8NjzTmpufQX858GRz8uC6MKjVJ/hands-connecting-logo_23-2147507857.jpg\\"],\\"app\\":\\"steemit/0.1\\",\\"format\\":\\"markdown\\"}",
+          "last_payout": "2018-06-15T10:20:09",
+          "last_update": "2018-06-08T10:20:09",
+          "max_accepted_payout": {
+            "amount": "1000000000",
+            "nai": "@@000000013",
+            "precision": 3
+          },
+          "max_cashout_time": "1969-12-31T23:59:59",
+          "net_rshares": 0,
+          "net_votes": 11,
+          "parent_author": "",
+          "parent_permlink": "charity",
+          "percent_hbd": 10000,
+          "permlink": "2edar6-upvote-4-charity",
+          "reward_weight": 10000,
+          "root_author": "a-0-0-0-0-0-0",
+          "root_permlink": "2edar6-upvote-4-charity",
+          "title": "Upvote 4 Charity 👍",
+          "total_payout_value": {
+            "amount": "44",
+            "nai": "@@000000013",
+            "precision": 3
+          },
+          "total_vote_weight": 0,
+          "vote_rshares": 0
+        },
+        {
+          "abs_rshares": 0,
+          "allow_curation_rewards": true,
+          "allow_replies": true,
+          "allow_votes": true,
+          "author": "a-0-0-0-0-0-0",
+          "author_rewards": 559,
+          "beneficiaries": [],
+          "body": "<center>\\n<img src=\\"https://steemitimages.com/DQmPGxBK4512q2CGZ71KH8NjzTmpufQX858GRz8uC6MKjVJ/hands-connecting-logo_23-2147507857.jpg\\">\\n<h1>Everyday unused upvotes go in drain.\\nWhy not use it for charity.</h1></center>",
+          "cashout_time": "1969-12-31T23:59:59",
+          "category": "charity",
+          "children": 5,
+          "children_abs_rshares": 0,
+          "created": "2018-06-10T08:34:03",
+          "curator_payout_value": {
+            "amount": "250",
+            "nai": "@@000000013",
+            "precision": 3
+          },
+          "depth": 0,
+          "id": 60111028,
+          "json_metadata": "{\\"tags\\":[\\"charity\\",\\"love\\",\\"life\\",\\"care\\",\\"steemit\\"],\\"image\\":[\\"https://steemitimages.com/DQmPGxBK4512q2CGZ71KH8NjzTmpufQX858GRz8uC6MKjVJ/hands-connecting-logo_23-2147507857.jpg\\"],\\"app\\":\\"steemit/0.1\\",\\"format\\":\\"markdown\\"}",
+          "last_payout": "2018-06-17T08:34:03",
+          "last_update": "2018-06-10T08:34:03",
+          "max_accepted_payout": {
+            "amount": "1000000000",
+            "nai": "@@000000013",
+            "precision": 3
+          },
+          "max_cashout_time": "1969-12-31T23:59:59",
+          "net_rshares": 0,
+          "net_votes": 29,
+          "parent_author": "",
+          "parent_permlink": "charity",
+          "percent_hbd": 10000,
+          "permlink": "2gojbj-upvote-4-charity",
+          "reward_weight": 10000,
+          "root_author": "a-0-0-0-0-0-0",
+          "root_permlink": "2gojbj-upvote-4-charity",
+          "title": "Upvote 4 Charity 👍",
+          "total_payout_value": {
+            "amount": "937",
+            "nai": "@@000000013",
+            "precision": 3
+          },
+          "total_vote_weight": 0,
+          "vote_rshares": 0
+        }
+      ]
+    }`
+  },
+  {
+    api: "database_api",
+    method: "list_escrows",
+    params: ["start", "limit", "order"],
+    parameter: `<p>Parameters: start:array; limit:int; order:string</p><ul>
+      <li><code class="language-plaintext highlighter-rouge">start</code> depends on <code class="language-plaintext highlighter-rouge">order</code> (see below)</li>
+      <li><code class="language-plaintext highlighter-rouge">limit</code> is up to 1000.</li>
+      <li><code class="language-plaintext highlighter-rouge">order</code> can be one of:
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">by_from_id</code> - order by id
+            <ul>
+              <li><code class="language-plaintext highlighter-rouge">start</code> is an array of two values: <code class="language-plaintext highlighter-rouge">account</code>, <code class="language-plaintext highlighter-rouge">escrow_id</code></li>
+            </ul>
+          </li>
+          <li><code class="language-plaintext highlighter-rouge">by_ratification_deadline</code> - order by ratification deadline
+            <ul>
+              <li><code class="language-plaintext highlighter-rouge">start</code> is an array of three values: <code class="language-plaintext highlighter-rouge">is_approved</code>, <code class="language-plaintext highlighter-rouge">timestamp</code>, <code class="language-plaintext highlighter-rouge">escrow_id</code></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <table>
+      <thead>
+        <tr>
+          <th><code class="language-plaintext highlighter-rouge">start</code> (array)</th>
+          <th><code class="language-plaintext highlighter-rouge">limit</code> (int)</th>
+          <th><code class="language-plaintext highlighter-rouge">order</code> (string)</th>
+          <th>&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code class="language-plaintext highlighter-rouge">["alice", 99]</code></td>
+          <td>10</td>
+          <td><code class="language-plaintext highlighter-rouge">"by_from_id"</code></td>
+          <td>Queries first 10 requests, sort by id</td>
+        </tr>
+        <tr>
+          <td><code class="language-plaintext highlighter-rouge">[true, "1960-01-01T00:00:00", 99]</code></td>
+          <td>10</td>
+          <td><code class="language-plaintext highlighter-rouge">"by_ratification_deadline"</code></td>
+          <td>Queries first 10 requests, sort by ratification deadline</td>
+        </tr>
+      </tbody>
+    </table>`,
+    description:_t("database_api.list_escrows"),
+    url: `${ConfigItems.baseUrl}/api/list_escrows?start=["",0]&limit=5&order=by_from_id`,
+    response: `{
+      "escrows": [
+        {
+          "agent": "ongame",
+          "agent_approved": true,
+          "disputed": false,
+          "escrow_expiration": "2018-11-24T17:31:26",
+          "escrow_id": 1,
+          "from": "addicttolife",
+          "hbd_balance": {
+            "amount": "0",
+            "nai": "@@000000013",
+            "precision": 3
+          },
+          "hive_balance": {
+            "amount": "4832",
+            "nai": "@@000000021",
+            "precision": 3
+          },
+          "id": 158,
+          "pending_fee": {
+            "amount": "0",
+            "nai": "@@000000021",
+            "precision": 3
+          },
+          "ratification_deadline": "2018-11-23T17:31:26",
+          "to": "fundition.help",
+          "to_approved": true
+        },
+        {
+          "agent": "swapsteem",
+          "agent_approved": true,
+          "disputed": true,
+          "escrow_expiration": "2019-01-23T21:01:17",
+          "escrow_id": 1547992122,
+          "from": "anlptl",
+          "hbd_balance": {
+            "amount": "0",
+            "nai": "@@000000013",
+            "precision": 3
+          },
+          "hive_balance": {
+            "amount": "1",
+            "nai": "@@000000021",
+            "precision": 3
+          },
+          "id": 182,
+          "pending_fee": {
+            "amount": "0",
+            "nai": "@@000000021",
+            "precision": 3
+          },
+          "ratification_deadline": "2019-01-20T21:01:17",
+          "to": "svijay1692",
+          "to_approved": true
+        },
+        {
+          "agent": "swapsteem",
+          "agent_approved": true,
+          "disputed": true,
+          "escrow_expiration": "2019-01-25T18:01:09",
+          "escrow_id": 1548154776,
+          "from": "anlptl",
+          "hbd_balance": {
+            "amount": "0",
+            "nai": "@@000000013",
+            "precision": 3
+          },
+          "hive_balance": {
+            "amount": "1",
+            "nai": "@@000000021",
+            "precision": 3
+          },
+          "id": 185,
+          "pending_fee": {
+            "amount": "0",
+            "nai": "@@000000021",
+            "precision": 3
+          },
+          "ratification_deadline": "2019-01-22T18:01:09",
+          "to": "anlptl",
+          "to_approved": true
+        },
+        {
+          "agent": "elautomatico",
+          "agent_approved": true,
+          "disputed": false,
+          "escrow_expiration": "2019-06-26T19:08:45",
+          "escrow_id": 1,
+          "from": "biteosdev",
+          "hbd_balance": {
+            "amount": "1",
+            "nai": "@@000000013",
+            "precision": 3
+          },
+          "hive_balance": {
+            "amount": "2",
+            "nai": "@@000000021",
+            "precision": 3
+          },
+          "id": 162,
+          "pending_fee": {
+            "amount": "0",
+            "nai": "@@000000021",
+            "precision": 3
+          },
+          "ratification_deadline": "2019-06-25T19:08:45",
+          "to": "loshombresdepaco",
+          "to_approved": true
+        },
+        {
+          "agent": "elautomatico",
+          "agent_approved": true,
+          "disputed": false,
+          "escrow_expiration": "2019-06-26T19:08:45",
+          "escrow_id": 2,
+          "from": "biteosdev",
+          "hbd_balance": {
+            "amount": "1",
+            "nai": "@@000000013",
+            "precision": 3
+          },
+          "hive_balance": {
+            "amount": "5",
+            "nai": "@@000000021",
+            "precision": 3
+          },
+          "id": 163,
+          "pending_fee": {
+            "amount": "0",
+            "nai": "@@000000021",
+            "precision": 3
+          },
+          "ratification_deadline": "2019-06-25T19:08:45",
+          "to": "loshombresdepaco",
+          "to_approved": true
+        }
+      ]
+    }`
+  },
+  {
+    api: "database_api",
+    method: "list_limit_orders",
+    params: ["start", "limit", "order"],
+    parameter: `<p>Parameters: start:array; limit:int; order:string</p>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">start</code> depends on <code class="language-plaintext highlighter-rouge">order</code> (see below)</li>
+      <li><code class="language-plaintext highlighter-rouge">limit</code> is up to 1000.</li>
+      <li><code class="language-plaintext highlighter-rouge">order</code> can be one of:
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">by_price</code> - order by price
+            <ul>
+              <li><code class="language-plaintext highlighter-rouge">start</code> is an array of two values: <code class="language-plaintext highlighter-rouge">price</code>, <code class="language-plaintext highlighter-rouge">order_type</code></li>
+            </ul>
+          </li>
+          <li><code class="language-plaintext highlighter-rouge">by_account</code> - order by account
+            <ul>
+              <li><code class="language-plaintext highlighter-rouge">start</code> is an array of two values: <code class="language-plaintext highlighter-rouge">account</code>, <code class="language-plaintext highlighter-rouge">order_id</code></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <table>
+      <thead>
+        <tr>
+          <th><code class="language-plaintext highlighter-rouge">start</code> (array)</th>
+          <th><code class="language-plaintext highlighter-rouge">limit</code> (int)</th>
+          <th><code class="language-plaintext highlighter-rouge">order</code> (string)</th>
+          <th>&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code class="language-plaintext highlighter-rouge">[{"base": {"amount": "85405", "precision": 3, "nai": "@@000000021"}, "quote": {"amount": "17192", "precision": 3, "nai": "@@000000013"}}, 0]</code></td>
+          <td>10</td>
+          <td><code class="language-plaintext highlighter-rouge">"by_price"</code></td>
+          <td>Queries first 10 requests, sort by price</td>
+        </tr>
+        <tr>
+          <td><code class="language-plaintext highlighter-rouge">["alice", 0]</code></td>
+          <td>10</td>
+          <td><code class="language-plaintext highlighter-rouge">"by_account"</code></td>
+          <td>Queries first 10 requests, sort by account</td>
+        </tr>
+      </tbody>
+    </table>`,
+    description:_t("database_api.list_limit_orders"),
+    url: `${ConfigItems.baseUrl}/api/list_limit_orders?start=["hbdstabilizer",0]&limit=5&order=by_account`,
+    response: `{
+      "orders": [
+        {
+          "created": "2024-05-31T14:34:51",
+          "expiration": "2024-06-27T14:33:27",
+          "for_sale": 5486327,
+          "id": 9636028,
+          "orderid": 1717166083,
+          "sell_price": {
+            "base": {
+              "amount": "5486327",
+              "nai": "@@000000021",
+              "precision": 3
+            },
+            "quote": {
+              "amount": "1815974",
+              "nai": "@@000000013",
+              "precision": 3
+            }
+          },
+          "seller": "helcim"
+        },
+        {
+          "created": "2024-05-31T19:46:12",
+          "expiration": "2024-06-27T19:46:09",
+          "for_sale": 3500,
+          "id": 9637531,
+          "orderid": 17184769,
+          "sell_price": {
+            "base": {
+              "amount": "3500",
+              "nai": "@@000000013",
+              "precision": 3
+            },
+            "quote": {
+              "amount": "12500",
+              "nai": "@@000000021",
+              "precision": 3
+            }
+          },
+          "seller": "hindavi"
+        },
+        {
+          "created": "2024-05-12T02:01:48",
+          "expiration": "2024-06-08T01:57:44",
+          "for_sale": 13790,
+          "id": 9535752,
+          "orderid": 1715479308,
+          "sell_price": {
+            "base": {
+              "amount": "13790",
+              "nai": "@@000000021",
+              "precision": 3
+            },
+            "quote": {
+              "amount": "13790",
+              "nai": "@@000000013",
+              "precision": 3
+            }
+          },
+          "seller": "hive-158152"
+        },
+        {
+          "created": "2024-05-29T02:22:09",
+          "expiration": "2024-06-25T02:22:07",
+          "for_sale": 151872,
+          "id": 9620818,
+          "orderid": 1716949327,
+          "sell_price": {
+            "base": {
+              "amount": "151872",
+              "nai": "@@000000021",
+              "precision": 3
+            },
+            "quote": {
+              "amount": "65305",
+              "nai": "@@000000013",
+              "precision": 3
+            }
+          },
+          "seller": "hivesl"
+        },
+        {
+          "created": "2024-06-01T06:56:09",
+          "expiration": "2024-06-08T06:55:32",
+          "for_sale": 40835,
+          "id": 9639512,
+          "orderid": 99621553,
+          "sell_price": {
+            "base": {
+              "amount": "40835",
+              "nai": "@@000000021",
+              "precision": 3
+            },
+            "quote": {
+              "amount": "12371",
+              "nai": "@@000000013",
+              "precision": 3
+            }
+          },
+          "seller": "honeybot"
+        }
+      ]
+    }`
+  },
+  {
+    api: "database_api",
+    method: "list_owner_histories",
+    params: ["start", "limit", ],
+    parameter: `<p>Parameters: start:array; limit:int;</p>
+      <table>
+        <thead>
+          <tr>
+            <th><code class="language-plaintext highlighter-rouge">start</code> (array)</th>
+            <th><code class="language-plaintext highlighter-rouge">limit</code> (int)</th>
+            <th>&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">["hiveio", "1970-01-01T00:00:00"]</code></td>
+            <td>10</td>
+            <td>Queries the owner history starting from account named “hiveio” on “1970-01-01T00:00:00”, limit 10 results.</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">["alice", "1970-01-01T00:00:00"]</code></td>
+            <td>10</td>
+            <td>Queries the owner history starting from account named “alice”, limit 10 results.</td>
+          </tr>
+        </tbody>
+      </table>`,
+    description:_t("database_api.list_owner_histories"),
+    url: `${ConfigItems.baseUrl}/api/list_owner_histories?start=["a","1970-01-01T00:00:00"]&limit=5`,
+    response: `{
+      "owner_auths": [
+        {
+          "account": "a1a2",
+          "id": 765781,
+          "last_valid_time": "2024-06-13T20:58:36",
+          "previous_owner_authority": {
+            "account_auths": [],
+            "key_auths": [
+              [
+                "STM78Zbn5WKP84zNAtbhQ6UdGGSzWbtZySqVg21GGPXvJrfhj5mMY",
+                1
+              ]
+            ],
+            "weight_threshold": 1
+          }
+        },
+        {
+          "account": "abhi1113",
+          "id": 765439,
+          "last_valid_time": "2024-05-28T18:12:36",
+          "previous_owner_authority": {
+            "account_auths": [],
+            "key_auths": [
+              [
+                "STM5UphcBPV73ybULuCXcVuupCzNkAptZqUDUUwcmuGLgjbAfAcDM",
+                1
+              ]
+            ],
+            "weight_threshold": 1
+          }
+        },
+        {
+          "account": "ahubasakk",
+          "id": 765393,
+          "last_valid_time": "2024-05-24T23:42:24",
+          "previous_owner_authority": {
+            "account_auths": [],
+            "key_auths": [
+              [
+                "STM8V86owt4RxyTVE5fKhkgPpBWSNcva3y6y1r2nC2Qg2hTVpPBRg",
+                1
+              ]
+            ],
+            "weight_threshold": 1
+          }
+        },
+        {
+          "account": "ajaycrypto18",
+          "id": 765796,
+          "last_valid_time": "2024-06-16T20:10:33",
+          "previous_owner_authority": {
+            "account_auths": [],
+            "key_auths": [
+              [
+                "STM5QeuYQLap6qeVMzg1quPiRcKMQEWAihZW4jF79ZD2WihnYdnu4",
+                1
+              ]
+            ],
+            "weight_threshold": 1
+          }
+        },
+        {
+          "account": "ajie25",
+          "id": 765379,
+          "last_valid_time": "2024-05-23T14:29:54",
+          "previous_owner_authority": {
+            "account_auths": [],
+            "key_auths": [
+              [
+                "STM5yPuSR3xrhfhf8XN743bu81seBBKPwCiG8JxGhungMu8iJ5csw",
+                1
+              ]
+            ],
+            "weight_threshold": 1
+          }
+        }
+      ]
+    }`
+  },
+  {
+    api: "database_api",
     method: "list_proposals",
     params: ["start", "limit", "order", "order_direction", "status"],
     parameter: `<p>start:array; limit:int; order:string; order_direction:string; status:string</p>
