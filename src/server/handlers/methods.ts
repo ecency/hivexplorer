@@ -8559,8 +8559,8 @@ export const methods = [
   {
     api: "bridge",
     method: "get_discussion",
-    params: ["author", "permlink"],
-    parameter: `<code>author: string, permlink: string </code>`,
+    params: ["author", "permlink", "observer"],
+    parameter: `<code>author: string, permlink: string, observer: string(optional) </code>`,
     description:_t("bridge.get_discussion_description"),
     url:`${ConfigItems.baseUrl}/api/get_discussion?author=hiveio&permlink=around-the-hive-reflections`,
     response: `{
