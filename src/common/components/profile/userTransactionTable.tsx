@@ -26,7 +26,7 @@ import { getUserTransaction } from "../../api/urls";
 import { Col, Row } from "react-bootstrap";
 import { FilterDropdown } from "../filterTypes";
 import options_operations from "../operations/operationArrays";
-import { useHistory, useLocation } from 'react-router';
+import { useHistory, useLocation } from "react-router";
 import MyPagination from "../pagination";
 import { renderData } from "../fields/blockFields/ObjectField";
 
@@ -63,53 +63,74 @@ const UserTransactionsTable = (props: any) => {
   const [sortTransBtn, setSortTransBtn] = useState(false);
   const [selectedValues, setSelectedValues] = useState<string[]>([]);
   const [options, setOptions] = useState<Option[]>(options_operations);
-  const [searchValue, setSearchValue] = useState<string>('');
-  const [pageLimit,setPageLimit]=useState(1)
+  const [searchValue, setSearchValue] = useState<string>("");
+  const [pageLimit, setPageLimit] = useState(1);
   const themeContrastColor = currTheme === "day" ? "#535e65" : "#ffffffde ";
-  const [targetPage,setTargetPage]=useState<number>(parseInt(window.location.search.split('=')[1]))
+
+  // Determine initial page from query string with explicit radix and sensible
+  // default when the parameter is absent or malformed.
+  const initialPage = (() => {
+    const params = new URLSearchParams(window.location.search);
+    const p = parseInt(params.get("page") || "1", 10);
+    return Number.isNaN(p) ? 1 : p;
+  })();
+  const [targetPage, setTargetPage] = useState<number>(initialPage);
 
   const history = useHistory();
-const location = useLocation();
+  const location = useLocation();
 
-useEffect(() => {
-
-  const fetchData = async () => {
-    setLoading(true);
-    try {
-      const response = await getUserTransaction(user, transactionFrom, transactionLimit,selectedValues);
-      setUserTransaction(response.reverse());
-      setPageLimit(response.reverse()[0][0])
-    } catch (error: any) {
-      console.error(error.message);
-    }
-    setLoading(false);
-  };
-  fetchData();
-}, [targetPage<1]);
-useEffect(() => {
- setPage(targetPage)
-  const fetchData = async () => {
-    setLoading(true);
-    try {
-      const response = await getUserTransaction(user, transactionFrom, transactionLimit,selectedValues);
-
-      const countStart=Math.ceil(response.reverse()[0][0])
-      //console.log('count start',`${countStart}-(${targetPage}*250)`,response.reverse()[0][0]/250)
-      const respPage = await getUserTransaction(user, countStart-(targetPage*250), transactionLimit,selectedValues);
-      if(targetPage===1){
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const response = await getUserTransaction(
+          user,
+          transactionFrom,
+          transactionLimit,
+          selectedValues
+        );
         setUserTransaction(response.reverse());
+        setPageLimit(response.reverse()[0][0]);
+      } catch (error: any) {
+        console.error(error.message);
       }
-      else{
-        setUserTransaction(respPage.reverse());
+      setLoading(false);
+    };
+    fetchData();
+  }, [targetPage < 1]);
+  useEffect(() => {
+    setPage(targetPage);
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const response = await getUserTransaction(
+          user,
+          transactionFrom,
+          transactionLimit,
+          selectedValues
+        );
+
+        const countStart = Math.ceil(response.reverse()[0][0]);
+        //console.log('count start',`${countStart}-(${targetPage}*250)`,response.reverse()[0][0]/250)
+        const respPage = await getUserTransaction(
+          user,
+          countStart - targetPage * 250,
+          transactionLimit,
+          selectedValues
+        );
+        if (targetPage === 1) {
+          setUserTransaction(response.reverse());
+        } else {
+          setUserTransaction(respPage.reverse());
+        }
+        setPageLimit(response.reverse()[0][0]);
+      } catch (error: any) {
+        console.error(error.message);
       }
-      setPageLimit(response.reverse()[0][0])
-    } catch (error: any) {
-      console.error(error.message);
-    }
-    setLoading(false);
-  };
-  fetchData();
-}, [targetPage,selectedValues]);
+      setLoading(false);
+    };
+    fetchData();
+  }, [targetPage, selectedValues]);
   const [inputText, setInputText] = useState("");
   let inputHandler = (e: any) => {
     const lowerCase = e.target.value.toLowerCase();
@@ -132,19 +153,17 @@ useEffect(() => {
     setSearchValue(e.target.value);
   };
 
-  const handleSelect = (value:any) => {
+  const handleSelect = (value: any) => {
     if (selectedValues.includes(value)) {
       setSelectedValues(selectedValues.filter((val) => val !== value));
     } else {
       setSelectedValues([...selectedValues, value]);
     }
-
   };
   const handleRemove = (value: string) => {
     setSelectedValues(selectedValues.filter((val) => val !== value));
-
   };
-  const filteredOptions = options_operations.filter((option:any) =>
+  const filteredOptions = options_operations.filter((option: any) =>
     option.label.toLowerCase().includes(searchValue.toLowerCase())
   );
 
@@ -189,10 +208,13 @@ useEffect(() => {
       <>
         <TableRow className="transaction-table-data-row" hover={true} role="checkbox" tabIndex={-1}>
           <TableCell className="transaction-table-data-cell py-2">
-          <>{trans[1].trx_id==="0000000000000000000000000000000000000000"?
-                <p>{_t('trans_table.virtual')}</p>:
-                <Link to={`/tx/${trans[1].trx_id}`}>{trans[1].trx_id.substring(0,7)+'...'}</Link>
-            }</>
+            <>
+              {trans[1].trx_id === "0000000000000000000000000000000000000000" ? (
+                <p>{_t("trans_table.virtual")}</p>
+              ) : (
+                <Link to={`/tx/${trans[1].trx_id}`}>{trans[1].trx_id.substring(0, 7) + "..."}</Link>
+              )}
+            </>
           </TableCell>
           <TableCell className="transaction-table-data-cell py-2">
             <Link to={`/b/${trans[1].block}`}>{trans[1].block}</Link>
@@ -220,7 +242,7 @@ useEffect(() => {
             <Collapse in={openRow} timeout="auto" unmountOnExit={true}>
               <Box margin={1} className="trans-op-box">
                 {/* <TransactionOperationTable opTrans={...opTrans} /> */}
-                <>{renderData({...opTrans})}</>
+                <>{renderData({ ...opTrans })}</>
               </Box>
             </Collapse>
           </TableCell>
@@ -247,50 +269,55 @@ useEffect(() => {
             }
           >
             <Row>
-            <Col lg={6}>
-            <TextField
-              id="outlined-basic"
-              className="search-field"
-              fullWidth={false}
-              onChange={inputHandler}
-              placeholder={`${_t("heading_label.search_transaction")}`}
-            />
-            </Col>
-            {/* <Col lg={6}>
+              <Col lg={6}>
+                <TextField
+                  id="outlined-basic"
+                  className="search-field"
+                  fullWidth={false}
+                  onChange={inputHandler}
+                  placeholder={`${_t("heading_label.search_transaction")}`}
+                />
+              </Col>
+              {/* <Col lg={6}>
 
             </Col> */}
-          </Row>
+            </Row>
 
-          <Row>
-            <Col lg={6} className="select_dropdown">
-            <FilterDropdown
-              handleSelect={handleSelect}
-              selectedValues={selectedValues}
-              handleRemove={handleRemove}
-              searchValue={searchValue}
-              handleSearchChange={handleSearchChange}
-              filteredOptions={filteredOptions}
-
-             />
-            </Col>
-            {userTransaction &&
-            <Col md={6} className="pagination-col">
-              <MyPagination dataLength={pageLimit} pageSize={250} maxItems={4} page={page} onPageChange={(page) => {
-                setPage(page)
-                setTargetPage(page)
-                history.push(`?page=${page}`);
-              }}/>
-            </Col>}
-
-          </Row>
-          <br />
+            <Row>
+              <Col lg={6} className="select_dropdown">
+                <FilterDropdown
+                  handleSelect={handleSelect}
+                  selectedValues={selectedValues}
+                  handleRemove={handleRemove}
+                  searchValue={searchValue}
+                  handleSearchChange={handleSearchChange}
+                  filteredOptions={filteredOptions}
+                />
+              </Col>
+              {userTransaction && (
+                <Col md={6} className="pagination-col">
+                  <MyPagination
+                    dataLength={pageLimit}
+                    pageSize={250}
+                    maxItems={4}
+                    page={page}
+                    onPageChange={(page) => {
+                      setPage(page);
+                      setTargetPage(page);
+                      history.push(`?page=${page}`);
+                    }}
+                  />
+                </Col>
+              )}
+            </Row>
+            <br />
 
             <Table stickyHeader={true} aria-label="sticky table">
               <TableHead className="card-header">
                 <TableRow className="card-header">
                   {columns.map((column, index) => {
                     return (
-                      <div key={index + 1 +column.label}>
+                      <div key={index + 1 + column.label}>
                         {column.label === `${_t("common.block")}` ? (
                           <TableCell
                             className={`card-header px-2 col-w-${column.width} card-header-sort`}
@@ -341,14 +368,12 @@ useEffect(() => {
               </TableHead>
               <TableBody>
                 {filteredTransactionsData &&
-                  filteredTransactionsData
-                    .map((trans: any, i: number) => {
-                      return <TransRow key={i+trans+'-'} trans={trans} />;
-                    })}
+                  filteredTransactionsData.map((trans: any, i: number) => {
+                    return <TransRow key={i + trans + "-"} trans={trans} />;
+                  })}
               </TableBody>
             </Table>
           </div>
-
         </div>
       )}
     </>
