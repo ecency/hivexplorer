@@ -7,7 +7,7 @@ export const methods = [
     method: "get_trending_tags",
     description:_t("condenser_api.get_trending_tags_description"),
     params: ["tag", "limit"],
-    url:`${ConfigItems.baseUrl}api/get_trending_tags?start_tag=%22aaa%22&limit=10`,
+    url:`${ConfigItems.baseUrl}/api/get_trending_tags?start_tag=%22aaa%22&limit=10`,
     parameter:`<table>
         <thead>
           <tr>
@@ -84,7 +84,7 @@ export const methods = [
     params: ["block_num"],
     description:_t("block_api.get_block_description"),
     url:`${ConfigItems.baseUrl}/api/get_block?block_num=8675309`,
-    parameter: `<p>block_num(int)<p>
+    parameter: `<p>block_num(int)</p>
       <table>
         <thead>
           <tr>
