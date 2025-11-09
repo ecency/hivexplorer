@@ -207,7 +207,7 @@ const Index = (props: PageProps) => {
                     {blocksApiResult && (
                       <div className=" col-md-12 mt-2 mb-2">
                         <Link to={`/b/${blocksApiResult[0].block}`}>
-                          {blocksApiResult[0].block}
+                          {Number(blocksApiResult[0].block).toLocaleString("en-US")}
                         </Link>
                         <hr />
                       </div>

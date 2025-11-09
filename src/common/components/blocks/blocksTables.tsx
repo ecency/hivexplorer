@@ -111,10 +111,12 @@ const BlocksTables = (props: any) => {
                           operationsTableCount += trans.operations.length;
                         }
                       });
+                      const currentBlockNumber = block_number_page--;
+                      const formattedBlockNumber = currentBlockNumber.toLocaleString("en-US");
                       return (
                         <TableRow hover={true} role="checkbox" tabIndex={-1} key={i}>
                           <TableCell>
-                            <Link to={`/b/${block_number_page}`}>{block_number_page--}</Link>
+                            <Link to={`/b/${currentBlockNumber}`}>{formattedBlockNumber}</Link>
                           </TableCell>
                           <TableCell>
                             {Date_time_table(`${block.timestamp}`, "YYYY-MM-DD")}{" "}

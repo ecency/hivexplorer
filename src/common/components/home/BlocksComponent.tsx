@@ -61,12 +61,14 @@ const HomeBlocks = (props: any) => {
               operationsCount += trans.operations.length;
             }
           });
+          const currentBlockNumber = blockNum--;
+          const formattedBlockNumber = currentBlockNumber.toLocaleString("en-US");
           return (
             <Row className="m-0 block-row row-border" key={index}>
               <Col md={5} xs={12}>
                 <Row>
                   <Col md={12}>
-                    {_t("common.block")}: <Link to={`/b/${blockNum}`}>{blockNum--}</Link>{" "}
+                    {_t("common.block")}: <Link to={`/b/${currentBlockNumber}`}>{formattedBlockNumber}</Link>{" "}
                   </Col>
                   <Col md={12}>
                     {_t("common.witness")}: {UserAvatar({
