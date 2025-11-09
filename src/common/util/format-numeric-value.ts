@@ -22,16 +22,43 @@ const buildOptions = (
 };
 
 const formatNumberWithIntl = (
-  value: number | bigint,
+  value: number,
   options: Intl.NumberFormatOptions
 ) => {
   const formatter = new Intl.NumberFormat(undefined, options);
 
-  if (typeof value === "bigint") {
-    return formatter.format(value as unknown as number);
+  return formatter.format(value);
+};
+
+const MAX_SAFE_BIGINT = BigInt(Number.MAX_SAFE_INTEGER);
+const MIN_SAFE_BIGINT = BigInt(Number.MIN_SAFE_INTEGER);
+
+const GROUP_SEPARATOR_REGEX = /\B(?=(\d{3})+(?!\d))/g;
+
+const formatIntegerWithGrouping = (
+  value: string,
+  options: Intl.NumberFormatOptions
+) => {
+  if (options.useGrouping === false) {
+    return value;
   }
 
-  return formatter.format(value);
+  const isNegative = value.startsWith("-");
+  const unsigned = isNegative ? value.slice(1) : value;
+  const grouped = unsigned.replace(GROUP_SEPARATOR_REGEX, ",");
+
+  return `${isNegative ? "-" : ""}${grouped}`;
+};
+
+const formatBigIntValue = (
+  value: bigint,
+  options: Intl.NumberFormatOptions
+) => {
+  if (value <= MAX_SAFE_BIGINT && value >= MIN_SAFE_BIGINT) {
+    return formatNumberWithIntl(Number(value), options);
+  }
+
+  return formatIntegerWithGrouping(value.toString(), options);
 };
 
 const inferFractionDigits = (
@@ -112,7 +139,7 @@ export const formatNumericValue = (
   try {
     const numericValue = BigInt(trimmed);
     const merged = buildOptions(options, {});
-    return formatNumberWithIntl(numericValue, merged);
+    return formatBigIntValue(numericValue, merged);
   } catch (err) {
     const numericValue = Number(trimmed);
 
