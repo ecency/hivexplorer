@@ -6,7 +6,7 @@ import { Col, Container, Row, Card, Button } from "react-bootstrap";
 import "./headBlock.scss";
 import { withPersistentScroll } from "../with-persistent-scroll";
 import { pageMapDispatchToProps, pageMapStateToProps, PageProps } from "../../pages/common";
-import { infoIcon, showLessIcon, showMoreIcon } from "../../img/svg";
+import { showLessIcon, showMoreIcon } from "../../img/svg";
 import Theme from "../theme";
 import { useSelector } from "react-redux";
 import { ConfigItems } from "../../../../config";
@@ -17,6 +17,7 @@ import ObjectField from "../fields/blockFields/ObjectField";
 import { getHeadBlock } from "../../api/urls";
 import { setHeadBlockData } from "../../store/HeadBlock";
 import SpinnerEffect from "../loader/spinner";
+import formatNumericValue from "../../util/format-numeric-value";
 
 export interface objAmountPrecisionNai {
   amount: string;
@@ -101,7 +102,7 @@ const HeadBlockDetail = (props: any) => {
         } catch (error: any) {
           console.error(error.message);
         }
-       
+
       };
       fetchData();
   }, []);
@@ -113,7 +114,7 @@ const HeadBlockDetail = (props: any) => {
         <Container>
           <Card>
             <Card.Header>
-              <b>{_t("common.block")}</b>: {result?.head_block_number}
+              <b>{_t("common.block")}</b>: {formatNumericValue(result?.head_block_number ?? "")}
             </Card.Header>
             <Card.Body className="pt-0">
               {showMore
@@ -190,7 +191,7 @@ const HeadBlockDetail = (props: any) => {
           </Card>
         </Container>
       </div>}
-   
+
       <BackToTopButton />
     </>
   );

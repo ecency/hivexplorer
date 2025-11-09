@@ -14,6 +14,7 @@ import { ConfigItems } from "../../../../config";
 import { _t } from "../../i18n";
 import { SMTAssetCalc } from "../../api/hive";
 import parseAsset from "../../helper/parse-asset";
+import formatNumericValue from "../../util/format-numeric-value";
 //  interface SMTAsset {
 //   amount: string | number;
 //   precision: number;
@@ -52,7 +53,9 @@ const HeadBlock = (props: Block) => {
         <Card>
           <Card.Header>
             <span className="head-block-attr-span">{_t("common.block")}: </span>
-            <Link to={`/b/${result.head_block_number}`}>{result.head_block_number}</Link>
+            <Link to={`/b/${result.head_block_number}`}>
+              {formatNumericValue(result.head_block_number)}
+            </Link>
           </Card.Header>
           <Card.Body>
             <Row>
@@ -72,12 +75,11 @@ const HeadBlock = (props: Block) => {
                 <div>
                   <div className="pt-2">
                     <span className="head-block-attr-span">{_t("block.reward_fund")}: </span>
-                      {rewardFund.amount + " " + rewardFund.symbol}
+                    {`${rewardFund.formatted} ${rewardFund.symbol}`}
                   </div>
                   <div className="pt-2">
                     <span className="head-block-attr-span">{_t("block.vesting_fund")}: </span>
-
-                  {vestingFund.amount + " " + vestingFund.symbol}
+                    {`${vestingFund.formatted} ${vestingFund.symbol}`}
                   </div>
                 </div>
               </Col>
@@ -85,12 +87,11 @@ const HeadBlock = (props: Block) => {
                 <div>
                   <div className="pt-2">
                     <span className="head-block-attr-span">{_t("block.vesting_shares")}: </span>
-                    {vestingShares.amount + " " + vestingShares.symbol}
+                    {`${vestingShares.formatted} ${vestingShares.symbol}`}
                   </div>
                   <div className="pt-2">
                     <span className="head-block-attr-span">{_t("block.supply")}: </span>
-
-                  {hbdSupply.amount + " " + hbdSupply.symbol}
+                    {`${hbdSupply.formatted} ${hbdSupply.symbol}`}
                   </div>
                 </div>
               </Col>

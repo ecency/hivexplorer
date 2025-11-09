@@ -1,13 +1,12 @@
 import React from "react";
 import { Button, Col, Row } from "react-bootstrap";
-import { infoIcon } from "../../../img/svg";
 import "./stringField.scss";
 import { useSelector } from "react-redux";
 import { _t } from "../../../i18n";
 import { Link } from "react-router-dom";
-import DefaultImage from "../../../img/default-avatar.png";
 import { DateTimeTable } from "./DateTimeTable";
 import {UserAvatar} from "../../user-avatar";
+import formatNumericValue from "../../../util/format-numeric-value";
 
 const timestampKeys = [
   "time",
@@ -42,10 +41,13 @@ const StringField = (props: any) => {
   const rowBorder =
     currTheme === "day" ? "row-border border-color-day" : "row-border border-color-night";
 
+  const shouldFormatValue = typeof value === "number" || typeof value === "string";
+  const formattedValue = shouldFormatValue ? formatNumericValue(value) : value;
+
   return (
     <Row className={rowBorder} key={number}>
       <Col lg={2} md={3} xs={12} className="attr-col">
-        <span className="pl-2"> {_t(`${label_for}.${item}`)}:</span>{" "}   
+        <span className="pl-2"> {_t(`${label_for}.${item}`)}:</span>{" "}
       </Col>
       <Col className="val-col" lg={10} md={9} xs={12}>
         {item === "witness" || item === "current_witness" ? (
@@ -53,13 +55,13 @@ const StringField = (props: any) => {
         ) : item === "recovery_account" ? (
           <UserAvatar username={value} size="small"/>
         ) : item === "block_num" ? (
-          <Link to={`/b/${value}`}>{value}</Link>
+          <Link to={`/b/${value}`}>{formattedValue}</Link>
         ) : item === "transaction_ids" ? (
           <Button>{value}</Button>
         ) : timestampKeys.includes(item) ? (
           DateTimeTable(value)
         ) : (
-          value
+          formattedValue
         )}
       </Col>
     </Row>
