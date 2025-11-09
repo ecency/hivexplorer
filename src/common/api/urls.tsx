@@ -1,6 +1,6 @@
 import axios from "axios";
 import { ConfigItems } from "../../../config";
-import { utils } from '@hiveio/dhive';
+import { NaiMap } from "../helper/parse-asset";
 
 // Get witness Account
 export const getAccount = async (user: string) => {
@@ -29,7 +29,7 @@ export const getSingleProposal = (proposal_id: number) => {
 // Get All Blocks
 export const getHeadBlock = async () => {
   const head_block_url = `${ConfigItems.baseUrl}/api/get_dynamic_global_properties`;
-  const reward_fund_url = `${ConfigItems.baseUrl}/api/get_reward_funds`;
+  const reward_fund_url = `${ConfigItems.baseUrl}/api/get_reward_funds?type=%22post%22`;
 
   const [headBlockResp, rewardFundResp] = await Promise.allSettled([
     axios.get(head_block_url),
@@ -47,6 +47,7 @@ export const getHeadBlock = async () => {
 
     const rewardFundCollection =
       rewardFundData?.reward_funds ??
+      rewardFundData?.funds ??
       rewardFundData?.result?.reward_funds ??
       rewardFundData?.result ??
       rewardFundData;
@@ -60,12 +61,73 @@ export const getHeadBlock = async () => {
       rewardFundData?.reward_balance ??
       rewardFundData?.result?.reward_balance;
 
-    if (rewardBalance) {
-      headBlockData.total_reward_fund_hive = rewardBalance;
+    const formattedRewardBalance = formatRewardFundBalance(rewardBalance);
+
+    if (formattedRewardBalance) {
+      headBlockData.total_reward_fund_hive = formattedRewardBalance;
     }
   }
 
   return headBlockData;
+};
+
+type RewardBalance =
+  | string
+  | {
+      amount?: string | number;
+      precision?: string | number;
+      nai?: string;
+    };
+
+const formatRewardFundBalance = (
+  balance: RewardBalance
+): string | undefined => {
+  if (!balance) {
+    return undefined;
+  }
+
+  if (typeof balance === "string") {
+    return balance;
+  }
+
+  const { amount, precision, nai } = balance ?? {};
+
+  if (typeof amount === "undefined" || typeof nai !== "string") {
+    return undefined;
+  }
+
+  const symbol = NaiMap[nai as keyof typeof NaiMap];
+
+  if (!symbol) {
+    return undefined;
+  }
+
+  const precisionNumber =
+    typeof precision === "number"
+      ? precision
+      : typeof precision === "string"
+      ? parseInt(precision, 10)
+      : undefined;
+
+  if (
+    precisionNumber === undefined ||
+    Number.isNaN(precisionNumber) ||
+    precisionNumber < 0
+  ) {
+    return undefined;
+  }
+
+  const numericAmount = parseFloat(amount.toString());
+
+  if (Number.isNaN(numericAmount)) {
+    return undefined;
+  }
+
+  const normalizedAmount = (
+    numericAmount / Math.pow(10, precisionNumber)
+  ).toFixed(precisionNumber);
+
+  return `${normalizedAmount} ${symbol}`;
 };
 
 // Get Blocks
