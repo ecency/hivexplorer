@@ -29,7 +29,7 @@ export const getSingleProposal = (proposal_id: number) => {
 // Get All Blocks
 export const getHeadBlock = async () => {
   const head_block_url = `${ConfigItems.baseUrl}/api/get_dynamic_global_properties`;
-  const reward_fund_url = `${ConfigItems.baseUrl}/api/get_reward_fund?type="post"`;
+  const reward_fund_url = `${ConfigItems.baseUrl}/api/get_reward_funds`;
 
   const [headBlockResp, rewardFundResp] = await Promise.allSettled([
     axios.get(head_block_url),
@@ -45,11 +45,15 @@ export const getHeadBlock = async () => {
   if (rewardFundResp.status === "fulfilled") {
     const rewardFundData = rewardFundResp.value?.data;
 
-    const rewardFundObject =
-      rewardFundData?.reward_fund ??
-      rewardFundData?.result?.reward_fund ??
+    const rewardFundCollection =
+      rewardFundData?.reward_funds ??
+      rewardFundData?.result?.reward_funds ??
       rewardFundData?.result ??
       rewardFundData;
+
+    const rewardFundObject = Array.isArray(rewardFundCollection)
+      ? rewardFundCollection.find((fund) => fund?.name === "post")
+      : rewardFundCollection;
 
     const rewardBalance =
       rewardFundObject?.reward_balance ??
@@ -109,7 +113,7 @@ export const getUserTransaction = async (
   // } else{
   //   resp.forEach(function(item:any){
   //     if(item[1]['op']['type']===filters){
-  //       collection.push(item) 
+  //       collection.push(item)
   //     }
   //   })
   //     return collection
