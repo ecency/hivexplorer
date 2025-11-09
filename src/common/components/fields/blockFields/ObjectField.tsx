@@ -14,6 +14,7 @@ import "./ObjectField.scss";
 import { SMTAssetCalc } from "../../../api/hive";
 import parseAsset from "../../../helper/parse-asset";
 import { isInteger } from "lodash";
+import formatNumericValue from "../../../util/format-numeric-value";
 
 function renderTable(data: any) {
   return (
@@ -36,7 +37,7 @@ export function renderData(data: any) {
       return (
         <table className="time-date-table">
           <tbody>
-            
+
             {data.map((item: any, i: number) => (
             <tr key={i}>
               <td className="integer-td">
@@ -47,15 +48,19 @@ export function renderData(data: any) {
               </td>
             </tr>
           ))}
-            
+
           </tbody>
-        
+
         </table>
       );
     } else {
       return renderTable(data);
     }
   } else {
+    if (typeof data === "number" || typeof data === "string") {
+      return <span>{formatNumericValue(data)}</span>;
+    }
+
     return <span>{data.toString()}</span>;
   }
 }
@@ -191,13 +196,13 @@ useEffect(() => {
                       <UserAvatar username={val} size="small"/>
                     ) : (
                       <>
-                      
+
                        <Link to={`/tx/${val}`}>
                           <span>{trxIcon(themeContrastColor)}</span>
                           <span> {val} </span>
                         </Link>
                         <JsonField transactionOperations={transactionOperations[j]} />
-                       
+
                       </>
                     )}
                   </ListGroup.Item>
@@ -238,13 +243,13 @@ useEffect(() => {
               </table>
             ) : item === "transactions" ? (
               <>{transactionValue.push(...value)}</>
-           
+
             )   : item === "transaction_ids" ? (
               <>{value.length}</>
             )
             : item === "witness_votes" ? (
               <>
-              
+
               </>
             ) : item === "operations" ? (
               <><div>{renderData(value)}</div></>

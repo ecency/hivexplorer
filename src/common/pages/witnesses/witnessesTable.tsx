@@ -26,6 +26,7 @@ import { witnessesType } from ".";
 import { ExternalLink } from "../../img/svg";
 import { dateToRelative } from "../../helper/parse-date";
 import { UserAvatar } from "../../components/user-avatar";
+import formatNumericValue from "../../util/format-numeric-value";
 
 interface Column {
   label: string;
@@ -105,6 +106,13 @@ const WitnessesTables = (props: any) => {
   const Date_time = (timeSet: string, timeFormat: string) => {
     return moment(timeSet).format(timeFormat);
   };
+  const renderFormattedValue = (value: any) => {
+    if (typeof value === "number" || typeof value === "string") {
+      return formatNumericValue(value);
+    }
+
+    return value;
+  };
   const WitnessRow = (props: any) => {
     const { witness, key } = props;
     const [open, setOpen] = useState(allOpen);
@@ -112,24 +120,26 @@ const WitnessesTables = (props: any) => {
     return (
       <>
         <TableRow key={key} className="main-table-row" hover={true} role="checkbox" tabIndex={-1}>
-          <TableCell>{witness.id}</TableCell>
+          <TableCell>{renderFormattedValue(witness.id)}</TableCell>
           <TableCell>
             <UserAvatar username={witness.owner} size="small"/>
           </TableCell>
-          <TableCell>{`${witness.votes.substring(0, 6)}m`}</TableCell>
+          <TableCell>{renderFormattedValue(witness.votes)}</TableCell>
           <TableCell>
             <a className="witness-external-link" href={witness.url} target="_blank">
               {ExternalLink(themeContrastColor)}
             </a>
           </TableCell>
-          <TableCell className="text-center">{witness.props.hbd_interest_rate}</TableCell>
+          <TableCell className="text-center">
+            {renderFormattedValue(witness.props.hbd_interest_rate)}
+          </TableCell>
           <TableCell>
             <Link to={`b/${witness.last_confirmed_block_num}`}>
-              {witness.last_confirmed_block_num}
+              {renderFormattedValue(witness.last_confirmed_block_num)}
             </Link>
           </TableCell>
-          <TableCell>{witness.total_missed}</TableCell>
-          <TableCell>{witness.props.maximum_block_size}</TableCell>
+          <TableCell>{renderFormattedValue(witness.total_missed)}</TableCell>
+          <TableCell>{renderFormattedValue(witness.props.maximum_block_size)}</TableCell>
           <TableCell>{witness.props.account_creation_fee}</TableCell>
           <TableCell>
             <span className="inner inner-green">
@@ -184,7 +194,7 @@ const WitnessesTables = (props: any) => {
                                                       {_t(`witnesses.${val}`)}
                                                     </td>
                                                     <td style={{ width: "50%" }}>
-                                                      {witness[key][val]}
+                                                      {renderFormattedValue(witness[key][val])}
                                                     </td>
                                                   </tr>
                                                 );
@@ -200,7 +210,7 @@ const WitnessesTables = (props: any) => {
                                       <td>
                                         {key === "created"
                                           ? moment.utc(witness[key]).format("LL")
-                                          : witness[key]}
+                                          : renderFormattedValue(witness[key])}
                                       </td>
                                     </tr>
                                   )}

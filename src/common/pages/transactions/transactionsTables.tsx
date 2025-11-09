@@ -25,6 +25,7 @@ import { AscendingIcon, DescendingIcon } from "../../img/svg";
 import TransactionOperationTable from "../profile/userOpTable";
 import { TimestampField } from "../../components/fields/blockFields/DateTimeTable";
 import { renderData } from "../../components/fields/blockFields/ObjectField";
+import formatNumericValue from "../../util/format-numeric-value";
 
 interface Column {
   label: string;
@@ -125,6 +126,13 @@ const TransactionsTables = (props: any) => {
   const TransRow = (props: any) => {
     const { transaction } = props;
     const [open, setOpen] = useState(allOpen);
+    const renderFormattedValue = (value: any) => {
+      if (typeof value === "number" || typeof value === "string") {
+        return formatNumericValue(value);
+      }
+
+      return value;
+    };
     return (
       <>
         <TableRow hover={true} role="checkbox" tabIndex={-1}>
@@ -133,15 +141,19 @@ const TransactionsTables = (props: any) => {
             <p>{_t('trans_table.virtual')}</p>:
             <Link to={`/tx/${transaction.trx_id}`}>{transaction.trx_id.substring(0,7)+'...'}</Link>
             }</>
-           
+
           </TableCell>
           {/* <TableCell>{Date_time(`${transaction.timestamp}`,"YYYY-MM-DD")}</TableCell> */}
           <TableCell>
             <TimestampField timestamp={transaction.timestamp} />
           </TableCell>
 
-          <TableCell className="text-center px-2">{transaction.trx_in_block}</TableCell>
-          <TableCell className="text-center px-2">{transaction.op_in_trx}</TableCell>
+          <TableCell className="text-center px-2">
+            {renderFormattedValue(transaction.trx_in_block)}
+          </TableCell>
+          <TableCell className="text-center px-2">
+            {renderFormattedValue(transaction.op_in_trx)}
+          </TableCell>
           <TableCell className="tablecell-type">
             {transaction.op.type === "custom_json_operation" ? (
               <span className="badge bg-secondary">{transaction.op.type}</span>

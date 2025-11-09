@@ -29,6 +29,7 @@ import options_operations from "../operations/operationArrays";
 import { useHistory, useLocation } from "react-router";
 import MyPagination from "../pagination";
 import { renderData } from "../fields/blockFields/ObjectField";
+import formatNumericValue from "../../util/format-numeric-value";
 
 interface Column {
   label: string;
@@ -203,6 +204,13 @@ const UserTransactionsTable = (props: any) => {
     const { trans } = props;
     const opTrans = trans[1].op;
     const [openRow, setOpenRow] = useState(allOpen);
+    const renderFormattedValue = (value: any) => {
+      if (typeof value === "number" || typeof value === "string") {
+        return formatNumericValue(value);
+      }
+
+      return value;
+    };
 
     return (
       <>
@@ -217,13 +225,15 @@ const UserTransactionsTable = (props: any) => {
             </>
           </TableCell>
           <TableCell className="transaction-table-data-cell py-2">
-            <Link to={`/b/${trans[1].block}`}>{trans[1].block}</Link>
+            <Link to={`/b/${trans[1].block}`}>
+              {renderFormattedValue(trans[1].block)}
+            </Link>
           </TableCell>
           <TableCell className="transaction-table-data-cell  px-0 text-center">
             <TimestampField timestamp={trans[1].timestamp} />
           </TableCell>
           <TableCell className="transaction-table-data-cell py-2 col-w-100 text-center">
-            {trans[0]}
+            {renderFormattedValue(trans[0])}
           </TableCell>
           <TableCell className="transaction-table-data-cell py-2">{trans[1].op.type}</TableCell>
           <TableCell className="text-center col-w-100">
