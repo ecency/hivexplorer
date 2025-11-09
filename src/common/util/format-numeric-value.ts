@@ -25,11 +25,13 @@ const formatNumberWithIntl = (
   value: number | bigint,
   options: Intl.NumberFormatOptions
 ) => {
+  const formatter = new Intl.NumberFormat(undefined, options);
+
   if (typeof value === "bigint") {
-    return value.toLocaleString(undefined, options);
+    return formatter.format(value as unknown as number);
   }
 
-  return new Intl.NumberFormat(undefined, options).format(value);
+  return formatter.format(value);
 };
 
 const inferFractionDigits = (
