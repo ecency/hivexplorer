@@ -24,7 +24,7 @@ export interface Block {
   head_block_id: string;
   time: string;
   num_pow_witnesses: number;
-  init_hbd_supply: string | SMTAsset;
+  init_hbd_supply?: string | SMTAsset;
   current_hbd_supply: string | SMTAsset;
   total_vesting_fund_hive: string | SMTAsset;
   total_vesting_shares: string | SMTAsset;
@@ -38,8 +38,13 @@ const HeadBlock = (props: Block) => {
     total_reward_fund_hive,
     total_vesting_fund_hive,
     total_vesting_shares,
-    init_hbd_supply
-  }=result
+    current_hbd_supply
+  } = result;
+
+  const rewardFund = parseAsset(total_reward_fund_hive);
+  const vestingFund = parseAsset(total_vesting_fund_hive);
+  const vestingShares = parseAsset(total_vesting_shares);
+  const hbdSupply = parseAsset(current_hbd_supply);
 
   return (
     <div className="head-block">
@@ -67,12 +72,12 @@ const HeadBlock = (props: Block) => {
                 <div>
                   <div className="pt-2">
                     <span className="head-block-attr-span">{_t("block.reward_fund")}: </span>
-                      {parseAsset(total_reward_fund_hive).amount+' '+parseAsset(total_reward_fund_hive).symbol}
+                      {rewardFund.amount + " " + rewardFund.symbol}
                   </div>
                   <div className="pt-2">
                     <span className="head-block-attr-span">{_t("block.vesting_fund")}: </span>
-           
-                  {parseAsset(total_vesting_fund_hive).amount+' '+parseAsset(total_vesting_fund_hive).symbol}
+
+                  {vestingFund.amount + " " + vestingFund.symbol}
                   </div>
                 </div>
               </Col>
@@ -80,12 +85,12 @@ const HeadBlock = (props: Block) => {
                 <div>
                   <div className="pt-2">
                     <span className="head-block-attr-span">{_t("block.vesting_shares")}: </span>
-                    {parseAsset(total_vesting_shares).amount+' '+parseAsset(total_vesting_shares).symbol}
+                    {vestingShares.amount + " " + vestingShares.symbol}
                   </div>
                   <div className="pt-2">
                     <span className="head-block-attr-span">{_t("block.supply")}: </span>
-                 
-                  {parseAsset(init_hbd_supply).amount+' '+parseAsset(init_hbd_supply).symbol}
+
+                  {hbdSupply.amount + " " + hbdSupply.symbol}
                   </div>
                 </div>
               </Col>

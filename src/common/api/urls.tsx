@@ -29,8 +29,32 @@ export const getSingleProposal = (proposal_id: number) => {
 // Get All Blocks
 export const getHeadBlock = async () => {
   const head_block_url = `${ConfigItems.baseUrl}/api/get_dynamic_global_properties`;
-  const r = await axios.get(head_block_url);
-  return r.data;
+  const reward_fund_url = `${ConfigItems.baseUrl}/api/get_reward_fund?type="post"`;
+
+  const [headBlockResp, rewardFundResp] = await Promise.allSettled([
+    axios.get(head_block_url),
+    axios.get(reward_fund_url)
+  ]);
+
+  if (headBlockResp.status !== "fulfilled") {
+    throw headBlockResp.reason;
+  }
+
+  const headBlockData = headBlockResp.value.data;
+
+  if (rewardFundResp.status === "fulfilled") {
+    const rewardFundData = rewardFundResp.value?.data;
+    const rewardBalance =
+      rewardFundData?.reward_balance ??
+      rewardFundData?.result?.reward_balance ??
+      rewardFundData?.reward_fund?.reward_balance;
+
+    if (rewardBalance) {
+      headBlockData.total_reward_fund_hive = rewardBalance;
+    }
+  }
+
+  return headBlockData;
 };
 
 // Get Blocks
