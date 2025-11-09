@@ -1,4 +1,7 @@
+import parseAsset from "../helper/parse-asset";
+
 const NUMERIC_REGEX = /^-?\d+(?:\.\d+)?$/;
+const ASSET_STRING_REGEX = /^-?\d+(?:\.\d+)?\s+[A-Za-z0-9]+$/;
 const FRACTION_DIGITS_LIMIT = 8;
 
 const clampFractionDigits = (digits: number) => {
@@ -119,6 +122,20 @@ export const formatNumericValue = (
   }
 
   const trimmed = value.trim();
+
+  if (ASSET_STRING_REGEX.test(trimmed)) {
+    try {
+      const asset = parseAsset(trimmed);
+      const [, symbolPart = ""] = trimmed.split(/\s+/);
+      const symbol = asset.symbol || symbolPart;
+
+      return symbol ? `${asset.formatted} ${symbol}` : asset.formatted;
+    } catch (err) {
+      // Fall back to the original value when parsing fails so the UI still
+      // renders something meaningful rather than crashing the formatter.
+      return value.toString();
+    }
+  }
 
   if (!shouldFormat(trimmed)) {
     return value.toString();
