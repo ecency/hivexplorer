@@ -25,6 +25,10 @@ const formatNumberWithIntl = (
   value: number | bigint,
   options: Intl.NumberFormatOptions
 ) => {
+  if (typeof value === "bigint") {
+    return value.toLocaleString(undefined, options);
+  }
+
   return new Intl.NumberFormat(undefined, options).format(value);
 };
 
