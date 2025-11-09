@@ -44,10 +44,17 @@ export const getHeadBlock = async () => {
 
   if (rewardFundResp.status === "fulfilled") {
     const rewardFundData = rewardFundResp.value?.data;
+
+    const rewardFundObject =
+      rewardFundData?.reward_fund ??
+      rewardFundData?.result?.reward_fund ??
+      rewardFundData?.result ??
+      rewardFundData;
+
     const rewardBalance =
+      rewardFundObject?.reward_balance ??
       rewardFundData?.reward_balance ??
-      rewardFundData?.result?.reward_balance ??
-      rewardFundData?.reward_fund?.reward_balance;
+      rewardFundData?.result?.reward_balance;
 
     if (rewardBalance) {
       headBlockData.total_reward_fund_hive = rewardBalance;
