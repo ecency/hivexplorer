@@ -3,6 +3,7 @@
 exports[`Parse token (1) should parse 1`] = `
 Object {
   "amount": 18.494,
+  "formatted": "18.494",
   "symbol": "HBD",
 }
 `;
@@ -10,6 +11,7 @@ Object {
 exports[`Parse token (2) should parse 1`] = `
 Object {
   "amount": 0.012,
+  "formatted": "0.012",
   "symbol": "HIVE",
 }
 `;

@@ -8,12 +8,17 @@ import parseAsset from "../../helper/parse-asset";
 import { json_operation_ids, operation_types, quest_operation } from "./operationArrays";
 import { OperationCardData } from "./operationCard";
 
+const formatAsset = (assetValue: any): string => {
+    const asset = parseAsset(assetValue);
+    return `${asset.formatted} ${asset.symbol}`;
+};
+
 export const TransactionOperation = (props: any) => {
     const { trans_no, trans_data, time, trx_status,memo,permlink,from,to, key } = props
     const dateRelative = dateToRelative(time);
     const dateFormatted = dateToFormatted(time);
     const [renderedStrings, setRenderedStrings] = useState<string []>([]);
-   
+
     var name: string
     return (
         <div key={key}>
@@ -27,7 +32,7 @@ export const TransactionOperation = (props: any) => {
                     { trans_data.map((item: any, index: number) => {
                         return (
                             <div key={trans_no + index+item.type+item.timestamp} className="trans-op-card-data" >
-                                {!operation_types.includes(item.type) &&    
+                                {!operation_types.includes(item.type) &&
                                     <OperationCardData
                                         value={item.value}
                                         text={item.type.replace('_operation','').replace(/_/g,' ')}
@@ -128,7 +133,7 @@ export const TransactionOperation = (props: any) => {
                                         isTable={true}
                                     />
                                 }
-                         
+
                                 {item.type === 'account_update2_operation' &&
                                     <OperationCardData
                                         value={item.value}
@@ -157,7 +162,7 @@ export const TransactionOperation = (props: any) => {
                                         type={item.type}
                                     />
                                 }
-                            
+
                                     {item.type === 'limit_order_cancel_operation' &&
                                      <OperationCardData
                                         value={item.value}
@@ -176,7 +181,7 @@ export const TransactionOperation = (props: any) => {
                                         type={item.type}
                                     />
                                 }
-                               
+
                                    {item.type === 'comment_benefactor_reward_operation'  &&
                                     <OperationCardData
                                         value={item.value}
@@ -202,7 +207,7 @@ export const TransactionOperation = (props: any) => {
                                         time={time}
                                         trx_id={trans_no}
                                         type={item.type}
-                                        
+
                                     />
                                 }
                                 {item.type === 'witness_update_operation'  &&
@@ -262,7 +267,7 @@ export const TransactionOperation = (props: any) => {
                                         isTable={true}
                                     />
                                 }
-                                    {item.type==='producer_reward_operation' && 
+                                    {item.type==='producer_reward_operation' &&
                                             <OperationCardData
                                             value={item.value}
                                             text={item.type.replace('_operation','').replace(/_/g,' ')}
@@ -289,7 +294,7 @@ export const TransactionOperation = (props: any) => {
                                             type={item.type}
                                         />
                                     }
-                                    {item.type==="effective_comment_vote_operation" &&   
+                                    {item.type==="effective_comment_vote_operation" &&
                                         <OperationCardData
                                             value={item.value}
                                             text={item.type.replace('_operation','').replace(/_/g,' ')}
@@ -341,7 +346,7 @@ export const TransactionOperation = (props: any) => {
                                         <span className="time-span">
                                             &nbsp;(<span className="date" title={dateFormatted}>{dateRelative}</span>)
                                         </span>
-                                     
+
                                         </span>
                                     </div>
                                    </div>
@@ -368,7 +373,7 @@ export const TransactionOperation = (props: any) => {
                                                                     <span>
                                                                         <Link to={`/@${item.value.from}`}>{item.value.from}</Link>
                                                                         &nbsp;{item.type.replace('_operation','').replace(/_/g,' ')}&nbsp;
-                                                                        {parseAsset(item.value.amount).amount+' '+parseAsset(item.value.amount).symbol} to&nbsp;
+                                                                        {formatAsset(item.value.amount)} to&nbsp;
                                                                         <Link to={`/@${item.value.to}`}>{item.value.to}</Link>
                                                                         <code>&nbsp;{item.value.memo}</code>
                                                                         <span className="time-span">

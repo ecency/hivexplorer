@@ -9,11 +9,17 @@ import { DecodeJson } from "../../../server/util";
 import { LinkAccount, ObjectFieldArray, StringFieldArray } from "../fields/common_fields";
 import { UserAvatar } from "../../components/user-avatar";
 import parseAsset from "../../helper/parse-asset";
+
+const formatAsset = (assetValue: any): string => {
+  const asset = parseAsset(assetValue);
+  return `${asset.formatted} ${asset.symbol}`;
+};
+
 export const OpObjectValue=(field: any, name: string)=> {
   return (
     <tr key={field+name}>
       <td>{_t(`trans_table.${name}`)}</td>
-      <td>{parseAsset(field).amount+' '+parseAsset(field).symbol}</td>
+      <td>{formatAsset(field)}</td>
       {/* <td>
         <table>
           <tbody>
@@ -105,7 +111,7 @@ const TransactionOperationTable = (props: any) => {
                     <table style={{ width: "100%" }}>
                       <tbody>
                         {Object.keys(opVal).map((key, k: number) => {
-                       
+
                           return (
                             <>
                               {(typeof opVal[key] === "string" || typeof opVal[key] === "number") &&
@@ -121,7 +127,7 @@ const TransactionOperationTable = (props: any) => {
                           );
                         })}
                         {Object.keys(opVal).map((key, i: number) => {
-                         
+
                           return (
                             <>
                               {(typeof opVal[key] === "string" || typeof opVal[key] === "number") &&
@@ -247,7 +253,7 @@ const TransactionOperationTable = (props: any) => {
                                                  </span>
                                                   : jsonSplit[key]!==null?
                                                   jsonSplit[key]:<>{`null`}</>
-                                                  
+
                                                 }{" "}
                                               </td>
                                             </tr>
@@ -267,7 +273,7 @@ const TransactionOperationTable = (props: any) => {
                                       : (
                                         <>
                                         {!jsonSplit.items && !jsonSplit.cards  && <div className="d-flex">
-                                     
+
                                         <table>
                                           <tbody>
                                             <tr><td style={isInteger(+key)?{width:'40px',minWidth:'40px'}:{}}>{_t(`trans_table.${key}`)}</td>
@@ -275,7 +281,7 @@ const TransactionOperationTable = (props: any) => {
                                             <table>
                                           <tbody>
                                               {Object.keys(jsonSplit[key]).map((innerKey:any,i)=>{
-                                               
+
                                                 return(
                                                   <tr key={i+innerKey+jsonSplit[key]}>
                                                     <td style={isInteger(+innerKey)?{width:'40px',minWidth:'40px'}:{}}>{isInteger(+innerKey)?<>{innerKey}</>:<>{_t(`trans_table.${innerKey}`)}</>}</td>
@@ -287,7 +293,7 @@ const TransactionOperationTable = (props: any) => {
                                                         <tbody>
                                                           {Object.keys(jsonSplit[key][innerKey]).map((item,j:number)=>{
                                                             return(
-                                                              <tr key={item+j+jsonSplit[key][innerKey][item]}> 
+                                                              <tr key={item+j+jsonSplit[key][innerKey][item]}>
                                                                 <td style={isInteger(+item)?{width:'40px',minWidth:'40px'}:{}}>{_t(`trans_table.${item}`)}</td>
                                                                 <td>
                                                                   {typeof(jsonSplit[key][innerKey][item])!=="object"? jsonSplit[key][innerKey][item].toString()
@@ -299,7 +305,7 @@ const TransactionOperationTable = (props: any) => {
                                                                         <tr key={k+innerItem+item+j}>
                                                                           <td>{_t(`trans_table.${innerItem}`)}</td>
                                                                           <td>
-                                                                              {typeof(jsonSplit[key][innerKey][item][innerItem])!=="object"? 
+                                                                              {typeof(jsonSplit[key][innerKey][item][innerItem])!=="object"?
                                                                                 jsonSplit[key][innerKey][item][innerItem].toString()
                                                                                 :
                                                                                 <>
@@ -338,13 +344,13 @@ const TransactionOperationTable = (props: any) => {
                                               })}
                                               </tbody>
                                                </table>
-                                         
+
                                               </td>
                                               </tr>
                                           </tbody>
                                         </table>
                                         </div>}
-                                        </>                      
+                                        </>
                                       )}
                                     </>
                                   );

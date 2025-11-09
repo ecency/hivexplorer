@@ -10,6 +10,12 @@ import { _t } from "../../i18n";
 import { renderData } from "../fields/blockFields/ObjectField";
 
 
+const formatAsset = (assetValue: any): string => {
+    const asset = parseAsset(assetValue);
+    return `${asset.formatted} ${asset.symbol}`;
+};
+
+
 export const OperationCardData=(props:any)=>{
     const {value,text,time,trx_id,type,isTable}=props
     const [showTable,setShowTable]=useState(isTable)
@@ -66,34 +72,34 @@ export const OperationCardData=(props:any)=>{
                                                     {/* {value.weight && <span>&nbsp;({parseFloat(value.weight) / 100}%)</span>} */}
                                                 </span>}
                                                 {type==='producer_reward_operation' && <span>
-                                                    :&nbsp;{parseAsset(value.vesting_shares).amount+' '+parseAsset(value.vesting_shares).symbol}
+                                                    :&nbsp;{formatAsset(value.vesting_shares)}
                                                 </span>}
                                                 {type==='delegate_vesting_shares_operation' && <span>
-                                                &nbsp;{_t('common.delegate')} {parseAsset(value.vesting_shares).amount+' '+parseAsset(value.vesting_shares).symbol} {_t('common.to')} {value.delegatee}
+                                                &nbsp;{_t('common.delegate')} {formatAsset(value.vesting_shares)} {_t('common.to')} {value.delegatee}
 
                                                 </span>}
                                                 {type==='curation_reward_operation' && <span>
-                                                    :&nbsp;{parseAsset(value.reward).amount+' '+parseAsset(value.reward).symbol} {_t('common.for')} <Link to={`/@${value.comment_author}/${value.comment_permlink}`}>&nbsp;@{value.comment_author}/{value.comment_permlink}</Link>
+                                                    :&nbsp;{formatAsset(value.reward)} {_t('common.for')} <Link to={`/@${value.comment_author}/${value.comment_permlink}`}>&nbsp;@{value.comment_author}/{value.comment_permlink}</Link>
                                                 </span>}
                                                 {type==='limit_order_create_operation' && <span>
-                                                    &nbsp;{parseAsset(value.min_to_receive).amount+' '+parseAsset(value.min_to_receive).symbol} {_t('common.for')} {parseAsset(value.amount_to_sell).amount+' '+parseAsset(value.amount_to_sell).symbol}
+                                                    &nbsp;{formatAsset(value.min_to_receive)} {_t('common.for')} {formatAsset(value.amount_to_sell)}
                                                 </span>}
                                                 {type==='comment_benefactor_reward_operation' && <span>
-                                                    :&nbsp;{parseAsset(value.hbd_payout).amount+' '+parseAsset(value.hbd_payout).symbol} {_t('common.and')}
-                                                    :&nbsp;{parseAsset(value.vesting_payout).amount+' '+parseAsset(value.vesting_payout).symbol} {_t('common.for')}
+                                                    :&nbsp;{formatAsset(value.hbd_payout)} {_t('common.and')}
+                                                    :&nbsp;{formatAsset(value.vesting_payout)} {_t('common.for')}
                                                     <Link to={`/@${value.author}/${value.permlink}`}>&nbsp;@{value.author}/{value.permlink}</Link>
                                                 </span>}
                                                 {type==='fill_vesting_withdraw_operation' && <span>
-                                                    {_t('common.withdraw')}&nbsp;{parseAsset(value.withdrawn).amount+' '+parseAsset(value.withdrawn).symbol} {_t('common.as')}
-                                                    &nbsp;{parseAsset(value.deposited).amount+' '+parseAsset(value.deposited).symbol} {_t('common.to')}
+                                                    {_t('common.withdraw')}&nbsp;{formatAsset(value.withdrawn)} {_t('common.as')}
+                                                    &nbsp;{formatAsset(value.deposited)} {_t('common.to')}
                                                     <Link to={`/@${value.to_account}`}>&nbsp;{value.to_account}</Link>
                                                     &nbsp;(<span className="text-action" onClick={()=>setShowTable(!showTable)}>show details</span>)
                                                 </span>}
                                                 {type==='feed_publish_operation' && <span>
-                                                    &nbsp;{parseAsset(value.exchange_rate.base).amount+' '+parseAsset(value.exchange_rate.base).symbol}
+                                                    &nbsp;{formatAsset(value.exchange_rate.base)}
                                                 </span>}
                                                 {type==='feed_publish_operation' && <span>
-                                                    &nbsp;{parseAsset(value.exchange_rate.base).amount+' '+parseAsset(value.exchange_rate.base).symbol}
+                                                    &nbsp;{formatAsset(value.exchange_rate.base)}
                                                 </span>}
 
                                                 {type==='comment_options_operation' && <span>
@@ -106,7 +112,7 @@ export const OperationCardData=(props:any)=>{
                                                     &nbsp;{value.approve?'approve witness':'unapprove witness'}&nbsp;<Link to={`/@${value.witness}`}>{value.witness}</Link>
                                                 </span>}
                                                 {type==='fill_order_operation' && <span >
-                                                    &nbsp;{parseAsset(value.current_pays).amount+' '+parseAsset(value.current_pays).symbol} {_t('common.for')} {parseAsset(value.open_pays).amount+' '+parseAsset(value.open_pays).symbol}  {_t('common.from')}&nbsp;<Link to={`/@${value.open_owner}`}>{value.open_owner}</Link>
+                                                    &nbsp;{formatAsset(value.current_pays)} {_t('common.for')} {formatAsset(value.open_pays)}  {_t('common.from')}&nbsp;<Link to={`/@${value.open_owner}`}>{value.open_owner}</Link>
                                                 </span>}
 
                                                 <span className="time-span">
@@ -137,7 +143,7 @@ export const OperationCardData=(props:any)=>{
                                 {typeof(value[val]) ==='object' && ObjectFieldArray.includes(val) ?
                                 <tr key={val + index +value.id}>
                                     <th className="th-operation">{val}</th>
-                                    <td>{parseAsset(value[val]).amount+' '+parseAsset(value[val]).symbol}</td>
+                                    <td>{formatAsset(value[val])}</td>
                                 </tr>
                                 :
                                 typeof(value[val]) ==='object' && !ObjectFieldArray.includes(val) ?

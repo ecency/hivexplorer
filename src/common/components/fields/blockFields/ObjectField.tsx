@@ -127,6 +127,8 @@ const ObjectField = (props: any) => {
   const rowBorder =
     currTheme === "day" ? "row-border border-color-day" : "row-border border-color-night";
   const themeBtn = currTheme === "day" ? "showmore-btn btn-light" : "showmore-btn btn-dark";
+  const isSMTAsset = SMTAssetArray.includes(item);
+  const assetValue = isSMTAsset ? parseAsset(value) : null;
   let transactionValue: transactionTypeList = [];
   // useEffect(() => {
   //   setCurrentHash(window.location.hash.substring(1)) // remove the #
@@ -253,8 +255,8 @@ useEffect(() => {
               </>
             ) : item === "operations" ? (
               <><div>{renderData(value)}</div></>
-            ) : SMTAssetArray.includes(item) ? (
-              <>{parseAsset(value).amount+' '+parseAsset(value).symbol}</>
+            ) : isSMTAsset && assetValue ? (
+              <>{`${assetValue.formatted} ${assetValue.symbol}`}</>
             ) : item === "json_metadata" && label_for === "entry" ? (
               <>
                 <JsonMetadata data={value} />
